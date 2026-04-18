@@ -1,6 +1,24 @@
-# Zevr Guard
+<p align="center">
+  <img src="public/icons/icon128.png" width="128" height="128" alt="Zevr Guard" />
+</p>
 
-**See who your browser is talking to. Block the dangerous ones.**
+<h1 align="center">Zevr Guard</h1>
+
+<p align="center">
+  <strong>See who your browser is talking to. Block the dangerous ones.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/krystasis/zevr-guard/releases/latest">
+    <img alt="Release" src="https://img.shields.io/github/v/release/krystasis/zevr-guard" />
+  </a>
+  <a href="./LICENSE">
+    <img alt="License: GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue" />
+  </a>
+  <img alt="Chrome Web Store" src="https://img.shields.io/badge/Chrome_Web_Store-pending_review-yellow" />
+</p>
+
+---
 
 Zevr Guard is a Chrome extension that visualizes every connection your browser makes and automatically blocks malware, phishing, and tracker domains. Install once, zero configuration — protection starts the moment it's enabled.
 

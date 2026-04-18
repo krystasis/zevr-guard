@@ -1,0 +1,19 @@
+node_modules
+dist
+release
+*.zip
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+.vite
+tsconfig.tsbuildinfo
+
+# Build outputs — regenerated via `npm run build:data`
+assets/GeoLite2-*.mmdb
+public/rules/block_rules.json
+public/rules/ads_rules.json
+public/rules/tracking_rules.json
+src/data/trackers.json
+src/data/malware.json

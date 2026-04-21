@@ -1,4 +1,4 @@
-import type { PageStats, Settings, TodayStats } from '../types';
+import type { PageStats, Settings, TodayStats, UserLocation } from '../types';
 
 export function getDefaultSettings(): Settings {
   return {
@@ -67,4 +67,13 @@ export async function getTodayStats(): Promise<TodayStats> {
 
 export async function setTodayStats(stats: TodayStats): Promise<void> {
   await chrome.storage.local.set({ todayStats: stats });
+}
+
+export async function getCachedUserLocation(): Promise<UserLocation | null> {
+  const s = await chrome.storage.local.get('userLocation');
+  return (s.userLocation as UserLocation | null | undefined) ?? null;
+}
+
+export async function setCachedUserLocation(loc: UserLocation): Promise<void> {
+  await chrome.storage.local.set({ userLocation: loc });
 }

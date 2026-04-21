@@ -16,6 +16,8 @@ import {
   setSettings,
   getTodayStats,
   setTodayStats,
+  getCachedUserLocation,
+  setCachedUserLocation,
 } from './storage';
 import {
   clearBadge,
@@ -234,6 +236,12 @@ async function getUserLocation(): Promise<UserLocation | null> {
   if (userLocationCache) return userLocationCache;
   if (userLocationPromise) return userLocationPromise;
 
+  const stored = await getCachedUserLocation();
+  if (stored) {
+    userLocationCache = stored;
+    return stored;
+  }
+
   userLocationPromise = (async () => {
     try {
       const res = await fetch('https://api.ipify.org?format=json', {
@@ -250,6 +258,7 @@ async function getUserLocation(): Promise<UserLocation | null> {
         countryName: geo.country,
       };
       userLocationCache = loc;
+      await setCachedUserLocation(loc);
       return loc;
     } catch {
       return null;

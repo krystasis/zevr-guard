@@ -1,7 +1,7 @@
 {
   "name": "zevr-guard",
-  "version": "1.0.0",
-  "description": "See who your browser is talking to in real-time. Visualize trackers and block dangerous connections.",
+  "version": "1.0.1",
+  "description": "Blocks known malware and shows every third-party tracker your browser contacts. Threat list updates daily. All matching is local.",
   "private": true,
   "type": "module",
   "scripts": {

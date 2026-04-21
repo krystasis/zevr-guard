@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "default_locale": "en",
-  "name": "Zevr Guard - Network Visibility",
-  "version": "1.0.0",
-  "description": "Automatically blocks malware & phishing. See who's tracking you in real-time. Protection starts instantly – no setup needed.",
+  "name": "__MSG_extName__",
+  "version": "1.0.1",
+  "description": "__MSG_extDescription__",
   "icons": {
     "16": "public/icons/icon16.png",
     "32": "public/icons/icon32.png",

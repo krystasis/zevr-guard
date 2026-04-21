@@ -1,4 +1,9 @@
 {
+  "extName": { "message": "Zevr Guard - Network Visibility" },
+  "extDescription": {
+    "message": "既知のマルウェア・フィッシングをブロックし、ブラウザが接続するすべてのサードパーティ・トラッカーを表示。脅威リストは毎日更新、マッチングはすべて端末内で完結。"
+  },
+
   "protectionActive": { "message": "保護中" },
   "brandZevr": { "message": "Zevr" },
   "brandTagline": { "message": "ブランド第一作" },

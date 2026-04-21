@@ -1,4 +1,9 @@
 {
+  "extName": { "message": "Zevr Guard - Network Visibility" },
+  "extDescription": {
+    "message": "Blocks known malware and shows every third-party tracker your browser contacts. Threat list updates daily. All matching is local."
+  },
+
   "protectionActive": { "message": "Protection active" },
   "brandZevr": { "message": "Zevr" },
   "brandTagline": { "message": "The first product" },

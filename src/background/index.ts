@@ -430,8 +430,12 @@ async function maybePromptReview(lifetimeBlocked: number): Promise<void> {
 
 chrome.notifications.onButtonClicked.addListener((id, buttonIndex) => {
   if (id.startsWith('zg-review-') && buttonIndex === 0) {
+    // Edge installs come from the Edge Add-ons store, not CWS.
+    const isEdge = navigator.userAgent.includes(' Edg/');
     void chrome.tabs.create({
-      url: `https://chromewebstore.google.com/detail/${chrome.runtime.id}/reviews`,
+      url: isEdge
+        ? `https://microsoftedge.microsoft.com/addons/detail/${chrome.runtime.id}`
+        : `https://chromewebstore.google.com/detail/${chrome.runtime.id}/reviews`,
     });
   }
 });

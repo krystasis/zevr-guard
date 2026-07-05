@@ -1,8 +1,19 @@
 import enMessages from '../../_locales/en/messages.json';
 import jaMessages from '../../_locales/ja/messages.json';
+import esMessages from '../../_locales/es/messages.json';
+import ptMessages from '../../_locales/pt_BR/messages.json';
+import deMessages from '../../_locales/de/messages.json';
+import frMessages from '../../_locales/fr/messages.json';
 
-export type Locale = 'en' | 'ja';
-export const SUPPORTED_LOCALES: readonly Locale[] = ['en', 'ja'] as const;
+export type Locale = 'en' | 'ja' | 'es' | 'pt' | 'de' | 'fr';
+export const SUPPORTED_LOCALES: readonly Locale[] = [
+  'en',
+  'ja',
+  'es',
+  'pt',
+  'de',
+  'fr',
+] as const;
 export const DEFAULT_LOCALE: Locale = 'en';
 
 type ChromeMessage = {
@@ -14,6 +25,10 @@ type Dictionary = Record<string, ChromeMessage>;
 const DICTIONARIES: Record<Locale, Dictionary> = {
   en: enMessages as Dictionary,
   ja: jaMessages as Dictionary,
+  es: esMessages as Dictionary,
+  pt: ptMessages as Dictionary,
+  de: deMessages as Dictionary,
+  fr: frMessages as Dictionary,
 };
 
 const STORAGE_KEY = 'zg.locale';
@@ -23,6 +38,18 @@ const listeners = new Set<(l: Locale) => void>();
 
 function isSupported(v: unknown): v is Locale {
   return typeof v === 'string' && (SUPPORTED_LOCALES as readonly string[]).includes(v);
+}
+
+function detectLocale(): Locale {
+  try {
+    const ui = chrome.i18n.getUILanguage().toLowerCase();
+    if (ui.startsWith('pt')) return 'pt';
+    const base = ui.split('-')[0];
+    if (isSupported(base)) return base;
+  } catch {
+    // non-extension context
+  }
+  return DEFAULT_LOCALE;
 }
 
 export function getLocale(): Locale {
@@ -41,7 +68,7 @@ export async function loadLocale(): Promise<Locale> {
   } catch {
     // non-extension context or storage unavailable
   }
-  currentLocale = DEFAULT_LOCALE;
+  currentLocale = detectLocale();
   emit();
   return currentLocale;
 }

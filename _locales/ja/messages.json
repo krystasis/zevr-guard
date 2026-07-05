@@ -175,5 +175,37 @@
   "onThisPage": { "message": "このページ" },
   "requestsBlockedCount": { "message": "このページで$N$件のリクエストをブロック", "placeholders": { "n": { "content": "$1" } } },
   "autoBlockedNotTracked": { "message": "自動ブロックされたドメイン詳細はここに記録されません" },
-  "pinBadge": { "message": "固定" }
+  "pinBadge": { "message": "固定" },
+
+  "pauseBarPaused": { "message": "ブロック一時停止中" },
+  "pauseBarPause": { "message": "一時停止" },
+  "pauseBarResume": { "message": "再開" },
+  "pauseBarPauseTitle": { "message": "このサイトでブロックを一時停止(表示崩れの解消に)" },
+  "pauseBarResumeTitle": { "message": "このサイトのブロックを再開" },
+  "settingsPausedSites": { "message": "一時停止中のサイト" },
+
+  "shareTitle": { "message": "このスキャンをシェア" },
+  "shareTagline": { "message": "あなたのブラウザは誰と通信している?" },
+  "shareHeadline": { "message": "$C$社・$N$か国", "placeholders": { "c": { "content": "$1" }, "n": { "content": "$2" } } },
+  "shareTweet": { "message": "🛡 $HOST$ は $C$社・$N$か国と通信していた — Zevr Guard で可視化&ブロック", "placeholders": { "host": { "content": "$1" }, "c": { "content": "$2" }, "n": { "content": "$3" } } },
+  "shareDownload": { "message": "画像を保存" },
+  "sharePost": { "message": "ポスト" },
+  "shareHint": { "message": "ヒント: 保存した画像をポストに添付してください。" },
+
+  "reportTitle": { "message": "プロテクションレポート" },
+  "reportSubtitle": { "message": "週間プロテクションレポート" },
+  "reportBlocked": { "message": "ブロック" },
+  "reportConnections": { "message": "通信" },
+  "reportTrackers": { "message": "トラッカー" },
+  "reportDangerous": { "message": "危険" },
+  "reportDailyBlocked": { "message": "日別ブロック数" },
+  "reportTopCompanies": { "message": "監視企業トップ" },
+  "reportTopBlocked": { "message": "ブロック上位ドメイン" },
+  "reportNoData": { "message": "まだデータがありません。少しブラウジングしてみてください。" },
+  "reportFooter": { "message": "すべてのデータはこの端末内にのみ保存されます。" },
+
+  "reviewPromptTitle": { "message": "🎉 ブロック$N$件を達成!", "placeholders": { "n": { "content": "$1" } } },
+  "reviewPromptMessage": { "message": "Zevr Guard は静かにあなたを守り続けています。役に立っていたら、レビューを書いてもらえると他の人にも届きます。" },
+  "reviewPromptRate": { "message": "レビューを書く ★" },
+  "reviewPromptLater": { "message": "あとで" }
 }

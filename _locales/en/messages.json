@@ -175,5 +175,37 @@
   "onThisPage": { "message": "On this page" },
   "requestsBlockedCount": { "message": "$N$ requests blocked on this page", "placeholders": { "n": { "content": "$1" } } },
   "autoBlockedNotTracked": { "message": "Auto-blocked domain details aren't tracked here" },
-  "pinBadge": { "message": "PIN" }
+  "pinBadge": { "message": "PIN" },
+
+  "pauseBarPaused": { "message": "Blocking paused" },
+  "pauseBarPause": { "message": "Pause" },
+  "pauseBarResume": { "message": "Resume" },
+  "pauseBarPauseTitle": { "message": "Pause blocking on this site (fixes broken sites)" },
+  "pauseBarResumeTitle": { "message": "Resume blocking on this site" },
+  "settingsPausedSites": { "message": "Paused sites" },
+
+  "shareTitle": { "message": "Share this scan" },
+  "shareTagline": { "message": "Who is your browser talking to?" },
+  "shareHeadline": { "message": "$C$ companies · $N$ countries", "placeholders": { "c": { "content": "$1" }, "n": { "content": "$2" } } },
+  "shareTweet": { "message": "🛡 $HOST$ talks to $C$ companies in $N$ countries — watched & blocked by Zevr Guard", "placeholders": { "host": { "content": "$1" }, "c": { "content": "$2" }, "n": { "content": "$3" } } },
+  "shareDownload": { "message": "Save image" },
+  "sharePost": { "message": "Post" },
+  "shareHint": { "message": "Tip: attach the saved image to your post." },
+
+  "reportTitle": { "message": "Protection report" },
+  "reportSubtitle": { "message": "Weekly protection report" },
+  "reportBlocked": { "message": "Blocked" },
+  "reportConnections": { "message": "Connections" },
+  "reportTrackers": { "message": "Trackers" },
+  "reportDangerous": { "message": "Dangerous" },
+  "reportDailyBlocked": { "message": "Blocked per day" },
+  "reportTopCompanies": { "message": "Top watching companies" },
+  "reportTopBlocked": { "message": "Most blocked domains" },
+  "reportNoData": { "message": "No data yet — browse a little first." },
+  "reportFooter": { "message": "All data is stored locally on this device." },
+
+  "reviewPromptTitle": { "message": "🎉 $N$ threats blocked!", "placeholders": { "n": { "content": "$1" } } },
+  "reviewPromptMessage": { "message": "Zevr Guard has been quietly protecting you. If it helps, a quick review helps others find it too." },
+  "reviewPromptRate": { "message": "Rate Zevr Guard ★" },
+  "reviewPromptLater": { "message": "Later" }
 }

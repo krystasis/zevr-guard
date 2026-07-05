@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Zevr Guard - Visibilidade de rede"
+    "message": "Zevr Guard: Bloqueador de anúncios, rastreadores e malware"
   },
   "extDescription": {
-    "message": "Bloqueia malware conhecido e mostra todos os rastreadores de terceiros que seu navegador contata. Lista de ameaças atualizada diariamente. Toda a verificação é local."
+    "message": "Bloqueie anúncios, rastreadores, malware e phishing. Veja com quem seu navegador fala em um mapa ao vivo. 100% local."
   },
   "protectionActive": {
     "message": "Proteção ativa"

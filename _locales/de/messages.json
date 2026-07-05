@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Zevr Guard - Netzwerk-Transparenz"
+    "message": "Zevr Guard: Werbeblocker, Tracker- & Malware-Schutz"
   },
   "extDescription": {
-    "message": "Blockiert bekannte Malware und zeigt jeden Drittanbieter-Tracker, den dein Browser kontaktiert. Bedrohungsliste mit täglichen Updates. Der Abgleich erfolgt komplett lokal."
+    "message": "Blockiert Werbung, Tracker, Malware & Phishing. Zeigt auf einer Live-Weltkarte, mit wem dein Browser spricht. 100% lokal."
   },
   "protectionActive": {
     "message": "Schutz aktiv"

@@ -3,6 +3,7 @@ import type { Connection, MessageRequest, PageStats, UserLocation } from '../typ
 import {
   calcRiskScore,
   getRiskLevel,
+  isMalware,
   lookupTracker,
   scoreToRiskLevel,
 } from './risk';
@@ -30,6 +31,8 @@ import {
   blockDomain,
   disallowDomain,
   getBlockedDomains,
+  matchesDomainOrParent,
+  syncMalwareSessionRules,
   unblockDomain,
 } from './blocking';
 
@@ -63,7 +66,40 @@ async function updatePage(
   }
 }
 
-async function handleRequest(details: chrome.webRequest.WebResponseCacheDetails): Promise<void> {
+type RequestOutcome = 'completed' | 'blocked' | 'failed';
+
+interface RequestEvent {
+  tabId: number;
+  url: string;
+  ip?: string;
+}
+
+/**
+ * A block surfaced via net::ERR_BLOCKED_BY_CLIENT can come from any
+ * extension. Only claim it in the daily stats when one of our own rule
+ * sources covers the domain (category rulesets are approximated by a
+ * tracker-DB hit, which is what they are built from).
+ */
+async function isBlockAttributedToUs(
+  domain: string,
+  tracker: ReturnType<typeof lookupTracker>,
+): Promise<boolean> {
+  if (isMalware(domain)) return true;
+  const blocked = await getBlockedDomains();
+  if (matchesDomainOrParent(domain, blocked)) return true;
+  if (tracker) {
+    const settings = await getSettings();
+    if (settings.blockCategories.advertising || settings.blockCategories.tracking) {
+      return true;
+    }
+  }
+  return false;
+}
+
+async function handleRequest(
+  details: RequestEvent,
+  outcome: RequestOutcome = 'completed',
+): Promise<void> {
   if (details.tabId < 0) return;
 
   let requestUrl: URL;
@@ -91,7 +127,8 @@ async function handleRequest(details: chrome.webRequest.WebResponseCacheDetails)
   const riskLevel = getRiskLevel(domain);
   const geo = details.ip ? await getGeoData(details.ip) : null;
   const blockedDomains = await getBlockedDomains();
-  const isBlocked = blockedDomains.has(domain);
+  const isBlocked =
+    outcome === 'blocked' || matchesDomainOrParent(domain, blockedDomains);
 
   const page = await updatePage(details.tabId, (existing) => {
     const base: PageStats = existing ?? {
@@ -143,17 +180,29 @@ async function handleRequest(details: chrome.webRequest.WebResponseCacheDetails)
 
     base.connections[domain] = connection;
     base.totalCount += 1;
+    if (outcome === 'blocked') base.blockedCount += 1;
     base.riskScore = calcRiskScore(base.connections);
     base.riskLevel = scoreToRiskLevel(base.riskScore);
     base.lastUpdated = Date.now();
     return base;
   });
 
-  if (page) updateBadge(details.tabId, page.riskLevel, page.riskScore);
+  const blockedByUs =
+    outcome === 'blocked' && (await isBlockAttributedToUs(domain, tracker));
 
-  await updateTodayStats(domain, tracker, riskLevel, geo);
+  if (page) {
+    if (blockedByUs) {
+      flashBlockedBadge(details.tabId, () =>
+        updateBadge(details.tabId, page.riskLevel, page.riskScore),
+      );
+    } else {
+      updateBadge(details.tabId, page.riskLevel, page.riskScore);
+    }
+  }
 
-  if (riskLevel === 'dangerous') {
+  await updateTodayStats(domain, tracker, riskLevel, geo, blockedByUs);
+
+  if (riskLevel === 'dangerous' && outcome === 'completed') {
     flashDangerBadge(details.tabId);
     const settings = await getSettings();
     if (settings.notificationsEnabled) {
@@ -173,9 +222,14 @@ async function updateTodayStats(
   tracker: ReturnType<typeof lookupTracker>,
   riskLevel: ReturnType<typeof getRiskLevel>,
   geo: Awaited<ReturnType<typeof getGeoData>>,
+  blockedByUs: boolean,
 ): Promise<void> {
   const today = await getTodayStats();
   today.totalConnections += 1;
+  if (blockedByUs) {
+    today.blockedConnections += 1;
+    today.blockedDomains[domain] = (today.blockedDomains[domain] ?? 0) + 1;
+  }
   if (riskLevel === 'dangerous') today.dangerousDetected += 1;
   if (riskLevel === 'tracker' || riskLevel === 'suspicious') {
     today.trackersDetected += 1;
@@ -216,14 +270,14 @@ chrome.webRequest.onCompleted.addListener(
 
 chrome.webRequest.onErrorOccurred.addListener(
   (details) => {
-    if (details.error === 'net::ERR_BLOCKED_BY_CLIENT' && details.tabId >= 0) {
-      let domain: string | null = null;
-      try {
-        domain = new URL(details.url).hostname;
-      } catch {
-        // ignore
-      }
-      void incrementBlocked(details.tabId, domain);
+    if (details.tabId < 0) return;
+    if (details.error === 'net::ERR_BLOCKED_BY_CLIENT') {
+      void handleRequest(details, 'blocked');
+    } else if (details.error !== 'net::ERR_ABORTED') {
+      // DNS failures, refused connections, timeouts: the attempt itself is
+      // worth surfacing (e.g. beacons to a dead C2 host). ERR_ABORTED is
+      // excluded — pages cancel their own requests constantly.
+      void handleRequest(details, 'failed');
     }
   },
   { urls: ['<all_urls>'] },
@@ -268,26 +322,6 @@ async function getUserLocation(): Promise<UserLocation | null> {
   })();
 
   return userLocationPromise;
-}
-
-async function incrementBlocked(tabId: number, domain: string | null): Promise<void> {
-  const page = await updatePage(tabId, (existing) => {
-    if (!existing) return existing ?? null;
-    existing.blockedCount += 1;
-    existing.lastUpdated = Date.now();
-    return existing;
-  });
-
-  const today = await getTodayStats();
-  today.blockedConnections += 1;
-  if (domain) {
-    today.blockedDomains[domain] = (today.blockedDomains[domain] ?? 0) + 1;
-  }
-  await setTodayStats(today);
-
-  if (page) {
-    flashBlockedBadge(tabId, () => updateBadge(tabId, page.riskLevel, page.riskScore));
-  }
 }
 
 chrome.tabs.onActivated.addListener(async ({ tabId }) => {
@@ -364,6 +398,7 @@ chrome.runtime.onMessage.addListener(
         case 'UPDATE_SETTINGS':
           await setSettings(message.settings);
           await syncCategoryRulesets(message.settings);
+          await syncMalwareSessionRules();
           sendResponse({ success: true });
           break;
         case 'GET_PAGE_STATS': {
@@ -372,7 +407,9 @@ chrome.runtime.onMessage.addListener(
           if (page) {
             const blocked = await getBlockedDomains();
             for (const domain of Object.keys(page.connections)) {
-              page.connections[domain].isBlocked = blocked.has(domain);
+              page.connections[domain].isBlocked =
+                page.connections[domain].isBlocked ||
+                matchesDomainOrParent(domain, blocked);
             }
           }
           sendResponse({ stats: page });

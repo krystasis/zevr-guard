@@ -90,7 +90,8 @@ function categoryWeight(category: string | null): number {
 }
 
 export function calcRiskScore(connections: Record<string, Connection>): number {
-  const list = Object.values(connections);
+  // Blocked connections are neutralized — the score reflects actual exposure.
+  const list = Object.values(connections).filter((c) => !c.isBlocked);
   const dangerousCount = list.filter((c) => c.riskLevel === 'dangerous').length;
 
   if (dangerousCount >= 3) return 100;

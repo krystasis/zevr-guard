@@ -97,6 +97,7 @@ export const Popup: React.FC = () => {
   const [groupBy, setGroupBy] = useState<GroupBy>('domain');
   const [share, setShare] = useState<{
     url: string;
+    blob: Blob;
     fileName: string;
     tweet: string;
   } | null>(null);
@@ -186,9 +187,14 @@ export const Popup: React.FC = () => {
         domains: conns.length,
         requests: stats.totalCount,
         blocked: stats.blockedCount,
-        points: conns
-          .filter((c) => c.lat != null && c.lon != null)
-          .map((c) => ({ lat: c.lat!, lon: c.lon!, risk: c.riskLevel })),
+        points: conns.map((c) => ({
+          domain: c.domain,
+          lat: c.lat,
+          lon: c.lon,
+          country: c.country,
+          risk: c.riskLevel,
+          count: c.count,
+        })),
         source: locRes?.location ?? null,
         labels: {
           brand: 'ZEVR GUARD',
@@ -215,6 +221,7 @@ export const Popup: React.FC = () => {
       );
       setShare({
         url,
+        blob,
         fileName: `zevr-guard-${stats.host.replace(/[^a-z0-9.-]/gi, '_')}.png`,
         tweet,
       });
@@ -332,6 +339,7 @@ export const Popup: React.FC = () => {
         {share && (
           <ShareModal
             url={share.url}
+            blob={share.blob}
             fileName={share.fileName}
             tweet={share.tweet}
             onClose={closeShare}
@@ -344,11 +352,21 @@ export const Popup: React.FC = () => {
 
 const ShareModal: React.FC<{
   url: string;
+  blob: Blob;
   fileName: string;
   tweet: string;
   onClose: () => void;
-}> = ({ url, fileName, tweet, onClose }) => {
-  function postOnX() {
+}> = ({ url, blob, fileName, tweet, onClose }) => {
+  async function postOnX() {
+    // The tweet intent URL cannot carry media, so put the image on the
+    // clipboard first — one Ctrl+V in the composer attaches it.
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({ 'image/png': blob }),
+      ]);
+    } catch {
+      // clipboard is best-effort; the user can still attach the saved file
+    }
     const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       `${tweet}\nhttps://zevrhq.com`,
     )}`;
@@ -379,7 +397,7 @@ const ShareModal: React.FC<{
           </a>
           <button
             className="flex-1 py-2 rounded text-[11px] font-bold uppercase tracking-wider bg-cyan-500/90 text-black hover:bg-cyan-400 transition"
-            onClick={postOnX}
+            onClick={() => void postOnX()}
           >
             𝕏 {t('sharePost', 'Post')}
           </button>

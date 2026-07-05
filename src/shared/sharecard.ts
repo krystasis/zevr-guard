@@ -1,10 +1,16 @@
 import type { RiskLevel } from '../types';
 import landUrl from '../../assets/ne_110m_land.geojson?url';
+import countryCentroids from '../data/country_centroids.json';
+
+const CENTROIDS = countryCentroids as unknown as Record<string, [number, number]>;
 
 export interface ShareCardPoint {
-  lat: number;
-  lon: number;
+  domain: string;
+  lat: number | null;
+  lon: number | null;
+  country: string | null;
   risk: RiskLevel;
+  count: number;
 }
 
 export interface ShareCardLabels {
@@ -43,6 +49,52 @@ const FONT = 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif';
 
 function project(lat: number, lng: number): [number, number] {
   return [((lng + 180) / 360) * W, ((90 - lat) / 180) * H];
+}
+
+function hashCode(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
+
+interface ResolvedPoint {
+  x: number;
+  y: number;
+  risk: RiskLevel;
+  count: number;
+}
+
+/**
+ * Geo data is country-centroid based, so every domain in the same country
+ * lands on the exact same pixel and all their arcs collapse into one line.
+ * Fan the domains out deterministically around the centroid so each
+ * connection gets its own visible arc.
+ */
+function resolvePoints(points: ShareCardPoint[]): ResolvedPoint[] {
+  const out: ResolvedPoint[] = [];
+  for (const p of points) {
+    let lat = p.lat;
+    let lon = p.lon;
+    if ((lat == null || lon == null) && p.country) {
+      const c = CENTROIDS[p.country.toUpperCase()];
+      if (c) {
+        lat = c[0];
+        lon = c[1];
+      }
+    }
+    if (lat == null || lon == null) continue;
+    const h = hashCode(p.domain);
+    const jLat = ((h % 1000) / 1000 - 0.5) * 7;
+    const jLon = ((Math.floor(h / 1000) % 1000) / 1000 - 0.5) * 11;
+    const [x, y] = project(
+      Math.max(-72, Math.min(78, lat + jLat)),
+      lon + jLon,
+    );
+    out.push({ x, y, risk: p.risk, count: p.count });
+  }
+  return out;
 }
 
 async function drawLand(ctx: CanvasRenderingContext2D): Promise<void> {
@@ -157,45 +209,56 @@ export async function renderShareCard(data: ShareCardData): Promise<Blob> {
 
   await drawLand(ctx);
 
-  // Arcs + destination points
+  // Arcs + destination points — one arc per connection. Fall back to a
+  // virtual origin near the bottom center when the user location is unknown
+  // so the card is never arc-less.
   const src = data.source;
+  const [sx, sy] = src
+    ? project(src.lat, src.lng)
+    : [W / 2, H - 210];
+  const resolved = resolvePoints(data.points);
+
   ctx.save();
   ctx.lineCap = 'round';
-  ctx.lineWidth = 1.6;
-  ctx.shadowBlur = 10;
-  ctx.globalAlpha = 0.55;
-  if (src) {
-    const [sx, sy] = project(src.lat, src.lng);
-    for (const p of data.points) {
-      const [tx, ty] = project(p.lat, p.lon);
-      drawArc(ctx, sx, sy, tx, ty, RISK_COLOR[p.risk]);
-    }
+  for (const p of resolved) {
+    ctx.lineWidth = Math.min(3.2, 1.1 + Math.log2(1 + p.count) * 0.5);
+    ctx.shadowBlur = 12;
+    ctx.globalAlpha = 0.7;
+    drawArc(ctx, sx, sy, p.x, p.y, RISK_COLOR[p.risk]);
   }
   ctx.restore();
 
   ctx.save();
-  ctx.shadowBlur = 8;
-  for (const p of data.points) {
-    const [x, y] = project(p.lat, p.lon);
+  for (const p of resolved) {
     ctx.fillStyle = RISK_COLOR[p.risk];
     ctx.shadowColor = RISK_COLOR[p.risk];
+    ctx.shadowBlur = 10;
     ctx.globalAlpha = 0.95;
     ctx.beginPath();
-    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
     ctx.fill();
+    // impact ring
+    ctx.strokeStyle = RISK_COLOR[p.risk];
+    ctx.globalAlpha = 0.35;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 7.5, 0, Math.PI * 2);
+    ctx.stroke();
   }
-  if (src) {
-    const [sx, sy] = project(src.lat, src.lng);
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = '#7dd3fc';
-    ctx.shadowBlur = 16;
+  // source marker
+  ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = '#7dd3fc';
+  ctx.shadowBlur = 18;
+  ctx.globalAlpha = 1;
+  ctx.beginPath();
+  ctx.arc(sx, sy, 6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.65)';
+  ctx.lineWidth = 1.5;
+  for (const r of [13, 22]) {
+    ctx.globalAlpha = r === 13 ? 0.7 : 0.35;
     ctx.beginPath();
-    ctx.arc(sx, sy, 6, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,0.6)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(sx, sy, 14, 0, Math.PI * 2);
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
     ctx.stroke();
   }
   ctx.restore();

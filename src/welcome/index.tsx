@@ -255,6 +255,28 @@ const FeatureSection: React.FC = () => (
           )}
         />
       </div>
+
+      <div className="mt-10 text-center">
+        <div className="text-[10px] uppercase tracking-[0.35em] text-gray-400 mb-4">
+          {t('welcomeAlsoTitle', 'Also included')}
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          {[
+            ['📤', t('welcomeAlsoShare', '1-click share card')],
+            ['📊', t('welcomeAlsoReport', 'Weekly protection report')],
+            ['⏸️', t('welcomeAlsoPause', 'Per-site pause')],
+            ['🌍', t('welcomeAlsoLangs', 'Available in 6 languages')],
+          ].map(([icon, label]) => (
+            <span
+              key={label}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-800/40 bg-white/[0.03] text-xs text-gray-200"
+            >
+              <span>{icon}</span>
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 );
@@ -372,7 +394,7 @@ const Footer: React.FC = () => (
       <div className="text-[10px] uppercase tracking-[0.3em] text-gray-300">
         {t('footerNetworkVisibility', 'Network visibility, instantly')}
       </div>
-      <div className="text-[10px] text-gray-300">v1.0</div>
+      <div className="text-[10px] text-gray-300">v{chrome.runtime.getManifest().version}</div>
     </div>
   </footer>
 );

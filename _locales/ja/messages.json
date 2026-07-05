@@ -610,5 +610,20 @@
         "content": "$1"
       }
     }
+  },
+  "welcomeAlsoTitle": {
+    "message": "ほかにも"
+  },
+  "welcomeAlsoShare": {
+    "message": "1クリックのシェアカード"
+  },
+  "welcomeAlsoReport": {
+    "message": "週間プロテクションレポート"
+  },
+  "welcomeAlsoPause": {
+    "message": "サイト別の一時停止"
+  },
+  "welcomeAlsoLangs": {
+    "message": "6言語に対応"
   }
 }

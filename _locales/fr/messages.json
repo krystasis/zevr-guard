@@ -610,5 +610,20 @@
         "content": "$1"
       }
     }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Également inclus"
+  },
+  "welcomeAlsoShare": {
+    "message": "Carte de partage en 1 clic"
+  },
+  "welcomeAlsoReport": {
+    "message": "Rapport de protection hebdomadaire"
+  },
+  "welcomeAlsoPause": {
+    "message": "Pause par site"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Disponible en 6 langues"
   }
 }

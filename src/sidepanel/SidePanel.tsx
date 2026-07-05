@@ -252,7 +252,7 @@ export const SidePanel: React.FC = () => {
           onReady={(m) => {
             mapRef.current = m;
             const loc = userLocRef.current;
-            if (loc) m.setSource(loc.lat, loc.lng, 'YOU');
+            if (loc) m.setSource(loc.lat, loc.lng, t('youLabel', 'YOU'));
           }}
           onDispose={() => {
             mapRef.current = null;
@@ -696,7 +696,7 @@ const DetailPanel: React.FC<{
                 className="flex-shrink-0 px-2 h-5 rounded text-[9px] font-bold uppercase tracking-wider bg-gray-700/60 text-gray-200 hover:bg-gray-600 transition"
                 onClick={() => onUnblock(domain)}
               >
-                unblock
+                {t('unblock', 'unblock')}
               </button>
             </div>
           ))}
@@ -766,7 +766,7 @@ const ConnectionRow: React.FC<{
       {isLocked && (
         <span
           className="text-cyan-300 text-[9px] font-bold tracking-wider flex-shrink-0"
-          title="Click again to unpin"
+          title={t('unpinTitle', 'Click again to unpin')}
         >
           {t('pinBadge', 'PIN')}
         </span>

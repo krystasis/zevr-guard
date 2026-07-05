@@ -1,13 +1,19 @@
 {
-  "extName": { "message": "Zevr Guard - Visibilité réseau" },
+  "extName": {
+    "message": "Zevr Guard - Visibilité réseau"
+  },
   "extDescription": {
     "message": "Bloque les malwares connus et affiche chaque traqueur tiers que votre navigateur contacte. Liste de menaces mise à jour chaque jour. Toute l'analyse est locale."
   },
-
-  "protectionActive": { "message": "Protection active" },
-  "brandZevr": { "message": "Zevr" },
-  "brandTagline": { "message": "Le premier produit" },
-
+  "protectionActive": {
+    "message": "Protection active"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Le premier produit"
+  },
   "heroTagline": {
     "message": "Voyez à qui parle votre navigateur."
   },
@@ -17,195 +23,592 @@
   "heroDescription": {
     "message": "Voyez en temps réel quelles parties du monde votre navigateur contacte. Les connexions dangereuses sont bloquées automatiquement."
   },
-  "ctaOpenGlobe": { "message": "Ouvrir le Live Globe" },
-  "ctaStartBrowsing": { "message": "Commencer à naviguer" },
-  "trustTrackers": { "message": "$N$ signaux de traqueurs", "placeholders": { "n": { "content": "$1" } } },
-  "trustUrlhaus": { "message": "BD mise à jour chaque jour" },
-  "trust100Local": { "message": "Analyse 100 % locale" },
-  "trustNoTelemetry": { "message": "Aucune URL envoyée" },
-  "scrollHint": { "message": "Défiler" },
-
-  "howItWorks": { "message": "Comment ça marche" },
-  "fourLayersTitle": { "message": "Quatre couches de protection" },
-
-  "feature1Title": { "message": "Blocage auto des malwares" },
+  "ctaOpenGlobe": {
+    "message": "Ouvrir le Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "Commencer à naviguer"
+  },
+  "trustTrackers": {
+    "message": "$N$ signaux de traqueurs",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "BD mise à jour chaque jour"
+  },
+  "trust100Local": {
+    "message": "Analyse 100 % locale"
+  },
+  "trustNoTelemetry": {
+    "message": "Aucune URL envoyée"
+  },
+  "scrollHint": {
+    "message": "Défiler"
+  },
+  "howItWorks": {
+    "message": "Comment ça marche"
+  },
+  "fourLayersTitle": {
+    "message": "Quatre couches de protection"
+  },
+  "feature1Title": {
+    "message": "Blocage auto des malwares"
+  },
   "feature1Desc": {
     "message": "Les domaines connus de malware et de phishing sont bloqués avant même que vous les remarquiez. La liste de menaces se met à jour automatiquement chaque jour."
   },
-  "feature2Title": { "message": "Voyez chaque traqueur" },
+  "feature2Title": {
+    "message": "Voyez chaque traqueur"
+  },
   "feature2Desc": {
     "message": "Une base de plus de 115 000 signaux de traqueurs identifie quelles entreprises atteignent votre navigateur, à quelle fréquence et depuis où."
   },
-  "feature3Title": { "message": "Alerte sur le suspect" },
+  "feature3Title": {
+    "message": "Alerte sur le suspect"
+  },
   "feature3Desc": {
     "message": "Les domaines de publicité, d'analyse et de fingerprinting sont mis en évidence par couleur. Voyez la densité de pistage de chaque page en temps réel."
   },
-  "feature4Title": { "message": "Analyse locale. Vos URL ne sortent jamais." },
+  "feature4Title": {
+    "message": "Analyse locale. Vos URL ne sortent jamais."
+  },
   "feature4Desc": {
     "message": "L'analyse s'exécute entièrement dans votre navigateur. Le seul trafic sortant : les mises à jour anonymes de la BD de menaces depuis notre CDN — votre historique de navigation ne va nulle part."
   },
-
-  "dataSourcesTitle": { "message": "Une défense discrète, à une échelle vérifiable." },
-  "dataSourcesSubtitle": { "message": "En chiffres" },
-  "dataByNumbers1Value": { "message": "115 000+" },
-  "dataByNumbers1Unit": { "message": "signaux" },
-  "dataByNumbers1Label": { "message": "BD d'identification des traqueurs" },
-  "dataByNumbers2Value": { "message": "quotidiennes" },
-  "dataByNumbers2Unit": { "message": "mises à jour" },
-  "dataByNumbers2Label": { "message": "Mise à jour auto via notre CDN" },
-  "dataByNumbers3Value": { "message": "244" },
-  "dataByNumbers3Unit": { "message": "pays" },
-  "dataByNumbers3Label": { "message": "Couverture de géolocalisation" },
-  "dataByNumbers4Value": { "message": "0" },
-  "dataByNumbers4Unit": { "message": "URL envoyées" },
-  "dataByNumbers4Label": { "message": "Votre navigation ne sort jamais" },
-
-  "languageSwitchLabel": { "message": "Langue" },
-  "languageEnglish": { "message": "English" },
-  "languageJapanese": { "message": "日本語" },
-
-  "footerNetworkVisibility": { "message": "La visibilité réseau, instantanément" },
-
-  "warningTitle": { "message": "Site dangereux bloqué" },
-  "warningSubtitle": { "message": "Protégé par Zevr Guard" },
-  "warningBlockedSiteLabel": { "message": "Zevr Guard a bloqué l'accès à :" },
-  "warningListHeader": { "message": "Ce domaine figure dans des bases de données connues de malware/phishing." },
-  "warningListIntro": { "message": "Visiter ce site pourrait :" },
-  "warningListItem1": { "message": "Installer un malware sur votre appareil" },
-  "warningListItem2": { "message": "Voler vos mots de passe ou données personnelles" },
-  "warningListItem3": { "message": "Détourner votre navigateur ou vos comptes" },
-  "warningGoBack": { "message": "Retour (sécurisé)" },
-  "warningUnderstandRisk": { "message": "Je comprends le risque" },
+  "dataSourcesTitle": {
+    "message": "Une défense discrète, à une échelle vérifiable."
+  },
+  "dataSourcesSubtitle": {
+    "message": "En chiffres"
+  },
+  "dataByNumbers1Value": {
+    "message": "115 000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "signaux"
+  },
+  "dataByNumbers1Label": {
+    "message": "BD d'identification des traqueurs"
+  },
+  "dataByNumbers2Value": {
+    "message": "quotidiennes"
+  },
+  "dataByNumbers2Unit": {
+    "message": "mises à jour"
+  },
+  "dataByNumbers2Label": {
+    "message": "Mise à jour auto via notre CDN"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "pays"
+  },
+  "dataByNumbers3Label": {
+    "message": "Couverture de géolocalisation"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL envoyées"
+  },
+  "dataByNumbers4Label": {
+    "message": "Votre navigation ne sort jamais"
+  },
+  "languageSwitchLabel": {
+    "message": "Langue"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "La visibilité réseau, instantanément"
+  },
+  "warningTitle": {
+    "message": "Site dangereux bloqué"
+  },
+  "warningSubtitle": {
+    "message": "Protégé par Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard a bloqué l'accès à :"
+  },
+  "warningListHeader": {
+    "message": "Ce domaine figure dans des bases de données connues de malware/phishing."
+  },
+  "warningListIntro": {
+    "message": "Visiter ce site pourrait :"
+  },
+  "warningListItem1": {
+    "message": "Installer un malware sur votre appareil"
+  },
+  "warningListItem2": {
+    "message": "Voler vos mots de passe ou données personnelles"
+  },
+  "warningListItem3": {
+    "message": "Détourner votre navigateur ou vos comptes"
+  },
+  "warningGoBack": {
+    "message": "Retour (sécurisé)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Je comprends le risque"
+  },
   "warningOverrideDetail": {
     "message": "Pour continuer malgré tout, retirez ce domaine de votre liste de blocage via le popup de Zevr Guard (bouton bloquer/débloquer), puis rechargez la page."
   },
-  "warningFooter": { "message": "Protégé par Zevr Guard · Une navigation sûre pour tous" },
-
-  "riskMsgSafe": { "message": "Cette page est sûre" },
-  "riskMsgTracker": { "message": "Traqueurs détectés" },
-  "riskMsgSuspicious": { "message": "Trafic suspect détecté" },
-  "riskMsgDangerous": { "message": "Trafic dangereux détecté" },
-
-  "settingsGeneral": { "message": "Général" },
-  "settingsNotifications": { "message": "Notifications" },
-  "settingsNotificationsDesc": { "message": "Notifier en cas de trafic dangereux" },
-  "settingsBlockCategories": { "message": "Catégories de blocage" },
-  "settingsMalware": { "message": "Malware / Phishing" },
-  "settingsMalwareDesc": { "message": "Malware et phishing connus (recommandé)" },
-  "settingsAdvertising": { "message": "Publicité" },
-  "settingsAdvertisingDesc": { "message": "Domaines publicitaires" },
-  "settingsTracking": { "message": "Pistage" },
-  "settingsTrackingDesc": { "message": "Domaines de pistage et d'analyse" },
-  "settingsCustomBlocklist": { "message": "Liste de blocage personnalisée" },
-  "settingsBlocklistEmpty": { "message": "Aucun domaine bloqué" },
-  "settingsBlocklistCountOne": { "message": "1 domaine" },
-  "settingsBlocklistCountMany": { "message": "$N$ domaines", "placeholders": { "n": { "content": "$1" } } },
-  "settingsCustomAllowlist": { "message": "Liste d'autorisation personnalisée" },
-  "settingsAllowlistEmpty": { "message": "Aucun domaine autorisé" },
-  "settingsAllowlistCountOne": { "message": "1 domaine" },
-  "settingsAllowlistCountMany": { "message": "$N$ domaines", "placeholders": { "n": { "content": "$1" } } },
-  "settingsAllowlistHint": { "message": "Les domaines ajoutés ici contournent toutes les règles de blocage, même les malwares." },
-  "allowBarThisSite": { "message": "Ce site" },
-  "allowBarAllowed": { "message": "Autorisé" },
-  "allowBarAllow": { "message": "Autoriser" },
-  "allowBarRevoke": { "message": "Révoquer" },
-  "allowBarAddTitle": { "message": "Ajouter ce site à la liste d'autorisation (contourne le blocage)" },
-  "allowBarRemoveTitle": { "message": "Retirer ce site de la liste d'autorisation" },
-  "remove": { "message": "retirer" },
-
-  "brandGuard": { "message": "Guard" },
-  "sidepanelSubtitle": { "message": "Live Globe" },
-  "popupStatusLive": { "message": "protection active" },
-  "popupScanning": { "message": "ANALYSE..." },
-  "popupNoData": { "message": "Pas encore de données pour cette page." },
-  "popupReloadToMonitor": { "message": "Rechargez l'onglet pour lancer la surveillance." },
-  "metricDomains": { "message": "domaines" },
-  "metricRequests": { "message": "requêtes" },
-  "metricBlocked": { "message": "bloquées" },
-  "todayTrackers": { "message": "Traqueurs aujourd'hui" },
-  "todayBlocked": { "message": "Bloqués aujourd'hui" },
-  "todayCompanies": { "message": "Entreprises" },
-  "riskScoreLabel": { "message": "score de risque" },
-  "riskLabelSafe": { "message": "SÛR" },
-  "riskLabelTracker": { "message": "TRAQUEUR" },
-  "riskLabelSuspicious": { "message": "SUSPECT" },
-  "riskLabelDangerous": { "message": "DANGEREUX" },
-  "connectionsCount": { "message": "Connexions" },
-  "monitoringConnections": { "message": "Surveillance des connexions..." },
-  "noMatchingConnections": { "message": "Aucune connexion correspondante." },
-  "backToList": { "message": "Retour à la liste" },
-  "filterAll": { "message": "Tout" },
-  "filterDangerShort": { "message": "Danger" },
-  "filterSuspicShort": { "message": "Suspect" },
-  "filterTrackerShort": { "message": "Traqueur" },
-  "filterSafeShort": { "message": "Sûr" },
-  "viewLabel": { "message": "Vue" },
-  "groupDomains": { "message": "Domaines" },
-  "groupCompanies": { "message": "Entreprises" },
-  "groupDomainCount": { "message": "$N$ domaines", "placeholders": { "n": { "content": "$1" } } },
-  "groupDomainCountOne": { "message": "1 domaine" },
-  "detailCompany": { "message": "Entreprise" },
-  "detailCategory": { "message": "Catégorie" },
-  "detailLocation": { "message": "Localisation" },
-  "detailHostedBy": { "message": "Hébergé par" },
-  "detailISP": { "message": "FAI" },
-  "detailASN": { "message": "ASN" },
-  "detailRequests": { "message": "Requêtes" },
-  "detailFirstSeen": { "message": "Première détection" },
-  "unblockThisDomain": { "message": "Débloquer ce domaine" },
-  "blockThisDomain": { "message": "Bloquer ce domaine" },
-  "block": { "message": "bloquer" },
-  "unblock": { "message": "débloquer" },
-  "legendSafe": { "message": "Sûr" },
-  "legendTracker": { "message": "Traqueur" },
-  "legendSuspicious": { "message": "Suspect" },
-  "legendDangerous": { "message": "Dangereux" },
-  "stripTrackers": { "message": "Traqueurs" },
-  "stripBlocked": { "message": "Bloqués" },
-  "stripCompanies": { "message": "Entreprises" },
-  "thisPage": { "message": "Cette page" },
-  "backToConnections": { "message": "Retour aux connexions" },
-  "drillRequests": { "message": "requêtes" },
-  "drillDomains": { "message": "domaines" },
-  "drillCompanies": { "message": "entreprises" },
-  "noTrackersOnPage": { "message": "Aucun traqueur sur cette page." },
-  "noCompaniesOnPage": { "message": "Aucune entreprise identifiable sur cette page." },
-  "nothingBlocked": { "message": "Rien de bloqué sur cette page." },
-  "watchingMsg": { "message": "Zevr Guard veille — les sites dangereux seront bloqués automatiquement." },
-  "onThisPage": { "message": "Sur cette page" },
-  "requestsBlockedCount": { "message": "$N$ requêtes bloquées sur cette page", "placeholders": { "n": { "content": "$1" } } },
-  "autoBlockedNotTracked": { "message": "Les détails des domaines bloqués automatiquement ne sont pas suivis ici" },
-  "pinBadge": { "message": "ÉPINGLÉ" },
-
-  "pauseBarPaused": { "message": "Blocage en pause" },
-  "pauseBarPause": { "message": "Pause" },
-  "pauseBarResume": { "message": "Reprendre" },
-  "pauseBarPauseTitle": { "message": "Mettre le blocage en pause sur ce site (répare les sites cassés)" },
-  "pauseBarResumeTitle": { "message": "Reprendre le blocage sur ce site" },
-  "settingsPausedSites": { "message": "Sites en pause" },
-
-  "shareTitle": { "message": "Partager cette analyse" },
-  "shareTagline": { "message": "À qui parle votre navigateur ?" },
-  "shareHeadline": { "message": "$C$ entreprises · $N$ pays", "placeholders": { "c": { "content": "$1" }, "n": { "content": "$2" } } },
-  "shareTweet": { "message": "🛡 $HOST$ parle à $C$ entreprises dans $N$ pays — surveillé et bloqué par Zevr Guard", "placeholders": { "host": { "content": "$1" }, "c": { "content": "$2" }, "n": { "content": "$3" } } },
-  "shareDownload": { "message": "Enregistrer l'image" },
-  "sharePost": { "message": "Publier" },
-  "shareHint": { "message": "Astuce : joignez l'image enregistrée à votre publication." },
-
-  "reportTitle": { "message": "Rapport de protection" },
-  "reportSubtitle": { "message": "Rapport de protection hebdomadaire" },
-  "reportBlocked": { "message": "Bloqués" },
-  "reportConnections": { "message": "Connexions" },
-  "reportTrackers": { "message": "Traqueurs" },
-  "reportDangerous": { "message": "Dangereux" },
-  "reportDailyBlocked": { "message": "Blocages par jour" },
-  "reportTopCompanies": { "message": "Entreprises qui vous observent le plus" },
-  "reportTopBlocked": { "message": "Domaines les plus bloqués" },
-  "reportNoData": { "message": "Pas encore de données — naviguez un peu d'abord." },
-  "reportFooter": { "message": "Toutes les données sont stockées localement sur cet appareil." },
-
-  "reviewPromptTitle": { "message": "🎉 $N$ menaces bloquées !", "placeholders": { "n": { "content": "$1" } } },
-  "reviewPromptMessage": { "message": "Zevr Guard vous protège discrètement. S'il vous est utile, un avis rapide aide d'autres personnes à le découvrir." },
-  "reviewPromptRate": { "message": "Noter Zevr Guard ★" },
-  "reviewPromptLater": { "message": "Plus tard" }
+  "warningFooter": {
+    "message": "Protégé par Zevr Guard · Une navigation sûre pour tous"
+  },
+  "riskMsgSafe": {
+    "message": "Cette page est sûre"
+  },
+  "riskMsgTracker": {
+    "message": "Traqueurs détectés"
+  },
+  "riskMsgSuspicious": {
+    "message": "Trafic suspect détecté"
+  },
+  "riskMsgDangerous": {
+    "message": "Trafic dangereux détecté"
+  },
+  "settingsGeneral": {
+    "message": "Général"
+  },
+  "settingsNotifications": {
+    "message": "Notifications"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Notifier en cas de trafic dangereux"
+  },
+  "settingsBlockCategories": {
+    "message": "Catégories de blocage"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Malware et phishing connus (recommandé)"
+  },
+  "settingsAdvertising": {
+    "message": "Publicité"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Domaines publicitaires"
+  },
+  "settingsTracking": {
+    "message": "Pistage"
+  },
+  "settingsTrackingDesc": {
+    "message": "Domaines de pistage et d'analyse"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Liste de blocage personnalisée"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Aucun domaine bloqué"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domaine"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domaines",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Liste d'autorisation personnalisée"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Aucun domaine autorisé"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domaine"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domaines",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Les domaines ajoutés ici contournent toutes les règles de blocage, même les malwares."
+  },
+  "allowBarThisSite": {
+    "message": "Ce site"
+  },
+  "allowBarAllowed": {
+    "message": "Autorisé"
+  },
+  "allowBarAllow": {
+    "message": "Autoriser"
+  },
+  "allowBarRevoke": {
+    "message": "Révoquer"
+  },
+  "allowBarAddTitle": {
+    "message": "Ajouter ce site à la liste d'autorisation (contourne le blocage)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Retirer ce site de la liste d'autorisation"
+  },
+  "remove": {
+    "message": "retirer"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "protection active"
+  },
+  "popupScanning": {
+    "message": "ANALYSE..."
+  },
+  "popupNoData": {
+    "message": "Pas encore de données pour cette page."
+  },
+  "popupReloadToMonitor": {
+    "message": "Rechargez l'onglet pour lancer la surveillance."
+  },
+  "metricDomains": {
+    "message": "domaines"
+  },
+  "metricRequests": {
+    "message": "requêtes"
+  },
+  "metricBlocked": {
+    "message": "bloquées"
+  },
+  "todayTrackers": {
+    "message": "Traqueurs aujourd'hui"
+  },
+  "todayBlocked": {
+    "message": "Bloqués aujourd'hui"
+  },
+  "todayCompanies": {
+    "message": "Entreprises"
+  },
+  "riskScoreLabel": {
+    "message": "score de risque"
+  },
+  "riskLabelSafe": {
+    "message": "SÛR"
+  },
+  "riskLabelTracker": {
+    "message": "TRAQUEUR"
+  },
+  "riskLabelSuspicious": {
+    "message": "SUSPECT"
+  },
+  "riskLabelDangerous": {
+    "message": "DANGEREUX"
+  },
+  "connectionsCount": {
+    "message": "Connexions"
+  },
+  "monitoringConnections": {
+    "message": "Surveillance des connexions..."
+  },
+  "noMatchingConnections": {
+    "message": "Aucune connexion correspondante."
+  },
+  "backToList": {
+    "message": "Retour à la liste"
+  },
+  "filterAll": {
+    "message": "Tout"
+  },
+  "filterDangerShort": {
+    "message": "Danger"
+  },
+  "filterSuspicShort": {
+    "message": "Suspect"
+  },
+  "filterTrackerShort": {
+    "message": "Traqueur"
+  },
+  "filterSafeShort": {
+    "message": "Sûr"
+  },
+  "viewLabel": {
+    "message": "Vue"
+  },
+  "groupDomains": {
+    "message": "Domaines"
+  },
+  "groupCompanies": {
+    "message": "Entreprises"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domaines",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domaine"
+  },
+  "detailCompany": {
+    "message": "Entreprise"
+  },
+  "detailCategory": {
+    "message": "Catégorie"
+  },
+  "detailLocation": {
+    "message": "Localisation"
+  },
+  "detailHostedBy": {
+    "message": "Hébergé par"
+  },
+  "detailISP": {
+    "message": "FAI"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Requêtes"
+  },
+  "detailFirstSeen": {
+    "message": "Première détection"
+  },
+  "unblockThisDomain": {
+    "message": "Débloquer ce domaine"
+  },
+  "blockThisDomain": {
+    "message": "Bloquer ce domaine"
+  },
+  "block": {
+    "message": "bloquer"
+  },
+  "unblock": {
+    "message": "débloquer"
+  },
+  "legendSafe": {
+    "message": "Sûr"
+  },
+  "legendTracker": {
+    "message": "Traqueur"
+  },
+  "legendSuspicious": {
+    "message": "Suspect"
+  },
+  "legendDangerous": {
+    "message": "Dangereux"
+  },
+  "stripTrackers": {
+    "message": "Traqueurs"
+  },
+  "stripBlocked": {
+    "message": "Bloqués"
+  },
+  "stripCompanies": {
+    "message": "Entreprises"
+  },
+  "thisPage": {
+    "message": "Cette page"
+  },
+  "backToConnections": {
+    "message": "Retour aux connexions"
+  },
+  "drillRequests": {
+    "message": "requêtes"
+  },
+  "drillDomains": {
+    "message": "domaines"
+  },
+  "drillCompanies": {
+    "message": "entreprises"
+  },
+  "noTrackersOnPage": {
+    "message": "Aucun traqueur sur cette page."
+  },
+  "noCompaniesOnPage": {
+    "message": "Aucune entreprise identifiable sur cette page."
+  },
+  "nothingBlocked": {
+    "message": "Rien de bloqué sur cette page."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard veille — les sites dangereux seront bloqués automatiquement."
+  },
+  "onThisPage": {
+    "message": "Sur cette page"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ requêtes bloquées sur cette page",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Les détails des domaines bloqués automatiquement ne sont pas suivis ici"
+  },
+  "pinBadge": {
+    "message": "ÉPINGLÉ"
+  },
+  "pauseBarPaused": {
+    "message": "Blocage en pause"
+  },
+  "pauseBarPause": {
+    "message": "Pause"
+  },
+  "pauseBarResume": {
+    "message": "Reprendre"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Mettre le blocage en pause sur ce site (répare les sites cassés)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Reprendre le blocage sur ce site"
+  },
+  "settingsPausedSites": {
+    "message": "Sites en pause"
+  },
+  "shareTitle": {
+    "message": "Partager cette analyse"
+  },
+  "shareTagline": {
+    "message": "À qui parle votre navigateur ?"
+  },
+  "shareHeadline": {
+    "message": "$C$ entreprises · $N$ pays",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ parle à $C$ entreprises dans $N$ pays — surveillé et bloqué par Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Enregistrer l'image"
+  },
+  "sharePost": {
+    "message": "Publier"
+  },
+  "shareHint": {
+    "message": "Astuce : joignez l'image enregistrée à votre publication."
+  },
+  "reportTitle": {
+    "message": "Rapport de protection"
+  },
+  "reportSubtitle": {
+    "message": "Rapport de protection hebdomadaire"
+  },
+  "reportBlocked": {
+    "message": "Bloqués"
+  },
+  "reportConnections": {
+    "message": "Connexions"
+  },
+  "reportTrackers": {
+    "message": "Traqueurs"
+  },
+  "reportDangerous": {
+    "message": "Dangereux"
+  },
+  "reportDailyBlocked": {
+    "message": "Blocages par jour"
+  },
+  "reportTopCompanies": {
+    "message": "Entreprises qui vous observent le plus"
+  },
+  "reportTopBlocked": {
+    "message": "Domaines les plus bloqués"
+  },
+  "reportNoData": {
+    "message": "Pas encore de données — naviguez un peu d'abord."
+  },
+  "reportFooter": {
+    "message": "Toutes les données sont stockées localement sur cet appareil."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ menaces bloquées !",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard vous protège discrètement. S'il vous est utile, un avis rapide aide d'autres personnes à le découvrir."
+  },
+  "reviewPromptRate": {
+    "message": "Noter Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Plus tard"
+  },
+  "riskExplainDangerous": {
+    "message": "Ce domaine figure dans des bases de données connues de malwares/phishing. Il peut tenter de voler vos données ou d'installer un malware."
+  },
+  "riskExplainSuspicious": {
+    "message": "Ce domaine est utilisé pour la publicité ou le traçage. Il collecte des données sur votre navigation."
+  },
+  "riskExplainTracker": {
+    "message": "Ce domaine est utilisé pour l'analyse ou la diffusion de contenu. Il peut collecter certaines données d'usage."
+  },
+  "riskExplainSafe": {
+    "message": "Ce domaine semble sûr. Aucun traçage ni activité malveillante connus détectés."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Ouvrir le globe en direct dans le panneau latéral"
+  },
+  "settingsTitle": {
+    "message": "Paramètres"
+  },
+  "unpinTitle": {
+    "message": "Cliquez à nouveau pour détacher"
+  },
+  "youLabel": {
+    "message": "VOUS"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Connexion dangereuse détectée"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ est un domaine connu de malware/phishing.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  }
 }

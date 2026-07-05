@@ -9,6 +9,7 @@ import {
   scoreToRiskLevel,
 } from './risk';
 import { initFeed, refreshFeed } from './feed';
+import { t, loadLocale } from '../shared/i18n';
 import { syncCategoryRulesets } from './rulesets';
 import { getGeoData } from './geo';
 import {
@@ -270,8 +271,12 @@ async function handleRequest(
       chrome.notifications.create(`danger-${domain}-${Date.now()}`, {
         type: 'basic',
         iconUrl: chrome.runtime.getURL('public/icons/icon48.png'),
-        title: '⚠️ Dangerous Connection Detected',
-        message: `${domain} is a known malware/phishing domain.`,
+        title: t('dangerNotifTitle', '⚠️ Dangerous Connection Detected'),
+        message: t(
+          'dangerNotifMessage',
+          `${domain} is a known malware/phishing domain.`,
+          domain,
+        ),
         priority: 2,
       });
     }
@@ -407,18 +412,14 @@ async function maybePromptReview(lifetimeBlocked: number): Promise<void> {
     chrome.notifications.create(`zg-review-${milestone}`, {
       type: 'basic',
       iconUrl: chrome.runtime.getURL('public/icons/icon128.png'),
-      title:
-        chrome.i18n.getMessage('reviewPromptTitle', [count]) ||
-        `🎉 ${count} threats blocked!`,
-      message:
-        chrome.i18n.getMessage('reviewPromptMessage') ||
+      title: t('reviewPromptTitle', `🎉 ${count} threats blocked!`, count),
+      message: t(
+        'reviewPromptMessage',
         'Zevr Guard has been quietly protecting you. If it helps, a quick review helps others find it too.',
+      ),
       buttons: [
-        {
-          title:
-            chrome.i18n.getMessage('reviewPromptRate') || 'Rate Zevr Guard ★',
-        },
-        { title: chrome.i18n.getMessage('reviewPromptLater') || 'Later' },
+        { title: t('reviewPromptRate', 'Rate Zevr Guard ★') },
+        { title: t('reviewPromptLater', 'Later') },
       ],
       priority: 1,
     });
@@ -495,6 +496,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 
 const feedReady = initFeed().catch(() => {});
+void loadLocale();
 void syncFromStoredSettings();
 
 chrome.runtime.onMessage.addListener(

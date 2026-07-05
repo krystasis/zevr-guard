@@ -59,14 +59,29 @@ const riskMessage = (r: RiskLevel): string => {
   }
 };
 
-const RISK_EXPLAIN: Record<RiskLevel, string> = {
-  dangerous:
-    'This domain is in known malware/phishing databases. It may attempt to steal your data or install malware.',
-  suspicious:
-    'This domain is used for advertising or tracking. It collects data about your browsing behavior.',
-  tracker:
-    'This domain is used for analytics or content delivery. It may collect some usage data.',
-  safe: 'This domain appears to be safe. No known tracking or malicious activity detected.',
+const riskExplain = (r: RiskLevel): string => {
+  switch (r) {
+    case 'dangerous':
+      return t(
+        'riskExplainDangerous',
+        'This domain is in known malware/phishing databases. It may attempt to steal your data or install malware.',
+      );
+    case 'suspicious':
+      return t(
+        'riskExplainSuspicious',
+        'This domain is used for advertising or tracking. It collects data about your browsing behavior.',
+      );
+    case 'tracker':
+      return t(
+        'riskExplainTracker',
+        'This domain is used for analytics or content delivery. It may collect some usage data.',
+      );
+    case 'safe':
+      return t(
+        'riskExplainSafe',
+        'This domain appears to be safe. No known tracking or malicious activity detected.',
+      );
+  }
 };
 
 type GroupBy = 'domain' | 'company';
@@ -428,12 +443,15 @@ const TopBar: React.FC<{
       <IconButton onClick={openReport} title={t('reportTitle', 'Protection report')}>
         📊
       </IconButton>
-      <IconButton onClick={openSidePanel} title="Open live globe side panel">
+      <IconButton
+        onClick={openSidePanel}
+        title={t('sidePanelOpenTitle', 'Open live globe side panel')}
+      >
         🌐
       </IconButton>
       <IconButton
         onClick={() => onToggle(view === 'settings' ? 'list' : 'settings')}
-        title="Settings"
+        title={t('settingsTitle', 'Settings')}
         active={view === 'settings'}
       >
         {view === 'settings' ? '←' : '⚙'}
@@ -597,7 +615,7 @@ const Header: React.FC<{ stats: PageStats | null; today: TodayStats | null }> = 
               </div>
             </div>
             <div className="text-[9px] uppercase tracking-[0.2em] text-gray-500 mt-1">
-              risk score
+              {t('riskScoreLabel', 'risk score')}
             </div>
           </div>
         </div>
@@ -631,10 +649,10 @@ const RiskGauge: React.FC<{ score: number; riskLevel: RiskLevel }> = ({
   return (
     <div className="relative mt-3">
       <div className="flex justify-between text-[8px] uppercase tracking-[0.18em] text-gray-600 mb-1">
-        <span>safe</span>
-        <span>tracker</span>
-        <span>suspicious</span>
-        <span>dangerous</span>
+        <span>{t('legendSafe', 'Safe')}</span>
+        <span>{t('legendTracker', 'Tracker')}</span>
+        <span>{t('legendSuspicious', 'Suspicious')}</span>
+        <span>{t('legendDangerous', 'Dangerous')}</span>
       </div>
       <div className="relative h-1.5 rounded-full border border-cyan-900/30 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b981_0%,#38bdf8_30%,#facc15_60%,#ef4444_100%)] opacity-80" />
@@ -1036,7 +1054,7 @@ const ConnectionDetail: React.FC<{
     </div>
 
     <div className="bg-black/40 border border-cyan-900/30 rounded p-2.5 text-[11px] text-gray-300 leading-relaxed">
-      {RISK_EXPLAIN[connection.riskLevel]}
+      {riskExplain(connection.riskLevel)}
     </div>
 
     <button
@@ -1153,7 +1171,7 @@ const SettingsPanel: React.FC<{
                   className="flex-shrink-0 px-2 h-5 rounded text-[9px] font-bold uppercase tracking-wider bg-gray-700/60 text-gray-200 hover:bg-gray-600 transition"
                   onClick={() => onUnblock(domain)}
                 >
-                  unblock
+                  {t('unblock', 'unblock')}
                 </button>
               </div>
             ))}
@@ -1279,7 +1297,9 @@ const ToggleRow: React.FC<{
 
 const Footer: React.FC<{ stats: PageStats | null }> = ({ stats }) => (
   <div className="px-3 py-1.5 bg-black/60 border-t border-cyan-900/40 flex items-center justify-between text-[9px] uppercase tracking-[0.2em]">
-    <div className="text-gray-600">Zevr Guard v1.0</div>
+    <div className="text-gray-600">
+      Zevr Guard v{chrome.runtime.getManifest().version}
+    </div>
     {stats && (
       <div className="text-cyan-700 tabular-nums">
         {new Date(stats.lastUpdated).toLocaleTimeString()}

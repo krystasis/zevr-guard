@@ -73,6 +73,7 @@ function isPrivateIP(ip: string): boolean {
   if (ip.startsWith('10.')) return true;
   if (ip.startsWith('169.254.')) return true;
   if (/^172\.(1[6-9]|2\d|3[01])\./.test(ip)) return true;
+  if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(ip)) return true;
   if (ip.startsWith('fe80:') || ip.startsWith('fc') || ip.startsWith('fd')) return true;
   return false;
 }

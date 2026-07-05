@@ -127,7 +127,10 @@ type BlockRule = {
     | { type: 'redirect'; redirect: { extensionPath: string } };
   condition: {
     urlFilter: string;
-    resourceTypes: string[];
+    // Omitted for block rules: the DNR default ("every type except
+    // main_frame") also covers ping/beacon, object, csp_report,
+    // webtransport, webbundle and other.
+    resourceTypes?: string[];
   };
 };
 
@@ -199,16 +202,6 @@ async function loadSeedDomains(): Promise<string[]> {
 function buildRules(domains: string[]): BlockRule[] {
   const rules: BlockRule[] = [];
   let id = 1;
-  const subResources = [
-    'script',
-    'image',
-    'xmlhttprequest',
-    'sub_frame',
-    'stylesheet',
-    'font',
-    'media',
-    'websocket',
-  ];
 
   for (const domain of domains) {
     rules.push({
@@ -232,7 +225,6 @@ function buildRules(domains: string[]): BlockRule[] {
       action: { type: 'block' },
       condition: {
         urlFilter: `||${domain}`,
-        resourceTypes: subResources,
       },
     });
 
@@ -548,19 +540,11 @@ async function fetchEasyListDomains(): Promise<TrackerDB> {
 
 function buildCategoryRules(domains: string[]): BlockRule[] {
   const rules: BlockRule[] = [];
-  // NB: main_frame is deliberately excluded. These categories only block the
-  // sub-resources ads / trackers pull in; the user is still free to navigate
-  // to the top-level page (matches uBlock Origin behaviour for this list).
-  const resourceTypes = [
-    'script',
-    'image',
-    'xmlhttprequest',
-    'sub_frame',
-    'stylesheet',
-    'font',
-    'media',
-    'websocket',
-  ];
+  // NB: main_frame stays unblocked. Omitting resourceTypes matches every
+  // other type (the DNR default), so these categories only block the
+  // sub-resources ads / trackers pull in — including ping/beacon — while
+  // the user is still free to navigate to the top-level page (matches
+  // uBlock Origin behaviour for this list).
   let id = 1;
   for (const domain of domains) {
     if (GLOBAL_DOMAIN_ALLOWLIST.has(domain)) continue;
@@ -570,7 +554,6 @@ function buildCategoryRules(domains: string[]): BlockRule[] {
       action: { type: 'block' },
       condition: {
         urlFilter: `||${domain}`,
-        resourceTypes,
       },
     });
     if (rules.length >= CATEGORY_RULES_MAX) break;

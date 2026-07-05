@@ -1,15 +1,9 @@
 import { getSettings, setSettings } from './storage';
 
-const SUB_RESOURCES = [
-  'script',
-  'image',
-  'xmlhttprequest',
-  'sub_frame',
-  'stylesheet',
-  'font',
-  'media',
-  'websocket',
-] as unknown as chrome.declarativeNetRequest.ResourceType[];
+// NB: block rules deliberately omit resourceTypes. The DNR default is "every
+// resource type except main_frame", which covers ping (sendBeacon), object,
+// csp_report, webtransport, webbundle and other — types the old explicit list
+// silently let through. main_frame is handled by the redirect rule instead.
 
 const ALL_RESOURCES = [
   'script',
@@ -20,6 +14,12 @@ const ALL_RESOURCES = [
   'font',
   'media',
   'websocket',
+  'ping',
+  'object',
+  'csp_report',
+  'webtransport',
+  'webbundle',
+  'other',
   'main_frame',
 ] as unknown as chrome.declarativeNetRequest.ResourceType[];
 
@@ -49,7 +49,6 @@ export async function blockDomain(domain: string): Promise<void> {
         action: { type: BLOCK_ACTION },
         condition: {
           urlFilter: `||${domain}`,
-          resourceTypes: SUB_RESOURCES,
         },
       },
       {
@@ -185,3 +184,4 @@ export async function getAllowedDomains(): Promise<Set<string>> {
   }
   return allowed;
 }
+

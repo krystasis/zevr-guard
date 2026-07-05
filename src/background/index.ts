@@ -2,6 +2,7 @@ import './buffer-polyfill';
 import type { Connection, MessageRequest, PageStats, UserLocation } from '../types';
 import {
   calcRiskScore,
+  ensureTrackerDB,
   getRiskLevel,
   isMalware,
   lookupTracker,
@@ -122,6 +123,11 @@ async function handleRequest(
   }
   if (!/^https?:$/.test(tabUrl.protocol)) return;
   if (domain === tabUrl.hostname) return;
+
+  // Give the stored feed a chance to become the active DB before falling
+  // back to fetching the bundled tracker JSON.
+  await feedReady;
+  await ensureTrackerDB();
 
   const tracker = lookupTracker(domain);
   const riskLevel = getRiskLevel(domain);
@@ -369,7 +375,7 @@ chrome.runtime.onStartup.addListener(() => {
   void syncFromStoredSettings();
 });
 
-void initFeed();
+const feedReady = initFeed().catch(() => {});
 void syncFromStoredSettings();
 
 chrome.runtime.onMessage.addListener(

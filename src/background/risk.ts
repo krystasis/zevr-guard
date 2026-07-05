@@ -1,12 +1,42 @@
 import type { Connection, RiskLevel, TrackerDB, TrackerEntry } from '../types';
-import trackerDB from '../data/trackers.json';
+// The tracker DB is ~8MB; import it as an asset URL instead of inlining it
+// into the service-worker bundle, which made every SW cold start re-parse
+// 8MB of JavaScript. It is fetched lazily and skipped entirely once a feed
+// override is active.
+import trackersUrl from '../data/trackers.json?url';
 import malwareDB from '../data/malware.json';
 
-const BUNDLED_TRACKERS: TrackerDB = trackerDB as TrackerDB;
 const BUNDLED_MALWARE: Set<string> = new Set(malwareDB as string[]);
 
-let TRACKERS: TrackerDB = BUNDLED_TRACKERS;
+let BUNDLED_TRACKERS: TrackerDB | null = null;
+let TRACKERS: TrackerDB | null = null;
 let MALWARE_SET: Set<string> = BUNDLED_MALWARE;
+let trackersLoading: Promise<void> | null = null;
+
+/**
+ * Resolve the active tracker DB. Returns immediately when a feed override
+ * (or a previous load) is in place; otherwise fetches the bundled JSON once.
+ */
+export function ensureTrackerDB(): Promise<void> {
+  if (TRACKERS) return Promise.resolve();
+  if (BUNDLED_TRACKERS) {
+    TRACKERS = BUNDLED_TRACKERS;
+    return Promise.resolve();
+  }
+  if (!trackersLoading) {
+    trackersLoading = fetch(trackersUrl)
+      .then((r) => r.json())
+      .then((db: TrackerDB) => {
+        BUNDLED_TRACKERS = db;
+        if (!TRACKERS) TRACKERS = db;
+      })
+      .catch((err) => {
+        console.warn('[Zevr Guard] bundled tracker DB load failed:', err);
+        trackersLoading = null;
+      });
+  }
+  return trackersLoading;
+}
 
 export function setTrackerOverride(db: TrackerDB | null): void {
   TRACKERS = db && Object.keys(db).length > 0 ? db : BUNDLED_TRACKERS;
@@ -30,6 +60,7 @@ const SUSPICIOUS_CATEGORIES = new Set([
 ]);
 
 export function lookupTracker(domain: string): TrackerEntry | null {
+  if (!TRACKERS) return null;
   const direct = TRACKERS[domain];
   if (direct) return direct;
 

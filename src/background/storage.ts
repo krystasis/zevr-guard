@@ -71,6 +71,8 @@ let pagesCache: Record<number, PageStats> | null = null;
 let pagesDirty = false;
 let todayCache: TodayStats | null = null;
 let todayDirty = false;
+let lifetimeCache: { blocked: number } | null = null;
+let lifetimeDirty = false;
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 
 async function flush(): Promise<void> {
@@ -81,6 +83,10 @@ async function flush(): Promise<void> {
   if (todayDirty && todayCache) {
     todayDirty = false;
     await setTodayStats(todayCache);
+  }
+  if (lifetimeDirty && lifetimeCache) {
+    lifetimeDirty = false;
+    await chrome.storage.local.set({ 'zg.lifetime': lifetimeCache });
   }
 }
 
@@ -134,6 +140,20 @@ export function markTodayDirty(): void {
 export async function setTodayStats(stats: TodayStats): Promise<void> {
   todayCache = stats;
   await chrome.storage.local.set({ todayStats: stats });
+}
+
+/** Lifetime blocked counter, used for the review-prompt milestones. */
+export async function incrementLifetimeBlocked(): Promise<number> {
+  if (!lifetimeCache) {
+    const s = await chrome.storage.local.get('zg.lifetime');
+    lifetimeCache = (s['zg.lifetime'] as { blocked: number } | undefined) ?? {
+      blocked: 0,
+    };
+  }
+  lifetimeCache.blocked += 1;
+  lifetimeDirty = true;
+  scheduleFlush();
+  return lifetimeCache.blocked;
 }
 
 // Best-effort flush when the service worker is about to be torn down.

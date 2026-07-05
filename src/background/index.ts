@@ -18,6 +18,7 @@ import {
   setSettings,
   getTodayStats,
   markTodayDirty,
+  incrementLifetimeBlocked,
   getCachedUserLocation,
   setCachedUserLocation,
 } from './storage';
@@ -288,6 +289,8 @@ async function updateTodayStats(
   if (blockedByUs) {
     today.blockedConnections += 1;
     today.blockedDomains[domain] = (today.blockedDomains[domain] ?? 0) + 1;
+    const lifetime = await incrementLifetimeBlocked();
+    void maybePromptReview(lifetime);
   }
   if (riskLevel === 'dangerous') today.dangerousDetected += 1;
   if (riskLevel === 'tracker' || riskLevel === 'suspicious') {
@@ -381,6 +384,55 @@ async function getUserLocation(): Promise<UserLocation | null> {
 
   return userLocationPromise;
 }
+
+// ---------------------------------------------------------------------------
+// Review prompt: once per milestone, ask happy users for a store review.
+// ---------------------------------------------------------------------------
+
+const REVIEW_MILESTONES = [1000, 10000];
+const REVIEW_SHOWN_KEY = 'zg.reviewPromptShown';
+
+async function maybePromptReview(lifetimeBlocked: number): Promise<void> {
+  const milestone = REVIEW_MILESTONES.filter((m) => lifetimeBlocked >= m).pop();
+  if (!milestone) return;
+  try {
+    const s = await chrome.storage.local.get(REVIEW_SHOWN_KEY);
+    const shown = (s[REVIEW_SHOWN_KEY] as number | undefined) ?? 0;
+    if (shown >= milestone) return;
+    const settings = await getSettings();
+    if (!settings.notificationsEnabled) return;
+    await chrome.storage.local.set({ [REVIEW_SHOWN_KEY]: milestone });
+    const count = milestone.toLocaleString();
+    chrome.notifications.create(`zg-review-${milestone}`, {
+      type: 'basic',
+      iconUrl: chrome.runtime.getURL('public/icons/icon128.png'),
+      title:
+        chrome.i18n.getMessage('reviewPromptTitle', [count]) ||
+        `🎉 ${count} threats blocked!`,
+      message:
+        chrome.i18n.getMessage('reviewPromptMessage') ||
+        'Zevr Guard has been quietly protecting you. If it helps, a quick review helps others find it too.',
+      buttons: [
+        {
+          title:
+            chrome.i18n.getMessage('reviewPromptRate') || 'Rate Zevr Guard ★',
+        },
+        { title: chrome.i18n.getMessage('reviewPromptLater') || 'Later' },
+      ],
+      priority: 1,
+    });
+  } catch {
+    // notifications are best-effort
+  }
+}
+
+chrome.notifications.onButtonClicked.addListener((id, buttonIndex) => {
+  if (id.startsWith('zg-review-') && buttonIndex === 0) {
+    void chrome.tabs.create({
+      url: `https://chromewebstore.google.com/detail/${chrome.runtime.id}/reviews`,
+    });
+  }
+});
 
 chrome.tabs.onActivated.addListener(async ({ tabId }) => {
   const pages = await getPagesCached();

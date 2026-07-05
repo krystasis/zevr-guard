@@ -524,7 +524,7 @@
     "message": "Postar"
   },
   "shareHint": {
-    "message": "Dica: anexe a imagem salva à sua postagem."
+    "message": "A imagem é copiada ao postar — pressione Ctrl+V no editor para anexá-la."
   },
   "reportTitle": {
     "message": "Relatório de proteção"

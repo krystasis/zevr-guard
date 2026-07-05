@@ -524,7 +524,7 @@
     "message": "ポスト"
   },
   "shareHint": {
-    "message": "ヒント: 保存した画像をポストに添付してください。"
+    "message": "ポストを押すと画像がコピーされます。投稿欄で Ctrl+V を押すと添付できます。"
   },
   "reportTitle": {
     "message": "プロテクションレポート"

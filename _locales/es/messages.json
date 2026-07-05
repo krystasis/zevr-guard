@@ -524,7 +524,7 @@
     "message": "Publicar"
   },
   "shareHint": {
-    "message": "Consejo: adjunta la imagen guardada a tu publicación."
+    "message": "La imagen se copia al publicar: pulsa Ctrl+V en el editor para adjuntarla."
   },
   "reportTitle": {
     "message": "Informe de protección"

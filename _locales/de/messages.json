@@ -524,7 +524,7 @@
     "message": "Posten"
   },
   "shareHint": {
-    "message": "Tipp: Häng das gespeicherte Bild an deinen Post an."
+    "message": "Beim Posten wird das Bild kopiert — mit Strg+V im Editor einfügen."
   },
   "reportTitle": {
     "message": "Schutzbericht"

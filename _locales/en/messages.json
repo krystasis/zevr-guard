@@ -524,7 +524,7 @@
     "message": "Post"
   },
   "shareHint": {
-    "message": "Tip: attach the saved image to your post."
+    "message": "The image is copied when you post — press Ctrl+V in the composer to attach it."
   },
   "reportTitle": {
     "message": "Protection report"

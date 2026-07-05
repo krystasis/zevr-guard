@@ -524,7 +524,7 @@
     "message": "Publier"
   },
   "shareHint": {
-    "message": "Astuce : joignez l'image enregistrée à votre publication."
+    "message": "L'image est copiée au moment de publier — appuyez sur Ctrl+V dans l'éditeur pour la joindre."
   },
   "reportTitle": {
     "message": "Rapport de protection"

@@ -17,6 +17,10 @@ export function setMalwareOverride(list: string[] | null): void {
     list && list.length > 0 ? new Set(list) : BUNDLED_MALWARE;
 }
 
+export function getMalwareDomains(): string[] {
+  return Array.from(MALWARE_SET);
+}
+
 const SUSPICIOUS_CATEGORIES = new Set([
   'advertising',
   'tracking',

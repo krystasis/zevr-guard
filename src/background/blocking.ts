@@ -1,4 +1,5 @@
 import { getSettings, setSettings } from './storage';
+import { getMalwareDomains } from './risk';
 
 // NB: block rules deliberately omit resourceTypes. The DNR default is "every
 // resource type except main_frame", which covers ping (sendBeacon), object,
@@ -185,3 +186,82 @@ export async function getAllowedDomains(): Promise<Set<string>> {
   return allowed;
 }
 
+/**
+ * `||domain` rules also match subdomains, so membership checks against the
+ * blocked/allowed sets must walk parent labels too.
+ */
+export function matchesDomainOrParent(domain: string, set: Set<string>): boolean {
+  if (set.has(domain)) return true;
+  const parts = domain.split('.');
+  for (let i = 1; i < parts.length - 1; i++) {
+    if (set.has(parts.slice(i).join('.'))) return true;
+  }
+  return false;
+}
+
+const SESSION_APPLIED_KEY = 'zg.sessionRules.applied';
+// Chrome caps session rules at 5,000 and each domain takes two rules
+// (main_frame redirect + everything-else block).
+const MAX_SESSION_DOMAINS = 2400;
+
+/**
+ * Mirror the current malware feed into DNR session rules so blocking follows
+ * the daily feed instead of the rules baked into the store package. Session
+ * rules are cleared on browser restart; initFeed() re-applies them on boot.
+ */
+export async function syncMalwareSessionRules(): Promise<void> {
+  if (!chrome.declarativeNetRequest?.updateSessionRules) return;
+
+  const settings = await getSettings();
+  const enabled = settings.blockCategories.malware !== false;
+  const domains = enabled ? getMalwareDomains().slice(0, MAX_SESSION_DOMAINS) : [];
+
+  // Skip the (frequent) service-worker restarts where nothing changed.
+  const key = `${enabled}:${domains.length}:${domains[0] ?? ''}:${domains[domains.length - 1] ?? ''}`;
+  try {
+    const stored = await chrome.storage.session.get(SESSION_APPLIED_KEY);
+    if (stored[SESSION_APPLIED_KEY] === key) return;
+  } catch {
+    // session storage unavailable — apply unconditionally
+  }
+
+  const addRules: chrome.declarativeNetRequest.Rule[] = [];
+  let id = 1;
+  for (const domain of domains) {
+    addRules.push({
+      id: id++,
+      priority: 2,
+      action: {
+        type: REDIRECT_ACTION,
+        redirect: {
+          url: chrome.runtime.getURL(
+            `src/warning/index.html?blocked=${encodeURIComponent(domain)}`,
+          ),
+        },
+      },
+      condition: {
+        urlFilter: `||${domain}`,
+        resourceTypes: [MAIN_FRAME],
+      },
+    });
+    addRules.push({
+      id: id++,
+      priority: 1,
+      action: { type: BLOCK_ACTION },
+      condition: {
+        urlFilter: `||${domain}`,
+      },
+    });
+  }
+
+  const existing = await chrome.declarativeNetRequest.getSessionRules();
+  await chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: existing.map((r) => r.id),
+    addRules,
+  });
+  try {
+    await chrome.storage.session.set({ [SESSION_APPLIED_KEY]: key });
+  } catch {
+    // ignore
+  }
+}

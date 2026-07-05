@@ -1,5 +1,6 @@
 import type { TrackerDB } from '../types';
 import { setMalwareOverride, setTrackerOverride } from './risk';
+import { syncMalwareSessionRules } from './blocking';
 
 const FEED_BASE = 'https://zevrhq.com/feed/v1';
 const ALARM_NAME = 'zg-feed-update';
@@ -95,6 +96,12 @@ export async function refreshFeed(force = false): Promise<void> {
   }
 
   await setMeta(nextMeta);
+
+  try {
+    await syncMalwareSessionRules();
+  } catch (err) {
+    console.warn('[zg-feed] session rule sync failed:', (err as Error).message);
+  }
 }
 
 export async function initFeed(): Promise<void> {
@@ -106,6 +113,14 @@ export async function initFeed(): Promise<void> {
     if (malware) setMalwareOverride(malware);
   } catch {
     // ignore — bundled data remains active
+  }
+
+  // Session rules vanish on browser restart; re-apply from whichever malware
+  // set is now active (stored feed or bundled fallback).
+  try {
+    await syncMalwareSessionRules();
+  } catch (err) {
+    console.warn('[zg-feed] session rule sync failed:', (err as Error).message);
   }
 
   try {

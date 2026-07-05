@@ -181,8 +181,19 @@ async function fetchURLhausDomains(): Promise<string[]> {
 }
 
 async function loadSeedDomains(): Promise<string[]> {
-  const raw = await readFile(MALWARE_SEED_PATH, 'utf8');
-  return JSON.parse(raw) as string[];
+  // MALWARE_SEED_PATH is a build output and gitignored, so it is absent on
+  // clean checkouts (CI). Fall back to the previously published feed to keep
+  // accumulating domains across runs, then to an empty seed.
+  for (const path of [MALWARE_SEED_PATH, LP_FEED_MALWARE]) {
+    try {
+      const raw = await readFile(path, 'utf8');
+      return JSON.parse(raw) as string[];
+    } catch {
+      // try next source
+    }
+  }
+  console.warn('[build-rules] no malware seed found, starting from fetched set only');
+  return [];
 }
 
 function buildRules(domains: string[]): BlockRule[] {

@@ -11,12 +11,12 @@ import { initFeed, refreshFeed } from './feed';
 import { syncCategoryRulesets } from './rulesets';
 import { getGeoData } from './geo';
 import {
-  getPages,
-  setPages,
+  getPagesCached,
+  markPagesDirty,
   getSettings,
   setSettings,
   getTodayStats,
-  setTodayStats,
+  markTodayDirty,
   getCachedUserLocation,
   setCachedUserLocation,
 } from './storage';
@@ -51,14 +51,14 @@ async function updatePage(
 
   try {
     await prev;
-    const pages = await getPages();
+    const pages = await getPagesCached();
     const result = mutator(pages[tabId], pages);
     if (result === null) {
       delete pages[tabId];
     } else {
       pages[tabId] = result;
     }
-    await setPages(pages);
+    markPagesDirty();
     return result;
   } finally {
     resolveLock();
@@ -258,7 +258,7 @@ async function updateTodayStats(
     today.companyCounts[tracker.company] =
       (today.companyCounts[tracker.company] ?? 0) + 1;
   }
-  await setTodayStats(today);
+  markTodayDirty();
 }
 
 chrome.webRequest.onCompleted.addListener(
@@ -325,7 +325,7 @@ async function getUserLocation(): Promise<UserLocation | null> {
 }
 
 chrome.tabs.onActivated.addListener(async ({ tabId }) => {
-  const pages = await getPages();
+  const pages = await getPagesCached();
   const page = pages[tabId];
   if (page) updateBadge(tabId, page.riskLevel, page.riskScore);
   else clearBadge(tabId);
@@ -402,7 +402,7 @@ chrome.runtime.onMessage.addListener(
           sendResponse({ success: true });
           break;
         case 'GET_PAGE_STATS': {
-          const pages = await getPages();
+          const pages = await getPagesCached();
           const page = pages[message.tabId] ?? null;
           if (page) {
             const blocked = await getBlockedDomains();

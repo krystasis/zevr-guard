@@ -186,6 +186,62 @@ export async function getAllowedDomains(): Promise<Set<string>> {
   return allowed;
 }
 
+// Pause rules allow *everything initiated by* a given site, as an escape
+// hatch when blocking breaks it. Identified by this urlFilter so they never
+// collide with per-domain (`||domain`) allow rules.
+const PAUSE_URL_FILTER = '*';
+
+function isPauseRule(r: chrome.declarativeNetRequest.Rule, host?: string): boolean {
+  const cond = r.condition as { initiatorDomains?: string[]; urlFilter?: string };
+  if (r.action.type !== ALLOW_ACTION) return false;
+  if (cond.urlFilter !== PAUSE_URL_FILTER) return false;
+  if (!cond.initiatorDomains || cond.initiatorDomains.length !== 1) return false;
+  return host === undefined || cond.initiatorDomains[0] === host;
+}
+
+export async function pauseSite(host: string): Promise<void> {
+  const rules = await chrome.declarativeNetRequest.getDynamicRules();
+  if (!rules.some((r) => isPauseRule(r, host))) {
+    const maxId = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) : 10_000;
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: [
+        {
+          id: maxId + 1,
+          priority: ALLOW_PRIORITY,
+          action: { type: ALLOW_ACTION },
+          condition: {
+            urlFilter: PAUSE_URL_FILTER,
+            initiatorDomains: [host],
+            resourceTypes: ALL_RESOURCES,
+          } as chrome.declarativeNetRequest.RuleCondition,
+        },
+      ],
+      removeRuleIds: [],
+    });
+  }
+
+  const settings = await getSettings();
+  if (!settings.pausedSites.includes(host)) {
+    settings.pausedSites.push(host);
+    await setSettings(settings);
+  }
+}
+
+export async function resumeSite(host: string): Promise<void> {
+  const rules = await chrome.declarativeNetRequest.getDynamicRules();
+  const removeIds = rules.filter((r) => isPauseRule(r, host)).map((r) => r.id);
+  if (removeIds.length > 0) {
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: [],
+      removeRuleIds: removeIds,
+    });
+  }
+
+  const settings = await getSettings();
+  settings.pausedSites = settings.pausedSites.filter((h) => h !== host);
+  await setSettings(settings);
+}
+
 /**
  * `||domain` rules also match subdomains, so membership checks against the
  * blocked/allowed sets must walk parent labels too.

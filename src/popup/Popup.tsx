@@ -127,6 +127,16 @@ export const Popup: React.FC = () => {
     await loadData();
   }
 
+  async function handlePause(host: string) {
+    await chrome.runtime.sendMessage({ type: 'PAUSE_SITE', host });
+    await loadData();
+  }
+
+  async function handleResume(host: string) {
+    await chrome.runtime.sendMessage({ type: 'RESUME_SITE', host });
+    await loadData();
+  }
+
   async function handleSettingsChange(next: Settings) {
     setSettings(next);
     await chrome.runtime.sendMessage({ type: 'UPDATE_SETTINGS', settings: next });
@@ -181,6 +191,7 @@ export const Popup: React.FC = () => {
             onChange={handleSettingsChange}
             onUnblock={handleUnblock}
             onDisallow={handleDisallow}
+            onResume={handleResume}
           />
         ) : selected ? (
           <ConnectionDetail
@@ -196,8 +207,11 @@ export const Popup: React.FC = () => {
               <AllowBar
                 host={stats.host}
                 allowed={settings.customWhiteList.includes(stats.host)}
+                paused={settings.pausedSites.includes(stats.host)}
                 onAllow={handleAllow}
                 onDisallow={handleDisallow}
+                onPause={handlePause}
+                onResume={handleResume}
               />
             )}
             {connections.length > 0 && (
@@ -294,28 +308,50 @@ const IconButton: React.FC<{
 const AllowBar: React.FC<{
   host: string;
   allowed: boolean;
+  paused: boolean;
   onAllow: (domain: string) => void;
   onDisallow: (domain: string) => void;
-}> = ({ host, allowed, onAllow, onDisallow }) => {
+  onPause: (host: string) => void;
+  onResume: (host: string) => void;
+}> = ({ host, allowed, paused, onAllow, onDisallow, onPause, onResume }) => {
   if (!host) return null;
   return (
     <div
       className={`flex items-center justify-between gap-2 px-3 py-2 border-b ${
-        allowed
-          ? 'border-emerald-800/40 bg-emerald-500/[0.04]'
-          : 'border-cyan-900/40 bg-black/30'
+        paused
+          ? 'border-amber-700/40 bg-amber-500/[0.05]'
+          : allowed
+            ? 'border-emerald-800/40 bg-emerald-500/[0.04]'
+            : 'border-cyan-900/40 bg-black/30'
       }`}
     >
       <div className="min-w-0 flex-1">
         <div className="text-[9px] uppercase tracking-[0.25em] text-gray-500">
-          {allowed
-            ? t('allowBarAllowed', 'Allowed')
-            : t('allowBarThisSite', 'This site')}
+          {paused
+            ? t('pauseBarPaused', 'Blocking paused')
+            : allowed
+              ? t('allowBarAllowed', 'Allowed')
+              : t('allowBarThisSite', 'This site')}
         </div>
         <div className="text-[11px] font-mono text-gray-200 truncate mt-0.5">
           {host}
         </div>
       </div>
+      <button
+        className={`flex-shrink-0 px-2.5 h-6 rounded-full text-[10px] font-bold uppercase tracking-wider transition ${
+          paused
+            ? 'bg-amber-500/90 text-black hover:bg-amber-400'
+            : 'bg-gray-700/60 text-gray-200 hover:bg-gray-600'
+        }`}
+        onClick={() => (paused ? onResume(host) : onPause(host))}
+        title={
+          paused
+            ? t('pauseBarResumeTitle', 'Resume blocking on this site')
+            : t('pauseBarPauseTitle', 'Pause blocking on this site (fixes broken sites)')
+        }
+      >
+        {paused ? t('pauseBarResume', 'Resume') : t('pauseBarPause', 'Pause')}
+      </button>
       <button
         className={`flex-shrink-0 px-2.5 h-6 rounded-full text-[10px] font-bold uppercase tracking-wider transition ${
           allowed
@@ -879,7 +915,8 @@ const SettingsPanel: React.FC<{
   onChange: (s: Settings) => void;
   onUnblock: (domain: string) => void;
   onDisallow: (domain: string) => void;
-}> = ({ settings, onChange, onUnblock, onDisallow }) => {
+  onResume: (host: string) => void;
+}> = ({ settings, onChange, onUnblock, onDisallow, onResume }) => {
   function toggle<K extends keyof Settings>(key: K, value: Settings[K]) {
     onChange({ ...settings, [key]: value });
   }
@@ -896,6 +933,7 @@ const SettingsPanel: React.FC<{
 
   const blockedDomains = [...settings.customBlockList].sort();
   const allowedDomains = [...settings.customWhiteList].sort();
+  const pausedSites = [...settings.pausedSites].sort();
 
   return (
     <div className="p-3 space-y-1">
@@ -966,6 +1004,36 @@ const SettingsPanel: React.FC<{
           </div>
         )}
       </div>
+
+      {pausedSites.length > 0 && (
+        <div className="pt-3 mt-2 border-t border-cyan-900/30">
+          <div className="flex items-center justify-between text-[10px] tracking-wide mb-1.5">
+            <span className="uppercase text-gray-500">
+              {t('settingsPausedSites', 'Paused sites')}
+            </span>
+            <span className="text-amber-300 font-bold">{pausedSites.length}</span>
+          </div>
+          <div className="max-h-[180px] overflow-y-auto border border-amber-900/30 rounded bg-black/30">
+            {pausedSites.map((host) => (
+              <div
+                key={host}
+                className="flex items-center gap-2 px-2 py-1.5 border-b border-amber-900/20 last:border-b-0"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
+                <div className="flex-1 min-w-0 truncate text-gray-100 font-mono text-[11px]">
+                  {host}
+                </div>
+                <button
+                  className="flex-shrink-0 px-2 h-5 rounded text-[9px] font-bold uppercase tracking-wider bg-gray-700/60 text-gray-200 hover:bg-gray-600 transition"
+                  onClick={() => onResume(host)}
+                >
+                  {t('pauseBarResume', 'Resume')}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="pt-3 mt-2 border-t border-cyan-900/30">
         <div className="flex items-center justify-between text-[10px] tracking-wide mb-1.5">

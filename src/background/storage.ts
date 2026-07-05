@@ -12,6 +12,7 @@ export function getDefaultSettings(): Settings {
     },
     customBlockList: [],
     customWhiteList: [],
+    pausedSites: [],
   };
 }
 
@@ -31,7 +32,18 @@ export function getDefaultTodayStats(): TodayStats {
 
 export async function getSettings(): Promise<Settings> {
   const s = await chrome.storage.local.get('settings');
-  return (s.settings as Settings | undefined) ?? getDefaultSettings();
+  const stored = s.settings as Partial<Settings> | undefined;
+  const def = getDefaultSettings();
+  if (!stored) return def;
+  // Merge so settings stored by older versions gain newly added fields.
+  return {
+    ...def,
+    ...stored,
+    blockCategories: { ...def.blockCategories, ...stored.blockCategories },
+    customBlockList: stored.customBlockList ?? [],
+    customWhiteList: stored.customWhiteList ?? [],
+    pausedSites: stored.pausedSites ?? [],
+  };
 }
 
 export async function setSettings(settings: Settings): Promise<void> {

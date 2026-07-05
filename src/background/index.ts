@@ -33,6 +33,8 @@ import {
   disallowDomain,
   getBlockedDomains,
   matchesDomainOrParent,
+  pauseSite,
+  resumeSite,
   syncMalwareSessionRules,
   unblockDomain,
 } from './blocking';
@@ -460,6 +462,14 @@ chrome.runtime.onMessage.addListener(
           break;
         case 'DISALLOW_DOMAIN':
           await disallowDomain(message.domain);
+          sendResponse({ success: true });
+          break;
+        case 'PAUSE_SITE':
+          await pauseSite(message.host);
+          sendResponse({ success: true });
+          break;
+        case 'RESUME_SITE':
+          await resumeSite(message.host);
           sendResponse({ success: true });
           break;
         case 'GET_SETTINGS':

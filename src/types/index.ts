@@ -44,6 +44,8 @@ export interface Settings {
   blockCategories: BlockCategories;
   customBlockList: string[];
   customWhiteList: string[];
+  /** Hosts where blocking is paused (requests initiated by these sites are allowed). */
+  pausedSites: string[];
 }
 
 export interface TrackerDomainInfo {
@@ -93,6 +95,8 @@ export type MessageRequest =
   | { type: 'UNBLOCK_DOMAIN'; domain: string }
   | { type: 'ALLOW_DOMAIN'; domain: string }
   | { type: 'DISALLOW_DOMAIN'; domain: string }
+  | { type: 'PAUSE_SITE'; host: string }
+  | { type: 'RESUME_SITE'; host: string }
   | { type: 'GET_SETTINGS' }
   | { type: 'UPDATE_SETTINGS'; settings: Settings }
   | { type: 'GET_PAGE_STATS'; tabId: number }

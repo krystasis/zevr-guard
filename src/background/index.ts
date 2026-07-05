@@ -73,6 +73,51 @@ interface RequestEvent {
   tabId: number;
   url: string;
   ip?: string;
+  timeStamp?: number;
+  initiator?: string;
+}
+
+// Navigation start per tab, used to drop events that were emitted for the
+// previous document but processed (async) after the tab moved on.
+const navStartTimes = new Map<number, number>();
+
+async function resetPage(tabId: number): Promise<void> {
+  navStartTimes.set(tabId, Date.now());
+  await updatePage(tabId, () => null);
+  clearBadge(tabId);
+}
+
+/**
+ * Requests without a tab (site service workers, shared workers) used to be
+ * dropped entirely. They cannot be attributed to a page, but they are real
+ * traffic — count them into the daily stats keyed by their initiator.
+ */
+async function handleBackgroundRequest(
+  details: RequestEvent,
+  outcome: RequestOutcome,
+): Promise<void> {
+  if (outcome === 'failed') return;
+  if (!details.initiator || !/^https?:/.test(details.initiator)) return;
+
+  let domain: string;
+  let initiatorHost: string;
+  try {
+    domain = new URL(details.url).hostname;
+    initiatorHost = new URL(details.initiator).hostname;
+  } catch {
+    return;
+  }
+  if (!domain || domain === initiatorHost) return;
+
+  await feedReady;
+  await ensureTrackerDB();
+
+  const tracker = lookupTracker(domain);
+  const riskLevel = getRiskLevel(domain);
+  const geo = details.ip ? await getGeoData(details.ip) : null;
+  const blockedByUs =
+    outcome === 'blocked' && (await isBlockAttributedToUs(domain, tracker));
+  await updateTodayStats(domain, tracker, riskLevel, geo, blockedByUs);
 }
 
 /**
@@ -101,7 +146,13 @@ async function handleRequest(
   details: RequestEvent,
   outcome: RequestOutcome = 'completed',
 ): Promise<void> {
-  if (details.tabId < 0) return;
+  if (details.tabId < 0) {
+    await handleBackgroundRequest(details, outcome);
+    return;
+  }
+
+  const navStart = navStartTimes.get(details.tabId);
+  if (navStart && details.timeStamp && details.timeStamp < navStart) return;
 
   let requestUrl: URL;
   try {
@@ -276,7 +327,6 @@ chrome.webRequest.onCompleted.addListener(
 
 chrome.webRequest.onErrorOccurred.addListener(
   (details) => {
-    if (details.tabId < 0) return;
     if (details.error === 'net::ERR_BLOCKED_BY_CLIENT') {
       void handleRequest(details, 'blocked');
     } else if (details.error !== 'net::ERR_ABORTED') {
@@ -337,14 +387,28 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
   else clearBadge(tabId);
 });
 
+function stripHash(u: string): string {
+  const i = u.indexOf('#');
+  return i === -1 ? u : u.slice(0, i);
+}
+
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
-  if (changeInfo.status === 'loading' && changeInfo.url) {
-    await updatePage(tabId, () => null);
-    clearBadge(tabId);
+  if (!changeInfo.url) return;
+  if (changeInfo.status === 'loading') {
+    await resetPage(tabId);
+    return;
+  }
+  // URL changed without a load: SPA route change via the history API.
+  // Start a fresh page so stats reflect the current route.
+  const pages = await getPagesCached();
+  const prevUrl = pages[tabId]?.url;
+  if (prevUrl && stripHash(prevUrl) !== stripHash(changeInfo.url)) {
+    await resetPage(tabId);
   }
 });
 
 chrome.tabs.onRemoved.addListener(async (tabId) => {
+  navStartTimes.delete(tabId);
   await updatePage(tabId, () => null);
 });
 

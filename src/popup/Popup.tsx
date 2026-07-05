@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
+import { renderShareCard } from '../shared/sharecard';
 import type { Connection, PageStats, RiskLevel, Settings, TodayStats } from '../types';
 
 const RISK_TEXT: Record<RiskLevel, string> = {
@@ -79,6 +80,12 @@ export const Popup: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<RiskLevel | null>(null);
   const [groupBy, setGroupBy] = useState<GroupBy>('domain');
+  const [share, setShare] = useState<{
+    url: string;
+    fileName: string;
+    tweet: string;
+  } | null>(null);
+  const [sharing, setSharing] = useState(false);
 
   useEffect(() => {
     void loadData();
@@ -142,6 +149,72 @@ export const Popup: React.FC = () => {
     await chrome.runtime.sendMessage({ type: 'UPDATE_SETTINGS', settings: next });
   }
 
+  async function handleShare() {
+    if (!stats || sharing) return;
+    setSharing(true);
+    try {
+      const conns = Object.values(stats.connections);
+      const companies = new Set(
+        conns.map((c) => c.company).filter(Boolean),
+      ).size;
+      const countries = new Set(
+        conns.map((c) => c.country).filter(Boolean),
+      ).size;
+      const locRes = (await chrome.runtime
+        .sendMessage({ type: 'GET_USER_LOCATION' })
+        .catch(() => null)) as { location?: { lat: number; lng: number } } | null;
+
+      const blob = await renderShareCard({
+        host: stats.host,
+        riskScore: stats.riskScore,
+        riskLevel: stats.riskLevel,
+        domains: conns.length,
+        requests: stats.totalCount,
+        blocked: stats.blockedCount,
+        points: conns
+          .filter((c) => c.lat != null && c.lon != null)
+          .map((c) => ({ lat: c.lat!, lon: c.lon!, risk: c.riskLevel })),
+        source: locRes?.location ?? null,
+        labels: {
+          brand: 'ZEVR GUARD',
+          tagline: t('shareTagline', 'Who is your browser talking to?'),
+          headline: t(
+            'shareHeadline',
+            `${companies} companies · ${countries} countries`,
+            String(companies),
+            String(countries),
+          ),
+          statDomains: t('metricDomains', 'domains'),
+          statRequests: t('metricRequests', 'requests'),
+          statBlocked: t('metricBlocked', 'blocked'),
+          scoreLabel: t('riskScoreLabel', 'risk score'),
+        },
+      });
+      const url = URL.createObjectURL(blob);
+      const tweet = t(
+        'shareTweet',
+        `🛡 ${stats.host} talks to ${companies} companies in ${countries} countries — watched & blocked by Zevr Guard`,
+        stats.host,
+        String(companies),
+        String(countries),
+      );
+      setShare({
+        url,
+        fileName: `zevr-guard-${stats.host.replace(/[^a-z0-9.-]/gi, '_')}.png`,
+        tweet,
+      });
+    } catch {
+      // rendering is best-effort
+    } finally {
+      setSharing(false);
+    }
+  }
+
+  function closeShare() {
+    if (share) URL.revokeObjectURL(share.url);
+    setShare(null);
+  }
+
   if (loading) {
     return (
       <div className="w-[360px] h-48 bg-[radial-gradient(circle_at_top,#0b1e2e_0%,#000_70%)] flex items-center justify-center">
@@ -183,7 +256,12 @@ export const Popup: React.FC = () => {
     <div className="w-[360px] bg-[radial-gradient(circle_at_top,#0b1e2e_0%,#000_70%)] text-gray-100 font-sans text-xs relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 opacity-[0.04] bg-[repeating-linear-gradient(0deg,#38bdf8_0px,#38bdf8_1px,transparent_1px,transparent_3px)]" />
       <div className="relative">
-        <TopBar view={view} onToggle={setView} />
+        <TopBar
+          view={view}
+          onToggle={setView}
+          onShare={stats ? handleShare : undefined}
+          sharing={sharing}
+        />
 
         {view === 'settings' && settings ? (
           <SettingsPanel
@@ -235,6 +313,65 @@ export const Popup: React.FC = () => {
         )}
 
         <Footer stats={stats} />
+
+        {share && (
+          <ShareModal
+            url={share.url}
+            fileName={share.fileName}
+            tweet={share.tweet}
+            onClose={closeShare}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+const ShareModal: React.FC<{
+  url: string;
+  fileName: string;
+  tweet: string;
+  onClose: () => void;
+}> = ({ url, fileName, tweet, onClose }) => {
+  function postOnX() {
+    const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      `${tweet}\nhttps://zevrhq.com`,
+    )}`;
+    void chrome.tabs.create({ url: intent });
+  }
+  return (
+    <div className="absolute inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="w-full bg-[#0a1420] border border-cyan-800/50 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(56,189,248,0.15)]">
+        <div className="flex items-center justify-between px-3 py-2 border-b border-cyan-900/40">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-cyan-400">
+            {t('shareTitle', 'Share this scan')}
+          </div>
+          <button
+            className="text-gray-500 hover:text-gray-200 text-sm"
+            onClick={onClose}
+          >
+            ✕
+          </button>
+        </div>
+        <img src={url} alt="" className="w-full block" />
+        <div className="flex gap-2 p-3">
+          <a
+            href={url}
+            download={fileName}
+            className="flex-1 text-center py-2 rounded text-[11px] font-bold uppercase tracking-wider bg-gray-700/70 text-gray-100 hover:bg-gray-600 transition"
+          >
+            ⬇ {t('shareDownload', 'Save image')}
+          </a>
+          <button
+            className="flex-1 py-2 rounded text-[11px] font-bold uppercase tracking-wider bg-cyan-500/90 text-black hover:bg-cyan-400 transition"
+            onClick={postOnX}
+          >
+            𝕏 {t('sharePost', 'Post')}
+          </button>
+        </div>
+        <div className="px-3 pb-3 text-[9px] text-gray-500">
+          {t('shareHint', 'Tip: attach the saved image to your post.')}
+        </div>
       </div>
     </div>
   );
@@ -259,7 +396,9 @@ async function openSidePanel() {
 const TopBar: React.FC<{
   view: 'list' | 'settings';
   onToggle: (v: 'list' | 'settings') => void;
-}> = ({ view, onToggle }) => (
+  onShare?: () => void;
+  sharing?: boolean;
+}> = ({ view, onToggle, onShare, sharing }) => (
   <div className="flex items-center justify-between px-3 py-2 bg-black/60 backdrop-blur border-b border-cyan-900/40">
     <div className="flex items-center gap-2">
       <AppIcon size={22} className="drop-shadow-[0_0_6px_rgba(56,189,248,0.6)]" />
@@ -272,6 +411,14 @@ const TopBar: React.FC<{
       </div>
     </div>
     <div className="flex items-center gap-1">
+      {onShare && (
+        <IconButton
+          onClick={onShare}
+          title={t('shareTitle', 'Share this scan')}
+        >
+          {sharing ? '…' : '📤'}
+        </IconButton>
+      )}
       <IconButton onClick={openSidePanel} title="Open live globe side panel">
         🌐
       </IconButton>

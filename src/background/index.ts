@@ -18,6 +18,7 @@ import {
   setSettings,
   getTodayStats,
   markTodayDirty,
+  getStatsHistory,
   incrementLifetimeBlocked,
   getCachedUserLocation,
   setCachedUserLocation,
@@ -523,6 +524,9 @@ chrome.runtime.onMessage.addListener(
         case 'RESUME_SITE':
           await resumeSite(message.host);
           sendResponse({ success: true });
+          break;
+        case 'GET_STATS_HISTORY':
+          sendResponse({ history: await getStatsHistory() });
           break;
         case 'GET_SETTINGS':
           sendResponse({ settings: await getSettings() });

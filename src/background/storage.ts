@@ -66,6 +66,7 @@ export async function setPages(pages: Record<number, PageStats>): Promise<void> 
 // ---------------------------------------------------------------------------
 
 const FLUSH_MS = 500;
+const HISTORY_DAYS = 30;
 
 let pagesCache: Record<number, PageStats> | null = null;
 let pagesDirty = false;
@@ -117,6 +118,9 @@ export async function getTodayStats(): Promise<TodayStats> {
   const existing = (todayCache ?? s.todayStats) as Partial<TodayStats> | undefined;
   const today = new Date().toISOString().slice(0, 10);
   if (!existing || existing.date !== today) {
+    if (existing?.date && (existing.totalConnections ?? 0) > 0) {
+      await archiveDay(existing as TodayStats);
+    }
     const fresh = getDefaultTodayStats();
     todayCache = fresh;
     await chrome.storage.local.set({ todayStats: fresh });
@@ -142,6 +146,22 @@ export async function setTodayStats(stats: TodayStats): Promise<void> {
   await chrome.storage.local.set({ todayStats: stats });
 }
 
+/** Roll a finished day into the bounded history used by the weekly report. */
+async function archiveDay(day: TodayStats): Promise<void> {
+  try {
+    const s = await chrome.storage.local.get('statsHistory');
+    const history = (s.statsHistory as TodayStats[] | undefined) ?? [];
+    const withoutDupe = history.filter((d) => d.date !== day.date);
+    withoutDupe.push(day);
+    withoutDupe.sort((a, b) => a.date.localeCompare(b.date));
+    await chrome.storage.local.set({
+      statsHistory: withoutDupe.slice(-HISTORY_DAYS),
+    });
+  } catch {
+    // history is best-effort
+  }
+}
+
 /** Lifetime blocked counter, used for the review-prompt milestones. */
 export async function incrementLifetimeBlocked(): Promise<number> {
   if (!lifetimeCache) {
@@ -154,6 +174,11 @@ export async function incrementLifetimeBlocked(): Promise<number> {
   lifetimeDirty = true;
   scheduleFlush();
   return lifetimeCache.blocked;
+}
+
+export async function getStatsHistory(): Promise<TodayStats[]> {
+  const s = await chrome.storage.local.get('statsHistory');
+  return (s.statsHistory as TodayStats[] | undefined) ?? [];
 }
 
 // Best-effort flush when the service worker is about to be torn down.

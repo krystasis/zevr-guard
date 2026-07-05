@@ -393,6 +393,12 @@ async function openSidePanel() {
   }
 }
 
+function openReport() {
+  void chrome.tabs.create({
+    url: chrome.runtime.getURL('src/report/index.html'),
+  });
+}
+
 const TopBar: React.FC<{
   view: 'list' | 'settings';
   onToggle: (v: 'list' | 'settings') => void;
@@ -419,6 +425,9 @@ const TopBar: React.FC<{
           {sharing ? '…' : '📤'}
         </IconButton>
       )}
+      <IconButton onClick={openReport} title={t('reportTitle', 'Protection report')}>
+        📊
+      </IconButton>
       <IconButton onClick={openSidePanel} title="Open live globe side panel">
         🌐
       </IconButton>

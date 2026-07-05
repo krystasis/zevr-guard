@@ -101,4 +101,5 @@ export type MessageRequest =
   | { type: 'UPDATE_SETTINGS'; settings: Settings }
   | { type: 'GET_PAGE_STATS'; tabId: number }
   | { type: 'GET_TODAY_STATS' }
+  | { type: 'GET_STATS_HISTORY' }
   | { type: 'GET_USER_LOCATION' };

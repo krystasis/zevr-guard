@@ -15,6 +15,7 @@ export default defineConfig({
         welcome: 'src/welcome/index.html',
         warning: 'src/warning/index.html',
         sidepanel: 'src/sidepanel/index.html',
+        report: 'src/report/index.html',
       },
     },
   },

@@ -127,16 +127,18 @@ export const Report: React.FC = () => {
           <h2 className="text-[11px] uppercase tracking-[0.25em] text-cyan-500 mb-4">
             {t('reportDailyBlocked', 'Blocked per day')}
           </h2>
-          <div className="flex items-end gap-2 h-32">
+          <div className="flex items-end gap-2">
             {week.map((d) => {
               const v = d.stats?.blockedConnections ?? 0;
-              const h = Math.max(2, Math.round((v / maxBlocked) * 100));
+              // Pixel height: a percentage would resolve against the unsized
+              // flex column and collapse the bar to nothing.
+              const h = Math.max(3, Math.round((v / maxBlocked) * 96));
               return (
                 <div key={d.date} className="flex-1 flex flex-col items-center gap-1.5">
                   <div className="text-[10px] text-red-300 tabular-nums">{v}</div>
                   <div
                     className="w-full rounded-t bg-gradient-to-t from-red-900/70 to-red-500/90 shadow-[0_0_8px_rgba(239,68,68,0.35)]"
-                    style={{ height: `${h}%` }}
+                    style={{ height: `${h}px` }}
                   />
                   <div className="text-[9px] text-gray-500">{d.date.slice(5)}</div>
                 </div>

@@ -15,7 +15,7 @@
   <a href="./LICENSE">
     <img alt="License: GPL-3.0" src="https://img.shields.io/badge/license-GPL--3.0-blue" />
   </a>
-  <img alt="Chrome Web Store" src="https://img.shields.io/badge/Chrome_Web_Store-pending_review-yellow" />
+  <img alt="Chrome Web Store" src="https://img.shields.io/badge/Chrome_Web_Store-available-green" />
 </p>
 
 ---
@@ -23,16 +23,18 @@
 Zevr Guard is a Chrome extension that visualizes every connection your browser makes and automatically blocks malware, phishing, and tracker domains. Install once, zero configuration — protection starts the moment it's enabled.
 
 - **115,000+ tracker signals** identify who reaches your browser and how often
+- **Lookalike phishing detection** — homoglyph (`аpple.com`), typosquat (`paypa1.com`) and brand-embedding (`paypal.com.verify-account.net`) domains are caught by on-device heuristics, before they reach any blocklist
 - **Daily threat-DB auto-updates** via Zevr's CDN — your browsing URLs are never sent
 - **Local-only matching** — every decision happens inside your browser
 - **Real-time world map** of the connections a page makes, with risk coloring
 - **Faster browsing as a side effect** — blocking ads and trackers removes dozens of HTTP requests and JS executions per page
+- **18 languages** — UI and store listing localized, picked automatically from your browser language
 
 ## Privacy model
 
 Zevr Guard **never uploads the URLs you visit**. The only outbound traffic is a scheduled, anonymous fetch of the threat database from Zevr's CDN. The request contains no information about you or the sites you browse — it is indistinguishable across users.
 
-If you want to verify this, the code in this repository is the code that ships in the extension. Search for `fetch(` in [`src/`](./src/) — you will find only the threat-DB fetch in [`src/background/feed.ts`](./src/background/feed.ts) and the geolocation lookup of your own IP via `api.ipify.org` in [`src/background/index.ts`](./src/background/index.ts) (this lookup is made once per session to render the "you are here" marker on the world map and can be disabled in settings).
+If you want to verify this, the code in this repository is the code that ships in the extension. Search for `fetch(` in [`src/`](./src/) — the only network fetches are the threat-DB update in [`src/background/feed.ts`](./src/background/feed.ts) and the geolocation lookup of your own IP via `api.ipify.org` in [`src/background/index.ts`](./src/background/index.ts) (made once per session to render the "you are here" marker on the world map; can be disabled in settings). Every other `fetch(` targets assets bundled inside the extension package. The lookalike phishing heuristics in [`src/background/lookalike.ts`](./src/background/lookalike.ts) likewise run entirely on-device against a bundled brand list.
 
 ## Build
 

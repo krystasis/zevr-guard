@@ -9,7 +9,7 @@ import {
   scoreToRiskLevel,
 } from './risk';
 import { initFeed, refreshFeed } from './feed';
-import { t, loadLocale } from '../shared/i18n';
+import { t, getLocale, loadLocale, subscribeLocale } from '../shared/i18n';
 import { syncCategoryRulesets } from './rulesets';
 import { getGeoData } from './geo';
 import {
@@ -515,6 +515,20 @@ chrome.runtime.onStartup.addListener(() => {
   void syncFromStoredSettings();
   void initWeeklyReport();
 });
+
+// Chrome opens this page right after the extension is removed — the only
+// chance to learn why someone left. The URL is static per locale and carries
+// no parameters: we learn nothing about who uninstalled.
+function syncUninstallUrl(): void {
+  const page = getLocale() === 'ja' ? 'ja/uninstall/' : 'uninstall/';
+  try {
+    void chrome.runtime.setUninstallURL(`https://zevrhq.com/${page}`);
+  } catch {
+    // best-effort
+  }
+}
+
+subscribeLocale(syncUninstallUrl);
 
 const feedReady = initFeed().catch(() => {});
 void loadLocale();

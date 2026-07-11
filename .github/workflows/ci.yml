@@ -26,13 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # The threat databases are generated at release time from upstream
-      # feeds and are not committed. Provide empty stand-ins so the type
-      # checker, tests and bundler run deterministically without network.
+      # The threat databases and DNR rule files are generated at release time
+      # from upstream feeds and are not committed. Provide empty stand-ins so
+      # the type checker, tests and bundler run deterministically and offline.
       - name: Provide placeholder threat data
         run: |
           [ -f src/data/malware.json ] || echo '[]' > src/data/malware.json
           [ -f src/data/trackers.json ] || echo '{}' > src/data/trackers.json
+          mkdir -p public/rules
+          for f in block_rules ads_rules tracking_rules; do
+            [ -f "public/rules/$f.json" ] || echo '[]' > "public/rules/$f.json"
+          done
 
       - name: Type check
         run: npm run typecheck

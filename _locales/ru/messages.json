@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Предупреждать перед вводом пароля на небезопасных страницах"
   },
+  "settingsBlockedCountries": {
+    "message": "Заблокированные страны"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Пусто. Откройте сведения о соединении, чтобы заблокировать его страну."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Домены блокируются, как только обнаруживается трафик из этих стран."
+  },
+  "blockCountry": {
+    "message": "Заблокировать весь трафик из региона: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Разблокировать: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Заблокировано вашим правилом для стран"
+  },
+  "warningCountryHeader": {
+    "message": "Этот сайт обменивается данными из региона, который вы решили заблокировать: $COUNTRY$.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Вы включили блокировку этого региона в Zevr Guard. С вашим устройством всё в порядке — это работает ваше собственное правило."
+  },
+  "warningCountryUnblock": {
+    "message": "Разблокировать: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Разблокировано. Вернитесь назад и перезагрузите страницу."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Блокировка стран в одно касание"
+  },
   "welcomeAlsoPw": {
     "message": "Защита при вводе пароля"
   }

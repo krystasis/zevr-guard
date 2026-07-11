@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Vor Passworteingabe auf riskanten Seiten warnen"
   },
+  "settingsBlockedCountries": {
+    "message": "Blockierte Länder"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Keine. Öffnen Sie die Detailansicht einer Verbindung, um ihr Land zu blockieren."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domains werden blockiert, sobald Traffic aus diesen Ländern beobachtet wird."
+  },
+  "blockCountry": {
+    "message": "Gesamten Traffic aus $COUNTRY$ blockieren",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "$COUNTRY$ freigeben",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Durch Ihre Länderregel blockiert"
+  },
+  "warningCountryHeader": {
+    "message": "Diese Website kommuniziert aus $COUNTRY$ — einem Land, das Sie blockiert haben.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Sie haben die Länderblockierung für diese Region in Zevr Guard aktiviert. Mit Ihrem Gerät ist alles in Ordnung — Ihre eigene Regel tut ihren Dienst."
+  },
+  "warningCountryUnblock": {
+    "message": "$COUNTRY$ freigeben",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Freigegeben. Gehen Sie zurück und laden Sie die Seite neu."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Länder mit einem Klick blockieren"
+  },
   "welcomeAlsoPw": {
     "message": "Passworteingabe-Schutz"
   }

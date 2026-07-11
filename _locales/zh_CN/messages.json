@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "在高风险页面输入密码前发出警告"
   },
+  "settingsBlockedCountries": {
+    "message": "已屏蔽的国家/地区"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "暂无。打开某个连接的详情即可屏蔽其所在国家/地区。"
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "一旦发现来自这些国家/地区的流量，相关域名会立即被拦截。"
+  },
+  "blockCountry": {
+    "message": "屏蔽来自 $COUNTRY$ 的所有流量",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "取消屏蔽 $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "已按你的国家/地区规则拦截"
+  },
+  "warningCountryHeader": {
+    "message": "此网站与 $COUNTRY$ 通信，而你已选择屏蔽该国家/地区。",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "你在 Zevr Guard 中启用了对该地区的国家屏蔽。你的设备没有任何问题——这是你自己设定的规则在发挥作用。"
+  },
+  "warningCountryUnblock": {
+    "message": "取消屏蔽 $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "已取消屏蔽。请返回并重新加载页面。"
+  },
+  "welcomeAlsoCountry": {
+    "message": "一键屏蔽国家/地区"
+  },
   "welcomeAlsoPw": {
     "message": "密码输入防护"
   }

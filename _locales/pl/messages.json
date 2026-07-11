@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Ostrzegaj przed wpisaniem hasła na ryzykownych stronach"
   },
+  "settingsBlockedCountries": {
+    "message": "Zablokowane kraje"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Brak. Otwórz szczegóły połączenia, aby zablokować jego kraj."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domeny są blokowane natychmiast po wykryciu ruchu z tych krajów."
+  },
+  "blockCountry": {
+    "message": "Zablokuj cały ruch z kraju: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Odblokuj kraj: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Zablokowano na podstawie Twojej reguły kraju"
+  },
+  "warningCountryHeader": {
+    "message": "Ta strona komunikuje się z zablokowanego przez Ciebie kraju: $COUNTRY$.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Blokowanie tego regionu włączono w Zevr Guard. Z Twoim urządzeniem wszystko jest w porządku — to Twoja własna reguła działa zgodnie z przeznaczeniem."
+  },
+  "warningCountryUnblock": {
+    "message": "Odblokuj kraj: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Odblokowano. Wróć i odśwież stronę."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Blokowanie krajów jednym kliknięciem"
+  },
   "welcomeAlsoPw": {
     "message": "Ochrona przy wpisywaniu hasła"
   }

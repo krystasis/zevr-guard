@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Cảnh báo trước khi bạn nhập mật khẩu trên trang rủi ro"
   },
+  "settingsBlockedCountries": {
+    "message": "Quốc gia bị chặn"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Chưa có. Mở chi tiết một kết nối để chặn quốc gia của nó."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Tên miền sẽ bị chặn ngay khi phát hiện lưu lượng từ các quốc gia này."
+  },
+  "blockCountry": {
+    "message": "Chặn mọi lưu lượng từ $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Bỏ chặn $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Bị chặn theo quy tắc quốc gia của bạn"
+  },
+  "warningCountryHeader": {
+    "message": "Trang này giao tiếp từ $COUNTRY$, quốc gia mà bạn đã chọn chặn.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Bạn đã bật chặn quốc gia cho khu vực này trong Zevr Guard. Thiết bị của bạn không có vấn đề gì — đây chính là quy tắc do bạn đặt ra đang hoạt động."
+  },
+  "warningCountryUnblock": {
+    "message": "Bỏ chặn $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Đã bỏ chặn. Hãy quay lại và tải lại trang."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Chặn quốc gia chỉ với một chạm"
+  },
   "welcomeAlsoPw": {
     "message": "Bảo vệ khi nhập mật khẩu"
   }

@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Warn before typing a password on risky pages"
   },
+  "settingsBlockedCountries": {
+    "message": "Blocked countries"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "None. Open a connection's detail view to block its country."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domains are blocked as soon as traffic from these countries is observed."
+  },
+  "blockCountry": {
+    "message": "Block all traffic from $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Unblock $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Blocked by Your Country Rule"
+  },
+  "warningCountryHeader": {
+    "message": "This site communicates from $COUNTRY$, which you chose to block.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "You enabled country blocking for this region in Zevr Guard. Nothing is wrong with your device — this is your own rule doing its job."
+  },
+  "warningCountryUnblock": {
+    "message": "Unblock $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Unblocked. Go back and reload the page."
+  },
+  "welcomeAlsoCountry": {
+    "message": "One-tap country blocking"
+  },
   "welcomeAlsoPw": {
     "message": "Password-entry guard"
   }

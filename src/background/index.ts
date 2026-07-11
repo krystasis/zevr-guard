@@ -47,6 +47,14 @@ import {
   isLookalikeBypassed,
 } from './lookalike';
 import { isFreshVisit, markInstalled, recordVisit } from './visits';
+import {
+  blockCountry,
+  getCountryRuleStats,
+  isCountryBlockedDomain,
+  noteConnection,
+  syncCountryBlocking,
+  unblockCountry,
+} from './country';
 import { initWeeklyReport } from './weekly';
 
 const pageLocks = new Map<number, Promise<void>>();
@@ -127,6 +135,7 @@ async function handleBackgroundRequest(
   const tracker = lookupTracker(domain);
   const riskLevel = getRiskLevel(domain);
   const geo = details.ip ? await getGeoData(details.ip) : null;
+  void noteConnection(domain, geo?.countryCode);
   const blockedByUs =
     outcome === 'blocked' && (await isBlockAttributedToUs(domain, tracker));
   await updateTodayStats(domain, tracker, riskLevel, geo, blockedByUs);
@@ -143,6 +152,7 @@ async function isBlockAttributedToUs(
   tracker: ReturnType<typeof lookupTracker>,
 ): Promise<boolean> {
   if (isMalware(domain)) return true;
+  if (await isCountryBlockedDomain(domain)) return true;
   const blocked = await getBlockedDomains();
   if (matchesDomainOrParent(domain, blocked)) return true;
   if (tracker) {
@@ -195,6 +205,7 @@ async function handleRequest(
   const tracker = lookupTracker(domain);
   const riskLevel = getRiskLevel(domain);
   const geo = details.ip ? await getGeoData(details.ip) : null;
+  void noteConnection(domain, geo?.countryCode);
   const blockedDomains = await getBlockedDomains();
   const isBlocked =
     outcome === 'blocked' || matchesDomainOrParent(domain, blockedDomains);
@@ -502,6 +513,7 @@ async function syncFromStoredSettings(): Promise<void> {
   try {
     const settings = await getSettings();
     await syncCategoryRulesets(settings);
+    await syncCountryBlocking(settings);
   } catch (err) {
     console.warn(
       '[Zevr Guard] syncCategoryRulesets on boot failed:',
@@ -578,6 +590,30 @@ chrome.runtime.onMessage.addListener(
           await addLookalikeBypass(message.host);
           sendResponse({ success: true });
           break;
+        case 'GET_STATS_HISTORY':
+          sendResponse({ history: await getStatsHistory() });
+          break;
+        case 'GET_SETTINGS':
+          sendResponse({ settings: await getSettings() });
+          break;
+        case 'UPDATE_SETTINGS':
+          await setSettings(message.settings);
+          await syncCategoryRulesets(message.settings);
+          await syncMalwareSessionRules();
+          await syncCountryBlocking(message.settings);
+          sendResponse({ success: true });
+          break;
+        case 'BLOCK_COUNTRY':
+          await blockCountry(message.country);
+          sendResponse({ success: true });
+          break;
+        case 'UNBLOCK_COUNTRY':
+          await unblockCountry(message.country);
+          sendResponse({ success: true });
+          break;
+        case 'GET_COUNTRY_STATS':
+          sendResponse({ stats: await getCountryRuleStats() });
+          break;
         case 'PASSWORD_CONTEXT': {
           const settings = await getSettings();
           let context: {
@@ -623,18 +659,6 @@ chrome.runtime.onMessage.addListener(
           sendResponse({ context });
           break;
         }
-        case 'GET_STATS_HISTORY':
-          sendResponse({ history: await getStatsHistory() });
-          break;
-        case 'GET_SETTINGS':
-          sendResponse({ settings: await getSettings() });
-          break;
-        case 'UPDATE_SETTINGS':
-          await setSettings(message.settings);
-          await syncCategoryRulesets(message.settings);
-          await syncMalwareSessionRules();
-          sendResponse({ success: true });
-          break;
         case 'GET_PAGE_STATS': {
           const pages = await getPagesCached();
           const page = pages[message.tabId] ?? null;

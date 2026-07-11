@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "जोखिम भरे पेजों पर पासवर्ड टाइप करने से पहले चेतावनी दें"
   },
+  "settingsBlockedCountries": {
+    "message": "ब्लॉक किए गए देश"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "कोई नहीं। किसी देश को ब्लॉक करने के लिए कनेक्शन का विवरण खोलें।"
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "इन देशों से ट्रैफ़िक दिखते ही डोमेन ब्लॉक कर दिए जाते हैं।"
+  },
+  "blockCountry": {
+    "message": "$COUNTRY$ से आने वाला सारा ट्रैफ़िक ब्लॉक करें",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "$COUNTRY$ को अनब्लॉक करें",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "आपके देश-नियम द्वारा ब्लॉक"
+  },
+  "warningCountryHeader": {
+    "message": "यह साइट $COUNTRY$ से संचार करती है, जिसे आपने ब्लॉक करना चुना है।",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "आपने Zevr Guard में इस क्षेत्र के लिए देश-ब्लॉकिंग चालू की थी। आपके डिवाइस में कोई गड़बड़ नहीं है — यह आपका ही बनाया नियम अपना काम कर रहा है।"
+  },
+  "warningCountryUnblock": {
+    "message": "$COUNTRY$ को अनब्लॉक करें",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "अनब्लॉक हो गया। वापस जाकर पेज दोबारा लोड करें।"
+  },
+  "welcomeAlsoCountry": {
+    "message": "एक टैप में देश ब्लॉकिंग"
+  },
   "welcomeAlsoPw": {
     "message": "पासवर्ड-एंट्री सुरक्षा"
   }

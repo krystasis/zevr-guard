@@ -166,6 +166,16 @@ export const Popup: React.FC = () => {
     await chrome.runtime.sendMessage({ type: 'UPDATE_SETTINGS', settings: next });
   }
 
+  async function handleBlockCountry(country: string) {
+    await chrome.runtime.sendMessage({ type: 'BLOCK_COUNTRY', country });
+    await loadData();
+  }
+
+  async function handleUnblockCountry(country: string) {
+    await chrome.runtime.sendMessage({ type: 'UNBLOCK_COUNTRY', country });
+    await loadData();
+  }
+
   async function handleShare() {
     if (!stats || sharing) return;
     setSharing(true);
@@ -293,13 +303,17 @@ export const Popup: React.FC = () => {
             onUnblock={handleUnblock}
             onDisallow={handleDisallow}
             onResume={handleResume}
+            onUnblockCountry={handleUnblockCountry}
           />
         ) : selected ? (
           <ConnectionDetail
             connection={selected}
+            blockedCountries={settings?.blockedCountries ?? []}
             onBack={() => setSelectedDomain(null)}
             onBlock={handleBlock}
             onUnblock={handleUnblock}
+            onBlockCountry={handleBlockCountry}
+            onUnblockCountry={handleUnblockCountry}
           />
         ) : (
           <>
@@ -952,10 +966,21 @@ const ConnectionRow: React.FC<{
 
 const ConnectionDetail: React.FC<{
   connection: Connection;
+  blockedCountries: string[];
   onBack: () => void;
   onBlock: (domain: string) => void;
   onUnblock: (domain: string) => void;
-}> = ({ connection, onBack, onBlock, onUnblock }) => (
+  onBlockCountry: (country: string) => void;
+  onUnblockCountry: (country: string) => void;
+}> = ({
+  connection,
+  blockedCountries,
+  onBack,
+  onBlock,
+  onUnblock,
+  onBlockCountry,
+  onUnblockCountry,
+}) => (
   <div className="p-3">
     <button
       className="text-cyan-400 hover:text-cyan-200 text-[11px] mb-3 tracking-wide"
@@ -1032,6 +1057,26 @@ const ConnectionDetail: React.FC<{
         ? `✓ ${t('unblockThisDomain', 'Unblock this domain')}`
         : `🚫 ${t('blockThisDomain', 'Block this domain')}`}
     </button>
+
+    {connection.country && (
+      <button
+        className={`w-full py-2 rounded text-[11px] font-bold uppercase tracking-wider mt-2 transition border ${
+          blockedCountries.includes(connection.country)
+            ? 'border-gray-600 text-gray-300 hover:bg-gray-800'
+            : 'border-red-800/60 text-red-300 hover:bg-red-900/30'
+        }`}
+        onClick={() =>
+          blockedCountries.includes(connection.country!)
+            ? onUnblockCountry(connection.country!)
+            : onBlockCountry(connection.country!)
+        }
+      >
+        {blockedCountries.includes(connection.country)
+          ? `✓ ${t('unblockCountry', `Unblock ${connection.countryName ?? connection.country}`, connection.countryName ?? connection.country)}`
+          : `🌍 ${t('blockCountry', `Block all traffic from ${connection.countryName ?? connection.country}`, connection.countryName ?? connection.country)}`}
+      </button>
+    )}
+
   </div>
 );
 
@@ -1050,7 +1095,8 @@ const SettingsPanel: React.FC<{
   onUnblock: (domain: string) => void;
   onDisallow: (domain: string) => void;
   onResume: (host: string) => void;
-}> = ({ settings, onChange, onUnblock, onDisallow, onResume }) => {
+  onUnblockCountry: (country: string) => void;
+}> = ({ settings, onChange, onUnblock, onDisallow, onResume, onUnblockCountry }) => {
   function toggle<K extends keyof Settings>(key: K, value: Settings[K]) {
     onChange({ ...settings, [key]: value });
   }
@@ -1107,6 +1153,51 @@ const SettingsPanel: React.FC<{
         checked={settings.blockCategories.tracking}
         onChange={() => toggleCategory('tracking')}
       />
+
+      <div className="pt-3 mt-2 border-t border-cyan-900/30">
+        <div className="flex items-center justify-between text-[10px] tracking-wide mb-1.5">
+          <span className="uppercase text-gray-500">
+            {t('settingsBlockedCountries', 'Blocked countries')}
+          </span>
+          <span className="text-red-300 font-bold">{settings.blockedCountries.length}</span>
+        </div>
+        {settings.blockedCountries.length === 0 ? (
+          <div className="text-[10px] text-gray-600 pb-2">
+            {t(
+              'settingsBlockedCountriesEmpty',
+              'None. Open a connection\u2019s detail view to block its country.',
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="text-[10px] text-gray-500 pb-1">
+              {t(
+                'settingsBlockedCountriesHint',
+                'Domains are blocked as soon as traffic from these countries is observed.',
+              )}
+            </div>
+            <div className="max-h-[140px] overflow-y-auto border border-red-900/30 rounded bg-black/30 mb-2">
+              {[...settings.blockedCountries].sort().map((code) => (
+                <div
+                  key={code}
+                  className="flex items-center gap-2 px-2 py-1.5 border-b border-red-900/20 last:border-b-0"
+                >
+                  <Flag code={code} size={12} />
+                  <div className="flex-1 min-w-0 truncate text-gray-100 font-mono text-[11px]">
+                    {code}
+                  </div>
+                  <button
+                    className="flex-shrink-0 px-2 h-5 rounded text-[9px] font-bold uppercase tracking-wider bg-gray-700/60 text-gray-200 hover:bg-gray-600 transition"
+                    onClick={() => onUnblockCountry(code)}
+                  >
+                    {t('unblock', 'unblock')}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
 
       <div className="pt-3 mt-2 border-t border-cyan-900/30">
         <div className="flex items-center justify-between text-[10px] tracking-wide mb-1.5">

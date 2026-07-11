@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Avisar antes de digitar uma senha em páginas de risco"
   },
+  "settingsBlockedCountries": {
+    "message": "Países bloqueados"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Nenhum. Abra o detalhe de uma conexão para bloquear o país dela."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Os domínios são bloqueados assim que houver tráfego desses países."
+  },
+  "blockCountry": {
+    "message": "Bloquear todo o tráfego de $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Desbloquear $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Bloqueado pela sua regra de país"
+  },
+  "warningCountryHeader": {
+    "message": "Este site se comunica a partir de $COUNTRY$, que você escolheu bloquear.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Você ativou o bloqueio por país para esta região no Zevr Guard. Seu aparelho está bem — é a sua própria regra funcionando."
+  },
+  "warningCountryUnblock": {
+    "message": "Desbloquear $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Desbloqueado. Volte e recarregue a página."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Bloqueio de países com um toque"
+  },
   "welcomeAlsoPw": {
     "message": "Proteção ao digitar senhas"
   }

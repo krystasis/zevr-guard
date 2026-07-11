@@ -14,6 +14,7 @@ export function getDefaultSettings(): Settings {
     customWhiteList: [],
     pausedSites: [],
     passwordWarningsEnabled: true,
+    blockedCountries: [],
   };
 }
 
@@ -45,6 +46,7 @@ export async function getSettings(): Promise<Settings> {
     customWhiteList: stored.customWhiteList ?? [],
     pausedSites: stored.pausedSites ?? [],
     passwordWarningsEnabled: stored.passwordWarningsEnabled ?? true,
+    blockedCountries: stored.blockedCountries ?? [],
   };
 }
 

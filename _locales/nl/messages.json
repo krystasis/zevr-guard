@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Waarschuw voordat je een wachtwoord typt op risicovolle pagina's"
   },
+  "settingsBlockedCountries": {
+    "message": "Geblokkeerde landen"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Geen. Open de details van een verbinding om het land ervan te blokkeren."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domeinen worden geblokkeerd zodra er verkeer uit deze landen wordt waargenomen."
+  },
+  "blockCountry": {
+    "message": "Blokkeer al het verkeer uit $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Deblokkeer $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Geblokkeerd door je landregel"
+  },
+  "warningCountryHeader": {
+    "message": "Deze site communiceert vanuit $COUNTRY$, een land dat je zelf hebt geblokkeerd.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Je hebt in Zevr Guard landblokkering voor deze regio ingeschakeld. Er is niets mis met je apparaat — dit is je eigen regel die zijn werk doet."
+  },
+  "warningCountryUnblock": {
+    "message": "Deblokkeer $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Gedeblokkeerd. Ga terug en laad de pagina opnieuw."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Landen blokkeren met één tik"
+  },
   "welcomeAlsoPw": {
     "message": "Bescherming bij wachtwoordinvoer"
   }

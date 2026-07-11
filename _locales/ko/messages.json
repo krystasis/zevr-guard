@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "위험한 페이지에서 비밀번호를 입력하기 전에 경고해요"
   },
+  "settingsBlockedCountries": {
+    "message": "차단된 국가"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "없음. 연결의 상세 보기에서 해당 국가를 차단할 수 있어요."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "이 국가들의 트래픽이 감지되는 즉시 해당 도메인이 차단돼요."
+  },
+  "blockCountry": {
+    "message": "$COUNTRY$의 모든 트래픽 차단",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "$COUNTRY$ 차단 해제",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "내 국가 규칙으로 차단됨"
+  },
+  "warningCountryHeader": {
+    "message": "이 사이트는 차단하기로 선택하신 $COUNTRY$에서 통신해요.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Zevr Guard에서 이 지역에 대한 국가 차단을 켜 두셨어요. 기기에는 아무 문제가 없어요. 직접 만든 규칙이 제 역할을 하고 있는 거예요."
+  },
+  "warningCountryUnblock": {
+    "message": "$COUNTRY$ 차단 해제",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "차단이 해제됐어요. 이전 페이지로 돌아가 새로고침해 주세요."
+  },
+  "welcomeAlsoCountry": {
+    "message": "원탭 국가 차단"
+  },
   "welcomeAlsoPw": {
     "message": "비밀번호 입력 보호"
   }

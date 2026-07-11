@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "在高風險頁面輸入密碼前先提出警告"
   },
+  "settingsBlockedCountries": {
+    "message": "已封鎖的國家"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "尚無。開啟任一連線的詳細資訊即可封鎖其所在國家。"
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "一旦偵測到來自這些國家的流量，相關網域就會立即被封鎖。"
+  },
+  "blockCountry": {
+    "message": "封鎖來自 $COUNTRY$ 的所有流量",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "解除封鎖 $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "已依你的國家封鎖規則攔截"
+  },
+  "warningCountryHeader": {
+    "message": "這個網站的通訊來自 $COUNTRY$——你已選擇封鎖的地區。",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "你在 Zevr Guard 中啟用了針對這個地區的國家封鎖。你的裝置沒有任何問題——這是你自己設定的規則正在發揮作用。"
+  },
+  "warningCountryUnblock": {
+    "message": "解除封鎖 $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "已解除封鎖。請返回並重新載入頁面。"
+  },
+  "welcomeAlsoCountry": {
+    "message": "一鍵封鎖整個國家"
+  },
   "welcomeAlsoPw": {
     "message": "密碼輸入防護"
   }

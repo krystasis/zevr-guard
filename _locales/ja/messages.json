@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "危険なページでのパスワード入力前に警告"
   },
+  "settingsBlockedCountries": {
+    "message": "ブロック中の国"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "なし。通信先の詳細画面から国をブロックできます。"
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "これらの国への通信を検知し次第、ドメイン単位でブロックします。"
+  },
+  "blockCountry": {
+    "message": "$COUNTRY$ への通信をすべてブロック",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "$COUNTRY$ のブロックを解除",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "国ブロックルールで遮断"
+  },
+  "warningCountryHeader": {
+    "message": "このサイトは、あなたがブロック指定した $COUNTRY$ と通信しています。",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Zevr Guard の国ブロック設定によるものです。端末の異常ではなく、あなたのルールが機能しています。"
+  },
+  "warningCountryUnblock": {
+    "message": "$COUNTRY$ のブロックを解除",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "解除しました。戻って再読み込みしてください。"
+  },
+  "welcomeAlsoCountry": {
+    "message": "ワンタップ国ブロック"
+  },
   "welcomeAlsoPw": {
     "message": "パスワード入力ガード"
   }

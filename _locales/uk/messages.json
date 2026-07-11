@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Попереджати перед введенням пароля на ризикованих сторінках"
   },
+  "settingsBlockedCountries": {
+    "message": "Заблоковані країни"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Немає. Відкрийте деталі з'єднання, щоб заблокувати його країну."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Домени блокуються, щойно виявлено трафік із цих країн."
+  },
+  "blockCountry": {
+    "message": "Заблокувати весь трафік із країни: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Розблокувати: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Заблоковано вашим правилом для країни"
+  },
+  "warningCountryHeader": {
+    "message": "Цей сайт передає дані з країни, яку ви вирішили заблокувати: $COUNTRY$.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Ви ввімкнули блокування цієї країни в Zevr Guard. З вашим пристроєм усе гаразд — це просто працює ваше власне правило."
+  },
+  "warningCountryUnblock": {
+    "message": "Розблокувати: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Розблоковано. Поверніться назад і перезавантажте сторінку."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Блокування країн одним дотиком"
+  },
   "welcomeAlsoPw": {
     "message": "Захист під час введення пароля"
   }

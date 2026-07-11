@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Riskli sayfalarda parola yazmadan önce uyar"
   },
+  "settingsBlockedCountries": {
+    "message": "Engellenen ülkeler"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Yok. Bir ülkeyi engellemek için bağlantının ayrıntı görünümünü açın."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Bu ülkelerden trafik gözlemlendiği anda ilgili alan adları engellenir."
+  },
+  "blockCountry": {
+    "message": "$COUNTRY$ kaynaklı tüm trafiği engelle",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "$COUNTRY$ engelini kaldır",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Ülke Kuralınız Tarafından Engellendi"
+  },
+  "warningCountryHeader": {
+    "message": "Bu site, engellemeyi seçtiğiniz $COUNTRY$ üzerinden iletişim kuruyor.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Bu bölge için ülke engellemesini Zevr Guard'da siz etkinleştirdiniz. Cihazınızda hiçbir sorun yok — bu, kendi kuralınızın görevini yapmasından ibaret."
+  },
+  "warningCountryUnblock": {
+    "message": "$COUNTRY$ engelini kaldır",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Engel kaldırıldı. Geri dönüp sayfayı yeniden yükleyin."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Tek dokunuşla ülke engelleme"
+  },
   "welcomeAlsoPw": {
     "message": "Parola girişi koruması"
   }

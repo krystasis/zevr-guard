@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Avertir avant la saisie d'un mot de passe sur une page à risque"
   },
+  "settingsBlockedCountries": {
+    "message": "Pays bloqués"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Aucun. Ouvrez le détail d'une connexion pour bloquer son pays."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Les domaines sont bloqués dès qu'un trafic depuis ces pays est observé."
+  },
+  "blockCountry": {
+    "message": "Bloquer tout le trafic depuis $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Débloquer $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Bloqué par votre règle de pays"
+  },
+  "warningCountryHeader": {
+    "message": "Ce site communique depuis $COUNTRY$, que vous avez choisi de bloquer.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Vous avez activé le blocage par pays pour cette région dans Zevr Guard. Votre appareil va bien — c'est votre propre règle qui fait son travail."
+  },
+  "warningCountryUnblock": {
+    "message": "Débloquer $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Débloqué. Revenez en arrière et rechargez la page."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Blocage de pays en un geste"
+  },
   "welcomeAlsoPw": {
     "message": "Garde de saisie de mot de passe"
   }

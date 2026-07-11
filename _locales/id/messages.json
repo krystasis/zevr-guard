@@ -744,6 +744,59 @@
   "settingsPasswordWarningsDesc": {
     "message": "Peringatkan sebelum mengetik kata sandi di halaman berisiko"
   },
+  "settingsBlockedCountries": {
+    "message": "Negara yang diblokir"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Tidak ada. Buka tampilan detail sebuah koneksi untuk memblokir negaranya."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domain langsung diblokir begitu lalu lintas dari negara-negara ini terdeteksi."
+  },
+  "blockCountry": {
+    "message": "Blokir semua lalu lintas dari $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Buka blokir $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Diblokir oleh Aturan Negara Anda"
+  },
+  "warningCountryHeader": {
+    "message": "Situs ini berkomunikasi dari $COUNTRY$, negara yang Anda pilih untuk diblokir.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Anda mengaktifkan pemblokiran negara untuk wilayah ini di Zevr Guard. Perangkat Anda baik-baik saja — ini aturan Anda sendiri yang sedang bekerja."
+  },
+  "warningCountryUnblock": {
+    "message": "Buka blokir $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Blokir dibuka. Kembali dan muat ulang halaman."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Pemblokiran negara sekali ketuk"
+  },
   "welcomeAlsoPw": {
     "message": "Pelindung entri kata sandi"
   }

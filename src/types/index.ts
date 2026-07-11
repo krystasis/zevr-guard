@@ -48,6 +48,8 @@ export interface Settings {
   pausedSites: string[];
   /** Warn when a password field is focused in a risky context. */
   passwordWarningsEnabled: boolean;
+  /** ISO 3166-1 alpha-2 codes whose traffic is blocked (learning rules). */
+  blockedCountries: string[];
 }
 
 export interface TrackerDomainInfo {
@@ -101,6 +103,9 @@ export type MessageRequest =
   | { type: 'RESUME_SITE'; host: string }
   | { type: 'BYPASS_LOOKALIKE'; host: string }
   | { type: 'PASSWORD_CONTEXT'; host: string; isSecure: boolean }
+  | { type: 'BLOCK_COUNTRY'; country: string }
+  | { type: 'UNBLOCK_COUNTRY'; country: string }
+  | { type: 'GET_COUNTRY_STATS' }
   | { type: 'GET_SETTINGS' }
   | { type: 'UPDATE_SETTINGS'; settings: Settings }
   | { type: 'GET_PAGE_STATS'; tabId: number }

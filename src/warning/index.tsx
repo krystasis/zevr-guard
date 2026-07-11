@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppIcon } from '../shared/AppIcon';
 import { t, loadLocale } from '../shared/i18n';
@@ -8,7 +8,19 @@ import '../styles/tailwind.css';
 const params = new URLSearchParams(window.location.search);
 const blocked = params.get('blocked') ?? 'unknown-domain';
 const isLookalike = params.get('reason') === 'lookalike';
+const isCountry = params.get('reason') === 'country';
 const brand = params.get('brand') ?? '';
+const countryCode = params.get('country') ?? '';
+
+function countryDisplayName(code: string): string {
+  try {
+    return (
+      new Intl.DisplayNames([navigator.language, 'en'], { type: 'region' }).of(code) ?? code
+    );
+  } catch {
+    return code;
+  }
+}
 
 // Anyone can deep-link this page with arbitrary params (it is
 // web-accessible), so only ever resume to a plain http(s) URL.
@@ -39,6 +51,30 @@ async function proceedAnyway() {
   window.location.href = target;
 }
 
+const CountryActions: React.FC = () => {
+  const [unblocked, setUnblocked] = useState(false);
+  const name = countryDisplayName(countryCode);
+  if (unblocked) {
+    return (
+      <div className="text-center text-emerald-300 text-xs py-2">
+        ✓ {t('warningCountryUnblocked', 'Unblocked. Go back and reload the page.', name)}
+      </div>
+    );
+  }
+  return (
+    <button
+      className="w-full py-2 rounded border border-gray-600 text-gray-300 hover:bg-gray-800 transition text-sm"
+      onClick={() => {
+        void chrome.runtime
+          .sendMessage({ type: 'UNBLOCK_COUNTRY', country: countryCode })
+          .then(() => setUnblocked(true));
+      }}
+    >
+      {t('warningCountryUnblock', `Unblock ${name}`, name)}
+    </button>
+  );
+};
+
 const Warning: React.FC = () => {
   useLocale();
   const target = safeTargetUrl();
@@ -54,7 +90,9 @@ const Warning: React.FC = () => {
           <div className="text-red-400 text-2xl font-bold">
             {isLookalike
               ? t('warningLookalikeTitle', 'Suspected Phishing Blocked')
-              : t('warningTitle', 'Dangerous Site Blocked')}
+              : isCountry
+                ? t('warningCountryTitle', 'Blocked by Your Country Rule')
+                : t('warningTitle', 'Dangerous Site Blocked')}
           </div>
           <div className="text-gray-400 text-sm">
             {t('warningSubtitle', 'Protected by Zevr Guard')}
@@ -80,7 +118,23 @@ const Warning: React.FC = () => {
       </div>
 
       <div className="bg-black/30 rounded p-3 mb-6 text-sm">
-        {isLookalike ? (
+        {isCountry ? (
+          <>
+            <div className="text-gray-200 font-bold mb-2">
+              {t(
+                'warningCountryHeader',
+                `This site communicates from ${countryDisplayName(countryCode)}, which you chose to block.`,
+                countryDisplayName(countryCode),
+              )}
+            </div>
+            <div className="text-gray-400">
+              {t(
+                'warningCountryDetail',
+                'You enabled country blocking for this region in Zevr Guard. Nothing is wrong with your device — this is your own rule doing its job.',
+              )}
+            </div>
+          </>
+        ) : isLookalike ? (
           <>
             <div className="text-gray-200 font-bold mb-2">
               {t(
@@ -131,6 +185,8 @@ const Warning: React.FC = () => {
         >
           ← {t('warningGoBack', 'Go Back (Safe)')}
         </button>
+        {isCountry && <CountryActions />}
+        {!isCountry && (
         <details className="text-xs text-gray-500">
           <summary className="cursor-pointer hover:text-gray-300">
             {t('warningUnderstandRisk', 'I understand the risk')}
@@ -153,6 +209,7 @@ const Warning: React.FC = () => {
             </div>
           )}
         </details>
+        )}
       </div>
 
       <div className="text-center text-gray-600 text-xs mt-6">

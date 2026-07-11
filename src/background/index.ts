@@ -41,6 +41,7 @@ import {
   syncMalwareSessionRules,
   unblockDomain,
 } from './blocking';
+import { addLookalikeBypass, checkNavigation } from './lookalike';
 
 const pageLocks = new Map<number, Promise<void>>();
 
@@ -329,6 +330,20 @@ async function updateTodayStats(
   markTodayDirty();
 }
 
+// Lookalike (homoglyph / typosquat / brand-embedding) navigations cannot be
+// covered by DNR rules — they need per-URL heuristics. Inspect main-frame
+// requests and swap the tab to the warning page on a hit.
+chrome.webRequest.onBeforeRequest.addListener(
+  (details) => {
+    if (details.tabId < 0) return;
+    void checkNavigation(details.tabId, details.url);
+  },
+  {
+    urls: ['http://*/*', 'https://*/*'],
+    types: ['main_frame' as chrome.webRequest.ResourceType],
+  },
+);
+
 chrome.webRequest.onCompleted.addListener(
   (details) => {
     void handleRequest(details);
@@ -529,6 +544,10 @@ chrome.runtime.onMessage.addListener(
           break;
         case 'RESUME_SITE':
           await resumeSite(message.host);
+          sendResponse({ success: true });
+          break;
+        case 'BYPASS_LOOKALIKE':
+          await addLookalikeBypass(message.host);
           sendResponse({ success: true });
           break;
         case 'GET_STATS_HISTORY':

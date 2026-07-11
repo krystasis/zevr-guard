@@ -625,5 +625,40 @@
   },
   "welcomeAlsoLangs": {
     "message": "In 6 Sprachen verfügbar"
+  },
+  "warningLookalikeTitle": {
+    "message": "Phishing-Verdacht blockiert"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Nicht identisch mit:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Diese Adresse imitiert $BRAND$, ist aber nicht die echte Website.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Gefälschte Websites dienen typischerweise dazu:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Passwörter oder Login-Codes zu stehlen"
+  },
+  "warningLookalikeItem2": {
+    "message": "Kreditkarten- oder Bankdaten abzugreifen"
+  },
+  "warningLookalikeItem3": {
+    "message": "Malware getarnt als echten Dienst zu verbreiten"
+  },
+  "warningLookalikeDetected": {
+    "message": "Erkannt durch lokale Ähnlichkeitsanalyse. Ihre URL hat den Browser nie verlassen."
+  },
+  "warningProceedAnyway": {
+    "message": "Trotzdem fortfahren (nicht empfohlen)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Erkennung gefälschter Phishing-Domains"
   }
 }

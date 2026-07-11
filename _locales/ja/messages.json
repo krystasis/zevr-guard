@@ -625,5 +625,40 @@
   },
   "welcomeAlsoLangs": {
     "message": "6言語に対応"
+  },
+  "warningLookalikeTitle": {
+    "message": "フィッシングの疑いをブロック"
+  },
+  "warningLookalikeNotSame": {
+    "message": "本物はこちら:"
+  },
+  "warningLookalikeHeader": {
+    "message": "このアドレスは $BRAND$ に似せた偽サイトの可能性があります。",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "偽装サイトの主な目的:"
+  },
+  "warningLookalikeItem1": {
+    "message": "パスワードやログインコードを盗む"
+  },
+  "warningLookalikeItem2": {
+    "message": "クレジットカードや銀行情報を詐取する"
+  },
+  "warningLookalikeItem3": {
+    "message": "本物になりすましてマルウェアを配布する"
+  },
+  "warningLookalikeDetected": {
+    "message": "端末内のなりすまし解析で検知しました。URLはブラウザの外に送信されていません。"
+  },
+  "warningProceedAnyway": {
+    "message": "危険を理解して進む(非推奨)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "なりすましフィッシング検知"
   }
 }

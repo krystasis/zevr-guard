@@ -625,5 +625,40 @@
   },
   "welcomeAlsoLangs": {
     "message": "Available in 6 languages"
+  },
+  "warningLookalikeTitle": {
+    "message": "Suspected Phishing Blocked"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Not the same as:"
+  },
+  "warningLookalikeHeader": {
+    "message": "This address imitates $BRAND$ but is not the real site.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Lookalike sites are typically used to:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Steal your password or login codes"
+  },
+  "warningLookalikeItem2": {
+    "message": "Capture credit card or banking details"
+  },
+  "warningLookalikeItem3": {
+    "message": "Deliver malware disguised as the real service"
+  },
+  "warningLookalikeDetected": {
+    "message": "Detected by on-device lookalike analysis. Your URL never left this browser."
+  },
+  "warningProceedAnyway": {
+    "message": "Proceed anyway (not recommended)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Lookalike phishing detection"
   }
 }

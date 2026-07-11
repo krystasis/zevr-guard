@@ -97,6 +97,7 @@ export type MessageRequest =
   | { type: 'DISALLOW_DOMAIN'; domain: string }
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }
+  | { type: 'BYPASS_LOOKALIKE'; host: string }
   | { type: 'GET_SETTINGS' }
   | { type: 'UPDATE_SETTINGS'; settings: Settings }
   | { type: 'GET_PAGE_STATS'; tabId: number }

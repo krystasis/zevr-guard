@@ -625,5 +625,40 @@
   },
   "welcomeAlsoLangs": {
     "message": "Disponible en 6 langues"
+  },
+  "warningLookalikeTitle": {
+    "message": "Phishing présumé bloqué"
+  },
+  "warningLookalikeNotSame": {
+    "message": "À ne pas confondre avec :"
+  },
+  "warningLookalikeHeader": {
+    "message": "Cette adresse imite $BRAND$ mais n'est pas le vrai site.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Les sites d'imitation servent généralement à :"
+  },
+  "warningLookalikeItem1": {
+    "message": "Voler votre mot de passe ou vos codes de connexion"
+  },
+  "warningLookalikeItem2": {
+    "message": "Capturer vos données bancaires ou de carte"
+  },
+  "warningLookalikeItem3": {
+    "message": "Diffuser des logiciels malveillants sous couvert du vrai service"
+  },
+  "warningLookalikeDetected": {
+    "message": "Détecté par l'analyse locale de similarité. Votre URL n'a jamais quitté ce navigateur."
+  },
+  "warningProceedAnyway": {
+    "message": "Continuer quand même (déconseillé)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Détection du phishing par imitation"
   }
 }

@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "レポートを見る"
+  },
+  "pwWarnDismiss": {
+    "message": "閉じる"
+  },
+  "pwWarnHttpTitle": {
+    "message": "このページは暗号化されていません"
+  },
+  "pwWarnHttpMsg": {
+    "message": "通信が平文(HTTP)です。ここで入力したパスワードは通信経路上で盗み見られる可能性があります。"
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "なりすましの疑いがあるサイトです"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "先ほど警告を承知で進んだサイトです。ここで入力したパスワードは偽サイトに渡る恐れがあります。"
+  },
+  "pwWarnFirstTitle": {
+    "message": "このサイトで初めてのパスワード入力です"
+  },
+  "pwWarnFirstMsg": {
+    "message": "初めてログインするサイトです。アドレスバーのドメインを確認してから入力してください。"
+  },
+  "settingsPasswordWarnings": {
+    "message": "パスワード入力警告"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "危険なページでのパスワード入力前に警告"
+  },
+  "welcomeAlsoPw": {
+    "message": "パスワード入力ガード"
   }
 }

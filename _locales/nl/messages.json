@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Rapport bekijken"
+  },
+  "pwWarnDismiss": {
+    "message": "Sluiten"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Deze pagina is niet versleuteld"
+  },
+  "pwWarnHttpMsg": {
+    "message": "De verbinding is onversleuteld HTTP — een wachtwoord dat je hier typt, kan onderweg worden meegelezen."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Je bent op een vermoedelijke imitatiesite"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Je hebt er eerder voor gekozen om naar deze site door te gaan. Een wachtwoord dat je hier typt, kan bij een oplichter terechtkomen."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Eerste wachtwoord op deze site"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Je hebt hier nog nooit ingelogd. Controleer eerst goed de adresbalk."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Wachtwoordwaarschuwingen"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Waarschuw voordat je een wachtwoord typt op risicovolle pagina's"
+  },
+  "welcomeAlsoPw": {
+    "message": "Bescherming bij wachtwoordinvoer"
   }
 }

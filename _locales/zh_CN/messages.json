@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "查看报告"
+  },
+  "pwWarnDismiss": {
+    "message": "忽略"
+  },
+  "pwWarnHttpTitle": {
+    "message": "此页面未加密"
+  },
+  "pwWarnHttpMsg": {
+    "message": "当前连接是明文 HTTP——在此输入的密码可能在传输途中被窃取。"
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "你正在访问疑似仿冒网站"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "你之前选择继续访问了此网站。在此输入的密码可能会落入冒充者手中。"
+  },
+  "pwWarnFirstTitle": {
+    "message": "首次在此网站输入密码"
+  },
+  "pwWarnFirstMsg": {
+    "message": "你从未在此登录过。请先仔细核对地址栏。"
+  },
+  "settingsPasswordWarnings": {
+    "message": "密码警告"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "在高风险页面输入密码前发出警告"
+  },
+  "welcomeAlsoPw": {
+    "message": "密码输入防护"
   }
 }

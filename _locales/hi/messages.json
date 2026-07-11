@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "रिपोर्ट देखें"
+  },
+  "pwWarnDismiss": {
+    "message": "बंद करें"
+  },
+  "pwWarnHttpTitle": {
+    "message": "यह पेज एन्क्रिप्टेड नहीं है"
+  },
+  "pwWarnHttpMsg": {
+    "message": "कनेक्शन सादा HTTP है — यहाँ टाइप किया गया पासवर्ड रास्ते में पढ़ा जा सकता है।"
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "आप एक संदिग्ध नक़ली साइट पर हैं"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "आपने पहले इस साइट पर आगे बढ़ना चुना था। यहाँ टाइप किया गया पासवर्ड किसी नक़लची के पास जा सकता है।"
+  },
+  "pwWarnFirstTitle": {
+    "message": "इस साइट पर पहला पासवर्ड"
+  },
+  "pwWarnFirstMsg": {
+    "message": "आपने यहाँ पहले कभी साइन इन नहीं किया है। पहले एड्रेस बार अच्छी तरह जाँच लें।"
+  },
+  "settingsPasswordWarnings": {
+    "message": "पासवर्ड चेतावनियाँ"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "जोखिम भरे पेजों पर पासवर्ड टाइप करने से पहले चेतावनी दें"
+  },
+  "welcomeAlsoPw": {
+    "message": "पासवर्ड-एंट्री सुरक्षा"
   }
 }

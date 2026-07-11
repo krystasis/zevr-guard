@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Lihat laporan"
+  },
+  "pwWarnDismiss": {
+    "message": "Tutup"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Halaman ini tidak terenkripsi"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Koneksi ini menggunakan HTTP biasa — kata sandi yang diketik di sini dapat dibaca saat dikirim."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Anda berada di situs yang dicurigai tiruan"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Anda sebelumnya memilih untuk melanjutkan ke situs ini. Kata sandi yang diketik di sini bisa jatuh ke tangan peniru."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Kata sandi pertama di situs ini"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Anda belum pernah masuk di sini sebelumnya. Periksa kembali bilah alamat terlebih dahulu."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Peringatan kata sandi"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Peringatkan sebelum mengetik kata sandi di halaman berisiko"
+  },
+  "welcomeAlsoPw": {
+    "message": "Pelindung entri kata sandi"
   }
 }

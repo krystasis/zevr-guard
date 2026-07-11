@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Ver relatório"
+  },
+  "pwWarnDismiss": {
+    "message": "Fechar"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Esta página não é criptografada"
+  },
+  "pwWarnHttpMsg": {
+    "message": "A conexão é HTTP sem criptografia — uma senha digitada aqui pode ser lida no caminho."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Você está em um site suspeito de imitação"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Você escolheu prosseguir para este site há pouco. Uma senha digitada aqui pode ir parar com um impostor."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Primeira senha neste site"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Você nunca fez login aqui. Confira a barra de endereço primeiro."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Avisos de senha"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Avisar antes de digitar uma senha em páginas de risco"
+  },
+  "welcomeAlsoPw": {
+    "message": "Proteção ao digitar senhas"
   }
 }

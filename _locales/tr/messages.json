@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Raporu görüntüle"
+  },
+  "pwWarnDismiss": {
+    "message": "Kapat"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Bu sayfa şifreli değil"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Bağlantı düz HTTP — buraya yazılan parola aktarım sırasında okunabilir."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Taklit olduğundan şüphelenilen bir sitedesiniz"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Bu siteye daha önce devam etmeyi seçtiniz. Buraya yazılan parola bir sahtekârın eline geçebilir."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Bu sitede ilk parola girişi"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Burada daha önce hiç oturum açmadınız. Önce adres çubuğunu bir kez daha kontrol edin."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Parola uyarıları"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Riskli sayfalarda parola yazmadan önce uyar"
+  },
+  "welcomeAlsoPw": {
+    "message": "Parola girişi koruması"
   }
 }

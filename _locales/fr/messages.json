@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Voir le rapport"
+  },
+  "pwWarnDismiss": {
+    "message": "Fermer"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Cette page n'est pas chiffrée"
+  },
+  "pwWarnHttpMsg": {
+    "message": "La connexion est en HTTP non chiffré — un mot de passe saisi ici peut être lu en transit."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Vous êtes sur un site suspecté d'imitation"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Vous avez choisi de poursuivre vers ce site tout à l'heure. Un mot de passe saisi ici pourrait finir chez un imposteur."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Premier mot de passe sur ce site"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Vous ne vous êtes jamais connecté ici. Vérifiez d'abord la barre d'adresse."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Alertes mot de passe"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Avertir avant la saisie d'un mot de passe sur une page à risque"
+  },
+  "welcomeAlsoPw": {
+    "message": "Garde de saisie de mot de passe"
   }
 }

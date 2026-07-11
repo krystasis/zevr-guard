@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Открыть отчёт"
+  },
+  "pwWarnDismiss": {
+    "message": "Закрыть"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Эта страница не зашифрована"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Соединение использует обычный HTTP — введённый здесь пароль может быть перехвачен при передаче."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Похоже, это сайт-двойник"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Ранее вы решили перейти на этот сайт. Введённый здесь пароль может попасть к злоумышленникам."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Первый пароль на этом сайте"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Вы ещё не входили на этот сайт. Сначала проверьте адресную строку."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Предупреждения о паролях"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Предупреждать перед вводом пароля на небезопасных страницах"
+  },
+  "welcomeAlsoPw": {
+    "message": "Защита при вводе пароля"
   }
 }

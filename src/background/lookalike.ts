@@ -47,7 +47,7 @@ const MULTI_SUFFIXES = new Set([
   'co.nz', 'net.nz', 'org.nz', 'co.il', 'com.pl',
 ]);
 
-function registrableDomain(host: string): string {
+export function registrableDomain(host: string): string {
   const parts = host.split('.');
   if (parts.length <= 2) return host;
   const lastTwo = parts.slice(-2).join('.');
@@ -297,6 +297,11 @@ async function getBypassed(): Promise<Set<string>> {
   } catch {
     return memoryBypass;
   }
+}
+
+/** True when the user chose "proceed anyway" for this host this session. */
+export async function isLookalikeBypassed(host: string): Promise<boolean> {
+  return matchesDomainOrParent(host.toLowerCase(), await getBypassed());
 }
 
 export async function addLookalikeBypass(host: string): Promise<void> {

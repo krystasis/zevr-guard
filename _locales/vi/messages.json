@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Xem báo cáo"
+  },
+  "pwWarnDismiss": {
+    "message": "Bỏ qua"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Trang này không được mã hóa"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Kết nối là HTTP thuần — mật khẩu bạn nhập tại đây có thể bị đọc trên đường truyền."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Bạn đang ở trên trang nghi là mạo danh"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Trước đó bạn đã chọn tiếp tục vào trang này. Mật khẩu nhập tại đây có thể rơi vào tay kẻ giả mạo."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Lần đầu nhập mật khẩu trên trang này"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Bạn chưa từng đăng nhập tại đây. Hãy kiểm tra kỹ thanh địa chỉ trước."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Cảnh báo mật khẩu"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Cảnh báo trước khi bạn nhập mật khẩu trên trang rủi ro"
+  },
+  "welcomeAlsoPw": {
+    "message": "Bảo vệ khi nhập mật khẩu"
   }
 }

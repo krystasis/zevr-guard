@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "View report"
+  },
+  "pwWarnDismiss": {
+    "message": "Dismiss"
+  },
+  "pwWarnHttpTitle": {
+    "message": "This page is not encrypted"
+  },
+  "pwWarnHttpMsg": {
+    "message": "The connection is plain HTTP — a password typed here can be read in transit."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "You are on a suspected lookalike site"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "You chose to proceed to this site earlier. A password typed here may go to an impostor."
+  },
+  "pwWarnFirstTitle": {
+    "message": "First password on this site"
+  },
+  "pwWarnFirstMsg": {
+    "message": "You've never signed in here before. Double-check the address bar first."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Password warnings"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Warn before typing a password on risky pages"
+  },
+  "welcomeAlsoPw": {
+    "message": "Password-entry guard"
   }
 }

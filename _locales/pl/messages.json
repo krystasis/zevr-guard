@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Zobacz raport"
+  },
+  "pwWarnDismiss": {
+    "message": "Zamknij"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Ta strona nie jest szyfrowana"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Połączenie to zwykły HTTP — hasło wpisane tutaj może zostać przechwycone podczas przesyłania."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Ta strona może podszywać się pod inną"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Wcześniej zdecydowano się przejść na tę stronę. Wpisane tu hasło może trafić do oszusta."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Pierwsze hasło na tej stronie"
+  },
+  "pwWarnFirstMsg": {
+    "message": "To pierwsze logowanie na tej stronie. Najpierw dokładnie sprawdź pasek adresu."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Ostrzeżenia dotyczące haseł"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Ostrzegaj przed wpisaniem hasła na ryzykownych stronach"
+  },
+  "welcomeAlsoPw": {
+    "message": "Ochrona przy wpisywaniu hasła"
   }
 }

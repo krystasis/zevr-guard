@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "查看報告"
+  },
+  "pwWarnDismiss": {
+    "message": "關閉"
+  },
+  "pwWarnHttpTitle": {
+    "message": "這個頁面未加密"
+  },
+  "pwWarnHttpMsg": {
+    "message": "此連線是未加密的 HTTP——在這裡輸入的密碼可能在傳輸過程中被攔截。"
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "你正瀏覽疑似仿冒的網站"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "你先前選擇繼續前往這個網站。在這裡輸入的密碼可能落入冒充者手中。"
+  },
+  "pwWarnFirstTitle": {
+    "message": "首次在這個網站輸入密碼"
+  },
+  "pwWarnFirstMsg": {
+    "message": "你從未在這裡登入過。請先仔細確認網址列。"
+  },
+  "settingsPasswordWarnings": {
+    "message": "密碼輸入警告"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "在高風險頁面輸入密碼前先提出警告"
+  },
+  "welcomeAlsoPw": {
+    "message": "密碼輸入防護"
   }
 }

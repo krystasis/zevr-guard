@@ -1078,6 +1078,15 @@ const SettingsPanel: React.FC<{
         checked={settings.notificationsEnabled}
         onChange={(v) => toggle('notificationsEnabled', v)}
       />
+      <ToggleRow
+        label={t('settingsPasswordWarnings', 'Password warnings')}
+        description={t(
+          'settingsPasswordWarningsDesc',
+          'Warn before typing a password on risky pages',
+        )}
+        checked={settings.passwordWarningsEnabled}
+        onChange={(v) => toggle('passwordWarningsEnabled', v)}
+      />
 
       <SectionLabel>{t('settingsBlockCategories', 'Block categories')}</SectionLabel>
       <ToggleRow

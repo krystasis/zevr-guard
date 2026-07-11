@@ -275,6 +275,7 @@ const FeatureSection: React.FC = () => (
         </div>
         <div className="flex flex-wrap justify-center gap-2">
           {[
+            ['🔑', t('welcomeAlsoPw', 'Password-entry guard')],
             ['📤', t('welcomeAlsoShare', '1-click share card')],
             ['📊', t('welcomeAlsoReport', 'Weekly protection report')],
             ['⏸️', t('welcomeAlsoPause', 'Per-site pause')],

@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "리포트 보기"
+  },
+  "pwWarnDismiss": {
+    "message": "닫기"
+  },
+  "pwWarnHttpTitle": {
+    "message": "이 페이지는 암호화되지 않았어요"
+  },
+  "pwWarnHttpMsg": {
+    "message": "연결이 일반 HTTP예요. 여기에 입력한 비밀번호는 전송 중에 읽힐 수 있어요."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "위장 사이트로 의심되는 페이지예요"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "앞서 이 사이트로 계속 진행하기를 선택하셨어요. 여기에 입력한 비밀번호는 사칭 사이트로 넘어갈 수 있어요."
+  },
+  "pwWarnFirstTitle": {
+    "message": "이 사이트에서 처음 입력하는 비밀번호예요"
+  },
+  "pwWarnFirstMsg": {
+    "message": "여기에 로그인한 적이 없어요. 먼저 주소창을 다시 확인해 주세요."
+  },
+  "settingsPasswordWarnings": {
+    "message": "비밀번호 경고"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "위험한 페이지에서 비밀번호를 입력하기 전에 경고해요"
+  },
+  "welcomeAlsoPw": {
+    "message": "비밀번호 입력 보호"
   }
 }

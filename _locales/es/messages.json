@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Ver informe"
+  },
+  "pwWarnDismiss": {
+    "message": "Cerrar"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Esta página no está cifrada"
+  },
+  "pwWarnHttpMsg": {
+    "message": "La conexión es HTTP sin cifrar — una contraseña escrita aquí puede leerse en tránsito."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Estás en un sitio sospechoso de imitación"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Antes decidiste continuar hacia este sitio. Una contraseña escrita aquí podría ir a un impostor."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Primera contraseña en este sitio"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Nunca has iniciado sesión aquí. Revisa primero la barra de direcciones."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Avisos de contraseña"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Avisar antes de escribir una contraseña en páginas de riesgo"
+  },
+  "welcomeAlsoPw": {
+    "message": "Protección al escribir contraseñas"
   }
 }

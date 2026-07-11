@@ -46,6 +46,8 @@ export interface Settings {
   customWhiteList: string[];
   /** Hosts where blocking is paused (requests initiated by these sites are allowed). */
   pausedSites: string[];
+  /** Warn when a password field is focused in a risky context. */
+  passwordWarningsEnabled: boolean;
 }
 
 export interface TrackerDomainInfo {
@@ -98,6 +100,7 @@ export type MessageRequest =
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }
   | { type: 'BYPASS_LOOKALIKE'; host: string }
+  | { type: 'PASSWORD_CONTEXT'; host: string; isSecure: boolean }
   | { type: 'GET_SETTINGS' }
   | { type: 'UPDATE_SETTINGS'; settings: Settings }
   | { type: 'GET_PAGE_STATS'; tabId: number }

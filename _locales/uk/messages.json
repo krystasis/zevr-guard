@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Переглянути звіт"
+  },
+  "pwWarnDismiss": {
+    "message": "Закрити"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Ця сторінка не зашифрована"
+  },
+  "pwWarnHttpMsg": {
+    "message": "З'єднання відбувається через незахищений HTTP — введений тут пароль можна перехопити під час передавання."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Ви на ймовірному сайті-двійнику"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Раніше ви вирішили перейти на цей сайт. Введений тут пароль може потрапити до шахраїв."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Перший пароль на цьому сайті"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Ви ще ніколи тут не входили. Спершу уважно перевірте адресний рядок."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Попередження про паролі"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Попереджати перед введенням пароля на ризикованих сторінках"
+  },
+  "welcomeAlsoPw": {
+    "message": "Захист під час введення пароля"
   }
 }

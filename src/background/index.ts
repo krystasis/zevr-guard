@@ -41,7 +41,12 @@ import {
   syncMalwareSessionRules,
   unblockDomain,
 } from './blocking';
-import { addLookalikeBypass, checkNavigation } from './lookalike';
+import {
+  addLookalikeBypass,
+  checkNavigation,
+  isLookalikeBypassed,
+} from './lookalike';
+import { isFreshVisit, markInstalled, recordVisit } from './visits';
 import { initWeeklyReport } from './weekly';
 
 const pageLocks = new Map<number, Promise<void>>();
@@ -337,6 +342,11 @@ async function updateTodayStats(
 chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
     if (details.tabId < 0) return;
+    try {
+      void recordVisit(new URL(details.url).hostname);
+    } catch {
+      // unparsable URL
+    }
     void checkNavigation(details.tabId, details.url);
   },
   {
@@ -502,6 +512,7 @@ async function syncFromStoredSettings(): Promise<void> {
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
+    void markInstalled();
     chrome.tabs.create({ url: chrome.runtime.getURL('src/welcome/index.html') });
     void refreshFeed(true);
   } else if (details.reason === 'update') {
@@ -567,6 +578,51 @@ chrome.runtime.onMessage.addListener(
           await addLookalikeBypass(message.host);
           sendResponse({ success: true });
           break;
+        case 'PASSWORD_CONTEXT': {
+          const settings = await getSettings();
+          let context: {
+            level: 'danger' | 'notice';
+            title: string;
+            message: string;
+            dismiss: string;
+          } | null = null;
+          if (settings.passwordWarningsEnabled) {
+            const dismiss = t('pwWarnDismiss', 'Dismiss');
+            if (await isLookalikeBypassed(message.host)) {
+              context = {
+                level: 'danger',
+                title: t('pwWarnLookalikeTitle', 'You are on a suspected lookalike site'),
+                message: t(
+                  'pwWarnLookalikeMsg',
+                  'You chose to proceed to this site earlier. A password typed here may go to an impostor.',
+                ),
+                dismiss,
+              };
+            } else if (!message.isSecure) {
+              context = {
+                level: 'danger',
+                title: t('pwWarnHttpTitle', 'This page is not encrypted'),
+                message: t(
+                  'pwWarnHttpMsg',
+                  'The connection is plain HTTP — a password typed here can be read in transit.',
+                ),
+                dismiss,
+              };
+            } else if (await isFreshVisit(message.host)) {
+              context = {
+                level: 'notice',
+                title: t('pwWarnFirstTitle', 'First password on this site'),
+                message: t(
+                  'pwWarnFirstMsg',
+                  "You've never signed in here before. Double-check the address bar first.",
+                ),
+                dismiss,
+              };
+            }
+          }
+          sendResponse({ context });
+          break;
+        }
         case 'GET_STATS_HISTORY':
           sendResponse({ history: await getStatsHistory() });
           break;

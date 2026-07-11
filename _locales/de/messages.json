@@ -716,5 +716,35 @@
   },
   "weeklyNotifView": {
     "message": "Bericht ansehen"
+  },
+  "pwWarnDismiss": {
+    "message": "Schließen"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Diese Seite ist nicht verschlüsselt"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Die Verbindung ist unverschlüsseltes HTTP — ein hier eingegebenes Passwort kann mitgelesen werden."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Sie sind auf einer mutmaßlichen Fälschung"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Sie haben die Warnung für diese Website zuvor übergangen. Ein hier eingegebenes Passwort könnte an Betrüger gehen."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Erstes Passwort auf dieser Website"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Sie haben sich hier noch nie angemeldet. Prüfen Sie zuerst die Adressleiste."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Passwort-Warnungen"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Vor Passworteingabe auf riskanten Seiten warnen"
+  },
+  "welcomeAlsoPw": {
+    "message": "Passworteingabe-Schutz"
   }
 }

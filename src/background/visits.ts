@@ -16,14 +16,31 @@ const FRESH_MS = 10 * 60 * 1000;
 // had time to learn the user's routine.
 const LEARNING_MS = 48 * 60 * 60 * 1000;
 
-let cache: Record<string, number> | null = null;
+// Per domain: `first` (first-ever-seen, drives the freshness check) and
+// `last` (touched every visit, drives LRU eviction). Keeping first-seen fixed
+// is what lets isFreshVisit tell a genuinely new site apart from a routine
+// one; evicting by last activity is what keeps routine sites from being
+// dropped and then mistaken for new on the next visit.
+interface SeenEntry {
+  first: number;
+  last: number;
+}
+
+let cache: Record<string, SeenEntry> | null = null;
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 
-async function getSeen(): Promise<Record<string, number>> {
+async function getSeen(): Promise<Record<string, SeenEntry>> {
   if (cache) return cache;
   try {
     const s = await chrome.storage.local.get(STORAGE_KEY);
-    cache = (s[STORAGE_KEY] as Record<string, number> | undefined) ?? {};
+    const raw = s[STORAGE_KEY] as
+      | Record<string, SeenEntry | number>
+      | undefined;
+    cache = {};
+    // Migrate the old number-only shape.
+    for (const [k, v] of Object.entries(raw ?? {})) {
+      cache[k] = typeof v === 'number' ? { first: v, last: v } : v;
+    }
   } catch {
     cache = {};
   }
@@ -38,7 +55,8 @@ function scheduleFlush(): void {
       if (!cache) return;
       const entries = Object.entries(cache);
       if (entries.length > MAX_ENTRIES) {
-        entries.sort((a, b) => b[1] - a[1]);
+        // Evict least-recently-active, not oldest-discovered.
+        entries.sort((a, b) => b[1].last - a[1].last);
         cache = Object.fromEntries(entries.slice(0, MAX_ENTRIES));
       }
       try {
@@ -54,10 +72,14 @@ export async function recordVisit(host: string): Promise<void> {
   const domain = registrableDomain(host.toLowerCase());
   if (!domain) return;
   const seen = await getSeen();
-  if (!seen[domain]) {
-    seen[domain] = Date.now();
-    scheduleFlush();
+  const now = Date.now();
+  const entry = seen[domain];
+  if (entry) {
+    entry.last = now; // touch for LRU; keep first fixed
+  } else {
+    seen[domain] = { first: now, last: now };
   }
+  scheduleFlush();
 }
 
 export async function markInstalled(): Promise<void> {
@@ -84,6 +106,6 @@ export async function isFreshVisit(host: string): Promise<boolean> {
   const domain = registrableDomain(host.toLowerCase());
   if (!domain) return false;
   const seen = await getSeen();
-  const first = seen[domain];
-  return first !== undefined && Date.now() - first < FRESH_MS;
+  const entry = seen[domain];
+  return entry !== undefined && Date.now() - entry.first < FRESH_MS;
 }

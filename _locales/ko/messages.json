@@ -53,7 +53,13 @@
     "message": "작동 방식"
   },
   "fourLayersTitle": {
-    "message": "4중 보호 레이어"
+    "message": "5중 보호"
+  },
+  "featureLookalikeTitle": {
+    "message": "위장 피싱 도메인 탐지"
+  },
+  "featureLookalikeDesc": {
+    "message": "실제 브랜드를 흉내 낸 가짜 도메인(paypa1.com, аpple.com)을 기기 내 분석으로 탐지합니다. 차단 목록에 오르기 전이라도 막아냅니다."
   },
   "feature1Title": {
     "message": "악성코드 자동 차단"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "리포트 보기"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "사칭 피싱 감지"
   }
 }

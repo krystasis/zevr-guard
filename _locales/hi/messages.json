@@ -53,7 +53,13 @@
     "message": "यह कैसे काम करता है"
   },
   "fourLayersTitle": {
-    "message": "सुरक्षा की चार परतें"
+    "message": "सुरक्षा की पाँच परतें"
+  },
+  "featureLookalikeTitle": {
+    "message": "नकली फ़िशिंग डोमेन पकड़ें"
+  },
+  "featureLookalikeDesc": {
+    "message": "असली ब्रांड की नकल करने वाले नकली डोमेन — paypa1.com, аpple.com — किसी भी ब्लॉकलिस्ट में आने से पहले ही डिवाइस पर विश्लेषण से पकड़े जाते हैं।"
   },
   "feature1Title": {
     "message": "मैलवेयर ऑटो-ब्लॉक"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "रिपोर्ट देखें"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "लुकअलाइक फ़िशिंग पहचान"
   }
 }

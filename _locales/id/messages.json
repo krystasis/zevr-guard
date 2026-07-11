@@ -53,7 +53,13 @@
     "message": "Cara kerjanya"
   },
   "fourLayersTitle": {
-    "message": "Empat lapis perlindungan"
+    "message": "Lima lapis perlindungan"
+  },
+  "featureLookalikeTitle": {
+    "message": "Menangkap phishing tiruan"
+  },
+  "featureLookalikeDesc": {
+    "message": "Domain palsu yang meniru merek asli — paypa1.com, аpple.com — terdeteksi lewat analisis di perangkat, bahkan sebelum masuk daftar blokir mana pun."
   },
   "feature1Title": {
     "message": "Blokir malware otomatis"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Lihat laporan"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Deteksi phishing situs tiruan"
   }
 }

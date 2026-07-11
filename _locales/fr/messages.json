@@ -53,7 +53,13 @@
     "message": "Comment ça marche"
   },
   "fourLayersTitle": {
-    "message": "Quatre couches de protection"
+    "message": "Cinq couches de protection"
+  },
+  "featureLookalikeTitle": {
+    "message": "Détecte le phishing par imitation"
+  },
+  "featureLookalikeDesc": {
+    "message": "Les faux domaines qui imitent de vraies marques — paypa1.com, аpple.com — sont détectés par une analyse locale, avant même d'être listés."
   },
   "feature1Title": {
     "message": "Blocage auto des malwares"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Voir le rapport"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Détection du phishing par imitation"
   }
 }

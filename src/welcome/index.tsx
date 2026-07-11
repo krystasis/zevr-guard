@@ -215,7 +215,7 @@ const FeatureSection: React.FC = () => (
         </div>
         <h2 className="text-4xl md:text-5xl font-black">
           <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-            {t('fourLayersTitle', 'Four layers of protection')}
+            {t('fourLayersTitle', 'Five layers of protection')}
           </span>
         </h2>
       </div>
@@ -231,8 +231,17 @@ const FeatureSection: React.FC = () => (
           )}
         />
         <FeatureCard
-          accent="sky"
+          accent="violet"
           index="02"
+          title={t('featureLookalikeTitle', 'Catch lookalike phishing')}
+          desc={t(
+            'featureLookalikeDesc',
+            'Fake domains that imitate real brands — paypa1.com, аpple.com — are caught by on-device analysis, before they reach any blocklist.',
+          )}
+        />
+        <FeatureCard
+          accent="sky"
+          index="03"
           title={t('feature2Title', 'See every tracker')}
           desc={t(
             'feature2Desc',
@@ -241,7 +250,7 @@ const FeatureSection: React.FC = () => (
         />
         <FeatureCard
           accent="amber"
-          index="03"
+          index="04"
           title={t('feature3Title', 'Warn on suspicious')}
           desc={t(
             'feature3Desc',
@@ -250,7 +259,8 @@ const FeatureSection: React.FC = () => (
         />
         <FeatureCard
           accent="emerald"
-          index="04"
+          index="05"
+          wide
           title={t('feature4Title', 'Local matching. Your URLs never leave.')}
           desc={t(
             'feature4Desc',
@@ -265,7 +275,6 @@ const FeatureSection: React.FC = () => (
         </div>
         <div className="flex flex-wrap justify-center gap-2">
           {[
-            ['🎣', t('welcomeAlsoLookalike', 'Lookalike phishing detection')],
             ['📤', t('welcomeAlsoShare', '1-click share card')],
             ['📊', t('welcomeAlsoReport', 'Weekly protection report')],
             ['⏸️', t('welcomeAlsoPause', 'Per-site pause')],
@@ -293,38 +302,43 @@ const FeatureSection: React.FC = () => (
 );
 
 const FeatureCard: React.FC<{
-  accent: 'red' | 'sky' | 'amber' | 'emerald';
+  accent: 'red' | 'sky' | 'amber' | 'emerald' | 'violet';
   index: string;
   title: string;
   desc: string;
-}> = ({ accent, index, title, desc }) => {
+  wide?: boolean;
+}> = ({ accent, index, title, desc, wide }) => {
   const accentBg = {
     red: 'from-red-500/20 to-transparent',
     sky: 'from-sky-500/20 to-transparent',
     amber: 'from-amber-500/20 to-transparent',
     emerald: 'from-emerald-500/20 to-transparent',
+    violet: 'from-violet-500/20 to-transparent',
   }[accent];
   const accentBorder = {
     red: 'border-red-900/40 hover:border-red-600/60',
     sky: 'border-sky-900/40 hover:border-sky-600/60',
     amber: 'border-amber-900/40 hover:border-amber-600/60',
     emerald: 'border-emerald-900/40 hover:border-emerald-600/60',
+    violet: 'border-violet-900/40 hover:border-violet-600/60',
   }[accent];
   const accentText = {
     red: 'text-red-400',
     sky: 'text-sky-400',
     amber: 'text-amber-400',
     emerald: 'text-emerald-400',
+    violet: 'text-violet-400',
   }[accent];
   const accentBlob = {
     red: 'bg-red-500',
     sky: 'bg-sky-500',
     amber: 'bg-amber-500',
     emerald: 'bg-emerald-500',
+    violet: 'bg-violet-500',
   }[accent];
   return (
     <div
-      className={`group relative p-6 rounded-lg border ${accentBorder} bg-gradient-to-br ${accentBg} backdrop-blur-sm transition overflow-hidden`}
+      className={`group relative p-6 rounded-lg border ${accentBorder} bg-gradient-to-br ${accentBg} backdrop-blur-sm transition overflow-hidden ${wide ? 'md:col-span-2' : ''}`}
     >
       <div
         className={`absolute -top-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-30 ${accentBlob}`}

@@ -53,7 +53,13 @@
     "message": "Nasıl çalışır"
   },
   "fourLayersTitle": {
-    "message": "Dört katmanlı koruma"
+    "message": "Beş katmanlı koruma"
+  },
+  "featureLookalikeTitle": {
+    "message": "Taklit oltalama alan adlarını yakalar"
+  },
+  "featureLookalikeDesc": {
+    "message": "Gerçek markaları taklit eden sahte alan adları — paypa1.com, аpple.com — herhangi bir engel listesine girmeden önce cihaz üzerindeki analizle yakalanır."
   },
   "feature1Title": {
     "message": "Zararlı yazılımı otomatik engeller"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Raporu görüntüle"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Taklit kimlik avı tespiti"
   }
 }

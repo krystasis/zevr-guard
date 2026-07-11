@@ -53,7 +53,13 @@
     "message": "Jak to działa"
   },
   "fourLayersTitle": {
-    "message": "Cztery warstwy ochrony"
+    "message": "Pięć warstw ochrony"
+  },
+  "featureLookalikeTitle": {
+    "message": "Wykrywa phishing przez podszywanie"
+  },
+  "featureLookalikeDesc": {
+    "message": "Fałszywe domeny podszywające się pod znane marki — paypa1.com, аpple.com — są wykrywane analizą na urządzeniu, zanim trafią na jakąkolwiek listę blokad."
   },
   "feature1Title": {
     "message": "Automatyczne blokowanie malware"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Zobacz raport"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Wykrywanie phishingu przez podszywanie"
   }
 }

@@ -53,7 +53,13 @@
     "message": "So funktioniert es"
   },
   "fourLayersTitle": {
-    "message": "Vier Schutzebenen"
+    "message": "Fünf Schutzebenen"
+  },
+  "featureLookalikeTitle": {
+    "message": "Gefälschte Phishing-Domains erkennen"
+  },
+  "featureLookalikeDesc": {
+    "message": "Gefälschte Domains, die echte Marken imitieren — paypa1.com, аpple.com — werden per On-Device-Analyse erkannt, noch bevor sie auf einer Blockliste stehen."
   },
   "feature1Title": {
     "message": "Malware automatisch blockieren"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Bericht ansehen"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Erkennung gefälschter Phishing-Domains"
   }
 }

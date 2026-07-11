@@ -53,7 +53,13 @@
     "message": "Zo werkt het"
   },
   "fourLayersTitle": {
-    "message": "Vier beschermingslagen"
+    "message": "Vijf beschermingslagen"
+  },
+  "featureLookalikeTitle": {
+    "message": "Vangt lookalike-phishing"
+  },
+  "featureLookalikeDesc": {
+    "message": "Nepdomeinen die echte merken nabootsen — paypa1.com, аpple.com — worden op het apparaat herkend, nog vóór ze op een blokkeerlijst staan."
   },
   "feature1Title": {
     "message": "Blokkeert malware automatisch"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Rapport bekijken"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Detectie van lookalike-phishing"
   }
 }

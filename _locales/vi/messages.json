@@ -53,7 +53,13 @@
     "message": "Cách hoạt động"
   },
   "fourLayersTitle": {
-    "message": "Bốn lớp bảo vệ"
+    "message": "Năm lớp bảo vệ"
+  },
+  "featureLookalikeTitle": {
+    "message": "Bắt lừa đảo giả mạo thương hiệu"
+  },
+  "featureLookalikeDesc": {
+    "message": "Các tên miền giả mạo thương hiệu thật — paypa1.com, аpple.com — được phát hiện bằng phân tích ngay trên thiết bị, trước cả khi có mặt trong bất kỳ danh sách chặn nào."
   },
   "feature1Title": {
     "message": "Tự động chặn mã độc"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Xem báo cáo"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Phát hiện tên miền giả mạo"
   }
 }

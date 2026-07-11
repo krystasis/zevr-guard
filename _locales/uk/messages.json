@@ -53,7 +53,13 @@
     "message": "Як це працює"
   },
   "fourLayersTitle": {
-    "message": "Чотири рівні захисту"
+    "message": "П'ять рівнів захисту"
+  },
+  "featureLookalikeTitle": {
+    "message": "Ловить фішингові домени-двійники"
+  },
+  "featureLookalikeDesc": {
+    "message": "Підроблені домени, що імітують відомі бренди — paypa1.com, аpple.com — розпізнаються аналізом на пристрої ще до потрапляння в чорні списки."
   },
   "feature1Title": {
     "message": "Автоблокування шкідливого ПЗ"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Переглянути звіт"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Виявлення фішингових доменів-двійників"
   }
 }

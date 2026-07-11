@@ -53,7 +53,13 @@
     "message": "How it works"
   },
   "fourLayersTitle": {
-    "message": "Four layers of protection"
+    "message": "Five layers of protection"
+  },
+  "featureLookalikeTitle": {
+    "message": "Catch lookalike phishing"
+  },
+  "featureLookalikeDesc": {
+    "message": "Fake domains that imitate real brands — paypa1.com, аpple.com — are caught by on-device analysis, before they reach any blocklist."
   },
   "feature1Title": {
     "message": "Auto-block malware"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "View report"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Lookalike phishing detection"
   }
 }

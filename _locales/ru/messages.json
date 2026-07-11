@@ -53,7 +53,13 @@
     "message": "Как это работает"
   },
   "fourLayersTitle": {
-    "message": "Четыре уровня защиты"
+    "message": "Пять уровней защиты"
+  },
+  "featureLookalikeTitle": {
+    "message": "Ловит фишинговые домены-двойники"
+  },
+  "featureLookalikeDesc": {
+    "message": "Поддельные домены, имитирующие известные бренды — paypa1.com, аpple.com — распознаются анализом на устройстве ещё до попадания в чёрные списки."
   },
   "feature1Title": {
     "message": "Автоблокировка вредоносного ПО"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Открыть отчёт"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Обнаружение фишинговых доменов-двойников"
   }
 }

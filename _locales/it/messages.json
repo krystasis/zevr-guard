@@ -53,7 +53,13 @@
     "message": "Come funziona"
   },
   "fourLayersTitle": {
-    "message": "Quattro livelli di protezione"
+    "message": "Cinque livelli di protezione"
+  },
+  "featureLookalikeTitle": {
+    "message": "Rileva il phishing per imitazione"
+  },
+  "featureLookalikeDesc": {
+    "message": "I domini falsi che imitano marchi reali — paypa1.com, аpple.com — vengono rilevati con analisi sul dispositivo, prima che finiscano in qualsiasi blocklist."
   },
   "feature1Title": {
     "message": "Blocco automatico dei malware"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "Vedi il report"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "Rilevamento di phishing per imitazione"
   }
 }

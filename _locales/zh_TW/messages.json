@@ -53,7 +53,13 @@
     "message": "運作方式"
   },
   "fourLayersTitle": {
-    "message": "四層防護"
+    "message": "五重防護"
+  },
+  "featureLookalikeTitle": {
+    "message": "識破仿冒釣魚網域"
+  },
+  "featureLookalikeDesc": {
+    "message": "仿冒真實品牌的假網域（如 paypa1.com、аpple.com）由裝置端分析辨識，即使尚未列入任何封鎖清單也能攔截。"
   },
   "feature1Title": {
     "message": "自動封鎖惡意軟體"
@@ -710,8 +716,5 @@
   },
   "weeklyNotifView": {
     "message": "查看報告"
-  },
-  "welcomeAlsoLookalike": {
-    "message": "仿冒釣魚網域偵測"
   }
 }

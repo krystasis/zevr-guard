@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Đã bỏ chặn. Hãy quay lại và tải lại trang."
   },
+  "reportPhishingButton": {
+    "message": "Báo cáo lừa đảo — bảo vệ người dùng khác"
+  },
+  "reportPhishingConfirm": {
+    "message": "Gửi tên miền này (và không gì khác) cho Zevr để xem xét?"
+  },
+  "reportPhishingSend": {
+    "message": "Gửi báo cáo"
+  },
+  "reportPhishingCancel": {
+    "message": "Hủy"
+  },
+  "reportPhishingDone": {
+    "message": "Đã báo cáo. Cảm ơn bạn đã bảo vệ những người dùng khác!"
+  },
+  "reportPhishingError": {
+    "message": "Không gửi được báo cáo. Vui lòng thử lại sau."
+  },
   "welcomeAlsoCountry": {
     "message": "Chặn quốc gia chỉ với một chạm"
   },

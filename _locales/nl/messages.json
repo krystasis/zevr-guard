@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Gedeblokkeerd. Ga terug en laad de pagina opnieuw."
   },
+  "reportPhishingButton": {
+    "message": "Meld als phishing — bescherm andere gebruikers"
+  },
+  "reportPhishingConfirm": {
+    "message": "Dit domein (en niets anders) naar Zevr sturen voor beoordeling?"
+  },
+  "reportPhishingSend": {
+    "message": "Melding versturen"
+  },
+  "reportPhishingCancel": {
+    "message": "Annuleren"
+  },
+  "reportPhishingDone": {
+    "message": "Gemeld. Bedankt dat je andere gebruikers beschermt!"
+  },
+  "reportPhishingError": {
+    "message": "De melding kon niet worden verzonden. Probeer het later opnieuw."
+  },
   "welcomeAlsoCountry": {
     "message": "Landen blokkeren met één tik"
   },

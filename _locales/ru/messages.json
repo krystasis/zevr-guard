@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Разблокировано. Вернитесь назад и перезагрузите страницу."
   },
+  "reportPhishingButton": {
+    "message": "Сообщить о фишинге — защитите других пользователей"
+  },
+  "reportPhishingConfirm": {
+    "message": "Отправить этот домен (и ничего больше) в Zevr на проверку?"
+  },
+  "reportPhishingSend": {
+    "message": "Отправить"
+  },
+  "reportPhishingCancel": {
+    "message": "Отмена"
+  },
+  "reportPhishingDone": {
+    "message": "Отправлено. Спасибо, что защищаете других пользователей!"
+  },
+  "reportPhishingError": {
+    "message": "Не удалось отправить сообщение. Повторите попытку позже."
+  },
   "welcomeAlsoCountry": {
     "message": "Блокировка стран в одно касание"
   },

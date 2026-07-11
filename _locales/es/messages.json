@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Desbloqueado. Vuelve atrás y recarga la página."
   },
+  "reportPhishingButton": {
+    "message": "Denunciar como phishing — protege a otros usuarios"
+  },
+  "reportPhishingConfirm": {
+    "message": "¿Enviar este dominio (y nada más) a Zevr para su revisión?"
+  },
+  "reportPhishingSend": {
+    "message": "Enviar denuncia"
+  },
+  "reportPhishingCancel": {
+    "message": "Cancelar"
+  },
+  "reportPhishingDone": {
+    "message": "Denunciado. ¡Gracias por proteger a otros usuarios!"
+  },
+  "reportPhishingError": {
+    "message": "No se pudo enviar. Inténtalo de nuevo más tarde."
+  },
   "welcomeAlsoCountry": {
     "message": "Bloqueo de países con un toque"
   },

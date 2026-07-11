@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "अनब्लॉक हो गया। वापस जाकर पेज दोबारा लोड करें।"
   },
+  "reportPhishingButton": {
+    "message": "फ़िशिंग के रूप में रिपोर्ट करें — दूसरे यूज़र्स की रक्षा करें"
+  },
+  "reportPhishingConfirm": {
+    "message": "समीक्षा के लिए सिर्फ़ यह डोमेन (और कुछ नहीं) Zevr को भेजें?"
+  },
+  "reportPhishingSend": {
+    "message": "रिपोर्ट भेजें"
+  },
+  "reportPhishingCancel": {
+    "message": "रद्द करें"
+  },
+  "reportPhishingDone": {
+    "message": "रिपोर्ट हो गई। दूसरे यूज़र्स की रक्षा करने के लिए धन्यवाद!"
+  },
+  "reportPhishingError": {
+    "message": "रिपोर्ट नहीं भेजी जा सकी। कृपया बाद में फिर कोशिश करें।"
+  },
   "welcomeAlsoCountry": {
     "message": "एक टैप में देश ब्लॉकिंग"
   },

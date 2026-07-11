@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "차단이 해제됐어요. 이전 페이지로 돌아가 새로고침해 주세요."
   },
+  "reportPhishingButton": {
+    "message": "피싱으로 신고 — 다른 사용자 보호하기"
+  },
+  "reportPhishingConfirm": {
+    "message": "이 도메인만(다른 정보 없이) 검토를 위해 Zevr에 보낼까요?"
+  },
+  "reportPhishingSend": {
+    "message": "신고 보내기"
+  },
+  "reportPhishingCancel": {
+    "message": "취소"
+  },
+  "reportPhishingDone": {
+    "message": "신고했어요. 다른 사용자를 지켜 주셔서 감사해요!"
+  },
+  "reportPhishingError": {
+    "message": "신고를 보내지 못했어요. 잠시 후 다시 시도해 주세요."
+  },
   "welcomeAlsoCountry": {
     "message": "원탭 국가 차단"
   },

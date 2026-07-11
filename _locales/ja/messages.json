@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "解除しました。戻って再読み込みしてください。"
   },
+  "reportPhishingButton": {
+    "message": "フィッシングとして報告 — 他のユーザーも守る"
+  },
+  "reportPhishingConfirm": {
+    "message": "このドメイン(のみ)を Zevr に送信して審査を依頼しますか？"
+  },
+  "reportPhishingSend": {
+    "message": "報告を送信"
+  },
+  "reportPhishingCancel": {
+    "message": "キャンセル"
+  },
+  "reportPhishingDone": {
+    "message": "報告しました。ご協力ありがとうございます！"
+  },
+  "reportPhishingError": {
+    "message": "送信できませんでした。時間をおいてお試しください。"
+  },
   "welcomeAlsoCountry": {
     "message": "ワンタップ国ブロック"
   },

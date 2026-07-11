@@ -964,6 +964,66 @@ const ConnectionRow: React.FC<{
   </div>
 );
 
+const ReportPhishingRow: React.FC<{ domain: string }> = ({ domain }) => {
+  const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>(
+    'idle',
+  );
+  if (state === 'done') {
+    return (
+      <div className="text-center text-emerald-300 text-[10px] mt-2">
+        ✓ {t('reportPhishingDone', 'Reported. Thank you for protecting other users!')}
+      </div>
+    );
+  }
+  if (state === 'confirm' || state === 'sending') {
+    return (
+      <div className="mt-2 text-center text-[10px] text-gray-400">
+        <div className="mb-1.5">
+          {t('reportPhishingConfirm', 'Send this domain (and nothing else) to Zevr for review?')}
+        </div>
+        <div className="flex justify-center gap-2">
+          <button
+            className="px-2.5 h-6 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-bold disabled:opacity-50"
+            disabled={state === 'sending'}
+            onClick={() => {
+              setState('sending');
+              void chrome.runtime
+                .sendMessage({ type: 'REPORT_PHISHING', domain, context: 'popup' })
+                .then((res: { success?: boolean } | undefined) =>
+                  setState(res?.success ? 'done' : 'error'),
+                )
+                .catch(() => setState('error'));
+            }}
+          >
+            {state === 'sending' ? '…' : t('reportPhishingSend', 'Send report')}
+          </button>
+          <button
+            className="px-2.5 h-6 rounded bg-gray-700 hover:bg-gray-600 text-gray-200"
+            onClick={() => setState('idle')}
+          >
+            {t('reportPhishingCancel', 'Cancel')}
+          </button>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="text-center mt-2">
+      <button
+        className="text-[10px] text-cyan-500 hover:text-cyan-300 underline underline-offset-2"
+        onClick={() => setState('confirm')}
+      >
+        🎣 {t('reportPhishingButton', 'Report as phishing — protect other users')}
+      </button>
+      {state === 'error' && (
+        <div className="text-[9px] text-amber-300 mt-0.5">
+          {t('reportPhishingError', "Couldn't send the report. Please try again later.")}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ConnectionDetail: React.FC<{
   connection: Connection;
   blockedCountries: string[];
@@ -1077,6 +1137,7 @@ const ConnectionDetail: React.FC<{
       </button>
     )}
 
+    <ReportPhishingRow domain={connection.domain} />
   </div>
 );
 

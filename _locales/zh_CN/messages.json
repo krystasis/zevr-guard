@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "已取消屏蔽。请返回并重新加载页面。"
   },
+  "reportPhishingButton": {
+    "message": "举报为钓鱼网站——保护其他用户"
+  },
+  "reportPhishingConfirm": {
+    "message": "将此域名（仅域名，别无其他）发送给 Zevr 审核？"
+  },
+  "reportPhishingSend": {
+    "message": "发送举报"
+  },
+  "reportPhishingCancel": {
+    "message": "取消"
+  },
+  "reportPhishingDone": {
+    "message": "已举报。感谢你保护其他用户！"
+  },
+  "reportPhishingError": {
+    "message": "举报发送失败。请稍后再试。"
+  },
   "welcomeAlsoCountry": {
     "message": "一键屏蔽国家/地区"
   },

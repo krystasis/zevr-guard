@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Unblocked. Go back and reload the page."
   },
+  "reportPhishingButton": {
+    "message": "Report as phishing — protect other users"
+  },
+  "reportPhishingConfirm": {
+    "message": "Send this domain (and nothing else) to Zevr for review?"
+  },
+  "reportPhishingSend": {
+    "message": "Send report"
+  },
+  "reportPhishingCancel": {
+    "message": "Cancel"
+  },
+  "reportPhishingDone": {
+    "message": "Reported. Thank you for protecting other users!"
+  },
+  "reportPhishingError": {
+    "message": "Couldn't send the report. Please try again later."
+  },
   "welcomeAlsoCountry": {
     "message": "One-tap country blocking"
   },

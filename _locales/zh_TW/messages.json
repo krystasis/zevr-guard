@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "已解除封鎖。請返回並重新載入頁面。"
   },
+  "reportPhishingButton": {
+    "message": "回報為釣魚網站——保護其他使用者"
+  },
+  "reportPhishingConfirm": {
+    "message": "將這個網域（僅限網域，不含其他資料）傳送給 Zevr 審核？"
+  },
+  "reportPhishingSend": {
+    "message": "送出回報"
+  },
+  "reportPhishingCancel": {
+    "message": "取消"
+  },
+  "reportPhishingDone": {
+    "message": "已回報。感謝你保護其他使用者！"
+  },
+  "reportPhishingError": {
+    "message": "無法送出回報。請稍後再試。"
+  },
   "welcomeAlsoCountry": {
     "message": "一鍵封鎖整個國家"
   },

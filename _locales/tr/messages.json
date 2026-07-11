@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Engel kaldırıldı. Geri dönüp sayfayı yeniden yükleyin."
   },
+  "reportPhishingButton": {
+    "message": "Kimlik avı olarak bildir — diğer kullanıcıları koru"
+  },
+  "reportPhishingConfirm": {
+    "message": "Bu alan adı (ve yalnızca bu) incelenmek üzere Zevr'e gönderilsin mi?"
+  },
+  "reportPhishingSend": {
+    "message": "Raporu gönder"
+  },
+  "reportPhishingCancel": {
+    "message": "İptal"
+  },
+  "reportPhishingDone": {
+    "message": "Bildirildi. Diğer kullanıcıları koruduğunuz için teşekkürler!"
+  },
+  "reportPhishingError": {
+    "message": "Rapor gönderilemedi. Lütfen daha sonra tekrar deneyin."
+  },
   "welcomeAlsoCountry": {
     "message": "Tek dokunuşla ülke engelleme"
   },

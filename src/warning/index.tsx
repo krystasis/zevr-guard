@@ -51,6 +51,71 @@ async function proceedAnyway() {
   window.location.href = target;
 }
 
+const ReportButton: React.FC = () => {
+  const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>('idle');
+  async function send() {
+    setState('sending');
+    try {
+      const res = (await chrome.runtime.sendMessage({
+        type: 'REPORT_PHISHING',
+        domain: blocked,
+        context: brand ? `lookalike:${brand}` : 'warning-page',
+      })) as { success?: boolean } | undefined;
+      setState(res?.success ? 'done' : 'error');
+    } catch {
+      setState('error');
+    }
+  }
+  if (state === 'done') {
+    return (
+      <div className="text-center text-emerald-300 text-xs py-2">
+        ✓ {t('reportPhishingDone', 'Reported. Thank you for protecting other users!')}
+      </div>
+    );
+  }
+  return (
+    <div className="text-center">
+      {state === 'confirm' || state === 'sending' ? (
+        <div className="text-xs text-gray-400">
+          <div className="mb-2">
+            {t(
+              'reportPhishingConfirm',
+              'Send this domain (and nothing else) to Zevr for review?',
+            )}
+          </div>
+          <div className="flex justify-center gap-2">
+            <button
+              className="px-3 py-1.5 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-bold disabled:opacity-50"
+              disabled={state === 'sending'}
+              onClick={() => void send()}
+            >
+              {state === 'sending' ? '…' : t('reportPhishingSend', 'Send report')}
+            </button>
+            <button
+              className="px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600 text-gray-200"
+              onClick={() => setState('idle')}
+            >
+              {t('reportPhishingCancel', 'Cancel')}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          className="text-xs text-cyan-400 hover:text-cyan-200 underline underline-offset-2"
+          onClick={() => setState('confirm')}
+        >
+          🎣 {t('reportPhishingButton', 'Report as phishing — protect other users')}
+        </button>
+      )}
+      {state === 'error' && (
+        <div className="text-[11px] text-amber-300 mt-1">
+          {t('reportPhishingError', "Couldn't send the report. Please try again later.")}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const CountryActions: React.FC = () => {
   const [unblocked, setUnblocked] = useState(false);
   const name = countryDisplayName(countryCode);
@@ -186,6 +251,7 @@ const Warning: React.FC = () => {
           ← {t('warningGoBack', 'Go Back (Safe)')}
         </button>
         {isCountry && <CountryActions />}
+        {isLookalike && <ReportButton />}
         {!isCountry && (
         <details className="text-xs text-gray-500">
           <summary className="cursor-pointer hover:text-gray-300">

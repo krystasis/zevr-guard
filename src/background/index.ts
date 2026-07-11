@@ -659,6 +659,23 @@ chrome.runtime.onMessage.addListener(
           sendResponse({ context });
           break;
         }
+        case 'REPORT_PHISHING':
+          try {
+            const res = await fetch('https://feedback.zevrhq.com/v1/phishing-report', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                domain: message.domain,
+                context: message.context,
+                locale: getLocale(),
+              }),
+              signal: AbortSignal.timeout(10_000),
+            });
+            sendResponse({ success: res.ok });
+          } catch {
+            sendResponse({ success: false });
+          }
+          break;
         case 'GET_PAGE_STATS': {
           const pages = await getPagesCached();
           const page = pages[message.tabId] ?? null;

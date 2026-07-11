@@ -794,6 +794,24 @@
   "warningCountryUnblocked": {
     "message": "Blokir dibuka. Kembali dan muat ulang halaman."
   },
+  "reportPhishingButton": {
+    "message": "Laporkan sebagai phishing — lindungi pengguna lain"
+  },
+  "reportPhishingConfirm": {
+    "message": "Kirim domain ini (dan tidak ada data lain) ke Zevr untuk ditinjau?"
+  },
+  "reportPhishingSend": {
+    "message": "Kirim laporan"
+  },
+  "reportPhishingCancel": {
+    "message": "Batal"
+  },
+  "reportPhishingDone": {
+    "message": "Laporan terkirim. Terima kasih telah melindungi pengguna lain!"
+  },
+  "reportPhishingError": {
+    "message": "Laporan gagal dikirim. Silakan coba lagi nanti."
+  },
   "welcomeAlsoCountry": {
     "message": "Pemblokiran negara sekali ketuk"
   },

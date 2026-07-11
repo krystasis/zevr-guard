@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Ülkesini engellemek için bir noktaya dokunun"
+  },
+  "warningFramedNotice": {
+    "message": "Bu güvenlik sayfası başka bir sitenin içinde gösterilemez. Doğrudan açın."
   }
 }

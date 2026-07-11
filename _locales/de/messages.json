@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Auf einen Punkt tippen, um sein Land zu blockieren"
+  },
+  "warningFramedNotice": {
+    "message": "Diese Sicherheitsseite kann nicht in einer anderen Website angezeigt werden. Öffnen Sie sie direkt."
   }
 }

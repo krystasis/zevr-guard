@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Toque em um ponto para bloquear o país"
+  },
+  "warningFramedNotice": {
+    "message": "Esta página de segurança não pode ser exibida dentro de outro site. Abra-a diretamente."
   }
 }

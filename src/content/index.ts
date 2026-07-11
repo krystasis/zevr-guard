@@ -10,29 +10,28 @@ interface PasswordContext {
   dismiss: string;
 }
 
-const DISMISS_KEY = 'zg.pwWarn.dismissed';
-
-let requested = false;
+// Dismissal is kept in-memory only. It must NOT live in page-reachable
+// storage (sessionStorage) — a hostile page could pre-set the flag to
+// suppress the very warning it is meant to trigger. In-memory state resets on
+// reload, which for a security notice is acceptable (it simply re-appears).
+//
+// Dismissal is tracked per severity: dismissing a mild "first visit" notice
+// must not swallow a later "danger" (plain-HTTP / lookalike) warning on the
+// same page. Dismissing a danger stops further nagging entirely.
+let inFlight = false;
+let dismissedDanger = false;
+let dismissedNotice = false;
 let host: HTMLElement | null = null;
+let hostLevel: 'danger' | 'notice' | null = null;
 
-function isDismissed(): boolean {
-  try {
-    return sessionStorage.getItem(DISMISS_KEY) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function markDismissed(): void {
-  try {
-    sessionStorage.setItem(DISMISS_KEY, '1');
-  } catch {
-    // sandboxed frame — in-memory `requested` flag still prevents repeats
-  }
+function suppressed(level: 'danger' | 'notice'): boolean {
+  if (dismissedDanger) return true; // worst case already acknowledged
+  return level === 'notice' && dismissedNotice;
 }
 
 function showBanner(ctx: PasswordContext): void {
   if (host) return;
+  hostLevel = ctx.level;
   host = document.createElement('div');
   host.style.cssText =
     'all:initial;position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2147483647;';
@@ -78,9 +77,11 @@ function showBanner(ctx: PasswordContext): void {
   close.style.cssText =
     'all:unset;cursor:pointer;flex:none;color:#6b7280;font-size:13px;padding:2px 4px;line-height:1';
   close.addEventListener('click', () => {
-    markDismissed();
+    if (hostLevel === 'danger') dismissedDanger = true;
+    else dismissedNotice = true;
     host?.remove();
     host = null;
+    hostLevel = null;
   });
 
   card.append(icon, body, close);
@@ -89,8 +90,8 @@ function showBanner(ctx: PasswordContext): void {
 }
 
 async function onPasswordFocus(): Promise<void> {
-  if (requested || host || isDismissed()) return;
-  requested = true;
+  if (inFlight || host || dismissedDanger) return;
+  inFlight = true;
   let context: PasswordContext | null = null;
   try {
     const res = (await chrome.runtime.sendMessage({
@@ -101,9 +102,10 @@ async function onPasswordFocus(): Promise<void> {
     context = res?.context ?? null;
   } catch {
     // extension got reloaded — nothing to show
+  } finally {
+    inFlight = false;
   }
-  if (context) showBanner(context);
-  else requested = false; // context may change (e.g. settings toggled back on)
+  if (context && !suppressed(context.level)) showBanner(context);
 }
 
 document.addEventListener(

@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Ketuk titik untuk memblokir negaranya"
+  },
+  "warningFramedNotice": {
+    "message": "Halaman keamanan ini tidak dapat ditampilkan di dalam situs lain. Buka langsung."
   }
 }

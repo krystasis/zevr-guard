@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "점을 탭하면 해당 국가를 차단합니다"
+  },
+  "warningFramedNotice": {
+    "message": "이 보안 페이지는 다른 사이트 안에 표시할 수 없습니다. 직접 열어 주세요."
   }
 }

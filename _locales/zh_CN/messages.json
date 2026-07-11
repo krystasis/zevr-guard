@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "点按圆点即可屏蔽其所在国家/地区"
+  },
+  "warningFramedNotice": {
+    "message": "此安全页面无法在其他网站中显示。请直接打开。"
   }
 }

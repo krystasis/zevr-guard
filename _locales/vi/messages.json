@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Chạm vào một chấm để chặn quốc gia đó"
+  },
+  "warningFramedNotice": {
+    "message": "Không thể hiển thị trang an toàn này bên trong một trang web khác. Hãy mở trực tiếp."
   }
 }

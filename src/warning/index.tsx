@@ -35,6 +35,19 @@ function safeTargetUrl(): string | null {
   }
 }
 
+// This page is web-accessible, so a hostile site could iframe it and try to
+// clickjack the state-changing buttons (unblock a country, report+block a
+// domain, proceed past a lookalike). Refuse to act when we are not the top
+// frame — the buttons still render but do nothing, and the entry point below
+// shows a plain notice instead.
+const isFramed = (() => {
+  try {
+    return window.top !== window.self;
+  } catch {
+    return true; // cross-origin access threw — we are framed
+  }
+})();
+
 function goBack() {
   if (window.history.length > 1) window.history.back();
   else window.close();
@@ -300,11 +313,23 @@ const Warning: React.FC = () => {
   );
 };
 
+const FramedNotice: React.FC = () => (
+  <div className="min-h-screen flex items-center justify-center p-6 bg-gray-900 text-gray-300 text-sm">
+    <div className="max-w-sm text-center">
+      <div className="text-red-400 text-lg font-bold mb-2">Zevr Guard</div>
+      <div>
+        {t(
+          'warningFramedNotice',
+          'This safety page cannot be shown inside another site. Open it directly.',
+        )}
+      </div>
+    </div>
+  </div>
+);
+
 void (async () => {
   await loadLocale();
   ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-      <Warning />
-    </React.StrictMode>,
+    <React.StrictMode>{isFramed ? <FramedNotice /> : <Warning />}</React.StrictMode>,
   );
 })();

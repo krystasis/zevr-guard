@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Tik op een stip om het land te blokkeren"
+  },
+  "warningFramedNotice": {
+    "message": "Deze beveiligingspagina kan niet in een andere site worden getoond. Open hem rechtstreeks."
   }
 }

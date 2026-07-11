@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "点をタップして国をブロック"
+  },
+  "warningFramedNotice": {
+    "message": "この安全ページは他サイト内に埋め込んで表示できません。直接開いてください。"
   }
 }

@@ -835,5 +835,8 @@
   },
   "mapBlockHint": {
     "message": "Tap a dot to block its country"
+  },
+  "warningFramedNotice": {
+    "message": "This safety page cannot be shown inside another site. Open it directly."
   }
 }

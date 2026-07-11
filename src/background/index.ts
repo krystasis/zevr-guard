@@ -58,6 +58,14 @@ import {
 } from './country';
 import { initWeeklyReport } from './weekly';
 
+// RFC-1123-ish hostname check (no scheme, path or port). Used to sanitize a
+// domain that may have arrived from the web-accessible warning page's params.
+const HOSTNAME_RE =
+  /^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?)+$/;
+function isValidHostname(host: string): boolean {
+  return host.length <= 253 && HOSTNAME_RE.test(host);
+}
+
 const pageLocks = new Map<number, Promise<void>>();
 
 async function updatePage(
@@ -672,10 +680,18 @@ chrome.runtime.onMessage.addListener(
           break;
         }
         case 'REPORT_PHISHING': {
+          // The domain can originate from the web-accessible warning page's
+          // query params, so validate it as a bare hostname before it becomes
+          // a DNR filter or a report payload.
+          const reportDomain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(reportDomain)) {
+            sendResponse({ success: false, blocked: false });
+            break;
+          }
           // Block locally first (if requested) so the user is protected even
           // if the report request fails; the report itself is best-effort.
           if (message.alsoBlock) {
-            await blockDomain(message.domain).catch(() => {});
+            await blockDomain(reportDomain).catch(() => {});
           }
           let reported = false;
           try {
@@ -683,7 +699,7 @@ chrome.runtime.onMessage.addListener(
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                domain: message.domain,
+                domain: reportDomain,
                 context: message.context,
                 locale: getLocale(),
               }),

@@ -3,8 +3,11 @@ import { WorldMapCanvas, type WorldMap } from '../shared/worldmap/WorldMapCanvas
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
+import { groupByCountry, type CountryGroup } from '../shared/grouping';
 import countryCentroids from '../data/country_centroids.json';
 import type { Connection, PageStats, RiskLevel, Settings } from '../types';
+
+type ListView = 'domains' | 'countries';
 
 const CENTROIDS = countryCentroids as unknown as Record<string, [number, number]>;
 
@@ -113,6 +116,7 @@ export const SidePanel: React.FC = () => {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [tabUrl, setTabUrl] = useState<string | null>(null);
   const [detailView, setDetailView] = useState<DetailView>(null);
+  const [listView, setListView] = useState<ListView>('domains');
   const [hoverDomain, setHoverDomain] = useState<string | null>(null);
   const [lockedDomain, setLockedDomain] = useState<string | null>(null);
   const mapRef = useRef<WorldMap | null>(null);
@@ -222,6 +226,8 @@ export const SidePanel: React.FC = () => {
 
   const connections = stats
     ? Object.values(stats.connections).sort((a, b) => {
+        // Blocked connections sink to the bottom.
+        if (a.isBlocked !== b.isBlocked) return a.isBlocked ? 1 : -1;
         const order: Record<RiskLevel, number> = {
           dangerous: 0,
           suspicious: 1,
@@ -233,11 +239,32 @@ export const SidePanel: React.FC = () => {
       })
     : [];
 
-  async function handleUnblock(domain: string) {
-    await chrome.runtime.sendMessage({ type: 'UNBLOCK_DOMAIN', domain });
+  async function refreshSettings() {
     const settingsRes = await chrome.runtime.sendMessage({ type: 'GET_SETTINGS' });
     setSettings(settingsRes?.settings ?? null);
   }
+
+  async function handleBlock(domain: string) {
+    await chrome.runtime.sendMessage({ type: 'BLOCK_DOMAIN', domain });
+    await refreshSettings();
+  }
+
+  async function handleUnblock(domain: string) {
+    await chrome.runtime.sendMessage({ type: 'UNBLOCK_DOMAIN', domain });
+    await refreshSettings();
+  }
+
+  async function handleBlockCountry(country: string) {
+    await chrome.runtime.sendMessage({ type: 'BLOCK_COUNTRY', country });
+    await refreshSettings();
+  }
+
+  async function handleUnblockCountry(country: string) {
+    await chrome.runtime.sendMessage({ type: 'UNBLOCK_COUNTRY', country });
+    await refreshSettings();
+  }
+
+  const blockedCountries = settings?.blockedCountries ?? [];
 
   const host = stats?.host ?? '';
   const riskLevel = stats?.riskLevel ?? 'safe';
@@ -282,21 +309,57 @@ export const SidePanel: React.FC = () => {
           </div>
         ) : (
           <>
-            <div className="text-[10px] uppercase tracking-widest text-gray-500 mb-1 px-1">
-              {t('connectionsCount', 'Connections')} · {connections.length}
+            <div className="flex items-center justify-between mb-1 px-1">
+              <div className="text-[10px] uppercase tracking-widest text-gray-500">
+                {t('connectionsCount', 'Connections')} · {connections.length}
+              </div>
+              <div className="flex border border-cyan-900/40 rounded-md overflow-hidden text-[9px] uppercase tracking-wider">
+                <button
+                  className={`px-2 py-0.5 transition ${
+                    listView === 'domains'
+                      ? 'bg-cyan-500/20 text-cyan-200'
+                      : 'text-gray-500 hover:text-gray-200 hover:bg-cyan-900/20'
+                  }`}
+                  onClick={() => setListView('domains')}
+                >
+                  {t('groupDomains', 'Domains')}
+                </button>
+                <button
+                  className={`px-2 py-0.5 border-l border-cyan-900/40 transition ${
+                    listView === 'countries'
+                      ? 'bg-cyan-500/20 text-cyan-200'
+                      : 'text-gray-500 hover:text-gray-200 hover:bg-cyan-900/20'
+                  }`}
+                  onClick={() => setListView('countries')}
+                >
+                  {t('groupCountries', 'Countries')}
+                </button>
+              </div>
             </div>
-            {connections.map((c) => (
-              <ConnectionRow
-                key={c.domain}
-                connection={c}
-                isLocked={lockedDomain === c.domain}
-                isHover={hoverDomain === c.domain}
-                onHover={(v) => setHoverDomain(v ? c.domain : null)}
-                onToggleLock={() =>
-                  setLockedDomain((prev) => (prev === c.domain ? null : c.domain))
-                }
-              />
-            ))}
+            {listView === 'countries'
+              ? groupByCountry(connections).map((g) => (
+                  <CountryRow
+                    key={g.country ?? '(unknown)'}
+                    group={g}
+                    blocked={g.country ? blockedCountries.includes(g.country) : false}
+                    onBlockCountry={handleBlockCountry}
+                    onUnblockCountry={handleUnblockCountry}
+                  />
+                ))
+              : connections.map((c) => (
+                  <ConnectionRow
+                    key={c.domain}
+                    connection={c}
+                    isLocked={lockedDomain === c.domain}
+                    isHover={hoverDomain === c.domain}
+                    onHover={(v) => setHoverDomain(v ? c.domain : null)}
+                    onToggleLock={() =>
+                      setLockedDomain((prev) => (prev === c.domain ? null : c.domain))
+                    }
+                    onBlock={handleBlock}
+                    onUnblock={handleUnblock}
+                  />
+                ))}
           </>
         )}
       </div>
@@ -727,24 +790,44 @@ const ConnectionRow: React.FC<{
   isHover: boolean;
   onHover: (v: boolean) => void;
   onToggleLock: () => void;
-}> = ({ connection, isLocked, isHover, onHover, onToggleLock }) => {
+  onBlock: (domain: string) => void;
+  onUnblock: (domain: string) => void;
+}> = ({ connection, isLocked, isHover, onHover, onToggleLock, onBlock, onUnblock }) => {
   const active = isLocked || isHover;
+  const blocked = connection.isBlocked;
   return (
     <div
       className={`group flex items-center gap-2 px-2 py-1.5 border-b border-cyan-900/20 cursor-pointer transition ${
-        active
-          ? 'bg-cyan-900/25 border-l-2 border-l-cyan-400'
-          : 'border-l-2 border-l-transparent hover:bg-cyan-900/10'
+        blocked
+          ? 'bg-red-950/25 border-l-2 border-l-red-500/60'
+          : active
+            ? 'bg-cyan-900/25 border-l-2 border-l-cyan-400'
+            : 'border-l-2 border-l-transparent hover:bg-cyan-900/10'
       }`}
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
       onClick={onToggleLock}
     >
-      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${RISK_DOT[connection.riskLevel]}`} />
+      <span
+        className={`w-2 h-2 rounded-full flex-shrink-0 ${
+          blocked ? 'bg-gray-600' : RISK_DOT[connection.riskLevel]
+        }`}
+      />
       <CountryBadge code={connection.country} />
       <div className="flex-1 min-w-0">
-        <div className="truncate text-gray-100 font-mono text-[11px]">
-          {connection.domain}
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span
+            className={`truncate font-mono text-[11px] ${
+              blocked ? 'text-gray-500 line-through decoration-red-500/60' : 'text-gray-100'
+            }`}
+          >
+            {connection.domain}
+          </span>
+          {blocked && (
+            <span className="flex-shrink-0 px-1 rounded-sm bg-red-900/50 text-red-300 text-[8px] font-bold uppercase tracking-wider leading-[1.4]">
+              {t('connBlockedTag', 'blocked')}
+            </span>
+          )}
         </div>
         {(connection.company || connection.countryName) && (
           <div className="text-gray-500 text-[10px] flex items-center gap-1 min-w-0">
@@ -763,7 +846,7 @@ const ConnectionRow: React.FC<{
           </div>
         )}
       </div>
-      {isLocked && (
+      {isLocked && !blocked && (
         <span
           className="text-cyan-300 text-[9px] font-bold tracking-wider flex-shrink-0"
           title={t('unpinTitle', 'Click again to unpin')}
@@ -771,7 +854,83 @@ const ConnectionRow: React.FC<{
           {t('pinBadge', 'PIN')}
         </span>
       )}
-      <div className="text-gray-500 text-[10px] flex-shrink-0">{connection.count}x</div>
+      <div className="text-gray-500 text-[10px] flex-shrink-0 tabular-nums">
+        {connection.count}x
+      </div>
+      <button
+        className={`flex-shrink-0 px-1.5 h-5 rounded text-[9px] font-bold uppercase tracking-wider transition ${
+          blocked
+            ? 'bg-gray-700/60 text-gray-300 hover:bg-gray-600'
+            : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
+        }`}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (blocked) onUnblock(connection.domain);
+          else onBlock(connection.domain);
+        }}
+      >
+        {blocked ? t('unblock', 'unblock') : t('block', 'block')}
+      </button>
+    </div>
+  );
+};
+
+const CountryRow: React.FC<{
+  group: CountryGroup;
+  blocked: boolean;
+  onBlockCountry: (country: string) => void;
+  onUnblockCountry: (country: string) => void;
+}> = ({ group, blocked, onBlockCountry, onUnblockCountry }) => {
+  const label =
+    group.countryName ?? group.country ?? t('countryUnknown', 'Unknown location');
+  return (
+    <div
+      className={`flex items-center gap-2 px-2 py-1.5 border-b border-cyan-900/20 ${
+        blocked ? 'bg-red-950/25' : ''
+      }`}
+    >
+      <span
+        className={`w-2 h-2 rounded-full flex-shrink-0 ${
+          blocked ? 'bg-gray-600' : RISK_DOT[group.topRisk]
+        }`}
+      />
+      <Flag code={group.country} size={14} />
+      <div className="flex-1 min-w-0">
+        <div className="truncate text-gray-100 text-[11px] font-bold flex items-center gap-1.5">
+          <span className="truncate">{label}</span>
+          {blocked && (
+            <span className="flex-shrink-0 px-1 rounded-sm bg-red-900/50 text-red-300 text-[8px] font-bold uppercase tracking-wider leading-[1.4]">
+              {t('connBlockedTag', 'blocked')}
+            </span>
+          )}
+        </div>
+        <div className="text-gray-500 text-[9px]">
+          {group.domains.length === 1
+            ? t('groupDomainCountOne', '1 domain')
+            : t('groupDomainCount', `${group.domains.length} domains`, String(group.domains.length))}
+          <span className="text-gray-700"> · </span>
+          {group.requests}×
+        </div>
+      </div>
+      {group.country && (
+        <button
+          className={`flex-shrink-0 px-2 h-6 rounded-full text-[9px] font-bold uppercase tracking-wider transition ${
+            blocked
+              ? 'bg-gray-700/60 text-gray-200 hover:bg-gray-600'
+              : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
+          }`}
+          onClick={() =>
+            blocked ? onUnblockCountry(group.country!) : onBlockCountry(group.country!)
+          }
+          title={
+            blocked
+              ? t('unblockCountry', `Unblock ${label}`, label)
+              : t('blockCountry', `Block all traffic from ${label}`, label)
+          }
+        >
+          {blocked ? t('unblock', 'unblock') : `🌍 ${t('block', 'block')}`}
+        </button>
+      )}
     </div>
   );
 };

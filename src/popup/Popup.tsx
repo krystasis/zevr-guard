@@ -5,6 +5,12 @@ import { t } from '../shared/i18n';
 import { renderShareCard } from '../shared/sharecard';
 import { ShareModal } from '../shared/ShareModal';
 import type { Connection, PageStats, RiskLevel, Settings, TodayStats } from '../types';
+import {
+  groupByCompany,
+  groupByCountry,
+  type CompanyGroup,
+  type CountryGroup,
+} from '../shared/grouping';
 
 const RISK_TEXT: Record<RiskLevel, string> = {
   safe: 'text-emerald-400',
@@ -697,13 +703,6 @@ const TodayCell: React.FC<{ label: string; value: number; accent: string }> = ({
   </div>
 );
 
-const RISK_ORDER: Record<RiskLevel, number> = {
-  dangerous: 0,
-  suspicious: 1,
-  tracker: 2,
-  safe: 3,
-};
-
 const Toolbar: React.FC<{
   filter: RiskLevel | null;
   onFilterChange: (f: RiskLevel | null) => void;
@@ -799,71 +798,6 @@ const Toolbar: React.FC<{
     </div>
   );
 };
-
-interface CompanyGroup {
-  company: string;
-  domains: Connection[];
-  requests: number;
-  topRisk: RiskLevel;
-}
-
-function groupByCompany(connections: Connection[]): CompanyGroup[] {
-  const map = new Map<string, Connection[]>();
-  for (const c of connections) {
-    const key = c.company ?? '(unknown)';
-    const arr = map.get(key) ?? [];
-    arr.push(c);
-    map.set(key, arr);
-  }
-  return Array.from(map.entries())
-    .map(([company, arr]) => ({
-      company,
-      domains: arr,
-      requests: arr.reduce((s, c) => s + c.count, 0),
-      topRisk: arr.reduce<RiskLevel>(
-        (top, c) => (RISK_ORDER[c.riskLevel] < RISK_ORDER[top] ? c.riskLevel : top),
-        'safe',
-      ),
-    }))
-    .sort(
-      (a, b) =>
-        RISK_ORDER[a.topRisk] - RISK_ORDER[b.topRisk] || b.requests - a.requests,
-    );
-}
-
-interface CountryGroup {
-  country: string | null;
-  countryName: string | null;
-  domains: Connection[];
-  requests: number;
-  topRisk: RiskLevel;
-}
-
-function groupByCountry(connections: Connection[]): CountryGroup[] {
-  const map = new Map<string, Connection[]>();
-  for (const c of connections) {
-    const key = c.country ?? '';
-    const arr = map.get(key) ?? [];
-    arr.push(c);
-    map.set(key, arr);
-  }
-  return Array.from(map.entries())
-    .map(([country, arr]) => ({
-      country: country || null,
-      countryName: arr.find((c) => c.countryName)?.countryName ?? null,
-      domains: arr,
-      requests: arr.reduce((s, c) => s + c.count, 0),
-      topRisk: arr.reduce<RiskLevel>(
-        (top, c) => (RISK_ORDER[c.riskLevel] < RISK_ORDER[top] ? c.riskLevel : top),
-        'safe',
-      ),
-    }))
-    .sort((a, b) => {
-      // Unknown-country bucket always last.
-      if (!a.country !== !b.country) return a.country ? -1 : 1;
-      return RISK_ORDER[a.topRisk] - RISK_ORDER[b.topRisk] || b.requests - a.requests;
-    });
-}
 
 const ConnectionList: React.FC<{
   connections: Connection[];

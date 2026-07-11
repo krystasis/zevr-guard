@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Pelindung entri kata sandi"
+  },
+  "groupCountries": {
+    "message": "Negara"
+  },
+  "countryUnknown": {
+    "message": "Lokasi tidak diketahui"
+  },
+  "connBlockedTag": {
+    "message": "diblokir"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Blokir juga di perangkat ini"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Dilaporkan & diblokir. Terima kasih telah melindungi pengguna lain!"
   }
 }

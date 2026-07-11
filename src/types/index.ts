@@ -105,7 +105,7 @@ export type MessageRequest =
   | { type: 'PASSWORD_CONTEXT'; host: string; isSecure: boolean }
   | { type: 'BLOCK_COUNTRY'; country: string }
   | { type: 'UNBLOCK_COUNTRY'; country: string }
-  | { type: 'REPORT_PHISHING'; domain: string; context: string | null }
+  | { type: 'REPORT_PHISHING'; domain: string; context: string | null; alsoBlock?: boolean }
   | { type: 'GET_COUNTRY_STATS' }
   | { type: 'GET_SETTINGS' }
   | { type: 'UPDATE_SETTINGS'; settings: Settings }

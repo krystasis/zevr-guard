@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Захист під час введення пароля"
+  },
+  "groupCountries": {
+    "message": "Країни"
+  },
+  "countryUnknown": {
+    "message": "Невідоме розташування"
+  },
+  "connBlockedTag": {
+    "message": "заблоковано"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Також заблокувати на цьому пристрої"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Надіслано та заблоковано. Дякуємо, що захищаєте інших користувачів!"
   }
 }

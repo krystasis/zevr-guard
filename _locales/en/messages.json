@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Password-entry guard"
+  },
+  "groupCountries": {
+    "message": "Countries"
+  },
+  "countryUnknown": {
+    "message": "Unknown location"
+  },
+  "connBlockedTag": {
+    "message": "blocked"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Also block it on this device"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Reported & blocked. Thank you for protecting other users!"
   }
 }

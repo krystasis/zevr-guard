@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Ochrona przy wpisywaniu hasła"
+  },
+  "groupCountries": {
+    "message": "Kraje"
+  },
+  "countryUnknown": {
+    "message": "Nieznana lokalizacja"
+  },
+  "connBlockedTag": {
+    "message": "zablokowano"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Zablokuj też na tym urządzeniu"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Zgłoszono i zablokowano. Dziękujemy za ochronę innych użytkowników!"
   }
 }

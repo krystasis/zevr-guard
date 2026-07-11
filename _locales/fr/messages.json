@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Garde de saisie de mot de passe"
+  },
+  "groupCountries": {
+    "message": "Pays"
+  },
+  "countryUnknown": {
+    "message": "Lieu inconnu"
+  },
+  "connBlockedTag": {
+    "message": "bloqué"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Bloquer aussi sur cet appareil"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Signalé et bloqué. Merci de protéger les autres utilisateurs !"
   }
 }

@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Bảo vệ khi nhập mật khẩu"
+  },
+  "groupCountries": {
+    "message": "Quốc gia"
+  },
+  "countryUnknown": {
+    "message": "Vị trí không xác định"
+  },
+  "connBlockedTag": {
+    "message": "đã chặn"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Cũng chặn trên thiết bị này"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Đã báo cáo và chặn. Cảm ơn bạn đã bảo vệ những người dùng khác!"
   }
 }

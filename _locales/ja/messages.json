@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "パスワード入力ガード"
+  },
+  "groupCountries": {
+    "message": "国別"
+  },
+  "countryUnknown": {
+    "message": "不明な地域"
+  },
+  "connBlockedTag": {
+    "message": "ブロック中"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "この端末でもブロックする"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "報告してブロックしました。ご協力ありがとうございます！"
   }
 }

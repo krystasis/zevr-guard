@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Parola girişi koruması"
+  },
+  "groupCountries": {
+    "message": "Ülkeler"
+  },
+  "countryUnknown": {
+    "message": "Bilinmeyen konum"
+  },
+  "connBlockedTag": {
+    "message": "engellendi"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Bu cihazda da engelle"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Bildirildi ve engellendi. Diğer kullanıcıları koruduğunuz için teşekkürler!"
   }
 }

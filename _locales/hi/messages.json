@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "पासवर्ड-एंट्री सुरक्षा"
+  },
+  "groupCountries": {
+    "message": "देश"
+  },
+  "countryUnknown": {
+    "message": "अज्ञात स्थान"
+  },
+  "connBlockedTag": {
+    "message": "ब्लॉक"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "इस डिवाइस पर भी ब्लॉक करें"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "रिपोर्ट कर दिया और ब्लॉक कर दिया। दूसरे उपयोगकर्ताओं की सुरक्षा के लिए धन्यवाद!"
   }
 }

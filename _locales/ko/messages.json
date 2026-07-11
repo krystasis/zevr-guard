@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "비밀번호 입력 보호"
+  },
+  "groupCountries": {
+    "message": "국가별"
+  },
+  "countryUnknown": {
+    "message": "알 수 없는 위치"
+  },
+  "connBlockedTag": {
+    "message": "차단됨"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "이 기기에서도 차단"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "신고하고 차단했습니다. 다른 사용자를 지켜 주셔서 감사합니다!"
   }
 }

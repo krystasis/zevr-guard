@@ -53,6 +53,7 @@ async function proceedAnyway() {
 
 const ReportButton: React.FC = () => {
   const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>('idle');
+  const [alsoBlock, setAlsoBlock] = useState(true);
   async function send() {
     setState('sending');
     try {
@@ -60,6 +61,7 @@ const ReportButton: React.FC = () => {
         type: 'REPORT_PHISHING',
         domain: blocked,
         context: brand ? `lookalike:${brand}` : 'warning-page',
+        alsoBlock,
       })) as { success?: boolean } | undefined;
       setState(res?.success ? 'done' : 'error');
     } catch {
@@ -69,7 +71,10 @@ const ReportButton: React.FC = () => {
   if (state === 'done') {
     return (
       <div className="text-center text-emerald-300 text-xs py-2">
-        ✓ {t('reportPhishingDone', 'Reported. Thank you for protecting other users!')}
+        ✓{' '}
+        {alsoBlock
+          ? t('reportPhishingDoneBlocked', 'Reported & blocked. Thank you for protecting other users!')
+          : t('reportPhishingDone', 'Reported. Thank you for protecting other users!')}
       </div>
     );
   }
@@ -83,6 +88,15 @@ const ReportButton: React.FC = () => {
               'Send this domain (and nothing else) to Zevr for review?',
             )}
           </div>
+          <label className="flex items-center justify-center gap-2 mb-3 cursor-pointer text-gray-300">
+            <input
+              type="checkbox"
+              checked={alsoBlock}
+              onChange={(e) => setAlsoBlock(e.target.checked)}
+              className="accent-cyan-500"
+            />
+            {t('reportPhishingAlsoBlock', 'Also block it on this device')}
+          </label>
           <div className="flex justify-center gap-2">
             <button
               className="px-3 py-1.5 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-bold disabled:opacity-50"

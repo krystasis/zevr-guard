@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "密碼輸入防護"
+  },
+  "groupCountries": {
+    "message": "國家/地區"
+  },
+  "countryUnknown": {
+    "message": "未知位置"
+  },
+  "connBlockedTag": {
+    "message": "已封鎖"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "同時在本裝置封鎖"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "已回報並封鎖。感謝你保護其他使用者！"
   }
 }

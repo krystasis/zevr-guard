@@ -85,7 +85,7 @@ const riskExplain = (r: RiskLevel): string => {
   }
 };
 
-type GroupBy = 'domain' | 'company';
+type GroupBy = 'domain' | 'company' | 'country';
 
 export const Popup: React.FC = () => {
   const [stats, setStats] = useState<PageStats | null>(null);
@@ -260,6 +260,9 @@ export const Popup: React.FC = () => {
 
   const connections = stats
     ? Object.values(stats.connections).sort((a, b) => {
+        // Blocked connections sink to the bottom — they are neutralized, so
+        // the active traffic the user can still act on stays up top.
+        if (a.isBlocked !== b.isBlocked) return a.isBlocked ? 1 : -1;
         const order: Record<RiskLevel, number> = {
           dangerous: 0,
           suspicious: 1,
@@ -342,9 +345,12 @@ export const Popup: React.FC = () => {
             <ConnectionList
               connections={filtered}
               groupBy={groupBy}
+              blockedCountries={settings?.blockedCountries ?? []}
               onSelect={setSelectedDomain}
               onBlock={handleBlock}
               onUnblock={handleUnblock}
+              onBlockCountry={handleBlockCountry}
+              onUnblockCountry={handleUnblockCountry}
             />
           </>
         )}
@@ -778,6 +784,16 @@ const Toolbar: React.FC<{
           >
             {t('groupCompanies', 'Companies')}
           </button>
+          <button
+            className={`px-2 py-0.5 border-l border-cyan-900/40 transition ${
+              groupBy === 'country'
+                ? 'bg-cyan-500/20 text-cyan-200'
+                : 'text-gray-500 hover:text-gray-200 hover:bg-cyan-900/20'
+            }`}
+            onClick={() => onGroupByChange('country')}
+          >
+            {t('groupCountries', 'Countries')}
+          </button>
         </div>
       </div>
     </div>
@@ -815,13 +831,59 @@ function groupByCompany(connections: Connection[]): CompanyGroup[] {
     );
 }
 
+interface CountryGroup {
+  country: string | null;
+  countryName: string | null;
+  domains: Connection[];
+  requests: number;
+  topRisk: RiskLevel;
+}
+
+function groupByCountry(connections: Connection[]): CountryGroup[] {
+  const map = new Map<string, Connection[]>();
+  for (const c of connections) {
+    const key = c.country ?? '';
+    const arr = map.get(key) ?? [];
+    arr.push(c);
+    map.set(key, arr);
+  }
+  return Array.from(map.entries())
+    .map(([country, arr]) => ({
+      country: country || null,
+      countryName: arr.find((c) => c.countryName)?.countryName ?? null,
+      domains: arr,
+      requests: arr.reduce((s, c) => s + c.count, 0),
+      topRisk: arr.reduce<RiskLevel>(
+        (top, c) => (RISK_ORDER[c.riskLevel] < RISK_ORDER[top] ? c.riskLevel : top),
+        'safe',
+      ),
+    }))
+    .sort((a, b) => {
+      // Unknown-country bucket always last.
+      if (!a.country !== !b.country) return a.country ? -1 : 1;
+      return RISK_ORDER[a.topRisk] - RISK_ORDER[b.topRisk] || b.requests - a.requests;
+    });
+}
+
 const ConnectionList: React.FC<{
   connections: Connection[];
   groupBy: GroupBy;
+  blockedCountries: string[];
   onSelect: (domain: string) => void;
   onBlock: (domain: string) => void;
   onUnblock: (domain: string) => void;
-}> = ({ connections, groupBy, onSelect, onBlock, onUnblock }) => {
+  onBlockCountry: (country: string) => void;
+  onUnblockCountry: (country: string) => void;
+}> = ({
+  connections,
+  groupBy,
+  blockedCountries,
+  onSelect,
+  onBlock,
+  onUnblock,
+  onBlockCountry,
+  onUnblockCountry,
+}) => {
   if (connections.length === 0) {
     return (
       <div className="max-h-[280px] py-10 text-gray-500 text-center">
@@ -839,6 +901,23 @@ const ConnectionList: React.FC<{
       <div className="max-h-[280px] overflow-y-auto">
         {groups.map((g) => (
           <CompanyGroupRow key={g.company} group={g} />
+        ))}
+      </div>
+    );
+  }
+
+  if (groupBy === 'country') {
+    const groups = groupByCountry(connections);
+    return (
+      <div className="max-h-[280px] overflow-y-auto">
+        {groups.map((g) => (
+          <CountryGroupRow
+            key={g.country ?? '(unknown)'}
+            group={g}
+            blocked={g.country ? blockedCountries.includes(g.country) : false}
+            onBlockCountry={onBlockCountry}
+            onUnblockCountry={onUnblockCountry}
+          />
         ))}
       </div>
     );
@@ -889,6 +968,74 @@ const CompanyGroupRow: React.FC<{ group: CompanyGroup }> = ({ group }) => {
   );
 };
 
+const CountryGroupRow: React.FC<{
+  group: CountryGroup;
+  blocked: boolean;
+  onBlockCountry: (country: string) => void;
+  onUnblockCountry: (country: string) => void;
+}> = ({ group, blocked, onBlockCountry, onUnblockCountry }) => {
+  const label =
+    group.countryName ??
+    group.country ??
+    t('countryUnknown', 'Unknown location');
+  return (
+    <div
+      className={`flex items-center gap-2 px-3 py-2 border-b border-cyan-900/20 ${
+        blocked
+          ? 'bg-red-950/25'
+          : group.topRisk === 'dangerous'
+            ? 'bg-red-950/20'
+            : ''
+      }`}
+    >
+      <div
+        className={`w-2 h-2 rounded-full flex-shrink-0 ${
+          blocked ? 'bg-gray-600' : RISK_DOT[group.topRisk]
+        }`}
+      />
+      <Flag code={group.country} size={14} />
+      <div className="flex-1 min-w-0">
+        <div className="truncate text-gray-100 text-[12px] font-bold flex items-center gap-1.5">
+          <span className="truncate">{label}</span>
+          {blocked && (
+            <span className="flex-shrink-0 px-1 rounded-sm bg-red-900/50 text-red-300 text-[8px] font-bold uppercase tracking-wider leading-[1.4]">
+              {t('connBlockedTag', 'blocked')}
+            </span>
+          )}
+        </div>
+        <div className="text-gray-500 text-[10px]">
+          {group.domains.length === 1
+            ? t('groupDomainCountOne', '1 domain')
+            : t('groupDomainCount', `${group.domains.length} domains`, String(group.domains.length))}
+          <span className="text-gray-700"> · </span>
+          {group.requests}×
+        </div>
+      </div>
+      {group.country && (
+        <button
+          className={`flex-shrink-0 px-2 h-6 rounded-full text-[9px] font-bold uppercase tracking-wider transition ${
+            blocked
+              ? 'bg-gray-700/60 text-gray-200 hover:bg-gray-600'
+              : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
+          }`}
+          onClick={() =>
+            blocked
+              ? onUnblockCountry(group.country!)
+              : onBlockCountry(group.country!)
+          }
+          title={
+            blocked
+              ? t('unblockCountry', `Unblock ${label}`, label)
+              : t('blockCountry', `Block all traffic from ${label}`, label)
+          }
+        >
+          {blocked ? t('unblock', 'unblock') : `🌍 ${t('block', 'block')}`}
+        </button>
+      )}
+    </div>
+  );
+};
+
 const CountryBadge: React.FC<{ code: string | null }> = ({ code }) => (
   <span
     className={`inline-flex items-center justify-center min-w-[26px] h-4 px-1 rounded font-mono text-[9px] font-bold tracking-wider ${
@@ -908,18 +1055,35 @@ const ConnectionRow: React.FC<{
   onUnblock: (domain: string) => void;
 }> = ({ connection, onSelect, onBlock, onUnblock }) => (
   <div
-    className={`group flex items-center gap-2 px-3 py-1.5 border-b border-cyan-900/20 hover:bg-cyan-900/15 cursor-pointer transition ${
-      connection.isBlocked ? 'opacity-40' : ''
+    className={`group flex items-center gap-2 px-3 py-1.5 border-b border-cyan-900/20 cursor-pointer transition ${
+      connection.isBlocked
+        ? 'bg-red-950/25 hover:bg-red-950/40'
+        : 'hover:bg-cyan-900/15'
     }`}
     onClick={() => onSelect(connection.domain)}
   >
     <div
-      className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${RISK_DOT[connection.riskLevel]}`}
+      className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+        connection.isBlocked ? 'bg-gray-600' : RISK_DOT[connection.riskLevel]
+      }`}
     />
     <CountryBadge code={connection.country} />
     <div className="flex-1 min-w-0">
-      <div className="truncate text-gray-100 font-mono text-[11px]">
-        {connection.domain}
+      <div className="flex items-center gap-1.5 min-w-0">
+        <span
+          className={`truncate font-mono text-[11px] ${
+            connection.isBlocked
+              ? 'text-gray-500 line-through decoration-red-500/60'
+              : 'text-gray-100'
+          }`}
+        >
+          {connection.domain}
+        </span>
+        {connection.isBlocked && (
+          <span className="flex-shrink-0 px-1 rounded-sm bg-red-900/50 text-red-300 text-[8px] font-bold uppercase tracking-wider leading-[1.4]">
+            {t('connBlockedTag', 'blocked')}
+          </span>
+        )}
       </div>
       {(connection.company || connection.category || connection.countryName) && (
         <div className="text-gray-500 text-[10px] flex items-center gap-1 min-w-0">
@@ -968,10 +1132,14 @@ const ReportPhishingRow: React.FC<{ domain: string }> = ({ domain }) => {
   const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>(
     'idle',
   );
+  const [alsoBlock, setAlsoBlock] = useState(true);
   if (state === 'done') {
     return (
       <div className="text-center text-emerald-300 text-[10px] mt-2">
-        ✓ {t('reportPhishingDone', 'Reported. Thank you for protecting other users!')}
+        ✓{' '}
+        {alsoBlock
+          ? t('reportPhishingDoneBlocked', 'Reported & blocked. Thank you for protecting other users!')
+          : t('reportPhishingDone', 'Reported. Thank you for protecting other users!')}
       </div>
     );
   }
@@ -981,6 +1149,15 @@ const ReportPhishingRow: React.FC<{ domain: string }> = ({ domain }) => {
         <div className="mb-1.5">
           {t('reportPhishingConfirm', 'Send this domain (and nothing else) to Zevr for review?')}
         </div>
+        <label className="flex items-center justify-center gap-1.5 mb-2 cursor-pointer text-gray-300">
+          <input
+            type="checkbox"
+            checked={alsoBlock}
+            onChange={(e) => setAlsoBlock(e.target.checked)}
+            className="accent-cyan-500"
+          />
+          {t('reportPhishingAlsoBlock', 'Also block it on this device')}
+        </label>
         <div className="flex justify-center gap-2">
           <button
             className="px-2.5 h-6 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-bold disabled:opacity-50"
@@ -988,7 +1165,7 @@ const ReportPhishingRow: React.FC<{ domain: string }> = ({ domain }) => {
             onClick={() => {
               setState('sending');
               void chrome.runtime
-                .sendMessage({ type: 'REPORT_PHISHING', domain, context: 'popup' })
+                .sendMessage({ type: 'REPORT_PHISHING', domain, context: 'popup', alsoBlock })
                 .then((res: { success?: boolean } | undefined) =>
                   setState(res?.success ? 'done' : 'error'),
                 )

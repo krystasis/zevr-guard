@@ -817,5 +817,20 @@
   },
   "welcomeAlsoPw": {
     "message": "Bescherming bij wachtwoordinvoer"
+  },
+  "groupCountries": {
+    "message": "Landen"
+  },
+  "countryUnknown": {
+    "message": "Onbekende locatie"
+  },
+  "connBlockedTag": {
+    "message": "geblokkeerd"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Ook op dit apparaat blokkeren"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Gemeld en geblokkeerd. Bedankt dat je andere gebruikers beschermt!"
   }
 }

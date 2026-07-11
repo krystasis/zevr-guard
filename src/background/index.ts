@@ -659,7 +659,13 @@ chrome.runtime.onMessage.addListener(
           sendResponse({ context });
           break;
         }
-        case 'REPORT_PHISHING':
+        case 'REPORT_PHISHING': {
+          // Block locally first (if requested) so the user is protected even
+          // if the report request fails; the report itself is best-effort.
+          if (message.alsoBlock) {
+            await blockDomain(message.domain).catch(() => {});
+          }
+          let reported = false;
           try {
             const res = await fetch('https://feedback.zevrhq.com/v1/phishing-report', {
               method: 'POST',
@@ -671,11 +677,13 @@ chrome.runtime.onMessage.addListener(
               }),
               signal: AbortSignal.timeout(10_000),
             });
-            sendResponse({ success: res.ok });
+            reported = res.ok;
           } catch {
-            sendResponse({ success: false });
+            reported = false;
           }
+          sendResponse({ success: reported, blocked: message.alsoBlock === true });
           break;
+        }
         case 'GET_PAGE_STATS': {
           const pages = await getPagesCached();
           const page = pages[message.tabId] ?? null;

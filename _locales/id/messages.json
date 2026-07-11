@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "Dilaporkan & diblokir. Terima kasih telah melindungi pengguna lain!"
+  },
+  "mapBlockHint": {
+    "message": "Ketuk titik untuk memblokir negaranya"
   }
 }

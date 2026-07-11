@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "報告してブロックしました。ご協力ありがとうございます！"
+  },
+  "mapBlockHint": {
+    "message": "点をタップして国をブロック"
   }
 }

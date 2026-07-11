@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "已举报并拦截。感谢你保护其他用户！"
+  },
+  "mapBlockHint": {
+    "message": "点按圆点即可屏蔽其所在国家/地区"
   }
 }

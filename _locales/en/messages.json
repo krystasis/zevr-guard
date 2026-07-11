@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "Reported & blocked. Thank you for protecting other users!"
+  },
+  "mapBlockHint": {
+    "message": "Tap a dot to block its country"
   }
 }

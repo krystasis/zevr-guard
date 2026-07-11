@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "Bildirildi ve engellendi. Diğer kullanıcıları koruduğunuz için teşekkürler!"
+  },
+  "mapBlockHint": {
+    "message": "Ülkesini engellemek için bir noktaya dokunun"
   }
 }

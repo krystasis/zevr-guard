@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "Gemeld en geblokkeerd. Bedankt dat je andere gebruikers beschermt!"
+  },
+  "mapBlockHint": {
+    "message": "Tik op een stip om het land te blokkeren"
   }
 }

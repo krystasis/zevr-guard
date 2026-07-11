@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "已回報並封鎖。感謝你保護其他使用者！"
+  },
+  "mapBlockHint": {
+    "message": "輕觸圓點即可封鎖其所在國家/地區"
   }
 }

@@ -119,6 +119,11 @@ export const SidePanel: React.FC = () => {
   const [listView, setListView] = useState<ListView>('domains');
   const [hoverDomain, setHoverDomain] = useState<string | null>(null);
   const [lockedDomain, setLockedDomain] = useState<string | null>(null);
+  const [mapPick, setMapPick] = useState<{
+    country: string;
+    countryName: string | null;
+    domains: number;
+  } | null>(null);
   const mapRef = useRef<WorldMap | null>(null);
   const animatedRef = useRef<Set<string>>(new Set());
   const userLocRef = useRef<{ lat: number; lng: number } | null>(null);
@@ -266,6 +271,36 @@ export const SidePanel: React.FC = () => {
 
   const blockedCountries = settings?.blockedCountries ?? [];
 
+  // Click a dot on the globe to act on the country it sits in. Dots are placed
+  // at country centroids, so hit-test the connections with the same
+  // equirectangular projection the map uses and pick the nearest one.
+  function handleMapClick(px: number, py: number, w: number, h: number) {
+    if (!stats) return;
+    let best: Connection | null = null;
+    let bestDist = 18; // px radius
+    for (const c of Object.values(stats.connections)) {
+      if (c.lat == null || c.lon == null || !c.country) continue;
+      const x = ((c.lon + 180) / 360) * w;
+      const y = ((90 - c.lat) / 180) * h;
+      const d = Math.hypot(x - px, y - py);
+      if (d < bestDist) {
+        bestDist = d;
+        best = c;
+      }
+    }
+    if (!best || !best.country) {
+      setMapPick(null);
+      return;
+    }
+    const country = best.country;
+    const domains = Object.values(stats.connections).filter(
+      (c) => c.country === country,
+    ).length;
+    setMapPick({ country, countryName: best.countryName, domains });
+  }
+
+  const pickBlocked = mapPick ? blockedCountries.includes(mapPick.country) : false;
+
   const host = stats?.host ?? '';
   const riskLevel = stats?.riskLevel ?? 'safe';
 
@@ -284,10 +319,34 @@ export const SidePanel: React.FC = () => {
           onDispose={() => {
             mapRef.current = null;
           }}
+          onMapClick={handleMapClick}
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
+        {stats && Object.keys(stats.connections).length > 0 && !mapPick && (
+          <div className="pointer-events-none absolute top-2 left-3 text-[9px] text-cyan-300/70 bg-black/40 rounded-full px-2 py-0.5 border border-cyan-900/40">
+            {t('mapBlockHint', 'Tap a dot to block its country')}
+          </div>
+        )}
         <LegendOverlay stats={stats} />
       </div>
+
+      {mapPick && (
+        <MapPickBar
+          country={mapPick.country}
+          countryName={mapPick.countryName}
+          domains={mapPick.domains}
+          blocked={pickBlocked}
+          onBlock={() => {
+            void handleBlockCountry(mapPick.country);
+            setMapPick(null);
+          }}
+          onUnblock={() => {
+            void handleUnblockCountry(mapPick.country);
+            setMapPick(null);
+          }}
+          onClose={() => setMapPick(null)}
+        />
+      )}
 
       {stats && (
         <PageStrip stats={stats} active={detailView} onSelect={setDetailView} />
@@ -401,6 +460,49 @@ const Header: React.FC<{ host: string; riskLevel: RiskLevel; score: number }> = 
         {t('riskScoreLabel', 'risk score')}
       </div>
     </div>
+  </div>
+);
+
+const MapPickBar: React.FC<{
+  country: string;
+  countryName: string | null;
+  domains: number;
+  blocked: boolean;
+  onBlock: () => void;
+  onUnblock: () => void;
+  onClose: () => void;
+}> = ({ country, countryName, domains, blocked, onBlock, onUnblock, onClose }) => (
+  <div className="shrink-0 flex items-center gap-2 px-3 py-2 border-b border-cyan-900/40 bg-cyan-950/40">
+    <Flag code={country} size={16} />
+    <div className="min-w-0 flex-1">
+      <div className="text-gray-100 text-[12px] font-bold truncate">
+        {countryName ?? country}
+      </div>
+      <div className="text-gray-500 text-[10px]">
+        {domains === 1
+          ? t('groupDomainCountOne', '1 domain')
+          : t('groupDomainCount', `${domains} domains`, String(domains))}
+      </div>
+    </div>
+    <button
+      className={`flex-shrink-0 px-3 h-7 rounded-full text-[10px] font-bold uppercase tracking-wider transition ${
+        blocked
+          ? 'bg-gray-700/70 text-gray-100 hover:bg-gray-600'
+          : 'bg-red-600 text-white hover:bg-red-500'
+      }`}
+      onClick={blocked ? onUnblock : onBlock}
+    >
+      {blocked
+        ? `✓ ${t('unblock', 'unblock')}`
+        : `🌍 ${t('blockCountry', `Block all traffic from ${countryName ?? country}`, countryName ?? country)}`}
+    </button>
+    <button
+      className="flex-shrink-0 text-gray-500 hover:text-gray-200 text-sm px-1"
+      onClick={onClose}
+      aria-label={t('warningGoBack', 'Close')}
+    >
+      ✕
+    </button>
   </div>
 );
 

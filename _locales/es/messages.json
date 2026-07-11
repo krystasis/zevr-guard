@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "Denunciado y bloqueado. ¡Gracias por proteger a otros usuarios!"
+  },
+  "mapBlockHint": {
+    "message": "Toca un punto para bloquear su país"
   }
 }

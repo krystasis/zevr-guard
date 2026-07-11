@@ -832,5 +832,8 @@
   },
   "reportPhishingDoneBlocked": {
     "message": "Đã báo cáo và chặn. Cảm ơn bạn đã bảo vệ những người dùng khác!"
+  },
+  "mapBlockHint": {
+    "message": "Chạm vào một chấm để chặn quốc gia đó"
   }
 }

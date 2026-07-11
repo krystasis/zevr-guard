@@ -47,6 +47,7 @@ import {
   isLookalikeBypassed,
 } from './lookalike';
 import { isFreshVisit, markInstalled, recordVisit } from './visits';
+import { recallDomainGeo, rememberDomainGeo } from './domaingeo';
 import {
   blockCountry,
   getCountryRuleStats,
@@ -134,7 +135,9 @@ async function handleBackgroundRequest(
 
   const tracker = lookupTracker(domain);
   const riskLevel = getRiskLevel(domain);
-  const geo = details.ip ? await getGeoData(details.ip) : null;
+  let geo = details.ip ? await getGeoData(details.ip) : null;
+  if (geo) void rememberDomainGeo(domain, geo);
+  else geo = await recallDomainGeo(domain);
   void noteConnection(domain, geo?.countryCode);
   const blockedByUs =
     outcome === 'blocked' && (await isBlockAttributedToUs(domain, tracker));
@@ -204,7 +207,9 @@ async function handleRequest(
 
   const tracker = lookupTracker(domain);
   const riskLevel = getRiskLevel(domain);
-  const geo = details.ip ? await getGeoData(details.ip) : null;
+  let geo = details.ip ? await getGeoData(details.ip) : null;
+  if (geo) void rememberDomainGeo(domain, geo);
+  else geo = await recallDomainGeo(domain);
   void noteConnection(domain, geo?.countryCode);
   const blockedDomains = await getBlockedDomains();
   const isBlocked =

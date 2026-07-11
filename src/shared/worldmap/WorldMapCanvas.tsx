@@ -7,6 +7,8 @@ export interface WorldMapCanvasProps {
   style?: React.CSSProperties;
   onReady?: (map: WorldMap) => void;
   onDispose?: () => void;
+  /** Click position relative to the map, plus the map's pixel size. */
+  onMapClick?: (px: number, py: number, width: number, height: number) => void;
 }
 
 export const WorldMapCanvas: React.FC<WorldMapCanvasProps> = ({
@@ -14,6 +16,7 @@ export const WorldMapCanvas: React.FC<WorldMapCanvasProps> = ({
   style,
   onReady,
   onDispose,
+  onMapClick,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const onReadyRef = useRef(onReady);
@@ -32,7 +35,26 @@ export const WorldMapCanvas: React.FC<WorldMapCanvasProps> = ({
     };
   }, []);
 
-  return <div ref={ref} className={className} style={style} />;
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={style}
+      onClick={
+        onMapClick
+          ? (e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              onMapClick(
+                e.clientX - rect.left,
+                e.clientY - rect.top,
+                rect.width,
+                rect.height,
+              );
+            }
+          : undefined
+      }
+    />
+  );
 };
 
 export { WorldMap } from './WorldMap';

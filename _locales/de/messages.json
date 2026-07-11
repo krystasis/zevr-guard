@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Diese Sicherheitsseite kann nicht in einer anderen Website angezeigt werden. Öffnen Sie sie direkt."
+  },
+  "leakTitle": {
+    "message": "Ihre Daten wurden soeben gesendet"
+  },
+  "leakBlock": {
+    "message": "$HOST$ blockieren",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ wurde an $HOST$ gesendet",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "Ihre E-Mail"
+  },
+  "leakKind_phone": {
+    "message": "Ihre Telefonnummer"
+  },
+  "leakKind_custom": {
+    "message": "Ihre Daten"
+  },
+  "watchTitle": {
+    "message": "Daten überwachen"
+  },
+  "watchDesc": {
+    "message": "Warnt, wenn Ihre E-Mail, Telefonnummer oder ein hinzugefügter Wert an eine andere Website gesendet wird — auch gehasht. Der Abgleich bleibt auf Ihrem Gerät."
+  },
+  "watchKindEmail": {
+    "message": "E-Mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Eigenes"
+  },
+  "watchPlaceholder": {
+    "message": "zu überwachender Wert"
+  },
+  "watchAdd": {
+    "message": "Hinzufügen"
+  },
+  "watchTooShort": {
+    "message": "Zu kurz zum sicheren Überwachen (mind. 5 Zeichen)."
+  },
+  "watchRemove": {
+    "message": "Entfernen"
+  },
+  "watchLeaksTitle": {
+    "message": "Kürzlich erkannte Lecks"
   }
 }

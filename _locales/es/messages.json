@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Esta página de seguridad no puede mostrarse dentro de otro sitio. Ábrela directamente."
+  },
+  "leakTitle": {
+    "message": "Tu información acaba de enviarse"
+  },
+  "leakBlock": {
+    "message": "Bloquear $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ se envió a $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "tu correo"
+  },
+  "leakKind_phone": {
+    "message": "tu teléfono"
+  },
+  "leakKind_custom": {
+    "message": "tu dato"
+  },
+  "watchTitle": {
+    "message": "Vigilar tus datos"
+  },
+  "watchDesc": {
+    "message": "Te avisa cuando tu correo, teléfono o cualquier valor añadido se envía a otro sitio, incluso con hash. Todo el cotejo ocurre en tu dispositivo."
+  },
+  "watchKindEmail": {
+    "message": "Correo"
+  },
+  "watchKindPhone": {
+    "message": "Teléfono"
+  },
+  "watchKindCustom": {
+    "message": "Otro"
+  },
+  "watchPlaceholder": {
+    "message": "valor a vigilar"
+  },
+  "watchAdd": {
+    "message": "Añadir"
+  },
+  "watchTooShort": {
+    "message": "Demasiado corto para vigilar (5+ caracteres)."
+  },
+  "watchRemove": {
+    "message": "Quitar"
+  },
+  "watchLeaksTitle": {
+    "message": "Fugas recientes detectadas"
   }
 }

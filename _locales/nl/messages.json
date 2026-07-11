@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Deze beveiligingspagina kan niet in een andere site worden getoond. Open hem rechtstreeks."
+  },
+  "leakTitle": {
+    "message": "Je gegevens zijn zojuist verzonden"
+  },
+  "leakBlock": {
+    "message": "$HOST$ blokkeren",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ is verzonden naar $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "je e-mail"
+  },
+  "leakKind_phone": {
+    "message": "je telefoonnummer"
+  },
+  "leakKind_custom": {
+    "message": "je gegeven"
+  },
+  "watchTitle": {
+    "message": "Bewaak je gegevens"
+  },
+  "watchDesc": {
+    "message": "Waarschuwt wanneer je e-mail, telefoon of toegevoegde waarde naar een andere site wordt gestuurd — ook gehasht. Alle vergelijking blijft op je apparaat."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefoon"
+  },
+  "watchKindCustom": {
+    "message": "Aangepast"
+  },
+  "watchPlaceholder": {
+    "message": "te bewaken waarde"
+  },
+  "watchAdd": {
+    "message": "Toevoegen"
+  },
+  "watchTooShort": {
+    "message": "Te kort om veilig te bewaken (5+ tekens)."
+  },
+  "watchRemove": {
+    "message": "Verwijderen"
+  },
+  "watchLeaksTitle": {
+    "message": "Recent betrapte lekken"
   }
 }

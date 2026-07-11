@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "यह सुरक्षा पृष्ठ किसी अन्य साइट के अंदर नहीं दिखाया जा सकता। इसे सीधे खोलें।"
+  },
+  "leakTitle": {
+    "message": "आपकी जानकारी अभी भेजी गई"
+  },
+  "leakBlock": {
+    "message": "$HOST$ ब्लॉक करें",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ को $HOST$ पर भेजा गया",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "आपका ईमेल"
+  },
+  "leakKind_phone": {
+    "message": "आपका फ़ोन नंबर"
+  },
+  "leakKind_custom": {
+    "message": "आपकी जानकारी"
+  },
+  "watchTitle": {
+    "message": "अपनी जानकारी पर नज़र"
+  },
+  "watchDesc": {
+    "message": "जब आपका ईमेल, फ़ोन या जोड़ा गया कोई मान किसी अन्य साइट को भेजा जाए — हैश किया हुआ भी — तो चेतावनी देता है। सारा मिलान आपके डिवाइस पर होता है।"
+  },
+  "watchKindEmail": {
+    "message": "ईमेल"
+  },
+  "watchKindPhone": {
+    "message": "फ़ोन"
+  },
+  "watchKindCustom": {
+    "message": "कस्टम"
+  },
+  "watchPlaceholder": {
+    "message": "निगरानी हेतु मान"
+  },
+  "watchAdd": {
+    "message": "जोड़ें"
+  },
+  "watchTooShort": {
+    "message": "सुरक्षित निगरानी हेतु बहुत छोटा (5+ अक्षर)।"
+  },
+  "watchRemove": {
+    "message": "हटाएँ"
+  },
+  "watchLeaksTitle": {
+    "message": "हाल में पकड़े गए रिसाव"
   }
 }

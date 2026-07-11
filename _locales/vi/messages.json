@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Không thể hiển thị trang an toàn này bên trong một trang web khác. Hãy mở trực tiếp."
+  },
+  "leakTitle": {
+    "message": "Thông tin của bạn vừa được gửi đi"
+  },
+  "leakBlock": {
+    "message": "Chặn $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ đã được gửi tới $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "email của bạn"
+  },
+  "leakKind_phone": {
+    "message": "số điện thoại của bạn"
+  },
+  "leakKind_custom": {
+    "message": "thông tin của bạn"
+  },
+  "watchTitle": {
+    "message": "Theo dõi thông tin"
+  },
+  "watchDesc": {
+    "message": "Cảnh báo khi email, số điện thoại hoặc bất kỳ giá trị nào bạn thêm được gửi tới trang khác — kể cả đã băm. Mọi việc đối chiếu diễn ra trên thiết bị của bạn."
+  },
+  "watchKindEmail": {
+    "message": "Email"
+  },
+  "watchKindPhone": {
+    "message": "Điện thoại"
+  },
+  "watchKindCustom": {
+    "message": "Tùy chỉnh"
+  },
+  "watchPlaceholder": {
+    "message": "giá trị cần theo dõi"
+  },
+  "watchAdd": {
+    "message": "Thêm"
+  },
+  "watchTooShort": {
+    "message": "Quá ngắn để theo dõi an toàn (5+ ký tự)."
+  },
+  "watchRemove": {
+    "message": "Xóa"
+  },
+  "watchLeaksTitle": {
+    "message": "Rò rỉ vừa phát hiện"
   }
 }

@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "この安全ページは他サイト内に埋め込んで表示できません。直接開いてください。"
+  },
+  "leakTitle": {
+    "message": "あなたの情報が送信されました"
+  },
+  "leakBlock": {
+    "message": "$HOST$ をブロック",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ が $HOST$ に送信されました",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "あなたのメール"
+  },
+  "leakKind_phone": {
+    "message": "あなたの電話番号"
+  },
+  "leakKind_custom": {
+    "message": "あなたの情報"
+  },
+  "watchTitle": {
+    "message": "情報の見張り"
+  },
+  "watchDesc": {
+    "message": "メール・電話番号など登録した値が他サイトに送信されたら警告します(ハッシュ化されていても検知)。照合はすべて端末内で行います。"
+  },
+  "watchKindEmail": {
+    "message": "メール"
+  },
+  "watchKindPhone": {
+    "message": "電話"
+  },
+  "watchKindCustom": {
+    "message": "任意"
+  },
+  "watchPlaceholder": {
+    "message": "見張る値"
+  },
+  "watchAdd": {
+    "message": "追加"
+  },
+  "watchTooShort": {
+    "message": "短すぎて安全に監視できません(5文字以上)。"
+  },
+  "watchRemove": {
+    "message": "削除"
+  },
+  "watchLeaksTitle": {
+    "message": "最近検知した漏洩"
   }
 }

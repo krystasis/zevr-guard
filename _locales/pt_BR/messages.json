@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Esta página de segurança não pode ser exibida dentro de outro site. Abra-a diretamente."
+  },
+  "leakTitle": {
+    "message": "Suas informações acabaram de ser enviadas"
+  },
+  "leakBlock": {
+    "message": "Bloquear $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ foi enviado para $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "seu e-mail"
+  },
+  "leakKind_phone": {
+    "message": "seu telefone"
+  },
+  "leakKind_custom": {
+    "message": "sua informação"
+  },
+  "watchTitle": {
+    "message": "Vigiar seus dados"
+  },
+  "watchDesc": {
+    "message": "Avisa quando seu e-mail, telefone ou qualquer valor adicionado é enviado a outro site — mesmo com hash. Toda a comparação fica no seu dispositivo."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefone"
+  },
+  "watchKindCustom": {
+    "message": "Outro"
+  },
+  "watchPlaceholder": {
+    "message": "valor a vigiar"
+  },
+  "watchAdd": {
+    "message": "Adicionar"
+  },
+  "watchTooShort": {
+    "message": "Curto demais para vigiar (5+ caracteres)."
+  },
+  "watchRemove": {
+    "message": "Remover"
+  },
+  "watchLeaksTitle": {
+    "message": "Vazamentos recentes detectados"
   }
 }

@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "此安全頁面無法在其他網站中顯示。請直接開啟。"
+  },
+  "leakTitle": {
+    "message": "您的資訊剛剛被傳送"
+  },
+  "leakBlock": {
+    "message": "封鎖 $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ 已傳送至 $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "您的電子郵件"
+  },
+  "leakKind_phone": {
+    "message": "您的電話號碼"
+  },
+  "leakKind_custom": {
+    "message": "您的資訊"
+  },
+  "watchTitle": {
+    "message": "監視你的資訊"
+  },
+  "watchDesc": {
+    "message": "當您的電子郵件、電話或任何新增的值被傳送到其他網站時發出警告——即使經過雜湊。所有比對都在您的裝置上完成。"
+  },
+  "watchKindEmail": {
+    "message": "電子郵件"
+  },
+  "watchKindPhone": {
+    "message": "電話"
+  },
+  "watchKindCustom": {
+    "message": "自訂"
+  },
+  "watchPlaceholder": {
+    "message": "要監視的值"
+  },
+  "watchAdd": {
+    "message": "新增"
+  },
+  "watchTooShort": {
+    "message": "太短，無法安全監視（5 個以上字元）。"
+  },
+  "watchRemove": {
+    "message": "移除"
+  },
+  "watchLeaksTitle": {
+    "message": "最近捕獲的外洩"
   }
 }

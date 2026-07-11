@@ -47,6 +47,23 @@ import {
   isLookalikeBypassed,
 } from './lookalike';
 import { isFreshVisit, markInstalled, recordVisit } from './visits';
+import {
+  buildHaystack,
+  computeEntry,
+  extractBody,
+  isThirdPartySend,
+  maskValue,
+  scan,
+  type WatchEntry,
+} from './exfil';
+import {
+  addLeakEvent,
+  clearLeakEvents,
+  getLeakEvents,
+  getWatchList,
+  setWatchList,
+} from './storage';
+import type { WatchItem } from '../types';
 import { recallDomainGeo, rememberDomainGeo } from './domaingeo';
 import {
   blockCountry,
@@ -112,6 +129,7 @@ const navStartTimes = new Map<number, number>();
 
 async function resetPage(tabId: number): Promise<void> {
   navStartTimes.set(tabId, Date.now());
+  leakSeen.delete(tabId);
   await updatePage(tabId, () => null);
   clearBadge(tabId);
 }
@@ -377,6 +395,109 @@ chrome.webRequest.onBeforeRequest.addListener(
     urls: ['http://*/*', 'https://*/*'],
     types: ['main_frame' as chrome.webRequest.ResourceType],
   },
+);
+
+// --- Data-exfiltration watch ---------------------------------------------
+// Precomputed match tokens for the user's watched values. Empty (feature
+// inert) until the user registers something.
+let watchEntries: WatchEntry[] = [];
+
+async function reloadWatch(): Promise<void> {
+  const list = await getWatchList();
+  const computed = await Promise.all(list.map((w) => computeEntry(w)));
+  watchEntries = computed.filter((e): e is WatchEntry => e !== null);
+}
+void reloadWatch();
+
+// Per-tab dedupe so one page load doesn't fire the same leak repeatedly.
+const leakSeen = new Map<number, Set<string>>();
+
+async function reportLeaks(
+  details: chrome.webRequest.WebRequestBodyDetails,
+  hits: WatchEntry[],
+): Promise<void> {
+  let host: string;
+  try {
+    host = new URL(details.url).hostname;
+  } catch {
+    return;
+  }
+  let pageHost: string | null = null;
+  try {
+    pageHost = details.initiator ? new URL(details.initiator).hostname : null;
+  } catch {
+    pageHost = null;
+  }
+
+  const seen = leakSeen.get(details.tabId) ?? new Set<string>();
+  leakSeen.set(details.tabId, seen);
+
+  const fresh: WatchEntry[] = [];
+  for (const h of hits) {
+    const key = `${host}|${h.id}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    fresh.push(h);
+    await addLeakEvent({
+      id: `${Date.now()}-${h.id}`,
+      kind: h.kind,
+      display: h.display,
+      destination: host,
+      host,
+      pageHost,
+      ts: Date.now(),
+    });
+  }
+  if (fresh.length === 0) return;
+
+  flashDangerBadge(details.tabId);
+
+  const kindWord = (k: WatchEntry['kind']): string =>
+    t(
+      `leakKind_${k}`,
+      k === 'email' ? 'your email' : k === 'phone' ? 'your phone number' : 'your info',
+    );
+  const first = fresh[0];
+  const what = `${kindWord(first.kind)} (${first.display})`;
+  const extra = fresh.length > 1 ? ` +${fresh.length - 1}` : '';
+
+  chrome.tabs
+    .sendMessage(details.tabId, {
+      type: 'DATA_LEAK',
+      destination: host,
+      title: t('leakTitle', 'Your information was just sent'),
+      message: t('leakBody', `${what}${extra} was sent to ${host}`, `${what}${extra}`, host),
+      blockLabel: t('leakBlock', `Block ${host}`, host),
+      dismiss: t('pwWarnDismiss', 'Dismiss'),
+    })
+    .catch(() => {
+      // no content script on this page (e.g. chrome:// or a discarded tab)
+    });
+}
+
+chrome.webRequest.onBeforeRequest.addListener(
+  (details) => {
+    if (watchEntries.length === 0 || details.tabId < 0) return;
+    if (!isThirdPartySend(details.initiator, details.url)) return;
+    const body = extractBody(details.requestBody ?? undefined);
+    const hits = scan(buildHaystack(details.url, body), watchEntries);
+    if (hits.length > 0) void reportLeaks(details, hits);
+  },
+  {
+    urls: ['http://*/*', 'https://*/*'],
+    types: [
+      'image',
+      'script',
+      'xmlhttprequest',
+      'ping',
+      'sub_frame',
+      'media',
+      'websocket',
+      'csp_report',
+      'other',
+    ] as chrome.webRequest.ResourceType[],
+  },
+  ['requestBody'],
 );
 
 chrome.webRequest.onCompleted.addListener(
@@ -731,6 +852,57 @@ chrome.runtime.onMessage.addListener(
           break;
         case 'GET_USER_LOCATION':
           sendResponse({ location: await getUserLocation() });
+          break;
+        case 'GET_WATCH': {
+          const list = await getWatchList();
+          sendResponse({
+            watch: list.map((w) => ({
+              id: w.id,
+              kind: w.kind,
+              display: maskValue(w.kind, w.value),
+            })),
+          });
+          break;
+        }
+        case 'ADD_WATCH': {
+          const item: WatchItem = {
+            id: `w${Date.now()}`,
+            kind: message.kind,
+            value: message.value,
+          };
+          // computeEntry rejects values too short to watch safely.
+          const entry = await computeEntry(item);
+          if (!entry) {
+            sendResponse({ success: false, error: 'too_short' });
+            break;
+          }
+          const list = await getWatchList();
+          list.push(item);
+          await setWatchList(list);
+          await reloadWatch();
+          sendResponse({
+            success: true,
+            watch: list.map((w) => ({
+              id: w.id,
+              kind: w.kind,
+              display: maskValue(w.kind, w.value),
+            })),
+          });
+          break;
+        }
+        case 'REMOVE_WATCH': {
+          const list = (await getWatchList()).filter((w) => w.id !== message.id);
+          await setWatchList(list);
+          await reloadWatch();
+          sendResponse({ success: true });
+          break;
+        }
+        case 'GET_LEAKS':
+          sendResponse({ leaks: await getLeakEvents() });
+          break;
+        case 'CLEAR_LEAKS':
+          await clearLeakEvents();
+          sendResponse({ success: true });
           break;
         default:
           sendResponse({ error: 'unknown message' });

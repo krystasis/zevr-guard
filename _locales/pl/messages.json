@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Tej strony bezpieczeństwa nie można wyświetlić w innej witrynie. Otwórz ją bezpośrednio."
+  },
+  "leakTitle": {
+    "message": "Twoje dane właśnie wysłano"
+  },
+  "leakBlock": {
+    "message": "Zablokuj $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ wysłano do $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "Twój e-mail"
+  },
+  "leakKind_phone": {
+    "message": "Twój numer telefonu"
+  },
+  "leakKind_custom": {
+    "message": "Twoje dane"
+  },
+  "watchTitle": {
+    "message": "Pilnuj swoich danych"
+  },
+  "watchDesc": {
+    "message": "Ostrzega, gdy Twój e-mail, telefon lub dodana wartość trafia do innej witryny — nawet zahaszowana. Całe dopasowanie odbywa się na urządzeniu."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Własne"
+  },
+  "watchPlaceholder": {
+    "message": "wartość do pilnowania"
+  },
+  "watchAdd": {
+    "message": "Dodaj"
+  },
+  "watchTooShort": {
+    "message": "Za krótkie, by bezpiecznie pilnować (min. 5 znaków)."
+  },
+  "watchRemove": {
+    "message": "Usuń"
+  },
+  "watchLeaksTitle": {
+    "message": "Ostatnio wykryte wycieki"
   }
 }

@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Цю сторінку безпеки не можна показувати всередині іншого сайту. Відкрийте її напряму."
+  },
+  "leakTitle": {
+    "message": "Ваші дані щойно надіслано"
+  },
+  "leakBlock": {
+    "message": "Заблокувати $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ надіслано на $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "ваш e-mail"
+  },
+  "leakKind_phone": {
+    "message": "ваш телефон"
+  },
+  "leakKind_custom": {
+    "message": "ваші дані"
+  },
+  "watchTitle": {
+    "message": "Стеження за даними"
+  },
+  "watchDesc": {
+    "message": "Попереджає, коли ваш e-mail, телефон чи додане значення надсилається на інший сайт — навіть у вигляді хешу. Звірка — лише на пристрої."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Телефон"
+  },
+  "watchKindCustom": {
+    "message": "Інше"
+  },
+  "watchPlaceholder": {
+    "message": "значення для стеження"
+  },
+  "watchAdd": {
+    "message": "Додати"
+  },
+  "watchTooShort": {
+    "message": "Замало для стеження (від 5 символів)."
+  },
+  "watchRemove": {
+    "message": "Видалити"
+  },
+  "watchLeaksTitle": {
+    "message": "Нещодавно виявлені витоки"
   }
 }

@@ -4,7 +4,14 @@ import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
 import { renderShareCard } from '../shared/sharecard';
 import { ShareModal } from '../shared/ShareModal';
-import type { Connection, PageStats, RiskLevel, Settings, TodayStats } from '../types';
+import type {
+  Connection,
+  LeakEvent,
+  PageStats,
+  RiskLevel,
+  Settings,
+  TodayStats,
+} from '../types';
 import {
   groupByCompany,
   groupByCountry,
@@ -1261,6 +1268,137 @@ const Row: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   </div>
 );
 
+interface WatchRow {
+  id: string;
+  kind: 'email' | 'phone' | 'custom';
+  display: string;
+}
+
+const WatchSection: React.FC = () => {
+  const [items, setItems] = useState<WatchRow[]>([]);
+  const [leaks, setLeaks] = useState<LeakEvent[]>([]);
+  const [kind, setKind] = useState<'email' | 'phone' | 'custom'>('email');
+  const [value, setValue] = useState('');
+  const [tooShort, setTooShort] = useState(false);
+
+  async function reload() {
+    const w = (await chrome.runtime.sendMessage({ type: 'GET_WATCH' })) as
+      | { watch?: WatchRow[] }
+      | undefined;
+    setItems(w?.watch ?? []);
+    const l = (await chrome.runtime.sendMessage({ type: 'GET_LEAKS' })) as
+      | { leaks?: LeakEvent[] }
+      | undefined;
+    setLeaks(l?.leaks ?? []);
+  }
+
+  useEffect(() => {
+    void reload();
+  }, []);
+
+  async function add() {
+    const v = value.trim();
+    if (!v) return;
+    const res = (await chrome.runtime.sendMessage({
+      type: 'ADD_WATCH',
+      kind,
+      value: v,
+    })) as { success?: boolean } | undefined;
+    if (res?.success) {
+      setValue('');
+      setTooShort(false);
+      await reload();
+    } else {
+      setTooShort(true);
+    }
+  }
+
+  async function remove(id: string) {
+    await chrome.runtime.sendMessage({ type: 'REMOVE_WATCH', id });
+    await reload();
+  }
+
+  const inputCls =
+    'flex-1 min-w-0 bg-black/40 border border-cyan-900/40 rounded px-2 py-1 text-[11px] text-gray-200 placeholder-gray-600 focus:outline-none focus:border-cyan-500/60';
+
+  return (
+    <div className="pt-1">
+      <SectionLabel>{t('watchTitle', 'Watch your info')}</SectionLabel>
+      <p className="text-[10px] leading-relaxed text-gray-500 px-1 mb-2">
+        {t(
+          'watchDesc',
+          'Warns you when your email, phone, or any value you add is sent to another site — even hashed. All matching stays on your device.',
+        )}
+      </p>
+      <div className="flex gap-1.5 px-1">
+        <select
+          value={kind}
+          onChange={(e) => setKind(e.target.value as WatchRow['kind'])}
+          className="bg-black/40 border border-cyan-900/40 rounded px-1 py-1 text-[11px] text-gray-200 focus:outline-none"
+        >
+          <option value="email">{t('watchKindEmail', 'Email')}</option>
+          <option value="phone">{t('watchKindPhone', 'Phone')}</option>
+          <option value="custom">{t('watchKindCustom', 'Custom')}</option>
+        </select>
+        <input
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setTooShort(false);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') void add();
+          }}
+          placeholder={t('watchPlaceholder', 'value to watch for')}
+          className={inputCls}
+        />
+        <button
+          onClick={() => void add()}
+          className="flex-none px-2.5 py-1 rounded bg-cyan-600/80 hover:bg-cyan-500 text-white text-[11px] font-semibold"
+        >
+          {t('watchAdd', 'Add')}
+        </button>
+      </div>
+      {tooShort && (
+        <div className="text-[10px] text-red-400 px-1 mt-1">
+          {t('watchTooShort', 'Too short to watch safely (5+ characters).')}
+        </div>
+      )}
+      {items.length > 0 && (
+        <div className="mt-2 space-y-0.5">
+          {items.map((it) => (
+            <div
+              key={it.id}
+              className="flex items-center justify-between px-1 py-0.5 text-[11px]"
+            >
+              <span className="font-mono text-gray-300 truncate">{it.display}</span>
+              <button
+                onClick={() => void remove(it.id)}
+                className="flex-none text-gray-500 hover:text-red-400 px-1"
+                aria-label={t('watchRemove', 'Remove')}
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+      {leaks.length > 0 && (
+        <div className="mt-2">
+          <div className="text-[9px] uppercase tracking-wide text-red-400/80 px-1 mb-1">
+            {t('watchLeaksTitle', 'Recent leaks caught')}
+          </div>
+          {leaks.slice(0, 5).map((l) => (
+            <div key={l.id} className="px-1 py-0.5 text-[10px] text-gray-400 truncate">
+              {l.display} → <span className="font-mono text-red-300">{l.host}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const SettingsPanel: React.FC<{
   settings: Settings;
   onChange: (s: Settings) => void;
@@ -1305,6 +1443,8 @@ const SettingsPanel: React.FC<{
         checked={settings.passwordWarningsEnabled}
         onChange={(v) => toggle('passwordWarningsEnabled', v)}
       />
+
+      <WatchSection />
 
       <SectionLabel>{t('settingsBlockCategories', 'Block categories')}</SectionLabel>
       <ToggleRow

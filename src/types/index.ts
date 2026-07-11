@@ -112,4 +112,27 @@ export type MessageRequest =
   | { type: 'GET_PAGE_STATS'; tabId: number }
   | { type: 'GET_TODAY_STATS' }
   | { type: 'GET_STATS_HISTORY' }
-  | { type: 'GET_USER_LOCATION' };
+  | { type: 'GET_USER_LOCATION' }
+  | { type: 'GET_WATCH' }
+  | { type: 'ADD_WATCH'; kind: 'email' | 'phone' | 'custom'; value: string }
+  | { type: 'REMOVE_WATCH'; id: string }
+  | { type: 'GET_LEAKS' }
+  | { type: 'CLEAR_LEAKS' };
+
+/** A value the user asked Zevr Guard to watch for in outbound traffic. */
+export interface WatchItem {
+  id: string;
+  kind: 'email' | 'phone' | 'custom';
+  value: string;
+}
+
+/** A recorded data-exfiltration event (one watched value seen leaving). */
+export interface LeakEvent {
+  id: string;
+  kind: 'email' | 'phone' | 'custom';
+  display: string;
+  destination: string;
+  host: string;
+  pageHost: string | null;
+  ts: number;
+}

@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Halaman keamanan ini tidak dapat ditampilkan di dalam situs lain. Buka langsung."
+  },
+  "leakTitle": {
+    "message": "Informasi Anda baru saja dikirim"
+  },
+  "leakBlock": {
+    "message": "Blokir $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ dikirim ke $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "email Anda"
+  },
+  "leakKind_phone": {
+    "message": "nomor telepon Anda"
+  },
+  "leakKind_custom": {
+    "message": "info Anda"
+  },
+  "watchTitle": {
+    "message": "Pantau data Anda"
+  },
+  "watchDesc": {
+    "message": "Memperingatkan saat email, telepon, atau nilai apa pun yang Anda tambahkan dikirim ke situs lain — bahkan yang di-hash. Semua pencocokan tetap di perangkat Anda."
+  },
+  "watchKindEmail": {
+    "message": "Email"
+  },
+  "watchKindPhone": {
+    "message": "Telepon"
+  },
+  "watchKindCustom": {
+    "message": "Kustom"
+  },
+  "watchPlaceholder": {
+    "message": "nilai yang dipantau"
+  },
+  "watchAdd": {
+    "message": "Tambah"
+  },
+  "watchTooShort": {
+    "message": "Terlalu pendek untuk dipantau (5+ karakter)."
+  },
+  "watchRemove": {
+    "message": "Hapus"
+  },
+  "watchLeaksTitle": {
+    "message": "Kebocoran terbaru yang tertangkap"
   }
 }

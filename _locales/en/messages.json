@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "This safety page cannot be shown inside another site. Open it directly."
+  },
+  "leakTitle": {
+    "message": "Your information was just sent"
+  },
+  "leakBlock": {
+    "message": "Block $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ was sent to $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "your email"
+  },
+  "leakKind_phone": {
+    "message": "your phone number"
+  },
+  "leakKind_custom": {
+    "message": "your info"
+  },
+  "watchTitle": {
+    "message": "Watch your info"
+  },
+  "watchDesc": {
+    "message": "Warns you when your email, phone, or any value you add is sent to another site — even hashed. All matching stays on your device."
+  },
+  "watchKindEmail": {
+    "message": "Email"
+  },
+  "watchKindPhone": {
+    "message": "Phone"
+  },
+  "watchKindCustom": {
+    "message": "Custom"
+  },
+  "watchPlaceholder": {
+    "message": "value to watch for"
+  },
+  "watchAdd": {
+    "message": "Add"
+  },
+  "watchTooShort": {
+    "message": "Too short to watch safely (5+ characters)."
+  },
+  "watchRemove": {
+    "message": "Remove"
+  },
+  "watchLeaksTitle": {
+    "message": "Recent leaks caught"
   }
 }

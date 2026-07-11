@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "이 보안 페이지는 다른 사이트 안에 표시할 수 없습니다. 직접 열어 주세요."
+  },
+  "leakTitle": {
+    "message": "당신의 정보가 방금 전송되었습니다"
+  },
+  "leakBlock": {
+    "message": "$HOST$ 차단",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ 가 $HOST$ 로 전송되었습니다",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "당신의 이메일"
+  },
+  "leakKind_phone": {
+    "message": "당신의 전화번호"
+  },
+  "leakKind_custom": {
+    "message": "당신의 정보"
+  },
+  "watchTitle": {
+    "message": "내 정보 감시"
+  },
+  "watchDesc": {
+    "message": "등록한 이메일·전화번호 등의 값이 다른 사이트로 전송되면 경고합니다(해시된 경우도 감지). 대조는 모두 기기 안에서 이루어집니다."
+  },
+  "watchKindEmail": {
+    "message": "이메일"
+  },
+  "watchKindPhone": {
+    "message": "전화"
+  },
+  "watchKindCustom": {
+    "message": "사용자"
+  },
+  "watchPlaceholder": {
+    "message": "감시할 값"
+  },
+  "watchAdd": {
+    "message": "추가"
+  },
+  "watchTooShort": {
+    "message": "감시하기에 너무 짧습니다(5자 이상)."
+  },
+  "watchRemove": {
+    "message": "삭제"
+  },
+  "watchLeaksTitle": {
+    "message": "최근 잡은 유출"
   }
 }

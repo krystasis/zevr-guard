@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Bu güvenlik sayfası başka bir sitenin içinde gösterilemez. Doğrudan açın."
+  },
+  "leakTitle": {
+    "message": "Bilgileriniz az önce gönderildi"
+  },
+  "leakBlock": {
+    "message": "$HOST$ engelle",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ şu adrese gönderildi: $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "e-postanız"
+  },
+  "leakKind_phone": {
+    "message": "telefon numaranız"
+  },
+  "leakKind_custom": {
+    "message": "bilginiz"
+  },
+  "watchTitle": {
+    "message": "Bilgini izle"
+  },
+  "watchDesc": {
+    "message": "E-postanız, telefonunuz veya eklediğiniz herhangi bir değer başka bir siteye gönderildiğinde — hashlenmiş olsa bile — sizi uyarır. Tüm eşleştirme cihazınızda kalır."
+  },
+  "watchKindEmail": {
+    "message": "E-posta"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Özel"
+  },
+  "watchPlaceholder": {
+    "message": "izlenecek değer"
+  },
+  "watchAdd": {
+    "message": "Ekle"
+  },
+  "watchTooShort": {
+    "message": "İzlemek için çok kısa (5+ karakter)."
+  },
+  "watchRemove": {
+    "message": "Kaldır"
+  },
+  "watchLeaksTitle": {
+    "message": "Son yakalanan sızıntılar"
   }
 }

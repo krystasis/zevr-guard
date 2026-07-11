@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Cette page de sécurité ne peut pas s'afficher dans un autre site. Ouvrez-la directement."
+  },
+  "leakTitle": {
+    "message": "Vos informations viennent d'être envoyées"
+  },
+  "leakBlock": {
+    "message": "Bloquer $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ a été envoyé à $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "votre e-mail"
+  },
+  "leakKind_phone": {
+    "message": "votre numéro"
+  },
+  "leakKind_custom": {
+    "message": "votre info"
+  },
+  "watchTitle": {
+    "message": "Surveiller vos infos"
+  },
+  "watchDesc": {
+    "message": "Vous alerte quand votre e-mail, téléphone ou toute valeur ajoutée est envoyé à un autre site — même haché. Toute la comparaison reste sur votre appareil."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Téléphone"
+  },
+  "watchKindCustom": {
+    "message": "Autre"
+  },
+  "watchPlaceholder": {
+    "message": "valeur à surveiller"
+  },
+  "watchAdd": {
+    "message": "Ajouter"
+  },
+  "watchTooShort": {
+    "message": "Trop court pour surveiller (5+ caractères)."
+  },
+  "watchRemove": {
+    "message": "Supprimer"
+  },
+  "watchLeaksTitle": {
+    "message": "Fuites récentes détectées"
   }
 }

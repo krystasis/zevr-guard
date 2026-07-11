@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "Эту страницу безопасности нельзя показывать внутри другого сайта. Откройте её напрямую."
+  },
+  "leakTitle": {
+    "message": "Ваши данные только что отправлены"
+  },
+  "leakBlock": {
+    "message": "Заблокировать $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ отправлено на $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "ваш e-mail"
+  },
+  "leakKind_phone": {
+    "message": "ваш телефон"
+  },
+  "leakKind_custom": {
+    "message": "ваши данные"
+  },
+  "watchTitle": {
+    "message": "Слежка за данными"
+  },
+  "watchDesc": {
+    "message": "Предупреждает, когда ваш e-mail, телефон или добавленное значение отправляется на другой сайт — даже в виде хеша. Сопоставление — только на устройстве."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Телефон"
+  },
+  "watchKindCustom": {
+    "message": "Другое"
+  },
+  "watchPlaceholder": {
+    "message": "значение для слежки"
+  },
+  "watchAdd": {
+    "message": "Добавить"
+  },
+  "watchTooShort": {
+    "message": "Слишком коротко для слежки (от 5 символов)."
+  },
+  "watchRemove": {
+    "message": "Удалить"
+  },
+  "watchLeaksTitle": {
+    "message": "Недавно пойманные утечки"
   }
 }

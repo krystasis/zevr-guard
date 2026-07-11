@@ -1,4 +1,11 @@
-import type { PageStats, Settings, TodayStats, UserLocation } from '../types';
+import type {
+  LeakEvent,
+  PageStats,
+  Settings,
+  TodayStats,
+  UserLocation,
+  WatchItem,
+} from '../types';
 
 export function getDefaultSettings(): Settings {
   return {
@@ -201,4 +208,55 @@ export async function getCachedUserLocation(): Promise<UserLocation | null> {
 
 export async function setCachedUserLocation(loc: UserLocation): Promise<void> {
   await chrome.storage.local.set({ userLocation: loc });
+}
+
+// --- Data-exfiltration watch ---------------------------------------------
+
+const WATCH_KEY = 'zg.watch';
+const LEAKS_KEY = 'zg.leaks';
+const MAX_LEAKS = 100;
+
+export async function getWatchList(): Promise<WatchItem[]> {
+  try {
+    const s = await chrome.storage.local.get(WATCH_KEY);
+    const list = s[WATCH_KEY];
+    return Array.isArray(list) ? (list as WatchItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function setWatchList(items: WatchItem[]): Promise<void> {
+  await chrome.storage.local.set({ [WATCH_KEY]: items });
+}
+
+export async function getLeakEvents(): Promise<LeakEvent[]> {
+  try {
+    const s = await chrome.storage.local.get(LEAKS_KEY);
+    const list = s[LEAKS_KEY];
+    return Array.isArray(list) ? (list as LeakEvent[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Serialize writes: two leaks firing at once would otherwise read the same
+// array and clobber each other (last write wins), silently dropping an event.
+let leakWrite: Promise<void> = Promise.resolve();
+
+export async function addLeakEvent(event: LeakEvent): Promise<void> {
+  leakWrite = leakWrite
+    .then(async () => {
+      const events = await getLeakEvents();
+      events.unshift(event);
+      await chrome.storage.local.set({ [LEAKS_KEY]: events.slice(0, MAX_LEAKS) });
+    })
+    .catch(() => {
+      // keep the chain alive even if one write fails
+    });
+  return leakWrite;
+}
+
+export async function clearLeakEvents(): Promise<void> {
+  await chrome.storage.local.set({ [LEAKS_KEY]: [] });
 }

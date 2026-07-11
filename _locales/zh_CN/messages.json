@@ -838,5 +838,66 @@
   },
   "warningFramedNotice": {
     "message": "此安全页面无法在其他网站中显示。请直接打开。"
+  },
+  "leakTitle": {
+    "message": "您的信息刚刚被发送"
+  },
+  "leakBlock": {
+    "message": "屏蔽 $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ 已发送至 $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "您的邮箱"
+  },
+  "leakKind_phone": {
+    "message": "您的电话号码"
+  },
+  "leakKind_custom": {
+    "message": "您的信息"
+  },
+  "watchTitle": {
+    "message": "监视你的信息"
+  },
+  "watchDesc": {
+    "message": "当您的邮箱、电话或任何添加的值被发送到其他网站时发出警告——即使经过哈希。所有匹配都在您的设备上完成。"
+  },
+  "watchKindEmail": {
+    "message": "邮箱"
+  },
+  "watchKindPhone": {
+    "message": "电话"
+  },
+  "watchKindCustom": {
+    "message": "自定义"
+  },
+  "watchPlaceholder": {
+    "message": "要监视的值"
+  },
+  "watchAdd": {
+    "message": "添加"
+  },
+  "watchTooShort": {
+    "message": "太短，无法安全监视（5 个以上字符）。"
+  },
+  "watchRemove": {
+    "message": "移除"
+  },
+  "watchLeaksTitle": {
+    "message": "最近捕获的泄露"
   }
 }

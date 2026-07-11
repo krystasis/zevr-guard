@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: 广告拦截、反跟踪、恶意软件与钓鱼防护"
+  },
+  "extDescription": {
+    "message": "拦截广告、跟踪器、恶意软件与钓鱼网站。在实时世界地图上查看浏览器正与哪些公司通信。100% 本地处理，数据绝不外传。"
+  },
+  "protectionActive": {
+    "message": "防护已开启"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "首款产品"
+  },
+  "heroTagline": {
+    "message": "看清浏览器在和谁通信。"
+  },
+  "heroTaglineAccent": {
+    "message": "自动拦截危险连接。"
+  },
+  "heroDescription": {
+    "message": "实时查看你的浏览器正连向世界的哪些角落。危险连接会被自动拦截。"
+  },
+  "ctaOpenGlobe": {
+    "message": "打开实时地球"
+  },
+  "ctaStartBrowsing": {
+    "message": "开始浏览"
+  },
+  "trustTrackers": {
+    "message": "$N$ 个跟踪器信号",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "威胁库每日更新"
+  },
+  "trust100Local": {
+    "message": "仅本地匹配"
+  },
+  "trustNoTelemetry": {
+    "message": "绝不上传网址"
+  },
+  "scrollHint": {
+    "message": "滚动"
+  },
+  "howItWorks": {
+    "message": "工作原理"
+  },
+  "fourLayersTitle": {
+    "message": "四重防护"
+  },
+  "feature1Title": {
+    "message": "自动拦截恶意软件"
+  },
+  "feature1Desc": {
+    "message": "已知的恶意软件和钓鱼域名在你察觉之前就被拦截。威胁列表每天自动更新。"
+  },
+  "feature2Title": {
+    "message": "看清每一个跟踪器"
+  },
+  "feature2Desc": {
+    "message": "内置 115,000+ 跟踪器信号数据库，识别哪些公司在触达你的浏览器、频率如何、来自哪里。"
+  },
+  "feature3Title": {
+    "message": "可疑连接即时警示"
+  },
+  "feature3Desc": {
+    "message": "广告、分析和指纹识别域名以颜色高亮标示。实时查看每个页面的跟踪密度。"
+  },
+  "feature4Title": {
+    "message": "本地匹配，网址绝不外传。"
+  },
+  "feature4Desc": {
+    "message": "所有匹配完全在你的浏览器内完成。唯一的对外流量是从我们 CDN 获取的匿名威胁库更新——你的浏览记录哪儿也不去。"
+  },
+  "dataSourcesTitle": {
+    "message": "静默防御，规模可验证。"
+  },
+  "dataSourcesSubtitle": {
+    "message": "数据一览"
+  },
+  "dataByNumbers1Value": {
+    "message": "115,000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "个信号"
+  },
+  "dataByNumbers1Label": {
+    "message": "跟踪器识别数据库"
+  },
+  "dataByNumbers2Value": {
+    "message": "每日"
+  },
+  "dataByNumbers2Unit": {
+    "message": "更新"
+  },
+  "dataByNumbers2Label": {
+    "message": "通过我们的 CDN 自动刷新"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "个国家/地区"
+  },
+  "dataByNumbers3Label": {
+    "message": "地理定位覆盖范围"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "条网址上传"
+  },
+  "dataByNumbers4Label": {
+    "message": "你的浏览记录绝不外传"
+  },
+  "languageSwitchLabel": {
+    "message": "语言"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "网络可视化，即刻呈现"
+  },
+  "warningTitle": {
+    "message": "已拦截危险网站"
+  },
+  "warningSubtitle": {
+    "message": "由 Zevr Guard 提供保护"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard 已阻止访问："
+  },
+  "warningListHeader": {
+    "message": "该域名已被收录于已知恶意软件/钓鱼数据库。"
+  },
+  "warningListIntro": {
+    "message": "访问此网站可能会："
+  },
+  "warningListItem1": {
+    "message": "在你的设备上安装恶意软件"
+  },
+  "warningListItem2": {
+    "message": "窃取你的密码或个人信息"
+  },
+  "warningListItem3": {
+    "message": "劫持你的浏览器或账户"
+  },
+  "warningGoBack": {
+    "message": "返回（安全）"
+  },
+  "warningUnderstandRisk": {
+    "message": "我了解风险"
+  },
+  "warningOverrideDetail": {
+    "message": "如仍要继续，请在 Zevr Guard 弹窗中（拦截/解除拦截按钮）将该域名从拦截列表移除，然后重新加载页面。"
+  },
+  "warningFooter": {
+    "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
+  },
+  "riskMsgSafe": {
+    "message": "此页面安全"
+  },
+  "riskMsgTracker": {
+    "message": "检测到跟踪器"
+  },
+  "riskMsgSuspicious": {
+    "message": "检测到可疑流量"
+  },
+  "riskMsgDangerous": {
+    "message": "检测到危险流量"
+  },
+  "settingsGeneral": {
+    "message": "常规"
+  },
+  "settingsNotifications": {
+    "message": "通知"
+  },
+  "settingsNotificationsDesc": {
+    "message": "检测到危险流量时通知我"
+  },
+  "settingsBlockCategories": {
+    "message": "拦截类别"
+  },
+  "settingsMalware": {
+    "message": "恶意软件 / 钓鱼"
+  },
+  "settingsMalwareDesc": {
+    "message": "已知恶意软件与钓鱼（推荐）"
+  },
+  "settingsAdvertising": {
+    "message": "广告"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "广告域名"
+  },
+  "settingsTracking": {
+    "message": "跟踪"
+  },
+  "settingsTrackingDesc": {
+    "message": "跟踪与分析域名"
+  },
+  "settingsCustomBlocklist": {
+    "message": "自定义拦截列表"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "暂无已拦截域名"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 个域名"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ 个域名",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "自定义允许列表"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "暂无已允许域名"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 个域名"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ 个域名",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "此处添加的域名将绕过所有拦截规则，包括恶意软件。"
+  },
+  "allowBarThisSite": {
+    "message": "当前网站"
+  },
+  "allowBarAllowed": {
+    "message": "已允许"
+  },
+  "allowBarAllow": {
+    "message": "允许"
+  },
+  "allowBarRevoke": {
+    "message": "撤销"
+  },
+  "allowBarAddTitle": {
+    "message": "将此网站加入允许列表（绕过拦截）"
+  },
+  "allowBarRemoveTitle": {
+    "message": "将此网站从允许列表移除"
+  },
+  "remove": {
+    "message": "移除"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "实时地球"
+  },
+  "popupStatusLive": {
+    "message": "防护运行中"
+  },
+  "popupScanning": {
+    "message": "扫描中..."
+  },
+  "popupNoData": {
+    "message": "此页面暂无数据。"
+  },
+  "popupReloadToMonitor": {
+    "message": "重新加载标签页即可开始监测。"
+  },
+  "metricDomains": {
+    "message": "域名"
+  },
+  "metricRequests": {
+    "message": "请求"
+  },
+  "metricBlocked": {
+    "message": "已拦截"
+  },
+  "todayTrackers": {
+    "message": "今日跟踪器"
+  },
+  "todayBlocked": {
+    "message": "今日已拦截"
+  },
+  "todayCompanies": {
+    "message": "公司"
+  },
+  "riskScoreLabel": {
+    "message": "风险评分"
+  },
+  "riskLabelSafe": {
+    "message": "安全"
+  },
+  "riskLabelTracker": {
+    "message": "跟踪"
+  },
+  "riskLabelSuspicious": {
+    "message": "可疑"
+  },
+  "riskLabelDangerous": {
+    "message": "危险"
+  },
+  "connectionsCount": {
+    "message": "连接"
+  },
+  "monitoringConnections": {
+    "message": "正在监测连接..."
+  },
+  "noMatchingConnections": {
+    "message": "没有匹配的连接。"
+  },
+  "backToList": {
+    "message": "返回列表"
+  },
+  "filterAll": {
+    "message": "全部"
+  },
+  "filterDangerShort": {
+    "message": "危险"
+  },
+  "filterSuspicShort": {
+    "message": "可疑"
+  },
+  "filterTrackerShort": {
+    "message": "跟踪"
+  },
+  "filterSafeShort": {
+    "message": "安全"
+  },
+  "viewLabel": {
+    "message": "视图"
+  },
+  "groupDomains": {
+    "message": "域名"
+  },
+  "groupCompanies": {
+    "message": "公司"
+  },
+  "groupDomainCount": {
+    "message": "$N$ 个域名",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 个域名"
+  },
+  "detailCompany": {
+    "message": "公司"
+  },
+  "detailCategory": {
+    "message": "类别"
+  },
+  "detailLocation": {
+    "message": "位置"
+  },
+  "detailHostedBy": {
+    "message": "托管方"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "请求数"
+  },
+  "detailFirstSeen": {
+    "message": "首次发现"
+  },
+  "unblockThisDomain": {
+    "message": "解除拦截此域名"
+  },
+  "blockThisDomain": {
+    "message": "拦截此域名"
+  },
+  "block": {
+    "message": "拦截"
+  },
+  "unblock": {
+    "message": "解除拦截"
+  },
+  "legendSafe": {
+    "message": "安全"
+  },
+  "legendTracker": {
+    "message": "跟踪"
+  },
+  "legendSuspicious": {
+    "message": "可疑"
+  },
+  "legendDangerous": {
+    "message": "危险"
+  },
+  "stripTrackers": {
+    "message": "跟踪器"
+  },
+  "stripBlocked": {
+    "message": "已拦截"
+  },
+  "stripCompanies": {
+    "message": "公司"
+  },
+  "thisPage": {
+    "message": "当前页面"
+  },
+  "backToConnections": {
+    "message": "返回连接列表"
+  },
+  "drillRequests": {
+    "message": "请求"
+  },
+  "drillDomains": {
+    "message": "域名"
+  },
+  "drillCompanies": {
+    "message": "公司"
+  },
+  "noTrackersOnPage": {
+    "message": "此页面没有跟踪器。"
+  },
+  "noCompaniesOnPage": {
+    "message": "此页面未识别到任何公司。"
+  },
+  "nothingBlocked": {
+    "message": "此页面没有拦截任何内容。"
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard 正在守护——危险网站将被自动拦截。"
+  },
+  "onThisPage": {
+    "message": "在此页面上"
+  },
+  "requestsBlockedCount": {
+    "message": "此页面已拦截 $N$ 个请求",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "自动拦截的域名详情不在此处记录"
+  },
+  "pinBadge": {
+    "message": "固定"
+  },
+  "pauseBarPaused": {
+    "message": "拦截已暂停"
+  },
+  "pauseBarPause": {
+    "message": "暂停"
+  },
+  "pauseBarResume": {
+    "message": "恢复"
+  },
+  "pauseBarPauseTitle": {
+    "message": "在此网站暂停拦截（可修复页面异常）"
+  },
+  "pauseBarResumeTitle": {
+    "message": "在此网站恢复拦截"
+  },
+  "settingsPausedSites": {
+    "message": "已暂停的网站"
+  },
+  "shareTitle": {
+    "message": "分享此次扫描"
+  },
+  "shareTagline": {
+    "message": "你的浏览器在和谁通信？"
+  },
+  "shareHeadline": {
+    "message": "$C$ 家公司 · $N$ 个国家",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ 正与 $N$ 个国家的 $C$ 家公司通信——由 Zevr Guard 监测并拦截",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "保存图片"
+  },
+  "sharePost": {
+    "message": "发布"
+  },
+  "shareHint": {
+    "message": "发布时图片已复制——在输入框按 Ctrl+V 即可附上。"
+  },
+  "reportTitle": {
+    "message": "防护报告"
+  },
+  "reportSubtitle": {
+    "message": "每周防护报告"
+  },
+  "reportBlocked": {
+    "message": "已拦截"
+  },
+  "reportConnections": {
+    "message": "连接"
+  },
+  "reportTrackers": {
+    "message": "跟踪器"
+  },
+  "reportDangerous": {
+    "message": "危险"
+  },
+  "reportDailyBlocked": {
+    "message": "每日拦截数"
+  },
+  "reportTopCompanies": {
+    "message": "监视你最多的公司"
+  },
+  "reportTopBlocked": {
+    "message": "被拦截最多的域名"
+  },
+  "reportNoData": {
+    "message": "暂无数据——先随便浏览一会儿吧。"
+  },
+  "reportFooter": {
+    "message": "所有数据均存储在本设备上。"
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 已拦截 $N$ 个威胁！",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard 一直在默默守护你。如果它帮到了你，留个好评也能帮助更多人发现它。"
+  },
+  "reviewPromptRate": {
+    "message": "为 Zevr Guard 评分 ★"
+  },
+  "reviewPromptLater": {
+    "message": "稍后再说"
+  },
+  "riskExplainDangerous": {
+    "message": "该域名已被收录于已知恶意软件/钓鱼数据库，可能试图窃取你的数据或安装恶意软件。"
+  },
+  "riskExplainSuspicious": {
+    "message": "该域名用于广告或跟踪，会收集你的浏览行为数据。"
+  },
+  "riskExplainTracker": {
+    "message": "该域名用于分析或内容分发，可能收集部分使用数据。"
+  },
+  "riskExplainSafe": {
+    "message": "该域名看起来是安全的，未检测到已知跟踪或恶意行为。"
+  },
+  "sidePanelOpenTitle": {
+    "message": "打开实时地球侧边栏"
+  },
+  "settingsTitle": {
+    "message": "设置"
+  },
+  "unpinTitle": {
+    "message": "再次点击取消固定"
+  },
+  "youLabel": {
+    "message": "你"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ 检测到危险连接"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ 是已知的恶意软件/钓鱼域名。",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "更多功能"
+  },
+  "welcomeAlsoShare": {
+    "message": "一键生成分享卡片"
+  },
+  "welcomeAlsoReport": {
+    "message": "每周防护报告"
+  },
+  "welcomeAlsoPause": {
+    "message": "按网站暂停"
+  },
+  "welcomeAlsoLangs": {
+    "message": "支持 $N$ 种语言",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "已拦截疑似钓鱼网站"
+  },
+  "warningLookalikeNotSame": {
+    "message": "并非以下网站："
+  },
+  "warningLookalikeHeader": {
+    "message": "该地址仿冒 $BRAND$，并非真正的官方网站。",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "仿冒网站通常用于："
+  },
+  "warningLookalikeItem1": {
+    "message": "窃取你的密码或登录验证码"
+  },
+  "warningLookalikeItem2": {
+    "message": "骗取信用卡或银行信息"
+  },
+  "warningLookalikeItem3": {
+    "message": "伪装成正版服务投放恶意软件"
+  },
+  "warningLookalikeDetected": {
+    "message": "由设备端仿冒分析检测。你的网址从未离开此浏览器。"
+  },
+  "warningProceedAnyway": {
+    "message": "仍要继续（不推荐）"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "仿冒钓鱼检测"
+  }
+}

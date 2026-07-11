@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: 廣告封鎖、追蹤器攔截、惡意軟體與釣魚防護"
+  },
+  "extDescription": {
+    "message": "封鎖廣告、追蹤器、惡意軟體與釣魚網站。在即時世界地圖上看清瀏覽器正與哪些公司連線。100% 本機處理，絕不上傳任何資料。"
+  },
+  "protectionActive": {
+    "message": "防護已啟用"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "首款產品"
+  },
+  "heroTagline": {
+    "message": "看清瀏覽器在和誰對話。"
+  },
+  "heroTaglineAccent": {
+    "message": "自動封鎖危險連線。"
+  },
+  "heroDescription": {
+    "message": "即時掌握瀏覽器正連向世界的哪些角落，危險連線會被自動封鎖。"
+  },
+  "ctaOpenGlobe": {
+    "message": "開啟即時地球儀"
+  },
+  "ctaStartBrowsing": {
+    "message": "開始瀏覽"
+  },
+  "trustTrackers": {
+    "message": "$N$ 筆追蹤器特徵",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "資料庫每日更新"
+  },
+  "trust100Local": {
+    "message": "僅在本機比對"
+  },
+  "trustNoTelemetry": {
+    "message": "不上傳任何網址"
+  },
+  "scrollHint": {
+    "message": "捲動"
+  },
+  "howItWorks": {
+    "message": "運作方式"
+  },
+  "fourLayersTitle": {
+    "message": "四層防護"
+  },
+  "feature1Title": {
+    "message": "自動封鎖惡意軟體"
+  },
+  "feature1Desc": {
+    "message": "已知的惡意軟體與釣魚網域，在你察覺之前就被封鎖。威脅清單每天自動更新。"
+  },
+  "feature2Title": {
+    "message": "看見每一個追蹤器"
+  },
+  "feature2Desc": {
+    "message": "超過 115,000 筆追蹤器特徵的資料庫，辨識出哪些公司正接觸你的瀏覽器、頻率多高、來自何處。"
+  },
+  "feature3Title": {
+    "message": "可疑連線即時警示"
+  },
+  "feature3Desc": {
+    "message": "廣告、分析與指紋辨識網域會以顏色標示，即時呈現每個頁面的追蹤密度。"
+  },
+  "feature4Title": {
+    "message": "本機比對，網址絕不外流。"
+  },
+  "feature4Desc": {
+    "message": "比對完全在你的瀏覽器內完成。唯一的對外流量是從我們的 CDN 匿名下載威脅資料庫更新——你的瀏覽紀錄哪裡都不會去。"
+  },
+  "dataSourcesTitle": {
+    "message": "安靜的防禦，規模可驗證。"
+  },
+  "dataSourcesSubtitle": {
+    "message": "數字會說話"
+  },
+  "dataByNumbers1Value": {
+    "message": "115,000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "筆特徵"
+  },
+  "dataByNumbers1Label": {
+    "message": "追蹤器辨識資料庫"
+  },
+  "dataByNumbers2Value": {
+    "message": "每日"
+  },
+  "dataByNumbers2Unit": {
+    "message": "更新"
+  },
+  "dataByNumbers2Label": {
+    "message": "透過我們的 CDN 自動更新"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "個國家"
+  },
+  "dataByNumbers3Label": {
+    "message": "地理位置涵蓋範圍"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "筆網址上傳"
+  },
+  "dataByNumbers4Label": {
+    "message": "瀏覽紀錄絕不離開裝置"
+  },
+  "languageSwitchLabel": {
+    "message": "語言"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "即刻看見網路連線全貌"
+  },
+  "warningTitle": {
+    "message": "已封鎖危險網站"
+  },
+  "warningSubtitle": {
+    "message": "由 Zevr Guard 提供防護"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard 已封鎖對以下網站的存取："
+  },
+  "warningListHeader": {
+    "message": "此網域已被列入已知的惡意軟體／釣魚資料庫。"
+  },
+  "warningListIntro": {
+    "message": "造訪此網站可能會："
+  },
+  "warningListItem1": {
+    "message": "在你的裝置安裝惡意軟體"
+  },
+  "warningListItem2": {
+    "message": "竊取你的密碼或個人資料"
+  },
+  "warningListItem3": {
+    "message": "挾持你的瀏覽器或帳號"
+  },
+  "warningGoBack": {
+    "message": "返回安全頁面"
+  },
+  "warningUnderstandRisk": {
+    "message": "我了解風險"
+  },
+  "warningOverrideDetail": {
+    "message": "若仍要前往，請在 Zevr Guard 的彈出視窗中（封鎖／解除封鎖按鈕）將此網域從封鎖清單移除，再重新載入頁面。"
+  },
+  "warningFooter": {
+    "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
+  },
+  "riskMsgSafe": {
+    "message": "此頁面安全"
+  },
+  "riskMsgTracker": {
+    "message": "偵測到追蹤器"
+  },
+  "riskMsgSuspicious": {
+    "message": "偵測到可疑流量"
+  },
+  "riskMsgDangerous": {
+    "message": "偵測到危險流量"
+  },
+  "settingsGeneral": {
+    "message": "一般"
+  },
+  "settingsNotifications": {
+    "message": "通知"
+  },
+  "settingsNotificationsDesc": {
+    "message": "偵測到危險流量時通知我"
+  },
+  "settingsBlockCategories": {
+    "message": "封鎖類別"
+  },
+  "settingsMalware": {
+    "message": "惡意軟體／釣魚"
+  },
+  "settingsMalwareDesc": {
+    "message": "已知惡意軟體與釣魚網站（建議開啟）"
+  },
+  "settingsAdvertising": {
+    "message": "廣告"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "廣告網域"
+  },
+  "settingsTracking": {
+    "message": "追蹤"
+  },
+  "settingsTrackingDesc": {
+    "message": "追蹤與分析網域"
+  },
+  "settingsCustomBlocklist": {
+    "message": "自訂封鎖清單"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "沒有已封鎖的網域"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 個網域"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ 個網域",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "自訂允許清單"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "沒有已允許的網域"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 個網域"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ 個網域",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "加入此清單的網域將略過所有封鎖規則，包括惡意軟體。"
+  },
+  "allowBarThisSite": {
+    "message": "此網站"
+  },
+  "allowBarAllowed": {
+    "message": "已允許"
+  },
+  "allowBarAllow": {
+    "message": "允許"
+  },
+  "allowBarRevoke": {
+    "message": "撤銷"
+  },
+  "allowBarAddTitle": {
+    "message": "將此網站加入允許清單（略過封鎖）"
+  },
+  "allowBarRemoveTitle": {
+    "message": "將此網站從允許清單移除"
+  },
+  "remove": {
+    "message": "移除"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "即時地球儀"
+  },
+  "popupStatusLive": {
+    "message": "防護運作中"
+  },
+  "popupScanning": {
+    "message": "掃描中..."
+  },
+  "popupNoData": {
+    "message": "此頁面尚無資料。"
+  },
+  "popupReloadToMonitor": {
+    "message": "重新載入分頁即可開始監測。"
+  },
+  "metricDomains": {
+    "message": "網域"
+  },
+  "metricRequests": {
+    "message": "請求"
+  },
+  "metricBlocked": {
+    "message": "已封鎖"
+  },
+  "todayTrackers": {
+    "message": "今日追蹤器"
+  },
+  "todayBlocked": {
+    "message": "今日封鎖"
+  },
+  "todayCompanies": {
+    "message": "公司"
+  },
+  "riskScoreLabel": {
+    "message": "風險分數"
+  },
+  "riskLabelSafe": {
+    "message": "安全"
+  },
+  "riskLabelTracker": {
+    "message": "追蹤"
+  },
+  "riskLabelSuspicious": {
+    "message": "可疑"
+  },
+  "riskLabelDangerous": {
+    "message": "危險"
+  },
+  "connectionsCount": {
+    "message": "連線"
+  },
+  "monitoringConnections": {
+    "message": "正在監測連線..."
+  },
+  "noMatchingConnections": {
+    "message": "沒有符合的連線。"
+  },
+  "backToList": {
+    "message": "返回清單"
+  },
+  "filterAll": {
+    "message": "全部"
+  },
+  "filterDangerShort": {
+    "message": "危險"
+  },
+  "filterSuspicShort": {
+    "message": "可疑"
+  },
+  "filterTrackerShort": {
+    "message": "追蹤"
+  },
+  "filterSafeShort": {
+    "message": "安全"
+  },
+  "viewLabel": {
+    "message": "檢視"
+  },
+  "groupDomains": {
+    "message": "網域"
+  },
+  "groupCompanies": {
+    "message": "公司"
+  },
+  "groupDomainCount": {
+    "message": "$N$ 個網域",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 個網域"
+  },
+  "detailCompany": {
+    "message": "公司"
+  },
+  "detailCategory": {
+    "message": "類別"
+  },
+  "detailLocation": {
+    "message": "位置"
+  },
+  "detailHostedBy": {
+    "message": "代管業者"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "請求數"
+  },
+  "detailFirstSeen": {
+    "message": "首次偵測"
+  },
+  "unblockThisDomain": {
+    "message": "解除封鎖此網域"
+  },
+  "blockThisDomain": {
+    "message": "封鎖此網域"
+  },
+  "block": {
+    "message": "封鎖"
+  },
+  "unblock": {
+    "message": "解除封鎖"
+  },
+  "legendSafe": {
+    "message": "安全"
+  },
+  "legendTracker": {
+    "message": "追蹤器"
+  },
+  "legendSuspicious": {
+    "message": "可疑"
+  },
+  "legendDangerous": {
+    "message": "危險"
+  },
+  "stripTrackers": {
+    "message": "追蹤器"
+  },
+  "stripBlocked": {
+    "message": "已封鎖"
+  },
+  "stripCompanies": {
+    "message": "公司"
+  },
+  "thisPage": {
+    "message": "此頁面"
+  },
+  "backToConnections": {
+    "message": "返回連線清單"
+  },
+  "drillRequests": {
+    "message": "請求"
+  },
+  "drillDomains": {
+    "message": "網域"
+  },
+  "drillCompanies": {
+    "message": "公司"
+  },
+  "noTrackersOnPage": {
+    "message": "此頁面沒有追蹤器。"
+  },
+  "noCompaniesOnPage": {
+    "message": "此頁面沒有可辨識的公司。"
+  },
+  "nothingBlocked": {
+    "message": "此頁面沒有封鎖任何項目。"
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard 正在守護中——危險網站會被自動封鎖。"
+  },
+  "onThisPage": {
+    "message": "在此頁面"
+  },
+  "requestsBlockedCount": {
+    "message": "此頁面已封鎖 $N$ 個請求",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "自動封鎖的網域詳細資訊不會在此顯示"
+  },
+  "pinBadge": {
+    "message": "釘選"
+  },
+  "pauseBarPaused": {
+    "message": "封鎖已暫停"
+  },
+  "pauseBarPause": {
+    "message": "暫停"
+  },
+  "pauseBarResume": {
+    "message": "恢復"
+  },
+  "pauseBarPauseTitle": {
+    "message": "在此網站暫停封鎖（可修復顯示異常的網站）"
+  },
+  "pauseBarResumeTitle": {
+    "message": "在此網站恢復封鎖"
+  },
+  "settingsPausedSites": {
+    "message": "已暫停的網站"
+  },
+  "shareTitle": {
+    "message": "分享這次掃描"
+  },
+  "shareTagline": {
+    "message": "你的瀏覽器正在和誰對話？"
+  },
+  "shareHeadline": {
+    "message": "$C$ 家公司 · $N$ 個國家",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ 正與 $N$ 個國家的 $C$ 家公司連線——由 Zevr Guard 全程監測並封鎖",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "儲存圖片"
+  },
+  "sharePost": {
+    "message": "發佈"
+  },
+  "shareHint": {
+    "message": "發佈時圖片已自動複製——在輸入框按 Ctrl+V 即可附上。"
+  },
+  "reportTitle": {
+    "message": "防護報告"
+  },
+  "reportSubtitle": {
+    "message": "每週防護報告"
+  },
+  "reportBlocked": {
+    "message": "已封鎖"
+  },
+  "reportConnections": {
+    "message": "連線"
+  },
+  "reportTrackers": {
+    "message": "追蹤器"
+  },
+  "reportDangerous": {
+    "message": "危險"
+  },
+  "reportDailyBlocked": {
+    "message": "每日封鎖數"
+  },
+  "reportTopCompanies": {
+    "message": "最常監視你的公司"
+  },
+  "reportTopBlocked": {
+    "message": "封鎖次數最多的網域"
+  },
+  "reportNoData": {
+    "message": "尚無資料——先瀏覽幾個網頁吧。"
+  },
+  "reportFooter": {
+    "message": "所有資料皆儲存在本機裝置上。"
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 已封鎖 $N$ 個威脅！",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard 一直在默默守護你。如果覺得好用，留下評價也能幫助更多人找到它。"
+  },
+  "reviewPromptRate": {
+    "message": "為 Zevr Guard 評分 ★"
+  },
+  "reviewPromptLater": {
+    "message": "稍後再說"
+  },
+  "riskExplainDangerous": {
+    "message": "此網域已列於已知的惡意軟體／釣魚資料庫，可能會試圖竊取你的資料或安裝惡意軟體。"
+  },
+  "riskExplainSuspicious": {
+    "message": "此網域用於廣告或追蹤，會蒐集你的瀏覽行為資料。"
+  },
+  "riskExplainTracker": {
+    "message": "此網域用於分析或內容傳遞，可能會蒐集部分使用資料。"
+  },
+  "riskExplainSafe": {
+    "message": "此網域看起來是安全的，未偵測到已知的追蹤或惡意活動。"
+  },
+  "sidePanelOpenTitle": {
+    "message": "開啟即時地球儀側邊面板"
+  },
+  "settingsTitle": {
+    "message": "設定"
+  },
+  "unpinTitle": {
+    "message": "再按一次取消釘選"
+  },
+  "youLabel": {
+    "message": "你"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ 偵測到危險連線"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ 是已知的惡意軟體／釣魚網域。",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "同時內建"
+  },
+  "welcomeAlsoShare": {
+    "message": "一鍵分享卡片"
+  },
+  "welcomeAlsoReport": {
+    "message": "每週防護報告"
+  },
+  "welcomeAlsoPause": {
+    "message": "單一網站暫停"
+  },
+  "welcomeAlsoLangs": {
+    "message": "支援 $N$ 種語言",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "已封鎖疑似釣魚網站"
+  },
+  "warningLookalikeNotSame": {
+    "message": "並非以下網站："
+  },
+  "warningLookalikeHeader": {
+    "message": "此網址仿冒 $BRAND$，並不是真正的網站。",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "仿冒網站通常被用來："
+  },
+  "warningLookalikeItem1": {
+    "message": "竊取你的密碼或登入驗證碼"
+  },
+  "warningLookalikeItem2": {
+    "message": "擷取信用卡或銀行帳戶資訊"
+  },
+  "warningLookalikeItem3": {
+    "message": "偽裝成真正的服務散布惡意軟體"
+  },
+  "warningLookalikeDetected": {
+    "message": "由裝置端仿冒網域分析偵測。你的網址從未離開這個瀏覽器。"
+  },
+  "warningProceedAnyway": {
+    "message": "仍要繼續（不建議）"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "仿冒釣魚網域偵測"
+  }
+}

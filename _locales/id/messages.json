@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Pemblokir Iklan, Pelacak & Perlindungan Malware"
+  },
+  "extDescription": {
+    "message": "Blokir iklan, pelacak, malware & phishing. Lihat semua koneksi browser Anda di peta dunia langsung. 100% lokal — tanpa kirim data."
+  },
+  "protectionActive": {
+    "message": "Perlindungan aktif"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Produk pertama"
+  },
+  "heroTagline": {
+    "message": "Lihat dengan siapa browser Anda berkomunikasi."
+  },
+  "heroTaglineAccent": {
+    "message": "Blokir yang berbahaya."
+  },
+  "heroDescription": {
+    "message": "Lihat bagian dunia mana yang dijangkau browser Anda secara real-time. Koneksi berbahaya diblokir secara otomatis."
+  },
+  "ctaOpenGlobe": {
+    "message": "Buka Globe Langsung"
+  },
+  "ctaStartBrowsing": {
+    "message": "Mulai menjelajah"
+  },
+  "trustTrackers": {
+    "message": "$N$ sinyal pelacak",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Pembaruan DB harian"
+  },
+  "trust100Local": {
+    "message": "Pencocokan lokal saja"
+  },
+  "trustNoTelemetry": {
+    "message": "Tanpa unggah URL"
+  },
+  "scrollHint": {
+    "message": "Gulir"
+  },
+  "howItWorks": {
+    "message": "Cara kerjanya"
+  },
+  "fourLayersTitle": {
+    "message": "Empat lapis perlindungan"
+  },
+  "feature1Title": {
+    "message": "Blokir malware otomatis"
+  },
+  "feature1Desc": {
+    "message": "Domain malware dan phishing yang dikenal diblokir sebelum Anda menyadarinya. Daftar ancaman diperbarui secara otomatis setiap hari."
+  },
+  "feature2Title": {
+    "message": "Lihat semua pelacak"
+  },
+  "feature2Desc": {
+    "message": "Basis data 115.000+ sinyal pelacak mengidentifikasi perusahaan mana saja yang menjangkau browser Anda, seberapa sering, dan dari mana."
+  },
+  "feature3Title": {
+    "message": "Peringatkan yang mencurigakan"
+  },
+  "feature3Desc": {
+    "message": "Domain iklan, analitik, dan fingerprinting disorot dengan warna. Lihat kepadatan pelacakan setiap halaman secara real-time."
+  },
+  "feature4Title": {
+    "message": "Pencocokan lokal. URL Anda tidak pernah keluar."
+  },
+  "feature4Desc": {
+    "message": "Pencocokan berjalan sepenuhnya di browser Anda. Satu-satunya lalu lintas keluar adalah pembaruan DB ancaman anonim dari CDN kami — riwayat penjelajahan Anda tidak ke mana-mana."
+  },
+  "dataSourcesTitle": {
+    "message": "Pertahanan senyap, dalam skala yang dapat diverifikasi."
+  },
+  "dataSourcesSubtitle": {
+    "message": "Dalam angka"
+  },
+  "dataByNumbers1Value": {
+    "message": "115.000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "sinyal"
+  },
+  "dataByNumbers1Label": {
+    "message": "DB identifikasi pelacak"
+  },
+  "dataByNumbers2Value": {
+    "message": "harian"
+  },
+  "dataByNumbers2Unit": {
+    "message": "pembaruan"
+  },
+  "dataByNumbers2Label": {
+    "message": "Diperbarui otomatis via CDN kami"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "negara"
+  },
+  "dataByNumbers3Label": {
+    "message": "Cakupan geolokasi"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL terkirim"
+  },
+  "dataByNumbers4Label": {
+    "message": "Penjelajahan Anda tidak pernah keluar"
+  },
+  "languageSwitchLabel": {
+    "message": "Bahasa"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Visibilitas jaringan, seketika"
+  },
+  "warningTitle": {
+    "message": "Situs Berbahaya Diblokir"
+  },
+  "warningSubtitle": {
+    "message": "Dilindungi oleh Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard memblokir akses ke:"
+  },
+  "warningListHeader": {
+    "message": "Domain ini terdaftar dalam basis data malware/phishing yang dikenal."
+  },
+  "warningListIntro": {
+    "message": "Mengunjungi situs ini dapat:"
+  },
+  "warningListItem1": {
+    "message": "Memasang malware di perangkat Anda"
+  },
+  "warningListItem2": {
+    "message": "Mencuri kata sandi atau data pribadi Anda"
+  },
+  "warningListItem3": {
+    "message": "Membajak browser atau akun Anda"
+  },
+  "warningGoBack": {
+    "message": "Kembali (Aman)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Saya memahami risikonya"
+  },
+  "warningOverrideDetail": {
+    "message": "Untuk tetap melanjutkan, hapus domain ini dari daftar blokir Anda melalui popup Zevr Guard (tombol blokir/buka blokir), lalu muat ulang."
+  },
+  "warningFooter": {
+    "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"
+  },
+  "riskMsgSafe": {
+    "message": "Halaman ini aman"
+  },
+  "riskMsgTracker": {
+    "message": "Pelacak terdeteksi"
+  },
+  "riskMsgSuspicious": {
+    "message": "Lalu lintas mencurigakan terdeteksi"
+  },
+  "riskMsgDangerous": {
+    "message": "Lalu lintas berbahaya terdeteksi"
+  },
+  "settingsGeneral": {
+    "message": "Umum"
+  },
+  "settingsNotifications": {
+    "message": "Notifikasi"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Beri tahu saat lalu lintas berbahaya terdeteksi"
+  },
+  "settingsBlockCategories": {
+    "message": "Kategori pemblokiran"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Malware & phishing yang dikenal (disarankan)"
+  },
+  "settingsAdvertising": {
+    "message": "Iklan"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Domain periklanan"
+  },
+  "settingsTracking": {
+    "message": "Pelacakan"
+  },
+  "settingsTrackingDesc": {
+    "message": "Domain pelacakan & analitik"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Daftar blokir kustom"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Tidak ada domain diblokir"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Daftar izin kustom"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Tidak ada domain diizinkan"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Domain yang ditambahkan di sini melewati semua aturan pemblokiran, termasuk malware."
+  },
+  "allowBarThisSite": {
+    "message": "Situs ini"
+  },
+  "allowBarAllowed": {
+    "message": "Diizinkan"
+  },
+  "allowBarAllow": {
+    "message": "Izinkan"
+  },
+  "allowBarRevoke": {
+    "message": "Cabut"
+  },
+  "allowBarAddTitle": {
+    "message": "Tambahkan situs ini ke daftar izin (melewati pemblokiran)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Hapus situs ini dari daftar izin"
+  },
+  "remove": {
+    "message": "hapus"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Globe Langsung"
+  },
+  "popupStatusLive": {
+    "message": "perlindungan aktif"
+  },
+  "popupScanning": {
+    "message": "MEMINDAI..."
+  },
+  "popupNoData": {
+    "message": "Belum ada data untuk halaman ini."
+  },
+  "popupReloadToMonitor": {
+    "message": "Muat ulang tab untuk mulai memantau."
+  },
+  "metricDomains": {
+    "message": "domain"
+  },
+  "metricRequests": {
+    "message": "permintaan"
+  },
+  "metricBlocked": {
+    "message": "diblokir"
+  },
+  "todayTrackers": {
+    "message": "Pelacak hari ini"
+  },
+  "todayBlocked": {
+    "message": "Diblokir hari ini"
+  },
+  "todayCompanies": {
+    "message": "Perusahaan"
+  },
+  "riskScoreLabel": {
+    "message": "skor risiko"
+  },
+  "riskLabelSafe": {
+    "message": "AMAN"
+  },
+  "riskLabelTracker": {
+    "message": "PELACAK"
+  },
+  "riskLabelSuspicious": {
+    "message": "MENCURIGAKAN"
+  },
+  "riskLabelDangerous": {
+    "message": "BERBAHAYA"
+  },
+  "connectionsCount": {
+    "message": "Koneksi"
+  },
+  "monitoringConnections": {
+    "message": "Memantau koneksi..."
+  },
+  "noMatchingConnections": {
+    "message": "Tidak ada koneksi yang cocok."
+  },
+  "backToList": {
+    "message": "Kembali ke daftar"
+  },
+  "filterAll": {
+    "message": "Semua"
+  },
+  "filterDangerShort": {
+    "message": "Bahaya"
+  },
+  "filterSuspicShort": {
+    "message": "Curiga"
+  },
+  "filterTrackerShort": {
+    "message": "Pelacak"
+  },
+  "filterSafeShort": {
+    "message": "Aman"
+  },
+  "viewLabel": {
+    "message": "Tampilan"
+  },
+  "groupDomains": {
+    "message": "Domain"
+  },
+  "groupCompanies": {
+    "message": "Perusahaan"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domain"
+  },
+  "detailCompany": {
+    "message": "Perusahaan"
+  },
+  "detailCategory": {
+    "message": "Kategori"
+  },
+  "detailLocation": {
+    "message": "Lokasi"
+  },
+  "detailHostedBy": {
+    "message": "Dihosting oleh"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Permintaan"
+  },
+  "detailFirstSeen": {
+    "message": "Pertama terlihat"
+  },
+  "unblockThisDomain": {
+    "message": "Buka blokir domain ini"
+  },
+  "blockThisDomain": {
+    "message": "Blokir domain ini"
+  },
+  "block": {
+    "message": "blokir"
+  },
+  "unblock": {
+    "message": "buka blokir"
+  },
+  "legendSafe": {
+    "message": "Aman"
+  },
+  "legendTracker": {
+    "message": "Pelacak"
+  },
+  "legendSuspicious": {
+    "message": "Mencurigakan"
+  },
+  "legendDangerous": {
+    "message": "Berbahaya"
+  },
+  "stripTrackers": {
+    "message": "Pelacak"
+  },
+  "stripBlocked": {
+    "message": "Diblokir"
+  },
+  "stripCompanies": {
+    "message": "Perusahaan"
+  },
+  "thisPage": {
+    "message": "Halaman ini"
+  },
+  "backToConnections": {
+    "message": "Kembali ke koneksi"
+  },
+  "drillRequests": {
+    "message": "permintaan"
+  },
+  "drillDomains": {
+    "message": "domain"
+  },
+  "drillCompanies": {
+    "message": "perusahaan"
+  },
+  "noTrackersOnPage": {
+    "message": "Tidak ada pelacak di halaman ini."
+  },
+  "noCompaniesOnPage": {
+    "message": "Tidak ada perusahaan teridentifikasi di halaman ini."
+  },
+  "nothingBlocked": {
+    "message": "Tidak ada yang diblokir di halaman ini."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard terus mengawasi — situs berbahaya akan diblokir otomatis."
+  },
+  "onThisPage": {
+    "message": "Di halaman ini"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ permintaan diblokir di halaman ini",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Detail domain yang diblokir otomatis tidak dilacak di sini"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Pemblokiran dijeda"
+  },
+  "pauseBarPause": {
+    "message": "Jeda"
+  },
+  "pauseBarResume": {
+    "message": "Lanjutkan"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Jeda pemblokiran di situs ini (memperbaiki situs yang rusak)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Lanjutkan pemblokiran di situs ini"
+  },
+  "settingsPausedSites": {
+    "message": "Situs yang dijeda"
+  },
+  "shareTitle": {
+    "message": "Bagikan pemindaian ini"
+  },
+  "shareTagline": {
+    "message": "Dengan siapa browser Anda berkomunikasi?"
+  },
+  "shareHeadline": {
+    "message": "$C$ perusahaan · $N$ negara",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ berkomunikasi dengan $C$ perusahaan di $N$ negara — dipantau & diblokir oleh Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Simpan gambar"
+  },
+  "sharePost": {
+    "message": "Posting"
+  },
+  "shareHint": {
+    "message": "Gambar disalin saat Anda memposting — tekan Ctrl+V di kolom tulisan untuk melampirkannya."
+  },
+  "reportTitle": {
+    "message": "Laporan perlindungan"
+  },
+  "reportSubtitle": {
+    "message": "Laporan perlindungan mingguan"
+  },
+  "reportBlocked": {
+    "message": "Diblokir"
+  },
+  "reportConnections": {
+    "message": "Koneksi"
+  },
+  "reportTrackers": {
+    "message": "Pelacak"
+  },
+  "reportDangerous": {
+    "message": "Berbahaya"
+  },
+  "reportDailyBlocked": {
+    "message": "Diblokir per hari"
+  },
+  "reportTopCompanies": {
+    "message": "Perusahaan pengawas teratas"
+  },
+  "reportTopBlocked": {
+    "message": "Domain paling sering diblokir"
+  },
+  "reportNoData": {
+    "message": "Belum ada data — jelajahi web sebentar dulu."
+  },
+  "reportFooter": {
+    "message": "Semua data disimpan secara lokal di perangkat ini."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ ancaman diblokir!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard telah melindungi Anda secara diam-diam. Jika bermanfaat, ulasan singkat Anda membantu orang lain menemukannya."
+  },
+  "reviewPromptRate": {
+    "message": "Beri Nilai Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Nanti"
+  },
+  "riskExplainDangerous": {
+    "message": "Domain ini terdaftar dalam basis data malware/phishing yang dikenal. Domain ini mungkin mencoba mencuri data Anda atau memasang malware."
+  },
+  "riskExplainSuspicious": {
+    "message": "Domain ini digunakan untuk periklanan atau pelacakan. Domain ini mengumpulkan data tentang perilaku penjelajahan Anda."
+  },
+  "riskExplainTracker": {
+    "message": "Domain ini digunakan untuk analitik atau pengiriman konten. Domain ini mungkin mengumpulkan sebagian data penggunaan."
+  },
+  "riskExplainSafe": {
+    "message": "Domain ini tampak aman. Tidak terdeteksi pelacakan atau aktivitas berbahaya yang dikenal."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Buka panel samping globe langsung"
+  },
+  "settingsTitle": {
+    "message": "Pengaturan"
+  },
+  "unpinTitle": {
+    "message": "Klik lagi untuk melepas pin"
+  },
+  "youLabel": {
+    "message": "ANDA"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Koneksi Berbahaya Terdeteksi"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ adalah domain malware/phishing yang dikenal.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Juga termasuk"
+  },
+  "welcomeAlsoShare": {
+    "message": "Kartu berbagi 1 klik"
+  },
+  "welcomeAlsoReport": {
+    "message": "Laporan perlindungan mingguan"
+  },
+  "welcomeAlsoPause": {
+    "message": "Jeda per situs"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Tersedia dalam $N$ bahasa",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Dugaan Phishing Diblokir"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Bukan situs yang sama dengan:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Alamat ini meniru $BRAND$ tetapi bukan situs aslinya.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Situs tiruan biasanya digunakan untuk:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Mencuri kata sandi atau kode login Anda"
+  },
+  "warningLookalikeItem2": {
+    "message": "Merekam detail kartu kredit atau perbankan Anda"
+  },
+  "warningLookalikeItem3": {
+    "message": "Menyebarkan malware yang menyamar sebagai layanan asli"
+  },
+  "warningLookalikeDetected": {
+    "message": "Terdeteksi oleh analisis situs tiruan di perangkat. URL Anda tidak pernah meninggalkan browser ini."
+  },
+  "warningProceedAnyway": {
+    "message": "Tetap lanjutkan (tidak disarankan)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Deteksi phishing situs tiruan"
+  }
+}

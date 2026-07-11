@@ -624,7 +624,12 @@
     "message": "Pause pro Website"
   },
   "welcomeAlsoLangs": {
-    "message": "In 6 Sprachen verfügbar"
+    "message": "In $N$ Sprachen verfügbar",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
   },
   "warningLookalikeTitle": {
     "message": "Phishing-Verdacht blockiert"

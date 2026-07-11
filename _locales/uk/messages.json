@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: блокувальник реклами, трекерів і шкідливого ПЗ"
+  },
+  "extDescription": {
+    "message": "Блокує рекламу, трекери, шкідливе ПЗ і фішинг. Мапа всіх з'єднань браузера в реальному часі. 100% локально — без передачі даних."
+  },
+  "protectionActive": {
+    "message": "Захист активний"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Перший продукт"
+  },
+  "heroTagline": {
+    "message": "Побачте, з ким спілкується ваш браузер."
+  },
+  "heroTaglineAccent": {
+    "message": "Заблокуйте небезпечних."
+  },
+  "heroDescription": {
+    "message": "Спостерігайте в реальному часі, з якими куточками світу з'єднується ваш браузер. Небезпечні з'єднання блокуються автоматично."
+  },
+  "ctaOpenGlobe": {
+    "message": "Відкрити живий глобус"
+  },
+  "ctaStartBrowsing": {
+    "message": "Почати перегляд"
+  },
+  "trustTrackers": {
+    "message": "$N$ сигналів трекерів",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Щоденні оновлення бази"
+  },
+  "trust100Local": {
+    "message": "Лише локальна перевірка"
+  },
+  "trustNoTelemetry": {
+    "message": "URL не надсилаються"
+  },
+  "scrollHint": {
+    "message": "Гортайте"
+  },
+  "howItWorks": {
+    "message": "Як це працює"
+  },
+  "fourLayersTitle": {
+    "message": "Чотири рівні захисту"
+  },
+  "feature1Title": {
+    "message": "Автоблокування шкідливого ПЗ"
+  },
+  "feature1Desc": {
+    "message": "Відомі шкідливі та фішингові домени блокуються ще до того, як ви їх помітите. Список загроз оновлюється автоматично щодня."
+  },
+  "feature2Title": {
+    "message": "Побачте кожен трекер"
+  },
+  "feature2Desc": {
+    "message": "База з понад 115 000 сигналів трекерів визначає, які компанії звертаються до вашого браузера, як часто та звідки."
+  },
+  "feature3Title": {
+    "message": "Попередження про підозріле"
+  },
+  "feature3Desc": {
+    "message": "Домени реклами, аналітики та фінгерпринтингу виділяються кольором. Спостерігайте за щільністю стеження на кожній сторінці в реальному часі."
+  },
+  "feature4Title": {
+    "message": "Локальна перевірка. Ваші URL нікуди не передаються."
+  },
+  "feature4Desc": {
+    "message": "Перевірка виконується повністю у вашому браузері. Єдиний вихідний трафік — анонімні оновлення бази загроз із нашого CDN. Історія перегляду залишається у вас."
+  },
+  "dataSourcesTitle": {
+    "message": "Тихий захист у масштабі, який можна перевірити."
+  },
+  "dataSourcesSubtitle": {
+    "message": "У цифрах"
+  },
+  "dataByNumbers1Value": {
+    "message": "115 000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "сигналів"
+  },
+  "dataByNumbers1Label": {
+    "message": "База ідентифікації трекерів"
+  },
+  "dataByNumbers2Value": {
+    "message": "щодня"
+  },
+  "dataByNumbers2Unit": {
+    "message": "оновлення"
+  },
+  "dataByNumbers2Label": {
+    "message": "Автооновлення через наш CDN"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "країни"
+  },
+  "dataByNumbers3Label": {
+    "message": "Покриття геолокації"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL надіслано"
+  },
+  "dataByNumbers4Label": {
+    "message": "Ваш перегляд не залишає пристрій"
+  },
+  "languageSwitchLabel": {
+    "message": "Мова"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Видимість мережі — миттєво"
+  },
+  "warningTitle": {
+    "message": "Небезпечний сайт заблоковано"
+  },
+  "warningSubtitle": {
+    "message": "Під захистом Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard заблокував доступ до:"
+  },
+  "warningListHeader": {
+    "message": "Цей домен внесено до відомих баз шкідливого ПЗ та фішингу."
+  },
+  "warningListIntro": {
+    "message": "Відвідування цього сайту може:"
+  },
+  "warningListItem1": {
+    "message": "Встановити шкідливе ПЗ на ваш пристрій"
+  },
+  "warningListItem2": {
+    "message": "Викрасти ваші паролі чи особисті дані"
+  },
+  "warningListItem3": {
+    "message": "Перехопити керування браузером або обліковими записами"
+  },
+  "warningGoBack": {
+    "message": "Повернутися (безпечно)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Я усвідомлюю ризик"
+  },
+  "warningOverrideDetail": {
+    "message": "Щоб усе ж перейти, видаліть цей домен зі списку блокування у спливному вікні Zevr Guard (кнопка блокування/розблокування) і перезавантажте сторінку."
+  },
+  "warningFooter": {
+    "message": "Під захистом Zevr Guard · Безпечний перегляд для всіх"
+  },
+  "riskMsgSafe": {
+    "message": "Ця сторінка безпечна"
+  },
+  "riskMsgTracker": {
+    "message": "Виявлено трекери"
+  },
+  "riskMsgSuspicious": {
+    "message": "Виявлено підозрілий трафік"
+  },
+  "riskMsgDangerous": {
+    "message": "Виявлено небезпечний трафік"
+  },
+  "settingsGeneral": {
+    "message": "Загальні"
+  },
+  "settingsNotifications": {
+    "message": "Сповіщення"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Сповіщати про небезпечний трафік"
+  },
+  "settingsBlockCategories": {
+    "message": "Категорії блокування"
+  },
+  "settingsMalware": {
+    "message": "Шкідливе ПЗ / фішинг"
+  },
+  "settingsMalwareDesc": {
+    "message": "Відоме шкідливе ПЗ і фішинг (рекомендовано)"
+  },
+  "settingsAdvertising": {
+    "message": "Реклама"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Рекламні домени"
+  },
+  "settingsTracking": {
+    "message": "Стеження"
+  },
+  "settingsTrackingDesc": {
+    "message": "Домени стеження та аналітики"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Власний список блокування"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Немає заблокованих доменів"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 домен"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ доменів",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Власний список дозволених"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Немає дозволених доменів"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 домен"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ доменів",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Домени з цього списку обходять усі правила блокування, навіть шкідливе ПЗ."
+  },
+  "allowBarThisSite": {
+    "message": "Цей сайт"
+  },
+  "allowBarAllowed": {
+    "message": "Дозволено"
+  },
+  "allowBarAllow": {
+    "message": "Дозволити"
+  },
+  "allowBarRevoke": {
+    "message": "Скасувати"
+  },
+  "allowBarAddTitle": {
+    "message": "Додати цей сайт до списку дозволених (обхід блокування)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Видалити цей сайт зі списку дозволених"
+  },
+  "remove": {
+    "message": "видалити"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Живий глобус"
+  },
+  "popupStatusLive": {
+    "message": "захист активний"
+  },
+  "popupScanning": {
+    "message": "СКАНУВАННЯ..."
+  },
+  "popupNoData": {
+    "message": "Даних для цієї сторінки ще немає."
+  },
+  "popupReloadToMonitor": {
+    "message": "Перезавантажте вкладку, щоб почати моніторинг."
+  },
+  "metricDomains": {
+    "message": "доменів"
+  },
+  "metricRequests": {
+    "message": "запитів"
+  },
+  "metricBlocked": {
+    "message": "заблоковано"
+  },
+  "todayTrackers": {
+    "message": "Трекери сьогодні"
+  },
+  "todayBlocked": {
+    "message": "Заблоковано сьогодні"
+  },
+  "todayCompanies": {
+    "message": "Компанії"
+  },
+  "riskScoreLabel": {
+    "message": "оцінка ризику"
+  },
+  "riskLabelSafe": {
+    "message": "БЕЗПЕЧНО"
+  },
+  "riskLabelTracker": {
+    "message": "ТРЕКЕР"
+  },
+  "riskLabelSuspicious": {
+    "message": "ПІДОЗРІЛО"
+  },
+  "riskLabelDangerous": {
+    "message": "НЕБЕЗПЕЧНО"
+  },
+  "connectionsCount": {
+    "message": "З'єднання"
+  },
+  "monitoringConnections": {
+    "message": "Моніторинг з'єднань..."
+  },
+  "noMatchingConnections": {
+    "message": "Немає відповідних з'єднань."
+  },
+  "backToList": {
+    "message": "Назад до списку"
+  },
+  "filterAll": {
+    "message": "Усі"
+  },
+  "filterDangerShort": {
+    "message": "Небезп."
+  },
+  "filterSuspicShort": {
+    "message": "Підозр."
+  },
+  "filterTrackerShort": {
+    "message": "Трекер"
+  },
+  "filterSafeShort": {
+    "message": "Безп."
+  },
+  "viewLabel": {
+    "message": "Вигляд"
+  },
+  "groupDomains": {
+    "message": "Домени"
+  },
+  "groupCompanies": {
+    "message": "Компанії"
+  },
+  "groupDomainCount": {
+    "message": "$N$ доменів",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 домен"
+  },
+  "detailCompany": {
+    "message": "Компанія"
+  },
+  "detailCategory": {
+    "message": "Категорія"
+  },
+  "detailLocation": {
+    "message": "Розташування"
+  },
+  "detailHostedBy": {
+    "message": "Хостинг"
+  },
+  "detailISP": {
+    "message": "Провайдер"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Запити"
+  },
+  "detailFirstSeen": {
+    "message": "Вперше помічено"
+  },
+  "unblockThisDomain": {
+    "message": "Розблокувати цей домен"
+  },
+  "blockThisDomain": {
+    "message": "Заблокувати цей домен"
+  },
+  "block": {
+    "message": "заблокувати"
+  },
+  "unblock": {
+    "message": "розблокувати"
+  },
+  "legendSafe": {
+    "message": "Безпечно"
+  },
+  "legendTracker": {
+    "message": "Трекер"
+  },
+  "legendSuspicious": {
+    "message": "Підозріло"
+  },
+  "legendDangerous": {
+    "message": "Небезпечно"
+  },
+  "stripTrackers": {
+    "message": "Трекери"
+  },
+  "stripBlocked": {
+    "message": "Заблоковано"
+  },
+  "stripCompanies": {
+    "message": "Компанії"
+  },
+  "thisPage": {
+    "message": "Ця сторінка"
+  },
+  "backToConnections": {
+    "message": "Назад до з'єднань"
+  },
+  "drillRequests": {
+    "message": "запитів"
+  },
+  "drillDomains": {
+    "message": "доменів"
+  },
+  "drillCompanies": {
+    "message": "компаній"
+  },
+  "noTrackersOnPage": {
+    "message": "На цій сторінці немає трекерів."
+  },
+  "noCompaniesOnPage": {
+    "message": "На цій сторінці немає ідентифікованих компаній."
+  },
+  "nothingBlocked": {
+    "message": "На цій сторінці нічого не заблоковано."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard на варті — небезпечні сайти блокуватимуться автоматично."
+  },
+  "onThisPage": {
+    "message": "На цій сторінці"
+  },
+  "requestsBlockedCount": {
+    "message": "Заблоковано запитів на цій сторінці: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Деталі автоматично заблокованих доменів тут не відстежуються"
+  },
+  "pinBadge": {
+    "message": "ПІН"
+  },
+  "pauseBarPaused": {
+    "message": "Блокування призупинено"
+  },
+  "pauseBarPause": {
+    "message": "Пауза"
+  },
+  "pauseBarResume": {
+    "message": "Відновити"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Призупинити блокування на цьому сайті (якщо сайт працює некоректно)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Відновити блокування на цьому сайті"
+  },
+  "settingsPausedSites": {
+    "message": "Призупинені сайти"
+  },
+  "shareTitle": {
+    "message": "Поділитися скануванням"
+  },
+  "shareTagline": {
+    "message": "З ким спілкується ваш браузер?"
+  },
+  "shareHeadline": {
+    "message": "$C$ компаній · $N$ країн",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ спілкується з $C$ компаніями в $N$ країнах — під наглядом і захистом Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Зберегти зображення"
+  },
+  "sharePost": {
+    "message": "Опублікувати"
+  },
+  "shareHint": {
+    "message": "Зображення копіюється під час публікації — натисніть Ctrl+V у вікні допису, щоб прикріпити його."
+  },
+  "reportTitle": {
+    "message": "Звіт про захист"
+  },
+  "reportSubtitle": {
+    "message": "Тижневий звіт про захист"
+  },
+  "reportBlocked": {
+    "message": "Заблоковано"
+  },
+  "reportConnections": {
+    "message": "З'єднання"
+  },
+  "reportTrackers": {
+    "message": "Трекери"
+  },
+  "reportDangerous": {
+    "message": "Небезпечні"
+  },
+  "reportDailyBlocked": {
+    "message": "Заблоковано за день"
+  },
+  "reportTopCompanies": {
+    "message": "Компанії, що стежать найбільше"
+  },
+  "reportTopBlocked": {
+    "message": "Найчастіше блоковані домени"
+  },
+  "reportNoData": {
+    "message": "Даних ще немає — спершу трохи попереглядайте сторінки."
+  },
+  "reportFooter": {
+    "message": "Усі дані зберігаються локально на цьому пристрої."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 Заблоковано загроз: $N$!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard непомітно захищає вас. Якщо він стає у пригоді, короткий відгук допоможе іншим його знайти."
+  },
+  "reviewPromptRate": {
+    "message": "Оцінити Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Пізніше"
+  },
+  "riskExplainDangerous": {
+    "message": "Цей домен внесено до відомих баз шкідливого ПЗ та фішингу. Він може намагатися викрасти ваші дані або встановити шкідливе ПЗ."
+  },
+  "riskExplainSuspicious": {
+    "message": "Цей домен використовується для реклами або стеження. Він збирає дані про вашу поведінку в браузері."
+  },
+  "riskExplainTracker": {
+    "message": "Цей домен використовується для аналітики або доставки контенту. Він може збирати певні дані про використання."
+  },
+  "riskExplainSafe": {
+    "message": "Цей домен виглядає безпечним. Відомого стеження чи шкідливої активності не виявлено."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Відкрити бічну панель із живим глобусом"
+  },
+  "settingsTitle": {
+    "message": "Налаштування"
+  },
+  "unpinTitle": {
+    "message": "Натисніть ще раз, щоб відкріпити"
+  },
+  "youLabel": {
+    "message": "ВИ"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Виявлено небезпечне з'єднання"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ — відомий домен шкідливого ПЗ або фішингу.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Також у комплекті"
+  },
+  "welcomeAlsoShare": {
+    "message": "Картка для поширення в 1 клік"
+  },
+  "welcomeAlsoReport": {
+    "message": "Тижневий звіт про захист"
+  },
+  "welcomeAlsoPause": {
+    "message": "Пауза для окремих сайтів"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Доступно $N$ мовами",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Заблоковано ймовірний фішинг"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Це не те саме, що:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Ця адреса імітує $BRAND$, але це не справжній сайт.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Сайти-двійники зазвичай використовують, щоб:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Викрасти ваш пароль або коди входу"
+  },
+  "warningLookalikeItem2": {
+    "message": "Отримати дані банківської картки чи рахунку"
+  },
+  "warningLookalikeItem3": {
+    "message": "Поширити шкідливе ПЗ під виглядом справжнього сервісу"
+  },
+  "warningLookalikeDetected": {
+    "message": "Виявлено локальним аналізом доменів-двійників. Ваш URL не залишав цей браузер."
+  },
+  "warningProceedAnyway": {
+    "message": "Все одно перейти (не рекомендується)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Виявлення фішингових доменів-двійників"
+  }
+}

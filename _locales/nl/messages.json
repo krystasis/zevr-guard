@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Adblocker, Tracker- & Malwarebescherming"
+  },
+  "extDescription": {
+    "message": "Blokkeer advertenties, trackers, malware & phishing. Zie elk bedrijf waarmee je browser praat op een live wereldkaart. 100% lokaal."
+  },
+  "protectionActive": {
+    "message": "Bescherming actief"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Het eerste product"
+  },
+  "heroTagline": {
+    "message": "Zie met wie je browser praat."
+  },
+  "heroTaglineAccent": {
+    "message": "Blokkeer de gevaarlijke."
+  },
+  "heroDescription": {
+    "message": "Zie in realtime welke delen van de wereld je browser bereikt. Gevaarlijke verbindingen worden automatisch geblokkeerd."
+  },
+  "ctaOpenGlobe": {
+    "message": "Open Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "Begin met browsen"
+  },
+  "trustTrackers": {
+    "message": "$N$ trackersignalen",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Dagelijkse DB-updates"
+  },
+  "trust100Local": {
+    "message": "Alleen lokale matching"
+  },
+  "trustNoTelemetry": {
+    "message": "Geen URL-uploads"
+  },
+  "scrollHint": {
+    "message": "Scroll"
+  },
+  "howItWorks": {
+    "message": "Zo werkt het"
+  },
+  "fourLayersTitle": {
+    "message": "Vier beschermingslagen"
+  },
+  "feature1Title": {
+    "message": "Blokkeert malware automatisch"
+  },
+  "feature1Desc": {
+    "message": "Bekende malware- en phishingdomeinen worden geblokkeerd voordat je ze opmerkt. De dreigingslijst wordt elke dag automatisch ververst."
+  },
+  "feature2Title": {
+    "message": "Zie elke tracker"
+  },
+  "feature2Desc": {
+    "message": "Een database met 115.000+ trackersignalen laat zien welke bedrijven je browser bereiken, hoe vaak en vanaf waar."
+  },
+  "feature3Title": {
+    "message": "Waarschuwt bij verdacht verkeer"
+  },
+  "feature3Desc": {
+    "message": "Advertentie-, analyse- en fingerprintingdomeinen worden met kleur gemarkeerd. Zie de trackingdichtheid van elke pagina in realtime."
+  },
+  "feature4Title": {
+    "message": "Lokale matching. Je URL's blijven bij jou."
+  },
+  "feature4Desc": {
+    "message": "Matching gebeurt volledig in je browser. Het enige uitgaande verkeer zijn anonieme dreigings-DB-updates van onze CDN — je browsegeschiedenis gaat nergens heen."
+  },
+  "dataSourcesTitle": {
+    "message": "Stille verdediging, op verifieerbare schaal."
+  },
+  "dataSourcesSubtitle": {
+    "message": "In cijfers"
+  },
+  "dataByNumbers1Value": {
+    "message": "115.000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "signalen"
+  },
+  "dataByNumbers1Label": {
+    "message": "Trackeridentificatie-DB"
+  },
+  "dataByNumbers2Value": {
+    "message": "dagelijks"
+  },
+  "dataByNumbers2Unit": {
+    "message": "updates"
+  },
+  "dataByNumbers2Label": {
+    "message": "Automatisch ververst via onze CDN"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "landen"
+  },
+  "dataByNumbers3Label": {
+    "message": "Geolocatiedekking"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL's verzonden"
+  },
+  "dataByNumbers4Label": {
+    "message": "Je surfgedrag blijft bij jou"
+  },
+  "languageSwitchLabel": {
+    "message": "Taal"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Netwerkzichtbaarheid, direct"
+  },
+  "warningTitle": {
+    "message": "Gevaarlijke site geblokkeerd"
+  },
+  "warningSubtitle": {
+    "message": "Beschermd door Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard blokkeerde de toegang tot:"
+  },
+  "warningListHeader": {
+    "message": "Dit domein staat in bekende malware-/phishingdatabases."
+  },
+  "warningListIntro": {
+    "message": "Deze site bezoeken kan:"
+  },
+  "warningListItem1": {
+    "message": "Malware op je apparaat installeren"
+  },
+  "warningListItem2": {
+    "message": "Je wachtwoorden of persoonlijke gegevens stelen"
+  },
+  "warningListItem3": {
+    "message": "Je browser of accounts kapen"
+  },
+  "warningGoBack": {
+    "message": "Ga terug (veilig)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Ik begrijp het risico"
+  },
+  "warningOverrideDetail": {
+    "message": "Wil je toch doorgaan? Verwijder dit domein uit je blokkeerlijst via de popup van Zevr Guard (knop blokkeren/deblokkeren) en herlaad de pagina."
+  },
+  "warningFooter": {
+    "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
+  },
+  "riskMsgSafe": {
+    "message": "Deze pagina is veilig"
+  },
+  "riskMsgTracker": {
+    "message": "Trackers gedetecteerd"
+  },
+  "riskMsgSuspicious": {
+    "message": "Verdacht verkeer gedetecteerd"
+  },
+  "riskMsgDangerous": {
+    "message": "Gevaarlijk verkeer gedetecteerd"
+  },
+  "settingsGeneral": {
+    "message": "Algemeen"
+  },
+  "settingsNotifications": {
+    "message": "Meldingen"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Melden wanneer gevaarlijk verkeer wordt gedetecteerd"
+  },
+  "settingsBlockCategories": {
+    "message": "Blokkeercategorieën"
+  },
+  "settingsMalware": {
+    "message": "Malware / phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Bekende malware & phishing (aanbevolen)"
+  },
+  "settingsAdvertising": {
+    "message": "Advertenties"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Advertentiedomeinen"
+  },
+  "settingsTracking": {
+    "message": "Tracking"
+  },
+  "settingsTrackingDesc": {
+    "message": "Tracking- & analysedomeinen"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Eigen blokkeerlijst"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Geen geblokkeerde domeinen"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domein"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domeinen",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Eigen toestaanlijst"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Geen toegestane domeinen"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domein"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domeinen",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Domeinen op deze lijst omzeilen alle blokkeerregels, zelfs malware."
+  },
+  "allowBarThisSite": {
+    "message": "Deze site"
+  },
+  "allowBarAllowed": {
+    "message": "Toegestaan"
+  },
+  "allowBarAllow": {
+    "message": "Toestaan"
+  },
+  "allowBarRevoke": {
+    "message": "Intrekken"
+  },
+  "allowBarAddTitle": {
+    "message": "Voeg deze site toe aan de toestaanlijst (blokkering omzeilen)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Verwijder deze site van de toestaanlijst"
+  },
+  "remove": {
+    "message": "verwijderen"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "bescherming actief"
+  },
+  "popupScanning": {
+    "message": "SCANNEN..."
+  },
+  "popupNoData": {
+    "message": "Nog geen gegevens voor deze pagina."
+  },
+  "popupReloadToMonitor": {
+    "message": "Herlaad het tabblad om te beginnen met monitoren."
+  },
+  "metricDomains": {
+    "message": "domeinen"
+  },
+  "metricRequests": {
+    "message": "verzoeken"
+  },
+  "metricBlocked": {
+    "message": "geblokkeerd"
+  },
+  "todayTrackers": {
+    "message": "Trackers vandaag"
+  },
+  "todayBlocked": {
+    "message": "Geblokkeerd vandaag"
+  },
+  "todayCompanies": {
+    "message": "Bedrijven"
+  },
+  "riskScoreLabel": {
+    "message": "risicoscore"
+  },
+  "riskLabelSafe": {
+    "message": "VEILIG"
+  },
+  "riskLabelTracker": {
+    "message": "TRACKER"
+  },
+  "riskLabelSuspicious": {
+    "message": "VERDACHT"
+  },
+  "riskLabelDangerous": {
+    "message": "GEVAARLIJK"
+  },
+  "connectionsCount": {
+    "message": "Verbindingen"
+  },
+  "monitoringConnections": {
+    "message": "Verbindingen monitoren..."
+  },
+  "noMatchingConnections": {
+    "message": "Geen overeenkomende verbindingen."
+  },
+  "backToList": {
+    "message": "Terug naar lijst"
+  },
+  "filterAll": {
+    "message": "Alle"
+  },
+  "filterDangerShort": {
+    "message": "Gevaar"
+  },
+  "filterSuspicShort": {
+    "message": "Verdacht"
+  },
+  "filterTrackerShort": {
+    "message": "Tracker"
+  },
+  "filterSafeShort": {
+    "message": "Veilig"
+  },
+  "viewLabel": {
+    "message": "Weergave"
+  },
+  "groupDomains": {
+    "message": "Domeinen"
+  },
+  "groupCompanies": {
+    "message": "Bedrijven"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domeinen",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domein"
+  },
+  "detailCompany": {
+    "message": "Bedrijf"
+  },
+  "detailCategory": {
+    "message": "Categorie"
+  },
+  "detailLocation": {
+    "message": "Locatie"
+  },
+  "detailHostedBy": {
+    "message": "Gehost door"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Verzoeken"
+  },
+  "detailFirstSeen": {
+    "message": "Eerst gezien"
+  },
+  "unblockThisDomain": {
+    "message": "Deblokkeer dit domein"
+  },
+  "blockThisDomain": {
+    "message": "Blokkeer dit domein"
+  },
+  "block": {
+    "message": "blokkeren"
+  },
+  "unblock": {
+    "message": "deblokkeren"
+  },
+  "legendSafe": {
+    "message": "Veilig"
+  },
+  "legendTracker": {
+    "message": "Tracker"
+  },
+  "legendSuspicious": {
+    "message": "Verdacht"
+  },
+  "legendDangerous": {
+    "message": "Gevaarlijk"
+  },
+  "stripTrackers": {
+    "message": "Trackers"
+  },
+  "stripBlocked": {
+    "message": "Geblokkeerd"
+  },
+  "stripCompanies": {
+    "message": "Bedrijven"
+  },
+  "thisPage": {
+    "message": "Deze pagina"
+  },
+  "backToConnections": {
+    "message": "Terug naar verbindingen"
+  },
+  "drillRequests": {
+    "message": "verzoeken"
+  },
+  "drillDomains": {
+    "message": "domeinen"
+  },
+  "drillCompanies": {
+    "message": "bedrijven"
+  },
+  "noTrackersOnPage": {
+    "message": "Geen trackers op deze pagina."
+  },
+  "noCompaniesOnPage": {
+    "message": "Geen identificeerbare bedrijven op deze pagina."
+  },
+  "nothingBlocked": {
+    "message": "Niets geblokkeerd op deze pagina."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard waakt — gevaarlijke sites worden automatisch geblokkeerd."
+  },
+  "onThisPage": {
+    "message": "Op deze pagina"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ verzoeken geblokkeerd op deze pagina",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Details van automatisch geblokkeerde domeinen worden hier niet bijgehouden"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Blokkering gepauzeerd"
+  },
+  "pauseBarPause": {
+    "message": "Pauzeren"
+  },
+  "pauseBarResume": {
+    "message": "Hervatten"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Pauzeer blokkering op deze site (lost kapotte sites op)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Hervat blokkering op deze site"
+  },
+  "settingsPausedSites": {
+    "message": "Gepauzeerde sites"
+  },
+  "shareTitle": {
+    "message": "Deel deze scan"
+  },
+  "shareTagline": {
+    "message": "Met wie praat jouw browser?"
+  },
+  "shareHeadline": {
+    "message": "$C$ bedrijven · $N$ landen",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ praat met $C$ bedrijven in $N$ landen — bewaakt & geblokkeerd door Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Afbeelding opslaan"
+  },
+  "sharePost": {
+    "message": "Posten"
+  },
+  "shareHint": {
+    "message": "De afbeelding wordt gekopieerd bij het posten — druk op Ctrl+V in het berichtvenster om deze toe te voegen."
+  },
+  "reportTitle": {
+    "message": "Beschermingsrapport"
+  },
+  "reportSubtitle": {
+    "message": "Wekelijks beschermingsrapport"
+  },
+  "reportBlocked": {
+    "message": "Geblokkeerd"
+  },
+  "reportConnections": {
+    "message": "Verbindingen"
+  },
+  "reportTrackers": {
+    "message": "Trackers"
+  },
+  "reportDangerous": {
+    "message": "Gevaarlijk"
+  },
+  "reportDailyBlocked": {
+    "message": "Geblokkeerd per dag"
+  },
+  "reportTopCompanies": {
+    "message": "Meest meekijkende bedrijven"
+  },
+  "reportTopBlocked": {
+    "message": "Meest geblokkeerde domeinen"
+  },
+  "reportNoData": {
+    "message": "Nog geen gegevens — surf eerst even rond."
+  },
+  "reportFooter": {
+    "message": "Alle gegevens worden lokaal op dit apparaat opgeslagen."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ bedreigingen geblokkeerd!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard beschermt je in alle stilte. Bevalt het? Met een korte review help je anderen het ook te vinden."
+  },
+  "reviewPromptRate": {
+    "message": "Beoordeel Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Later"
+  },
+  "riskExplainDangerous": {
+    "message": "Dit domein staat in bekende malware-/phishingdatabases. Het kan proberen je gegevens te stelen of malware te installeren."
+  },
+  "riskExplainSuspicious": {
+    "message": "Dit domein wordt gebruikt voor advertenties of tracking. Het verzamelt gegevens over je surfgedrag."
+  },
+  "riskExplainTracker": {
+    "message": "Dit domein wordt gebruikt voor analyse of contentlevering. Het kan beperkte gebruiksgegevens verzamelen."
+  },
+  "riskExplainSafe": {
+    "message": "Dit domein lijkt veilig. Geen bekende tracking of kwaadaardige activiteit gedetecteerd."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Open het Live Globe-zijpaneel"
+  },
+  "settingsTitle": {
+    "message": "Instellingen"
+  },
+  "unpinTitle": {
+    "message": "Klik nogmaals om los te maken"
+  },
+  "youLabel": {
+    "message": "JIJ"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Gevaarlijke verbinding gedetecteerd"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ is een bekend malware-/phishingdomein.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Ook inbegrepen"
+  },
+  "welcomeAlsoShare": {
+    "message": "Deelkaart met 1 klik"
+  },
+  "welcomeAlsoReport": {
+    "message": "Wekelijks beschermingsrapport"
+  },
+  "welcomeAlsoPause": {
+    "message": "Pauze per site"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Beschikbaar in $N$ talen",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Vermoedelijke phishing geblokkeerd"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Niet hetzelfde als:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Dit adres imiteert $BRAND$ maar is niet de echte site.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Lookalike-sites worden meestal gebruikt om:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Je wachtwoord of inlogcodes te stelen"
+  },
+  "warningLookalikeItem2": {
+    "message": "Creditcard- of bankgegevens te onderscheppen"
+  },
+  "warningLookalikeItem3": {
+    "message": "Malware te verspreiden, vermomd als de echte dienst"
+  },
+  "warningLookalikeDetected": {
+    "message": "Gedetecteerd door lookalike-analyse op je apparaat. Je URL heeft deze browser nooit verlaten."
+  },
+  "warningProceedAnyway": {
+    "message": "Toch doorgaan (niet aanbevolen)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Detectie van lookalike-phishing"
+  }
+}

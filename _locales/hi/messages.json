@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: ऐड ब्लॉकर, ट्रैकर और मैलवेयर सुरक्षा"
+  },
+  "extDescription": {
+    "message": "विज्ञापन, ट्रैकर, मैलवेयर और फ़िशिंग ब्लॉक करें। लाइव वर्ल्ड मैप पर देखें ब्राउज़र किससे जुड़ता है। 100% लोकल — कोई डेटा नहीं जाता।"
+  },
+  "protectionActive": {
+    "message": "सुरक्षा सक्रिय है"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "पहला प्रोडक्ट"
+  },
+  "heroTagline": {
+    "message": "देखें आपका ब्राउज़र किससे बात करता है।"
+  },
+  "heroTaglineAccent": {
+    "message": "खतरनाक को ब्लॉक करें।"
+  },
+  "heroDescription": {
+    "message": "रियल टाइम में देखें कि आपका ब्राउज़र दुनिया के किन हिस्सों से जुड़ रहा है। खतरनाक कनेक्शन अपने आप ब्लॉक हो जाते हैं।"
+  },
+  "ctaOpenGlobe": {
+    "message": "लाइव ग्लोब खोलें"
+  },
+  "ctaStartBrowsing": {
+    "message": "ब्राउज़िंग शुरू करें"
+  },
+  "trustTrackers": {
+    "message": "$N$ ट्रैकर सिग्नल",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "रोज़ाना DB अपडेट"
+  },
+  "trust100Local": {
+    "message": "केवल लोकल मैचिंग"
+  },
+  "trustNoTelemetry": {
+    "message": "कोई URL अपलोड नहीं"
+  },
+  "scrollHint": {
+    "message": "स्क्रॉल करें"
+  },
+  "howItWorks": {
+    "message": "यह कैसे काम करता है"
+  },
+  "fourLayersTitle": {
+    "message": "सुरक्षा की चार परतें"
+  },
+  "feature1Title": {
+    "message": "मैलवेयर ऑटो-ब्लॉक"
+  },
+  "feature1Desc": {
+    "message": "ज्ञात मैलवेयर और फ़िशिंग डोमेन आपकी नज़र में आने से पहले ही ब्लॉक हो जाते हैं। खतरों की सूची हर दिन अपने आप अपडेट होती है।"
+  },
+  "feature2Title": {
+    "message": "हर ट्रैकर देखें"
+  },
+  "feature2Desc": {
+    "message": "1,15,000+ ट्रैकर-सिग्नल डेटाबेस पहचानता है कि कौन-सी कंपनियाँ आपके ब्राउज़र तक पहुँचती हैं, कितनी बार और कहाँ से।"
+  },
+  "feature3Title": {
+    "message": "संदिग्ध पर चेतावनी"
+  },
+  "feature3Desc": {
+    "message": "विज्ञापन, एनालिटिक्स और फ़िंगरप्रिंटिंग डोमेन रंगों से हाइलाइट होते हैं। हर पेज की ट्रैकिंग सघनता रियल टाइम में देखें।"
+  },
+  "feature4Title": {
+    "message": "लोकल मैचिंग। आपके URL कभी बाहर नहीं जाते।"
+  },
+  "feature4Desc": {
+    "message": "मैचिंग पूरी तरह आपके ब्राउज़र में चलती है। बाहर जाने वाला एकमात्र ट्रैफ़िक हमारे CDN से गुमनाम थ्रेट-DB अपडेट है — आपका ब्राउज़िंग इतिहास कहीं नहीं जाता।"
+  },
+  "dataSourcesTitle": {
+    "message": "शांत सुरक्षा, सत्यापन-योग्य पैमाने पर।"
+  },
+  "dataSourcesSubtitle": {
+    "message": "आँकड़ों में"
+  },
+  "dataByNumbers1Value": {
+    "message": "1,15,000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "सिग्नल"
+  },
+  "dataByNumbers1Label": {
+    "message": "ट्रैकर पहचान DB"
+  },
+  "dataByNumbers2Value": {
+    "message": "रोज़ाना"
+  },
+  "dataByNumbers2Unit": {
+    "message": "अपडेट"
+  },
+  "dataByNumbers2Label": {
+    "message": "हमारे CDN से ऑटो-रिफ़्रेश"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "देश"
+  },
+  "dataByNumbers3Label": {
+    "message": "जियोलोकेशन कवरेज"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL भेजे गए"
+  },
+  "dataByNumbers4Label": {
+    "message": "आपकी ब्राउज़िंग कभी बाहर नहीं जाती"
+  },
+  "languageSwitchLabel": {
+    "message": "भाषा"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "नेटवर्क की पूरी झलक, तुरंत"
+  },
+  "warningTitle": {
+    "message": "खतरनाक साइट ब्लॉक की गई"
+  },
+  "warningSubtitle": {
+    "message": "Zevr Guard द्वारा सुरक्षित"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard ने इस पते तक पहुँच ब्लॉक की:"
+  },
+  "warningListHeader": {
+    "message": "यह डोमेन ज्ञात मैलवेयर/फ़िशिंग डेटाबेस में सूचीबद्ध है।"
+  },
+  "warningListIntro": {
+    "message": "इस साइट पर जाने से हो सकता है:"
+  },
+  "warningListItem1": {
+    "message": "आपके डिवाइस पर मैलवेयर इंस्टॉल हो"
+  },
+  "warningListItem2": {
+    "message": "आपके पासवर्ड या निजी डेटा चोरी हों"
+  },
+  "warningListItem3": {
+    "message": "आपका ब्राउज़र या अकाउंट हाईजैक हो"
+  },
+  "warningGoBack": {
+    "message": "वापस जाएँ (सुरक्षित)"
+  },
+  "warningUnderstandRisk": {
+    "message": "मुझे जोखिम पता है"
+  },
+  "warningOverrideDetail": {
+    "message": "फिर भी आगे बढ़ने के लिए, Zevr Guard के पॉपअप (ब्लॉक/अनब्लॉक बटन) से इस डोमेन को अपनी ब्लॉकलिस्ट से हटाएँ, फिर पेज रीलोड करें।"
+  },
+  "warningFooter": {
+    "message": "Zevr Guard द्वारा सुरक्षित · सबके लिए सुरक्षित ब्राउज़िंग"
+  },
+  "riskMsgSafe": {
+    "message": "यह पेज सुरक्षित है"
+  },
+  "riskMsgTracker": {
+    "message": "ट्रैकर मिले"
+  },
+  "riskMsgSuspicious": {
+    "message": "संदिग्ध ट्रैफ़िक मिला"
+  },
+  "riskMsgDangerous": {
+    "message": "खतरनाक ट्रैफ़िक मिला"
+  },
+  "settingsGeneral": {
+    "message": "सामान्य"
+  },
+  "settingsNotifications": {
+    "message": "सूचनाएँ"
+  },
+  "settingsNotificationsDesc": {
+    "message": "खतरनाक ट्रैफ़िक मिलने पर सूचित करें"
+  },
+  "settingsBlockCategories": {
+    "message": "ब्लॉक श्रेणियाँ"
+  },
+  "settingsMalware": {
+    "message": "मैलवेयर / फ़िशिंग"
+  },
+  "settingsMalwareDesc": {
+    "message": "ज्ञात मैलवेयर और फ़िशिंग (अनुशंसित)"
+  },
+  "settingsAdvertising": {
+    "message": "विज्ञापन"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "विज्ञापन डोमेन"
+  },
+  "settingsTracking": {
+    "message": "ट्रैकिंग"
+  },
+  "settingsTrackingDesc": {
+    "message": "ट्रैकिंग और एनालिटिक्स डोमेन"
+  },
+  "settingsCustomBlocklist": {
+    "message": "कस्टम ब्लॉकलिस्ट"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "कोई ब्लॉक किया डोमेन नहीं"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 डोमेन"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ डोमेन",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "कस्टम अलाउलिस्ट"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "कोई अनुमत डोमेन नहीं"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 डोमेन"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ डोमेन",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "यहाँ जोड़े गए डोमेन सभी ब्लॉकिंग नियमों को बायपास करते हैं — मैलवेयर भी।"
+  },
+  "allowBarThisSite": {
+    "message": "यह साइट"
+  },
+  "allowBarAllowed": {
+    "message": "अनुमत"
+  },
+  "allowBarAllow": {
+    "message": "अनुमति दें"
+  },
+  "allowBarRevoke": {
+    "message": "हटाएँ"
+  },
+  "allowBarAddTitle": {
+    "message": "इस साइट को अलाउलिस्ट में जोड़ें (ब्लॉकिंग बायपास)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "इस साइट को अलाउलिस्ट से हटाएँ"
+  },
+  "remove": {
+    "message": "हटाएँ"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "लाइव ग्लोब"
+  },
+  "popupStatusLive": {
+    "message": "सुरक्षा चालू"
+  },
+  "popupScanning": {
+    "message": "स्कैन हो रहा है..."
+  },
+  "popupNoData": {
+    "message": "इस पेज का डेटा अभी नहीं है।"
+  },
+  "popupReloadToMonitor": {
+    "message": "निगरानी शुरू करने के लिए टैब रीलोड करें।"
+  },
+  "metricDomains": {
+    "message": "डोमेन"
+  },
+  "metricRequests": {
+    "message": "रिक्वेस्ट"
+  },
+  "metricBlocked": {
+    "message": "ब्लॉक"
+  },
+  "todayTrackers": {
+    "message": "आज के ट्रैकर"
+  },
+  "todayBlocked": {
+    "message": "आज ब्लॉक हुए"
+  },
+  "todayCompanies": {
+    "message": "कंपनियाँ"
+  },
+  "riskScoreLabel": {
+    "message": "रिस्क स्कोर"
+  },
+  "riskLabelSafe": {
+    "message": "सुरक्षित"
+  },
+  "riskLabelTracker": {
+    "message": "ट्रैकर"
+  },
+  "riskLabelSuspicious": {
+    "message": "संदिग्ध"
+  },
+  "riskLabelDangerous": {
+    "message": "खतरनाक"
+  },
+  "connectionsCount": {
+    "message": "कनेक्शन"
+  },
+  "monitoringConnections": {
+    "message": "कनेक्शनों पर नज़र रखी जा रही है..."
+  },
+  "noMatchingConnections": {
+    "message": "कोई मेल खाता कनेक्शन नहीं।"
+  },
+  "backToList": {
+    "message": "सूची पर वापस"
+  },
+  "filterAll": {
+    "message": "सभी"
+  },
+  "filterDangerShort": {
+    "message": "खतरा"
+  },
+  "filterSuspicShort": {
+    "message": "संदिग्ध"
+  },
+  "filterTrackerShort": {
+    "message": "ट्रैकर"
+  },
+  "filterSafeShort": {
+    "message": "सुरक्षित"
+  },
+  "viewLabel": {
+    "message": "दृश्य"
+  },
+  "groupDomains": {
+    "message": "डोमेन"
+  },
+  "groupCompanies": {
+    "message": "कंपनियाँ"
+  },
+  "groupDomainCount": {
+    "message": "$N$ डोमेन",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 डोमेन"
+  },
+  "detailCompany": {
+    "message": "कंपनी"
+  },
+  "detailCategory": {
+    "message": "श्रेणी"
+  },
+  "detailLocation": {
+    "message": "स्थान"
+  },
+  "detailHostedBy": {
+    "message": "होस्टिंग"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "रिक्वेस्ट"
+  },
+  "detailFirstSeen": {
+    "message": "पहली बार दिखा"
+  },
+  "unblockThisDomain": {
+    "message": "इस डोमेन को अनब्लॉक करें"
+  },
+  "blockThisDomain": {
+    "message": "इस डोमेन को ब्लॉक करें"
+  },
+  "block": {
+    "message": "ब्लॉक"
+  },
+  "unblock": {
+    "message": "अनब्लॉक"
+  },
+  "legendSafe": {
+    "message": "सुरक्षित"
+  },
+  "legendTracker": {
+    "message": "ट्रैकर"
+  },
+  "legendSuspicious": {
+    "message": "संदिग्ध"
+  },
+  "legendDangerous": {
+    "message": "खतरनाक"
+  },
+  "stripTrackers": {
+    "message": "ट्रैकर"
+  },
+  "stripBlocked": {
+    "message": "ब्लॉक"
+  },
+  "stripCompanies": {
+    "message": "कंपनियाँ"
+  },
+  "thisPage": {
+    "message": "यह पेज"
+  },
+  "backToConnections": {
+    "message": "कनेक्शनों पर वापस"
+  },
+  "drillRequests": {
+    "message": "रिक्वेस्ट"
+  },
+  "drillDomains": {
+    "message": "डोमेन"
+  },
+  "drillCompanies": {
+    "message": "कंपनियाँ"
+  },
+  "noTrackersOnPage": {
+    "message": "इस पेज पर कोई ट्रैकर नहीं।"
+  },
+  "noCompaniesOnPage": {
+    "message": "इस पेज पर कोई पहचान-योग्य कंपनी नहीं।"
+  },
+  "nothingBlocked": {
+    "message": "इस पेज पर कुछ भी ब्लॉक नहीं हुआ।"
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard नज़र रखे हुए है — खतरनाक साइटें अपने आप ब्लॉक होंगी।"
+  },
+  "onThisPage": {
+    "message": "इस पेज पर"
+  },
+  "requestsBlockedCount": {
+    "message": "इस पेज पर $N$ रिक्वेस्ट ब्लॉक हुईं",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "ऑटो-ब्लॉक हुए डोमेन का विवरण यहाँ ट्रैक नहीं होता"
+  },
+  "pinBadge": {
+    "message": "पिन"
+  },
+  "pauseBarPaused": {
+    "message": "ब्लॉकिंग रुकी है"
+  },
+  "pauseBarPause": {
+    "message": "रोकें"
+  },
+  "pauseBarResume": {
+    "message": "फिर शुरू करें"
+  },
+  "pauseBarPauseTitle": {
+    "message": "इस साइट पर ब्लॉकिंग रोकें (टूटी साइटें ठीक करता है)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "इस साइट पर ब्लॉकिंग फिर शुरू करें"
+  },
+  "settingsPausedSites": {
+    "message": "रोकी गई साइटें"
+  },
+  "shareTitle": {
+    "message": "यह स्कैन शेयर करें"
+  },
+  "shareTagline": {
+    "message": "आपका ब्राउज़र किससे बात कर रहा है?"
+  },
+  "shareHeadline": {
+    "message": "$C$ कंपनियाँ · $N$ देश",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ $N$ देशों की $C$ कंपनियों से बात करता है — Zevr Guard की निगरानी और ब्लॉकिंग के साथ",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "इमेज सेव करें"
+  },
+  "sharePost": {
+    "message": "पोस्ट करें"
+  },
+  "shareHint": {
+    "message": "पोस्ट करते ही इमेज कॉपी हो जाती है — कंपोज़र में Ctrl+V दबाकर जोड़ें।"
+  },
+  "reportTitle": {
+    "message": "सुरक्षा रिपोर्ट"
+  },
+  "reportSubtitle": {
+    "message": "साप्ताहिक सुरक्षा रिपोर्ट"
+  },
+  "reportBlocked": {
+    "message": "ब्लॉक"
+  },
+  "reportConnections": {
+    "message": "कनेक्शन"
+  },
+  "reportTrackers": {
+    "message": "ट्रैकर"
+  },
+  "reportDangerous": {
+    "message": "खतरनाक"
+  },
+  "reportDailyBlocked": {
+    "message": "प्रतिदिन ब्लॉक"
+  },
+  "reportTopCompanies": {
+    "message": "सबसे ज़्यादा नज़र रखने वाली कंपनियाँ"
+  },
+  "reportTopBlocked": {
+    "message": "सबसे ज़्यादा ब्लॉक हुए डोमेन"
+  },
+  "reportNoData": {
+    "message": "अभी डेटा नहीं — पहले थोड़ी ब्राउज़िंग करें।"
+  },
+  "reportFooter": {
+    "message": "सारा डेटा इसी डिवाइस पर लोकली सेव रहता है।"
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ खतरे ब्लॉक हुए!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard चुपचाप आपकी रक्षा करता रहा है। अगर यह काम आ रहा है, तो एक छोटा-सा रिव्यू दूसरों को भी इसे खोजने में मदद करेगा।"
+  },
+  "reviewPromptRate": {
+    "message": "Zevr Guard को रेट करें ★"
+  },
+  "reviewPromptLater": {
+    "message": "बाद में"
+  },
+  "riskExplainDangerous": {
+    "message": "यह डोमेन ज्ञात मैलवेयर/फ़िशिंग डेटाबेस में है। यह आपका डेटा चुराने या मैलवेयर इंस्टॉल करने की कोशिश कर सकता है।"
+  },
+  "riskExplainSuspicious": {
+    "message": "यह डोमेन विज्ञापन या ट्रैकिंग के लिए इस्तेमाल होता है। यह आपके ब्राउज़िंग व्यवहार का डेटा इकट्ठा करता है।"
+  },
+  "riskExplainTracker": {
+    "message": "यह डोमेन एनालिटिक्स या कंटेंट डिलीवरी के लिए इस्तेमाल होता है। यह कुछ उपयोग डेटा इकट्ठा कर सकता है।"
+  },
+  "riskExplainSafe": {
+    "message": "यह डोमेन सुरक्षित लगता है। कोई ज्ञात ट्रैकिंग या दुर्भावनापूर्ण गतिविधि नहीं मिली।"
+  },
+  "sidePanelOpenTitle": {
+    "message": "लाइव ग्लोब साइड पैनल खोलें"
+  },
+  "settingsTitle": {
+    "message": "सेटिंग्स"
+  },
+  "unpinTitle": {
+    "message": "अनपिन करने के लिए फिर क्लिक करें"
+  },
+  "youLabel": {
+    "message": "आप"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ खतरनाक कनेक्शन मिला"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ एक ज्ञात मैलवेयर/फ़िशिंग डोमेन है।",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "इसके साथ और भी"
+  },
+  "welcomeAlsoShare": {
+    "message": "1-क्लिक शेयर कार्ड"
+  },
+  "welcomeAlsoReport": {
+    "message": "साप्ताहिक सुरक्षा रिपोर्ट"
+  },
+  "welcomeAlsoPause": {
+    "message": "हर साइट पर अलग पॉज़"
+  },
+  "welcomeAlsoLangs": {
+    "message": "$N$ भाषाओं में उपलब्ध",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "संदिग्ध फ़िशिंग ब्लॉक की गई"
+  },
+  "warningLookalikeNotSame": {
+    "message": "यह वह साइट नहीं है:"
+  },
+  "warningLookalikeHeader": {
+    "message": "यह पता $BRAND$ की नकल करता है, पर असली साइट नहीं है।",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "नकली (लुकअलाइक) साइटें आमतौर पर इनके लिए बनाई जाती हैं:"
+  },
+  "warningLookalikeItem1": {
+    "message": "आपका पासवर्ड या लॉगिन कोड चुराना"
+  },
+  "warningLookalikeItem2": {
+    "message": "क्रेडिट कार्ड या बैंकिंग विवरण हथियाना"
+  },
+  "warningLookalikeItem3": {
+    "message": "असली सेवा के भेस में मैलवेयर पहुँचाना"
+  },
+  "warningLookalikeDetected": {
+    "message": "डिवाइस पर ही हुई लुकअलाइक जाँच से पकड़ा गया। आपका URL इस ब्राउज़र से बाहर नहीं गया।"
+  },
+  "warningProceedAnyway": {
+    "message": "फिर भी आगे बढ़ें (अनुशंसित नहीं)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "लुकअलाइक फ़िशिंग पहचान"
+  }
+}

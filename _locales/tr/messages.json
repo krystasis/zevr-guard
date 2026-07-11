@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Reklam Engelleyici, İzleyici ve Zararlı Yazılım Koruması"
+  },
+  "extDescription": {
+    "message": "Reklam, izleyici, zararlı yazılım ve kimlik avını engeller. Tarayıcınızın kiminle konuştuğunu canlı haritada görün. %100 yerel."
+  },
+  "protectionActive": {
+    "message": "Koruma etkin"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "İlk ürün"
+  },
+  "heroTagline": {
+    "message": "Tarayıcınızın kiminle konuştuğunu görün."
+  },
+  "heroTaglineAccent": {
+    "message": "Tehlikeli olanları engelleyin."
+  },
+  "heroDescription": {
+    "message": "Tarayıcınızın dünyanın hangi noktalarına ulaştığını gerçek zamanlı görün. Tehlikeli bağlantılar otomatik olarak engellenir."
+  },
+  "ctaOpenGlobe": {
+    "message": "Canlı Küreyi Aç"
+  },
+  "ctaStartBrowsing": {
+    "message": "Gezinmeye başla"
+  },
+  "trustTrackers": {
+    "message": "$N$ izleyici sinyali",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Günlük veritabanı güncellemesi"
+  },
+  "trust100Local": {
+    "message": "Yalnızca yerel eşleştirme"
+  },
+  "trustNoTelemetry": {
+    "message": "URL gönderimi yok"
+  },
+  "scrollHint": {
+    "message": "Kaydır"
+  },
+  "howItWorks": {
+    "message": "Nasıl çalışır"
+  },
+  "fourLayersTitle": {
+    "message": "Dört katmanlı koruma"
+  },
+  "feature1Title": {
+    "message": "Zararlı yazılımı otomatik engeller"
+  },
+  "feature1Desc": {
+    "message": "Bilinen zararlı yazılım ve kimlik avı alan adları siz fark etmeden engellenir. Tehdit listesi her gün otomatik olarak yenilenir."
+  },
+  "feature2Title": {
+    "message": "Her izleyiciyi gösterir"
+  },
+  "feature2Desc": {
+    "message": "115.000'den fazla izleyici sinyali içeren veritabanı, hangi şirketlerin tarayıcınıza ne sıklıkla ve nereden ulaştığını belirler."
+  },
+  "feature3Title": {
+    "message": "Şüpheli olanlarda uyarır"
+  },
+  "feature3Desc": {
+    "message": "Reklam, analiz ve parmak izi alan adları renkle vurgulanır. Her sayfanın izleme yoğunluğunu gerçek zamanlı görün."
+  },
+  "feature4Title": {
+    "message": "Yerel eşleştirme. URL'leriniz asla dışarı çıkmaz."
+  },
+  "feature4Desc": {
+    "message": "Eşleştirme tamamen tarayıcınızda çalışır. Dışarı giden tek trafik, CDN'imizden alınan anonim tehdit veritabanı güncellemeleridir — gezinme geçmişiniz hiçbir yere gitmez."
+  },
+  "dataSourcesTitle": {
+    "message": "Sessiz savunma, doğrulanabilir ölçekte."
+  },
+  "dataSourcesSubtitle": {
+    "message": "Rakamlarla"
+  },
+  "dataByNumbers1Value": {
+    "message": "115.000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "sinyal"
+  },
+  "dataByNumbers1Label": {
+    "message": "İzleyici tanımlama veritabanı"
+  },
+  "dataByNumbers2Value": {
+    "message": "günlük"
+  },
+  "dataByNumbers2Unit": {
+    "message": "güncelleme"
+  },
+  "dataByNumbers2Label": {
+    "message": "CDN'imiz üzerinden otomatik yenileme"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "ülke"
+  },
+  "dataByNumbers3Label": {
+    "message": "Coğrafi konum kapsamı"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL gönderildi"
+  },
+  "dataByNumbers4Label": {
+    "message": "Gezinme verileriniz cihazınızda kalır"
+  },
+  "languageSwitchLabel": {
+    "message": "Dil"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Anında ağ görünürlüğü"
+  },
+  "warningTitle": {
+    "message": "Tehlikeli Site Engellendi"
+  },
+  "warningSubtitle": {
+    "message": "Zevr Guard koruması altında"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard şu adrese erişimi engelledi:"
+  },
+  "warningListHeader": {
+    "message": "Bu alan adı, bilinen zararlı yazılım/kimlik avı veritabanlarında listeleniyor."
+  },
+  "warningListIntro": {
+    "message": "Bu siteyi ziyaret etmek şunlara yol açabilir:"
+  },
+  "warningListItem1": {
+    "message": "Cihazınıza zararlı yazılım yüklenmesi"
+  },
+  "warningListItem2": {
+    "message": "Parolalarınızın veya kişisel verilerinizin çalınması"
+  },
+  "warningListItem3": {
+    "message": "Tarayıcınızın veya hesaplarınızın ele geçirilmesi"
+  },
+  "warningGoBack": {
+    "message": "Geri Dön (Güvenli)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Riski anlıyorum"
+  },
+  "warningOverrideDetail": {
+    "message": "Yine de devam etmek için bu alan adını Zevr Guard açılır penceresinden (engelle/engeli kaldır düğmesi) engel listenizden çıkarın, ardından sayfayı yeniden yükleyin."
+  },
+  "warningFooter": {
+    "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
+  },
+  "riskMsgSafe": {
+    "message": "Bu sayfa güvenli"
+  },
+  "riskMsgTracker": {
+    "message": "İzleyici tespit edildi"
+  },
+  "riskMsgSuspicious": {
+    "message": "Şüpheli trafik tespit edildi"
+  },
+  "riskMsgDangerous": {
+    "message": "Tehlikeli trafik tespit edildi"
+  },
+  "settingsGeneral": {
+    "message": "Genel"
+  },
+  "settingsNotifications": {
+    "message": "Bildirimler"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Tehlikeli trafik tespit edildiğinde bildir"
+  },
+  "settingsBlockCategories": {
+    "message": "Engelleme kategorileri"
+  },
+  "settingsMalware": {
+    "message": "Zararlı Yazılım / Kimlik Avı"
+  },
+  "settingsMalwareDesc": {
+    "message": "Bilinen zararlı yazılım ve kimlik avı (önerilir)"
+  },
+  "settingsAdvertising": {
+    "message": "Reklam"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Reklam alan adları"
+  },
+  "settingsTracking": {
+    "message": "İzleme"
+  },
+  "settingsTrackingDesc": {
+    "message": "İzleme ve analiz alan adları"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Özel engel listesi"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Engellenen alan adı yok"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 alan adı"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ alan adı",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Özel izin listesi"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "İzin verilen alan adı yok"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 alan adı"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ alan adı",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Buraya eklenen alan adları, zararlı yazılım dahil tüm engelleme kurallarını atlar."
+  },
+  "allowBarThisSite": {
+    "message": "Bu site"
+  },
+  "allowBarAllowed": {
+    "message": "İzinli"
+  },
+  "allowBarAllow": {
+    "message": "İzin ver"
+  },
+  "allowBarRevoke": {
+    "message": "Geri al"
+  },
+  "allowBarAddTitle": {
+    "message": "Bu siteyi izin listesine ekle (engellemeyi atlar)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Bu siteyi izin listesinden çıkar"
+  },
+  "remove": {
+    "message": "kaldır"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Canlı Küre"
+  },
+  "popupStatusLive": {
+    "message": "koruma devrede"
+  },
+  "popupScanning": {
+    "message": "TARANIYOR..."
+  },
+  "popupNoData": {
+    "message": "Bu sayfa için henüz veri yok."
+  },
+  "popupReloadToMonitor": {
+    "message": "İzlemeyi başlatmak için sekmeyi yeniden yükleyin."
+  },
+  "metricDomains": {
+    "message": "alan adı"
+  },
+  "metricRequests": {
+    "message": "istek"
+  },
+  "metricBlocked": {
+    "message": "engellendi"
+  },
+  "todayTrackers": {
+    "message": "Bugünkü izleyiciler"
+  },
+  "todayBlocked": {
+    "message": "Bugün engellenen"
+  },
+  "todayCompanies": {
+    "message": "Şirketler"
+  },
+  "riskScoreLabel": {
+    "message": "risk puanı"
+  },
+  "riskLabelSafe": {
+    "message": "GÜVENLİ"
+  },
+  "riskLabelTracker": {
+    "message": "İZLEYİCİ"
+  },
+  "riskLabelSuspicious": {
+    "message": "ŞÜPHELİ"
+  },
+  "riskLabelDangerous": {
+    "message": "TEHLİKELİ"
+  },
+  "connectionsCount": {
+    "message": "Bağlantılar"
+  },
+  "monitoringConnections": {
+    "message": "Bağlantılar izleniyor..."
+  },
+  "noMatchingConnections": {
+    "message": "Eşleşen bağlantı yok."
+  },
+  "backToList": {
+    "message": "Listeye dön"
+  },
+  "filterAll": {
+    "message": "Tümü"
+  },
+  "filterDangerShort": {
+    "message": "Tehlike"
+  },
+  "filterSuspicShort": {
+    "message": "Şüpheli"
+  },
+  "filterTrackerShort": {
+    "message": "İzleyici"
+  },
+  "filterSafeShort": {
+    "message": "Güvenli"
+  },
+  "viewLabel": {
+    "message": "Görünüm"
+  },
+  "groupDomains": {
+    "message": "Alan adları"
+  },
+  "groupCompanies": {
+    "message": "Şirketler"
+  },
+  "groupDomainCount": {
+    "message": "$N$ alan adı",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 alan adı"
+  },
+  "detailCompany": {
+    "message": "Şirket"
+  },
+  "detailCategory": {
+    "message": "Kategori"
+  },
+  "detailLocation": {
+    "message": "Konum"
+  },
+  "detailHostedBy": {
+    "message": "Barındıran"
+  },
+  "detailISP": {
+    "message": "İSS"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "İstekler"
+  },
+  "detailFirstSeen": {
+    "message": "İlk görülme"
+  },
+  "unblockThisDomain": {
+    "message": "Bu alan adının engelini kaldır"
+  },
+  "blockThisDomain": {
+    "message": "Bu alan adını engelle"
+  },
+  "block": {
+    "message": "engelle"
+  },
+  "unblock": {
+    "message": "engeli kaldır"
+  },
+  "legendSafe": {
+    "message": "Güvenli"
+  },
+  "legendTracker": {
+    "message": "İzleyici"
+  },
+  "legendSuspicious": {
+    "message": "Şüpheli"
+  },
+  "legendDangerous": {
+    "message": "Tehlikeli"
+  },
+  "stripTrackers": {
+    "message": "İzleyiciler"
+  },
+  "stripBlocked": {
+    "message": "Engellenen"
+  },
+  "stripCompanies": {
+    "message": "Şirketler"
+  },
+  "thisPage": {
+    "message": "Bu sayfa"
+  },
+  "backToConnections": {
+    "message": "Bağlantılara dön"
+  },
+  "drillRequests": {
+    "message": "istek"
+  },
+  "drillDomains": {
+    "message": "alan adı"
+  },
+  "drillCompanies": {
+    "message": "şirket"
+  },
+  "noTrackersOnPage": {
+    "message": "Bu sayfada izleyici yok."
+  },
+  "noCompaniesOnPage": {
+    "message": "Bu sayfada tanımlanabilir şirket yok."
+  },
+  "nothingBlocked": {
+    "message": "Bu sayfada engellenen bir şey yok."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard gözlüyor — tehlikeli siteler otomatik olarak engellenecek."
+  },
+  "onThisPage": {
+    "message": "Bu sayfada"
+  },
+  "requestsBlockedCount": {
+    "message": "Bu sayfada $N$ istek engellendi",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Otomatik engellenen alan adı ayrıntıları burada izlenmez"
+  },
+  "pinBadge": {
+    "message": "SABİT"
+  },
+  "pauseBarPaused": {
+    "message": "Engelleme duraklatıldı"
+  },
+  "pauseBarPause": {
+    "message": "Duraklat"
+  },
+  "pauseBarResume": {
+    "message": "Sürdür"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Bu sitede engellemeyi duraklat (bozulan siteleri düzeltir)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Bu sitede engellemeyi sürdür"
+  },
+  "settingsPausedSites": {
+    "message": "Duraklatılan siteler"
+  },
+  "shareTitle": {
+    "message": "Bu taramayı paylaş"
+  },
+  "shareTagline": {
+    "message": "Tarayıcınız kiminle konuşuyor?"
+  },
+  "shareHeadline": {
+    "message": "$C$ şirket · $N$ ülke",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$, $N$ ülkedeki $C$ şirketle konuşuyor — Zevr Guard izliyor ve engelliyor",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Görseli kaydet"
+  },
+  "sharePost": {
+    "message": "Gönder"
+  },
+  "shareHint": {
+    "message": "Gönderirken görsel panoya kopyalanır — eklemek için yazma alanında Ctrl+V'ye basın."
+  },
+  "reportTitle": {
+    "message": "Koruma raporu"
+  },
+  "reportSubtitle": {
+    "message": "Haftalık koruma raporu"
+  },
+  "reportBlocked": {
+    "message": "Engellenen"
+  },
+  "reportConnections": {
+    "message": "Bağlantılar"
+  },
+  "reportTrackers": {
+    "message": "İzleyiciler"
+  },
+  "reportDangerous": {
+    "message": "Tehlikeli"
+  },
+  "reportDailyBlocked": {
+    "message": "Günlük engellenen"
+  },
+  "reportTopCompanies": {
+    "message": "En çok izleyen şirketler"
+  },
+  "reportTopBlocked": {
+    "message": "En çok engellenen alan adları"
+  },
+  "reportNoData": {
+    "message": "Henüz veri yok — önce biraz gezinin."
+  },
+  "reportFooter": {
+    "message": "Tüm veriler bu cihazda yerel olarak saklanır."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ tehdit engellendi!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard sizi sessizce koruyor. İşinize yaradıysa, kısa bir değerlendirme başkalarının da onu bulmasına yardımcı olur."
+  },
+  "reviewPromptRate": {
+    "message": "Zevr Guard'ı değerlendir ★"
+  },
+  "reviewPromptLater": {
+    "message": "Daha sonra"
+  },
+  "riskExplainDangerous": {
+    "message": "Bu alan adı, bilinen zararlı yazılım/kimlik avı veritabanlarında yer alıyor. Verilerinizi çalmaya veya zararlı yazılım yüklemeye çalışabilir."
+  },
+  "riskExplainSuspicious": {
+    "message": "Bu alan adı reklam veya izleme için kullanılıyor. Gezinme davranışınız hakkında veri topluyor."
+  },
+  "riskExplainTracker": {
+    "message": "Bu alan adı analiz veya içerik dağıtımı için kullanılıyor. Bir miktar kullanım verisi toplayabilir."
+  },
+  "riskExplainSafe": {
+    "message": "Bu alan adı güvenli görünüyor. Bilinen bir izleme veya kötü amaçlı etkinlik tespit edilmedi."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Canlı küre yan panelini aç"
+  },
+  "settingsTitle": {
+    "message": "Ayarlar"
+  },
+  "unpinTitle": {
+    "message": "Sabitlemeyi kaldırmak için tekrar tıklayın"
+  },
+  "youLabel": {
+    "message": "SİZ"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Tehlikeli Bağlantı Tespit Edildi"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$, bilinen bir zararlı yazılım/kimlik avı alan adıdır.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Bunlar da dahil"
+  },
+  "welcomeAlsoShare": {
+    "message": "Tek tıkla paylaşım kartı"
+  },
+  "welcomeAlsoReport": {
+    "message": "Haftalık koruma raporu"
+  },
+  "welcomeAlsoPause": {
+    "message": "Siteye özel duraklatma"
+  },
+  "welcomeAlsoLangs": {
+    "message": "$N$ dilde kullanılabilir",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Olası Kimlik Avı Engellendi"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Şununla aynı değil:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Bu adres $BRAND$ sitesini taklit ediyor ama gerçek site değil.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Taklit siteler genellikle şu amaçlarla kullanılır:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Parolanızı veya giriş kodlarınızı çalmak"
+  },
+  "warningLookalikeItem2": {
+    "message": "Kredi kartı veya banka bilgilerinizi ele geçirmek"
+  },
+  "warningLookalikeItem3": {
+    "message": "Gerçek hizmet kılığında zararlı yazılım yaymak"
+  },
+  "warningLookalikeDetected": {
+    "message": "Cihaz üzerinde çalışan taklit analiziyle tespit edildi. URL'niz bu tarayıcıdan hiç çıkmadı."
+  },
+  "warningProceedAnyway": {
+    "message": "Yine de devam et (önerilmez)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Taklit kimlik avı tespiti"
+  }
+}

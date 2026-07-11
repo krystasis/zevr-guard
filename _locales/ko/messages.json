@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: 광고 차단, 추적 방지, 악성코드·피싱 보호"
+  },
+  "extDescription": {
+    "message": "광고·추적기·악성코드·피싱을 차단합니다. 브라우저가 통신하는 모든 회사를 실시간 세계 지도로 확인. 100% 로컬 처리 — 데이터 전송 없음."
+  },
+  "protectionActive": {
+    "message": "보호 작동 중"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "첫 번째 제품"
+  },
+  "heroTagline": {
+    "message": "브라우저가 누구와 통신하는지 확인하세요."
+  },
+  "heroTaglineAccent": {
+    "message": "위험한 연결은 차단합니다."
+  },
+  "heroDescription": {
+    "message": "브라우저가 세계 어디와 연결되고 있는지 실시간으로 확인하세요. 위험한 연결은 자동으로 차단됩니다."
+  },
+  "ctaOpenGlobe": {
+    "message": "라이브 글로브 열기"
+  },
+  "ctaStartBrowsing": {
+    "message": "브라우징 시작"
+  },
+  "trustTrackers": {
+    "message": "추적 신호 $N$개",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "매일 DB 업데이트"
+  },
+  "trust100Local": {
+    "message": "로컬 전용 매칭"
+  },
+  "trustNoTelemetry": {
+    "message": "URL 업로드 없음"
+  },
+  "scrollHint": {
+    "message": "스크롤"
+  },
+  "howItWorks": {
+    "message": "작동 방식"
+  },
+  "fourLayersTitle": {
+    "message": "4중 보호 레이어"
+  },
+  "feature1Title": {
+    "message": "악성코드 자동 차단"
+  },
+  "feature1Desc": {
+    "message": "알려진 악성코드·피싱 도메인을 눈치채기도 전에 차단합니다. 위협 목록은 매일 자동으로 갱신됩니다."
+  },
+  "feature2Title": {
+    "message": "모든 추적기 확인"
+  },
+  "feature2Desc": {
+    "message": "115,000개 이상의 추적 신호 데이터베이스로 어떤 회사가 얼마나 자주, 어디에서 브라우저에 접근하는지 식별합니다."
+  },
+  "feature3Title": {
+    "message": "의심스러우면 경고"
+  },
+  "feature3Desc": {
+    "message": "광고, 분석, 핑거프린팅 도메인을 색상으로 구분해 표시합니다. 각 페이지의 추적 밀도를 실시간으로 확인하세요."
+  },
+  "feature4Title": {
+    "message": "로컬 매칭. URL은 절대 밖으로 나가지 않습니다."
+  },
+  "feature4Desc": {
+    "message": "매칭은 전부 브라우저 안에서 실행됩니다. 외부로 나가는 통신은 저희 CDN에서 받는 익명 위협 DB 업데이트뿐이며, 브라우징 기록은 어디에도 전송되지 않습니다."
+  },
+  "dataSourcesTitle": {
+    "message": "조용한 방어, 검증 가능한 규모."
+  },
+  "dataSourcesSubtitle": {
+    "message": "숫자로 보기"
+  },
+  "dataByNumbers1Value": {
+    "message": "115,000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "신호"
+  },
+  "dataByNumbers1Label": {
+    "message": "추적기 식별 DB"
+  },
+  "dataByNumbers2Value": {
+    "message": "매일"
+  },
+  "dataByNumbers2Unit": {
+    "message": "업데이트"
+  },
+  "dataByNumbers2Label": {
+    "message": "자체 CDN을 통한 자동 갱신"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "개 국가·지역"
+  },
+  "dataByNumbers3Label": {
+    "message": "위치 정보 커버리지"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "전송된 URL"
+  },
+  "dataByNumbers4Label": {
+    "message": "브라우징 기록은 밖으로 나가지 않습니다"
+  },
+  "languageSwitchLabel": {
+    "message": "언어"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "네트워크 가시성을 즉시"
+  },
+  "warningTitle": {
+    "message": "위험한 사이트 차단됨"
+  },
+  "warningSubtitle": {
+    "message": "Zevr Guard가 보호 중"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard가 다음 사이트 접근을 차단했습니다:"
+  },
+  "warningListHeader": {
+    "message": "이 도메인은 알려진 악성코드/피싱 데이터베이스에 등록되어 있습니다."
+  },
+  "warningListIntro": {
+    "message": "이 사이트를 방문하면 다음 위험이 있습니다:"
+  },
+  "warningListItem1": {
+    "message": "기기에 악성코드 설치"
+  },
+  "warningListItem2": {
+    "message": "비밀번호·개인정보 탈취"
+  },
+  "warningListItem3": {
+    "message": "브라우저·계정 하이재킹"
+  },
+  "warningGoBack": {
+    "message": "돌아가기 (안전)"
+  },
+  "warningUnderstandRisk": {
+    "message": "위험을 이해했습니다"
+  },
+  "warningOverrideDetail": {
+    "message": "그래도 진행하려면 Zevr Guard 팝업(차단/차단 해제 버튼)에서 이 도메인을 차단 목록에서 제거한 뒤 새로고침하세요."
+  },
+  "warningFooter": {
+    "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"
+  },
+  "riskMsgSafe": {
+    "message": "이 페이지는 안전합니다"
+  },
+  "riskMsgTracker": {
+    "message": "추적기가 감지되었습니다"
+  },
+  "riskMsgSuspicious": {
+    "message": "의심스러운 트래픽이 감지되었습니다"
+  },
+  "riskMsgDangerous": {
+    "message": "위험한 트래픽이 감지되었습니다"
+  },
+  "settingsGeneral": {
+    "message": "일반"
+  },
+  "settingsNotifications": {
+    "message": "알림"
+  },
+  "settingsNotificationsDesc": {
+    "message": "위험한 트래픽 감지 시 알림"
+  },
+  "settingsBlockCategories": {
+    "message": "차단 카테고리"
+  },
+  "settingsMalware": {
+    "message": "악성코드 / 피싱"
+  },
+  "settingsMalwareDesc": {
+    "message": "알려진 악성코드·피싱 (권장)"
+  },
+  "settingsAdvertising": {
+    "message": "광고"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "광고 도메인"
+  },
+  "settingsTracking": {
+    "message": "추적"
+  },
+  "settingsTrackingDesc": {
+    "message": "추적·분석 도메인"
+  },
+  "settingsCustomBlocklist": {
+    "message": "사용자 차단 목록"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "차단된 도메인 없음"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "도메인 1개"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "도메인 $N$개",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "사용자 허용 목록"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "허용된 도메인 없음"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "도메인 1개"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "도메인 $N$개",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "여기에 추가한 도메인은 악성코드를 포함한 모든 차단 규칙을 우회합니다."
+  },
+  "allowBarThisSite": {
+    "message": "이 사이트"
+  },
+  "allowBarAllowed": {
+    "message": "허용됨"
+  },
+  "allowBarAllow": {
+    "message": "허용"
+  },
+  "allowBarRevoke": {
+    "message": "취소"
+  },
+  "allowBarAddTitle": {
+    "message": "이 사이트를 허용 목록에 추가 (차단 우회)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "이 사이트를 허용 목록에서 제거"
+  },
+  "remove": {
+    "message": "제거"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "라이브 글로브"
+  },
+  "popupStatusLive": {
+    "message": "보호 작동 중"
+  },
+  "popupScanning": {
+    "message": "검사 중..."
+  },
+  "popupNoData": {
+    "message": "이 페이지의 데이터가 아직 없습니다."
+  },
+  "popupReloadToMonitor": {
+    "message": "모니터링을 시작하려면 탭을 새로고침하세요."
+  },
+  "metricDomains": {
+    "message": "도메인"
+  },
+  "metricRequests": {
+    "message": "요청"
+  },
+  "metricBlocked": {
+    "message": "차단"
+  },
+  "todayTrackers": {
+    "message": "오늘의 추적기"
+  },
+  "todayBlocked": {
+    "message": "오늘 차단"
+  },
+  "todayCompanies": {
+    "message": "회사"
+  },
+  "riskScoreLabel": {
+    "message": "위험 점수"
+  },
+  "riskLabelSafe": {
+    "message": "안전"
+  },
+  "riskLabelTracker": {
+    "message": "추적"
+  },
+  "riskLabelSuspicious": {
+    "message": "의심"
+  },
+  "riskLabelDangerous": {
+    "message": "위험"
+  },
+  "connectionsCount": {
+    "message": "연결"
+  },
+  "monitoringConnections": {
+    "message": "연결 모니터링 중..."
+  },
+  "noMatchingConnections": {
+    "message": "일치하는 연결이 없습니다."
+  },
+  "backToList": {
+    "message": "목록으로 돌아가기"
+  },
+  "filterAll": {
+    "message": "전체"
+  },
+  "filterDangerShort": {
+    "message": "위험"
+  },
+  "filterSuspicShort": {
+    "message": "의심"
+  },
+  "filterTrackerShort": {
+    "message": "추적"
+  },
+  "filterSafeShort": {
+    "message": "안전"
+  },
+  "viewLabel": {
+    "message": "보기"
+  },
+  "groupDomains": {
+    "message": "도메인"
+  },
+  "groupCompanies": {
+    "message": "회사"
+  },
+  "groupDomainCount": {
+    "message": "도메인 $N$개",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "도메인 1개"
+  },
+  "detailCompany": {
+    "message": "회사"
+  },
+  "detailCategory": {
+    "message": "카테고리"
+  },
+  "detailLocation": {
+    "message": "위치"
+  },
+  "detailHostedBy": {
+    "message": "호스팅"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "요청"
+  },
+  "detailFirstSeen": {
+    "message": "처음 감지"
+  },
+  "unblockThisDomain": {
+    "message": "이 도메인 차단 해제"
+  },
+  "blockThisDomain": {
+    "message": "이 도메인 차단"
+  },
+  "block": {
+    "message": "차단"
+  },
+  "unblock": {
+    "message": "차단 해제"
+  },
+  "legendSafe": {
+    "message": "안전"
+  },
+  "legendTracker": {
+    "message": "추적"
+  },
+  "legendSuspicious": {
+    "message": "의심"
+  },
+  "legendDangerous": {
+    "message": "위험"
+  },
+  "stripTrackers": {
+    "message": "추적기"
+  },
+  "stripBlocked": {
+    "message": "차단됨"
+  },
+  "stripCompanies": {
+    "message": "회사"
+  },
+  "thisPage": {
+    "message": "이 페이지"
+  },
+  "backToConnections": {
+    "message": "연결 목록으로"
+  },
+  "drillRequests": {
+    "message": "요청"
+  },
+  "drillDomains": {
+    "message": "도메인"
+  },
+  "drillCompanies": {
+    "message": "회사"
+  },
+  "noTrackersOnPage": {
+    "message": "이 페이지에는 추적기가 없습니다."
+  },
+  "noCompaniesOnPage": {
+    "message": "이 페이지에서 식별된 회사가 없습니다."
+  },
+  "nothingBlocked": {
+    "message": "이 페이지에서 차단된 항목이 없습니다."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard가 지켜보고 있습니다 — 위험한 사이트는 자동으로 차단됩니다."
+  },
+  "onThisPage": {
+    "message": "이 페이지에서"
+  },
+  "requestsBlockedCount": {
+    "message": "이 페이지에서 요청 $N$건 차단됨",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "자동 차단된 도메인의 상세 정보는 여기에 표시되지 않습니다"
+  },
+  "pinBadge": {
+    "message": "고정"
+  },
+  "pauseBarPaused": {
+    "message": "차단 일시중지됨"
+  },
+  "pauseBarPause": {
+    "message": "일시중지"
+  },
+  "pauseBarResume": {
+    "message": "재개"
+  },
+  "pauseBarPauseTitle": {
+    "message": "이 사이트에서 차단 일시중지 (사이트 깨짐 해결)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "이 사이트에서 차단 재개"
+  },
+  "settingsPausedSites": {
+    "message": "일시중지된 사이트"
+  },
+  "shareTitle": {
+    "message": "이 스캔 공유하기"
+  },
+  "shareTagline": {
+    "message": "내 브라우저는 누구와 통신하고 있을까?"
+  },
+  "shareHeadline": {
+    "message": "회사 $C$곳 · $N$개국",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$은(는) $N$개국의 회사 $C$곳과 통신 중 — Zevr Guard가 감시하고 차단합니다",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "이미지 저장"
+  },
+  "sharePost": {
+    "message": "게시"
+  },
+  "shareHint": {
+    "message": "게시하면 이미지가 복사됩니다 — 작성 창에서 Ctrl+V를 눌러 첨부하세요."
+  },
+  "reportTitle": {
+    "message": "보호 리포트"
+  },
+  "reportSubtitle": {
+    "message": "주간 보호 리포트"
+  },
+  "reportBlocked": {
+    "message": "차단됨"
+  },
+  "reportConnections": {
+    "message": "연결"
+  },
+  "reportTrackers": {
+    "message": "추적기"
+  },
+  "reportDangerous": {
+    "message": "위험"
+  },
+  "reportDailyBlocked": {
+    "message": "일별 차단 수"
+  },
+  "reportTopCompanies": {
+    "message": "가장 많이 지켜본 회사"
+  },
+  "reportTopBlocked": {
+    "message": "가장 많이 차단된 도메인"
+  },
+  "reportNoData": {
+    "message": "아직 데이터가 없습니다 — 먼저 조금 둘러보세요."
+  },
+  "reportFooter": {
+    "message": "모든 데이터는 이 기기에만 저장됩니다."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 위협 $N$건 차단!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard가 조용히 지켜드리고 있습니다. 도움이 되었다면 짧은 리뷰가 다른 분들에게도 큰 힘이 됩니다."
+  },
+  "reviewPromptRate": {
+    "message": "Zevr Guard 평가하기 ★"
+  },
+  "reviewPromptLater": {
+    "message": "나중에"
+  },
+  "riskExplainDangerous": {
+    "message": "이 도메인은 알려진 악성코드/피싱 데이터베이스에 등록되어 있습니다. 데이터를 탈취하거나 악성코드를 설치하려 할 수 있습니다."
+  },
+  "riskExplainSuspicious": {
+    "message": "이 도메인은 광고 또는 추적에 사용됩니다. 브라우징 행동에 관한 데이터를 수집합니다."
+  },
+  "riskExplainTracker": {
+    "message": "이 도메인은 분석 또는 콘텐츠 전송에 사용됩니다. 일부 사용 데이터를 수집할 수 있습니다."
+  },
+  "riskExplainSafe": {
+    "message": "이 도메인은 안전한 것으로 보입니다. 알려진 추적이나 악성 활동이 감지되지 않았습니다."
+  },
+  "sidePanelOpenTitle": {
+    "message": "라이브 글로브 사이드 패널 열기"
+  },
+  "settingsTitle": {
+    "message": "설정"
+  },
+  "unpinTitle": {
+    "message": "다시 클릭하면 고정 해제"
+  },
+  "youLabel": {
+    "message": "나"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ 위험한 연결 감지됨"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$은(는) 알려진 악성코드/피싱 도메인입니다.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "이런 기능도 있어요"
+  },
+  "welcomeAlsoShare": {
+    "message": "원클릭 공유 카드"
+  },
+  "welcomeAlsoReport": {
+    "message": "주간 보호 리포트"
+  },
+  "welcomeAlsoPause": {
+    "message": "사이트별 일시중지"
+  },
+  "welcomeAlsoLangs": {
+    "message": "$N$개 언어 지원",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "피싱 의심 사이트 차단됨"
+  },
+  "warningLookalikeNotSame": {
+    "message": "다음 사이트와 다릅니다:"
+  },
+  "warningLookalikeHeader": {
+    "message": "이 주소는 $BRAND$을(를) 사칭하고 있으며 실제 사이트가 아닙니다.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "사칭 사이트는 주로 다음 목적으로 사용됩니다:"
+  },
+  "warningLookalikeItem1": {
+    "message": "비밀번호나 로그인 코드 탈취"
+  },
+  "warningLookalikeItem2": {
+    "message": "신용카드·은행 정보 수집"
+  },
+  "warningLookalikeItem3": {
+    "message": "실제 서비스로 위장한 악성코드 유포"
+  },
+  "warningLookalikeDetected": {
+    "message": "기기 내 사칭 도메인 분석으로 감지되었습니다. URL은 이 브라우저를 벗어나지 않았습니다."
+  },
+  "warningProceedAnyway": {
+    "message": "그래도 진행 (권장하지 않음)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "사칭 피싱 감지"
+  }
+}

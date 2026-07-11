@@ -624,7 +624,12 @@
     "message": "Pausa por sitio"
   },
   "welcomeAlsoLangs": {
-    "message": "Disponible en 6 idiomas"
+    "message": "Disponible en $N$ idiomas",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
   },
   "warningLookalikeTitle": {
     "message": "Presunto phishing bloqueado"

@@ -1,11 +1,25 @@
 import enMessages from '../../_locales/en/messages.json';
-import jaMessages from '../../_locales/ja/messages.json';
-import esMessages from '../../_locales/es/messages.json';
-import ptMessages from '../../_locales/pt_BR/messages.json';
-import deMessages from '../../_locales/de/messages.json';
-import frMessages from '../../_locales/fr/messages.json';
 
-export type Locale = 'en' | 'ja' | 'es' | 'pt' | 'de' | 'fr';
+export type Locale =
+  | 'en'
+  | 'ja'
+  | 'es'
+  | 'pt'
+  | 'de'
+  | 'fr'
+  | 'it'
+  | 'nl'
+  | 'pl'
+  | 'ru'
+  | 'uk'
+  | 'tr'
+  | 'ko'
+  | 'id'
+  | 'vi'
+  | 'hi'
+  | 'zh_CN'
+  | 'zh_TW';
+
 export const SUPPORTED_LOCALES: readonly Locale[] = [
   'en',
   'ja',
@@ -13,8 +27,42 @@ export const SUPPORTED_LOCALES: readonly Locale[] = [
   'pt',
   'de',
   'fr',
+  'it',
+  'nl',
+  'pl',
+  'ru',
+  'uk',
+  'tr',
+  'ko',
+  'id',
+  'vi',
+  'hi',
+  'zh_CN',
+  'zh_TW',
 ] as const;
 export const DEFAULT_LOCALE: Locale = 'en';
+
+/** Native-language display names for locale pickers. */
+export const LOCALE_NAMES: Record<Locale, string> = {
+  en: 'English',
+  ja: '日本語',
+  es: 'Español',
+  pt: 'Português (BR)',
+  de: 'Deutsch',
+  fr: 'Français',
+  it: 'Italiano',
+  nl: 'Nederlands',
+  pl: 'Polski',
+  ru: 'Русский',
+  uk: 'Українська',
+  tr: 'Türkçe',
+  ko: '한국어',
+  id: 'Bahasa Indonesia',
+  vi: 'Tiếng Việt',
+  hi: 'हिन्दी',
+  zh_CN: '简体中文',
+  zh_TW: '繁體中文',
+};
 
 type ChromeMessage = {
   message: string;
@@ -22,14 +70,33 @@ type ChromeMessage = {
 };
 type Dictionary = Record<string, ChromeMessage>;
 
-const DICTIONARIES: Record<Locale, Dictionary> = {
-  en: enMessages as Dictionary,
-  ja: jaMessages as Dictionary,
-  es: esMessages as Dictionary,
-  pt: ptMessages as Dictionary,
-  de: deMessages as Dictionary,
-  fr: frMessages as Dictionary,
-};
+const EN_DICTIONARY = enMessages as Dictionary;
+
+// English ships in every bundle as the always-available fallback; the other
+// dictionaries load on demand. With 18 locales, inlining all of them into
+// every entry (popup, sidepanel, service worker, ...) would cost several
+// hundred kB of parse time per cold start.
+const LOCALE_LOADERS = import.meta.glob<Dictionary>(
+  '../../_locales/*/messages.json',
+  { import: 'default' },
+);
+
+function localeDir(locale: Locale): string {
+  return locale === 'pt' ? 'pt_BR' : locale;
+}
+
+const loadedDictionaries = new Map<Locale, Dictionary>([['en', EN_DICTIONARY]]);
+
+async function ensureDictionary(locale: Locale): Promise<void> {
+  if (loadedDictionaries.has(locale)) return;
+  const loader = LOCALE_LOADERS[`../../_locales/${localeDir(locale)}/messages.json`];
+  if (!loader) return;
+  try {
+    loadedDictionaries.set(locale, await loader());
+  } catch {
+    // fall back to English
+  }
+}
 
 const STORAGE_KEY = 'zg.locale';
 
@@ -44,6 +111,11 @@ function detectLocale(): Locale {
   try {
     const ui = chrome.i18n.getUILanguage().toLowerCase();
     if (ui.startsWith('pt')) return 'pt';
+    if (ui.startsWith('zh')) {
+      return ui.startsWith('zh-tw') || ui.startsWith('zh-hk') || ui.startsWith('zh-mo')
+        ? 'zh_TW'
+        : 'zh_CN';
+    }
     const base = ui.split('-')[0];
     if (isSupported(base)) return base;
   } catch {
@@ -56,25 +128,29 @@ export function getLocale(): Locale {
   return currentLocale;
 }
 
+/** BCP 47 tag for Intl APIs (date formatting etc.). */
+export function bcp47(locale: Locale = currentLocale): string {
+  return locale === 'pt' ? 'pt-BR' : locale.replace('_', '-');
+}
+
 export async function loadLocale(): Promise<Locale> {
+  let next = detectLocale();
   try {
     const res = await chrome.storage.local.get(STORAGE_KEY);
     const stored = res[STORAGE_KEY];
-    if (isSupported(stored)) {
-      currentLocale = stored;
-      emit();
-      return currentLocale;
-    }
+    if (isSupported(stored)) next = stored;
   } catch {
     // non-extension context or storage unavailable
   }
-  currentLocale = detectLocale();
+  await ensureDictionary(next);
+  currentLocale = next;
   emit();
   return currentLocale;
 }
 
 export async function setLocale(locale: Locale): Promise<void> {
   if (!isSupported(locale)) return;
+  await ensureDictionary(locale);
   currentLocale = locale;
   try {
     await chrome.storage.local.set({ [STORAGE_KEY]: locale });
@@ -108,8 +184,10 @@ try {
       if (area !== 'local') return;
       const next = changes[STORAGE_KEY]?.newValue;
       if (isSupported(next) && next !== currentLocale) {
-        currentLocale = next;
-        emit();
+        void ensureDictionary(next).then(() => {
+          currentLocale = next;
+          emit();
+        });
       }
     });
   }
@@ -135,9 +213,8 @@ function resolveMessage(msg: ChromeMessage | undefined, subs: string[]): string 
 }
 
 export function t(key: string, fallback?: string, ...subs: string[]): string {
-  const dict = DICTIONARIES[currentLocale] ?? DICTIONARIES[DEFAULT_LOCALE];
+  const dict = loadedDictionaries.get(currentLocale) ?? EN_DICTIONARY;
   const resolved =
-    resolveMessage(dict[key], subs) ??
-    resolveMessage(DICTIONARIES[DEFAULT_LOCALE][key], subs);
+    resolveMessage(dict[key], subs) ?? resolveMessage(EN_DICTIONARY[key], subs);
   return resolved ?? fallback ?? key;
 }

@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Chặn quảng cáo, trình theo dõi & phần mềm độc hại"
+  },
+  "extDescription": {
+    "message": "Chặn quảng cáo, theo dõi, mã độc & lừa đảo. Xem trình duyệt kết nối với ai trên bản đồ trực tiếp. 100% cục bộ, không gửi dữ liệu."
+  },
+  "protectionActive": {
+    "message": "Đang bảo vệ"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Sản phẩm đầu tiên"
+  },
+  "heroTagline": {
+    "message": "Xem trình duyệt của bạn kết nối với ai."
+  },
+  "heroTaglineAccent": {
+    "message": "Chặn những kẻ nguy hiểm."
+  },
+  "heroDescription": {
+    "message": "Xem trình duyệt của bạn đang vươn tới những nơi nào trên thế giới theo thời gian thực. Các kết nối nguy hiểm sẽ tự động bị chặn."
+  },
+  "ctaOpenGlobe": {
+    "message": "Mở Địa cầu trực tiếp"
+  },
+  "ctaStartBrowsing": {
+    "message": "Bắt đầu duyệt web"
+  },
+  "trustTrackers": {
+    "message": "$N$ tín hiệu theo dõi",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Cập nhật CSDL hằng ngày"
+  },
+  "trust100Local": {
+    "message": "Đối chiếu cục bộ"
+  },
+  "trustNoTelemetry": {
+    "message": "Không tải URL lên"
+  },
+  "scrollHint": {
+    "message": "Cuộn"
+  },
+  "howItWorks": {
+    "message": "Cách hoạt động"
+  },
+  "fourLayersTitle": {
+    "message": "Bốn lớp bảo vệ"
+  },
+  "feature1Title": {
+    "message": "Tự động chặn mã độc"
+  },
+  "feature1Desc": {
+    "message": "Các tên miền mã độc và lừa đảo đã biết bị chặn trước khi bạn kịp nhận ra. Danh sách mối đe dọa tự động làm mới mỗi ngày."
+  },
+  "feature2Title": {
+    "message": "Thấy mọi trình theo dõi"
+  },
+  "feature2Desc": {
+    "message": "Cơ sở dữ liệu hơn 115.000 tín hiệu theo dõi nhận diện công ty nào đang tiếp cận trình duyệt của bạn, tần suất ra sao và từ đâu."
+  },
+  "feature3Title": {
+    "message": "Cảnh báo khi đáng ngờ"
+  },
+  "feature3Desc": {
+    "message": "Các tên miền quảng cáo, phân tích và thu thập dấu vân tay số được đánh dấu bằng màu sắc. Xem mật độ theo dõi của từng trang theo thời gian thực."
+  },
+  "feature4Title": {
+    "message": "Đối chiếu cục bộ. URL của bạn không bao giờ rời máy."
+  },
+  "feature4Desc": {
+    "message": "Việc đối chiếu diễn ra hoàn toàn trong trình duyệt của bạn. Lưu lượng gửi đi duy nhất là các bản cập nhật CSDL mối đe dọa ẩn danh từ CDN của chúng tôi — lịch sử duyệt web của bạn không đi đâu cả."
+  },
+  "dataSourcesTitle": {
+    "message": "Phòng thủ thầm lặng, ở quy mô có thể kiểm chứng."
+  },
+  "dataSourcesSubtitle": {
+    "message": "Những con số"
+  },
+  "dataByNumbers1Value": {
+    "message": "115.000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "tín hiệu"
+  },
+  "dataByNumbers1Label": {
+    "message": "CSDL nhận diện trình theo dõi"
+  },
+  "dataByNumbers2Value": {
+    "message": "mỗi ngày"
+  },
+  "dataByNumbers2Unit": {
+    "message": "cập nhật"
+  },
+  "dataByNumbers2Label": {
+    "message": "Tự động làm mới qua CDN của chúng tôi"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "quốc gia"
+  },
+  "dataByNumbers3Label": {
+    "message": "Phạm vi định vị địa lý"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL gửi đi"
+  },
+  "dataByNumbers4Label": {
+    "message": "Dữ liệu duyệt web không bao giờ rời máy"
+  },
+  "languageSwitchLabel": {
+    "message": "Ngôn ngữ"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Nhìn rõ mạng lưới, ngay lập tức"
+  },
+  "warningTitle": {
+    "message": "Đã chặn trang nguy hiểm"
+  },
+  "warningSubtitle": {
+    "message": "Được bảo vệ bởi Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard đã chặn truy cập tới:"
+  },
+  "warningListHeader": {
+    "message": "Tên miền này nằm trong các cơ sở dữ liệu mã độc/lừa đảo đã biết."
+  },
+  "warningListIntro": {
+    "message": "Truy cập trang này có thể:"
+  },
+  "warningListItem1": {
+    "message": "Cài mã độc lên thiết bị của bạn"
+  },
+  "warningListItem2": {
+    "message": "Đánh cắp mật khẩu hoặc dữ liệu cá nhân của bạn"
+  },
+  "warningListItem3": {
+    "message": "Chiếm quyền điều khiển trình duyệt hoặc tài khoản của bạn"
+  },
+  "warningGoBack": {
+    "message": "Quay lại (An toàn)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Tôi hiểu rủi ro"
+  },
+  "warningOverrideDetail": {
+    "message": "Để vẫn tiếp tục, hãy gỡ tên miền này khỏi danh sách chặn trong popup của Zevr Guard (nút chặn/bỏ chặn), rồi tải lại trang."
+  },
+  "warningFooter": {
+    "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"
+  },
+  "riskMsgSafe": {
+    "message": "Trang này an toàn"
+  },
+  "riskMsgTracker": {
+    "message": "Phát hiện trình theo dõi"
+  },
+  "riskMsgSuspicious": {
+    "message": "Phát hiện lưu lượng đáng ngờ"
+  },
+  "riskMsgDangerous": {
+    "message": "Phát hiện lưu lượng nguy hiểm"
+  },
+  "settingsGeneral": {
+    "message": "Chung"
+  },
+  "settingsNotifications": {
+    "message": "Thông báo"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Thông báo khi phát hiện lưu lượng nguy hiểm"
+  },
+  "settingsBlockCategories": {
+    "message": "Danh mục chặn"
+  },
+  "settingsMalware": {
+    "message": "Mã độc / Lừa đảo"
+  },
+  "settingsMalwareDesc": {
+    "message": "Mã độc & lừa đảo đã biết (khuyến nghị)"
+  },
+  "settingsAdvertising": {
+    "message": "Quảng cáo"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Tên miền quảng cáo"
+  },
+  "settingsTracking": {
+    "message": "Theo dõi"
+  },
+  "settingsTrackingDesc": {
+    "message": "Tên miền theo dõi & phân tích"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Danh sách chặn tùy chỉnh"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Chưa có tên miền bị chặn"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 tên miền"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ tên miền",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Danh sách cho phép tùy chỉnh"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Chưa có tên miền được phép"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 tên miền"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ tên miền",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Tên miền thêm vào đây sẽ bỏ qua mọi quy tắc chặn, kể cả mã độc."
+  },
+  "allowBarThisSite": {
+    "message": "Trang này"
+  },
+  "allowBarAllowed": {
+    "message": "Đã cho phép"
+  },
+  "allowBarAllow": {
+    "message": "Cho phép"
+  },
+  "allowBarRevoke": {
+    "message": "Thu hồi"
+  },
+  "allowBarAddTitle": {
+    "message": "Thêm trang này vào danh sách cho phép (bỏ qua chặn)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Gỡ trang này khỏi danh sách cho phép"
+  },
+  "remove": {
+    "message": "gỡ"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Địa cầu trực tiếp"
+  },
+  "popupStatusLive": {
+    "message": "đang bảo vệ"
+  },
+  "popupScanning": {
+    "message": "ĐANG QUÉT..."
+  },
+  "popupNoData": {
+    "message": "Chưa có dữ liệu cho trang này."
+  },
+  "popupReloadToMonitor": {
+    "message": "Tải lại thẻ để bắt đầu giám sát."
+  },
+  "metricDomains": {
+    "message": "tên miền"
+  },
+  "metricRequests": {
+    "message": "yêu cầu"
+  },
+  "metricBlocked": {
+    "message": "đã chặn"
+  },
+  "todayTrackers": {
+    "message": "Theo dõi hôm nay"
+  },
+  "todayBlocked": {
+    "message": "Đã chặn hôm nay"
+  },
+  "todayCompanies": {
+    "message": "Công ty"
+  },
+  "riskScoreLabel": {
+    "message": "điểm rủi ro"
+  },
+  "riskLabelSafe": {
+    "message": "AN TOÀN"
+  },
+  "riskLabelTracker": {
+    "message": "THEO DÕI"
+  },
+  "riskLabelSuspicious": {
+    "message": "ĐÁNG NGỜ"
+  },
+  "riskLabelDangerous": {
+    "message": "NGUY HIỂM"
+  },
+  "connectionsCount": {
+    "message": "Kết nối"
+  },
+  "monitoringConnections": {
+    "message": "Đang giám sát kết nối..."
+  },
+  "noMatchingConnections": {
+    "message": "Không có kết nối phù hợp."
+  },
+  "backToList": {
+    "message": "Về danh sách"
+  },
+  "filterAll": {
+    "message": "Tất cả"
+  },
+  "filterDangerShort": {
+    "message": "Nguy hiểm"
+  },
+  "filterSuspicShort": {
+    "message": "Đáng ngờ"
+  },
+  "filterTrackerShort": {
+    "message": "Theo dõi"
+  },
+  "filterSafeShort": {
+    "message": "An toàn"
+  },
+  "viewLabel": {
+    "message": "Xem"
+  },
+  "groupDomains": {
+    "message": "Tên miền"
+  },
+  "groupCompanies": {
+    "message": "Công ty"
+  },
+  "groupDomainCount": {
+    "message": "$N$ tên miền",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 tên miền"
+  },
+  "detailCompany": {
+    "message": "Công ty"
+  },
+  "detailCategory": {
+    "message": "Danh mục"
+  },
+  "detailLocation": {
+    "message": "Vị trí"
+  },
+  "detailHostedBy": {
+    "message": "Lưu trữ bởi"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Yêu cầu"
+  },
+  "detailFirstSeen": {
+    "message": "Thấy lần đầu"
+  },
+  "unblockThisDomain": {
+    "message": "Bỏ chặn tên miền này"
+  },
+  "blockThisDomain": {
+    "message": "Chặn tên miền này"
+  },
+  "block": {
+    "message": "chặn"
+  },
+  "unblock": {
+    "message": "bỏ chặn"
+  },
+  "legendSafe": {
+    "message": "An toàn"
+  },
+  "legendTracker": {
+    "message": "Theo dõi"
+  },
+  "legendSuspicious": {
+    "message": "Đáng ngờ"
+  },
+  "legendDangerous": {
+    "message": "Nguy hiểm"
+  },
+  "stripTrackers": {
+    "message": "Theo dõi"
+  },
+  "stripBlocked": {
+    "message": "Đã chặn"
+  },
+  "stripCompanies": {
+    "message": "Công ty"
+  },
+  "thisPage": {
+    "message": "Trang này"
+  },
+  "backToConnections": {
+    "message": "Về danh sách kết nối"
+  },
+  "drillRequests": {
+    "message": "yêu cầu"
+  },
+  "drillDomains": {
+    "message": "tên miền"
+  },
+  "drillCompanies": {
+    "message": "công ty"
+  },
+  "noTrackersOnPage": {
+    "message": "Không có trình theo dõi trên trang này."
+  },
+  "noCompaniesOnPage": {
+    "message": "Không nhận diện được công ty nào trên trang này."
+  },
+  "nothingBlocked": {
+    "message": "Chưa chặn gì trên trang này."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard đang canh chừng — các trang nguy hiểm sẽ tự động bị chặn."
+  },
+  "onThisPage": {
+    "message": "Trên trang này"
+  },
+  "requestsBlockedCount": {
+    "message": "Đã chặn $N$ yêu cầu trên trang này",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Chi tiết tên miền bị chặn tự động không được ghi lại ở đây"
+  },
+  "pinBadge": {
+    "message": "GHIM"
+  },
+  "pauseBarPaused": {
+    "message": "Đã tạm dừng chặn"
+  },
+  "pauseBarPause": {
+    "message": "Tạm dừng"
+  },
+  "pauseBarResume": {
+    "message": "Tiếp tục"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Tạm dừng chặn trên trang này (khắc phục trang bị lỗi)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Tiếp tục chặn trên trang này"
+  },
+  "settingsPausedSites": {
+    "message": "Trang đang tạm dừng"
+  },
+  "shareTitle": {
+    "message": "Chia sẻ kết quả quét"
+  },
+  "shareTagline": {
+    "message": "Trình duyệt của bạn đang kết nối với ai?"
+  },
+  "shareHeadline": {
+    "message": "$C$ công ty · $N$ quốc gia",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ kết nối với $C$ công ty tại $N$ quốc gia — được Zevr Guard giám sát & chặn",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Lưu ảnh"
+  },
+  "sharePost": {
+    "message": "Đăng"
+  },
+  "shareHint": {
+    "message": "Ảnh được sao chép khi bạn đăng — nhấn Ctrl+V trong khung soạn để đính kèm."
+  },
+  "reportTitle": {
+    "message": "Báo cáo bảo vệ"
+  },
+  "reportSubtitle": {
+    "message": "Báo cáo bảo vệ hằng tuần"
+  },
+  "reportBlocked": {
+    "message": "Đã chặn"
+  },
+  "reportConnections": {
+    "message": "Kết nối"
+  },
+  "reportTrackers": {
+    "message": "Theo dõi"
+  },
+  "reportDangerous": {
+    "message": "Nguy hiểm"
+  },
+  "reportDailyBlocked": {
+    "message": "Số lượt chặn mỗi ngày"
+  },
+  "reportTopCompanies": {
+    "message": "Công ty theo dõi nhiều nhất"
+  },
+  "reportTopBlocked": {
+    "message": "Tên miền bị chặn nhiều nhất"
+  },
+  "reportNoData": {
+    "message": "Chưa có dữ liệu — hãy duyệt web một chút trước."
+  },
+  "reportFooter": {
+    "message": "Mọi dữ liệu được lưu cục bộ trên thiết bị này."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 Đã chặn $N$ mối đe dọa!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard vẫn đang âm thầm bảo vệ bạn. Nếu thấy hữu ích, một đánh giá nhanh sẽ giúp nhiều người khác tìm thấy nó."
+  },
+  "reviewPromptRate": {
+    "message": "Đánh giá Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Để sau"
+  },
+  "riskExplainDangerous": {
+    "message": "Tên miền này nằm trong các cơ sở dữ liệu mã độc/lừa đảo đã biết. Nó có thể tìm cách đánh cắp dữ liệu hoặc cài mã độc."
+  },
+  "riskExplainSuspicious": {
+    "message": "Tên miền này được dùng cho quảng cáo hoặc theo dõi. Nó thu thập dữ liệu về hành vi duyệt web của bạn."
+  },
+  "riskExplainTracker": {
+    "message": "Tên miền này được dùng cho phân tích hoặc phân phối nội dung. Nó có thể thu thập một số dữ liệu sử dụng."
+  },
+  "riskExplainSafe": {
+    "message": "Tên miền này có vẻ an toàn. Không phát hiện hoạt động theo dõi hay độc hại nào đã biết."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Mở bảng bên Địa cầu trực tiếp"
+  },
+  "settingsTitle": {
+    "message": "Cài đặt"
+  },
+  "unpinTitle": {
+    "message": "Nhấp lần nữa để bỏ ghim"
+  },
+  "youLabel": {
+    "message": "BẠN"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Phát hiện kết nối nguy hiểm"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ là tên miền mã độc/lừa đảo đã biết.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Kèm theo"
+  },
+  "welcomeAlsoShare": {
+    "message": "Thẻ chia sẻ 1 chạm"
+  },
+  "welcomeAlsoReport": {
+    "message": "Báo cáo bảo vệ hằng tuần"
+  },
+  "welcomeAlsoPause": {
+    "message": "Tạm dừng theo từng trang"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Hỗ trợ $N$ ngôn ngữ",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Đã chặn trang nghi lừa đảo"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Không phải là:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Địa chỉ này giả mạo $BRAND$ nhưng không phải trang thật.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Trang giả mạo thường được dùng để:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Đánh cắp mật khẩu hoặc mã đăng nhập của bạn"
+  },
+  "warningLookalikeItem2": {
+    "message": "Lấy thông tin thẻ tín dụng hoặc ngân hàng"
+  },
+  "warningLookalikeItem3": {
+    "message": "Phát tán mã độc đội lốt dịch vụ thật"
+  },
+  "warningLookalikeDetected": {
+    "message": "Phát hiện bằng phân tích tên miền giả mạo ngay trên thiết bị. URL của bạn chưa từng rời trình duyệt này."
+  },
+  "warningProceedAnyway": {
+    "message": "Vẫn tiếp tục (không khuyến nghị)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Phát hiện tên miền giả mạo"
+  }
+}

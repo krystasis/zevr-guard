@@ -624,7 +624,12 @@
     "message": "サイト別の一時停止"
   },
   "welcomeAlsoLangs": {
-    "message": "6言語に対応"
+    "message": "$N$言語に対応",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
   },
   "warningLookalikeTitle": {
     "message": "フィッシングの疑いをブロック"

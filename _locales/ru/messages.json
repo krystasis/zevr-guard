@@ -1,0 +1,669 @@
+{
+  "extName": {
+    "message": "Zevr Guard: блокировка рекламы, трекеров, защита от вредоносного ПО"
+  },
+  "extDescription": {
+    "message": "Блокирует рекламу, трекеры, вредоносное ПО и фишинг. Все соединения браузера на живой карте мира. 100% локально."
+  },
+  "protectionActive": {
+    "message": "Защита активна"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Первый продукт"
+  },
+  "heroTagline": {
+    "message": "Узнайте, с кем общается ваш браузер."
+  },
+  "heroTaglineAccent": {
+    "message": "Блокируйте опасные соединения."
+  },
+  "heroDescription": {
+    "message": "Смотрите в реальном времени, с какими точками мира соединяется ваш браузер. Опасные соединения блокируются автоматически."
+  },
+  "ctaOpenGlobe": {
+    "message": "Открыть живой глобус"
+  },
+  "ctaStartBrowsing": {
+    "message": "Начать просмотр"
+  },
+  "trustTrackers": {
+    "message": "$N$ сигналов трекеров",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Ежедневное обновление базы"
+  },
+  "trust100Local": {
+    "message": "Только локальная проверка"
+  },
+  "trustNoTelemetry": {
+    "message": "URL не отправляются"
+  },
+  "scrollHint": {
+    "message": "Листайте"
+  },
+  "howItWorks": {
+    "message": "Как это работает"
+  },
+  "fourLayersTitle": {
+    "message": "Четыре уровня защиты"
+  },
+  "feature1Title": {
+    "message": "Автоблокировка вредоносного ПО"
+  },
+  "feature1Desc": {
+    "message": "Известные вредоносные и фишинговые домены блокируются раньше, чем вы их заметите. Список угроз обновляется автоматически каждый день."
+  },
+  "feature2Title": {
+    "message": "Все трекеры на виду"
+  },
+  "feature2Desc": {
+    "message": "База из более чем 115 000 сигналов трекеров определяет, какие компании подключаются к вашему браузеру, как часто и откуда."
+  },
+  "feature3Title": {
+    "message": "Предупреждение о подозрительном"
+  },
+  "feature3Desc": {
+    "message": "Домены рекламы, аналитики и фингерпринтинга выделяются цветом. Плотность слежки на каждой странице видна в реальном времени."
+  },
+  "feature4Title": {
+    "message": "Локальная проверка. Ваши URL никуда не уходят."
+  },
+  "feature4Desc": {
+    "message": "Сопоставление выполняется целиком в вашем браузере. Единственный исходящий трафик — анонимные обновления базы угроз с нашего CDN; история просмотров никуда не отправляется."
+  },
+  "dataSourcesTitle": {
+    "message": "Тихая защита в проверяемом масштабе."
+  },
+  "dataSourcesSubtitle": {
+    "message": "В цифрах"
+  },
+  "dataByNumbers1Value": {
+    "message": "115 000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "сигналов"
+  },
+  "dataByNumbers1Label": {
+    "message": "База идентификации трекеров"
+  },
+  "dataByNumbers2Value": {
+    "message": "ежедневные"
+  },
+  "dataByNumbers2Unit": {
+    "message": "обновления"
+  },
+  "dataByNumbers2Label": {
+    "message": "Автообновление через наш CDN"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "страны"
+  },
+  "dataByNumbers3Label": {
+    "message": "Покрытие геолокации"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "отправленных URL"
+  },
+  "dataByNumbers4Label": {
+    "message": "История просмотров не покидает устройство"
+  },
+  "languageSwitchLabel": {
+    "message": "Язык"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Видимость сети — мгновенно"
+  },
+  "warningTitle": {
+    "message": "Опасный сайт заблокирован"
+  },
+  "warningSubtitle": {
+    "message": "Под защитой Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard заблокировал доступ к:"
+  },
+  "warningListHeader": {
+    "message": "Этот домен числится в базах известных вредоносных и фишинговых сайтов."
+  },
+  "warningListIntro": {
+    "message": "Посещение этого сайта может:"
+  },
+  "warningListItem1": {
+    "message": "Установить вредоносное ПО на ваше устройство"
+  },
+  "warningListItem2": {
+    "message": "Украсть ваши пароли или личные данные"
+  },
+  "warningListItem3": {
+    "message": "Захватить ваш браузер или учётные записи"
+  },
+  "warningGoBack": {
+    "message": "Вернуться назад (безопасно)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Я понимаю риск"
+  },
+  "warningOverrideDetail": {
+    "message": "Чтобы всё же продолжить, удалите этот домен из списка блокировки во всплывающем окне Zevr Guard (кнопка блокировки/разблокировки) и перезагрузите страницу."
+  },
+  "warningFooter": {
+    "message": "Под защитой Zevr Guard · Безопасный интернет для всех"
+  },
+  "riskMsgSafe": {
+    "message": "Эта страница безопасна"
+  },
+  "riskMsgTracker": {
+    "message": "Обнаружены трекеры"
+  },
+  "riskMsgSuspicious": {
+    "message": "Обнаружен подозрительный трафик"
+  },
+  "riskMsgDangerous": {
+    "message": "Обнаружен опасный трафик"
+  },
+  "settingsGeneral": {
+    "message": "Общие"
+  },
+  "settingsNotifications": {
+    "message": "Уведомления"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Уведомлять при обнаружении опасного трафика"
+  },
+  "settingsBlockCategories": {
+    "message": "Категории блокировки"
+  },
+  "settingsMalware": {
+    "message": "Вредоносное ПО / фишинг"
+  },
+  "settingsMalwareDesc": {
+    "message": "Известное вредоносное ПО и фишинг (рекомендуется)"
+  },
+  "settingsAdvertising": {
+    "message": "Реклама"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Рекламные домены"
+  },
+  "settingsTracking": {
+    "message": "Трекинг"
+  },
+  "settingsTrackingDesc": {
+    "message": "Домены трекинга и аналитики"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Свой список блокировки"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Нет заблокированных доменов"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 домен"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "Доменов: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Свой список разрешений"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Нет разрешённых доменов"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 домен"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "Доменов: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Домены из этого списка обходят все правила блокировки, включая вредоносное ПО."
+  },
+  "allowBarThisSite": {
+    "message": "Этот сайт"
+  },
+  "allowBarAllowed": {
+    "message": "Разрешено"
+  },
+  "allowBarAllow": {
+    "message": "Разрешить"
+  },
+  "allowBarRevoke": {
+    "message": "Отозвать"
+  },
+  "allowBarAddTitle": {
+    "message": "Добавить сайт в список разрешений (обход блокировки)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Убрать сайт из списка разрешений"
+  },
+  "remove": {
+    "message": "убрать"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Живой глобус"
+  },
+  "popupStatusLive": {
+    "message": "защита активна"
+  },
+  "popupScanning": {
+    "message": "СКАНИРОВАНИЕ..."
+  },
+  "popupNoData": {
+    "message": "Данных по этой странице пока нет."
+  },
+  "popupReloadToMonitor": {
+    "message": "Перезагрузите вкладку, чтобы начать мониторинг."
+  },
+  "metricDomains": {
+    "message": "доменов"
+  },
+  "metricRequests": {
+    "message": "запросов"
+  },
+  "metricBlocked": {
+    "message": "заблокировано"
+  },
+  "todayTrackers": {
+    "message": "Трекеров сегодня"
+  },
+  "todayBlocked": {
+    "message": "Заблокировано сегодня"
+  },
+  "todayCompanies": {
+    "message": "Компаний"
+  },
+  "riskScoreLabel": {
+    "message": "оценка риска"
+  },
+  "riskLabelSafe": {
+    "message": "БЕЗОПАСНО"
+  },
+  "riskLabelTracker": {
+    "message": "ТРЕКЕРЫ"
+  },
+  "riskLabelSuspicious": {
+    "message": "ПОДОЗРИТЕЛЬНО"
+  },
+  "riskLabelDangerous": {
+    "message": "ОПАСНО"
+  },
+  "connectionsCount": {
+    "message": "Соединения"
+  },
+  "monitoringConnections": {
+    "message": "Отслеживаем соединения..."
+  },
+  "noMatchingConnections": {
+    "message": "Нет подходящих соединений."
+  },
+  "backToList": {
+    "message": "Назад к списку"
+  },
+  "filterAll": {
+    "message": "Все"
+  },
+  "filterDangerShort": {
+    "message": "Опасные"
+  },
+  "filterSuspicShort": {
+    "message": "Подозр."
+  },
+  "filterTrackerShort": {
+    "message": "Трекеры"
+  },
+  "filterSafeShort": {
+    "message": "Безоп."
+  },
+  "viewLabel": {
+    "message": "Вид"
+  },
+  "groupDomains": {
+    "message": "Домены"
+  },
+  "groupCompanies": {
+    "message": "Компании"
+  },
+  "groupDomainCount": {
+    "message": "Доменов: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 домен"
+  },
+  "detailCompany": {
+    "message": "Компания"
+  },
+  "detailCategory": {
+    "message": "Категория"
+  },
+  "detailLocation": {
+    "message": "Расположение"
+  },
+  "detailHostedBy": {
+    "message": "Хостинг"
+  },
+  "detailISP": {
+    "message": "Провайдер"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Запросы"
+  },
+  "detailFirstSeen": {
+    "message": "Впервые замечен"
+  },
+  "unblockThisDomain": {
+    "message": "Разблокировать этот домен"
+  },
+  "blockThisDomain": {
+    "message": "Заблокировать этот домен"
+  },
+  "block": {
+    "message": "блокировать"
+  },
+  "unblock": {
+    "message": "разблокировать"
+  },
+  "legendSafe": {
+    "message": "Безопасные"
+  },
+  "legendTracker": {
+    "message": "Трекеры"
+  },
+  "legendSuspicious": {
+    "message": "Подозрительные"
+  },
+  "legendDangerous": {
+    "message": "Опасные"
+  },
+  "stripTrackers": {
+    "message": "Трекеры"
+  },
+  "stripBlocked": {
+    "message": "Заблокировано"
+  },
+  "stripCompanies": {
+    "message": "Компании"
+  },
+  "thisPage": {
+    "message": "Эта страница"
+  },
+  "backToConnections": {
+    "message": "Назад к соединениям"
+  },
+  "drillRequests": {
+    "message": "запросов"
+  },
+  "drillDomains": {
+    "message": "доменов"
+  },
+  "drillCompanies": {
+    "message": "компаний"
+  },
+  "noTrackersOnPage": {
+    "message": "На этой странице нет трекеров."
+  },
+  "noCompaniesOnPage": {
+    "message": "На этой странице нет распознанных компаний."
+  },
+  "nothingBlocked": {
+    "message": "На этой странице ничего не заблокировано."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard на страже — опасные сайты будут заблокированы автоматически."
+  },
+  "onThisPage": {
+    "message": "На этой странице"
+  },
+  "requestsBlockedCount": {
+    "message": "Заблокировано запросов на этой странице: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Детали автоматически заблокированных доменов здесь не отслеживаются"
+  },
+  "pinBadge": {
+    "message": "ЗАКРЕП"
+  },
+  "pauseBarPaused": {
+    "message": "Блокировка приостановлена"
+  },
+  "pauseBarPause": {
+    "message": "Пауза"
+  },
+  "pauseBarResume": {
+    "message": "Возобновить"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Приостановить блокировку на этом сайте (если сайт работает неправильно)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Возобновить блокировку на этом сайте"
+  },
+  "settingsPausedSites": {
+    "message": "Сайты на паузе"
+  },
+  "shareTitle": {
+    "message": "Поделиться результатом"
+  },
+  "shareTagline": {
+    "message": "С кем общается ваш браузер?"
+  },
+  "shareHeadline": {
+    "message": "$C$ компаний · $N$ стран",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ общается с $C$ компаниями в $N$ странах — под наблюдением и защитой Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Сохранить картинку"
+  },
+  "sharePost": {
+    "message": "Опубликовать"
+  },
+  "shareHint": {
+    "message": "Изображение копируется при публикации — нажмите Ctrl+V в окне поста, чтобы прикрепить его."
+  },
+  "reportTitle": {
+    "message": "Отчёт о защите"
+  },
+  "reportSubtitle": {
+    "message": "Еженедельный отчёт о защите"
+  },
+  "reportBlocked": {
+    "message": "Заблокировано"
+  },
+  "reportConnections": {
+    "message": "Соединения"
+  },
+  "reportTrackers": {
+    "message": "Трекеры"
+  },
+  "reportDangerous": {
+    "message": "Опасные"
+  },
+  "reportDailyBlocked": {
+    "message": "Блокировки по дням"
+  },
+  "reportTopCompanies": {
+    "message": "Главные наблюдатели"
+  },
+  "reportTopBlocked": {
+    "message": "Самые блокируемые домены"
+  },
+  "reportNoData": {
+    "message": "Данных пока нет — сначала немного попользуйтесь браузером."
+  },
+  "reportFooter": {
+    "message": "Все данные хранятся локально на этом устройстве."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 Заблокировано угроз: $N$!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard незаметно защищает вас. Если он полезен, короткий отзыв поможет другим найти его."
+  },
+  "reviewPromptRate": {
+    "message": "Оценить Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Позже"
+  },
+  "riskExplainDangerous": {
+    "message": "Этот домен числится в базах известного вредоносного ПО и фишинга. Он может попытаться украсть ваши данные или установить вредоносное ПО."
+  },
+  "riskExplainSuspicious": {
+    "message": "Этот домен используется для рекламы или слежки. Он собирает данные о вашем поведении в браузере."
+  },
+  "riskExplainTracker": {
+    "message": "Этот домен используется для аналитики или доставки контента. Он может собирать некоторые данные об использовании."
+  },
+  "riskExplainSafe": {
+    "message": "Этот домен выглядит безопасным. Известной слежки или вредоносной активности не обнаружено."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Открыть живой глобус в боковой панели"
+  },
+  "settingsTitle": {
+    "message": "Настройки"
+  },
+  "unpinTitle": {
+    "message": "Нажмите ещё раз, чтобы открепить"
+  },
+  "youLabel": {
+    "message": "ВЫ"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Обнаружено опасное соединение"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ — известный вредоносный или фишинговый домен.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Также в комплекте"
+  },
+  "welcomeAlsoShare": {
+    "message": "Карточка для соцсетей в 1 клик"
+  },
+  "welcomeAlsoReport": {
+    "message": "Еженедельный отчёт о защите"
+  },
+  "welcomeAlsoPause": {
+    "message": "Пауза для отдельных сайтов"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Доступно на $N$ языках",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Вероятный фишинг заблокирован"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Не то же самое, что:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Этот адрес имитирует $BRAND$, но не является настоящим сайтом.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Сайты-двойники обычно используются, чтобы:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Украсть ваш пароль или коды входа"
+  },
+  "warningLookalikeItem2": {
+    "message": "Получить данные банковской карты или счёта"
+  },
+  "warningLookalikeItem3": {
+    "message": "Распространять вредоносное ПО под видом настоящего сервиса"
+  },
+  "warningLookalikeDetected": {
+    "message": "Обнаружено локальным анализом доменов-двойников. Ваш URL не покидал этот браузер."
+  },
+  "warningProceedAnyway": {
+    "message": "Всё равно продолжить (не рекомендуется)"
+  },
+  "welcomeAlsoLookalike": {
+    "message": "Обнаружение фишинговых доменов-двойников"
+  }
+}

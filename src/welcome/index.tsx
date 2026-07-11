@@ -2,7 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppIcon, BrandMark } from '../shared/AppIcon';
 import { TechBackground } from '../shared/TechBackground';
-import { t, loadLocale, SUPPORTED_LOCALES } from '../shared/i18n';
+import {
+  t,
+  loadLocale,
+  LOCALE_NAMES,
+  SUPPORTED_LOCALES,
+  type Locale,
+} from '../shared/i18n';
 import { useLocale } from '../shared/useLocale';
 import '../styles/tailwind.css';
 
@@ -38,24 +44,21 @@ const Welcome: React.FC = () => {
 const LanguageSwitcher: React.FC = () => {
   const [locale, setLocale] = useLocale();
   return (
-    <div className="fixed top-4 right-4 z-50 flex items-center gap-1 rounded-full border border-cyan-900/50 bg-black/70 backdrop-blur px-1 py-1 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.8)]">
-      {SUPPORTED_LOCALES.map((l) => (
-        <button
-          key={l}
-          type="button"
-          onClick={() => setLocale(l)}
-          aria-pressed={locale === l}
-          className={
-            'px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-[0.25em] transition ' +
-            (locale === l
-              ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(56,189,248,0.55)]'
-              : 'text-gray-400 hover:text-white')
-          }
-        >
-          {l}
-        </button>
-      ))}
-    </div>
+    <label className="fixed top-4 right-4 z-50 flex items-center gap-2 rounded-full border border-cyan-900/50 bg-black/70 backdrop-blur pl-3 pr-2 py-1.5 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.8)] cursor-pointer hover:border-cyan-600/60 transition">
+      <span aria-hidden="true">🌐</span>
+      <select
+        value={locale}
+        onChange={(e) => setLocale(e.target.value as Locale)}
+        aria-label={t('languageSwitchLabel', 'Language')}
+        className="bg-transparent text-gray-200 text-xs font-mono tracking-wide outline-none cursor-pointer [&>option]:bg-gray-900"
+      >
+        {SUPPORTED_LOCALES.map((l) => (
+          <option key={l} value={l}>
+            {LOCALE_NAMES[l]}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 };
 
@@ -262,10 +265,18 @@ const FeatureSection: React.FC = () => (
         </div>
         <div className="flex flex-wrap justify-center gap-2">
           {[
+            ['🎣', t('welcomeAlsoLookalike', 'Lookalike phishing detection')],
             ['📤', t('welcomeAlsoShare', '1-click share card')],
             ['📊', t('welcomeAlsoReport', 'Weekly protection report')],
             ['⏸️', t('welcomeAlsoPause', 'Per-site pause')],
-            ['🌍', t('welcomeAlsoLangs', 'Available in 6 languages')],
+            [
+              '🌍',
+              t(
+                'welcomeAlsoLangs',
+                `Available in ${SUPPORTED_LOCALES.length} languages`,
+                String(SUPPORTED_LOCALES.length),
+              ),
+            ],
           ].map(([icon, label]) => (
             <span
               key={label}

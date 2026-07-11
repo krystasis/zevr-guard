@@ -35,6 +35,16 @@ const ALLOW_PRIORITY = 1000;
 
 export async function blockDomain(domain: string): Promise<void> {
   const rules = await chrome.declarativeNetRequest.getDynamicRules();
+  // Idempotent: a domain can be blocked from several places (button, phishing
+  // report). Skip adding a second identical rule pair if one already exists.
+  if (rules.some((r) => r.condition.urlFilter === `||${domain}`)) {
+    const settings = await getSettings();
+    if (!settings.customBlockList.includes(domain)) {
+      settings.customBlockList.push(domain);
+      await setSettings(settings);
+    }
+    return;
+  }
   const maxId = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) : 10_000;
   const subId = maxId + 1;
   const redirectId = maxId + 2;

@@ -526,8 +526,12 @@ async function syncFromStoredSettings(): Promise<void> {
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
+  // Set the install timestamp on update too, not only fresh installs — it is
+  // idempotent (only sets if unset) and gates the password guard's "first
+  // visit" learning window. Without it, users who upgrade from a version
+  // before this feature would never get the first-visit notice.
+  void markInstalled();
   if (details.reason === 'install') {
-    void markInstalled();
     chrome.tabs.create({ url: chrome.runtime.getURL('src/welcome/index.html') });
     void refreshFeed(true);
   } else if (details.reason === 'update') {

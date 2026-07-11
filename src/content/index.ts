@@ -36,7 +36,9 @@ function showBanner(ctx: PasswordContext): void {
   host = document.createElement('div');
   host.style.cssText =
     'all:initial;position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2147483647;';
-  const root = host.attachShadow({ mode: 'open' });
+  // Closed so a hostile page (the very phishing sites we warn about) can't
+  // read or tamper with the banner contents.
+  const root = host.attachShadow({ mode: 'closed' });
 
   const danger = ctx.level === 'danger';
   const accent = danger ? '#ef4444' : '#f59e0b';

@@ -33,19 +33,28 @@ const ALLOW_ACTION = 'allow' as unknown as chrome.declarativeNetRequest.RuleActi
 // a far higher priority than anything else dynamic or static.
 const ALLOW_PRIORITY = 1000;
 
+// Country-learning rules live in their own id range (see country.ts). Manual
+// block/allow/pause rules must never allocate into it, and must never be
+// removed as if they were manual — otherwise the two owners corrupt each
+// other's inventory.
+export const COUNTRY_ID_BASE = 1_000_000;
+
+/** Highest manual (non-country) dynamic rule id, for max+1 allocation. */
+function maxManualId(rules: chrome.declarativeNetRequest.Rule[]): number {
+  const ids = rules.map((r) => r.id).filter((id) => id < COUNTRY_ID_BASE);
+  return ids.length > 0 ? Math.max(...ids) : 10_000;
+}
+
 export async function blockDomain(domain: string): Promise<void> {
+  // Idempotency is keyed on the manual blocklist, the source of truth for
+  // user blocks — not on the presence of any `||domain` rule, which would
+  // also match a country-learning rule and wrongly skip creating the user's
+  // own (independent) block.
+  const settings = await getSettings();
+  if (settings.customBlockList.includes(domain)) return;
+
   const rules = await chrome.declarativeNetRequest.getDynamicRules();
-  // Idempotent: a domain can be blocked from several places (button, phishing
-  // report). Skip adding a second identical rule pair if one already exists.
-  if (rules.some((r) => r.condition.urlFilter === `||${domain}`)) {
-    const settings = await getSettings();
-    if (!settings.customBlockList.includes(domain)) {
-      settings.customBlockList.push(domain);
-      await setSettings(settings);
-    }
-    return;
-  }
-  const maxId = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) : 10_000;
+  const maxId = maxManualId(rules);
   const subId = maxId + 1;
   const redirectId = maxId + 2;
   const redirectPath = chrome.runtime.getURL(
@@ -78,7 +87,6 @@ export async function blockDomain(domain: string): Promise<void> {
     removeRuleIds: [],
   });
 
-  const settings = await getSettings();
   if (!settings.customBlockList.includes(domain)) {
     settings.customBlockList.push(domain);
     await setSettings(settings);
@@ -87,8 +95,10 @@ export async function blockDomain(domain: string): Promise<void> {
 
 export async function unblockDomain(domain: string): Promise<void> {
   const rules = await chrome.declarativeNetRequest.getDynamicRules();
+  // Only remove the user's own (manual-range) rules. A country-learning rule
+  // for the same domain is owned by country.ts and must not be orphaned here.
   const removeIds = rules
-    .filter((r) => r.condition.urlFilter === `||${domain}`)
+    .filter((r) => r.condition.urlFilter === `||${domain}` && r.id < COUNTRY_ID_BASE)
     .map((r) => r.id);
 
   if (removeIds.length > 0) {
@@ -134,7 +144,7 @@ export async function allowDomain(domain: string): Promise<void> {
     return;
   }
 
-  const maxId = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) : 10_000;
+  const maxId = maxManualId(rules);
   const allowId = maxId + 1;
 
   await chrome.declarativeNetRequest.updateDynamicRules({
@@ -212,7 +222,7 @@ function isPauseRule(r: chrome.declarativeNetRequest.Rule, host?: string): boole
 export async function pauseSite(host: string): Promise<void> {
   const rules = await chrome.declarativeNetRequest.getDynamicRules();
   if (!rules.some((r) => isPauseRule(r, host))) {
-    const maxId = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) : 10_000;
+    const maxId = maxManualId(rules);
     await chrome.declarativeNetRequest.updateDynamicRules({
       addRules: [
         {

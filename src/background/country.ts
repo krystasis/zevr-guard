@@ -1,6 +1,6 @@
 import type { Settings } from '../types';
 import { getSettings, setSettings } from './storage';
-import { matchesDomainOrParent } from './blocking';
+import { COUNTRY_ID_BASE, matchesDomainOrParent } from './blocking';
 
 // ---------------------------------------------------------------------------
 // Country blocking.
@@ -40,6 +40,17 @@ let ruleMapCache: RuleMap | null = null;
 // not allocate the same rule ids.
 let mutation: Promise<unknown> = Promise.resolve();
 
+/**
+ * Append a task to the serialized mutation chain. The task is wrapped so a
+ * rejection (e.g. a DNR error) can never poison the chain — every member
+ * resolves, so later mutations still run.
+ */
+function enqueue(task: () => Promise<void>): Promise<void> {
+  const run = mutation.then(() => task().catch(() => {}));
+  mutation = run;
+  return run;
+}
+
 async function getRuleMap(): Promise<RuleMap> {
   if (!ruleMapCache) {
     try {
@@ -71,12 +82,12 @@ export async function syncCountryBlocking(settings?: Settings): Promise<void> {
   if (stale.length > 0) {
     const removeRuleIds = stale.flatMap(([, e]) => e.ids);
     for (const [domain] of stale) delete map[domain];
-    mutation = mutation.then(() =>
-      chrome.declarativeNetRequest
-        .updateDynamicRules({ addRules: [], removeRuleIds })
-        .catch(() => {}),
-    );
-    await mutation;
+    await enqueue(async () => {
+      await chrome.declarativeNetRequest.updateDynamicRules({
+        addRules: [],
+        removeRuleIds,
+      });
+    });
     await saveRuleMap();
   }
 }
@@ -90,9 +101,12 @@ export async function isCountryBlockedDomain(domain: string): Promise<boolean> {
   return matchesDomainOrParent(domain, new Set(Object.keys(map)));
 }
 
+// Allocate ids from the dedicated country range, so they never collide with
+// manual block/allow/pause rules (which allocate below COUNTRY_ID_BASE).
 async function nextRuleIds(count: number): Promise<number[]> {
   const rules = await chrome.declarativeNetRequest.getDynamicRules();
-  const maxId = rules.length > 0 ? Math.max(...rules.map((r) => r.id)) : 10_000;
+  const ids = rules.map((r) => r.id).filter((id) => id >= COUNTRY_ID_BASE);
+  const maxId = ids.length > 0 ? Math.max(...ids) : COUNTRY_ID_BASE - 1;
   return Array.from({ length: count }, (_, i) => maxId + 1 + i);
 }
 
@@ -117,7 +131,10 @@ export async function noteConnection(
   if (map[domain]) return null;
 
   let created = false;
-  mutation = mutation.then(async () => {
+  await enqueue(async () => {
+    // Re-check inside the lock: the country may have been unblocked between
+    // the pre-check above and this task running.
+    if (!activeCountries.has(code)) return;
     if (map[domain]) return;
 
     // LRU eviction to stay under the dynamic-rule budget.
@@ -157,12 +174,6 @@ export async function noteConnection(
     map[domain] = { ids: [blockId, redirectId], country: code, ts: Date.now() };
     created = true;
   });
-
-  try {
-    await mutation;
-  } catch {
-    return null;
-  }
   if (!created) return null;
   await saveRuleMap();
   return code;

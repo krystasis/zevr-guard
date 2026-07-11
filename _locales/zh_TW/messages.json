@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "仍要繼續（不建議）"
   },
+  "metricTrackers": {
+    "message": "追蹤器"
+  },
+  "metricCompanies": {
+    "message": "公司"
+  },
+  "weeklyShareTitle": {
+    "message": "分享你的一週"
+  },
+  "weeklyCardTagline": {
+    "message": "我這一週的被追蹤紀錄"
+  },
+  "weeklyCardHeadline": {
+    "message": "本週已封鎖 $N$ 個請求",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "頭號監視者"
+  },
+  "weeklyTweet": {
+    "message": "🛡 我的瀏覽器這週和 $C$ 家公司連線——Zevr Guard 封鎖了 $N$ 個追蹤請求。全程在裝置端完成。",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 你的每週防護報告已完成"
+  },
+  "weeklyNotifMessage": {
+    "message": "過去 7 天已封鎖 $N$ 個請求。看看是誰在監視你。",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "查看報告"
+  },
   "welcomeAlsoLookalike": {
     "message": "仿冒釣魚網域偵測"
   }

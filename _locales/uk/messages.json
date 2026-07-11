@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Все одно перейти (не рекомендується)"
   },
+  "metricTrackers": {
+    "message": "трекерів"
+  },
+  "metricCompanies": {
+    "message": "компаній"
+  },
+  "weeklyShareTitle": {
+    "message": "Поділіться своїм тижнем"
+  },
+  "weeklyCardTagline": {
+    "message": "Мій тиждень під наглядом"
+  },
+  "weeklyCardHeadline": {
+    "message": "Заблоковано запитів за тиждень: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Головні спостерігачі"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Цього тижня мій браузер спілкувався з $C$ компаніями — Zevr Guard заблокував $N$ запитів стеження. Усе на пристрої.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Ваш тижневий звіт про захист готовий"
+  },
+  "weeklyNotifMessage": {
+    "message": "За останні 7 днів заблоковано запитів: $N$. Дізнайтеся, хто за вами стежив.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Переглянути звіт"
+  },
   "welcomeAlsoLookalike": {
     "message": "Виявлення фішингових доменів-двійників"
   }

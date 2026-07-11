@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Procedi comunque (sconsigliato)"
   },
+  "metricTrackers": {
+    "message": "tracker"
+  },
+  "metricCompanies": {
+    "message": "aziende"
+  },
+  "weeklyShareTitle": {
+    "message": "Condividi la tua settimana"
+  },
+  "weeklyCardTagline": {
+    "message": "La mia settimana di tracciamento"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ richieste bloccate questa settimana",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Top osservatori"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Questa settimana il mio browser ha parlato con $C$ aziende — Zevr Guard ha bloccato $N$ richieste di tracciamento. Tutto sul dispositivo.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Il tuo report settimanale di protezione è pronto"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ richieste bloccate negli ultimi 7 giorni. Scopri chi ti stava osservando.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Vedi il report"
+  },
   "welcomeAlsoLookalike": {
     "message": "Rilevamento di phishing per imitazione"
   }

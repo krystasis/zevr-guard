@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Всё равно продолжить (не рекомендуется)"
   },
+  "metricTrackers": {
+    "message": "трекеров"
+  },
+  "metricCompanies": {
+    "message": "компаний"
+  },
+  "weeklyShareTitle": {
+    "message": "Поделиться итогами недели"
+  },
+  "weeklyCardTagline": {
+    "message": "Моя неделя под наблюдением"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ запросов заблокировано за неделю",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Главные наблюдатели"
+  },
+  "weeklyTweet": {
+    "message": "🛡 За неделю мой браузер общался с $C$ компаниями — Zevr Guard заблокировал $N$ запросов слежки. Всё на устройстве.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Ваш еженедельный отчёт о защите готов"
+  },
+  "weeklyNotifMessage": {
+    "message": "За последние 7 дней заблокировано запросов: $N$. Узнайте, кто за вами следил.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Открыть отчёт"
+  },
   "welcomeAlsoLookalike": {
     "message": "Обнаружение фишинговых доменов-двойников"
   }

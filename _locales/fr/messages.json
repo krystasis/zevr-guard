@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Continuer quand même (déconseillé)"
   },
+  "metricTrackers": {
+    "message": "traqueurs"
+  },
+  "metricCompanies": {
+    "message": "entreprises"
+  },
+  "weeklyShareTitle": {
+    "message": "Partagez votre semaine"
+  },
+  "weeklyCardTagline": {
+    "message": "Ma semaine de pistage"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ requêtes bloquées cette semaine",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Principaux observateurs"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Mon navigateur a parlé à $C$ entreprises cette semaine — Zevr Guard a bloqué $N$ requêtes de pistage. Tout en local.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Votre rapport hebdomadaire est prêt"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ requêtes bloquées ces 7 derniers jours. Découvrez qui vous observait.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Voir le rapport"
+  },
   "welcomeAlsoLookalike": {
     "message": "Détection du phishing par imitation"
   }

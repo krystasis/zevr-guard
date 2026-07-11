@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Przejdź mimo to (niezalecane)"
   },
+  "metricTrackers": {
+    "message": "trackerów"
+  },
+  "metricCompanies": {
+    "message": "firm"
+  },
+  "weeklyShareTitle": {
+    "message": "Udostępnij swój tydzień"
+  },
+  "weeklyCardTagline": {
+    "message": "Mój tydzień pod obserwacją"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ zablokowanych żądań w tym tygodniu",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Najwięksi obserwatorzy"
+  },
+  "weeklyTweet": {
+    "message": "🛡 W tym tygodniu moja przeglądarka łączyła się z $C$ firmami — Zevr Guard zablokował $N$ żądań śledzących. Wszystko lokalnie na urządzeniu.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Twój tygodniowy raport ochrony jest gotowy"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ żądań zablokowanych w ciągu ostatnich 7 dni. Zobacz, kto Cię obserwował.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Zobacz raport"
+  },
   "welcomeAlsoLookalike": {
     "message": "Wykrywanie phishingu przez podszywanie"
   }

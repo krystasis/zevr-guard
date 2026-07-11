@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Proceed anyway (not recommended)"
   },
+  "metricTrackers": {
+    "message": "trackers"
+  },
+  "metricCompanies": {
+    "message": "companies"
+  },
+  "weeklyShareTitle": {
+    "message": "Share your week"
+  },
+  "weeklyCardTagline": {
+    "message": "My week in tracking"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ requests blocked this week",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Top watchers"
+  },
+  "weeklyTweet": {
+    "message": "🛡 My browser talked to $C$ companies this week — Zevr Guard blocked $N$ tracking requests. All on-device.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Your weekly protection report is ready"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ requests blocked in the last 7 days. See who was watching you.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "View report"
+  },
   "welcomeAlsoLookalike": {
     "message": "Lookalike phishing detection"
   }

@@ -175,13 +175,16 @@ function roundRect(
   ctx.closePath();
 }
 
-export async function renderShareCard(data: ShareCardData): Promise<Blob> {
+function createCardContext(): CanvasRenderingContext2D {
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas 2D not supported');
+  return ctx;
+}
 
+function drawBackdrop(ctx: CanvasRenderingContext2D): void {
   // Background
   const bg = ctx.createRadialGradient(W / 2, H / 3, 0, W / 2, H / 3, W / 1.1);
   bg.addColorStop(0, '#0a1a28');
@@ -206,6 +209,20 @@ export async function renderShareCard(data: ShareCardData): Promise<Blob> {
     ctx.lineTo(x, H);
     ctx.stroke();
   }
+}
+
+function toBlob(ctx: CanvasRenderingContext2D): Promise<Blob> {
+  return new Promise<Blob>((resolve, reject) => {
+    ctx.canvas.toBlob((blob) => {
+      if (blob) resolve(blob);
+      else reject(new Error('toBlob failed'));
+    }, 'image/png');
+  });
+}
+
+export async function renderShareCard(data: ShareCardData): Promise<Blob> {
+  const ctx = createCardContext();
+  drawBackdrop(ctx);
 
   await drawLand(ctx);
 
@@ -349,10 +366,190 @@ export async function renderShareCard(data: ShareCardData): Promise<Blob> {
   ctx.textAlign = 'right';
   ctx.fillText('zevrhq.com', W - 56, H - 48);
 
-  return new Promise<Blob>((resolve, reject) => {
-    canvas.toBlob((blob) => {
-      if (blob) resolve(blob);
-      else reject(new Error('toBlob failed'));
-    }, 'image/png');
-  });
+  return toBlob(ctx);
+}
+
+// ---------------------------------------------------------------------------
+// Weekly recap card — same visual language as the per-page scan card, but fed
+// by the 7-day stats history: one glowing dot per country that tracked the
+// user, a big blocked counter, and the week's top watching companies.
+// ---------------------------------------------------------------------------
+
+export interface WeeklyCardPoint {
+  country: string;
+  count: number;
+  risk: RiskLevel;
+}
+
+export interface WeeklyCardLabels {
+  brand: string;
+  tagline: string;
+  headline: string;
+  range: string;
+  statBlocked: string;
+  statTrackers: string;
+  statCompanies: string;
+  topWatchers: string;
+}
+
+export interface WeeklyCardData {
+  blocked: number;
+  trackers: number;
+  companies: number;
+  topCompanies: Array<[string, number]>;
+  points: WeeklyCardPoint[];
+  labels: WeeklyCardLabels;
+}
+
+export async function renderWeeklyCard(data: WeeklyCardData): Promise<Blob> {
+  const ctx = createCardContext();
+  drawBackdrop(ctx);
+  await drawLand(ctx);
+
+  // One dot per country, sized by how often it received tracking traffic.
+  ctx.save();
+  for (const p of data.points) {
+    const c = CENTROIDS[p.country.toUpperCase()];
+    if (!c) continue;
+    const [x, y] = project(c[0], c[1]);
+    const r = Math.min(13, 3 + Math.log2(1 + p.count) * 1.7);
+    const color = RISK_COLOR[p.risk];
+    ctx.fillStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 14;
+    ctx.globalAlpha = 0.85;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = 0.3;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(x, y, r + 5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Text scrim
+  const scrim = ctx.createLinearGradient(0, H, 0, H - 340);
+  scrim.addColorStop(0, 'rgba(2, 6, 12, 0.94)');
+  scrim.addColorStop(1, 'rgba(2, 6, 12, 0)');
+  ctx.fillStyle = scrim;
+  ctx.fillRect(0, H - 340, W, 340);
+
+  // Brand + tagline (top left)
+  ctx.textBaseline = 'alphabetic';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#7dd3fc';
+  ctx.font = `bold 26px ${FONT}`;
+  ctx.fillText(`🛡 ${data.labels.brand}`, 56, 72);
+  ctx.fillStyle = 'rgba(148, 163, 184, 0.85)';
+  ctx.font = `500 18px ${FONT}`;
+  ctx.fillText(data.labels.tagline, 56, 100);
+
+  // Date range (top right)
+  ctx.textAlign = 'right';
+  ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+  ctx.font = `600 20px ${FONT}`;
+  ctx.fillText(data.labels.range, W - 56, 72);
+
+  // Top watchers panel (bottom right)
+  const panelW = 340;
+  const panelX = W - 56 - panelW;
+  const panelY = H - 272;
+  const rows = data.topCompanies.slice(0, 3);
+  const panelH = 56 + rows.length * 36;
+  if (rows.length > 0) {
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(8, 20, 32, 0.85)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, panelX, panelY, panelW, panelH, 10);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(125, 211, 252, 0.85)';
+    ctx.font = `700 13px ${FONT}`;
+    ctx.fillText(data.labels.topWatchers.toUpperCase(), panelX + 20, panelY + 32);
+    const maxCount = Math.max(1, ...rows.map(([, n]) => n));
+    rows.forEach(([name, n], i) => {
+      const rowY = panelY + 64 + i * 36;
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.18)';
+      const barW = Math.max(8, (n / maxCount) * (panelW - 40));
+      roundRect(ctx, panelX + 20, rowY - 20, barW, 27, 5);
+      ctx.fill();
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = `600 17px ${FONT}`;
+      let label = name;
+      while (label.length > 3 && ctx.measureText(label).width > panelW - 120) {
+        label = label.slice(0, -2);
+      }
+      if (label !== name) label += '…';
+      ctx.fillText(label, panelX + 28, rowY);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+      ctx.font = `700 16px ${FONT}`;
+      ctx.fillText(n.toLocaleString(), panelX + panelW - 20, rowY);
+      ctx.textAlign = 'left';
+    });
+  }
+
+  // Headline — shrink to fit the space left of the watchers panel.
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#f8fafc';
+  const headlineMax = panelX - 56 - 24;
+  let headlineSize = 52;
+  do {
+    ctx.font = `900 ${headlineSize}px ${FONT}`;
+    if (ctx.measureText(data.labels.headline).width <= headlineMax) break;
+    headlineSize -= 2;
+  } while (headlineSize > 30);
+  ctx.fillText(data.labels.headline, 56, H - 124);
+
+  // Stats chips
+  const chips: Array<{ value: string; label: string; color: string }> = [
+    {
+      value: data.blocked.toLocaleString(),
+      label: data.labels.statBlocked,
+      color: '#f87171',
+    },
+    {
+      value: data.trackers.toLocaleString(),
+      label: data.labels.statTrackers,
+      color: '#7dd3fc',
+    },
+    {
+      value: data.companies.toLocaleString(),
+      label: data.labels.statCompanies,
+      color: '#34d399',
+    },
+  ];
+  let cx0 = 56;
+  for (const chip of chips) {
+    ctx.font = `900 30px ${FONT}`;
+    const vw = ctx.measureText(chip.value).width;
+    ctx.font = `600 18px ${FONT}`;
+    const lw = ctx.measureText(chip.label).width;
+    const w = Math.max(vw, lw) + 44;
+    ctx.fillStyle = 'rgba(8, 20, 32, 0.85)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, cx0, H - 92, w, 64, 10);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = chip.color;
+    ctx.font = `900 30px ${FONT}`;
+    ctx.fillText(chip.value, cx0 + 22, H - 62);
+    ctx.fillStyle = 'rgba(148, 163, 184, 0.9)';
+    ctx.font = `600 15px ${FONT}`;
+    ctx.fillText(chip.label, cx0 + 22, H - 40);
+    cx0 += w + 16;
+  }
+
+  // Site URL bottom right
+  ctx.fillStyle = 'rgba(125, 211, 252, 0.7)';
+  ctx.font = `600 18px ${FONT}`;
+  ctx.textAlign = 'right';
+  ctx.fillText('zevrhq.com', W - 56, H - 28);
+
+  return toBlob(ctx);
 }

@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "危険を理解して進む(非推奨)"
   },
+  "metricTrackers": {
+    "message": "トラッカー"
+  },
+  "metricCompanies": {
+    "message": "企業"
+  },
+  "weeklyShareTitle": {
+    "message": "今週の記録をシェア"
+  },
+  "weeklyCardTagline": {
+    "message": "私の1週間のトラッキング事情"
+  },
+  "weeklyCardHeadline": {
+    "message": "今週 $N$ 件の通信をブロック",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "最も監視していた企業"
+  },
+  "weeklyTweet": {
+    "message": "🛡 今週、私のブラウザは $C$ 社と通信していました。Zevr Guard が $N$ 件のトラッキングをブロック — すべて端末内で処理。",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 週間レポートができました"
+  },
+  "weeklyNotifMessage": {
+    "message": "この7日間で $N$ 件をブロック。誰があなたを見ていたか確認しましょう。",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "レポートを見る"
+  },
   "welcomeAlsoLookalike": {
     "message": "なりすましフィッシング検知"
   }

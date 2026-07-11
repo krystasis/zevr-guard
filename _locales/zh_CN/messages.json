@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "仍要继续（不推荐）"
   },
+  "metricTrackers": {
+    "message": "跟踪器"
+  },
+  "metricCompanies": {
+    "message": "公司"
+  },
+  "weeklyShareTitle": {
+    "message": "分享你的一周"
+  },
+  "weeklyCardTagline": {
+    "message": "我这一周被跟踪的情况"
+  },
+  "weeklyCardHeadline": {
+    "message": "本周已拦截 $N$ 个请求",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "头号监视者"
+  },
+  "weeklyTweet": {
+    "message": "🛡 本周我的浏览器与 $C$ 家公司通信——Zevr Guard 拦截了 $N$ 个跟踪请求。全部在设备端完成。",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 你的每周防护报告已生成"
+  },
+  "weeklyNotifMessage": {
+    "message": "过去 7 天已拦截 $N$ 个请求。看看是谁在监视你。",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "查看报告"
+  },
   "welcomeAlsoLookalike": {
     "message": "仿冒钓鱼检测"
   }

@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Toch doorgaan (niet aanbevolen)"
   },
+  "metricTrackers": {
+    "message": "trackers"
+  },
+  "metricCompanies": {
+    "message": "bedrijven"
+  },
+  "weeklyShareTitle": {
+    "message": "Deel je week"
+  },
+  "weeklyCardTagline": {
+    "message": "Mijn week in tracking"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ verzoeken geblokkeerd deze week",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Grootste meekijkers"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Mijn browser praatte deze week met $C$ bedrijven — Zevr Guard blokkeerde $N$ trackingverzoeken. Alles op mijn apparaat.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Je wekelijkse beschermingsrapport staat klaar"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ verzoeken geblokkeerd in de afgelopen 7 dagen. Zie wie er meekeek.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Rapport bekijken"
+  },
   "welcomeAlsoLookalike": {
     "message": "Detectie van lookalike-phishing"
   }

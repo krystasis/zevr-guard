@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "그래도 진행 (권장하지 않음)"
   },
+  "metricTrackers": {
+    "message": "추적기"
+  },
+  "metricCompanies": {
+    "message": "회사"
+  },
+  "weeklyShareTitle": {
+    "message": "이번 주 공유하기"
+  },
+  "weeklyCardTagline": {
+    "message": "나의 한 주 추적 기록"
+  },
+  "weeklyCardHeadline": {
+    "message": "이번 주 요청 $N$건 차단",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "가장 많이 지켜본 곳"
+  },
+  "weeklyTweet": {
+    "message": "🛡 이번 주 내 브라우저는 회사 $C$곳과 통신했고, Zevr Guard가 추적 요청 $N$건을 차단했습니다. 전부 기기 안에서.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 주간 보호 리포트가 준비되었습니다"
+  },
+  "weeklyNotifMessage": {
+    "message": "지난 7일간 요청 $N$건 차단. 누가 나를 지켜보고 있었는지 확인하세요.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "리포트 보기"
+  },
   "welcomeAlsoLookalike": {
     "message": "사칭 피싱 감지"
   }

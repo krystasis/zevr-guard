@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Tetap lanjutkan (tidak disarankan)"
   },
+  "metricTrackers": {
+    "message": "pelacak"
+  },
+  "metricCompanies": {
+    "message": "perusahaan"
+  },
+  "weeklyShareTitle": {
+    "message": "Bagikan minggu Anda"
+  },
+  "weeklyCardTagline": {
+    "message": "Minggu saya dalam pelacakan"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ permintaan diblokir minggu ini",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Pengawas teratas"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Browser saya berkomunikasi dengan $C$ perusahaan minggu ini — Zevr Guard memblokir $N$ permintaan pelacakan. Semua di perangkat.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Laporan perlindungan mingguan Anda sudah siap"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ permintaan diblokir dalam 7 hari terakhir. Lihat siapa yang mengawasi Anda.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Lihat laporan"
+  },
   "welcomeAlsoLookalike": {
     "message": "Deteksi phishing situs tiruan"
   }

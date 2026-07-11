@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Yine de devam et (önerilmez)"
   },
+  "metricTrackers": {
+    "message": "izleyici"
+  },
+  "metricCompanies": {
+    "message": "şirket"
+  },
+  "weeklyShareTitle": {
+    "message": "Haftanızı paylaşın"
+  },
+  "weeklyCardTagline": {
+    "message": "Haftalık izlenme özetim"
+  },
+  "weeklyCardHeadline": {
+    "message": "Bu hafta $N$ istek engellendi",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "En çok izleyenler"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Tarayıcım bu hafta $C$ şirketle konuştu — Zevr Guard $N$ izleme isteğini engelledi. Tamamı cihaz üzerinde.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Haftalık koruma raporunuz hazır"
+  },
+  "weeklyNotifMessage": {
+    "message": "Son 7 günde $N$ istek engellendi. Sizi kimlerin izlediğini görün.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Raporu görüntüle"
+  },
   "welcomeAlsoLookalike": {
     "message": "Taklit kimlik avı tespiti"
   }

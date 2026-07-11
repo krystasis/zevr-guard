@@ -42,6 +42,7 @@ import {
   unblockDomain,
 } from './blocking';
 import { addLookalikeBypass, checkNavigation } from './lookalike';
+import { initWeeklyReport } from './weekly';
 
 const pageLocks = new Map<number, Promise<void>>();
 
@@ -512,11 +513,13 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.runtime.onStartup.addListener(() => {
   void initFeed();
   void syncFromStoredSettings();
+  void initWeeklyReport();
 });
 
 const feedReady = initFeed().catch(() => {});
 void loadLocale();
 void syncFromStoredSettings();
+void initWeeklyReport();
 
 chrome.runtime.onMessage.addListener(
   (message: MessageRequest, _sender, sendResponse) => {

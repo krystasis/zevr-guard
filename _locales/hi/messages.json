@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "फिर भी आगे बढ़ें (अनुशंसित नहीं)"
   },
+  "metricTrackers": {
+    "message": "ट्रैकर"
+  },
+  "metricCompanies": {
+    "message": "कंपनियाँ"
+  },
+  "weeklyShareTitle": {
+    "message": "अपना हफ़्ता शेयर करें"
+  },
+  "weeklyCardTagline": {
+    "message": "ट्रैकिंग में मेरा हफ़्ता"
+  },
+  "weeklyCardHeadline": {
+    "message": "इस हफ़्ते $N$ रिक्वेस्ट ब्लॉक हुईं",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "सबसे ज़्यादा नज़र रखने वाले"
+  },
+  "weeklyTweet": {
+    "message": "🛡 इस हफ़्ते मेरा ब्राउज़र $C$ कंपनियों से बात कर रहा था — Zevr Guard ने $N$ ट्रैकिंग रिक्वेस्ट ब्लॉक कीं। सब कुछ डिवाइस पर ही।",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 आपकी साप्ताहिक सुरक्षा रिपोर्ट तैयार है"
+  },
+  "weeklyNotifMessage": {
+    "message": "पिछले 7 दिनों में $N$ रिक्वेस्ट ब्लॉक हुईं। देखें कौन आप पर नज़र रख रहा था।",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "रिपोर्ट देखें"
+  },
   "welcomeAlsoLookalike": {
     "message": "लुकअलाइक फ़िशिंग पहचान"
   }

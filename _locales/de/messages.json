@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Trotzdem fortfahren (nicht empfohlen)"
   },
+  "metricTrackers": {
+    "message": "Tracker"
+  },
+  "metricCompanies": {
+    "message": "Firmen"
+  },
+  "weeklyShareTitle": {
+    "message": "Ihre Woche teilen"
+  },
+  "weeklyCardTagline": {
+    "message": "Meine Woche im Tracking"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ Anfragen diese Woche blockiert",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Top-Beobachter"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Mein Browser hat diese Woche mit $C$ Firmen gesprochen — Zevr Guard hat $N$ Tracking-Anfragen blockiert. Alles lokal.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Ihr Wochenbericht ist fertig"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ Anfragen in den letzten 7 Tagen blockiert. Sehen Sie, wer Sie beobachtet hat.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Bericht ansehen"
+  },
   "welcomeAlsoLookalike": {
     "message": "Erkennung gefälschter Phishing-Domains"
   }

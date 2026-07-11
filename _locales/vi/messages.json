@@ -663,6 +663,54 @@
   "warningProceedAnyway": {
     "message": "Vẫn tiếp tục (không khuyến nghị)"
   },
+  "metricTrackers": {
+    "message": "theo dõi"
+  },
+  "metricCompanies": {
+    "message": "công ty"
+  },
+  "weeklyShareTitle": {
+    "message": "Chia sẻ tuần của bạn"
+  },
+  "weeklyCardTagline": {
+    "message": "Một tuần bị theo dõi của tôi"
+  },
+  "weeklyCardHeadline": {
+    "message": "Đã chặn $N$ yêu cầu tuần này",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Theo dõi nhiều nhất"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Trình duyệt của tôi đã kết nối với $C$ công ty tuần này — Zevr Guard chặn $N$ yêu cầu theo dõi. Tất cả ngay trên thiết bị.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Báo cáo bảo vệ hằng tuần của bạn đã sẵn sàng"
+  },
+  "weeklyNotifMessage": {
+    "message": "Đã chặn $N$ yêu cầu trong 7 ngày qua. Xem ai đã theo dõi bạn.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Xem báo cáo"
+  },
   "welcomeAlsoLookalike": {
     "message": "Phát hiện tên miền giả mạo"
   }

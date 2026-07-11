@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AppIcon } from '../shared/AppIcon';
-import { t } from '../shared/i18n';
+import { ShareModal } from '../shared/ShareModal';
+import { bcp47, t } from '../shared/i18n';
+import { renderWeeklyCard, type WeeklyCardPoint } from '../shared/sharecard';
 import type { TodayStats } from '../types';
 
 interface DayEntry {
@@ -50,6 +52,7 @@ export const Report: React.FC = () => {
     const days = week.map((d) => d.stats).filter(Boolean) as TodayStats[];
     const companyCounts: Record<string, number> = {};
     const blockedDomains: Record<string, number> = {};
+    const countryCounts: Record<string, { count: number; suspicious: boolean }> = {};
     let connections = 0;
     let blocked = 0;
     let trackers = 0;
@@ -65,6 +68,13 @@ export const Report: React.FC = () => {
       for (const [dom, n] of Object.entries(d.blockedDomains)) {
         blockedDomains[dom] = (blockedDomains[dom] ?? 0) + n;
       }
+      for (const info of Object.values(d.trackerDomains)) {
+        if (!info.country) continue;
+        const entry = countryCounts[info.country] ?? { count: 0, suspicious: false };
+        entry.count += info.count;
+        entry.suspicious = entry.suspicious || info.riskLevel === 'suspicious';
+        countryCounts[info.country] = entry;
+      }
     }
     const topCompanies = Object.entries(companyCounts)
       .sort((a, b) => b[1] - a[1])
@@ -72,8 +82,90 @@ export const Report: React.FC = () => {
     const topBlocked = Object.entries(blockedDomains)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 8);
-    return { connections, blocked, trackers, dangerous, topCompanies, topBlocked };
+    const points: WeeklyCardPoint[] = Object.entries(countryCounts).map(
+      ([country, v]) => ({
+        country,
+        count: v.count,
+        risk: v.suspicious ? 'suspicious' : 'tracker',
+      }),
+    );
+    return {
+      connections,
+      blocked,
+      trackers,
+      dangerous,
+      topCompanies,
+      topBlocked,
+      companies: Object.keys(companyCounts).length,
+      points,
+    };
   }, [week]);
+
+  const [share, setShare] = useState<{
+    url: string;
+    blob: Blob;
+    fileName: string;
+    tweet: string;
+  } | null>(null);
+  const [sharing, setSharing] = useState(false);
+
+  async function handleShare() {
+    if (sharing) return;
+    setSharing(true);
+    try {
+      const fmt = new Intl.DateTimeFormat(bcp47(), {
+        month: 'short',
+        day: 'numeric',
+      });
+      const range = `${fmt.format(new Date(week[0].date))} – ${fmt.format(
+        new Date(week[week.length - 1].date),
+      )}`;
+      const blockedStr = totals.blocked.toLocaleString();
+      const blob = await renderWeeklyCard({
+        blocked: totals.blocked,
+        trackers: totals.trackers,
+        companies: totals.companies,
+        topCompanies: totals.topCompanies,
+        points: totals.points,
+        labels: {
+          brand: 'ZEVR GUARD',
+          tagline: t('weeklyCardTagline', 'My week in tracking'),
+          headline: t(
+            'weeklyCardHeadline',
+            `${blockedStr} requests blocked this week`,
+            blockedStr,
+          ),
+          range,
+          statBlocked: t('metricBlocked', 'blocked'),
+          statTrackers: t('metricTrackers', 'trackers'),
+          statCompanies: t('metricCompanies', 'companies'),
+          topWatchers: t('weeklyCardTopWatchers', 'Top watchers'),
+        },
+      });
+      const url = URL.createObjectURL(blob);
+      const tweet = t(
+        'weeklyTweet',
+        `🛡 My browser talked to ${totals.companies} companies this week — Zevr Guard blocked ${blockedStr} tracking requests. All on-device.`,
+        String(totals.companies),
+        blockedStr,
+      );
+      setShare({
+        url,
+        blob,
+        fileName: `zevr-guard-week-${week[week.length - 1].date}.png`,
+        tweet,
+      });
+    } catch {
+      // rendering is best-effort
+    } finally {
+      setSharing(false);
+    }
+  }
+
+  function closeShare() {
+    if (share) URL.revokeObjectURL(share.url);
+    setShare(null);
+  }
 
   if (loading) {
     return (
@@ -98,6 +190,12 @@ export const Report: React.FC = () => {
               {t('reportSubtitle', 'Weekly protection report')}
             </div>
           </div>
+          <button
+            className="ml-auto flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-cyan-500/90 text-black hover:bg-cyan-400 transition shadow-[0_0_16px_rgba(56,189,248,0.35)]"
+            onClick={() => void handleShare()}
+          >
+            {sharing ? '…' : '📤'} {t('weeklyShareTitle', 'Share your week')}
+          </button>
         </header>
 
         <section className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
@@ -167,6 +265,17 @@ export const Report: React.FC = () => {
           {t('reportFooter', 'All data is stored locally on this device.')}
         </footer>
       </div>
+
+      {share && (
+        <ShareModal
+          title={t('weeklyShareTitle', 'Share your week')}
+          url={share.url}
+          blob={share.blob}
+          fileName={share.fileName}
+          tweet={share.tweet}
+          onClose={closeShare}
+        />
+      )}
     </div>
   );
 };

@@ -490,11 +490,14 @@ function stripHash(u: string): string {
 }
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
-  if (!changeInfo.url) return;
+  // A document load resets the page. changeInfo.url is absent on a plain
+  // reload of the same URL, so key the reset off status, not url — otherwise
+  // reloading keeps stale stats (e.g. a blocked count that never clears).
   if (changeInfo.status === 'loading') {
     await resetPage(tabId);
     return;
   }
+  if (!changeInfo.url) return;
   // URL changed without a load: SPA route change via the history API.
   // Start a fresh page so stats reflect the current route.
   const pages = await getPagesCached();

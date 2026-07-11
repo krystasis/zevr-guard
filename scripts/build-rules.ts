@@ -33,6 +33,11 @@ function feedPublishEnabled(): boolean {
 
 const URLHAUS_API = 'https://urlhaus.abuse.ch/downloads/hostfile/';
 const URLHAUS_MAX = 5000;
+// ThreatFox (also abuse.ch) shares URLhaus' permissive terms and adds C2 /
+// botnet / payload-hosting IOCs that the URLhaus hostfile alone misses.
+// The recent-IOC export is public; if abuse.ch requires an Auth-Key on the
+// account, set THREATFOX_AUTH_KEY and it is sent as the documented header.
+const THREATFOX_EXPORT = 'https://threatfox.abuse.ch/export/json/recent/';
 const DDG_TDS_URL =
   'https://staticcdn.duckduckgo.com/trackerblocking/v5/current/ios-tds.json';
 const DISCONNECT_URL = 'https://services.disconnect.me/disconnect.json';
@@ -181,6 +186,68 @@ async function fetchURLhausDomains(): Promise<string[]> {
     );
     return [];
   }
+}
+
+/** Extract a bare, blockable hostname from a ThreatFox IOC value. */
+function hostFromIoc(value: string): string | null {
+  let host = value.trim().toLowerCase();
+  if (!host) return null;
+  if (host.includes('://')) {
+    try {
+      host = new URL(host).hostname;
+    } catch {
+      return null;
+    }
+  }
+  // Strip any leftover path or :port (domain:port IOCs).
+  host = host.split('/')[0].split(':')[0];
+  if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)) return null; // drops IPs too
+  return host;
+}
+
+async function fetchThreatFoxDomains(): Promise<string[]> {
+  try {
+    const headers: Record<string, string> = {};
+    if (process.env.THREATFOX_AUTH_KEY) {
+      headers['Auth-Key'] = process.env.THREATFOX_AUTH_KEY;
+    }
+    const res = await fetch(THREATFOX_EXPORT, {
+      headers,
+      signal: AbortSignal.timeout(30_000),
+    });
+    if (!res.ok) throw new Error(`ThreatFox returned ${res.status}`);
+    const data = (await res.json()) as Record<string, unknown>;
+    const domains: string[] = [];
+    // Export shape: { "<id>": [ { ioc_type, ioc/ioc_value, ... } ], ... }
+    for (const entries of Object.values(data)) {
+      if (!Array.isArray(entries)) continue;
+      for (const e of entries) {
+        const rec = e as { ioc_type?: string; ioc?: string; ioc_value?: string };
+        const type = rec.ioc_type ?? '';
+        if (type !== 'domain' && type !== 'url') continue;
+        const host = hostFromIoc(rec.ioc_value ?? rec.ioc ?? '');
+        if (host) domains.push(host);
+      }
+    }
+    return Array.from(new Set(domains));
+  } catch (err) {
+    console.warn(
+      '[build-rules] ThreatFox fetch failed, skipping source:',
+      (err as Error).message,
+    );
+    return [];
+  }
+}
+
+/** Interleave two ranked lists so both sources survive the malware cap. */
+function interleave(a: string[], b: string[]): string[] {
+  const out: string[] = [];
+  const max = Math.max(a.length, b.length);
+  for (let i = 0; i < max; i++) {
+    if (i < a.length) out.push(a[i]);
+    if (i < b.length) out.push(b[i]);
+  }
+  return out;
 }
 
 async function loadSeedDomains(): Promise<string[]> {
@@ -672,14 +739,19 @@ async function downloadTwemojiFlags(): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  const fetched = await fetchURLhausDomains();
+  const [urlhaus, threatfox] = await Promise.all([
+    fetchURLhausDomains(),
+    fetchThreatFoxDomains(),
+  ]);
   const seed = await loadSeedDomains();
 
-  const merged = Array.from(new Set([...fetched, ...seed]));
+  // Interleave the two live feeds so ThreatFox's unique IOCs are not entirely
+  // crowded out of the capped set by URLhaus, then top up from the seed.
+  const merged = Array.from(new Set([...interleave(urlhaus, threatfox), ...seed]));
   const capped = merged.slice(0, Math.floor(URLHAUS_MAX / 2));
 
   console.log(
-    `[build-rules] ${fetched.length} fetched, ${seed.length} seed, ${capped.length} final`,
+    `[build-rules] urlhaus ${urlhaus.length}, threatfox ${threatfox.length}, seed ${seed.length}, ${capped.length} final`,
   );
 
   await writeFile(MALWARE_SEED_PATH, JSON.stringify(capped, null, 2) + '\n');

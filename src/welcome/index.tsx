@@ -178,7 +178,8 @@ const Hero: React.FC = () => (
 
     <p className="text-xl md:text-2xl text-white text-center max-w-2xl mb-3 font-light leading-tight">
       {t('heroTagline', 'See who your browser talks to.')}{' '}
-      <span className="text-cyan-300">
+      {/* inline-block: wrap the accent phrase as a unit instead of mid-phrase */}
+      <span className="text-cyan-300 inline-block">
         {t('heroTaglineAccent', 'Block the dangerous ones.')}
       </span>
     </p>

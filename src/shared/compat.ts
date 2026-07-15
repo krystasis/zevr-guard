@@ -1,0 +1,78 @@
+// Cross-browser glue. Firefox exposes the promise-based `browser`
+// namespace; its `chrome` alias historically used callbacks, while this
+// codebase awaits chrome.* calls everywhere. Point the global `chrome`
+// at `browser` when it exists — a no-op on Chromium.
+type BrowserGlobal = typeof chrome & {
+  sidebarAction?: { open: () => Promise<void>; close: () => Promise<void> };
+};
+
+const g = globalThis as { browser?: BrowserGlobal; chrome?: BrowserGlobal };
+if (g.browser?.runtime?.id) {
+  g.chrome = g.browser;
+}
+
+/** True when running inside a Gecko (Firefox) extension context. */
+export const IS_GECKO = g.browser?.runtime?.id !== undefined;
+
+/**
+ * Open the Live Globe: the side panel on Chromium, the sidebar on
+ * Firefox. Both call sites run inside a user gesture, which Firefox
+ * requires for sidebarAction.open().
+ */
+export async function openLiveGlobe(tabId: number | undefined): Promise<void> {
+  const sidePanel = (
+    chrome as { sidePanel?: { setOptions: (o: object) => Promise<void>; open: (o: object) => Promise<void> } }
+  ).sidePanel;
+  if (sidePanel) {
+    if (tabId == null) return;
+    await sidePanel.setOptions({
+      tabId,
+      path: 'src/sidepanel/index.html',
+      enabled: true,
+    });
+    await sidePanel.open({ tabId });
+    return;
+  }
+  await g.browser?.sidebarAction?.open();
+}
+
+/**
+ * chrome.notifications.create that survives Firefox, which rejects
+ * options containing `buttons`. Every button also has an onClicked
+ * fallback registered by its call site, so dropping them only loses
+ * the shortcut, not the action.
+ */
+export function createNotificationSafe(
+  id: string,
+  options: chrome.notifications.NotificationOptions<true> & {
+    buttons?: Array<{ title: string }>;
+  },
+): void {
+  try {
+    chrome.notifications.create(id, options, () => {
+      if (chrome.runtime.lastError && options.buttons) {
+        const { buttons: _dropped, ...rest } = options;
+        chrome.notifications.create(id, rest);
+      }
+    });
+  } catch {
+    try {
+      const { buttons: _dropped, ...rest } = options;
+      chrome.notifications.create(id, rest);
+    } catch {
+      // notifications are best-effort
+    }
+  }
+}
+
+/** Store review page for the browser this build is actually running in. */
+export function reviewPageUrl(): string {
+  const ua = navigator.userAgent;
+  if (ua.includes(' Edg/')) {
+    return `https://microsoftedge.microsoft.com/addons/detail/${chrome.runtime.id}`;
+  }
+  if (ua.includes('Firefox/')) {
+    return 'https://addons.mozilla.org/firefox/addon/zevr-guard/';
+  }
+  return `https://chromewebstore.google.com/detail/${chrome.runtime.id}/reviews`;
+}

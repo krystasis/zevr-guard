@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Rozumiem"
+  },
+  "hostPermTitle": {
+    "message": "Włącz pełną ochronę"
+  },
+  "hostPermDesc": {
+    "message": "Przeglądarka osobno prosi o dostęp do danych witryn. Zevr Guard potrzebuje go, aby widzieć i blokować połączenia — wszystko zostaje na Twoim urządzeniu."
+  },
+  "hostPermGrant": {
+    "message": "Przyznaj dostęp"
   }
 }

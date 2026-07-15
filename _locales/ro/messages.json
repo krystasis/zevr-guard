@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Am înțeles"
+  },
+  "hostPermTitle": {
+    "message": "Activează protecția completă"
+  },
+  "hostPermDesc": {
+    "message": "Browserul cere separat accesul la datele site-urilor. Zevr Guard are nevoie de el pentru a vedea și bloca conexiunile — totul rămâne pe dispozitivul tău."
+  },
+  "hostPermGrant": {
+    "message": "Acordă acces"
   }
 }

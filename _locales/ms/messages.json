@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Faham"
+  },
+  "hostPermTitle": {
+    "message": "Hidupkan perlindungan penuh"
+  },
+  "hostPermDesc": {
+    "message": "Pelayar meminta akses kepada data laman secara berasingan. Zevr Guard memerlukannya untuk melihat dan menyekat sambungan — semuanya kekal pada peranti anda."
+  },
+  "hostPermGrant": {
+    "message": "Beri akses"
   }
 }

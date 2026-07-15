@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Got it"
+  },
+  "hostPermTitle": {
+    "message": "Turn on full protection"
+  },
+  "hostPermDesc": {
+    "message": "Your browser asks separately for access to website data. Zevr Guard needs it to see and block connections — everything stays on your device."
+  },
+  "hostPermGrant": {
+    "message": "Grant access"
   }
 }

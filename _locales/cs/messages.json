@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Rozumím"
+  },
+  "hostPermTitle": {
+    "message": "Zapněte plnou ochranu"
+  },
+  "hostPermDesc": {
+    "message": "Prohlížeč žádá o přístup k datům webů zvlášť. Zevr Guard jej potřebuje, aby viděl a blokoval spojení — vše zůstává ve vašem zařízení."
+  },
+  "hostPermGrant": {
+    "message": "Povolit přístup"
   }
 }

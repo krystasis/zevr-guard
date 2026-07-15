@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Begrepen"
+  },
+  "hostPermTitle": {
+    "message": "Volledige bescherming inschakelen"
+  },
+  "hostPermDesc": {
+    "message": "Je browser vraagt apart om toegang tot websitegegevens. Zevr Guard heeft die nodig om verbindingen te zien en te blokkeren — alles blijft op je apparaat."
+  },
+  "hostPermGrant": {
+    "message": "Toegang verlenen"
   }
 }

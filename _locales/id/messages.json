@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Mengerti"
+  },
+  "hostPermTitle": {
+    "message": "Aktifkan perlindungan penuh"
+  },
+  "hostPermDesc": {
+    "message": "Browser meminta akses ke data situs secara terpisah. Zevr Guard memerlukannya untuk melihat dan memblokir koneksi — semuanya tetap di perangkat Anda."
+  },
+  "hostPermGrant": {
+    "message": "Beri akses"
   }
 }

@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Értem"
+  },
+  "hostPermTitle": {
+    "message": "Kapcsold be a teljes védelmet"
+  },
+  "hostPermDesc": {
+    "message": "A böngésző külön kéri a webhelyadatokhoz való hozzáférést. A Zevr Guardnak erre van szüksége a kapcsolatok látásához és blokkolásához — minden az eszközödön marad."
+  },
+  "hostPermGrant": {
+    "message": "Hozzáférés engedélyezése"
   }
 }

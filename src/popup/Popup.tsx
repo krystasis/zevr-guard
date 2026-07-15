@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { openLiveGlobe } from '../shared/compat';
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
@@ -388,13 +389,7 @@ export const Popup: React.FC = () => {
 async function openSidePanel() {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab?.id == null) return;
-    await chrome.sidePanel.setOptions({
-      tabId: tab.id,
-      path: 'src/sidepanel/index.html',
-      enabled: true,
-    });
-    await chrome.sidePanel.open({ tabId: tab.id });
+    await openLiveGlobe(tab?.id ?? undefined);
     window.close();
   } catch {
     // ignore

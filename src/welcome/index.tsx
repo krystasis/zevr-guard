@@ -1,3 +1,4 @@
+import { openLiveGlobe } from '../shared/compat';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppIcon, BrandMark } from '../shared/AppIcon';
@@ -15,13 +16,7 @@ import '../styles/tailwind.css';
 async function openSidePanel() {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab?.id == null) return;
-    await chrome.sidePanel.setOptions({
-      tabId: tab.id,
-      path: 'src/sidepanel/index.html',
-      enabled: true,
-    });
-    await chrome.sidePanel.open({ tabId: tab.id });
+    await openLiveGlobe(tab?.id ?? undefined);
   } catch {
     // ignore
   }
@@ -33,11 +28,72 @@ const Welcome: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-gray-100 relative font-sans">
       <LanguageSwitcher />
+      <HostPermissionCard />
       <PinHint />
       <Hero />
       <FeatureSection />
       <CredibilitySection />
       <Footer />
+    </div>
+  );
+};
+
+// Firefox treats MV3 host permissions as optional: without them the
+// connection monitor sees nothing. Chromium grants them at install, so
+// permissions.contains() is true there and the card never renders.
+const HostPermissionCard: React.FC = () => {
+  const [missing, setMissing] = React.useState(false);
+  React.useEffect(() => {
+    let mounted = true;
+    void (async () => {
+      try {
+        const granted = await chrome.permissions.contains({
+          origins: ['<all_urls>'],
+        });
+        if (mounted) setMissing(!granted);
+      } catch {
+        // API unavailable — assume granted rather than nag
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  if (!missing) return null;
+  const request = async () => {
+    try {
+      const granted = await chrome.permissions.request({
+        origins: ['<all_urls>'],
+      });
+      if (granted) setMissing(false);
+    } catch {
+      // ignore
+    }
+  };
+  return (
+    <div className="fixed top-16 left-4 z-50 w-80 rounded-xl border border-amber-500/60 bg-black/85 backdrop-blur p-4 shadow-[0_8px_40px_-8px_rgba(245,158,11,0.45)]">
+      <div className="flex items-start gap-2.5">
+        <span className="text-lg leading-none" aria-hidden="true">
+          🛡️
+        </span>
+        <div>
+          <div className="text-sm font-bold text-white leading-snug">
+            {t('hostPermTitle', 'Turn on full protection')}
+          </div>
+          <p className="mt-1.5 text-xs leading-relaxed text-gray-300">
+            {t(
+              'hostPermDesc',
+              'Your browser asks separately for access to website data. Zevr Guard needs it to see and block connections — everything stays on your device.',
+            )}
+          </p>
+          <button
+            className="mt-3 rounded-full bg-amber-400 hover:bg-amber-300 px-4 py-1.5 text-xs font-bold text-black transition"
+            onClick={request}
+          >
+            {t('hostPermGrant', 'Grant access')}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

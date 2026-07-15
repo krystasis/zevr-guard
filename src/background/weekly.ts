@@ -1,3 +1,4 @@
+import { createNotificationSafe } from '../shared/compat';
 import { t, loadLocale } from '../shared/i18n';
 import { getSettings, getStatsHistory, getTodayStats } from './storage';
 
@@ -61,7 +62,7 @@ async function notifyWeekly(): Promise<void> {
 
   await loadLocale();
   const count = blocked.toLocaleString();
-  chrome.notifications.create(`${NOTIF_PREFIX}${Date.now()}`, {
+  createNotificationSafe(`${NOTIF_PREFIX}${Date.now()}`, {
     type: 'basic',
     iconUrl: chrome.runtime.getURL('public/icons/icon128.png'),
     title: t('weeklyNotifTitle', '📊 Your weekly protection report is ready'),

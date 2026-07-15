@@ -1,3 +1,4 @@
+import '../shared/compat';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppIcon } from '../shared/AppIcon';

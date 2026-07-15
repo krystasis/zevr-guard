@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "知道了"
+  },
+  "hostPermTitle": {
+    "message": "开启完整防护"
+  },
+  "hostPermDesc": {
+    "message": "此浏览器会单独询问网站数据的访问权限。Zevr Guard 需要它来查看并拦截连接——一切都保留在你的设备上。"
+  },
+  "hostPermGrant": {
+    "message": "授予权限"
   }
 }

@@ -3,6 +3,7 @@
 // All policy decisions and localized copy come from the background — this
 // script only renders what it is told.
 
+import '../shared/compat';
 interface PasswordContext {
   level: 'danger' | 'notice';
   title: string;

@@ -1,3 +1,4 @@
+import { createNotificationSafe, reviewPageUrl } from '../shared/compat';
 import './buffer-polyfill';
 import type { Connection, MessageRequest, PageStats, UserLocation } from '../types';
 import {
@@ -580,7 +581,7 @@ async function maybePromptReview(lifetimeBlocked: number): Promise<void> {
     if (!settings.notificationsEnabled) return;
     await chrome.storage.local.set({ [REVIEW_SHOWN_KEY]: milestone });
     const count = milestone.toLocaleString();
-    chrome.notifications.create(`zg-review-${milestone}`, {
+    createNotificationSafe(`zg-review-${milestone}`, {
       type: 'basic',
       iconUrl: chrome.runtime.getURL('public/icons/icon128.png'),
       title: t('reviewPromptTitle', `🎉 ${count} threats blocked!`, count),
@@ -601,13 +602,15 @@ async function maybePromptReview(lifetimeBlocked: number): Promise<void> {
 
 chrome.notifications.onButtonClicked.addListener((id, buttonIndex) => {
   if (id.startsWith('zg-review-') && buttonIndex === 0) {
-    // Edge installs come from the Edge Add-ons store, not CWS.
-    const isEdge = navigator.userAgent.includes(' Edg/');
-    void chrome.tabs.create({
-      url: isEdge
-        ? `https://microsoftedge.microsoft.com/addons/detail/${chrome.runtime.id}`
-        : `https://chromewebstore.google.com/detail/${chrome.runtime.id}/reviews`,
-    });
+    void chrome.tabs.create({ url: reviewPageUrl() });
+  }
+});
+
+// Firefox drops notification buttons; clicking the notification body is
+// the only affordance there, so mirror the primary action.
+chrome.notifications.onClicked.addListener((id) => {
+  if (id.startsWith('zg-review-')) {
+    void chrome.tabs.create({ url: reviewPageUrl() });
   }
 });
 

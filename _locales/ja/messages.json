@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "OK"
+  },
+  "hostPermTitle": {
+    "message": "フル保護を有効にする"
+  },
+  "hostPermDesc": {
+    "message": "このブラウザではサイトデータへのアクセス許可を別途求められます。接続の可視化とブロックに必要で、処理はすべて端末内で完結します。"
+  },
+  "hostPermGrant": {
+    "message": "アクセスを許可"
   }
 }

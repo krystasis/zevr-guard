@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Anladım"
+  },
+  "hostPermTitle": {
+    "message": "Tam korumayı etkinleştirin"
+  },
+  "hostPermDesc": {
+    "message": "Tarayıcı, site verilerine erişimi ayrıca sorar. Zevr Guard bağlantıları görmek ve engellemek için buna ihtiyaç duyar — her şey cihazınızda kalır."
+  },
+  "hostPermGrant": {
+    "message": "Erişim ver"
   }
 }

@@ -908,5 +908,14 @@
   },
   "pinHintGotIt": {
     "message": "Đã hiểu"
+  },
+  "hostPermTitle": {
+    "message": "Bật bảo vệ đầy đủ"
+  },
+  "hostPermDesc": {
+    "message": "Trình duyệt hỏi riêng về quyền truy cập dữ liệu trang web. Zevr Guard cần quyền này để thấy và chặn các kết nối — mọi thứ vẫn ở trên thiết bị của bạn."
+  },
+  "hostPermGrant": {
+    "message": "Cấp quyền"
   }
 }

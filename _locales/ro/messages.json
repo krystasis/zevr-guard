@@ -1,0 +1,912 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Blocare reclame, trackere și protecție malware"
+  },
+  "extDescription": {
+    "message": "Blochează reclame, trackere, malware și phishing. Vezi cu cine vorbește browserul tău pe o hartă live. Fără configurare, 100% local."
+  },
+  "protectionActive": {
+    "message": "Protecție activă"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Primul produs"
+  },
+  "heroTagline": {
+    "message": "Vezi cu cine vorbește browserul tău."
+  },
+  "heroTaglineAccent": {
+    "message": "Le blochează automat pe cele periculoase."
+  },
+  "heroDescription": {
+    "message": "Vezi în timp real către ce părți ale lumii se conectează browserul tău. Conexiunile periculoase sunt blocate automat."
+  },
+  "ctaOpenGlobe": {
+    "message": "Deschide Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "Începe navigarea"
+  },
+  "trustTrackers": {
+    "message": "$N$ semnale de trackere",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Actualizări zilnice ale DB"
+  },
+  "trust100Local": {
+    "message": "Potrivire doar locală"
+  },
+  "trustNoTelemetry": {
+    "message": "Niciun URL trimis"
+  },
+  "scrollHint": {
+    "message": "Derulează"
+  },
+  "howItWorks": {
+    "message": "Cum funcționează"
+  },
+  "fourLayersTitle": {
+    "message": "Cinci straturi de protecție"
+  },
+  "featureLookalikeTitle": {
+    "message": "Prinde phishingul cu domenii-copie"
+  },
+  "featureLookalikeDesc": {
+    "message": "Domeniile false care imită branduri reale — examp1e.com, exаmple.com — sunt prinse prin analiză pe dispozitiv, înainte să ajungă pe vreo listă de blocare."
+  },
+  "feature1Title": {
+    "message": "Blochează automat malware-ul"
+  },
+  "feature1Desc": {
+    "message": "Domeniile cunoscute de malware și phishing sunt blocate înainte să le observi. Lista de amenințări se actualizează automat în fiecare zi."
+  },
+  "feature2Title": {
+    "message": "Vezi fiecare tracker"
+  },
+  "feature2Desc": {
+    "message": "O bază de date cu peste 115.000 de semnale identifică ce companii ajung la browserul tău, cât de des și de unde."
+  },
+  "feature3Title": {
+    "message": "Avertizează la suspiciuni"
+  },
+  "feature3Desc": {
+    "message": "Domeniile de reclame, analitice și fingerprinting sunt evidențiate prin culori. Vezi densitatea urmăririi pe fiecare pagină în timp real."
+  },
+  "feature4Title": {
+    "message": "Potrivire locală. URL-urile tale nu pleacă nicăieri."
+  },
+  "feature4Desc": {
+    "message": "Potrivirea rulează integral în browserul tău. Singurul trafic de ieșire sunt actualizările anonime ale bazei de amenințări de pe CDN-ul nostru — istoricul tău de navigare nu merge nicăieri."
+  },
+  "dataSourcesTitle": {
+    "message": "Apărare discretă, la scară verificabilă."
+  },
+  "dataSourcesSubtitle": {
+    "message": "În cifre"
+  },
+  "dataByNumbers1Value": {
+    "message": "115.000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "semnale"
+  },
+  "dataByNumbers1Label": {
+    "message": "DB de identificare a trackerelor"
+  },
+  "dataByNumbers2Value": {
+    "message": "zilnic"
+  },
+  "dataByNumbers2Unit": {
+    "message": "actualizări"
+  },
+  "dataByNumbers2Label": {
+    "message": "Reîmprospătare automată prin CDN-ul nostru"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "țări"
+  },
+  "dataByNumbers3Label": {
+    "message": "Acoperire de geolocalizare"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL-uri trimise"
+  },
+  "dataByNumbers4Label": {
+    "message": "Navigarea ta nu părăsește dispozitivul"
+  },
+  "languageSwitchLabel": {
+    "message": "Limbă"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Vizibilitate în rețea, instantaneu"
+  },
+  "warningTitle": {
+    "message": "Site periculos blocat"
+  },
+  "warningSubtitle": {
+    "message": "Protejat de Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard a blocat accesul la:"
+  },
+  "warningListHeader": {
+    "message": "Acest domeniu apare în baze de date cunoscute de malware/phishing."
+  },
+  "warningListIntro": {
+    "message": "Vizitarea acestui site poate:"
+  },
+  "warningListItem1": {
+    "message": "Instala malware pe dispozitivul tău"
+  },
+  "warningListItem2": {
+    "message": "Fura parolele sau datele tale personale"
+  },
+  "warningListItem3": {
+    "message": "Prelua controlul browserului sau al conturilor tale"
+  },
+  "warningGoBack": {
+    "message": "Înapoi (sigur)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Înțeleg riscul"
+  },
+  "warningOverrideDetail": {
+    "message": "Pentru a continua totuși, scoate domeniul din lista de blocare prin popup-ul Zevr Guard (butonul blocare/deblocare), apoi reîncarcă pagina."
+  },
+  "warningFooter": {
+    "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
+  },
+  "riskMsgSafe": {
+    "message": "Această pagină este sigură"
+  },
+  "riskMsgTracker": {
+    "message": "Trackere detectate"
+  },
+  "riskMsgSuspicious": {
+    "message": "Trafic suspect detectat"
+  },
+  "riskMsgDangerous": {
+    "message": "Trafic periculos detectat"
+  },
+  "settingsGeneral": {
+    "message": "General"
+  },
+  "settingsNotifications": {
+    "message": "Notificări"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Notifică atunci când este detectat trafic periculos"
+  },
+  "settingsBlockCategories": {
+    "message": "Categorii blocate"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Malware și phishing cunoscute (recomandat)"
+  },
+  "settingsAdvertising": {
+    "message": "Publicitate"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Domenii de publicitate"
+  },
+  "settingsTracking": {
+    "message": "Urmărire"
+  },
+  "settingsTrackingDesc": {
+    "message": "Domenii de urmărire și analiză"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Listă de blocare personalizată"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Niciun domeniu blocat"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domeniu"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domenii",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Listă de permise personalizată"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Niciun domeniu permis"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domeniu"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domenii",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Domeniile adăugate aici ocolesc toate regulile de blocare, chiar și malware-ul."
+  },
+  "allowBarThisSite": {
+    "message": "Acest site"
+  },
+  "allowBarAllowed": {
+    "message": "Permis"
+  },
+  "allowBarAllow": {
+    "message": "Permite"
+  },
+  "allowBarRevoke": {
+    "message": "Revocă"
+  },
+  "allowBarAddTitle": {
+    "message": "Adaugă acest site în lista de permise (ocolește blocarea)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Scoate acest site din lista de permise"
+  },
+  "remove": {
+    "message": "elimină"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "protecție activă"
+  },
+  "popupScanning": {
+    "message": "SCANARE..."
+  },
+  "popupNoData": {
+    "message": "Încă nu există date pentru această pagină."
+  },
+  "popupReloadToMonitor": {
+    "message": "Reîncarcă fila pentru a începe monitorizarea."
+  },
+  "metricDomains": {
+    "message": "domenii"
+  },
+  "metricRequests": {
+    "message": "cereri"
+  },
+  "metricBlocked": {
+    "message": "blocate"
+  },
+  "todayTrackers": {
+    "message": "Trackere azi"
+  },
+  "todayBlocked": {
+    "message": "Blocate azi"
+  },
+  "todayCompanies": {
+    "message": "Companii"
+  },
+  "riskScoreLabel": {
+    "message": "scor de risc"
+  },
+  "riskLabelSafe": {
+    "message": "SIGUR"
+  },
+  "riskLabelTracker": {
+    "message": "TRACKER"
+  },
+  "riskLabelSuspicious": {
+    "message": "SUSPECT"
+  },
+  "riskLabelDangerous": {
+    "message": "PERICULOS"
+  },
+  "connectionsCount": {
+    "message": "Conexiuni"
+  },
+  "monitoringConnections": {
+    "message": "Se monitorizează conexiunile..."
+  },
+  "noMatchingConnections": {
+    "message": "Nicio conexiune potrivită."
+  },
+  "backToList": {
+    "message": "Înapoi la listă"
+  },
+  "filterAll": {
+    "message": "Toate"
+  },
+  "filterDangerShort": {
+    "message": "Pericol"
+  },
+  "filterSuspicShort": {
+    "message": "Suspect"
+  },
+  "filterTrackerShort": {
+    "message": "Tracker"
+  },
+  "filterSafeShort": {
+    "message": "Sigur"
+  },
+  "viewLabel": {
+    "message": "Vizualizare"
+  },
+  "groupDomains": {
+    "message": "Domenii"
+  },
+  "groupCompanies": {
+    "message": "Companii"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domenii",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domeniu"
+  },
+  "detailCompany": {
+    "message": "Companie"
+  },
+  "detailCategory": {
+    "message": "Categorie"
+  },
+  "detailLocation": {
+    "message": "Locație"
+  },
+  "detailHostedBy": {
+    "message": "Găzduit de"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Cereri"
+  },
+  "detailFirstSeen": {
+    "message": "Văzut prima dată"
+  },
+  "unblockThisDomain": {
+    "message": "Deblochează acest domeniu"
+  },
+  "blockThisDomain": {
+    "message": "Blochează acest domeniu"
+  },
+  "block": {
+    "message": "blochează"
+  },
+  "unblock": {
+    "message": "deblochează"
+  },
+  "legendSafe": {
+    "message": "Sigur"
+  },
+  "legendTracker": {
+    "message": "Tracker"
+  },
+  "legendSuspicious": {
+    "message": "Suspect"
+  },
+  "legendDangerous": {
+    "message": "Periculos"
+  },
+  "stripTrackers": {
+    "message": "Trackere"
+  },
+  "stripBlocked": {
+    "message": "Blocate"
+  },
+  "stripCompanies": {
+    "message": "Companii"
+  },
+  "thisPage": {
+    "message": "Această pagină"
+  },
+  "backToConnections": {
+    "message": "Înapoi la conexiuni"
+  },
+  "drillRequests": {
+    "message": "cereri"
+  },
+  "drillDomains": {
+    "message": "domenii"
+  },
+  "drillCompanies": {
+    "message": "companii"
+  },
+  "noTrackersOnPage": {
+    "message": "Niciun tracker pe această pagină."
+  },
+  "noCompaniesOnPage": {
+    "message": "Nicio companie identificabilă pe această pagină."
+  },
+  "nothingBlocked": {
+    "message": "Nimic blocat pe această pagină."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard veghează — site-urile periculoase vor fi blocate automat."
+  },
+  "onThisPage": {
+    "message": "Pe această pagină"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ cereri blocate pe această pagină",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Detaliile domeniilor blocate automat nu sunt urmărite aici"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Blocare în pauză"
+  },
+  "pauseBarPause": {
+    "message": "Pauză"
+  },
+  "pauseBarResume": {
+    "message": "Reia"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Pune blocarea pe pauză pe acest site (repară site-urile stricate)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Reia blocarea pe acest site"
+  },
+  "settingsPausedSites": {
+    "message": "Site-uri în pauză"
+  },
+  "shareTitle": {
+    "message": "Distribuie această scanare"
+  },
+  "shareTagline": {
+    "message": "Cu cine vorbește browserul tău?"
+  },
+  "shareHeadline": {
+    "message": "$C$ companii · $N$ țări",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ vorbește cu $C$ companii din $N$ țări — supravegheat și blocat de Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Salvează imaginea"
+  },
+  "sharePost": {
+    "message": "Postează"
+  },
+  "shareHint": {
+    "message": "Imaginea este copiată la postare — apasă Ctrl+V în editor pentru a o atașa."
+  },
+  "reportTitle": {
+    "message": "Raport de protecție"
+  },
+  "reportSubtitle": {
+    "message": "Raport săptămânal de protecție"
+  },
+  "reportBlocked": {
+    "message": "Blocate"
+  },
+  "reportConnections": {
+    "message": "Conexiuni"
+  },
+  "reportTrackers": {
+    "message": "Trackere"
+  },
+  "reportDangerous": {
+    "message": "Periculoase"
+  },
+  "reportDailyBlocked": {
+    "message": "Blocate pe zi"
+  },
+  "reportTopCompanies": {
+    "message": "Companiile care te urmăresc cel mai mult"
+  },
+  "reportTopBlocked": {
+    "message": "Cele mai blocate domenii"
+  },
+  "reportNoData": {
+    "message": "Încă nu există date — navighează puțin mai întâi."
+  },
+  "reportFooter": {
+    "message": "Toate datele sunt stocate local pe acest dispozitiv."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ amenințări blocate!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard te-a protejat în liniște. Dacă îți este de folos, o recenzie scurtă îi ajută și pe alții să îl descopere."
+  },
+  "reviewPromptRate": {
+    "message": "Evaluează Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Mai târziu"
+  },
+  "riskExplainDangerous": {
+    "message": "Acest domeniu apare în baze de date cunoscute de malware/phishing. Poate încerca să îți fure datele sau să instaleze malware."
+  },
+  "riskExplainSuspicious": {
+    "message": "Acest domeniu este folosit pentru publicitate sau urmărire. Colectează date despre comportamentul tău de navigare."
+  },
+  "riskExplainTracker": {
+    "message": "Acest domeniu este folosit pentru analiză sau livrare de conținut. Poate colecta unele date de utilizare."
+  },
+  "riskExplainSafe": {
+    "message": "Acest domeniu pare sigur. Nu a fost detectată urmărire sau activitate rău intenționată cunoscută."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Deschide panoul lateral Live Globe"
+  },
+  "settingsTitle": {
+    "message": "Setări"
+  },
+  "unpinTitle": {
+    "message": "Apasă din nou pentru a anula fixarea"
+  },
+  "youLabel": {
+    "message": "TU"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Conexiune periculoasă detectată"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ este un domeniu cunoscut de malware/phishing.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Inclus în plus"
+  },
+  "welcomeAlsoShare": {
+    "message": "Card de distribuire într-un clic"
+  },
+  "welcomeAlsoReport": {
+    "message": "Raport săptămânal de protecție"
+  },
+  "welcomeAlsoPause": {
+    "message": "Pauză per site"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Disponibil în $N$ limbi",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Phishing suspectat blocat"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Nu este același cu:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Această adresă imită $BRAND$, dar nu este site-ul real.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Site-urile-copie sunt de obicei folosite pentru a:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Fura parola sau codurile tale de autentificare"
+  },
+  "warningLookalikeItem2": {
+    "message": "Captura date de card sau bancare"
+  },
+  "warningLookalikeItem3": {
+    "message": "Livra malware deghizat în serviciul real"
+  },
+  "warningLookalikeDetected": {
+    "message": "Detectat prin analiza domeniilor-copie pe dispozitiv. URL-ul tău nu a părăsit niciodată acest browser."
+  },
+  "warningProceedAnyway": {
+    "message": "Continuă totuși (nerecomandat)"
+  },
+  "metricTrackers": {
+    "message": "trackere"
+  },
+  "metricCompanies": {
+    "message": "companii"
+  },
+  "weeklyShareTitle": {
+    "message": "Distribuie săptămâna ta"
+  },
+  "weeklyCardTagline": {
+    "message": "Săptămâna mea sub urmărire"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ cereri blocate săptămâna aceasta",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Cei mai activi urmăritori"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Browserul meu a vorbit cu $C$ companii săptămâna asta — Zevr Guard a blocat $N$ cereri de urmărire. Totul pe dispozitiv.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Raportul tău săptămânal de protecție este gata"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ cereri blocate în ultimele 7 zile. Vezi cine te urmărea.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Vezi raportul"
+  },
+  "pwWarnDismiss": {
+    "message": "Închide"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Această pagină nu este criptată"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Conexiunea este HTTP simplu — o parolă tastată aici poate fi citită pe traseu."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Ești pe un site suspectat de imitație"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Ai ales anterior să continui către acest site. O parolă tastată aici poate ajunge la un impostor."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Prima parolă pe acest site"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Nu te-ai autentificat aici niciodată. Verifică mai întâi bara de adrese."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Avertismente pentru parole"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Avertizează înainte de a tasta o parolă pe pagini riscante"
+  },
+  "settingsBlockedCountries": {
+    "message": "Țări blocate"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Niciuna. Deschide detaliile unei conexiuni pentru a-i bloca țara."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domeniile sunt blocate imediat ce se observă trafic din aceste țări."
+  },
+  "blockCountry": {
+    "message": "Blochează tot traficul din $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Deblochează $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Blocat de regula ta pentru țări"
+  },
+  "warningCountryHeader": {
+    "message": "Acest site comunică din $COUNTRY$, pe care ai ales să o blochezi.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Ai activat blocarea pe țări pentru această regiune în Zevr Guard. Dispozitivul tău este în regulă — este propria ta regulă care își face treaba."
+  },
+  "warningCountryUnblock": {
+    "message": "Deblochează $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Deblocat. Revino și reîncarcă pagina."
+  },
+  "reportPhishingButton": {
+    "message": "Raportează ca phishing — protejează alți utilizatori"
+  },
+  "reportPhishingConfirm": {
+    "message": "Trimiți acest domeniu (și nimic altceva) către Zevr pentru verificare?"
+  },
+  "reportPhishingSend": {
+    "message": "Trimite raportul"
+  },
+  "reportPhishingCancel": {
+    "message": "Anulează"
+  },
+  "reportPhishingDone": {
+    "message": "Raportat. Îți mulțumim că protejezi alți utilizatori!"
+  },
+  "reportPhishingError": {
+    "message": "Raportul nu a putut fi trimis. Încearcă din nou mai târziu."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Blocare de țară dintr-o atingere"
+  },
+  "welcomeAlsoPw": {
+    "message": "Gardian la introducerea parolei"
+  },
+  "groupCountries": {
+    "message": "Țări"
+  },
+  "countryUnknown": {
+    "message": "Locație necunoscută"
+  },
+  "connBlockedTag": {
+    "message": "blocat"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Blochează-l și pe acest dispozitiv"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Raportat și blocat. Îți mulțumim că protejezi alți utilizatori!"
+  },
+  "mapBlockHint": {
+    "message": "Atinge un punct pentru a-i bloca țara"
+  },
+  "warningFramedNotice": {
+    "message": "Această pagină de siguranță nu poate fi afișată în interiorul altui site. Deschide-o direct."
+  },
+  "leakTitle": {
+    "message": "Informațiile tale tocmai au fost trimise"
+  },
+  "leakBlock": {
+    "message": "Blochează $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ a fost trimis către $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "e-mailul tău"
+  },
+  "leakKind_phone": {
+    "message": "numărul tău de telefon"
+  },
+  "leakKind_custom": {
+    "message": "informațiile tale"
+  },
+  "watchTitle": {
+    "message": "Supraveghează-ți datele"
+  },
+  "watchDesc": {
+    "message": "Te avertizează când e-mailul, telefonul sau orice valoare adaugi este trimisă către alt site — chiar și hash-uită. Toată potrivirea rămâne pe dispozitivul tău."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Personalizat"
+  },
+  "watchPlaceholder": {
+    "message": "valoare de supravegheat"
+  },
+  "watchAdd": {
+    "message": "Adaugă"
+  },
+  "watchTooShort": {
+    "message": "Prea scurt pentru a fi supravegheat în siguranță (minim 5 caractere)."
+  },
+  "watchRemove": {
+    "message": "Elimină"
+  },
+  "watchLeaksTitle": {
+    "message": "Scurgeri recente prinse"
+  },
+  "pinHintTitle": {
+    "message": "Fixează Zevr Guard pe bara de instrumente"
+  },
+  "pinHintDesc": {
+    "message": "Apasă pe pictograma puzzle de sus, apoi pe pinul de lângă Zevr Guard. Protecția ta rămâne mereu la vedere."
+  },
+  "pinHintGotIt": {
+    "message": "Am înțeles"
+  }
+}

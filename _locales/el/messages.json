@@ -1,0 +1,912 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Αποκλεισμός διαφημίσεων, trackers & malware"
+  },
+  "extDescription": {
+    "message": "Μπλοκάρει διαφημίσεις, trackers, malware & phishing. Δείτε με ποιους μιλά ο browser σε ζωντανό χάρτη. Χωρίς ρυθμίσεις, 100% τοπικά."
+  },
+  "protectionActive": {
+    "message": "Προστασία ενεργή"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Το πρώτο προϊόν"
+  },
+  "heroTagline": {
+    "message": "Δείτε με ποιους μιλά ο browser σας."
+  },
+  "heroTaglineAccent": {
+    "message": "Μπλοκάρει αυτόματα τους επικίνδυνους."
+  },
+  "heroDescription": {
+    "message": "Δείτε σε πραγματικό χρόνο σε ποια μέρη του κόσμου συνδέεται ο browser σας. Οι επικίνδυνες συνδέσεις μπλοκάρονται αυτόματα."
+  },
+  "ctaOpenGlobe": {
+    "message": "Άνοιγμα Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "Έναρξη περιήγησης"
+  },
+  "trustTrackers": {
+    "message": "$N$ σήματα trackers",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Καθημερινές ενημερώσεις ΒΔ"
+  },
+  "trust100Local": {
+    "message": "Έλεγχος μόνο τοπικά"
+  },
+  "trustNoTelemetry": {
+    "message": "Καμία αποστολή URL"
+  },
+  "scrollHint": {
+    "message": "Κύλιση"
+  },
+  "howItWorks": {
+    "message": "Πώς λειτουργεί"
+  },
+  "fourLayersTitle": {
+    "message": "Πέντε επίπεδα προστασίας"
+  },
+  "featureLookalikeTitle": {
+    "message": "Πιάνει phishing με domains-απομιμήσεις"
+  },
+  "featureLookalikeDesc": {
+    "message": "Ψεύτικα domains που μιμούνται αληθινές μάρκες — examp1e.com, exаmple.com — εντοπίζονται με ανάλυση στη συσκευή, πριν μπουν σε οποιαδήποτε λίστα αποκλεισμού."
+  },
+  "feature1Title": {
+    "message": "Αυτόματος αποκλεισμός malware"
+  },
+  "feature1Desc": {
+    "message": "Γνωστά domains malware και phishing μπλοκάρονται πριν τα προσέξετε. Η λίστα απειλών ανανεώνεται αυτόματα κάθε μέρα."
+  },
+  "feature2Title": {
+    "message": "Δείτε κάθε tracker"
+  },
+  "feature2Desc": {
+    "message": "Μια βάση με 115.000+ σήματα trackers αναγνωρίζει ποιες εταιρείες φτάνουν στον browser σας, πόσο συχνά και από πού."
+  },
+  "feature3Title": {
+    "message": "Προειδοποίηση για ύποπτα"
+  },
+  "feature3Desc": {
+    "message": "Domains διαφημίσεων, analytics και fingerprinting επισημαίνονται με χρώμα. Δείτε την πυκνότητα παρακολούθησης κάθε σελίδας σε πραγματικό χρόνο."
+  },
+  "feature4Title": {
+    "message": "Τοπικός έλεγχος. Τα URL σας δεν φεύγουν ποτέ."
+  },
+  "feature4Desc": {
+    "message": "Ο έλεγχος γίνεται εξ ολοκλήρου στον browser σας. Η μόνη εξερχόμενη κίνηση είναι ανώνυμες ενημερώσεις της βάσης απειλών από το CDN μας — το ιστορικό περιήγησής σας δεν πάει πουθενά."
+  },
+  "dataSourcesTitle": {
+    "message": "Αθόρυβη άμυνα, σε επαληθεύσιμη κλίμακα."
+  },
+  "dataSourcesSubtitle": {
+    "message": "Σε αριθμούς"
+  },
+  "dataByNumbers1Value": {
+    "message": "115.000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "σήματα"
+  },
+  "dataByNumbers1Label": {
+    "message": "ΒΔ αναγνώρισης trackers"
+  },
+  "dataByNumbers2Value": {
+    "message": "καθημερινά"
+  },
+  "dataByNumbers2Unit": {
+    "message": "ενημερώσεις"
+  },
+  "dataByNumbers2Label": {
+    "message": "Αυτόματη ανανέωση μέσω του CDN μας"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "χώρες"
+  },
+  "dataByNumbers3Label": {
+    "message": "Κάλυψη γεωεντοπισμού"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL εστάλησαν"
+  },
+  "dataByNumbers4Label": {
+    "message": "Η περιήγησή σας δεν φεύγει από τη συσκευή"
+  },
+  "languageSwitchLabel": {
+    "message": "Γλώσσα"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Ορατότητα δικτύου, αμέσως"
+  },
+  "warningTitle": {
+    "message": "Επικίνδυνος ιστότοπος αποκλείστηκε"
+  },
+  "warningSubtitle": {
+    "message": "Προστασία από το Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Το Zevr Guard απέκλεισε την πρόσβαση σε:"
+  },
+  "warningListHeader": {
+    "message": "Αυτό το domain βρίσκεται σε γνωστές βάσεις δεδομένων malware/phishing."
+  },
+  "warningListIntro": {
+    "message": "Η επίσκεψη σε αυτόν τον ιστότοπο μπορεί να:"
+  },
+  "warningListItem1": {
+    "message": "Εγκαταστήσει malware στη συσκευή σας"
+  },
+  "warningListItem2": {
+    "message": "Κλέψει τους κωδικούς ή τα προσωπικά σας δεδομένα"
+  },
+  "warningListItem3": {
+    "message": "Καταλάβει τον browser ή τους λογαριασμούς σας"
+  },
+  "warningGoBack": {
+    "message": "Επιστροφή (ασφαλές)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Κατανοώ τον κίνδυνο"
+  },
+  "warningOverrideDetail": {
+    "message": "Για να συνεχίσετε παρ' όλα αυτά, αφαιρέστε το domain από τη λίστα αποκλεισμού μέσω του popup του Zevr Guard (κουμπί αποκλεισμού/άρσης) και φορτώστε ξανά τη σελίδα."
+  },
+  "warningFooter": {
+    "message": "Προστασία από το Zevr Guard · Ασφαλής περιήγηση για όλους"
+  },
+  "riskMsgSafe": {
+    "message": "Αυτή η σελίδα είναι ασφαλής"
+  },
+  "riskMsgTracker": {
+    "message": "Εντοπίστηκαν trackers"
+  },
+  "riskMsgSuspicious": {
+    "message": "Εντοπίστηκε ύποπτη κίνηση"
+  },
+  "riskMsgDangerous": {
+    "message": "Εντοπίστηκε επικίνδυνη κίνηση"
+  },
+  "settingsGeneral": {
+    "message": "Γενικά"
+  },
+  "settingsNotifications": {
+    "message": "Ειδοποιήσεις"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Ειδοποίηση όταν εντοπίζεται επικίνδυνη κίνηση"
+  },
+  "settingsBlockCategories": {
+    "message": "Κατηγορίες αποκλεισμού"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Γνωστό malware & phishing (συνιστάται)"
+  },
+  "settingsAdvertising": {
+    "message": "Διαφημίσεις"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Domains διαφημίσεων"
+  },
+  "settingsTracking": {
+    "message": "Παρακολούθηση"
+  },
+  "settingsTrackingDesc": {
+    "message": "Domains παρακολούθησης & analytics"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Προσαρμοσμένη λίστα αποκλεισμού"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Κανένα αποκλεισμένο domain"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domains",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Προσαρμοσμένη λίστα επιτρεπόμενων"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Κανένα επιτρεπόμενο domain"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domains",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Τα domains που προστίθενται εδώ παρακάμπτουν όλους τους κανόνες αποκλεισμού, ακόμη και για malware."
+  },
+  "allowBarThisSite": {
+    "message": "Αυτός ο ιστότοπος"
+  },
+  "allowBarAllowed": {
+    "message": "Επιτρέπεται"
+  },
+  "allowBarAllow": {
+    "message": "Να επιτραπεί"
+  },
+  "allowBarRevoke": {
+    "message": "Ανάκληση"
+  },
+  "allowBarAddTitle": {
+    "message": "Προσθήκη του ιστότοπου στη λίστα επιτρεπόμενων (παράκαμψη αποκλεισμού)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Αφαίρεση του ιστότοπου από τη λίστα επιτρεπόμενων"
+  },
+  "remove": {
+    "message": "αφαίρεση"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "προστασία ενεργή"
+  },
+  "popupScanning": {
+    "message": "ΣΑΡΩΣΗ..."
+  },
+  "popupNoData": {
+    "message": "Δεν υπάρχουν ακόμη δεδομένα για αυτή τη σελίδα."
+  },
+  "popupReloadToMonitor": {
+    "message": "Φορτώστε ξανά την καρτέλα για να ξεκινήσει η παρακολούθηση."
+  },
+  "metricDomains": {
+    "message": "domains"
+  },
+  "metricRequests": {
+    "message": "αιτήματα"
+  },
+  "metricBlocked": {
+    "message": "αποκλείστηκαν"
+  },
+  "todayTrackers": {
+    "message": "Trackers σήμερα"
+  },
+  "todayBlocked": {
+    "message": "Αποκλείστηκαν σήμερα"
+  },
+  "todayCompanies": {
+    "message": "Εταιρείες"
+  },
+  "riskScoreLabel": {
+    "message": "βαθμός κινδύνου"
+  },
+  "riskLabelSafe": {
+    "message": "ΑΣΦΑΛΕΣ"
+  },
+  "riskLabelTracker": {
+    "message": "TRACKER"
+  },
+  "riskLabelSuspicious": {
+    "message": "ΥΠΟΠΤΟ"
+  },
+  "riskLabelDangerous": {
+    "message": "ΕΠΙΚΙΝΔΥΝΟ"
+  },
+  "connectionsCount": {
+    "message": "Συνδέσεις"
+  },
+  "monitoringConnections": {
+    "message": "Παρακολούθηση συνδέσεων..."
+  },
+  "noMatchingConnections": {
+    "message": "Δεν υπάρχουν αντίστοιχες συνδέσεις."
+  },
+  "backToList": {
+    "message": "Πίσω στη λίστα"
+  },
+  "filterAll": {
+    "message": "Όλα"
+  },
+  "filterDangerShort": {
+    "message": "Κίνδυνος"
+  },
+  "filterSuspicShort": {
+    "message": "Ύποπτο"
+  },
+  "filterTrackerShort": {
+    "message": "Tracker"
+  },
+  "filterSafeShort": {
+    "message": "Ασφαλές"
+  },
+  "viewLabel": {
+    "message": "Προβολή"
+  },
+  "groupDomains": {
+    "message": "Domains"
+  },
+  "groupCompanies": {
+    "message": "Εταιρείες"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domains",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domain"
+  },
+  "detailCompany": {
+    "message": "Εταιρεία"
+  },
+  "detailCategory": {
+    "message": "Κατηγορία"
+  },
+  "detailLocation": {
+    "message": "Τοποθεσία"
+  },
+  "detailHostedBy": {
+    "message": "Φιλοξενείται από"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Αιτήματα"
+  },
+  "detailFirstSeen": {
+    "message": "Πρώτη εμφάνιση"
+  },
+  "unblockThisDomain": {
+    "message": "Άρση αποκλεισμού αυτού του domain"
+  },
+  "blockThisDomain": {
+    "message": "Αποκλεισμός αυτού του domain"
+  },
+  "block": {
+    "message": "αποκλεισμός"
+  },
+  "unblock": {
+    "message": "άρση αποκλεισμού"
+  },
+  "legendSafe": {
+    "message": "Ασφαλές"
+  },
+  "legendTracker": {
+    "message": "Tracker"
+  },
+  "legendSuspicious": {
+    "message": "Ύποπτο"
+  },
+  "legendDangerous": {
+    "message": "Επικίνδυνο"
+  },
+  "stripTrackers": {
+    "message": "Trackers"
+  },
+  "stripBlocked": {
+    "message": "Αποκλείστηκαν"
+  },
+  "stripCompanies": {
+    "message": "Εταιρείες"
+  },
+  "thisPage": {
+    "message": "Αυτή η σελίδα"
+  },
+  "backToConnections": {
+    "message": "Πίσω στις συνδέσεις"
+  },
+  "drillRequests": {
+    "message": "αιτήματα"
+  },
+  "drillDomains": {
+    "message": "domains"
+  },
+  "drillCompanies": {
+    "message": "εταιρείες"
+  },
+  "noTrackersOnPage": {
+    "message": "Δεν υπάρχουν trackers σε αυτή τη σελίδα."
+  },
+  "noCompaniesOnPage": {
+    "message": "Δεν υπάρχουν αναγνωρίσιμες εταιρείες σε αυτή τη σελίδα."
+  },
+  "nothingBlocked": {
+    "message": "Τίποτα δεν αποκλείστηκε σε αυτή τη σελίδα."
+  },
+  "watchingMsg": {
+    "message": "Το Zevr Guard επαγρυπνά — οι επικίνδυνοι ιστότοποι θα αποκλείονται αυτόματα."
+  },
+  "onThisPage": {
+    "message": "Σε αυτή τη σελίδα"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ αιτήματα αποκλείστηκαν σε αυτή τη σελίδα",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Οι λεπτομέρειες των αυτόματα αποκλεισμένων domains δεν καταγράφονται εδώ"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Ο αποκλεισμός είναι σε παύση"
+  },
+  "pauseBarPause": {
+    "message": "Παύση"
+  },
+  "pauseBarResume": {
+    "message": "Συνέχιση"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Παύση αποκλεισμού σε αυτόν τον ιστότοπο (διορθώνει χαλασμένες σελίδες)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Συνέχιση αποκλεισμού σε αυτόν τον ιστότοπο"
+  },
+  "settingsPausedSites": {
+    "message": "Ιστότοποι σε παύση"
+  },
+  "shareTitle": {
+    "message": "Κοινοποίηση αυτής της σάρωσης"
+  },
+  "shareTagline": {
+    "message": "Με ποιους μιλά ο browser σας;"
+  },
+  "shareHeadline": {
+    "message": "$C$ εταιρείες · $N$ χώρες",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 Το $HOST$ μιλά με $C$ εταιρείες σε $N$ χώρες — υπό παρακολούθηση & αποκλεισμό από το Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Αποθήκευση εικόνας"
+  },
+  "sharePost": {
+    "message": "Δημοσίευση"
+  },
+  "shareHint": {
+    "message": "Η εικόνα αντιγράφεται κατά τη δημοσίευση — πατήστε Ctrl+V στο πεδίο σύνταξης για να την επισυνάψετε."
+  },
+  "reportTitle": {
+    "message": "Αναφορά προστασίας"
+  },
+  "reportSubtitle": {
+    "message": "Εβδομαδιαία αναφορά προστασίας"
+  },
+  "reportBlocked": {
+    "message": "Αποκλείστηκαν"
+  },
+  "reportConnections": {
+    "message": "Συνδέσεις"
+  },
+  "reportTrackers": {
+    "message": "Trackers"
+  },
+  "reportDangerous": {
+    "message": "Επικίνδυνα"
+  },
+  "reportDailyBlocked": {
+    "message": "Αποκλεισμοί ανά ημέρα"
+  },
+  "reportTopCompanies": {
+    "message": "Κορυφαίες εταιρείες παρακολούθησης"
+  },
+  "reportTopBlocked": {
+    "message": "Πιο συχνά αποκλεισμένα domains"
+  },
+  "reportNoData": {
+    "message": "Δεν υπάρχουν ακόμη δεδομένα — περιηγηθείτε λίγο πρώτα."
+  },
+  "reportFooter": {
+    "message": "Όλα τα δεδομένα αποθηκεύονται τοπικά σε αυτή τη συσκευή."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 Αποκλείστηκαν $N$ απειλές!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Το Zevr Guard σάς προστάτευε αθόρυβα. Αν σας βοηθά, μια σύντομη κριτική βοηθά και άλλους να το βρουν."
+  },
+  "reviewPromptRate": {
+    "message": "Βαθμολογήστε το Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Αργότερα"
+  },
+  "riskExplainDangerous": {
+    "message": "Αυτό το domain βρίσκεται σε γνωστές βάσεις malware/phishing. Μπορεί να επιχειρήσει να κλέψει τα δεδομένα σας ή να εγκαταστήσει malware."
+  },
+  "riskExplainSuspicious": {
+    "message": "Αυτό το domain χρησιμοποιείται για διαφημίσεις ή παρακολούθηση. Συλλέγει δεδομένα για τη συμπεριφορά περιήγησής σας."
+  },
+  "riskExplainTracker": {
+    "message": "Αυτό το domain χρησιμοποιείται για analytics ή παράδοση περιεχομένου. Ίσως συλλέγει ορισμένα δεδομένα χρήσης."
+  },
+  "riskExplainSafe": {
+    "message": "Αυτό το domain φαίνεται ασφαλές. Δεν εντοπίστηκε γνωστή παρακολούθηση ή κακόβουλη δραστηριότητα."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Άνοιγμα πλευρικού πίνακα Live Globe"
+  },
+  "settingsTitle": {
+    "message": "Ρυθμίσεις"
+  },
+  "unpinTitle": {
+    "message": "Κάντε κλικ ξανά για ξεκαρφίτσωμα"
+  },
+  "youLabel": {
+    "message": "ΕΣΕΙΣ"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Εντοπίστηκε επικίνδυνη σύνδεση"
+  },
+  "dangerNotifMessage": {
+    "message": "Το $DOMAIN$ είναι γνωστό domain malware/phishing.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Περιλαμβάνονται επίσης"
+  },
+  "welcomeAlsoShare": {
+    "message": "Κάρτα κοινοποίησης με 1 κλικ"
+  },
+  "welcomeAlsoReport": {
+    "message": "Εβδομαδιαία αναφορά προστασίας"
+  },
+  "welcomeAlsoPause": {
+    "message": "Παύση ανά ιστότοπο"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Διαθέσιμο σε $N$ γλώσσες",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Πιθανό phishing αποκλείστηκε"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Δεν είναι το ίδιο με:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Αυτή η διεύθυνση μιμείται το $BRAND$ αλλά δεν είναι ο πραγματικός ιστότοπος.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Οι ιστότοποι-απομιμήσεις συνήθως χρησιμοποιούνται για να:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Κλέψουν τον κωδικό ή τους κωδικούς σύνδεσής σας"
+  },
+  "warningLookalikeItem2": {
+    "message": "Υποκλέψουν στοιχεία κάρτας ή τραπεζικά στοιχεία"
+  },
+  "warningLookalikeItem3": {
+    "message": "Διανείμουν malware μεταμφιεσμένο ως την πραγματική υπηρεσία"
+  },
+  "warningLookalikeDetected": {
+    "message": "Εντοπίστηκε από ανάλυση απομιμήσεων στη συσκευή. Το URL σας δεν έφυγε ποτέ από αυτόν τον browser."
+  },
+  "warningProceedAnyway": {
+    "message": "Συνέχεια παρ' όλα αυτά (δεν συνιστάται)"
+  },
+  "metricTrackers": {
+    "message": "trackers"
+  },
+  "metricCompanies": {
+    "message": "εταιρείες"
+  },
+  "weeklyShareTitle": {
+    "message": "Κοινοποιήστε την εβδομάδα σας"
+  },
+  "weeklyCardTagline": {
+    "message": "Η εβδομάδα μου στην παρακολούθηση"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ αιτήματα αποκλείστηκαν αυτή την εβδομάδα",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Κορυφαίοι παρατηρητές"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Ο browser μου μίλησε με $C$ εταιρείες αυτή την εβδομάδα — το Zevr Guard απέκλεισε $N$ αιτήματα παρακολούθησης. Όλα στη συσκευή.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Η εβδομαδιαία αναφορά προστασίας σας είναι έτοιμη"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ αιτήματα αποκλείστηκαν τις τελευταίες 7 ημέρες. Δείτε ποιος σας παρακολουθούσε.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Προβολή αναφοράς"
+  },
+  "pwWarnDismiss": {
+    "message": "Κλείσιμο"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Αυτή η σελίδα δεν είναι κρυπτογραφημένη"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Η σύνδεση είναι απλό HTTP — ένας κωδικός που πληκτρολογείται εδώ μπορεί να διαβαστεί καθ' οδόν."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Βρίσκεστε σε ύποπτο ιστότοπο-απομίμηση"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Επιλέξατε νωρίτερα να συνεχίσετε σε αυτόν τον ιστότοπο. Ένας κωδικός που θα πληκτρολογηθεί εδώ μπορεί να καταλήξει σε απατεώνα."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Πρώτος κωδικός σε αυτόν τον ιστότοπο"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Δεν έχετε συνδεθεί ποτέ εδώ. Ελέγξτε πρώτα τη γραμμή διευθύνσεων."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Προειδοποιήσεις κωδικών"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Προειδοποίηση πριν πληκτρολογήσετε κωδικό σε επικίνδυνες σελίδες"
+  },
+  "settingsBlockedCountries": {
+    "message": "Αποκλεισμένες χώρες"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Καμία. Ανοίξτε τις λεπτομέρειες μιας σύνδεσης για να αποκλείσετε τη χώρα της."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Τα domains αποκλείονται μόλις παρατηρηθεί κίνηση από αυτές τις χώρες."
+  },
+  "blockCountry": {
+    "message": "Αποκλεισμός όλης της κίνησης από $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Άρση αποκλεισμού για $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Αποκλείστηκε από τον δικό σας κανόνα χώρας"
+  },
+  "warningCountryHeader": {
+    "message": "Αυτός ο ιστότοπος επικοινωνεί από $COUNTRY$, που επιλέξατε να αποκλείσετε.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Ενεργοποιήσατε τον αποκλεισμό χωρών για αυτή την περιοχή στο Zevr Guard. Η συσκευή σας δεν έχει κανένα πρόβλημα — απλώς λειτουργεί ο δικός σας κανόνας."
+  },
+  "warningCountryUnblock": {
+    "message": "Άρση αποκλεισμού για $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Ο αποκλεισμός αφαιρέθηκε. Επιστρέψτε και φορτώστε ξανά τη σελίδα."
+  },
+  "reportPhishingButton": {
+    "message": "Αναφορά ως phishing — προστατέψτε άλλους χρήστες"
+  },
+  "reportPhishingConfirm": {
+    "message": "Να σταλεί αυτό το domain (και τίποτα άλλο) στο Zevr για έλεγχο;"
+  },
+  "reportPhishingSend": {
+    "message": "Αποστολή αναφοράς"
+  },
+  "reportPhishingCancel": {
+    "message": "Ακύρωση"
+  },
+  "reportPhishingDone": {
+    "message": "Αναφέρθηκε. Ευχαριστούμε που προστατεύετε άλλους χρήστες!"
+  },
+  "reportPhishingError": {
+    "message": "Δεν ήταν δυνατή η αποστολή της αναφοράς. Δοκιμάστε ξανά αργότερα."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Αποκλεισμός χώρας με ένα άγγιγμα"
+  },
+  "welcomeAlsoPw": {
+    "message": "Φύλακας εισαγωγής κωδικών"
+  },
+  "groupCountries": {
+    "message": "Χώρες"
+  },
+  "countryUnknown": {
+    "message": "Άγνωστη τοποθεσία"
+  },
+  "connBlockedTag": {
+    "message": "αποκλεισμένο"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Αποκλεισμός και σε αυτή τη συσκευή"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Αναφέρθηκε & αποκλείστηκε. Ευχαριστούμε που προστατεύετε άλλους χρήστες!"
+  },
+  "mapBlockHint": {
+    "message": "Αγγίξτε μια κουκκίδα για να αποκλείσετε τη χώρα της"
+  },
+  "warningFramedNotice": {
+    "message": "Αυτή η σελίδα ασφαλείας δεν μπορεί να εμφανιστεί μέσα σε άλλον ιστότοπο. Ανοίξτε την απευθείας."
+  },
+  "leakTitle": {
+    "message": "Οι πληροφορίες σας μόλις στάλθηκαν"
+  },
+  "leakBlock": {
+    "message": "Αποκλεισμός $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ στάλθηκε στο $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "το email σας"
+  },
+  "leakKind_phone": {
+    "message": "ο αριθμός τηλεφώνου σας"
+  },
+  "leakKind_custom": {
+    "message": "οι πληροφορίες σας"
+  },
+  "watchTitle": {
+    "message": "Παρακολουθήστε τα στοιχεία σας"
+  },
+  "watchDesc": {
+    "message": "Σας προειδοποιεί όταν το email, το τηλέφωνο ή οποιαδήποτε τιμή προσθέσετε στέλνεται σε άλλον ιστότοπο — ακόμη και κατακερματισμένη. Όλος ο έλεγχος μένει στη συσκευή σας."
+  },
+  "watchKindEmail": {
+    "message": "Email"
+  },
+  "watchKindPhone": {
+    "message": "Τηλέφωνο"
+  },
+  "watchKindCustom": {
+    "message": "Προσαρμοσμένο"
+  },
+  "watchPlaceholder": {
+    "message": "τιμή προς παρακολούθηση"
+  },
+  "watchAdd": {
+    "message": "Προσθήκη"
+  },
+  "watchTooShort": {
+    "message": "Πολύ σύντομο για ασφαλή παρακολούθηση (5+ χαρακτήρες)."
+  },
+  "watchRemove": {
+    "message": "Αφαίρεση"
+  },
+  "watchLeaksTitle": {
+    "message": "Πρόσφατες διαρροές που εντοπίστηκαν"
+  },
+  "pinHintTitle": {
+    "message": "Καρφιτσώστε το Zevr Guard στη γραμμή εργαλείων"
+  },
+  "pinHintDesc": {
+    "message": "Κάντε κλικ στο εικονίδιο παζλ επάνω και μετά στην καρφίτσα δίπλα στο Zevr Guard. Η προστασία σας μένει πάντα σε κοινή θέα."
+  },
+  "pinHintGotIt": {
+    "message": "Το κατάλαβα"
+  }
+}

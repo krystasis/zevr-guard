@@ -1,0 +1,912 @@
+{
+  "extName": {
+    "message": "Zevr Guard: reklám- és nyomkövető-blokkoló, malware-védelem"
+  },
+  "extDescription": {
+    "message": "Reklámok, nyomkövetők, malware és phishing blokkolása. Élő térképen látod, kivel beszél a böngésződ. Beállítás nélkül, 100% helyben."
+  },
+  "protectionActive": {
+    "message": "Védelem aktív"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Az első termék"
+  },
+  "heroTagline": {
+    "message": "Nézd meg, kivel beszél a böngésződ."
+  },
+  "heroTaglineAccent": {
+    "message": "A veszélyeseket automatikusan blokkolja."
+  },
+  "heroDescription": {
+    "message": "Valós időben látod, a világ mely részeit éri el a böngésződ. A veszélyes kapcsolatok automatikusan blokkolva vannak."
+  },
+  "ctaOpenGlobe": {
+    "message": "Live Globe megnyitása"
+  },
+  "ctaStartBrowsing": {
+    "message": "Böngészés indítása"
+  },
+  "trustTrackers": {
+    "message": "$N$ nyomkövető-jelzés",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Napi DB-frissítések"
+  },
+  "trust100Local": {
+    "message": "Csak helyi egyeztetés"
+  },
+  "trustNoTelemetry": {
+    "message": "Nincs URL-feltöltés"
+  },
+  "scrollHint": {
+    "message": "Görgess"
+  },
+  "howItWorks": {
+    "message": "Hogyan működik"
+  },
+  "fourLayersTitle": {
+    "message": "Öt védelmi réteg"
+  },
+  "featureLookalikeTitle": {
+    "message": "Elkapja a hasonmás adathalászatot"
+  },
+  "featureLookalikeDesc": {
+    "message": "A valódi márkákat utánzó hamis domaineket — examp1e.com, exаmple.com — az eszközön futó elemzés fogja el, még mielőtt bármilyen tiltólistára kerülnének."
+  },
+  "feature1Title": {
+    "message": "Malware automatikus blokkolása"
+  },
+  "feature1Desc": {
+    "message": "Az ismert malware- és phishing-domainek blokkolva lesznek, mielőtt észrevennéd őket. A fenyegetéslista naponta automatikusan frissül."
+  },
+  "feature2Title": {
+    "message": "Láss minden nyomkövetőt"
+  },
+  "feature2Desc": {
+    "message": "A 115 000+ nyomkövető-jelzést tartalmazó adatbázis azonosítja, mely cégek érik el a böngésződet, milyen gyakran és honnan."
+  },
+  "feature3Title": {
+    "message": "Figyelmeztet a gyanúsra"
+  },
+  "feature3Desc": {
+    "message": "A reklám-, analitikai és fingerprinting-domainek színnel vannak kiemelve. Valós időben látod minden oldal követési sűrűségét."
+  },
+  "feature4Title": {
+    "message": "Helyi egyeztetés. Az URL-jeid sosem távoznak."
+  },
+  "feature4Desc": {
+    "message": "Az egyeztetés teljes egészében a böngésződben fut. Az egyetlen kimenő forgalom a fenyegetés-adatbázis névtelen frissítése a CDN-ünkről — a böngészési előzményeid nem mennek sehová."
+  },
+  "dataSourcesTitle": {
+    "message": "Csendes védelem, ellenőrizhető léptékben."
+  },
+  "dataSourcesSubtitle": {
+    "message": "Számokban"
+  },
+  "dataByNumbers1Value": {
+    "message": "115 000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "jelzés"
+  },
+  "dataByNumbers1Label": {
+    "message": "Nyomkövető-azonosító DB"
+  },
+  "dataByNumbers2Value": {
+    "message": "napi"
+  },
+  "dataByNumbers2Unit": {
+    "message": "frissítés"
+  },
+  "dataByNumbers2Label": {
+    "message": "Automatikus frissítés a CDN-ünkön át"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "ország"
+  },
+  "dataByNumbers3Label": {
+    "message": "Geolokációs lefedettség"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "elküldött URL"
+  },
+  "dataByNumbers4Label": {
+    "message": "A böngészésed nem hagyja el az eszközt"
+  },
+  "languageSwitchLabel": {
+    "message": "Nyelv"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Hálózati átláthatóság, azonnal"
+  },
+  "warningTitle": {
+    "message": "Veszélyes webhely blokkolva"
+  },
+  "warningSubtitle": {
+    "message": "A Zevr Guard védelme alatt"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "A Zevr Guard blokkolta a hozzáférést:"
+  },
+  "warningListHeader": {
+    "message": "Ez a domain ismert malware/phishing adatbázisokban szerepel."
+  },
+  "warningListIntro": {
+    "message": "Az oldal meglátogatása:"
+  },
+  "warningListItem1": {
+    "message": "Malware-t telepíthet az eszközödre"
+  },
+  "warningListItem2": {
+    "message": "Ellophatja a jelszavaidat vagy személyes adataidat"
+  },
+  "warningListItem3": {
+    "message": "Eltérítheti a böngésződet vagy a fiókjaidat"
+  },
+  "warningGoBack": {
+    "message": "Vissza (biztonságos)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Értem a kockázatot"
+  },
+  "warningOverrideDetail": {
+    "message": "Ha mégis tovább akarsz lépni, távolítsd el a domaint a tiltólistáról a Zevr Guard felugró ablakában (blokkolás/feloldás gomb), majd töltsd újra az oldalt."
+  },
+  "warningFooter": {
+    "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
+  },
+  "riskMsgSafe": {
+    "message": "Ez az oldal biztonságos"
+  },
+  "riskMsgTracker": {
+    "message": "Nyomkövetők észlelve"
+  },
+  "riskMsgSuspicious": {
+    "message": "Gyanús forgalom észlelve"
+  },
+  "riskMsgDangerous": {
+    "message": "Veszélyes forgalom észlelve"
+  },
+  "settingsGeneral": {
+    "message": "Általános"
+  },
+  "settingsNotifications": {
+    "message": "Értesítések"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Értesítés veszélyes forgalom észlelésekor"
+  },
+  "settingsBlockCategories": {
+    "message": "Blokkolt kategóriák"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Ismert malware és phishing (ajánlott)"
+  },
+  "settingsAdvertising": {
+    "message": "Hirdetések"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Hirdetési domainek"
+  },
+  "settingsTracking": {
+    "message": "Nyomkövetés"
+  },
+  "settingsTrackingDesc": {
+    "message": "Nyomkövető és analitikai domainek"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Egyéni tiltólista"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Nincsenek blokkolt domainek"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Egyéni engedélyezőlista"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Nincsenek engedélyezett domainek"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Az itt hozzáadott domainek minden blokkolási szabályt megkerülnek, még a malware-t is."
+  },
+  "allowBarThisSite": {
+    "message": "Ez az oldal"
+  },
+  "allowBarAllowed": {
+    "message": "Engedélyezve"
+  },
+  "allowBarAllow": {
+    "message": "Engedélyezés"
+  },
+  "allowBarRevoke": {
+    "message": "Visszavonás"
+  },
+  "allowBarAddTitle": {
+    "message": "Az oldal hozzáadása az engedélyezőlistához (blokkolás megkerülése)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Az oldal eltávolítása az engedélyezőlistáról"
+  },
+  "remove": {
+    "message": "eltávolítás"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "védelem fut"
+  },
+  "popupScanning": {
+    "message": "VIZSGÁLAT..."
+  },
+  "popupNoData": {
+    "message": "Ehhez az oldalhoz még nincs adat."
+  },
+  "popupReloadToMonitor": {
+    "message": "Töltsd újra a lapot a megfigyelés indításához."
+  },
+  "metricDomains": {
+    "message": "domain"
+  },
+  "metricRequests": {
+    "message": "kérés"
+  },
+  "metricBlocked": {
+    "message": "blokkolva"
+  },
+  "todayTrackers": {
+    "message": "Nyomkövetők ma"
+  },
+  "todayBlocked": {
+    "message": "Ma blokkolva"
+  },
+  "todayCompanies": {
+    "message": "Cégek"
+  },
+  "riskScoreLabel": {
+    "message": "kockázati pontszám"
+  },
+  "riskLabelSafe": {
+    "message": "BIZTONSÁGOS"
+  },
+  "riskLabelTracker": {
+    "message": "NYOMKÖVETŐ"
+  },
+  "riskLabelSuspicious": {
+    "message": "GYANÚS"
+  },
+  "riskLabelDangerous": {
+    "message": "VESZÉLYES"
+  },
+  "connectionsCount": {
+    "message": "Kapcsolatok"
+  },
+  "monitoringConnections": {
+    "message": "Kapcsolatok figyelése..."
+  },
+  "noMatchingConnections": {
+    "message": "Nincs egyező kapcsolat."
+  },
+  "backToList": {
+    "message": "Vissza a listához"
+  },
+  "filterAll": {
+    "message": "Mind"
+  },
+  "filterDangerShort": {
+    "message": "Veszély"
+  },
+  "filterSuspicShort": {
+    "message": "Gyanús"
+  },
+  "filterTrackerShort": {
+    "message": "Követő"
+  },
+  "filterSafeShort": {
+    "message": "Biztonságos"
+  },
+  "viewLabel": {
+    "message": "Nézet"
+  },
+  "groupDomains": {
+    "message": "Domainek"
+  },
+  "groupCompanies": {
+    "message": "Cégek"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domain"
+  },
+  "detailCompany": {
+    "message": "Cég"
+  },
+  "detailCategory": {
+    "message": "Kategória"
+  },
+  "detailLocation": {
+    "message": "Hely"
+  },
+  "detailHostedBy": {
+    "message": "Üzemeltető"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Kérések"
+  },
+  "detailFirstSeen": {
+    "message": "Először látva"
+  },
+  "unblockThisDomain": {
+    "message": "Domain feloldása"
+  },
+  "blockThisDomain": {
+    "message": "Domain blokkolása"
+  },
+  "block": {
+    "message": "blokkolás"
+  },
+  "unblock": {
+    "message": "feloldás"
+  },
+  "legendSafe": {
+    "message": "Biztonságos"
+  },
+  "legendTracker": {
+    "message": "Nyomkövető"
+  },
+  "legendSuspicious": {
+    "message": "Gyanús"
+  },
+  "legendDangerous": {
+    "message": "Veszélyes"
+  },
+  "stripTrackers": {
+    "message": "Nyomkövetők"
+  },
+  "stripBlocked": {
+    "message": "Blokkolva"
+  },
+  "stripCompanies": {
+    "message": "Cégek"
+  },
+  "thisPage": {
+    "message": "Ez az oldal"
+  },
+  "backToConnections": {
+    "message": "Vissza a kapcsolatokhoz"
+  },
+  "drillRequests": {
+    "message": "kérés"
+  },
+  "drillDomains": {
+    "message": "domain"
+  },
+  "drillCompanies": {
+    "message": "cég"
+  },
+  "noTrackersOnPage": {
+    "message": "Ezen az oldalon nincsenek nyomkövetők."
+  },
+  "noCompaniesOnPage": {
+    "message": "Ezen az oldalon nincs azonosítható cég."
+  },
+  "nothingBlocked": {
+    "message": "Ezen az oldalon semmi sincs blokkolva."
+  },
+  "watchingMsg": {
+    "message": "A Zevr Guard őrködik — a veszélyes webhelyek automatikusan blokkolva lesznek."
+  },
+  "onThisPage": {
+    "message": "Ezen az oldalon"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ kérés blokkolva ezen az oldalon",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Az automatikusan blokkolt domainek részletei itt nem követhetők"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Blokkolás szüneteltetve"
+  },
+  "pauseBarPause": {
+    "message": "Szünet"
+  },
+  "pauseBarResume": {
+    "message": "Folytatás"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Blokkolás szüneteltetése ezen az oldalon (megjavítja az elromlott oldalakat)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Blokkolás folytatása ezen az oldalon"
+  },
+  "settingsPausedSites": {
+    "message": "Szüneteltetett oldalak"
+  },
+  "shareTitle": {
+    "message": "Vizsgálat megosztása"
+  },
+  "shareTagline": {
+    "message": "Kivel beszél a böngésződ?"
+  },
+  "shareHeadline": {
+    "message": "$C$ cég · $N$ ország",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 A(z) $HOST$ $C$ céggel beszél $N$ országban — a Zevr Guard figyeli és blokkolja",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Kép mentése"
+  },
+  "sharePost": {
+    "message": "Közzététel"
+  },
+  "shareHint": {
+    "message": "A kép a közzétételkor a vágólapra kerül — nyomj Ctrl+V-t a szerkesztőben a csatoláshoz."
+  },
+  "reportTitle": {
+    "message": "Védelmi jelentés"
+  },
+  "reportSubtitle": {
+    "message": "Heti védelmi jelentés"
+  },
+  "reportBlocked": {
+    "message": "Blokkolva"
+  },
+  "reportConnections": {
+    "message": "Kapcsolatok"
+  },
+  "reportTrackers": {
+    "message": "Nyomkövetők"
+  },
+  "reportDangerous": {
+    "message": "Veszélyes"
+  },
+  "reportDailyBlocked": {
+    "message": "Blokkolás naponta"
+  },
+  "reportTopCompanies": {
+    "message": "A leginkább figyelő cégek"
+  },
+  "reportTopBlocked": {
+    "message": "A leggyakrabban blokkolt domainek"
+  },
+  "reportNoData": {
+    "message": "Még nincs adat — böngéssz előbb egy kicsit."
+  },
+  "reportFooter": {
+    "message": "Minden adat helyben, ezen az eszközön tárolódik."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ fenyegetés blokkolva!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "A Zevr Guard csendben védett téged. Ha hasznos, egy rövid értékelés másoknak is segít megtalálni."
+  },
+  "reviewPromptRate": {
+    "message": "Zevr Guard értékelése ★"
+  },
+  "reviewPromptLater": {
+    "message": "Később"
+  },
+  "riskExplainDangerous": {
+    "message": "Ez a domain ismert malware/phishing adatbázisokban szerepel. Megpróbálhatja ellopni az adataidat vagy malware-t telepíteni."
+  },
+  "riskExplainSuspicious": {
+    "message": "Ezt a domaint hirdetésre vagy nyomkövetésre használják. Adatokat gyűjt a böngészési szokásaidról."
+  },
+  "riskExplainTracker": {
+    "message": "Ezt a domaint analitikára vagy tartalomkézbesítésre használják. Gyűjthet némi használati adatot."
+  },
+  "riskExplainSafe": {
+    "message": "Ez a domain biztonságosnak tűnik. Nem észlelhető ismert nyomkövetés vagy rosszindulatú tevékenység."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Live Globe oldalpanel megnyitása"
+  },
+  "settingsTitle": {
+    "message": "Beállítások"
+  },
+  "unpinTitle": {
+    "message": "Kattints újra a rögzítés feloldásához"
+  },
+  "youLabel": {
+    "message": "TE"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Veszélyes kapcsolat észlelve"
+  },
+  "dangerNotifMessage": {
+    "message": "A(z) $DOMAIN$ ismert malware/phishing domain.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Ezenkívül tartalmazza"
+  },
+  "welcomeAlsoShare": {
+    "message": "Megosztókártya 1 kattintással"
+  },
+  "welcomeAlsoReport": {
+    "message": "Heti védelmi jelentés"
+  },
+  "welcomeAlsoPause": {
+    "message": "Oldalankénti szünet"
+  },
+  "welcomeAlsoLangs": {
+    "message": "$N$ nyelven elérhető",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Feltételezett adathalászat blokkolva"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Nem azonos ezzel:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Ez a cím a(z) $BRAND$ oldalát utánozza, de nem az igazi webhely.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "A hasonmás oldalakat jellemzően erre használják:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Jelszavad vagy belépőkódjaid ellopása"
+  },
+  "warningLookalikeItem2": {
+    "message": "Bankkártya- vagy banki adatok megszerzése"
+  },
+  "warningLookalikeItem3": {
+    "message": "Az igazi szolgáltatásnak álcázott malware terjesztése"
+  },
+  "warningLookalikeDetected": {
+    "message": "Az eszközön futó hasonmás-elemzés észlelte. Az URL-ed soha nem hagyta el ezt a böngészőt."
+  },
+  "warningProceedAnyway": {
+    "message": "Folytatás mégis (nem ajánlott)"
+  },
+  "metricTrackers": {
+    "message": "nyomkövető"
+  },
+  "metricCompanies": {
+    "message": "cég"
+  },
+  "weeklyShareTitle": {
+    "message": "Oszd meg a hetedet"
+  },
+  "weeklyCardTagline": {
+    "message": "A hetem a nyomkövetésben"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ kérés blokkolva ezen a héten",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Legaktívabb figyelők"
+  },
+  "weeklyTweet": {
+    "message": "🛡 A böngészőm $C$ céggel beszélt ezen a héten — a Zevr Guard $N$ nyomkövető kérést blokkolt. Minden az eszközön.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Elkészült a heti védelmi jelentésed"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ kérés blokkolva az elmúlt 7 napban. Nézd meg, ki figyelt téged.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Jelentés megtekintése"
+  },
+  "pwWarnDismiss": {
+    "message": "Bezárás"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Ez az oldal nincs titkosítva"
+  },
+  "pwWarnHttpMsg": {
+    "message": "A kapcsolat sima HTTP — az itt beírt jelszó útközben elolvasható."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Feltételezett hasonmás oldalon vagy"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Korábban a továbblépést választottad erre az oldalra. Az itt beírt jelszó csalóhoz kerülhet."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Első jelszó ezen az oldalon"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Itt még soha nem jelentkeztél be. Először ellenőrizd a címsort."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Jelszó-figyelmeztetések"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Figyelmeztetés, mielőtt jelszót írnál be kockázatos oldalakon"
+  },
+  "settingsBlockedCountries": {
+    "message": "Blokkolt országok"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Nincs. Nyisd meg egy kapcsolat részleteit az országa blokkolásához."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "A domainek blokkolva lesznek, amint forgalom érkezik ezekből az országokból."
+  },
+  "blockCountry": {
+    "message": "Minden forgalom blokkolása innen: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "$COUNTRY$ feloldása",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "A saját országszabályod blokkolta"
+  },
+  "warningCountryHeader": {
+    "message": "Ez a webhely innen kommunikál: $COUNTRY$ — ezt az országot te blokkoltad.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "A Zevr Guardban bekapcsoltad az országblokkolást ehhez a régióhoz. Az eszközöddel semmi baj — a saját szabályod teszi a dolgát."
+  },
+  "warningCountryUnblock": {
+    "message": "$COUNTRY$ feloldása",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Feloldva. Lépj vissza és töltsd újra az oldalt."
+  },
+  "reportPhishingButton": {
+    "message": "Jelentés adathalászatként — védd a többi felhasználót"
+  },
+  "reportPhishingConfirm": {
+    "message": "Elküldöd ezt a domaint (és semmi mást) a Zevrnek ellenőrzésre?"
+  },
+  "reportPhishingSend": {
+    "message": "Jelentés küldése"
+  },
+  "reportPhishingCancel": {
+    "message": "Mégse"
+  },
+  "reportPhishingDone": {
+    "message": "Jelentve. Köszönjük, hogy védesz másokat!"
+  },
+  "reportPhishingError": {
+    "message": "A jelentést nem sikerült elküldeni. Próbáld újra később."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Országblokkolás egy érintéssel"
+  },
+  "welcomeAlsoPw": {
+    "message": "Jelszóbeviteli őr"
+  },
+  "groupCountries": {
+    "message": "Országok"
+  },
+  "countryUnknown": {
+    "message": "Ismeretlen hely"
+  },
+  "connBlockedTag": {
+    "message": "blokkolva"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Blokkolás ezen az eszközön is"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Jelentve és blokkolva. Köszönjük, hogy védesz másokat!"
+  },
+  "mapBlockHint": {
+    "message": "Érints meg egy pontot az országa blokkolásához"
+  },
+  "warningFramedNotice": {
+    "message": "Ez a biztonsági oldal nem jeleníthető meg másik webhelyen belül. Nyisd meg közvetlenül."
+  },
+  "leakTitle": {
+    "message": "Az adataid éppen most lettek elküldve"
+  },
+  "leakBlock": {
+    "message": "$HOST$ blokkolása",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ el lett küldve ide: $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "az e-mail-címed"
+  },
+  "leakKind_phone": {
+    "message": "a telefonszámod"
+  },
+  "leakKind_custom": {
+    "message": "az adataid"
+  },
+  "watchTitle": {
+    "message": "Figyeld az adataidat"
+  },
+  "watchDesc": {
+    "message": "Figyelmeztet, ha az e-mailed, telefonszámod vagy bármely hozzáadott érték másik oldalra kerül — akár hashelve is. Minden egyeztetés az eszközödön marad."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Egyéni"
+  },
+  "watchPlaceholder": {
+    "message": "figyelendő érték"
+  },
+  "watchAdd": {
+    "message": "Hozzáadás"
+  },
+  "watchTooShort": {
+    "message": "Túl rövid a biztonságos figyeléshez (5+ karakter)."
+  },
+  "watchRemove": {
+    "message": "Eltávolítás"
+  },
+  "watchLeaksTitle": {
+    "message": "Legutóbb elfogott szivárgások"
+  },
+  "pinHintTitle": {
+    "message": "Rögzítsd a Zevr Guardot az eszköztárra"
+  },
+  "pinHintDesc": {
+    "message": "Kattints fent a puzzle ikonra, majd a Zevr Guard melletti gombostűre. A védelmed így mindig szem előtt marad."
+  },
+  "pinHintGotIt": {
+    "message": "Értem"
+  }
+}

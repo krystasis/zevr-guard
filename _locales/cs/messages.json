@@ -1,0 +1,912 @@
+{
+  "extName": {
+    "message": "Zevr Guard: blokování reklam, trackerů a malwaru"
+  },
+  "extDescription": {
+    "message": "Blokuje reklamy, trackery, malware i phishing. Na živé mapě světa uvidíte, s kým prohlížeč komunikuje. Bez nastavení, 100% lokálně."
+  },
+  "protectionActive": {
+    "message": "Ochrana aktivní"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "První produkt"
+  },
+  "heroTagline": {
+    "message": "Podívejte se, s kým váš prohlížeč mluví."
+  },
+  "heroTaglineAccent": {
+    "message": "Ty nebezpečné automaticky zablokuje."
+  },
+  "heroDescription": {
+    "message": "Sledujte v reálném čase, do kterých částí světa se váš prohlížeč připojuje. Nebezpečná spojení jsou blokována automaticky."
+  },
+  "ctaOpenGlobe": {
+    "message": "Otevřít Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "Začít prohlížet"
+  },
+  "trustTrackers": {
+    "message": "$N$ signálů trackerů",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Denní aktualizace DB"
+  },
+  "trust100Local": {
+    "message": "Porovnávání jen lokálně"
+  },
+  "trustNoTelemetry": {
+    "message": "Žádné odesílání URL"
+  },
+  "scrollHint": {
+    "message": "Posunout"
+  },
+  "howItWorks": {
+    "message": "Jak to funguje"
+  },
+  "fourLayersTitle": {
+    "message": "Pět vrstev ochrany"
+  },
+  "featureLookalikeTitle": {
+    "message": "Odhalí napodobené domény"
+  },
+  "featureLookalikeDesc": {
+    "message": "Falešné domény napodobující skutečné značky — examp1e.com, exаmple.com — zachytí analýza přímo v zařízení, ještě než se dostanou na jakýkoli blokační seznam."
+  },
+  "feature1Title": {
+    "message": "Automatické blokování malwaru"
+  },
+  "feature1Desc": {
+    "message": "Známé malwarové a phishingové domény jsou zablokovány dřív, než si jich všimnete. Seznam hrozeb se automaticky obnovuje každý den."
+  },
+  "feature2Title": {
+    "message": "Uvidíte každý tracker"
+  },
+  "feature2Desc": {
+    "message": "Databáze s více než 115 000 signály trackerů určí, které firmy se k vašemu prohlížeči dostávají, jak často a odkud."
+  },
+  "feature3Title": {
+    "message": "Varování u podezřelých"
+  },
+  "feature3Desc": {
+    "message": "Reklamní, analytické a fingerprintingové domény jsou barevně zvýrazněny. Sledujte hustotu sledování každé stránky v reálném čase."
+  },
+  "feature4Title": {
+    "message": "Lokální porovnávání. Vaše URL nikam neodcházejí."
+  },
+  "feature4Desc": {
+    "message": "Porovnávání běží celé ve vašem prohlížeči. Jediný odchozí provoz jsou anonymní aktualizace databáze hrozeb z našeho CDN — historie prohlížení nikam neputuje."
+  },
+  "dataSourcesTitle": {
+    "message": "Tichá obrana v ověřitelném měřítku."
+  },
+  "dataSourcesSubtitle": {
+    "message": "V číslech"
+  },
+  "dataByNumbers1Value": {
+    "message": "115 000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "signálů"
+  },
+  "dataByNumbers1Label": {
+    "message": "DB identifikace trackerů"
+  },
+  "dataByNumbers2Value": {
+    "message": "denně"
+  },
+  "dataByNumbers2Unit": {
+    "message": "aktualizace"
+  },
+  "dataByNumbers2Label": {
+    "message": "Automatická obnova přes naše CDN"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "zemí"
+  },
+  "dataByNumbers3Label": {
+    "message": "Pokrytí geolokace"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "odeslaných URL"
+  },
+  "dataByNumbers4Label": {
+    "message": "Vaše prohlížení neopouští zařízení"
+  },
+  "languageSwitchLabel": {
+    "message": "Jazyk"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Přehled o síti, okamžitě"
+  },
+  "warningTitle": {
+    "message": "Nebezpečný web zablokován"
+  },
+  "warningSubtitle": {
+    "message": "Chráněno Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard zablokoval přístup na:"
+  },
+  "warningListHeader": {
+    "message": "Tato doména je uvedena ve známých databázích malwaru/phishingu."
+  },
+  "warningListIntro": {
+    "message": "Návštěva tohoto webu může:"
+  },
+  "warningListItem1": {
+    "message": "Nainstalovat do zařízení malware"
+  },
+  "warningListItem2": {
+    "message": "Ukrást vaše hesla nebo osobní údaje"
+  },
+  "warningListItem3": {
+    "message": "Ovládnout váš prohlížeč nebo účty"
+  },
+  "warningGoBack": {
+    "message": "Zpět (bezpečné)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Rozumím riziku"
+  },
+  "warningOverrideDetail": {
+    "message": "Chcete-li přesto pokračovat, odeberte doménu z blokačního seznamu ve vyskakovacím okně Zevr Guard (tlačítko blokovat/odblokovat) a stránku znovu načtěte."
+  },
+  "warningFooter": {
+    "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
+  },
+  "riskMsgSafe": {
+    "message": "Tato stránka je bezpečná"
+  },
+  "riskMsgTracker": {
+    "message": "Zjištěny trackery"
+  },
+  "riskMsgSuspicious": {
+    "message": "Zjištěn podezřelý provoz"
+  },
+  "riskMsgDangerous": {
+    "message": "Zjištěn nebezpečný provoz"
+  },
+  "settingsGeneral": {
+    "message": "Obecné"
+  },
+  "settingsNotifications": {
+    "message": "Oznámení"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Upozornit při zjištění nebezpečného provozu"
+  },
+  "settingsBlockCategories": {
+    "message": "Blokované kategorie"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Známý malware a phishing (doporučeno)"
+  },
+  "settingsAdvertising": {
+    "message": "Reklama"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Reklamní domény"
+  },
+  "settingsTracking": {
+    "message": "Sledování"
+  },
+  "settingsTrackingDesc": {
+    "message": "Sledovací a analytické domény"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Vlastní blokační seznam"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Žádné blokované domény"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 doména"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domén",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Vlastní seznam povolených"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Žádné povolené domény"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 doména"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domén",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Domény přidané sem obcházejí všechna pravidla blokování, včetně malwaru."
+  },
+  "allowBarThisSite": {
+    "message": "Tento web"
+  },
+  "allowBarAllowed": {
+    "message": "Povoleno"
+  },
+  "allowBarAllow": {
+    "message": "Povolit"
+  },
+  "allowBarRevoke": {
+    "message": "Zrušit"
+  },
+  "allowBarAddTitle": {
+    "message": "Přidat tento web do seznamu povolených (obejít blokování)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Odebrat tento web ze seznamu povolených"
+  },
+  "remove": {
+    "message": "odebrat"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "ochrana běží"
+  },
+  "popupScanning": {
+    "message": "SKENUJI..."
+  },
+  "popupNoData": {
+    "message": "Pro tuto stránku zatím nejsou data."
+  },
+  "popupReloadToMonitor": {
+    "message": "Znovu načtěte kartu a spusťte sledování."
+  },
+  "metricDomains": {
+    "message": "domény"
+  },
+  "metricRequests": {
+    "message": "požadavky"
+  },
+  "metricBlocked": {
+    "message": "blokováno"
+  },
+  "todayTrackers": {
+    "message": "Trackery dnes"
+  },
+  "todayBlocked": {
+    "message": "Zablokováno dnes"
+  },
+  "todayCompanies": {
+    "message": "Firmy"
+  },
+  "riskScoreLabel": {
+    "message": "skóre rizika"
+  },
+  "riskLabelSafe": {
+    "message": "BEZPEČNÉ"
+  },
+  "riskLabelTracker": {
+    "message": "TRACKER"
+  },
+  "riskLabelSuspicious": {
+    "message": "PODEZŘELÉ"
+  },
+  "riskLabelDangerous": {
+    "message": "NEBEZPEČNÉ"
+  },
+  "connectionsCount": {
+    "message": "Spojení"
+  },
+  "monitoringConnections": {
+    "message": "Sleduji spojení..."
+  },
+  "noMatchingConnections": {
+    "message": "Žádná odpovídající spojení."
+  },
+  "backToList": {
+    "message": "Zpět na seznam"
+  },
+  "filterAll": {
+    "message": "Vše"
+  },
+  "filterDangerShort": {
+    "message": "Nebezpečí"
+  },
+  "filterSuspicShort": {
+    "message": "Podezřelé"
+  },
+  "filterTrackerShort": {
+    "message": "Tracker"
+  },
+  "filterSafeShort": {
+    "message": "Bezpečné"
+  },
+  "viewLabel": {
+    "message": "Zobrazení"
+  },
+  "groupDomains": {
+    "message": "Domény"
+  },
+  "groupCompanies": {
+    "message": "Firmy"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domén",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 doména"
+  },
+  "detailCompany": {
+    "message": "Firma"
+  },
+  "detailCategory": {
+    "message": "Kategorie"
+  },
+  "detailLocation": {
+    "message": "Poloha"
+  },
+  "detailHostedBy": {
+    "message": "Hostováno u"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Požadavky"
+  },
+  "detailFirstSeen": {
+    "message": "Poprvé spatřeno"
+  },
+  "unblockThisDomain": {
+    "message": "Odblokovat tuto doménu"
+  },
+  "blockThisDomain": {
+    "message": "Blokovat tuto doménu"
+  },
+  "block": {
+    "message": "blokovat"
+  },
+  "unblock": {
+    "message": "odblokovat"
+  },
+  "legendSafe": {
+    "message": "Bezpečné"
+  },
+  "legendTracker": {
+    "message": "Tracker"
+  },
+  "legendSuspicious": {
+    "message": "Podezřelé"
+  },
+  "legendDangerous": {
+    "message": "Nebezpečné"
+  },
+  "stripTrackers": {
+    "message": "Trackery"
+  },
+  "stripBlocked": {
+    "message": "Blokováno"
+  },
+  "stripCompanies": {
+    "message": "Firmy"
+  },
+  "thisPage": {
+    "message": "Tato stránka"
+  },
+  "backToConnections": {
+    "message": "Zpět na spojení"
+  },
+  "drillRequests": {
+    "message": "požadavků"
+  },
+  "drillDomains": {
+    "message": "domén"
+  },
+  "drillCompanies": {
+    "message": "firem"
+  },
+  "noTrackersOnPage": {
+    "message": "Na této stránce nejsou žádné trackery."
+  },
+  "noCompaniesOnPage": {
+    "message": "Na této stránce nejsou žádné identifikovatelné firmy."
+  },
+  "nothingBlocked": {
+    "message": "Na této stránce nebylo nic zablokováno."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard hlídá — nebezpečné weby budou automaticky blokovány."
+  },
+  "onThisPage": {
+    "message": "Na této stránce"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ požadavků zablokováno na této stránce",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Podrobnosti automaticky blokovaných domén se zde nesledují"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Blokování pozastaveno"
+  },
+  "pauseBarPause": {
+    "message": "Pozastavit"
+  },
+  "pauseBarResume": {
+    "message": "Obnovit"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Pozastavit blokování na tomto webu (opraví rozbité weby)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Obnovit blokování na tomto webu"
+  },
+  "settingsPausedSites": {
+    "message": "Pozastavené weby"
+  },
+  "shareTitle": {
+    "message": "Sdílet tento sken"
+  },
+  "shareTagline": {
+    "message": "S kým mluví váš prohlížeč?"
+  },
+  "shareHeadline": {
+    "message": "$C$ firem · $N$ zemí",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ mluví s $C$ firmami v $N$ zemích — hlídáno a blokováno Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Uložit obrázek"
+  },
+  "sharePost": {
+    "message": "Přidat příspěvek"
+  },
+  "shareHint": {
+    "message": "Při odeslání se obrázek zkopíruje — v editoru jej vložíte stiskem Ctrl+V."
+  },
+  "reportTitle": {
+    "message": "Zpráva o ochraně"
+  },
+  "reportSubtitle": {
+    "message": "Týdenní zpráva o ochraně"
+  },
+  "reportBlocked": {
+    "message": "Blokováno"
+  },
+  "reportConnections": {
+    "message": "Spojení"
+  },
+  "reportTrackers": {
+    "message": "Trackery"
+  },
+  "reportDangerous": {
+    "message": "Nebezpečné"
+  },
+  "reportDailyBlocked": {
+    "message": "Blokováno za den"
+  },
+  "reportTopCompanies": {
+    "message": "Firmy, které vás sledovaly nejvíc"
+  },
+  "reportTopBlocked": {
+    "message": "Nejčastěji blokované domény"
+  },
+  "reportNoData": {
+    "message": "Zatím žádná data — nejdřív chvíli prohlížejte."
+  },
+  "reportFooter": {
+    "message": "Všechna data jsou uložena lokálně v tomto zařízení."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 Zablokováno $N$ hrozeb!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard vás tiše chránil. Pokud vám pomáhá, krátká recenze pomůže ostatním jej objevit."
+  },
+  "reviewPromptRate": {
+    "message": "Ohodnotit Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Později"
+  },
+  "riskExplainDangerous": {
+    "message": "Tato doména je ve známých databázích malwaru/phishingu. Může se pokusit ukrást vaše data nebo nainstalovat malware."
+  },
+  "riskExplainSuspicious": {
+    "message": "Tato doména slouží k reklamě nebo sledování. Sbírá data o vašem chování při prohlížení."
+  },
+  "riskExplainTracker": {
+    "message": "Tato doména slouží k analytice nebo doručování obsahu. Může sbírat některá data o používání."
+  },
+  "riskExplainSafe": {
+    "message": "Tato doména se jeví jako bezpečná. Nebylo zjištěno žádné známé sledování ani škodlivá aktivita."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Otevřít boční panel Live Globe"
+  },
+  "settingsTitle": {
+    "message": "Nastavení"
+  },
+  "unpinTitle": {
+    "message": "Kliknutím znovu odepnete"
+  },
+  "youLabel": {
+    "message": "VY"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Zjištěno nebezpečné spojení"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ je známá malwarová/phishingová doména.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Navíc obsahuje"
+  },
+  "welcomeAlsoShare": {
+    "message": "Sdílecí karta na 1 kliknutí"
+  },
+  "welcomeAlsoReport": {
+    "message": "Týdenní zpráva o ochraně"
+  },
+  "welcomeAlsoPause": {
+    "message": "Pozastavení pro jednotlivé weby"
+  },
+  "welcomeAlsoLangs": {
+    "message": "K dispozici v $N$ jazycích",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Podezřelý phishing zablokován"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Není totéž jako:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Tato adresa napodobuje $BRAND$, ale není to skutečný web.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Napodobené weby se obvykle používají k:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Krádeži hesla nebo přihlašovacích kódů"
+  },
+  "warningLookalikeItem2": {
+    "message": "Získání údajů o platební kartě či bankovnictví"
+  },
+  "warningLookalikeItem3": {
+    "message": "Šíření malwaru maskovaného za skutečnou službu"
+  },
+  "warningLookalikeDetected": {
+    "message": "Zjištěno analýzou napodobených domén v zařízení. Vaše URL nikdy neopustila tento prohlížeč."
+  },
+  "warningProceedAnyway": {
+    "message": "Přesto pokračovat (nedoporučeno)"
+  },
+  "metricTrackers": {
+    "message": "trackery"
+  },
+  "metricCompanies": {
+    "message": "firmy"
+  },
+  "weeklyShareTitle": {
+    "message": "Sdílejte svůj týden"
+  },
+  "weeklyCardTagline": {
+    "message": "Můj týden ve sledování"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ požadavků zablokováno tento týden",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Největší pozorovatelé"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Můj prohlížeč tento týden mluvil s $C$ firmami — Zevr Guard zablokoval $N$ sledovacích požadavků. Vše v zařízení.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Vaše týdenní zpráva o ochraně je připravena"
+  },
+  "weeklyNotifMessage": {
+    "message": "Za posledních 7 dní bylo zablokováno $N$ požadavků. Podívejte se, kdo vás sledoval.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Zobrazit zprávu"
+  },
+  "pwWarnDismiss": {
+    "message": "Zavřít"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Tato stránka není šifrovaná"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Spojení je nešifrované HTTP — heslo zde napsané lze cestou přečíst."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Jste na webu podezřelém z napodobování"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Dříve jste se rozhodli na tento web pokračovat. Heslo zde napsané může skončit u podvodníka."
+  },
+  "pwWarnFirstTitle": {
+    "message": "První heslo na tomto webu"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Nikdy jste se zde nepřihlašovali. Nejprve zkontrolujte adresní řádek."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Varování u hesel"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Varovat před zadáním hesla na rizikových stránkách"
+  },
+  "settingsBlockedCountries": {
+    "message": "Blokované země"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Žádné. Otevřete detail spojení a zablokujte jeho zemi."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domény se blokují, jakmile je zaznamenán provoz z těchto zemí."
+  },
+  "blockCountry": {
+    "message": "Blokovat veškerý provoz z: $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Odblokovat $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Zablokováno vaším pravidlem pro země"
+  },
+  "warningCountryHeader": {
+    "message": "Tento web komunikuje z: $COUNTRY$ — zemi jste se rozhodli blokovat.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Pro tento region jste v Zevr Guard zapnuli blokování zemí. Vaše zařízení je v pořádku — jen funguje vaše vlastní pravidlo."
+  },
+  "warningCountryUnblock": {
+    "message": "Odblokovat $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Odblokováno. Vraťte se a znovu načtěte stránku."
+  },
+  "reportPhishingButton": {
+    "message": "Nahlásit jako phishing — chraňte ostatní uživatele"
+  },
+  "reportPhishingConfirm": {
+    "message": "Odeslat tuto doménu (a nic jiného) Zevru ke kontrole?"
+  },
+  "reportPhishingSend": {
+    "message": "Odeslat hlášení"
+  },
+  "reportPhishingCancel": {
+    "message": "Zrušit"
+  },
+  "reportPhishingDone": {
+    "message": "Nahlášeno. Děkujeme, že chráníte ostatní uživatele!"
+  },
+  "reportPhishingError": {
+    "message": "Hlášení se nepodařilo odeslat. Zkuste to prosím později."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Blokování zemí jedním klepnutím"
+  },
+  "welcomeAlsoPw": {
+    "message": "Hlídání zadávání hesel"
+  },
+  "groupCountries": {
+    "message": "Země"
+  },
+  "countryUnknown": {
+    "message": "Neznámá poloha"
+  },
+  "connBlockedTag": {
+    "message": "blokováno"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Zablokovat také na tomto zařízení"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Nahlášeno a zablokováno. Děkujeme, že chráníte ostatní uživatele!"
+  },
+  "mapBlockHint": {
+    "message": "Klepnutím na bod zablokujete jeho zemi"
+  },
+  "warningFramedNotice": {
+    "message": "Tuto bezpečnostní stránku nelze zobrazit uvnitř jiného webu. Otevřete ji přímo."
+  },
+  "leakTitle": {
+    "message": "Vaše údaje byly právě odeslány"
+  },
+  "leakBlock": {
+    "message": "Blokovat $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ – odesláno na $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "váš e-mail"
+  },
+  "leakKind_phone": {
+    "message": "vaše telefonní číslo"
+  },
+  "leakKind_custom": {
+    "message": "vaše údaje"
+  },
+  "watchTitle": {
+    "message": "Hlídejte své údaje"
+  },
+  "watchDesc": {
+    "message": "Upozorní vás, když se váš e-mail, telefon nebo jakákoli přidaná hodnota odešle na jiný web — i v zahashované podobě. Veškeré porovnávání zůstává ve vašem zařízení."
+  },
+  "watchKindEmail": {
+    "message": "E-mail"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Vlastní"
+  },
+  "watchPlaceholder": {
+    "message": "hodnota ke hlídání"
+  },
+  "watchAdd": {
+    "message": "Přidat"
+  },
+  "watchTooShort": {
+    "message": "Příliš krátké pro bezpečné hlídání (5+ znaků)."
+  },
+  "watchRemove": {
+    "message": "Odebrat"
+  },
+  "watchLeaksTitle": {
+    "message": "Nedávno zachycené úniky"
+  },
+  "pinHintTitle": {
+    "message": "Připněte si Zevr Guard na lištu"
+  },
+  "pinHintDesc": {
+    "message": "Klikněte nahoře na ikonu puzzle a poté na špendlík vedle Zevr Guard. Stav ochrany budete mít stále na očích."
+  },
+  "pinHintGotIt": {
+    "message": "Rozumím"
+  }
+}

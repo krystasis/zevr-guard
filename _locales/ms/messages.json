@@ -1,0 +1,912 @@
+{
+  "extName": {
+    "message": "Zevr Guard: Penyekat Iklan, Penjejak & Perlindungan Malware"
+  },
+  "extDescription": {
+    "message": "Sekat iklan, penjejak, malware & phishing. Lihat siapa yang dihubungi pelayar anda di peta dunia. Tanpa persediaan, 100% setempat."
+  },
+  "protectionActive": {
+    "message": "Perlindungan aktif"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "Produk pertama"
+  },
+  "heroTagline": {
+    "message": "Lihat dengan siapa pelayar anda bercakap."
+  },
+  "heroTaglineAccent": {
+    "message": "Sekat yang berbahaya secara automatik."
+  },
+  "heroDescription": {
+    "message": "Lihat bahagian dunia mana yang dicapai pelayar anda dalam masa nyata. Sambungan berbahaya disekat secara automatik."
+  },
+  "ctaOpenGlobe": {
+    "message": "Buka Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "Mula melayari"
+  },
+  "trustTrackers": {
+    "message": "$N$ isyarat penjejak",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "Kemas kini DB harian"
+  },
+  "trust100Local": {
+    "message": "Padanan setempat sahaja"
+  },
+  "trustNoTelemetry": {
+    "message": "Tiada muat naik URL"
+  },
+  "scrollHint": {
+    "message": "Tatal"
+  },
+  "howItWorks": {
+    "message": "Cara ia berfungsi"
+  },
+  "fourLayersTitle": {
+    "message": "Lima lapisan perlindungan"
+  },
+  "featureLookalikeTitle": {
+    "message": "Tangkap phishing domain tiruan"
+  },
+  "featureLookalikeDesc": {
+    "message": "Domain palsu yang meniru jenama sebenar — examp1e.com, exаmple.com — ditangkap oleh analisis pada peranti, sebelum ia masuk ke mana-mana senarai sekatan."
+  },
+  "feature1Title": {
+    "message": "Sekat malware secara automatik"
+  },
+  "feature1Desc": {
+    "message": "Domain malware dan phishing yang diketahui disekat sebelum anda perasan. Senarai ancaman dikemas kini secara automatik setiap hari."
+  },
+  "feature2Title": {
+    "message": "Lihat setiap penjejak"
+  },
+  "feature2Desc": {
+    "message": "Pangkalan data 115,000+ isyarat penjejak mengenal pasti syarikat mana yang mencapai pelayar anda, berapa kerap, dan dari mana."
+  },
+  "feature3Title": {
+    "message": "Amaran jika mencurigakan"
+  },
+  "feature3Desc": {
+    "message": "Domain iklan, analitik dan pengecapan jari diserlahkan mengikut warna. Lihat kepadatan penjejakan setiap halaman dalam masa nyata."
+  },
+  "feature4Title": {
+    "message": "Padanan setempat. URL anda tidak keluar."
+  },
+  "feature4Desc": {
+    "message": "Padanan berjalan sepenuhnya dalam pelayar anda. Satu-satunya trafik keluar ialah kemas kini DB ancaman tanpa nama dari CDN kami — sejarah pelayaran anda tidak ke mana-mana."
+  },
+  "dataSourcesTitle": {
+    "message": "Pertahanan senyap, pada skala yang boleh disahkan."
+  },
+  "dataSourcesSubtitle": {
+    "message": "Mengikut angka"
+  },
+  "dataByNumbers1Value": {
+    "message": "115,000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "isyarat"
+  },
+  "dataByNumbers1Label": {
+    "message": "DB pengenalan penjejak"
+  },
+  "dataByNumbers2Value": {
+    "message": "harian"
+  },
+  "dataByNumbers2Unit": {
+    "message": "kemas kini"
+  },
+  "dataByNumbers2Label": {
+    "message": "Muat semula automatik melalui CDN kami"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "negara"
+  },
+  "dataByNumbers3Label": {
+    "message": "Liputan geolokasi"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL dihantar"
+  },
+  "dataByNumbers4Label": {
+    "message": "Pelayaran anda tidak keluar dari peranti"
+  },
+  "languageSwitchLabel": {
+    "message": "Bahasa"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "Keterlihatan rangkaian, serta-merta"
+  },
+  "warningTitle": {
+    "message": "Laman Berbahaya Disekat"
+  },
+  "warningSubtitle": {
+    "message": "Dilindungi oleh Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard menyekat akses ke:"
+  },
+  "warningListHeader": {
+    "message": "Domain ini tersenarai dalam pangkalan data malware/phishing yang diketahui."
+  },
+  "warningListIntro": {
+    "message": "Melawat laman ini mungkin:"
+  },
+  "warningListItem1": {
+    "message": "Memasang malware pada peranti anda"
+  },
+  "warningListItem2": {
+    "message": "Mencuri kata laluan atau data peribadi anda"
+  },
+  "warningListItem3": {
+    "message": "Merampas pelayar atau akaun anda"
+  },
+  "warningGoBack": {
+    "message": "Kembali (Selamat)"
+  },
+  "warningUnderstandRisk": {
+    "message": "Saya faham risikonya"
+  },
+  "warningOverrideDetail": {
+    "message": "Untuk meneruskan juga, keluarkan domain ini daripada senarai sekatan melalui popup Zevr Guard (butang sekat/nyahsekat), kemudian muat semula."
+  },
+  "warningFooter": {
+    "message": "Dilindungi oleh Zevr Guard · Pelayaran selamat untuk semua"
+  },
+  "riskMsgSafe": {
+    "message": "Halaman ini selamat"
+  },
+  "riskMsgTracker": {
+    "message": "Penjejak dikesan"
+  },
+  "riskMsgSuspicious": {
+    "message": "Trafik mencurigakan dikesan"
+  },
+  "riskMsgDangerous": {
+    "message": "Trafik berbahaya dikesan"
+  },
+  "settingsGeneral": {
+    "message": "Umum"
+  },
+  "settingsNotifications": {
+    "message": "Pemberitahuan"
+  },
+  "settingsNotificationsDesc": {
+    "message": "Beritahu apabila trafik berbahaya dikesan"
+  },
+  "settingsBlockCategories": {
+    "message": "Kategori sekatan"
+  },
+  "settingsMalware": {
+    "message": "Malware / Phishing"
+  },
+  "settingsMalwareDesc": {
+    "message": "Malware & phishing yang diketahui (disyorkan)"
+  },
+  "settingsAdvertising": {
+    "message": "Pengiklanan"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "Domain pengiklanan"
+  },
+  "settingsTracking": {
+    "message": "Penjejakan"
+  },
+  "settingsTrackingDesc": {
+    "message": "Domain penjejakan & analitik"
+  },
+  "settingsCustomBlocklist": {
+    "message": "Senarai sekatan tersuai"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "Tiada domain disekat"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "Senarai kebenaran tersuai"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "Tiada domain dibenarkan"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 domain"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "Domain yang ditambah di sini memintas semua peraturan sekatan, termasuk malware."
+  },
+  "allowBarThisSite": {
+    "message": "Laman ini"
+  },
+  "allowBarAllowed": {
+    "message": "Dibenarkan"
+  },
+  "allowBarAllow": {
+    "message": "Benarkan"
+  },
+  "allowBarRevoke": {
+    "message": "Tarik balik"
+  },
+  "allowBarAddTitle": {
+    "message": "Tambah laman ini ke senarai kebenaran (pintas sekatan)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "Keluarkan laman ini daripada senarai kebenaran"
+  },
+  "remove": {
+    "message": "keluarkan"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "perlindungan aktif"
+  },
+  "popupScanning": {
+    "message": "MENGIMBAS..."
+  },
+  "popupNoData": {
+    "message": "Belum ada data untuk halaman ini."
+  },
+  "popupReloadToMonitor": {
+    "message": "Muat semula tab untuk mula memantau."
+  },
+  "metricDomains": {
+    "message": "domain"
+  },
+  "metricRequests": {
+    "message": "permintaan"
+  },
+  "metricBlocked": {
+    "message": "disekat"
+  },
+  "todayTrackers": {
+    "message": "Penjejak hari ini"
+  },
+  "todayBlocked": {
+    "message": "Disekat hari ini"
+  },
+  "todayCompanies": {
+    "message": "Syarikat"
+  },
+  "riskScoreLabel": {
+    "message": "skor risiko"
+  },
+  "riskLabelSafe": {
+    "message": "SELAMAT"
+  },
+  "riskLabelTracker": {
+    "message": "PENJEJAK"
+  },
+  "riskLabelSuspicious": {
+    "message": "MENCURIGAKAN"
+  },
+  "riskLabelDangerous": {
+    "message": "BERBAHAYA"
+  },
+  "connectionsCount": {
+    "message": "Sambungan"
+  },
+  "monitoringConnections": {
+    "message": "Memantau sambungan..."
+  },
+  "noMatchingConnections": {
+    "message": "Tiada sambungan yang sepadan."
+  },
+  "backToList": {
+    "message": "Kembali ke senarai"
+  },
+  "filterAll": {
+    "message": "Semua"
+  },
+  "filterDangerShort": {
+    "message": "Bahaya"
+  },
+  "filterSuspicShort": {
+    "message": "Curiga"
+  },
+  "filterTrackerShort": {
+    "message": "Penjejak"
+  },
+  "filterSafeShort": {
+    "message": "Selamat"
+  },
+  "viewLabel": {
+    "message": "Paparan"
+  },
+  "groupDomains": {
+    "message": "Domain"
+  },
+  "groupCompanies": {
+    "message": "Syarikat"
+  },
+  "groupDomainCount": {
+    "message": "$N$ domain",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 domain"
+  },
+  "detailCompany": {
+    "message": "Syarikat"
+  },
+  "detailCategory": {
+    "message": "Kategori"
+  },
+  "detailLocation": {
+    "message": "Lokasi"
+  },
+  "detailHostedBy": {
+    "message": "Dihoskan oleh"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "Permintaan"
+  },
+  "detailFirstSeen": {
+    "message": "Kali pertama dilihat"
+  },
+  "unblockThisDomain": {
+    "message": "Nyahsekat domain ini"
+  },
+  "blockThisDomain": {
+    "message": "Sekat domain ini"
+  },
+  "block": {
+    "message": "sekat"
+  },
+  "unblock": {
+    "message": "nyahsekat"
+  },
+  "legendSafe": {
+    "message": "Selamat"
+  },
+  "legendTracker": {
+    "message": "Penjejak"
+  },
+  "legendSuspicious": {
+    "message": "Mencurigakan"
+  },
+  "legendDangerous": {
+    "message": "Berbahaya"
+  },
+  "stripTrackers": {
+    "message": "Penjejak"
+  },
+  "stripBlocked": {
+    "message": "Disekat"
+  },
+  "stripCompanies": {
+    "message": "Syarikat"
+  },
+  "thisPage": {
+    "message": "Halaman ini"
+  },
+  "backToConnections": {
+    "message": "Kembali ke sambungan"
+  },
+  "drillRequests": {
+    "message": "permintaan"
+  },
+  "drillDomains": {
+    "message": "domain"
+  },
+  "drillCompanies": {
+    "message": "syarikat"
+  },
+  "noTrackersOnPage": {
+    "message": "Tiada penjejak pada halaman ini."
+  },
+  "noCompaniesOnPage": {
+    "message": "Tiada syarikat yang boleh dikenal pasti pada halaman ini."
+  },
+  "nothingBlocked": {
+    "message": "Tiada apa-apa disekat pada halaman ini."
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard sedang memerhati — laman berbahaya akan disekat secara automatik."
+  },
+  "onThisPage": {
+    "message": "Pada halaman ini"
+  },
+  "requestsBlockedCount": {
+    "message": "$N$ permintaan disekat pada halaman ini",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "Butiran domain yang disekat automatik tidak dijejak di sini"
+  },
+  "pinBadge": {
+    "message": "PIN"
+  },
+  "pauseBarPaused": {
+    "message": "Sekatan dijeda"
+  },
+  "pauseBarPause": {
+    "message": "Jeda"
+  },
+  "pauseBarResume": {
+    "message": "Sambung"
+  },
+  "pauseBarPauseTitle": {
+    "message": "Jeda sekatan di laman ini (membaiki laman yang rosak)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "Sambung sekatan di laman ini"
+  },
+  "settingsPausedSites": {
+    "message": "Laman yang dijeda"
+  },
+  "shareTitle": {
+    "message": "Kongsi imbasan ini"
+  },
+  "shareTagline": {
+    "message": "Dengan siapa pelayar anda bercakap?"
+  },
+  "shareHeadline": {
+    "message": "$C$ syarikat · $N$ negara",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ bercakap dengan $C$ syarikat di $N$ negara — dipantau & disekat oleh Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "Simpan imej"
+  },
+  "sharePost": {
+    "message": "Siar"
+  },
+  "shareHint": {
+    "message": "Imej disalin apabila anda menyiar — tekan Ctrl+V dalam ruang karangan untuk melampirkannya."
+  },
+  "reportTitle": {
+    "message": "Laporan perlindungan"
+  },
+  "reportSubtitle": {
+    "message": "Laporan perlindungan mingguan"
+  },
+  "reportBlocked": {
+    "message": "Disekat"
+  },
+  "reportConnections": {
+    "message": "Sambungan"
+  },
+  "reportTrackers": {
+    "message": "Penjejak"
+  },
+  "reportDangerous": {
+    "message": "Berbahaya"
+  },
+  "reportDailyBlocked": {
+    "message": "Disekat setiap hari"
+  },
+  "reportTopCompanies": {
+    "message": "Syarikat pemerhati teratas"
+  },
+  "reportTopBlocked": {
+    "message": "Domain paling banyak disekat"
+  },
+  "reportNoData": {
+    "message": "Belum ada data — layari sedikit dahulu."
+  },
+  "reportFooter": {
+    "message": "Semua data disimpan secara setempat pada peranti ini."
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 $N$ ancaman disekat!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard telah melindungi anda secara senyap. Jika ia membantu, ulasan ringkas membantu orang lain menemuinya juga."
+  },
+  "reviewPromptRate": {
+    "message": "Nilaikan Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "Kemudian"
+  },
+  "riskExplainDangerous": {
+    "message": "Domain ini berada dalam pangkalan data malware/phishing yang diketahui. Ia mungkin cuba mencuri data anda atau memasang malware."
+  },
+  "riskExplainSuspicious": {
+    "message": "Domain ini digunakan untuk pengiklanan atau penjejakan. Ia mengumpul data tentang tingkah laku pelayaran anda."
+  },
+  "riskExplainTracker": {
+    "message": "Domain ini digunakan untuk analitik atau penghantaran kandungan. Ia mungkin mengumpul sedikit data penggunaan."
+  },
+  "riskExplainSafe": {
+    "message": "Domain ini kelihatan selamat. Tiada penjejakan atau aktiviti berniat jahat yang diketahui dikesan."
+  },
+  "sidePanelOpenTitle": {
+    "message": "Buka panel sisi Live Globe"
+  },
+  "settingsTitle": {
+    "message": "Tetapan"
+  },
+  "unpinTitle": {
+    "message": "Klik sekali lagi untuk nyahpin"
+  },
+  "youLabel": {
+    "message": "ANDA"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ Sambungan Berbahaya Dikesan"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ ialah domain malware/phishing yang diketahui.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "Turut disertakan"
+  },
+  "welcomeAlsoShare": {
+    "message": "Kad kongsi 1 klik"
+  },
+  "welcomeAlsoReport": {
+    "message": "Laporan perlindungan mingguan"
+  },
+  "welcomeAlsoPause": {
+    "message": "Jeda ikut laman"
+  },
+  "welcomeAlsoLangs": {
+    "message": "Tersedia dalam $N$ bahasa",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "Phishing Disyaki Disekat"
+  },
+  "warningLookalikeNotSame": {
+    "message": "Bukan sama dengan:"
+  },
+  "warningLookalikeHeader": {
+    "message": "Alamat ini meniru $BRAND$ tetapi bukan laman sebenar.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "Laman tiruan biasanya digunakan untuk:"
+  },
+  "warningLookalikeItem1": {
+    "message": "Mencuri kata laluan atau kod log masuk anda"
+  },
+  "warningLookalikeItem2": {
+    "message": "Merakam butiran kad kredit atau perbankan"
+  },
+  "warningLookalikeItem3": {
+    "message": "Menyebarkan malware yang menyamar sebagai perkhidmatan sebenar"
+  },
+  "warningLookalikeDetected": {
+    "message": "Dikesan oleh analisis domain tiruan pada peranti. URL anda tidak pernah meninggalkan pelayar ini."
+  },
+  "warningProceedAnyway": {
+    "message": "Teruskan juga (tidak disyorkan)"
+  },
+  "metricTrackers": {
+    "message": "penjejak"
+  },
+  "metricCompanies": {
+    "message": "syarikat"
+  },
+  "weeklyShareTitle": {
+    "message": "Kongsi minggu anda"
+  },
+  "weeklyCardTagline": {
+    "message": "Minggu saya dalam penjejakan"
+  },
+  "weeklyCardHeadline": {
+    "message": "$N$ permintaan disekat minggu ini",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "Pemerhati teratas"
+  },
+  "weeklyTweet": {
+    "message": "🛡 Pelayar saya bercakap dengan $C$ syarikat minggu ini — Zevr Guard menyekat $N$ permintaan penjejakan. Semuanya pada peranti.",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 Laporan perlindungan mingguan anda sudah sedia"
+  },
+  "weeklyNotifMessage": {
+    "message": "$N$ permintaan disekat dalam 7 hari lepas. Lihat siapa yang memerhati anda.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "Lihat laporan"
+  },
+  "pwWarnDismiss": {
+    "message": "Tutup"
+  },
+  "pwWarnHttpTitle": {
+    "message": "Halaman ini tidak disulitkan"
+  },
+  "pwWarnHttpMsg": {
+    "message": "Sambungan ini HTTP biasa — kata laluan yang ditaip di sini boleh dibaca semasa penghantaran."
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "Anda berada di laman tiruan yang disyaki"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "Anda memilih untuk meneruskan ke laman ini sebelum ini. Kata laluan yang ditaip di sini mungkin pergi kepada penyamar."
+  },
+  "pwWarnFirstTitle": {
+    "message": "Kata laluan pertama di laman ini"
+  },
+  "pwWarnFirstMsg": {
+    "message": "Anda tidak pernah log masuk di sini sebelum ini. Semak bar alamat dahulu."
+  },
+  "settingsPasswordWarnings": {
+    "message": "Amaran kata laluan"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "Beri amaran sebelum menaip kata laluan di halaman berisiko"
+  },
+  "settingsBlockedCountries": {
+    "message": "Negara yang disekat"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "Tiada. Buka paparan butiran sesuatu sambungan untuk menyekat negaranya."
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "Domain disekat sebaik sahaja trafik dari negara ini dikesan."
+  },
+  "blockCountry": {
+    "message": "Sekat semua trafik dari $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "Nyahsekat $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "Disekat oleh Peraturan Negara Anda"
+  },
+  "warningCountryHeader": {
+    "message": "Laman ini berkomunikasi dari $COUNTRY$, yang anda pilih untuk sekat.",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "Anda mengaktifkan sekatan negara untuk wilayah ini dalam Zevr Guard. Tiada masalah dengan peranti anda — ini peraturan anda sendiri yang sedang berfungsi."
+  },
+  "warningCountryUnblock": {
+    "message": "Nyahsekat $COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "Dinyahsekat. Kembali dan muat semula halaman."
+  },
+  "reportPhishingButton": {
+    "message": "Laporkan sebagai phishing — lindungi pengguna lain"
+  },
+  "reportPhishingConfirm": {
+    "message": "Hantar domain ini (dan tiada yang lain) kepada Zevr untuk semakan?"
+  },
+  "reportPhishingSend": {
+    "message": "Hantar laporan"
+  },
+  "reportPhishingCancel": {
+    "message": "Batal"
+  },
+  "reportPhishingDone": {
+    "message": "Dilaporkan. Terima kasih kerana melindungi pengguna lain!"
+  },
+  "reportPhishingError": {
+    "message": "Laporan tidak dapat dihantar. Sila cuba lagi nanti."
+  },
+  "welcomeAlsoCountry": {
+    "message": "Sekatan negara satu ketikan"
+  },
+  "welcomeAlsoPw": {
+    "message": "Pengawal input kata laluan"
+  },
+  "groupCountries": {
+    "message": "Negara"
+  },
+  "countryUnknown": {
+    "message": "Lokasi tidak diketahui"
+  },
+  "connBlockedTag": {
+    "message": "disekat"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "Sekat juga pada peranti ini"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "Dilaporkan & disekat. Terima kasih kerana melindungi pengguna lain!"
+  },
+  "mapBlockHint": {
+    "message": "Ketik satu titik untuk menyekat negaranya"
+  },
+  "warningFramedNotice": {
+    "message": "Halaman keselamatan ini tidak boleh dipaparkan dalam laman lain. Buka secara terus."
+  },
+  "leakTitle": {
+    "message": "Maklumat anda baru sahaja dihantar"
+  },
+  "leakBlock": {
+    "message": "Sekat $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ telah dihantar ke $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "e-mel anda"
+  },
+  "leakKind_phone": {
+    "message": "nombor telefon anda"
+  },
+  "leakKind_custom": {
+    "message": "maklumat anda"
+  },
+  "watchTitle": {
+    "message": "Perhatikan maklumat anda"
+  },
+  "watchDesc": {
+    "message": "Memberi amaran apabila e-mel, telefon, atau apa-apa nilai yang anda tambah dihantar ke laman lain — walaupun telah dicincang. Semua padanan kekal pada peranti anda."
+  },
+  "watchKindEmail": {
+    "message": "E-mel"
+  },
+  "watchKindPhone": {
+    "message": "Telefon"
+  },
+  "watchKindCustom": {
+    "message": "Tersuai"
+  },
+  "watchPlaceholder": {
+    "message": "nilai untuk diperhatikan"
+  },
+  "watchAdd": {
+    "message": "Tambah"
+  },
+  "watchTooShort": {
+    "message": "Terlalu pendek untuk diperhatikan dengan selamat (5+ aksara)."
+  },
+  "watchRemove": {
+    "message": "Keluarkan"
+  },
+  "watchLeaksTitle": {
+    "message": "Kebocoran terkini yang ditangkap"
+  },
+  "pinHintTitle": {
+    "message": "Pin Zevr Guard ke bar alat anda"
+  },
+  "pinHintDesc": {
+    "message": "Klik ikon teka-teki di atas, kemudian pin di sebelah Zevr Guard. Perlindungan anda sentiasa dalam pandangan."
+  },
+  "pinHintGotIt": {
+    "message": "Faham"
+  }
+}

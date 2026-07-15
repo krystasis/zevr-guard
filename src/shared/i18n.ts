@@ -10,11 +10,17 @@ export type Locale =
   | 'it'
   | 'nl'
   | 'pl'
+  | 'cs'
+  | 'hu'
+  | 'ro'
+  | 'el'
   | 'ru'
   | 'uk'
   | 'tr'
   | 'ko'
   | 'id'
+  | 'ms'
+  | 'th'
   | 'vi'
   | 'hi'
   | 'zh_CN'
@@ -30,11 +36,17 @@ export const SUPPORTED_LOCALES: readonly Locale[] = [
   'it',
   'nl',
   'pl',
+  'cs',
+  'hu',
+  'ro',
+  'el',
   'ru',
   'uk',
   'tr',
   'ko',
   'id',
+  'ms',
+  'th',
   'vi',
   'hi',
   'zh_CN',
@@ -53,11 +65,17 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   it: 'Italiano',
   nl: 'Nederlands',
   pl: 'Polski',
+  cs: 'Čeština',
+  hu: 'Magyar',
+  ro: 'Română',
+  el: 'Ελληνικά',
   ru: 'Русский',
   uk: 'Українська',
   tr: 'Türkçe',
   ko: '한국어',
   id: 'Bahasa Indonesia',
+  ms: 'Bahasa Melayu',
+  th: 'ไทย',
   vi: 'Tiếng Việt',
   hi: 'हिन्दी',
   zh_CN: '简体中文',

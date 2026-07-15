@@ -1,0 +1,912 @@
+{
+  "extName": {
+    "message": "Zevr Guard: บล็อกโฆษณา ตัวติดตาม และมัลแวร์"
+  },
+  "extDescription": {
+    "message": "บล็อกโฆษณา ตัวติดตาม มัลแวร์ และฟิชชิง ดูว่าเบราว์เซอร์คุยกับใครบนแผนที่โลกสด ไม่ต้องตั้งค่า ทำงานในเครื่อง 100% ไม่ส่งข้อมูลออก"
+  },
+  "protectionActive": {
+    "message": "การป้องกันทำงานอยู่"
+  },
+  "brandZevr": {
+    "message": "Zevr"
+  },
+  "brandTagline": {
+    "message": "ผลิตภัณฑ์แรก"
+  },
+  "heroTagline": {
+    "message": "ดูว่าเบราว์เซอร์ของคุณคุยกับใคร"
+  },
+  "heroTaglineAccent": {
+    "message": "บล็อกตัวที่อันตรายโดยอัตโนมัติ"
+  },
+  "heroDescription": {
+    "message": "ดูแบบเรียลไทม์ว่าเบราว์เซอร์ของคุณเชื่อมต่อไปยังส่วนใดของโลก การเชื่อมต่อที่อันตรายจะถูกบล็อกโดยอัตโนมัติ"
+  },
+  "ctaOpenGlobe": {
+    "message": "เปิด Live Globe"
+  },
+  "ctaStartBrowsing": {
+    "message": "เริ่มท่องเว็บ"
+  },
+  "trustTrackers": {
+    "message": "สัญญาณตัวติดตาม $N$ รายการ",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "trustUrlhaus": {
+    "message": "อัปเดตฐานข้อมูลทุกวัน"
+  },
+  "trust100Local": {
+    "message": "ตรวจสอบในเครื่องเท่านั้น"
+  },
+  "trustNoTelemetry": {
+    "message": "ไม่อัปโหลด URL"
+  },
+  "scrollHint": {
+    "message": "เลื่อนลง"
+  },
+  "howItWorks": {
+    "message": "วิธีทำงาน"
+  },
+  "fourLayersTitle": {
+    "message": "การป้องกัน 5 ชั้น"
+  },
+  "featureLookalikeTitle": {
+    "message": "จับฟิชชิงโดเมนเลียนแบบ"
+  },
+  "featureLookalikeDesc": {
+    "message": "โดเมนปลอมที่เลียนแบบแบรนด์จริง เช่น examp1e.com, exаmple.com ถูกตรวจจับด้วยการวิเคราะห์ในเครื่อง ก่อนที่จะถูกขึ้นบัญชีบล็อกใด ๆ"
+  },
+  "feature1Title": {
+    "message": "บล็อกมัลแวร์อัตโนมัติ"
+  },
+  "feature1Desc": {
+    "message": "โดเมนมัลแวร์และฟิชชิงที่รู้จักจะถูกบล็อกก่อนที่คุณจะทันสังเกต รายการภัยคุกคามอัปเดตอัตโนมัติทุกวัน"
+  },
+  "feature2Title": {
+    "message": "เห็นตัวติดตามทุกตัว"
+  },
+  "feature2Desc": {
+    "message": "ฐานข้อมูลสัญญาณตัวติดตามกว่า 115,000 รายการ ระบุว่าบริษัทใดเข้าถึงเบราว์เซอร์ของคุณ บ่อยแค่ไหน และจากที่ใด"
+  },
+  "feature3Title": {
+    "message": "เตือนเมื่อน่าสงสัย"
+  },
+  "feature3Desc": {
+    "message": "โดเมนโฆษณา วิเคราะห์ข้อมูล และเก็บลายนิ้วมือดิจิทัลถูกไฮไลต์ด้วยสี ดูความหนาแน่นของการติดตามในแต่ละหน้าแบบเรียลไทม์"
+  },
+  "feature4Title": {
+    "message": "ตรวจสอบในเครื่อง URL ของคุณไม่ออกไปไหน"
+  },
+  "feature4Desc": {
+    "message": "การตรวจสอบทำงานในเบราว์เซอร์ของคุณทั้งหมด ทราฟฟิกขาออกมีเพียงการอัปเดตฐานข้อมูลภัยคุกคามแบบไม่ระบุตัวตนจาก CDN ของเรา ประวัติการท่องเว็บของคุณไม่ถูกส่งไปที่ใด"
+  },
+  "dataSourcesTitle": {
+    "message": "การป้องกันแบบเงียบ ๆ ในระดับที่ตรวจสอบได้"
+  },
+  "dataSourcesSubtitle": {
+    "message": "ตัวเลขสำคัญ"
+  },
+  "dataByNumbers1Value": {
+    "message": "115,000+"
+  },
+  "dataByNumbers1Unit": {
+    "message": "สัญญาณ"
+  },
+  "dataByNumbers1Label": {
+    "message": "ฐานข้อมูลระบุตัวติดตาม"
+  },
+  "dataByNumbers2Value": {
+    "message": "ทุกวัน"
+  },
+  "dataByNumbers2Unit": {
+    "message": "อัปเดต"
+  },
+  "dataByNumbers2Label": {
+    "message": "รีเฟรชอัตโนมัติผ่าน CDN ของเรา"
+  },
+  "dataByNumbers3Value": {
+    "message": "244"
+  },
+  "dataByNumbers3Unit": {
+    "message": "ประเทศ"
+  },
+  "dataByNumbers3Label": {
+    "message": "ครอบคลุมการระบุตำแหน่ง"
+  },
+  "dataByNumbers4Value": {
+    "message": "0"
+  },
+  "dataByNumbers4Unit": {
+    "message": "URL ที่ถูกส่ง"
+  },
+  "dataByNumbers4Label": {
+    "message": "การท่องเว็บของคุณไม่ออกจากเครื่อง"
+  },
+  "languageSwitchLabel": {
+    "message": "ภาษา"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageJapanese": {
+    "message": "日本語"
+  },
+  "footerNetworkVisibility": {
+    "message": "มองเห็นเครือข่ายได้ทันที"
+  },
+  "warningTitle": {
+    "message": "บล็อกเว็บไซต์อันตรายแล้ว"
+  },
+  "warningSubtitle": {
+    "message": "ปกป้องโดย Zevr Guard"
+  },
+  "warningBlockedSiteLabel": {
+    "message": "Zevr Guard บล็อกการเข้าถึง:"
+  },
+  "warningListHeader": {
+    "message": "โดเมนนี้อยู่ในฐานข้อมูลมัลแวร์/ฟิชชิงที่รู้จัก"
+  },
+  "warningListIntro": {
+    "message": "การเข้าชมเว็บไซต์นี้อาจ:"
+  },
+  "warningListItem1": {
+    "message": "ติดตั้งมัลแวร์ลงในอุปกรณ์ของคุณ"
+  },
+  "warningListItem2": {
+    "message": "ขโมยรหัสผ่านหรือข้อมูลส่วนตัวของคุณ"
+  },
+  "warningListItem3": {
+    "message": "ยึดเบราว์เซอร์หรือบัญชีของคุณ"
+  },
+  "warningGoBack": {
+    "message": "ย้อนกลับ (ปลอดภัย)"
+  },
+  "warningUnderstandRisk": {
+    "message": "ฉันเข้าใจความเสี่ยง"
+  },
+  "warningOverrideDetail": {
+    "message": "หากต้องการดำเนินการต่อ ให้ลบโดเมนนี้ออกจากบัญชีบล็อกผ่านป๊อปอัปของ Zevr Guard (ปุ่มบล็อก/เลิกบล็อก) แล้วโหลดหน้าใหม่"
+  },
+  "warningFooter": {
+    "message": "ปกป้องโดย Zevr Guard · การท่องเว็บที่ปลอดภัยสำหรับทุกคน"
+  },
+  "riskMsgSafe": {
+    "message": "หน้านี้ปลอดภัย"
+  },
+  "riskMsgTracker": {
+    "message": "พบตัวติดตาม"
+  },
+  "riskMsgSuspicious": {
+    "message": "พบทราฟฟิกน่าสงสัย"
+  },
+  "riskMsgDangerous": {
+    "message": "พบทราฟฟิกอันตราย"
+  },
+  "settingsGeneral": {
+    "message": "ทั่วไป"
+  },
+  "settingsNotifications": {
+    "message": "การแจ้งเตือน"
+  },
+  "settingsNotificationsDesc": {
+    "message": "แจ้งเตือนเมื่อพบทราฟฟิกอันตราย"
+  },
+  "settingsBlockCategories": {
+    "message": "หมวดหมู่ที่บล็อก"
+  },
+  "settingsMalware": {
+    "message": "มัลแวร์ / ฟิชชิง"
+  },
+  "settingsMalwareDesc": {
+    "message": "มัลแวร์และฟิชชิงที่รู้จัก (แนะนำ)"
+  },
+  "settingsAdvertising": {
+    "message": "โฆษณา"
+  },
+  "settingsAdvertisingDesc": {
+    "message": "โดเมนโฆษณา"
+  },
+  "settingsTracking": {
+    "message": "การติดตาม"
+  },
+  "settingsTrackingDesc": {
+    "message": "โดเมนติดตามและวิเคราะห์ข้อมูล"
+  },
+  "settingsCustomBlocklist": {
+    "message": "บัญชีบล็อกที่กำหนดเอง"
+  },
+  "settingsBlocklistEmpty": {
+    "message": "ไม่มีโดเมนที่ถูกบล็อก"
+  },
+  "settingsBlocklistCountOne": {
+    "message": "1 โดเมน"
+  },
+  "settingsBlocklistCountMany": {
+    "message": "$N$ โดเมน",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsCustomAllowlist": {
+    "message": "บัญชีอนุญาตที่กำหนดเอง"
+  },
+  "settingsAllowlistEmpty": {
+    "message": "ไม่มีโดเมนที่อนุญาต"
+  },
+  "settingsAllowlistCountOne": {
+    "message": "1 โดเมน"
+  },
+  "settingsAllowlistCountMany": {
+    "message": "$N$ โดเมน",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "settingsAllowlistHint": {
+    "message": "โดเมนที่เพิ่มไว้ที่นี่จะข้ามกฎการบล็อกทั้งหมด แม้แต่มัลแวร์"
+  },
+  "allowBarThisSite": {
+    "message": "เว็บไซต์นี้"
+  },
+  "allowBarAllowed": {
+    "message": "อนุญาตแล้ว"
+  },
+  "allowBarAllow": {
+    "message": "อนุญาต"
+  },
+  "allowBarRevoke": {
+    "message": "เพิกถอน"
+  },
+  "allowBarAddTitle": {
+    "message": "เพิ่มเว็บไซต์นี้ในบัญชีอนุญาต (ข้ามการบล็อก)"
+  },
+  "allowBarRemoveTitle": {
+    "message": "ลบเว็บไซต์นี้ออกจากบัญชีอนุญาต"
+  },
+  "remove": {
+    "message": "ลบ"
+  },
+  "brandGuard": {
+    "message": "Guard"
+  },
+  "sidepanelSubtitle": {
+    "message": "Live Globe"
+  },
+  "popupStatusLive": {
+    "message": "กำลังป้องกัน"
+  },
+  "popupScanning": {
+    "message": "กำลังสแกน..."
+  },
+  "popupNoData": {
+    "message": "ยังไม่มีข้อมูลของหน้านี้"
+  },
+  "popupReloadToMonitor": {
+    "message": "โหลดแท็บใหม่เพื่อเริ่มการตรวจสอบ"
+  },
+  "metricDomains": {
+    "message": "โดเมน"
+  },
+  "metricRequests": {
+    "message": "คำขอ"
+  },
+  "metricBlocked": {
+    "message": "ถูกบล็อก"
+  },
+  "todayTrackers": {
+    "message": "ตัวติดตามวันนี้"
+  },
+  "todayBlocked": {
+    "message": "ถูกบล็อกวันนี้"
+  },
+  "todayCompanies": {
+    "message": "บริษัท"
+  },
+  "riskScoreLabel": {
+    "message": "คะแนนความเสี่ยง"
+  },
+  "riskLabelSafe": {
+    "message": "ปลอดภัย"
+  },
+  "riskLabelTracker": {
+    "message": "ตัวติดตาม"
+  },
+  "riskLabelSuspicious": {
+    "message": "น่าสงสัย"
+  },
+  "riskLabelDangerous": {
+    "message": "อันตราย"
+  },
+  "connectionsCount": {
+    "message": "การเชื่อมต่อ"
+  },
+  "monitoringConnections": {
+    "message": "กำลังตรวจสอบการเชื่อมต่อ..."
+  },
+  "noMatchingConnections": {
+    "message": "ไม่มีการเชื่อมต่อที่ตรงกัน"
+  },
+  "backToList": {
+    "message": "กลับไปที่รายการ"
+  },
+  "filterAll": {
+    "message": "ทั้งหมด"
+  },
+  "filterDangerShort": {
+    "message": "อันตราย"
+  },
+  "filterSuspicShort": {
+    "message": "น่าสงสัย"
+  },
+  "filterTrackerShort": {
+    "message": "ติดตาม"
+  },
+  "filterSafeShort": {
+    "message": "ปลอดภัย"
+  },
+  "viewLabel": {
+    "message": "มุมมอง"
+  },
+  "groupDomains": {
+    "message": "โดเมน"
+  },
+  "groupCompanies": {
+    "message": "บริษัท"
+  },
+  "groupDomainCount": {
+    "message": "$N$ โดเมน",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "groupDomainCountOne": {
+    "message": "1 โดเมน"
+  },
+  "detailCompany": {
+    "message": "บริษัท"
+  },
+  "detailCategory": {
+    "message": "หมวดหมู่"
+  },
+  "detailLocation": {
+    "message": "ตำแหน่งที่ตั้ง"
+  },
+  "detailHostedBy": {
+    "message": "โฮสต์โดย"
+  },
+  "detailISP": {
+    "message": "ISP"
+  },
+  "detailASN": {
+    "message": "ASN"
+  },
+  "detailRequests": {
+    "message": "คำขอ"
+  },
+  "detailFirstSeen": {
+    "message": "พบครั้งแรก"
+  },
+  "unblockThisDomain": {
+    "message": "เลิกบล็อกโดเมนนี้"
+  },
+  "blockThisDomain": {
+    "message": "บล็อกโดเมนนี้"
+  },
+  "block": {
+    "message": "บล็อก"
+  },
+  "unblock": {
+    "message": "เลิกบล็อก"
+  },
+  "legendSafe": {
+    "message": "ปลอดภัย"
+  },
+  "legendTracker": {
+    "message": "ตัวติดตาม"
+  },
+  "legendSuspicious": {
+    "message": "น่าสงสัย"
+  },
+  "legendDangerous": {
+    "message": "อันตราย"
+  },
+  "stripTrackers": {
+    "message": "ตัวติดตาม"
+  },
+  "stripBlocked": {
+    "message": "ถูกบล็อก"
+  },
+  "stripCompanies": {
+    "message": "บริษัท"
+  },
+  "thisPage": {
+    "message": "หน้านี้"
+  },
+  "backToConnections": {
+    "message": "กลับไปที่การเชื่อมต่อ"
+  },
+  "drillRequests": {
+    "message": "คำขอ"
+  },
+  "drillDomains": {
+    "message": "โดเมน"
+  },
+  "drillCompanies": {
+    "message": "บริษัท"
+  },
+  "noTrackersOnPage": {
+    "message": "ไม่มีตัวติดตามในหน้านี้"
+  },
+  "noCompaniesOnPage": {
+    "message": "ไม่พบบริษัทที่ระบุได้ในหน้านี้"
+  },
+  "nothingBlocked": {
+    "message": "ไม่มีสิ่งที่ถูกบล็อกในหน้านี้"
+  },
+  "watchingMsg": {
+    "message": "Zevr Guard กำลังเฝ้าดู เว็บไซต์อันตรายจะถูกบล็อกโดยอัตโนมัติ"
+  },
+  "onThisPage": {
+    "message": "ในหน้านี้"
+  },
+  "requestsBlockedCount": {
+    "message": "บล็อกคำขอ $N$ รายการในหน้านี้",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoBlockedNotTracked": {
+    "message": "รายละเอียดโดเมนที่ถูกบล็อกอัตโนมัติไม่ถูกติดตามที่นี่"
+  },
+  "pinBadge": {
+    "message": "ปักหมุด"
+  },
+  "pauseBarPaused": {
+    "message": "หยุดการบล็อกชั่วคราว"
+  },
+  "pauseBarPause": {
+    "message": "หยุดชั่วคราว"
+  },
+  "pauseBarResume": {
+    "message": "ทำงานต่อ"
+  },
+  "pauseBarPauseTitle": {
+    "message": "หยุดการบล็อกบนเว็บไซต์นี้ชั่วคราว (แก้เว็บไซต์ที่แสดงผลผิดปกติ)"
+  },
+  "pauseBarResumeTitle": {
+    "message": "เริ่มการบล็อกบนเว็บไซต์นี้อีกครั้ง"
+  },
+  "settingsPausedSites": {
+    "message": "เว็บไซต์ที่หยุดชั่วคราว"
+  },
+  "shareTitle": {
+    "message": "แชร์ผลสแกนนี้"
+  },
+  "shareTagline": {
+    "message": "เบราว์เซอร์ของคุณกำลังคุยกับใคร?"
+  },
+  "shareHeadline": {
+    "message": "$C$ บริษัท · $N$ ประเทศ",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "shareTweet": {
+    "message": "🛡 $HOST$ คุยกับ $C$ บริษัทใน $N$ ประเทศ — เฝ้าดูและบล็อกโดย Zevr Guard",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      },
+      "c": {
+        "content": "$2"
+      },
+      "n": {
+        "content": "$3"
+      }
+    }
+  },
+  "shareDownload": {
+    "message": "บันทึกรูปภาพ"
+  },
+  "sharePost": {
+    "message": "โพสต์"
+  },
+  "shareHint": {
+    "message": "รูปภาพถูกคัดลอกเมื่อคุณโพสต์ กด Ctrl+V ในช่องเขียนโพสต์เพื่อแนบ"
+  },
+  "reportTitle": {
+    "message": "รายงานการป้องกัน"
+  },
+  "reportSubtitle": {
+    "message": "รายงานการป้องกันรายสัปดาห์"
+  },
+  "reportBlocked": {
+    "message": "ถูกบล็อก"
+  },
+  "reportConnections": {
+    "message": "การเชื่อมต่อ"
+  },
+  "reportTrackers": {
+    "message": "ตัวติดตาม"
+  },
+  "reportDangerous": {
+    "message": "อันตราย"
+  },
+  "reportDailyBlocked": {
+    "message": "ถูกบล็อกต่อวัน"
+  },
+  "reportTopCompanies": {
+    "message": "บริษัทที่เฝ้าดูมากที่สุด"
+  },
+  "reportTopBlocked": {
+    "message": "โดเมนที่ถูกบล็อกมากที่สุด"
+  },
+  "reportNoData": {
+    "message": "ยังไม่มีข้อมูล ลองท่องเว็บสักครู่ก่อน"
+  },
+  "reportFooter": {
+    "message": "ข้อมูลทั้งหมดถูกเก็บไว้ในอุปกรณ์นี้เท่านั้น"
+  },
+  "reviewPromptTitle": {
+    "message": "🎉 บล็อกภัยคุกคามไปแล้ว $N$ รายการ!",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "reviewPromptMessage": {
+    "message": "Zevr Guard ปกป้องคุณอย่างเงียบ ๆ มาตลอด หากมันมีประโยชน์ รีวิวสั้น ๆ จะช่วยให้คนอื่นค้นพบมันด้วย"
+  },
+  "reviewPromptRate": {
+    "message": "ให้คะแนน Zevr Guard ★"
+  },
+  "reviewPromptLater": {
+    "message": "ไว้ทีหลัง"
+  },
+  "riskExplainDangerous": {
+    "message": "โดเมนนี้อยู่ในฐานข้อมูลมัลแวร์/ฟิชชิงที่รู้จัก อาจพยายามขโมยข้อมูลหรือติดตั้งมัลแวร์"
+  },
+  "riskExplainSuspicious": {
+    "message": "โดเมนนี้ใช้สำหรับโฆษณาหรือการติดตาม มันเก็บข้อมูลพฤติกรรมการท่องเว็บของคุณ"
+  },
+  "riskExplainTracker": {
+    "message": "โดเมนนี้ใช้สำหรับวิเคราะห์ข้อมูลหรือส่งเนื้อหา อาจเก็บข้อมูลการใช้งานบางส่วน"
+  },
+  "riskExplainSafe": {
+    "message": "โดเมนนี้ดูปลอดภัย ไม่พบการติดตามหรือกิจกรรมมุ่งร้ายที่รู้จัก"
+  },
+  "sidePanelOpenTitle": {
+    "message": "เปิดแผงด้านข้าง Live Globe"
+  },
+  "settingsTitle": {
+    "message": "การตั้งค่า"
+  },
+  "unpinTitle": {
+    "message": "คลิกอีกครั้งเพื่อเลิกปักหมุด"
+  },
+  "youLabel": {
+    "message": "คุณ"
+  },
+  "dangerNotifTitle": {
+    "message": "⚠️ พบการเชื่อมต่ออันตราย"
+  },
+  "dangerNotifMessage": {
+    "message": "$DOMAIN$ เป็นโดเมนมัลแวร์/ฟิชชิงที่รู้จัก",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "welcomeAlsoTitle": {
+    "message": "ยังมีอีก"
+  },
+  "welcomeAlsoShare": {
+    "message": "การ์ดแชร์ในคลิกเดียว"
+  },
+  "welcomeAlsoReport": {
+    "message": "รายงานการป้องกันรายสัปดาห์"
+  },
+  "welcomeAlsoPause": {
+    "message": "หยุดชั่วคราวรายเว็บไซต์"
+  },
+  "welcomeAlsoLangs": {
+    "message": "รองรับ $N$ ภาษา",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeTitle": {
+    "message": "บล็อกฟิชชิงต้องสงสัยแล้ว"
+  },
+  "warningLookalikeNotSame": {
+    "message": "ไม่ใช่เว็บไซต์เดียวกับ:"
+  },
+  "warningLookalikeHeader": {
+    "message": "ที่อยู่นี้เลียนแบบ $BRAND$ แต่ไม่ใช่เว็บไซต์จริง",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningLookalikeIntro": {
+    "message": "เว็บไซต์เลียนแบบมักถูกใช้เพื่อ:"
+  },
+  "warningLookalikeItem1": {
+    "message": "ขโมยรหัสผ่านหรือรหัสเข้าสู่ระบบของคุณ"
+  },
+  "warningLookalikeItem2": {
+    "message": "ดักข้อมูลบัตรเครดิตหรือข้อมูลธนาคาร"
+  },
+  "warningLookalikeItem3": {
+    "message": "ส่งมัลแวร์โดยปลอมเป็นบริการจริง"
+  },
+  "warningLookalikeDetected": {
+    "message": "ตรวจพบด้วยการวิเคราะห์โดเมนเลียนแบบในเครื่อง URL ของคุณไม่เคยออกจากเบราว์เซอร์นี้"
+  },
+  "warningProceedAnyway": {
+    "message": "ดำเนินการต่อ (ไม่แนะนำ)"
+  },
+  "metricTrackers": {
+    "message": "ตัวติดตาม"
+  },
+  "metricCompanies": {
+    "message": "บริษัท"
+  },
+  "weeklyShareTitle": {
+    "message": "แชร์สัปดาห์ของคุณ"
+  },
+  "weeklyCardTagline": {
+    "message": "สัปดาห์ของฉันกับการติดตาม"
+  },
+  "weeklyCardHeadline": {
+    "message": "บล็อกคำขอ $N$ รายการในสัปดาห์นี้",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyCardTopWatchers": {
+    "message": "ผู้เฝ้าดูอันดับต้น"
+  },
+  "weeklyTweet": {
+    "message": "🛡 สัปดาห์นี้เบราว์เซอร์ของฉันคุยกับ $C$ บริษัท — Zevr Guard บล็อกคำขอติดตาม $N$ รายการ ทั้งหมดในเครื่อง",
+    "placeholders": {
+      "c": {
+        "content": "$1"
+      },
+      "n": {
+        "content": "$2"
+      }
+    }
+  },
+  "weeklyNotifTitle": {
+    "message": "📊 รายงานการป้องกันรายสัปดาห์ของคุณพร้อมแล้ว"
+  },
+  "weeklyNotifMessage": {
+    "message": "บล็อกคำขอ $N$ รายการใน 7 วันที่ผ่านมา ดูว่าใครกำลังเฝ้าดูคุณ",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "weeklyNotifView": {
+    "message": "ดูรายงาน"
+  },
+  "pwWarnDismiss": {
+    "message": "ปิด"
+  },
+  "pwWarnHttpTitle": {
+    "message": "หน้านี้ไม่ได้เข้ารหัส"
+  },
+  "pwWarnHttpMsg": {
+    "message": "การเชื่อมต่อเป็น HTTP ธรรมดา รหัสผ่านที่พิมพ์ที่นี่อาจถูกอ่านระหว่างทาง"
+  },
+  "pwWarnLookalikeTitle": {
+    "message": "คุณอยู่บนเว็บไซต์ต้องสงสัยว่าเลียนแบบ"
+  },
+  "pwWarnLookalikeMsg": {
+    "message": "คุณเลือกดำเนินการต่อมายังเว็บไซต์นี้ก่อนหน้านี้ รหัสผ่านที่พิมพ์ที่นี่อาจถูกส่งไปยังผู้ปลอมตัว"
+  },
+  "pwWarnFirstTitle": {
+    "message": "รหัสผ่านครั้งแรกบนเว็บไซต์นี้"
+  },
+  "pwWarnFirstMsg": {
+    "message": "คุณไม่เคยเข้าสู่ระบบที่นี่มาก่อน ตรวจสอบแถบที่อยู่ให้ดีก่อน"
+  },
+  "settingsPasswordWarnings": {
+    "message": "คำเตือนรหัสผ่าน"
+  },
+  "settingsPasswordWarningsDesc": {
+    "message": "เตือนก่อนพิมพ์รหัสผ่านบนหน้าที่มีความเสี่ยง"
+  },
+  "settingsBlockedCountries": {
+    "message": "ประเทศที่ถูกบล็อก"
+  },
+  "settingsBlockedCountriesEmpty": {
+    "message": "ไม่มี เปิดมุมมองรายละเอียดของการเชื่อมต่อเพื่อบล็อกประเทศของมัน"
+  },
+  "settingsBlockedCountriesHint": {
+    "message": "โดเมนจะถูกบล็อกทันทีที่พบทราฟฟิกจากประเทศเหล่านี้"
+  },
+  "blockCountry": {
+    "message": "บล็อกทราฟฟิกทั้งหมดจาก$COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "unblockCountry": {
+    "message": "เลิกบล็อก$COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryTitle": {
+    "message": "ถูกบล็อกโดยกฎประเทศของคุณ"
+  },
+  "warningCountryHeader": {
+    "message": "เว็บไซต์นี้สื่อสารจาก$COUNTRY$ ซึ่งคุณเลือกที่จะบล็อก",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryDetail": {
+    "message": "คุณเปิดใช้การบล็อกประเทศสำหรับภูมิภาคนี้ใน Zevr Guard อุปกรณ์ของคุณไม่มีปัญหาใด ๆ นี่คือกฎของคุณเองที่กำลังทำงาน"
+  },
+  "warningCountryUnblock": {
+    "message": "เลิกบล็อก$COUNTRY$",
+    "placeholders": {
+      "country": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningCountryUnblocked": {
+    "message": "เลิกบล็อกแล้ว ย้อนกลับแล้วโหลดหน้าใหม่"
+  },
+  "reportPhishingButton": {
+    "message": "รายงานว่าเป็นฟิชชิง — ปกป้องผู้ใช้คนอื่น"
+  },
+  "reportPhishingConfirm": {
+    "message": "ส่งโดเมนนี้ (และไม่มีอย่างอื่น) ให้ Zevr ตรวจสอบหรือไม่?"
+  },
+  "reportPhishingSend": {
+    "message": "ส่งรายงาน"
+  },
+  "reportPhishingCancel": {
+    "message": "ยกเลิก"
+  },
+  "reportPhishingDone": {
+    "message": "รายงานแล้ว ขอบคุณที่ช่วยปกป้องผู้ใช้คนอื่น!"
+  },
+  "reportPhishingError": {
+    "message": "ส่งรายงานไม่สำเร็จ โปรดลองอีกครั้งภายหลัง"
+  },
+  "welcomeAlsoCountry": {
+    "message": "บล็อกทั้งประเทศในแตะเดียว"
+  },
+  "welcomeAlsoPw": {
+    "message": "ยามเฝ้าการพิมพ์รหัสผ่าน"
+  },
+  "groupCountries": {
+    "message": "ประเทศ"
+  },
+  "countryUnknown": {
+    "message": "ไม่ทราบตำแหน่ง"
+  },
+  "connBlockedTag": {
+    "message": "ถูกบล็อก"
+  },
+  "reportPhishingAlsoBlock": {
+    "message": "บล็อกบนอุปกรณ์นี้ด้วย"
+  },
+  "reportPhishingDoneBlocked": {
+    "message": "รายงานและบล็อกแล้ว ขอบคุณที่ช่วยปกป้องผู้ใช้คนอื่น!"
+  },
+  "mapBlockHint": {
+    "message": "แตะจุดเพื่อบล็อกประเทศนั้น"
+  },
+  "warningFramedNotice": {
+    "message": "หน้าความปลอดภัยนี้ไม่สามารถแสดงในเว็บไซต์อื่นได้ โปรดเปิดโดยตรง"
+  },
+  "leakTitle": {
+    "message": "ข้อมูลของคุณเพิ่งถูกส่งออกไป"
+  },
+  "leakBlock": {
+    "message": "บล็อก $HOST$",
+    "placeholders": {
+      "host": {
+        "content": "$1"
+      }
+    }
+  },
+  "leakBody": {
+    "message": "$WHAT$ถูกส่งไปยัง $HOST$",
+    "placeholders": {
+      "what": {
+        "content": "$1"
+      },
+      "host": {
+        "content": "$2"
+      }
+    }
+  },
+  "leakKind_email": {
+    "message": "อีเมลของคุณ"
+  },
+  "leakKind_phone": {
+    "message": "เบอร์โทรศัพท์ของคุณ"
+  },
+  "leakKind_custom": {
+    "message": "ข้อมูลของคุณ"
+  },
+  "watchTitle": {
+    "message": "เฝ้าดูข้อมูลของคุณ"
+  },
+  "watchDesc": {
+    "message": "เตือนคุณเมื่ออีเมล เบอร์โทร หรือค่าใด ๆ ที่คุณเพิ่ม ถูกส่งไปยังเว็บไซต์อื่น แม้ถูกแฮชแล้ว การตรวจสอบทั้งหมดอยู่ในอุปกรณ์ของคุณ"
+  },
+  "watchKindEmail": {
+    "message": "อีเมล"
+  },
+  "watchKindPhone": {
+    "message": "โทรศัพท์"
+  },
+  "watchKindCustom": {
+    "message": "กำหนดเอง"
+  },
+  "watchPlaceholder": {
+    "message": "ค่าที่ต้องการเฝ้าดู"
+  },
+  "watchAdd": {
+    "message": "เพิ่ม"
+  },
+  "watchTooShort": {
+    "message": "สั้นเกินไปที่จะเฝ้าดูอย่างปลอดภัย (5 ตัวอักษรขึ้นไป)"
+  },
+  "watchRemove": {
+    "message": "ลบ"
+  },
+  "watchLeaksTitle": {
+    "message": "การรั่วไหลล่าสุดที่จับได้"
+  },
+  "pinHintTitle": {
+    "message": "ปักหมุด Zevr Guard ไว้ที่แถบเครื่องมือ"
+  },
+  "pinHintDesc": {
+    "message": "คลิกไอคอนจิ๊กซอว์ด้านบน แล้วคลิกหมุดข้าง Zevr Guard สถานะการป้องกันจะอยู่ในสายตาเสมอ"
+  },
+  "pinHintGotIt": {
+    "message": "เข้าใจแล้ว"
+  }
+}

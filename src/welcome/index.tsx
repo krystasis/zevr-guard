@@ -1,4 +1,4 @@
-import { openLiveGlobe } from '../shared/compat';
+import { openLiveGlobe, IS_GECKO } from '../shared/compat';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppIcon, BrandMark } from '../shared/AppIcon';
@@ -99,23 +99,35 @@ const HostPermissionCard: React.FC = () => {
   );
 };
 
+const PIN_HINT_DISMISSED = 'zg.pinHintDismissed';
+
 const PinHint: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
   React.useEffect(() => {
     let mounted = true;
     void (async () => {
+      // Firefox: the puzzle-menu flow doesn't apply and getUserSettings is
+      // unavailable, so there's no reliable pin state to nudge on — skip it.
+      if (IS_GECKO) return;
       try {
+        const store = await chrome.storage.local.get(PIN_HINT_DISMISSED);
+        if (store[PIN_HINT_DISMISSED]) return;
         // Only nudge users whose icon is still buried in the puzzle menu.
         const settings = await chrome.action.getUserSettings();
         if (mounted) setVisible(!settings.isOnToolbar);
       } catch {
-        if (mounted) setVisible(true);
+        // Can't determine the state — don't nag.
       }
     })();
     return () => {
       mounted = false;
     };
   }, []);
+  const dismiss = () => {
+    setVisible(false);
+    // Persist so it stays dismissed across future opens of this page.
+    void chrome.storage.local.set({ [PIN_HINT_DISMISSED]: true });
+  };
   if (!visible) return null;
   return (
     <div className="fixed top-16 right-4 z-50 w-72 rounded-xl border border-cyan-500/50 bg-black/85 backdrop-blur p-4 shadow-[0_8px_40px_-8px_rgba(56,189,248,0.45)]">
@@ -138,7 +150,7 @@ const PinHint: React.FC = () => {
           </p>
           <button
             className="mt-3 rounded-full border border-cyan-600/60 hover:border-cyan-400/80 px-4 py-1.5 text-xs font-bold text-cyan-200 transition"
-            onClick={() => setVisible(false)}
+            onClick={dismiss}
           >
             {t('pinHintGotIt', 'Got it')}
           </button>

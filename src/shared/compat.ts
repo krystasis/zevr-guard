@@ -7,12 +7,19 @@ type BrowserGlobal = typeof chrome & {
 };
 
 const g = globalThis as { browser?: BrowserGlobal; chrome?: BrowserGlobal };
-if (g.browser?.runtime?.id) {
+
+// Chrome 121+ also exposes a `browser` alias, so its mere presence no longer
+// means Gecko. Detect Firefox by user agent, which is available in both the
+// background (event page / service worker) and page contexts.
+/** True when running inside a Gecko (Firefox) extension context. */
+export const IS_GECKO =
+  typeof navigator !== 'undefined' && /Firefox\//.test(navigator.userAgent);
+
+// On Firefox, point the global `chrome` at the promise-based `browser` so the
+// codebase's awaited chrome.* calls work unchanged. No-op on Chromium.
+if (IS_GECKO && g.browser?.runtime?.id) {
   g.chrome = g.browser;
 }
-
-/** True when running inside a Gecko (Firefox) extension context. */
-export const IS_GECKO = g.browser?.runtime?.id !== undefined;
 
 /**
  * Open the Live Globe: the side panel on Chromium, the sidebar on Firefox.

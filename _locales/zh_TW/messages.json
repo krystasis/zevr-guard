@@ -59,7 +59,7 @@
     "message": "識破仿冒釣魚網域"
   },
   "featureLookalikeDesc": {
-    "message": "仿冒真實品牌的假網域（如 paypa1.com、аpple.com）由裝置端分析辨識，即使尚未列入任何封鎖清單也能攔截。"
+    "message": "仿冒真實品牌的假網域（如 examp1e.com、exаmple.com）由裝置端分析辨識，即使尚未列入任何封鎖清單也能攔截。"
   },
   "feature1Title": {
     "message": "自動封鎖惡意軟體"

@@ -59,7 +59,7 @@
     "message": "Bắt lừa đảo giả mạo thương hiệu"
   },
   "featureLookalikeDesc": {
-    "message": "Các tên miền giả mạo thương hiệu thật — paypa1.com, аpple.com — được phát hiện bằng phân tích ngay trên thiết bị, trước cả khi có mặt trong bất kỳ danh sách chặn nào."
+    "message": "Các tên miền giả mạo thương hiệu thật — examp1e.com, exаmple.com — được phát hiện bằng phân tích ngay trên thiết bị, trước cả khi có mặt trong bất kỳ danh sách chặn nào."
   },
   "feature1Title": {
     "message": "Tự động chặn mã độc"

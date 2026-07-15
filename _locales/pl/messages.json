@@ -59,7 +59,7 @@
     "message": "Wykrywa phishing przez podszywanie"
   },
   "featureLookalikeDesc": {
-    "message": "Fałszywe domeny podszywające się pod znane marki — paypa1.com, аpple.com — są wykrywane analizą na urządzeniu, zanim trafią na jakąkolwiek listę blokad."
+    "message": "Fałszywe domeny podszywające się pod znane marki — examp1e.com, exаmple.com — są wykrywane analizą na urządzeniu, zanim trafią na jakąkolwiek listę blokad."
   },
   "feature1Title": {
     "message": "Automatyczne blokowanie malware"

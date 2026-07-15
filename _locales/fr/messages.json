@@ -59,7 +59,7 @@
     "message": "Détecte le phishing par imitation"
   },
   "featureLookalikeDesc": {
-    "message": "Les faux domaines qui imitent de vraies marques — paypa1.com, аpple.com — sont détectés par une analyse locale, avant même d'être listés."
+    "message": "Les faux domaines qui imitent de vraies marques — examp1e.com, exаmple.com — sont détectés par une analyse locale, avant même d'être listés."
   },
   "feature1Title": {
     "message": "Blocage auto des malwares"

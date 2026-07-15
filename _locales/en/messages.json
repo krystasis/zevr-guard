@@ -59,7 +59,7 @@
     "message": "Catch lookalike phishing"
   },
   "featureLookalikeDesc": {
-    "message": "Fake domains that imitate real brands — paypa1.com, аpple.com — are caught by on-device analysis, before they reach any blocklist."
+    "message": "Fake domains that imitate real brands — examp1e.com, exаmple.com — are caught by on-device analysis, before they reach any blocklist."
   },
   "feature1Title": {
     "message": "Auto-block malware"

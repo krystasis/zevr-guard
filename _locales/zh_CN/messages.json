@@ -59,7 +59,7 @@
     "message": "识破仿冒钓鱼域名"
   },
   "featureLookalikeDesc": {
-    "message": "仿冒真实品牌的假域名（如 paypa1.com、аpple.com）由端侧分析识别，即使尚未进入任何拦截列表也能拦下。"
+    "message": "仿冒真实品牌的假域名（如 examp1e.com、exаmple.com）由端侧分析识别，即使尚未进入任何拦截列表也能拦下。"
   },
   "feature1Title": {
     "message": "自动拦截恶意软件"

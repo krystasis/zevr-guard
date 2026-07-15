@@ -59,7 +59,7 @@
     "message": "Rileva il phishing per imitazione"
   },
   "featureLookalikeDesc": {
-    "message": "I domini falsi che imitano marchi reali — paypa1.com, аpple.com — vengono rilevati con analisi sul dispositivo, prima che finiscano in qualsiasi blocklist."
+    "message": "I domini falsi che imitano marchi reali — examp1e.com, exаmple.com — vengono rilevati con analisi sul dispositivo, prima che finiscano in qualsiasi blocklist."
   },
   "feature1Title": {
     "message": "Blocco automatico dei malware"

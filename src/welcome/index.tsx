@@ -236,7 +236,7 @@ const FeatureSection: React.FC = () => (
           title={t('featureLookalikeTitle', 'Catch lookalike phishing')}
           desc={t(
             'featureLookalikeDesc',
-            'Fake domains that imitate real brands — paypa1.com, аpple.com — are caught by on-device analysis, before they reach any blocklist.',
+            'Fake domains that imitate real brands — examp1e.com, exаmple.com — are caught by on-device analysis, before they reach any blocklist.',
           )}
         />
         <FeatureCard

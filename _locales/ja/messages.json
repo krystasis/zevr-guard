@@ -59,7 +59,7 @@
     "message": "なりすましフィッシングを検知"
   },
   "featureLookalikeDesc": {
-    "message": "paypa1.com や аpple.com のような本物そっくりの偽ドメインを端末内解析で検知。ブロックリストに載る前でも防ぎます。"
+    "message": "examp1e.com や exаmple.com のような本物そっくりの偽ドメインを端末内解析で検知。ブロックリストに載る前でも防ぎます。"
   },
   "feature1Title": {
     "message": "危険な通信を自動ブロック"

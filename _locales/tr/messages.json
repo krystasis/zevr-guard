@@ -59,7 +59,7 @@
     "message": "Taklit oltalama alan adlarını yakalar"
   },
   "featureLookalikeDesc": {
-    "message": "Gerçek markaları taklit eden sahte alan adları — paypa1.com, аpple.com — herhangi bir engel listesine girmeden önce cihaz üzerindeki analizle yakalanır."
+    "message": "Gerçek markaları taklit eden sahte alan adları — examp1e.com, exаmple.com — herhangi bir engel listesine girmeden önce cihaz üzerindeki analizle yakalanır."
   },
   "feature1Title": {
     "message": "Zararlı yazılımı otomatik engeller"

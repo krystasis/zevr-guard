@@ -543,7 +543,7 @@ async function getUserLocation(): Promise<UserLocation | null> {
       // never leaves the device, and this endpoint stores nothing. When the
       // edge only knows the country (no precise lat/lng), fall back to that
       // country's centroid, which is bundled offline.
-      const res = await fetch('https://zevrhq.com/whereami', {
+      const res = await fetch('https://feedback.zevrhq.com/v1/whereami', {
         signal: AbortSignal.timeout(4000),
       });
       const j = (await res.json()) as {

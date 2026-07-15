@@ -37,6 +37,16 @@ rmSync(path.join(OUT, '.vite'), { recursive: true, force: true });
 
 const manifest = JSON.parse(readFileSync(path.join(DIST, 'manifest.json'), 'utf8'));
 
+// Strip Chrome-only manifest keys Firefox does not recognize. They are
+// harmless (Firefox ignores them) but each one prints a load-time warning
+// and clutters the AMO review. default_badge_text is empty anyway — the
+// badge is set at runtime via setBadgeText — and use_dynamic_url has no
+// Firefox equivalent (web-accessible resources already get static URLs).
+if (manifest.action) delete manifest.action.default_badge_text;
+for (const entry of manifest.web_accessible_resources ?? []) {
+  delete entry.use_dynamic_url;
+}
+
 // Event page instead of a service worker. The crx loader is a plain ES
 // module import, which Firefox accepts as a module background script.
 manifest.background = {

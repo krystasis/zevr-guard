@@ -12,7 +12,7 @@ import {
 import { initFeed, refreshFeed } from './feed';
 import { t, getLocale, loadLocale, subscribeLocale } from '../shared/i18n';
 import { syncCategoryRulesets } from './rulesets';
-import { getGeoData } from './geo';
+import { getGeoData, countryCentroid } from './geo';
 import {
   getPagesCached,
   markPagesDirty,
@@ -537,18 +537,36 @@ async function getUserLocation(): Promise<UserLocation | null> {
 
   userLocationPromise = (async () => {
     try {
-      const res = await fetch('https://api.ipify.org?format=json', {
+      // Ask our own CDN where the request came from. Cloudflare resolves the
+      // location at the edge from the connecting IP, so nothing about the
+      // user is sent anywhere a third party could see — the browsing history
+      // never leaves the device, and this endpoint stores nothing. When the
+      // edge only knows the country (no precise lat/lng), fall back to that
+      // country's centroid, which is bundled offline.
+      const res = await fetch('https://zevrhq.com/whereami', {
         signal: AbortSignal.timeout(4000),
       });
-      const j = (await res.json()) as { ip?: string };
-      if (!j.ip) return null;
-      const geo = await getGeoData(j.ip);
-      if (!geo) return null;
+      const j = (await res.json()) as {
+        lat?: number | null;
+        lng?: number | null;
+        cc?: string | null;
+      };
+      const cc = typeof j.cc === 'string' ? j.cc.toUpperCase() : null;
+      if (!cc) return null;
+
+      let lat = typeof j.lat === 'number' ? j.lat : null;
+      let lng = typeof j.lng === 'number' ? j.lng : null;
+      if (lat === null || lng === null) {
+        const centroid = countryCentroid(cc);
+        if (!centroid) return null;
+        [lat, lng] = centroid;
+      }
+
       const loc: UserLocation = {
-        lat: geo.lat,
-        lng: geo.lon,
-        countryCode: geo.countryCode,
-        countryName: geo.country,
+        lat,
+        lng,
+        countryCode: cc,
+        countryName: cc,
       };
       userLocationCache = loc;
       await setCachedUserLocation(loc);

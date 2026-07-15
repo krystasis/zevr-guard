@@ -14,6 +14,12 @@ export interface GeoData {
 }
 
 const CENTROIDS = countryCentroids as unknown as Record<string, [number, number]>;
+
+/** [lat, lon] of a country's centroid, or null for an unknown code. */
+export function countryCentroid(code: string): [number, number] | null {
+  return CENTROIDS[code.toUpperCase()] ?? null;
+}
+
 const GEO_CACHE_TTL = 1000 * 60 * 60;
 const geoCache = new Map<string, { data: GeoData | null; timestamp: number }>();
 

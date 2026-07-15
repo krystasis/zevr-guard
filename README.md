@@ -39,8 +39,8 @@ Zevr Guard **never uploads the URLs you visit**. The only outbound traffic is a 
 
 If you want to verify this, the code in this repository is the code that ships in the extension. Search for `fetch(` in [`src/`](./src/) — the only network fetches are:
 
-- the threat-DB update in [`src/background/feed.ts`](./src/background/feed.ts) (anonymous, daily);
-- the geolocation lookup of your own IP via `api.ipify.org` in [`src/background/index.ts`](./src/background/index.ts) (once per session, renders the "you are here" marker; can be disabled in settings);
+- the threat-DB update in [`src/background/feed.ts`](./src/background/feed.ts) (anonymous, daily, from Zevr's own CDN);
+- an approximate-location lookup at `https://zevrhq.com/whereami` in [`src/background/index.ts`](./src/background/index.ts) — Zevr's own CDN returns the coarse location Cloudflare already resolved from the request, so the map can draw a "you are here" marker. It sends nothing about you or the sites you visit, contacts no third party, is cached after the first call, and stores nothing server-side;
 - the phishing-report submission in [`src/background/index.ts`](./src/background/index.ts) — sent **only when you explicitly click "Report as phishing"**, and containing only the reported domain name, never the page you were on or anything about you.
 
 Every other `fetch(` targets assets bundled inside the extension package. The lookalike phishing heuristics in [`src/background/lookalike.ts`](./src/background/lookalike.ts), the password-entry guard, and country blocking all run entirely on-device.

@@ -12,7 +12,8 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build:app": "tsc -b --noEmit && vite build"
+    "build:app": "tsc -b --noEmit && vite build",
+    "build:firefox": "npm run build:app && node scripts/build-firefox.mjs"
   },
   "dependencies": {
     "buffer": "^6.0.3",

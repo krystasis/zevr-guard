@@ -5,6 +5,7 @@ import type { Connection, RiskLevel, TrackerDB, TrackerEntry } from '../types';
 // override is active.
 import trackersUrl from '../data/trackers.json?url';
 import malwareDB from '../data/malware.json';
+import { readCachedTrackers } from './feedcache';
 
 const BUNDLED_MALWARE: Set<string> = new Set(malwareDB as string[]);
 
@@ -15,7 +16,8 @@ let trackersLoading: Promise<void> | null = null;
 
 /**
  * Resolve the active tracker DB. Returns immediately when a feed override
- * (or a previous load) is in place; otherwise fetches the bundled JSON once.
+ * (or a previous load) is in place; otherwise loads the cached feed, and
+ * falls back to the bundled JSON when no feed has been downloaded yet.
  */
 export function ensureTrackerDB(): Promise<void> {
   if (TRACKERS) return Promise.resolve();
@@ -24,22 +26,30 @@ export function ensureTrackerDB(): Promise<void> {
     return Promise.resolve();
   }
   if (!trackersLoading) {
-    trackersLoading = fetch(trackersUrl)
-      .then((r) => r.json())
-      .then((db: TrackerDB) => {
-        BUNDLED_TRACKERS = db;
-        if (!TRACKERS) TRACKERS = db;
-      })
-      .catch((err) => {
-        console.warn('[Zevr Guard] bundled tracker DB load failed:', err);
-        trackersLoading = null;
-      });
+    trackersLoading = (async () => {
+      // The cached feed is fresher than the bundled DB; fall through when
+      // it is absent or unreadable.
+      const feed = await readCachedTrackers();
+      if (feed) {
+        if (!TRACKERS) TRACKERS = feed;
+        return;
+      }
+      const db = (await (await fetch(trackersUrl)).json()) as TrackerDB;
+      BUNDLED_TRACKERS = db;
+      if (!TRACKERS) TRACKERS = db;
+    })().catch((err) => {
+      console.warn('[Zevr Guard] tracker DB load failed:', err);
+      trackersLoading = null;
+    });
   }
   return trackersLoading;
 }
 
 export function setTrackerOverride(db: TrackerDB | null): void {
   TRACKERS = db && Object.keys(db).length > 0 ? db : BUNDLED_TRACKERS;
+  // The bundled DB may never have been fetched (the cached feed usually
+  // wins); let ensureTrackerDB run again instead of latching onto null.
+  if (!TRACKERS) trackersLoading = null;
 }
 
 export function setMalwareOverride(list: string[] | null): void {

@@ -17,3 +17,4 @@ public/rules/ads_rules.json
 public/rules/tracking_rules.json
 src/data/trackers.json
 src/data/malware.json
+dist-firefox/

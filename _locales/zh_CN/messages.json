@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "最近捕获的泄露"
+  },
+  "pinHintTitle": {
+    "message": "把 Zevr Guard 固定到工具栏"
+  },
+  "pinHintDesc": {
+    "message": "点击上方的拼图图标，再点击 Zevr Guard 旁边的图钉。防护状态随时一目了然。"
+  },
+  "pinHintGotIt": {
+    "message": "知道了"
   }
 }

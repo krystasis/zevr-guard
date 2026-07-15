@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Rò rỉ vừa phát hiện"
+  },
+  "pinHintTitle": {
+    "message": "Ghim Zevr Guard vào thanh công cụ"
+  },
+  "pinHintDesc": {
+    "message": "Nhấp vào biểu tượng mảnh ghép ở trên, rồi nhấp vào ghim cạnh Zevr Guard. Trạng thái bảo vệ luôn hiện ngay trước mắt bạn."
+  },
+  "pinHintGotIt": {
+    "message": "Đã hiểu"
   }
 }

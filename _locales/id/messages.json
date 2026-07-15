@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Kebocoran terbaru yang tertangkap"
+  },
+  "pinHintTitle": {
+    "message": "Sematkan Zevr Guard ke bilah alat"
+  },
+  "pinHintDesc": {
+    "message": "Klik ikon puzzle di atas, lalu klik pin di samping Zevr Guard. Perlindungan Anda selalu terlihat sekilas."
+  },
+  "pinHintGotIt": {
+    "message": "Mengerti"
   }
 }

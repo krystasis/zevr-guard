@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Ostatnio wykryte wycieki"
+  },
+  "pinHintTitle": {
+    "message": "Przypnij Zevr Guard do paska narzędzi"
+  },
+  "pinHintDesc": {
+    "message": "Kliknij ikonę puzzla powyżej, a następnie pinezkę obok Zevr Guard. Twoja ochrona będzie zawsze w zasięgu wzroku."
+  },
+  "pinHintGotIt": {
+    "message": "Rozumiem"
   }
 }

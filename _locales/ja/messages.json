@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "最近検知した漏洩"
+  },
+  "pinHintTitle": {
+    "message": "ツールバーにピン留めしましょう"
+  },
+  "pinHintDesc": {
+    "message": "右上のパズルアイコンをクリックし、Zevr Guard の横のピンを押すと、保護状態がいつでも一目でわかります。"
+  },
+  "pinHintGotIt": {
+    "message": "OK"
   }
 }

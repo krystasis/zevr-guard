@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "हाल में पकड़े गए रिसाव"
+  },
+  "pinHintTitle": {
+    "message": "Zevr Guard को टूलबार पर पिन करें"
+  },
+  "pinHintDesc": {
+    "message": "ऊपर पज़ल आइकन पर क्लिक करें, फिर Zevr Guard के बगल में पिन दबाएँ। आपकी सुरक्षा हमेशा एक नज़र में दिखती रहेगी।"
+  },
+  "pinHintGotIt": {
+    "message": "समझ गया"
   }
 }

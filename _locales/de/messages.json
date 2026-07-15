@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Kürzlich erkannte Lecks"
+  },
+  "pinHintTitle": {
+    "message": "Zevr Guard an die Symbolleiste anheften"
+  },
+  "pinHintDesc": {
+    "message": "Klicke oben auf das Puzzle-Symbol und dann auf die Stecknadel neben Zevr Guard. So bleibt dein Schutz immer im Blick."
+  },
+  "pinHintGotIt": {
+    "message": "Alles klar"
   }
 }

@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Vazamentos recentes detectados"
+  },
+  "pinHintTitle": {
+    "message": "Fixe o Zevr Guard na barra de ferramentas"
+  },
+  "pinHintDesc": {
+    "message": "Clique no ícone de quebra-cabeça acima e depois no alfinete ao lado de Zevr Guard. Sua proteção fica sempre à vista."
+  },
+  "pinHintGotIt": {
+    "message": "Entendi"
   }
 }

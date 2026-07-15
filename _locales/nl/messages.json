@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Recent betrapte lekken"
+  },
+  "pinHintTitle": {
+    "message": "Zet Zevr Guard vast op je werkbalk"
+  },
+  "pinHintDesc": {
+    "message": "Klik hierboven op het puzzelstukje en daarna op de punaise naast Zevr Guard. Zo blijft je bescherming altijd in beeld."
+  },
+  "pinHintGotIt": {
+    "message": "Begrepen"
   }
 }

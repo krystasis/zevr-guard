@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Fuites récentes détectées"
+  },
+  "pinHintTitle": {
+    "message": "Épinglez Zevr Guard à votre barre d'outils"
+  },
+  "pinHintDesc": {
+    "message": "Cliquez sur l'icône puzzle ci-dessus, puis sur l'épingle à côté de Zevr Guard. Votre protection reste visible en un coup d'œil."
+  },
+  "pinHintGotIt": {
+    "message": "Compris"
   }
 }

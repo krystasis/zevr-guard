@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Недавно пойманные утечки"
+  },
+  "pinHintTitle": {
+    "message": "Закрепите Zevr Guard на панели инструментов"
+  },
+  "pinHintDesc": {
+    "message": "Нажмите на значок пазла сверху, затем на кнопку закрепления рядом с Zevr Guard. Ваша защита всегда будет на виду."
+  },
+  "pinHintGotIt": {
+    "message": "Понятно"
   }
 }

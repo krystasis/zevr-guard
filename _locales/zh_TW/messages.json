@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "最近捕獲的外洩"
+  },
+  "pinHintTitle": {
+    "message": "將 Zevr Guard 釘選到工具列"
+  },
+  "pinHintDesc": {
+    "message": "點選上方的拼圖圖示，再點選 Zevr Guard 旁的圖釘。防護狀態隨時一目了然。"
+  },
+  "pinHintGotIt": {
+    "message": "知道了"
   }
 }

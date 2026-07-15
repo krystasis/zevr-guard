@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Fughe recenti rilevate"
+  },
+  "pinHintTitle": {
+    "message": "Fissa Zevr Guard alla barra degli strumenti"
+  },
+  "pinHintDesc": {
+    "message": "Fai clic sull'icona del puzzle in alto, poi sulla puntina accanto a Zevr Guard. La tua protezione resta sempre in vista."
+  },
+  "pinHintGotIt": {
+    "message": "Capito"
   }
 }

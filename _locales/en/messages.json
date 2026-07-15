@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Recent leaks caught"
+  },
+  "pinHintTitle": {
+    "message": "Pin Zevr Guard to your toolbar"
+  },
+  "pinHintDesc": {
+    "message": "Click the puzzle icon above, then the pin next to Zevr Guard. Your protection stays one glance away."
+  },
+  "pinHintGotIt": {
+    "message": "Got it"
   }
 }

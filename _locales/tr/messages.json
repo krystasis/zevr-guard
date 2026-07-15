@@ -899,5 +899,14 @@
   },
   "watchLeaksTitle": {
     "message": "Son yakalanan sızıntılar"
+  },
+  "pinHintTitle": {
+    "message": "Zevr Guard'ı araç çubuğuna sabitleyin"
+  },
+  "pinHintDesc": {
+    "message": "Yukarıdaki yapboz simgesine, ardından Zevr Guard'ın yanındaki raptiyeye tıklayın. Korumanız her zaman göz önünde kalır."
+  },
+  "pinHintGotIt": {
+    "message": "Anladım"
   }
 }

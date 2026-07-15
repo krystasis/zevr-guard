@@ -33,10 +33,60 @@ const Welcome: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-gray-100 relative font-sans">
       <LanguageSwitcher />
+      <PinHint />
       <Hero />
       <FeatureSection />
       <CredibilitySection />
       <Footer />
+    </div>
+  );
+};
+
+const PinHint: React.FC = () => {
+  const [visible, setVisible] = React.useState(false);
+  React.useEffect(() => {
+    let mounted = true;
+    void (async () => {
+      try {
+        // Only nudge users whose icon is still buried in the puzzle menu.
+        const settings = await chrome.action.getUserSettings();
+        if (mounted) setVisible(!settings.isOnToolbar);
+      } catch {
+        if (mounted) setVisible(true);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  if (!visible) return null;
+  return (
+    <div className="fixed top-16 right-4 z-50 w-72 rounded-xl border border-cyan-500/50 bg-black/85 backdrop-blur p-4 shadow-[0_8px_40px_-8px_rgba(56,189,248,0.45)]">
+      <div className="absolute -top-5 right-8 text-cyan-300 text-lg animate-bounce-slow" aria-hidden="true">
+        ↑
+      </div>
+      <div className="flex items-start gap-2.5">
+        <span className="text-lg leading-none" aria-hidden="true">
+          📌
+        </span>
+        <div>
+          <div className="text-sm font-bold text-white leading-snug">
+            {t('pinHintTitle', 'Pin Zevr Guard to your toolbar')}
+          </div>
+          <p className="mt-1.5 text-xs leading-relaxed text-gray-300">
+            {t(
+              'pinHintDesc',
+              'Click the puzzle icon above, then the pin next to Zevr Guard. Your protection stays one glance away.',
+            )}
+          </p>
+          <button
+            className="mt-3 rounded-full border border-cyan-600/60 hover:border-cyan-400/80 px-4 py-1.5 text-xs font-bold text-cyan-200 transition"
+            onClick={() => setVisible(false)}
+          >
+            {t('pinHintGotIt', 'Got it')}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

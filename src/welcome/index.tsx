@@ -13,10 +13,11 @@ import {
 import { useLocale } from '../shared/useLocale';
 import '../styles/tailwind.css';
 
-async function openSidePanel() {
+function openSidePanel() {
+  // Synchronous: Firefox's sidebarAction.open() only works inside the click
+  // gesture, which an await here would break.
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    await openLiveGlobe(tab?.id ?? undefined);
+    openLiveGlobe();
   } catch {
     // ignore
   }

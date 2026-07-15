@@ -386,10 +386,11 @@ export const Popup: React.FC = () => {
   );
 };
 
-async function openSidePanel() {
+function openSidePanel() {
+  // Call openLiveGlobe synchronously — Firefox's sidebarAction.open() only
+  // works inside the click gesture, which an await here would break.
   try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    await openLiveGlobe(tab?.id ?? undefined);
+    openLiveGlobe();
     window.close();
   } catch {
     // ignore

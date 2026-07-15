@@ -15,25 +15,35 @@ if (g.browser?.runtime?.id) {
 export const IS_GECKO = g.browser?.runtime?.id !== undefined;
 
 /**
- * Open the Live Globe: the side panel on Chromium, the sidebar on
- * Firefox. Both call sites run inside a user gesture, which Firefox
- * requires for sidebarAction.open().
+ * Open the Live Globe: the side panel on Chromium, the sidebar on Firefox.
+ *
+ * MUST be called synchronously from a click handler with no `await` before
+ * it. Firefox rejects `sidebarAction.open()` unless it runs inside the user
+ * input handler, and a preceding await loses that context. The Firefox
+ * branch therefore opens first (the sidebar is window-global — no tab id
+ * needed); the Chromium branch does its own async tab lookup, which Chrome
+ * tolerates across awaits.
  */
-export async function openLiveGlobe(tabId: number | undefined): Promise<void> {
+export function openLiveGlobe(): void {
   const sidePanel = (
     chrome as { sidePanel?: { setOptions: (o: object) => Promise<void>; open: (o: object) => Promise<void> } }
   ).sidePanel;
-  if (sidePanel) {
-    if (tabId == null) return;
+
+  if (!sidePanel) {
+    void g.browser?.sidebarAction?.open();
+    return;
+  }
+
+  void (async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab?.id == null) return;
     await sidePanel.setOptions({
-      tabId,
+      tabId: tab.id,
       path: 'src/sidepanel/index.html',
       enabled: true,
     });
-    await sidePanel.open({ tabId });
-    return;
-  }
-  await g.browser?.sidebarAction?.open();
+    await sidePanel.open({ tabId: tab.id });
+  })();
 }
 
 /**

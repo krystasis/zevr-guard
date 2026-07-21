@@ -276,7 +276,9 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
     camera.updateProjectionMatrix();
     // Keep the sphere (plus arc headroom) inside the frame whatever the
     // container's aspect ratio: back the camera off for narrow hosts.
-    const fitH = 1.34; // sphere + atmosphere + arc lift
+    // Fill the first view: the sphere spans ~90% of the shorter viewport
+    // axis; arc peaks may crop at the edges, which reads as intentional.
+    const fitH = 1.12;
     const vFov = (camera.fov * Math.PI) / 180;
     const dV = fitH / Math.tan(vFov / 2);
     const dH = fitH / (Math.tan(vFov / 2) * camera.aspect);

@@ -246,9 +246,17 @@ const Hero: React.FC = () => {
   const [earth, setEarth] = React.useState<'loading' | 'ok' | 'failed'>('loading');
   return (
   <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 pb-24 overflow-hidden">
-    <HeroBackground dim={earth === 'ok'} />
+    {/* the wireframe emblem is strictly a no-3D fallback — never let it
+        flash behind the earth while the module streams in */}
+    <HeroBackground dim={earth !== 'failed'} />
+    {/* full-viewport backdrop: the whole sphere sits behind the copy */}
+    <div className="absolute inset-0 z-[5]">
+      <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
+      {/* scrim so the wordmark stays readable over bright clouds */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.22)_55%,transparent_82%)]" />
+    </div>
     <div className="relative z-10 w-full flex flex-col items-center">
-    <div className="flex items-center gap-2 mb-6">
+    <div className="flex items-center gap-2 mb-8">
       <BrandMark size={16} />
       <span className="text-[10px] uppercase tracking-[0.4em] text-gray-200">
         {t('brandZevr', 'Zevr')}
@@ -258,15 +266,6 @@ const Hero: React.FC = () => {
       <span className="text-[10px] uppercase tracking-[0.4em] text-emerald-300">
         {t('protectionActive', 'Protection active')}
       </span>
-    </div>
-
-    {/* the earth takes the emblem's old center-stage spot */}
-    <div
-      className={`relative mb-6 w-full max-w-[560px] ${
-        earth === 'failed' ? 'hidden' : ''
-      } h-[300px] sm:h-[340px] md:h-[380px]`}
-    >
-      <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
     </div>
 
     {earth === 'failed' && (

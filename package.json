@@ -1,6 +1,6 @@
 {
   "name": "zevr-guard",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Blocks known malware and shows every third-party tracker your browser contacts. Threat list updates daily. All matching is local.",
   "private": true,
   "type": "module",

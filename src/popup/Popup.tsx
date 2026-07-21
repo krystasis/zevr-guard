@@ -420,16 +420,21 @@ export const Popup: React.FC = () => {
                 total={connections.length}
               />
             )}
-            <ConnectionList
-              connections={filtered}
-              groupBy={groupBy}
-              blockedCountries={settings?.blockedCountries ?? []}
-              onSelect={setSelectedDomain}
-              onBlock={handleBlock}
-              onUnblock={handleUnblock}
-              onBlockCountry={handleBlockCountry}
-              onUnblockCountry={handleUnblockCountry}
-            />
+            {/* no per-page stats yet: the header already explains what to
+                do, so skip the list and its "no matching connections"
+                empty state — it reads like a filter result out of context */}
+            {stats && (
+              <ConnectionList
+                connections={filtered}
+                groupBy={groupBy}
+                blockedCountries={settings?.blockedCountries ?? []}
+                onSelect={setSelectedDomain}
+                onBlock={handleBlock}
+                onUnblock={handleUnblock}
+                onBlockCountry={handleBlockCountry}
+                onUnblockCountry={handleUnblockCountry}
+              />
+            )}
           </>
         )}
 
@@ -496,29 +501,49 @@ const TopBar: React.FC<{
       </div>
     </div>
     <div className="flex items-center gap-1">
+      {/* inline SVGs: emoji glyphs render inconsistently across platforms */}
       {onShare && (
         <IconButton
           onClick={onShare}
           title={t('shareTitle', 'Share this scan')}
         >
-          {sharing ? '…' : '📤'}
+          {sharing ? (
+            '…'
+          ) : (
+            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M12 15V4m0 0L7.5 8.5M12 4l4.5 4.5" />
+              <path d="M4 14v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+            </svg>
+          )}
         </IconButton>
       )}
       <IconButton onClick={openReport} title={t('reportTitle', 'Protection report')}>
-        📊
+        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+          <path d="M5 20V10M12 20V4M19 20v-7" />
+        </svg>
       </IconButton>
       <IconButton
         onClick={openSidePanel}
         title={t('sidePanelOpenTitle', 'Open live globe side panel')}
       >
-        🌐
+        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
+        </svg>
       </IconButton>
       <IconButton
         onClick={() => onToggle(view === 'settings' ? 'list' : 'settings')}
         title={t('settingsTitle', 'Settings')}
         active={view === 'settings'}
       >
-        {view === 'settings' ? '←' : '⚙'}
+        {view === 'settings' ? (
+          '←'
+        ) : (
+          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.11 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.09a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.09a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1.02Z" />
+          </svg>
+        )}
       </IconButton>
     </div>
   </div>

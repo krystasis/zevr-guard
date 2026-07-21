@@ -327,7 +327,7 @@
     "message": "Điểm này gồm những gì"
   },
   "riskBreakdownBlocked": {
-    "message": "Đã chặn (không tính)"
+    "message": "Bạn đã chặn (không tính)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting và quảng cáo có trọng số cao hơn hạ tầng. Chặn một kết nối sẽ loại nó khỏi điểm."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Đang theo dõi. Bạn sẽ thấy biểu ngữ đỏ ngay khi nó được gửi đến trang khác."
+  },
+  "welcomeAdblockTag": {
+    "message": "Khuyến nghị · một chạm"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Chặn cả quảng cáo & trình theo dõi?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Mặc định Zevr Guard chỉ chặn tên miền nguy hiểm. Bật để chặn cả quảng cáo và theo dõi — trang bị lỗi có thể tạm dừng bằng một chạm."
+  },
+  "welcomeAdblockCta": {
+    "message": "Bật chặn quảng cáo & trình theo dõi"
+  },
+  "welcomeAdblockOn": {
+    "message": "Đã bật chặn quảng cáo & trình theo dõi. Nếu trang bị lỗi, tạm dừng từ popup."
   },
   "watchDesc": {
     "message": "Cảnh báo khi email, số điện thoại hoặc bất kỳ giá trị nào bạn thêm được gửi tới trang khác — kể cả đã băm. Mọi việc đối chiếu diễn ra trên thiết bị của bạn."

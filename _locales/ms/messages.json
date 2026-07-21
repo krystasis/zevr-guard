@@ -327,7 +327,7 @@
     "message": "Apa yang membentuk skor ini"
   },
   "riskBreakdownBlocked": {
-    "message": "Disekat (tidak dikira)"
+    "message": "Disekat oleh anda (tidak dikira)"
   },
   "riskBreakdownNote": {
     "message": "Pengecapan jari dan iklan lebih berat daripada infrastruktur. Menyekat sambungan mengeluarkannya daripada skor."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Sedang dipantau. Anda akan nampak sepanduk merah sebaik sahaja ia dihantar ke tapak lain."
+  },
+  "welcomeAdblockTag": {
+    "message": "Disyorkan · satu ketikan"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Sekat iklan & penjejak juga?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Secara lalai, Zevr Guard hanya menyekat domain berbahaya. Hidupkan untuk turut menyekat iklan dan penjejakan — jeda tapak yang bermasalah dengan satu ketikan."
+  },
+  "welcomeAdblockCta": {
+    "message": "Hidupkan sekatan iklan & penjejak"
+  },
+  "welcomeAdblockOn": {
+    "message": "Sekatan iklan & penjejak dihidupkan. Jeda tapak dari popup jika bermasalah."
   },
   "watchDesc": {
     "message": "Memberi amaran apabila e-mel, telefon, atau apa-apa nilai yang anda tambah dihantar ke laman lain — walaupun telah dicincang. Semua padanan kekal pada peranti anda."

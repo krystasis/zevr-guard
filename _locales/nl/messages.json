@@ -327,7 +327,7 @@
     "message": "Waaruit deze score bestaat"
   },
   "riskBreakdownBlocked": {
-    "message": "Geblokkeerd (telt niet mee)"
+    "message": "Door jou geblokkeerd (telt niet mee)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting en advertenties wegen zwaarder dan infrastructuur. Een geblokkeerde verbinding telt niet meer mee."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Wordt bewaakt. Je ziet direct een rode banner zodra het naar een andere site wordt gestuurd."
+  },
+  "welcomeAdblockTag": {
+    "message": "Aanbevolen · één tik"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Ook advertenties & trackers blokkeren?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Standaard blokkeert Zevr Guard alleen gevaarlijke domeinen. Zet dit aan om ook advertenties en tracking te blokkeren — en pauzeer met één tik elke site die stukgaat."
+  },
+  "welcomeAdblockCta": {
+    "message": "Advertentie- & trackerblokkering aanzetten"
+  },
+  "welcomeAdblockOn": {
+    "message": "Advertentie- en trackerblokkering staat aan. Pauzeer een site via de popup als die stukgaat."
   },
   "watchDesc": {
     "message": "Waarschuwt wanneer je e-mail, telefoon of toegevoegde waarde naar een andere site wordt gestuurd — ook gehasht. Alle vergelijking blijft op je apparaat."

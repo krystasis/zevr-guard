@@ -327,7 +327,7 @@
     "message": "What makes this score"
   },
   "riskBreakdownBlocked": {
-    "message": "Blocked (not counted)"
+    "message": "Blocked by you (excluded)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting and ads weigh more than infrastructure. Blocking a connection removes it from the score."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Watching. You will see a red banner the moment it is sent to another site."
+  },
+  "welcomeAdblockTag": {
+    "message": "Recommended · one tap"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Block ads & trackers too?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Out of the box, Zevr Guard only blocks dangerous domains. Turn this on to also block ads and tracking requests — and pause any site that misbehaves with one tap."
+  },
+  "welcomeAdblockCta": {
+    "message": "Turn on ad & tracker blocking"
+  },
+  "welcomeAdblockOn": {
+    "message": "Ad & tracker blocking is on. Pause any site from the popup if it breaks."
   },
   "watchDesc": {
     "message": "Warns you when your email, phone, or any value you add is sent to another site — even hashed. All matching stays on your device."

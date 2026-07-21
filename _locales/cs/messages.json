@@ -327,7 +327,7 @@
     "message": "Z čeho se skóre skládá"
   },
   "riskBreakdownBlocked": {
-    "message": "Blokováno (nepočítá se)"
+    "message": "Zablokováno vámi (nepočítá se)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting a reklama váží víc než infrastruktura. Zablokované připojení se do skóre nepočítá."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Sledujeme. Jakmile se odešle na jiný web, uvidíte červený banner."
+  },
+  "welcomeAdblockTag": {
+    "message": "Doporučeno · jedno klepnutí"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Blokovat i reklamy a trackery?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Ve výchozím stavu Zevr Guard blokuje jen nebezpečné domény. Zapnutím zablokujete i reklamy a sledování — rozbitý web pozastavíte jedním klepnutím."
+  },
+  "welcomeAdblockCta": {
+    "message": "Zapnout blokování reklam a trackerů"
+  },
+  "welcomeAdblockOn": {
+    "message": "Blokování reklam a trackerů je zapnuté. Rozbitý web pozastavte z popupu."
   },
   "watchDesc": {
     "message": "Upozorní vás, když se váš e-mail, telefon nebo jakákoli přidaná hodnota odešle na jiný web — i v zahashované podobě. Veškeré porovnávání zůstává ve vašem zařízení."

@@ -327,7 +327,7 @@
     "message": "Qué compone esta puntuación"
   },
   "riskBreakdownBlocked": {
-    "message": "Bloqueadas (no cuentan)"
+    "message": "Bloqueadas por ti (no cuentan)"
   },
   "riskBreakdownNote": {
     "message": "El fingerprinting y la publicidad pesan más que la infraestructura. Bloquear una conexión la excluye de la puntuación."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "En vigilancia. Verás un banner rojo en cuanto se envíe a otro sitio."
+  },
+  "welcomeAdblockTag": {
+    "message": "Recomendado · un toque"
+  },
+  "welcomeAdblockTitle": {
+    "message": "¿Bloquear también anuncios y rastreadores?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "De fábrica, Zevr Guard solo bloquea dominios peligrosos. Activa esto para bloquear también anuncios y rastreo — y pausa con un toque cualquier sitio que falle."
+  },
+  "welcomeAdblockCta": {
+    "message": "Activar bloqueo de anuncios y rastreadores"
+  },
+  "welcomeAdblockOn": {
+    "message": "Bloqueo de anuncios y rastreadores activado. Pausa cualquier sitio desde el popup si falla."
   },
   "watchDesc": {
     "message": "Te avisa cuando tu correo, teléfono o cualquier valor añadido se envía a otro sitio, incluso con hash. Todo el cotejo ocurre en tu dispositivo."

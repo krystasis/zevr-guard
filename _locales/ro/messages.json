@@ -327,7 +327,7 @@
     "message": "Din ce e compus acest scor"
   },
   "riskBreakdownBlocked": {
-    "message": "Blocate (nu se numără)"
+    "message": "Blocate de tine (nu se numără)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting-ul și reclamele cântăresc mai mult decât infrastructura. Blocarea unei conexiuni o scoate din scor."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Sub supraveghere. Vei vedea un banner roșu imediat ce este trimis către alt site."
+  },
+  "welcomeAdblockTag": {
+    "message": "Recomandat · o atingere"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Blochezi și reclamele & trackerele?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Din fabrică, Zevr Guard blochează doar domeniile periculoase. Activează pentru a bloca și reclamele și urmărirea — pui pe pauză cu o atingere orice site stricat."
+  },
+  "welcomeAdblockCta": {
+    "message": "Activează blocarea reclamelor și trackerelor"
+  },
+  "welcomeAdblockOn": {
+    "message": "Blocarea reclamelor și trackerelor e activă. Pune pe pauză un site din popup dacă se strică."
   },
   "watchDesc": {
     "message": "Te avertizează când e-mailul, telefonul sau orice valoare adaugi este trimisă către alt site — chiar și hash-uită. Toată potrivirea rămâne pe dispozitivul tău."

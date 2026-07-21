@@ -327,7 +327,7 @@
     "message": "점수 구성"
   },
   "riskBreakdownBlocked": {
-    "message": "차단됨(집계 제외)"
+    "message": "직접 차단함(집계 제외)"
   },
   "riskBreakdownNote": {
     "message": "핑거프린팅과 광고는 인프라보다 가중치가 높습니다. 연결을 차단하면 점수에서 제외됩니다."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "감시 중입니다. 다른 사이트로 전송되는 순간 빨간 배너로 알려드립니다."
+  },
+  "welcomeAdblockTag": {
+    "message": "추천 · 원탭"
+  },
+  "welcomeAdblockTitle": {
+    "message": "광고와 트래커도 차단할까요?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "기본 상태에서는 위험한 도메인만 차단합니다. 켜면 광고·트래킹 요청도 차단하며, 문제가 생긴 사이트는 원탭으로 일시정지할 수 있습니다."
+  },
+  "welcomeAdblockCta": {
+    "message": "광고·트래커 차단 켜기"
+  },
+  "welcomeAdblockOn": {
+    "message": "광고·트래커 차단이 켜졌습니다. 문제가 생기면 팝업에서 사이트를 일시정지하세요."
   },
   "watchDesc": {
     "message": "등록한 이메일·전화번호 등의 값이 다른 사이트로 전송되면 경고합니다(해시된 경우도 감지). 대조는 모두 기기 안에서 이루어집니다."

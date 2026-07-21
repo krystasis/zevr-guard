@@ -327,7 +327,7 @@
     "message": "Miből áll ez a pontszám"
   },
   "riskBreakdownBlocked": {
-    "message": "Blokkolva (nem számít)"
+    "message": "Általad blokkolt (nem számít)"
   },
   "riskBreakdownNote": {
     "message": "Az ujjlenyomat-készítés és a hirdetések többet nyomnak, mint az infrastruktúra. A blokkolt kapcsolat kikerül a pontszámból."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Figyeljük. Piros sávot látsz, amint egy másik oldalra kerül."
+  },
+  "welcomeAdblockTag": {
+    "message": "Ajánlott · egy érintés"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Hirdetéseket és követőket is blokkoljunk?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Alapból a Zevr Guard csak a veszélyes domaineket blokkolja. Kapcsold be, hogy a hirdetéseket és a követést is blokkolja — a hibás oldalt egy érintéssel szüneteltetheted."
+  },
+  "welcomeAdblockCta": {
+    "message": "Hirdetés- és követőblokkolás bekapcsolása"
+  },
+  "welcomeAdblockOn": {
+    "message": "A hirdetés- és követőblokkolás bekapcsolva. Hibás oldalt a popupból szüneteltethetsz."
   },
   "watchDesc": {
     "message": "Figyelmeztet, ha az e-mailed, telefonszámod vagy bármely hozzáadott érték másik oldalra kerül — akár hashelve is. Minden egyeztetés az eszközödön marad."

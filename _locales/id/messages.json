@@ -327,7 +327,7 @@
     "message": "Apa yang membentuk skor ini"
   },
   "riskBreakdownBlocked": {
-    "message": "Diblokir (tidak dihitung)"
+    "message": "Diblokir olehmu (tidak dihitung)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting dan iklan berbobot lebih besar daripada infrastruktur. Memblokir koneksi menghapusnya dari skor."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Sedang dipantau. Anda akan melihat spanduk merah begitu dikirim ke situs lain."
+  },
+  "welcomeAdblockTag": {
+    "message": "Disarankan · sekali ketuk"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Blokir iklan & pelacak juga?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Bawaan pabrik, Zevr Guard hanya memblokir domain berbahaya. Aktifkan untuk juga memblokir iklan dan pelacakan — jeda situs yang rusak dengan sekali ketuk."
+  },
+  "welcomeAdblockCta": {
+    "message": "Aktifkan pemblokiran iklan & pelacak"
+  },
+  "welcomeAdblockOn": {
+    "message": "Pemblokiran iklan & pelacak aktif. Jeda situs dari popup jika ada masalah."
   },
   "watchDesc": {
     "message": "Memperingatkan saat email, telepon, atau nilai apa pun yang Anda tambahkan dikirim ke situs lain — bahkan yang di-hash. Semua pencocokan tetap di perangkat Anda."

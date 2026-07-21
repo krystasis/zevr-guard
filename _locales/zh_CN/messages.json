@@ -327,7 +327,7 @@
     "message": "分数构成"
   },
   "riskBreakdownBlocked": {
-    "message": "已拦截(不计入)"
+    "message": "你拦截的(不计入)"
   },
   "riskBreakdownNote": {
     "message": "指纹识别和广告的权重高于基础设施。拦截连接后将不再计入分数。"
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "监控中。一旦被发送到其他网站,你会立即看到红色横幅。"
+  },
+  "welcomeAdblockTag": {
+    "message": "推荐 · 一键"
+  },
+  "welcomeAdblockTitle": {
+    "message": "也拦截广告和跟踪器?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "默认只拦截危险域名。开启后还会拦截广告和跟踪请求 — 页面异常时可一键暂停该网站。"
+  },
+  "welcomeAdblockCta": {
+    "message": "开启广告和跟踪器拦截"
+  },
+  "welcomeAdblockOn": {
+    "message": "广告和跟踪器拦截已开启。如有异常,可在弹窗中暂停该网站。"
   },
   "watchDesc": {
     "message": "当您的邮箱、电话或任何添加的值被发送到其他网站时发出警告——即使经过哈希。所有匹配都在您的设备上完成。"

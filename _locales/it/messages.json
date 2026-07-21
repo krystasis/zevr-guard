@@ -327,7 +327,7 @@
     "message": "Da cosa deriva il punteggio"
   },
   "riskBreakdownBlocked": {
-    "message": "Bloccate (non contate)"
+    "message": "Bloccate da te (non contate)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting e pubblicità pesano più dell’infrastruttura. Bloccare una connessione la esclude dal punteggio."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Sotto controllo. Vedrai un banner rosso appena viene inviato a un altro sito."
+  },
+  "welcomeAdblockTag": {
+    "message": "Consigliato · un tocco"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Bloccare anche pubblicità e tracker?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Di default Zevr Guard blocca solo i domini pericolosi. Attiva questa opzione per bloccare anche pubblicità e tracciamento — e metti in pausa con un tocco i siti che si rompono."
+  },
+  "welcomeAdblockCta": {
+    "message": "Attiva blocco pubblicità e tracker"
+  },
+  "welcomeAdblockOn": {
+    "message": "Blocco di pubblicità e tracker attivo. Metti in pausa i siti dal popup se necessario."
   },
   "watchDesc": {
     "message": "Ti avvisa quando la tua email, il telefono o qualsiasi valore aggiunto viene inviato a un altro sito — anche con hash. Il confronto resta sul tuo dispositivo."

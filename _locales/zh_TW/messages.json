@@ -327,7 +327,7 @@
     "message": "分數組成"
   },
   "riskBreakdownBlocked": {
-    "message": "已封鎖(不計入)"
+    "message": "你封鎖的(不計入)"
   },
   "riskBreakdownNote": {
     "message": "指紋辨識與廣告的權重高於基礎設施。封鎖連線後將不再計入分數。"
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "監控中。一旦被傳送到其他網站,你會立即看到紅色橫幅。"
+  },
+  "welcomeAdblockTag": {
+    "message": "推薦 · 一鍵"
+  },
+  "welcomeAdblockTitle": {
+    "message": "也封鎖廣告和追蹤器?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "預設只封鎖危險網域。開啟後還會封鎖廣告和追蹤請求 — 頁面異常時可一鍵暫停該網站。"
+  },
+  "welcomeAdblockCta": {
+    "message": "開啟廣告和追蹤器封鎖"
+  },
+  "welcomeAdblockOn": {
+    "message": "廣告和追蹤器封鎖已開啟。如有異常,可在彈窗中暫停該網站。"
   },
   "watchDesc": {
     "message": "當您的電子郵件、電話或任何新增的值被傳送到其他網站時發出警告——即使經過雜湊。所有比對都在您的裝置上完成。"

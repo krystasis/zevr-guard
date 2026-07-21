@@ -327,7 +327,7 @@
     "message": "Z czego wynika ten wynik"
   },
   "riskBreakdownBlocked": {
-    "message": "Zablokowane (nieliczone)"
+    "message": "Zablokowane przez ciebie (nieliczone)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting i reklamy ważą więcej niż infrastruktura. Zablokowane połączenie nie liczy się do wyniku."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Obserwujemy. Zobaczysz czerwony baner, gdy tylko trafi na inną stronę."
+  },
+  "welcomeAdblockTag": {
+    "message": "Zalecane · jedno dotknięcie"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Blokować też reklamy i trackery?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Domyślnie Zevr Guard blokuje tylko groźne domeny. Włącz, aby blokować też reklamy i śledzenie — a psującą się stronę wstrzymasz jednym dotknięciem."
+  },
+  "welcomeAdblockCta": {
+    "message": "Włącz blokowanie reklam i trackerów"
+  },
+  "welcomeAdblockOn": {
+    "message": "Blokowanie reklam i trackerów włączone. W razie problemów wstrzymaj stronę z poziomu popupu."
   },
   "watchDesc": {
     "message": "Ostrzega, gdy Twój e-mail, telefon lub dodana wartość trafia do innej witryny — nawet zahaszowana. Całe dopasowanie odbywa się na urządzeniu."

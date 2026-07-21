@@ -133,7 +133,8 @@ describe('resolveOwner', () => {
 
   it('falls back to the curated map for Unknown', () => {
     expect(resolveOwner('x.doubleclick.net', 'Unknown')).toBe('Google');
-    expect(resolveOwner('tag.yjtag.jp', null)).toBe('LY-Corporation');
+    expect(resolveOwner('tag.yjtag.jp', null)).toBe('LY Corporation');
+    expect(resolveOwner('s.yimg.jp', 'LY-Corporation')).toBe('LY Corporation');
   });
 
   it('returns null instead of the literal Unknown', () => {

@@ -327,7 +327,7 @@
     "message": "スコアの内訳"
   },
   "riskBreakdownBlocked": {
-    "message": "ブロック済み(集計外)"
+    "message": "自分でブロック済み(集計外)"
   },
   "riskBreakdownNote": {
     "message": "フィンガープリンティングや広告はインフラ系より重く評価されます。接続をブロックするとスコアから除外されます。"
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "監視中です。別のサイトへ送信された瞬間に赤いバナーでお知らせします。"
+  },
+  "welcomeAdblockTag": {
+    "message": "おすすめ · ワンタップ"
+  },
+  "welcomeAdblockTitle": {
+    "message": "広告とトラッカーもブロックしますか?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "初期状態では危険なドメインだけをブロックします。ONにすると広告・トラッキング通信もブロック。表示が崩れたサイトはワンタップで一時停止できます。"
+  },
+  "welcomeAdblockCta": {
+    "message": "広告・トラッカーのブロックをON"
+  },
+  "welcomeAdblockOn": {
+    "message": "広告・トラッカーのブロックが有効になりました。崩れたサイトはポップアップから一時停止できます。"
   },
   "watchDesc": {
     "message": "メール・電話番号など登録した値が他サイトに送信されたら警告します(ハッシュ化されていても検知)。照合はすべて端末内で行います。"

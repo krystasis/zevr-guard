@@ -327,7 +327,7 @@
     "message": "Ce qui compose ce score"
   },
   "riskBreakdownBlocked": {
-    "message": "Bloquées (non comptées)"
+    "message": "Bloquées par vous (non comptées)"
   },
   "riskBreakdownNote": {
     "message": "Le fingerprinting et la pub pèsent plus que l’infrastructure. Bloquer une connexion la retire du score."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Sous surveillance. Un bandeau rouge apparaîtra dès qu’elle sera envoyée à un autre site."
+  },
+  "welcomeAdblockTag": {
+    "message": "Recommandé · un geste"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Bloquer aussi pubs et traqueurs ?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Par défaut, Zevr Guard ne bloque que les domaines dangereux. Activez ceci pour bloquer aussi les pubs et le pistage — et mettez en pause d’un geste tout site qui casse."
+  },
+  "welcomeAdblockCta": {
+    "message": "Activer le blocage pubs & traqueurs"
+  },
+  "welcomeAdblockOn": {
+    "message": "Blocage des pubs et traqueurs activé. Mettez un site en pause depuis le popup en cas de souci."
   },
   "watchDesc": {
     "message": "Vous alerte quand votre e-mail, téléphone ou toute valeur ajoutée est envoyé à un autre site — même haché. Toute la comparaison reste sur votre appareil."

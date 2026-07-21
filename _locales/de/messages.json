@@ -327,7 +327,7 @@
     "message": "Woraus sich der Wert ergibt"
   },
   "riskBreakdownBlocked": {
-    "message": "Blockiert (nicht gezählt)"
+    "message": "Von dir blockiert (nicht gezählt)"
   },
   "riskBreakdownNote": {
     "message": "Fingerprinting und Werbung wiegen schwerer als Infrastruktur. Blockierte Verbindungen zählen nicht mehr."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "Wird überwacht. Du siehst sofort ein rotes Banner, wenn es an eine andere Seite gesendet wird."
+  },
+  "welcomeAdblockTag": {
+    "message": "Empfohlen · ein Tipp"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Auch Werbung & Tracker blockieren?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Standardmäßig blockiert Zevr Guard nur gefährliche Domains. Aktiviere dies, um auch Werbung und Tracking zu blockieren — problematische Seiten pausierst du mit einem Tipp."
+  },
+  "welcomeAdblockCta": {
+    "message": "Werbe- & Tracker-Blockierung aktivieren"
+  },
+  "welcomeAdblockOn": {
+    "message": "Werbe- & Tracker-Blockierung ist aktiv. Pausiere Seiten bei Problemen im Popup."
   },
   "watchDesc": {
     "message": "Warnt, wenn Ihre E-Mail, Telefonnummer oder ein hinzugefügter Wert an eine andere Website gesendet wird — auch gehasht. Der Abgleich bleibt auf Ihrem Gerät."

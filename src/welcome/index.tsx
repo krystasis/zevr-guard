@@ -489,6 +489,80 @@ const FeatureSection: React.FC = () => (
   </section>
 );
 
+// Ads/tracking blocking ships OFF (visibility-first, nothing breaks), but
+// the store listing leads with ad blocking — let users opt in with one tap
+// right where they land, instead of discovering the toggle in settings.
+const AdblockOptIn: React.FC = () => {
+  const [state, setState] = React.useState<'loading' | 'off' | 'on'>('loading');
+
+  React.useEffect(() => {
+    void (async () => {
+      try {
+        const res = (await chrome.runtime.sendMessage({ type: 'GET_SETTINGS' })) as
+          | { settings?: { blockCategories?: { advertising?: boolean; tracking?: boolean } } }
+          | undefined;
+        const bc = res?.settings?.blockCategories;
+        setState(bc?.advertising && bc?.tracking ? 'on' : 'off');
+      } catch {
+        setState('off');
+      }
+    })();
+  }, []);
+
+  async function enable() {
+    try {
+      const res = (await chrome.runtime.sendMessage({ type: 'GET_SETTINGS' })) as
+        | { settings?: { blockCategories: { advertising: boolean; tracking: boolean } } }
+        | undefined;
+      const settings = res?.settings;
+      if (!settings) return;
+      settings.blockCategories.advertising = true;
+      settings.blockCategories.tracking = true;
+      await chrome.runtime.sendMessage({ type: 'UPDATE_SETTINGS', settings });
+      setState('on');
+    } catch {
+      // background unreachable — leave the button for a retry
+    }
+  }
+
+  return (
+    <div className="relative p-8 rounded-2xl border border-cyan-800/40 bg-gradient-to-br from-cyan-500/10 to-transparent overflow-hidden">
+      <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full blur-3xl opacity-25 bg-cyan-500" />
+      <div className="relative">
+        <div className="text-[10px] uppercase tracking-[0.35em] font-bold text-cyan-400 mb-2">
+          {t('welcomeAdblockTag', 'Recommended · one tap')}
+        </div>
+        <h2 className="text-white font-bold text-2xl mb-2 [word-break:keep-all]">
+          {t('welcomeAdblockTitle', 'Block ads & trackers too?')}
+        </h2>
+        <p className="text-gray-300 text-sm leading-relaxed mb-5 max-w-xl">
+          {t(
+            'welcomeAdblockDesc',
+            'Out of the box, Zevr Guard only blocks dangerous domains. Turn this on to also block ads and tracking requests — and pause any site that misbehaves with one tap.',
+          )}
+        </p>
+        {state === 'on' ? (
+          <div className="flex items-center gap-2 text-emerald-300 text-sm font-bold">
+            <span>✓</span>
+            {t(
+              'welcomeAdblockOn',
+              'Ad & tracker blocking is on. Pause any site from the popup if it breaks.',
+            )}
+          </div>
+        ) : (
+          <button
+            onClick={() => void enable()}
+            disabled={state === 'loading'}
+            className="px-5 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-bold transition disabled:opacity-50"
+          >
+            {t('welcomeAdblockCta', 'Turn on ad & tracker blocking')}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // The data-exfiltration monitor shipped buried in the popup's settings tab
 // where nobody found it. Offer the 10-second setup right on the welcome
 // page — it is the one feature that needs user input to be useful.
@@ -533,7 +607,8 @@ const WatchSetupSection: React.FC = () => {
 
   return (
     <section className="relative py-20 px-6 bg-black border-t border-cyan-900/30">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-6xl mx-auto grid gap-6 lg:grid-cols-2 items-start">
+        <AdblockOptIn />
         <div className="relative p-8 rounded-2xl border border-violet-800/40 bg-gradient-to-br from-violet-500/10 to-transparent overflow-hidden">
           <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full blur-3xl opacity-25 bg-violet-500" />
           <div className="relative">

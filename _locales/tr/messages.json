@@ -327,7 +327,7 @@
     "message": "Bu puanı ne oluşturur"
   },
   "riskBreakdownBlocked": {
-    "message": "Engellendi (sayılmaz)"
+    "message": "Sizin engellledikleriniz (sayılmaz)"
   },
   "riskBreakdownNote": {
     "message": "Parmak izi ve reklamlar altyapıdan daha ağır basar. Engellenen bağlantı puandan çıkarılır."
@@ -916,6 +916,21 @@
   },
   "welcomeWatchDone": {
     "message": "İzleniyor. Başka bir siteye gönderildiği anda kırmızı bir uyarı göreceksiniz."
+  },
+  "welcomeAdblockTag": {
+    "message": "Önerilir · tek dokunuş"
+  },
+  "welcomeAdblockTitle": {
+    "message": "Reklamları ve izleyicileri de engelle?"
+  },
+  "welcomeAdblockDesc": {
+    "message": "Varsayılan olarak Zevr Guard yalnızca tehlikeli alan adlarını engeller. Bunu açarsanız reklamlar ve izleme de engellenir — bozulan siteyi tek dokunuşla duraklatabilirsiniz."
+  },
+  "welcomeAdblockCta": {
+    "message": "Reklam ve izleyici engellemeyi aç"
+  },
+  "welcomeAdblockOn": {
+    "message": "Reklam ve izleyici engelleme açık. Bozulan siteyi popup’tan duraklatın."
   },
   "watchDesc": {
     "message": "E-postanız, telefonunuz veya eklediğiniz herhangi bir değer başka bir siteye gönderildiğinde — hashlenmiş olsa bile — sizi uyarır. Tüm eşleştirme cihazınızda kalır."

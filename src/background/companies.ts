@@ -51,11 +51,11 @@ const OWNERS: Record<string, string> = {
   'twimg.com': 'X',
   'ads-twitter.com': 'X',
   // LY Corporation (Yahoo! JAPAN / LINE)
-  'yahoo.co.jp': 'LY-Corporation',
-  'yimg.jp': 'LY-Corporation',
-  'yjtag.jp': 'LY-Corporation',
-  'line-scdn.net': 'LY-Corporation',
-  'line.me': 'LY-Corporation',
+  'yahoo.co.jp': 'LY Corporation',
+  'yimg.jp': 'LY Corporation',
+  'yjtag.jp': 'LY Corporation',
+  'line-scdn.net': 'LY Corporation',
+  'line.me': 'LY Corporation',
   // Rakuten
   'rakuten.co.jp': 'Rakuten',
   'r10s.jp': 'Rakuten',
@@ -151,6 +151,8 @@ export function resolveOwner(
   domain: string,
   dbCompany: string | null | undefined,
 ): string | null {
+  // The feed spells this owner with a stray hyphen; normalize for display.
+  if (dbCompany === 'LY-Corporation') return 'LY Corporation';
   if (dbCompany && dbCompany !== 'Unknown') return dbCompany;
   return OWNERS[registrableDomain(domain)] ?? null;
 }

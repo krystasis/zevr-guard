@@ -55,7 +55,7 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
   bumpRoughnessCloudsTexture.anisotropy = 8;
 
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 0.35, 3.1);
+  camera.position.set(0, 0, 3.55);
 
   const scene = new THREE.Scene();
 
@@ -171,7 +171,7 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
       const c = CITIES[Math.floor(Math.random() * CITIES.length)];
       worldProbe.copy(latLngToVec3(c[0], c[1], 1));
       globe.localToWorld(worldProbe);
-      if (worldProbe.z > 0.1 && worldProbe.y > -1.2) return c;
+      if (worldProbe.z > 0.1) return c;
     }
     return CITIES[Math.floor(Math.random() * CITIES.length)];
   }
@@ -182,7 +182,7 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
     if (b === a) b = CITIES[(CITIES.indexOf(a) + 5) % CITIES.length];
     const from = latLngToVec3(a[0], a[1], 1.005);
     const to = latLngToVec3(b[0], b[1], 1.005);
-    const lift = 1 + from.angleTo(to) * 0.35;
+    const lift = Math.min(1.38, 1 + from.angleTo(to) * 0.3);
     const mid = from.clone().add(to).multiplyScalar(0.5).normalize().multiplyScalar(lift);
     const curve = new THREE.QuadraticBezierCurve3(from, mid, to);
     const colorHex = ARC_COLORS[Math.floor(Math.random() * ARC_COLORS.length)];
@@ -239,14 +239,12 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
     }
   }
 
-  // "rising earth" composition: most of the sphere sits below the fold so
-  // the lit horizon arcs across the hero's lower half
+  // Centered composition: the full sphere is the hero's focal object,
+  // gently tilted like the reference three.js scene.
   const earthGroup = new THREE.Group();
   globe.add(arcGroup);
   earthGroup.add(globe, atmosphere);
-  earthGroup.position.y = -2.05;
-  earthGroup.rotation.z = -0.12;
-  earthGroup.scale.setScalar(1.75);
+  earthGroup.rotation.z = -0.18;
   scene.add(earthGroup);
 
   const renderer = new THREE.WebGPURenderer({ canvas, antialias: true, alpha: true });
@@ -276,9 +274,13 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
     const h = host.clientHeight || 1;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    // Portrait viewports render the sphere proportionally larger — sink it
-    // further so the horizon stays in the lower third of the hero.
-    earthGroup.position.y = camera.aspect < 0.9 ? -2.45 : -2.05;
+    // Keep the sphere (plus arc headroom) inside the frame whatever the
+    // container's aspect ratio: back the camera off for narrow hosts.
+    const fitH = 1.34; // sphere + atmosphere + arc lift
+    const vFov = (camera.fov * Math.PI) / 180;
+    const dV = fitH / Math.tan(vFov / 2);
+    const dH = fitH / (Math.tan(vFov / 2) * camera.aspect);
+    camera.position.z = Math.max(dV, dH) * 1.02;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(w, h, false);
   }

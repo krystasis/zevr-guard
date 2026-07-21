@@ -206,7 +206,7 @@ const HeroBackground: React.FC<{ dim?: boolean }> = ({ dim }) => (
     <div className="absolute bottom-0 left-1/3 w-[50vw] h-[50vw] rounded-full bg-emerald-500/5 blur-3xl animate-aurora-3" />
 
     <TechBackground
-      className={`absolute inset-0 mix-blend-screen transition-opacity duration-1000 ${dim ? 'opacity-15' : 'opacity-60'}`}
+      className={`absolute inset-0 mix-blend-screen transition-opacity duration-1000 ${dim ? 'opacity-0' : 'opacity-60'}`}
     />
 
     <div className="absolute inset-0 opacity-[0.04] bg-[repeating-linear-gradient(0deg,#38bdf8_0px,#38bdf8_1px,transparent_1px,transparent_3px)]" />
@@ -245,13 +245,10 @@ const EarthBackdrop: React.FC<{ onResult: (ok: boolean) => void }> = ({ onResult
 const Hero: React.FC = () => {
   const [earth, setEarth] = React.useState<'loading' | 'ok' | 'failed'>('loading');
   return (
-  <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-16 pb-28 overflow-hidden">
+  <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 pb-24 overflow-hidden">
     <HeroBackground dim={earth === 'ok'} />
-    <div className="absolute inset-0 z-[5]">
-      <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
-    </div>
     <div className="relative z-10 w-full flex flex-col items-center">
-    <div className="flex items-center gap-2 mb-10">
+    <div className="flex items-center gap-2 mb-6">
       <BrandMark size={16} />
       <span className="text-[10px] uppercase tracking-[0.4em] text-gray-200">
         {t('brandZevr', 'Zevr')}
@@ -261,6 +258,15 @@ const Hero: React.FC = () => {
       <span className="text-[10px] uppercase tracking-[0.4em] text-emerald-300">
         {t('protectionActive', 'Protection active')}
       </span>
+    </div>
+
+    {/* the earth takes the emblem's old center-stage spot */}
+    <div
+      className={`relative mb-6 w-full max-w-[560px] ${
+        earth === 'failed' ? 'hidden' : ''
+      } h-[300px] sm:h-[340px] md:h-[380px]`}
+    >
+      <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
     </div>
 
     {earth === 'failed' && (
@@ -289,14 +295,14 @@ const Hero: React.FC = () => {
         {t('heroTaglineAccent', 'Block the dangerous ones.')}
       </span>
     </p>
-    <p className="text-sm text-gray-200 text-center max-w-xl mb-12 leading-relaxed">
+    <p className="text-sm text-gray-200 text-center max-w-xl mb-8 leading-relaxed">
       {t(
         'heroDescription',
         'See which parts of the world your browser is reaching in real time. Dangerous connections are blocked automatically.',
       )}
     </p>
 
-    <div className="flex flex-wrap gap-3 mb-20 justify-center">
+    <div className="flex flex-wrap gap-3 mb-12 justify-center">
       <button
         className="group relative inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition shadow-[0_0_24px_rgba(56,189,248,0.5)] hover:shadow-[0_0_36px_rgba(56,189,248,0.8)]"
         onClick={openSidePanel}

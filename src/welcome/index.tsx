@@ -245,99 +245,105 @@ const EarthBackdrop: React.FC<{ onResult: (ok: boolean) => void }> = ({ onResult
 const Hero: React.FC = () => {
   const [earth, setEarth] = React.useState<'loading' | 'ok' | 'failed'>('loading');
   return (
-  <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-14 pb-24 overflow-hidden">
+  <section className="relative min-h-screen flex items-center px-6 py-16 overflow-hidden">
     {/* the wireframe emblem is strictly a no-3D fallback — never let it
         flash behind the earth while the module streams in */}
     <HeroBackground dim={earth !== 'failed'} />
-    {/* full-viewport backdrop: the whole sphere sits behind the copy */}
-    <div className="absolute inset-0 z-[5]">
-      <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
-      {/* scrim so the wordmark stays readable over bright clouds */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.22)_55%,transparent_82%)]" />
-    </div>
-    <div className="relative z-10 w-full flex flex-col items-center">
-    <div className="flex items-center gap-2 mb-8">
-      <BrandMark size={16} />
-      <span className="text-[10px] uppercase tracking-[0.4em] text-gray-200">
-        {t('brandZevr', 'Zevr')}
-      </span>
-      <span className="text-gray-400">·</span>
-      <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
-      <span className="text-[10px] uppercase tracking-[0.4em] text-emerald-300">
-        {t('protectionActive', 'Protection active')}
-      </span>
-    </div>
 
-    {earth === 'failed' && (
-      <div className="relative mb-10">
-        <RadarRings />
-        <div className="relative z-10 drop-shadow-[0_0_40px_rgba(56,189,248,0.6)]">
-          <AppIcon size={132} />
+    <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-4">
+      {/* ---- copy ---- */}
+      <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div className="flex items-center gap-2 mb-7">
+          <BrandMark size={16} />
+          <span className="text-[10px] uppercase tracking-[0.4em] text-gray-200">
+            {t('brandZevr', 'Zevr')}
+          </span>
+          <span className="text-gray-400">·</span>
+          <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-[10px] uppercase tracking-[0.4em] text-emerald-300">
+            {t('protectionActive', 'Protection active')}
+          </span>
+        </div>
+
+        <h1 className="relative text-[clamp(2.6rem,4.6vw,4.6rem)] font-black tracking-tight mb-5 leading-[0.98]">
+          <span className="block bg-gradient-to-b from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent">
+            ZEVR
+          </span>
+          <span className="block bg-gradient-to-b from-cyan-300 via-cyan-400 to-sky-600 bg-clip-text text-transparent">
+            GUARD
+          </span>
+        </h1>
+
+        <p className="text-xl md:text-2xl text-white max-w-xl mb-3 font-light leading-tight">
+          {t('heroTagline', 'See who your browser talks to.')}{' '}
+          {/* inline-block: wrap the accent phrase as a unit instead of mid-phrase */}
+          <span className="text-cyan-300 inline-block">
+            {t('heroTaglineAccent', 'Block the dangerous ones.')}
+          </span>
+        </p>
+        <p className="text-sm text-gray-300 max-w-md mb-8 leading-relaxed">
+          {t(
+            'heroDescription',
+            'See which parts of the world your browser is reaching in real time. Dangerous connections are blocked automatically.',
+          )}
+        </p>
+
+        <div className="flex flex-wrap gap-3 mb-10 justify-center lg:justify-start">
+          <button
+            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition shadow-[0_0_24px_rgba(56,189,248,0.5)] hover:shadow-[0_0_36px_rgba(56,189,248,0.8)]"
+            onClick={openSidePanel}
+          >
+            {/* inline SVG: emoji glyphs render inconsistently on the cyan fill */}
+            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
+            </svg>
+            {t('ctaOpenGlobe', 'Open Live Globe')}
+          </button>
+          <a
+            href={getLocale() === 'ja' ? 'https://zevrhq.com/ja/tour/' : 'https://zevrhq.com/tour/'}
+            className="px-6 py-3 border border-violet-500/60 hover:border-violet-400/90 text-white font-bold rounded-full transition backdrop-blur"
+          >
+            {t('ctaTour', 'Try the 90-second tour')} →
+          </a>
+          <button
+            className="px-6 py-3 border border-cyan-600/60 hover:border-cyan-400/80 text-white font-bold rounded-full transition backdrop-blur"
+            onClick={() => window.close()}
+          >
+            {t('ctaStartBrowsing', 'Start browsing')} →
+          </button>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.3em] text-gray-200">
+          <TrustItem color="bg-cyan-400" label={t('trustTrackers', '115,000+ tracker signals', '115,000+')} />
+          <span className="text-gray-500">·</span>
+          <TrustItem color="bg-red-400" label={t('trustUrlhaus', 'Daily threat feed')} />
+          <span className="text-gray-500">·</span>
+          <TrustItem color="bg-emerald-400" label={t('trust100Local', 'Local-only matching')} />
+          <span className="text-gray-500">·</span>
+          <TrustItem color="bg-emerald-400" label={t('trustNoTelemetry', 'No telemetry')} />
         </div>
       </div>
-    )}
 
-    <h1 className="relative text-[clamp(2.4rem,9.5vw,6rem)] font-black tracking-tight mb-6 text-center leading-none">
-      <span className="bg-gradient-to-b from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent">
-        ZEVR
-      </span>
-      <span className="text-gray-500 mx-3">/</span>
-      <span className="bg-gradient-to-b from-cyan-300 via-cyan-400 to-sky-600 bg-clip-text text-transparent">
-        GUARD
-      </span>
-    </h1>
+      {/* ---- earth ---- */}
+      <div
+        className={`order-1 lg:order-2 relative w-full ${
+          earth === 'failed' ? 'hidden' : ''
+        } h-[300px] sm:h-[360px] lg:h-[640px]`}
+      >
+        <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
+      </div>
 
-    <p className="text-xl md:text-2xl text-white text-center max-w-2xl mb-3 font-light leading-tight">
-      {t('heroTagline', 'See who your browser talks to.')}{' '}
-      {/* inline-block: wrap the accent phrase as a unit instead of mid-phrase */}
-      <span className="text-cyan-300 inline-block">
-        {t('heroTaglineAccent', 'Block the dangerous ones.')}
-      </span>
-    </p>
-    <p className="text-sm text-gray-200 text-center max-w-xl mb-8 leading-relaxed">
-      {t(
-        'heroDescription',
-        'See which parts of the world your browser is reaching in real time. Dangerous connections are blocked automatically.',
+      {earth === 'failed' && (
+        <div className="order-1 lg:order-2 relative flex items-center justify-center h-[300px] lg:h-[640px]">
+          <RadarRings />
+          <div className="relative z-10 drop-shadow-[0_0_40px_rgba(56,189,248,0.6)]">
+            <AppIcon size={132} />
+          </div>
+        </div>
       )}
-    </p>
-
-    <div className="flex flex-wrap gap-3 mb-12 justify-center">
-      <button
-        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition shadow-[0_0_24px_rgba(56,189,248,0.5)] hover:shadow-[0_0_36px_rgba(56,189,248,0.8)]"
-        onClick={openSidePanel}
-      >
-        {/* inline SVG: emoji glyphs render inconsistently on the cyan fill */}
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
-        </svg>
-        {t('ctaOpenGlobe', 'Open Live Globe')}
-      </button>
-      <a
-        href={getLocale() === 'ja' ? 'https://zevrhq.com/ja/tour/' : 'https://zevrhq.com/tour/'}
-        className="px-6 py-3 border border-violet-500/60 hover:border-violet-400/90 text-white font-bold rounded-full transition backdrop-blur"
-      >
-        {t('ctaTour', 'Try the 90-second tour')} →
-      </a>
-      <button
-        className="px-6 py-3 border border-cyan-600/60 hover:border-cyan-400/80 text-white font-bold rounded-full transition backdrop-blur"
-        onClick={() => window.close()}
-      >
-        {t('ctaStartBrowsing', 'Start browsing')} →
-      </button>
     </div>
 
-    <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.3em] text-gray-200">
-      <TrustItem color="bg-cyan-400" label={t('trustTrackers', '115,000+ tracker signals', '115,000+')} />
-      <span className="text-gray-500">·</span>
-      <TrustItem color="bg-red-400" label={t('trustUrlhaus', 'Daily threat feed')} />
-      <span className="text-gray-500">·</span>
-      <TrustItem color="bg-emerald-400" label={t('trust100Local', 'Local-only matching')} />
-      <span className="text-gray-500">·</span>
-      <TrustItem color="bg-emerald-400" label={t('trustNoTelemetry', 'No telemetry')} />
-    </div>
-
-    </div>
     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-gray-300 animate-bounce-slow">
       <span>{t('scrollHint', 'Scroll')}</span>
       <span>↓</span>

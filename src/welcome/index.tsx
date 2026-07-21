@@ -183,7 +183,7 @@ const LanguageSwitcher: React.FC = () => {
   );
 };
 
-const HeroBackground: React.FC = () => (
+const HeroBackground: React.FC<{ dim?: boolean }> = ({ dim }) => (
   <div className="pointer-events-none absolute inset-0 overflow-hidden">
     <div className="absolute inset-0 opacity-[0.045]">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -205,7 +205,9 @@ const HeroBackground: React.FC = () => (
     <div className="absolute top-1/3 -right-1/4 w-[70vw] h-[70vw] rounded-full bg-sky-600/10 blur-3xl animate-aurora-2" />
     <div className="absolute bottom-0 left-1/3 w-[50vw] h-[50vw] rounded-full bg-emerald-500/5 blur-3xl animate-aurora-3" />
 
-    <TechBackground className="absolute inset-0 opacity-60 mix-blend-screen" />
+    <TechBackground
+      className={`absolute inset-0 mix-blend-screen transition-opacity duration-1000 ${dim ? 'opacity-15' : 'opacity-60'}`}
+    />
 
     <div className="absolute inset-0 opacity-[0.04] bg-[repeating-linear-gradient(0deg,#38bdf8_0px,#38bdf8_1px,transparent_1px,transparent_3px)]" />
 
@@ -214,9 +216,40 @@ const HeroBackground: React.FC = () => (
   </div>
 );
 
-const Hero: React.FC = () => (
-  <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
-    <HeroBackground />
+// Photoreal rising-earth backdrop (three.js, WebGPU with WebGL fallback).
+// Loaded lazily so the hero copy paints immediately; when 3D is unavailable
+// the hero falls back to the radar-rings emblem.
+const EarthBackdrop: React.FC<{ onResult: (ok: boolean) => void }> = ({ onResult }) => {
+  const ref = React.useRef<HTMLCanvasElement>(null);
+  React.useEffect(() => {
+    let dispose: (() => void) | null = null;
+    let cancelled = false;
+    import('./earth')
+      .then(async (m) => {
+        if (!ref.current || cancelled) return;
+        dispose = await m.initEarthHero(ref.current);
+        if (!cancelled) onResult(true);
+      })
+      .catch(() => {
+        if (!cancelled) onResult(false);
+      });
+    return () => {
+      cancelled = true;
+      dispose?.();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return <canvas ref={ref} className="absolute inset-0 h-full w-full" aria-hidden />;
+};
+
+const Hero: React.FC = () => {
+  const [earth, setEarth] = React.useState<'loading' | 'ok' | 'failed'>('loading');
+  return (
+  <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-16 pb-28 overflow-hidden">
+    <HeroBackground dim={earth === 'ok'} />
+    <div className="absolute inset-0 z-[5]">
+      <EarthBackdrop onResult={(ok) => setEarth(ok ? 'ok' : 'failed')} />
+    </div>
     <div className="relative z-10 w-full flex flex-col items-center">
     <div className="flex items-center gap-2 mb-10">
       <BrandMark size={16} />
@@ -230,14 +263,16 @@ const Hero: React.FC = () => (
       </span>
     </div>
 
-    <div className="relative mb-10">
-      <RadarRings />
-      <div className="relative z-10 drop-shadow-[0_0_40px_rgba(56,189,248,0.6)]">
-        <AppIcon size={132} />
+    {earth === 'failed' && (
+      <div className="relative mb-10">
+        <RadarRings />
+        <div className="relative z-10 drop-shadow-[0_0_40px_rgba(56,189,248,0.6)]">
+          <AppIcon size={132} />
+        </div>
       </div>
-    </div>
+    )}
 
-    <h1 className="relative text-6xl md:text-8xl font-black tracking-tight mb-6 text-center leading-none">
+    <h1 className="relative text-[clamp(2.4rem,9.5vw,6rem)] font-black tracking-tight mb-6 text-center leading-none">
       <span className="bg-gradient-to-b from-white via-cyan-100 to-cyan-400 bg-clip-text text-transparent">
         ZEVR
       </span>
@@ -303,7 +338,8 @@ const Hero: React.FC = () => (
       <span>↓</span>
     </div>
   </section>
-);
+  );
+};
 
 const TrustItem: React.FC<{ color: string; label: string }> = ({ color, label }) => (
   <span className="flex items-center gap-2">
@@ -672,6 +708,17 @@ const Footer: React.FC = () => (
         {t('footerNetworkVisibility', 'Network visibility, instantly')}
       </div>
       <div className="text-[10px] text-gray-300">v{chrome.runtime.getManifest().version}</div>
+    </div>
+    <div className="max-w-5xl mx-auto mt-3 text-center md:text-right text-[9px] text-gray-600">
+      Earth textures ©{' '}
+      <a
+        href="https://www.solarsystemscope.com/textures/"
+        rel="noopener"
+        className="underline hover:text-gray-400"
+      >
+        Solar System Scope
+      </a>{' '}
+      (CC BY 4.0)
     </div>
   </footer>
 );

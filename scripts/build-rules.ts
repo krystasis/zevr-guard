@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { resolveOwner } from '../src/background/companies';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -581,6 +582,28 @@ async function buildTrackerDB(): Promise<TrackerDB> {
     ...ddg,
     ...seed,
   };
+
+  // ~90% of entries end up with company "Unknown" while a parent domain (or
+  // the curated map) often names the owner. Resolve it here so every client
+  // — including versions without the runtime fallback — gets real names.
+  let resolved = 0;
+  for (const [domain, entry] of Object.entries(merged)) {
+    if (entry.company && entry.company !== 'Unknown') continue;
+    let owner: string | null = null;
+    const parts = domain.split('.');
+    for (let i = 1; i < parts.length - 1 && !owner; i++) {
+      const parent = merged[parts.slice(i).join('.')];
+      if (parent && parent.company && parent.company !== 'Unknown') {
+        owner = parent.company;
+      }
+    }
+    owner ??= resolveOwner(domain, null);
+    if (owner) {
+      entry.company = owner;
+      resolved++;
+    }
+  }
+  console.log(`[build-rules] resolved owner for ${resolved} Unknown entries`);
 
   await ensureDir(TRACKERS_OUTPUT_PATH);
   const trackersJSON = JSON.stringify(merged);

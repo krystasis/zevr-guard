@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Lehet, hogy az oldalnak szüksége van rá — blokkoláshoz kattints kétszer."
   },
+  "allowShort": {
+    "message": "engedélyez"
+  },
+  "allowFeedTitle": {
+    "message": "A fenyegetési feed blokkolta. Az engedélyezés mindenhol átengedi — kattints kétszer."
+  },
   "unblock": {
     "message": "feloldás"
   },

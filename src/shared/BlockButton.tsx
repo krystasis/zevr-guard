@@ -11,18 +11,25 @@ import type { RiskLevel } from '../types';
 export const BlockButton: React.FC<{
   blocked: boolean;
   riskLevel: RiskLevel;
+  /** Blocked by the threat feed / a country rule rather than the user's own
+   *  list: "unblock" would be a no-op there, so offer allow-listing instead. */
+  feedBlocked?: boolean;
   onBlock: () => void;
   onUnblock: () => void;
-}> = ({ blocked, riskLevel, onBlock, onUnblock }) => {
+  onAllow?: () => void;
+}> = ({ blocked, riskLevel, feedBlocked, onBlock, onUnblock, onAllow }) => {
   const [confirming, setConfirming] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
-  const needsConfirm = riskLevel === 'tracker' || riskLevel === 'safe';
+  const allowMode = blocked && feedBlocked && !!onAllow;
+  // Break-risk rows confirm before blocking; allow-listing a feed-blocked
+  // (i.e. dangerous) domain always confirms.
+  const needsConfirm = allowMode || riskLevel === 'tracker' || riskLevel === 'safe';
 
   function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
-    if (blocked) {
+    if (blocked && !allowMode) {
       onUnblock();
       return;
     }
@@ -33,30 +40,41 @@ export const BlockButton: React.FC<{
     }
     window.clearTimeout(timer.current);
     setConfirming(false);
-    onBlock();
+    if (allowMode) onAllow!();
+    else onBlock();
   }
 
   return (
     <button
       className={`flex-shrink-0 px-1.5 h-5 rounded text-[9px] font-bold uppercase tracking-wider transition ${
-        blocked
+        blocked && !allowMode
           ? 'bg-gray-700/60 text-gray-300 hover:bg-gray-600'
           : confirming
-            ? 'bg-red-600 text-white border border-red-400'
-            : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
+            ? allowMode
+              ? 'bg-emerald-600 text-white border border-emerald-400'
+              : 'bg-red-600 text-white border border-red-400'
+            : allowMode
+              ? 'bg-gray-700/60 text-gray-300 border border-gray-600/60 hover:bg-emerald-900/50 hover:text-emerald-200'
+              : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
       }`}
       title={
-        !blocked && needsConfirm
-          ? t('blockBreakRisk', 'May be needed by this site — click twice to block.')
-          : undefined
+        allowMode
+          ? t('allowFeedTitle', 'Blocked by the threat feed. Allowing lets it through everywhere — click twice.')
+          : !blocked && needsConfirm
+            ? t('blockBreakRisk', 'May be needed by this site — click twice to block.')
+            : undefined
       }
       onClick={handleClick}
     >
-      {blocked
-        ? t('unblock', 'unblock')
-        : confirming
+      {allowMode
+        ? confirming
           ? t('blockConfirmShort', 'sure?')
-          : t('block', 'block')}
+          : t('allowShort', 'allow')
+        : blocked
+          ? t('unblock', 'unblock')
+          : confirming
+            ? t('blockConfirmShort', 'sure?')
+            : t('block', 'block')}
     </button>
   );
 };

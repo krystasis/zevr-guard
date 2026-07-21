@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "此网站可能需要它 — 点击两次以拦截。"
   },
+  "allowShort": {
+    "message": "允许"
+  },
+  "allowFeedTitle": {
+    "message": "已被威胁源拦截。允许后将在所有页面放行 — 点击两次确认。"
+  },
   "unblock": {
     "message": "解除拦截"
   },

@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Mogelijk nodig voor deze site — klik twee keer om te blokkeren."
   },
+  "allowShort": {
+    "message": "toestaan"
+  },
+  "allowFeedTitle": {
+    "message": "Geblokkeerd door de dreigingsfeed. Toestaan laat het overal door — klik twee keer."
+  },
   "unblock": {
     "message": "deblokkeren"
   },

@@ -428,9 +428,11 @@ export const Popup: React.FC = () => {
                 connections={filtered}
                 groupBy={groupBy}
                 blockedCountries={settings?.blockedCountries ?? []}
+                customBlockList={settings?.customBlockList ?? []}
                 onSelect={setSelectedDomain}
                 onBlock={handleBlock}
                 onUnblock={handleUnblock}
+                onAllow={handleAllow}
                 onBlockCountry={handleBlockCountry}
                 onUnblockCountry={handleUnblockCountry}
               />
@@ -979,18 +981,22 @@ const ConnectionList: React.FC<{
   connections: Connection[];
   groupBy: GroupBy;
   blockedCountries: string[];
+  customBlockList: string[];
   onSelect: (domain: string) => void;
   onBlock: (domain: string) => void;
   onUnblock: (domain: string) => void;
+  onAllow: (domain: string) => void;
   onBlockCountry: (country: string) => void;
   onUnblockCountry: (country: string) => void;
 }> = ({
   connections,
   groupBy,
   blockedCountries,
+  customBlockList,
   onSelect,
   onBlock,
   onUnblock,
+  onAllow,
   onBlockCountry,
   onUnblockCountry,
 }) => {
@@ -1039,9 +1045,13 @@ const ConnectionList: React.FC<{
         <ConnectionRow
           key={conn.domain}
           connection={conn}
+          manuallyBlocked={customBlockList.some(
+            (d) => conn.domain === d || conn.domain.endsWith('.' + d),
+          )}
           onSelect={onSelect}
           onBlock={onBlock}
           onUnblock={onUnblock}
+          onAllow={onAllow}
         />
       ))}
     </div>
@@ -1160,10 +1170,12 @@ const CountryBadge: React.FC<{ code: string | null }> = ({ code }) => (
 
 const ConnectionRow: React.FC<{
   connection: Connection;
+  manuallyBlocked: boolean;
   onSelect: (domain: string) => void;
   onBlock: (domain: string) => void;
   onUnblock: (domain: string) => void;
-}> = ({ connection, onSelect, onBlock, onUnblock }) => (
+  onAllow: (domain: string) => void;
+}> = ({ connection, manuallyBlocked, onSelect, onBlock, onUnblock, onAllow }) => (
   <div
     className={`group flex items-center gap-2 px-3 py-1.5 border-b border-cyan-900/20 cursor-pointer transition ${
       connection.isBlocked
@@ -1225,8 +1237,10 @@ const ConnectionRow: React.FC<{
     <BlockButton
       blocked={connection.isBlocked}
       riskLevel={connection.riskLevel}
+      feedBlocked={connection.isBlocked && !manuallyBlocked}
       onBlock={() => onBlock(connection.domain)}
       onUnblock={() => onUnblock(connection.domain)}
+      onAllow={() => onAllow(connection.domain)}
     />
   </div>
 );

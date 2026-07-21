@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Trang này có thể cần nó — nhấp hai lần để chặn."
   },
+  "allowShort": {
+    "message": "cho phép"
+  },
+  "allowFeedTitle": {
+    "message": "Bị chặn bởi nguồn cấp mối đe dọa. Cho phép sẽ để nó đi qua ở mọi nơi — nhấp hai lần."
+  },
   "unblock": {
     "message": "bỏ chặn"
   },

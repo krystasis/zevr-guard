@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Tento web ho může potřebovat — blokujte dvojím kliknutím."
   },
+  "allowShort": {
+    "message": "povolit"
+  },
+  "allowFeedTitle": {
+    "message": "Blokováno kanálem hrozeb. Povolení ho pustí všude — klikněte dvakrát."
+  },
   "unblock": {
     "message": "odblokovat"
   },

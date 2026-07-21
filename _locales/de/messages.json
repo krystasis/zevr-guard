@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Wird evtl. von dieser Seite gebraucht — zweimal klicken zum Blockieren."
   },
+  "allowShort": {
+    "message": "erlauben"
+  },
+  "allowFeedTitle": {
+    "message": "Vom Bedrohungsfeed blockiert. Erlauben lässt es überall durch — zweimal klicken."
+  },
   "unblock": {
     "message": "freigeben"
   },

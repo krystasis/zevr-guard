@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Bu siteye gerekli olabilir — engellemek için iki kez tıklayın."
   },
+  "allowShort": {
+    "message": "izin ver"
+  },
+  "allowFeedTitle": {
+    "message": "Tehdit akışı tarafından engellendi. İzin verirseniz her yerde geçer — iki kez tıklayın."
+  },
   "unblock": {
     "message": "engeli kaldır"
   },

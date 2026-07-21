@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Peut être nécessaire à ce site — cliquez deux fois pour bloquer."
   },
+  "allowShort": {
+    "message": "autoriser"
+  },
+  "allowFeedTitle": {
+    "message": "Bloqué par le flux de menaces. L’autoriser le laisse passer partout — cliquez deux fois."
+  },
   "unblock": {
     "message": "débloquer"
   },

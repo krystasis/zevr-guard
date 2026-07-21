@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Puede ser necesario para este sitio — haz clic dos veces para bloquear."
   },
+  "allowShort": {
+    "message": "permitir"
+  },
+  "allowFeedTitle": {
+    "message": "Bloqueado por la lista de amenazas. Permitirlo lo deja pasar en todas partes — haz clic dos veces."
+  },
   "unblock": {
     "message": "desbloquear"
   },

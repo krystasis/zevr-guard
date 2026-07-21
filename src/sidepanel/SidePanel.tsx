@@ -268,6 +268,11 @@ export const SidePanel: React.FC = () => {
     await refreshSettings();
   }
 
+  async function handleAllow(domain: string) {
+    await chrome.runtime.sendMessage({ type: 'ALLOW_DOMAIN', domain });
+    await refreshSettings();
+  }
+
   async function handleBlockCountry(country: string) {
     await chrome.runtime.sendMessage({ type: 'BLOCK_COUNTRY', country });
     await refreshSettings();
@@ -423,12 +428,16 @@ export const SidePanel: React.FC = () => {
                     connection={c}
                     isLocked={lockedDomain === c.domain}
                     isHover={hoverDomain === c.domain}
+                    manuallyBlocked={(settings?.customBlockList ?? []).some(
+                      (d) => c.domain === d || c.domain.endsWith('.' + d),
+                    )}
                     onHover={(v) => setHoverDomain(v ? c.domain : null)}
                     onToggleLock={() =>
                       setLockedDomain((prev) => (prev === c.domain ? null : c.domain))
                     }
                     onBlock={handleBlock}
                     onUnblock={handleUnblock}
+                    onAllow={handleAllow}
                   />
                 ))}
           </>
@@ -915,11 +924,13 @@ const ConnectionRow: React.FC<{
   connection: Connection;
   isLocked: boolean;
   isHover: boolean;
+  manuallyBlocked: boolean;
   onHover: (v: boolean) => void;
   onToggleLock: () => void;
   onBlock: (domain: string) => void;
   onUnblock: (domain: string) => void;
-}> = ({ connection, isLocked, isHover, onHover, onToggleLock, onBlock, onUnblock }) => {
+  onAllow: (domain: string) => void;
+}> = ({ connection, isLocked, isHover, manuallyBlocked, onHover, onToggleLock, onBlock, onUnblock, onAllow }) => {
   const active = isLocked || isHover;
   const blocked = connection.isBlocked;
   return (
@@ -987,8 +998,10 @@ const ConnectionRow: React.FC<{
       <BlockButton
         blocked={blocked}
         riskLevel={connection.riskLevel}
+        feedBlocked={blocked && !manuallyBlocked}
         onBlock={() => onBlock(connection.domain)}
         onUnblock={() => onUnblock(connection.domain)}
+        onAllow={() => onAllow(connection.domain)}
       />
     </div>
   );

@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Poate fi necesar acestui site — dă clic de două ori pentru a bloca."
   },
+  "allowShort": {
+    "message": "permite"
+  },
+  "allowFeedTitle": {
+    "message": "Blocat de fluxul de amenințări. Permiterea îl lasă să treacă peste tot — dă clic de două ori."
+  },
   "unblock": {
     "message": "deblochează"
   },

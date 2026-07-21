@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "此網站可能需要它 — 點兩下以封鎖。"
   },
+  "allowShort": {
+    "message": "允許"
+  },
+  "allowFeedTitle": {
+    "message": "已被威脅源封鎖。允許後將在所有頁面放行 — 點兩下確認。"
+  },
   "unblock": {
     "message": "解除封鎖"
   },

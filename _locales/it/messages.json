@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Potrebbe servire a questo sito — clicca due volte per bloccare."
   },
+  "allowShort": {
+    "message": "consenti"
+  },
+  "allowFeedTitle": {
+    "message": "Bloccato dal feed delle minacce. Consentirlo lo fa passare ovunque — clicca due volte."
+  },
   "unblock": {
     "message": "sblocca"
   },

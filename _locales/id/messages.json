@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Mungkin dibutuhkan situs ini — klik dua kali untuk memblokir."
   },
+  "allowShort": {
+    "message": "izinkan"
+  },
+  "allowFeedTitle": {
+    "message": "Diblokir oleh feed ancaman. Mengizinkan akan meloloskannya di mana saja — klik dua kali."
+  },
   "unblock": {
     "message": "buka blokir"
   },

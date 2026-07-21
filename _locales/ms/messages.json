@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Mungkin diperlukan oleh tapak ini — klik dua kali untuk menyekat."
   },
+  "allowShort": {
+    "message": "benarkan"
+  },
+  "allowFeedTitle": {
+    "message": "Disekat oleh suapan ancaman. Membenarkannya akan melepasinya di mana-mana — klik dua kali."
+  },
   "unblock": {
     "message": "nyahsekat"
   },

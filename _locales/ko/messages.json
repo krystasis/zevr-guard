@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "이 사이트에 필요할 수 있습니다 — 두 번 클릭하면 차단됩니다."
   },
+  "allowShort": {
+    "message": "허용"
+  },
+  "allowFeedTitle": {
+    "message": "위협 피드에 의해 차단되었습니다. 허용하면 모든 곳에서 통과합니다 — 두 번 클릭."
+  },
   "unblock": {
     "message": "차단 해제"
   },

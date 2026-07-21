@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "Może być potrzebne tej stronie — kliknij dwa razy, aby zablokować."
   },
+  "allowShort": {
+    "message": "zezwól"
+  },
+  "allowFeedTitle": {
+    "message": "Zablokowane przez listę zagrożeń. Zezwolenie przepuści je wszędzie — kliknij dwa razy."
+  },
   "unblock": {
     "message": "odblokuj"
   },

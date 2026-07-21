@@ -441,6 +441,12 @@
   "blockBreakRisk": {
     "message": "このサイトの動作に必要な可能性があります — 2回クリックでブロック。"
   },
+  "allowShort": {
+    "message": "許可"
+  },
+  "allowFeedTitle": {
+    "message": "脅威フィードによるブロックです。許可するとすべてのサイトで通ります — 2回クリックで確定。"
+  },
   "unblock": {
     "message": "解除"
   },

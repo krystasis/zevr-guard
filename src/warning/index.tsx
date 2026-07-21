@@ -113,14 +113,14 @@ const ReportButton: React.FC = () => {
           </label>
           <div className="flex justify-center gap-2">
             <button
-              className="px-3 py-1.5 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-bold disabled:opacity-50"
+              className="rounded-full bg-cyan-500 px-4 py-1.5 font-bold text-black transition hover:bg-cyan-400 disabled:opacity-50"
               disabled={state === 'sending'}
               onClick={() => void send()}
             >
               {state === 'sending' ? '…' : t('reportPhishingSend', 'Send report')}
             </button>
             <button
-              className="px-3 py-1.5 rounded bg-gray-700 hover:bg-gray-600 text-gray-200"
+              className="rounded-full border border-white/15 px-4 py-1.5 text-gray-300 transition hover:bg-white/[0.06]"
               onClick={() => setState('idle')}
             >
               {t('reportPhishingCancel', 'Cancel')}
@@ -156,7 +156,7 @@ const CountryActions: React.FC = () => {
   }
   return (
     <button
-      className="w-full py-2 rounded border border-gray-600 text-gray-300 hover:bg-gray-800 transition text-sm"
+      className="w-full rounded-full border border-sky-500/40 px-5 py-2.5 text-sm font-bold text-sky-300 transition hover:bg-sky-500/10"
       onClick={() => {
         void chrome.runtime
           .sendMessage({ type: 'UNBLOCK_COUNTRY', country: countryCode })
@@ -168,149 +168,186 @@ const CountryActions: React.FC = () => {
   );
 };
 
+// Big custom glyph instead of an emoji bolted onto the app icon: a rounded
+// octagon with an exclamation, tinted per variant.
+const DangerGlyph: React.FC<{ tone: 'red' | 'sky' }> = ({ tone }) => (
+  <svg
+    viewBox="0 0 96 96"
+    className={`h-20 w-20 ${
+      tone === 'red'
+        ? 'text-red-500 drop-shadow-[0_0_28px_rgba(239,68,68,0.45)]'
+        : 'text-sky-400 drop-shadow-[0_0_28px_rgba(56,189,248,0.4)]'
+    }`}
+    fill="none"
+    aria-hidden
+  >
+    <path
+      d="M33 10h30a8 8 0 0 1 5.7 2.3l15 15A8 8 0 0 1 86 33v30a8 8 0 0 1-2.3 5.7l-15 15A8 8 0 0 1 63 86H33a8 8 0 0 1-5.7-2.3l-15-15A8 8 0 0 1 10 63V33a8 8 0 0 1 2.3-5.7l15-15A8 8 0 0 1 33 10Z"
+      stroke="currentColor"
+      strokeWidth="5"
+    />
+    <path d="M48 28v26" stroke="currentColor" strokeWidth="7" strokeLinecap="round" />
+    <circle cx="48" cy="67" r="4.5" fill="currentColor" />
+  </svg>
+);
+
 const Warning: React.FC = () => {
   useLocale();
   const target = safeTargetUrl();
+  const tone: 'red' | 'sky' = isCountry ? 'sky' : 'red';
+  const title = isLookalike
+    ? t('warningLookalikeTitle', 'Suspected Phishing Blocked')
+    : isCountry
+      ? t('warningCountryTitle', 'Blocked by Your Country Rule')
+      : t('warningTitle', 'Dangerous Site Blocked');
   return (
-  <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-red-950 via-red-900 to-gray-900">
-    <div className="max-w-lg w-full bg-gray-900/80 border border-red-700 rounded-lg p-6 shadow-2xl">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="relative">
-          <AppIcon size={56} className="drop-shadow-[0_0_12px_rgba(239,68,68,0.6)]" />
-          <div className="absolute -bottom-1 -right-1 text-2xl">⚠️</div>
-        </div>
-        <div>
-          <div className="text-red-400 text-2xl font-bold">
-            {isLookalike
-              ? t('warningLookalikeTitle', 'Suspected Phishing Blocked')
-              : isCountry
-                ? t('warningCountryTitle', 'Blocked by Your Country Rule')
-                : t('warningTitle', 'Dangerous Site Blocked')}
-          </div>
-          <div className="text-gray-400 text-sm">
+    <div className="relative min-h-screen overflow-hidden bg-[#0a0507] font-sans text-gray-100">
+      {/* one glow, tinted per variant */}
+      <div
+        className={`pointer-events-none absolute -top-1/3 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full blur-3xl ${
+          tone === 'red' ? 'bg-red-600/[0.14]' : 'bg-sky-500/[0.12]'
+        }`}
+      />
+      <div className="relative mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center px-6 py-16 text-center">
+        <div className="mb-10 flex items-center gap-2.5">
+          <AppIcon size={20} />
+          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-gray-500">
             {t('warningSubtitle', 'Protected by Zevr Guard')}
-          </div>
+          </span>
         </div>
-      </div>
 
-      <div className="text-gray-300 mb-4">
-        {t('warningBlockedSiteLabel', 'Zevr Guard blocked access to:')}
-        <div className="font-mono mt-1 text-red-300 break-all bg-black/40 rounded p-2">
-          {blocked}
-        </div>
-        {isLookalike && brand && (
-          <div className="flex items-center gap-2 mt-2 text-sm">
-            <span className="text-gray-500">
-              {t('warningLookalikeNotSame', 'Not the same as:')}
-            </span>
-            <span className="font-mono text-emerald-300 bg-black/40 rounded px-2 py-0.5 break-all">
-              {brand}
-            </span>
-          </div>
-        )}
-      </div>
+        <DangerGlyph tone={tone} />
 
-      <div className="bg-black/30 rounded p-3 mb-6 text-sm">
-        {isCountry ? (
-          <>
-            <div className="text-gray-200 font-bold mb-2">
-              {t(
-                'warningCountryHeader',
-                `This site communicates from ${countryDisplayName(countryCode)}, which you chose to block.`,
-                countryDisplayName(countryCode),
-              )}
-            </div>
-            <div className="text-gray-400">
-              {t(
-                'warningCountryDetail',
-                'You enabled country blocking for this region in Zevr Guard. Nothing is wrong with your device — this is your own rule doing its job.',
-              )}
-            </div>
-          </>
-        ) : isLookalike ? (
-          <>
-            <div className="text-gray-200 font-bold mb-2">
-              {t(
-                'warningLookalikeHeader',
-                `This address imitates ${brand} but is not the real site.`,
-                brand,
-              )}
-            </div>
-            <div className="text-gray-400">
-              {t('warningLookalikeIntro', 'Lookalike sites are typically used to:')}
-            </div>
-            <ul className="text-gray-400 list-disc list-inside mt-1 space-y-0.5">
-              <li>{t('warningLookalikeItem1', 'Steal your password or login codes')}</li>
-              <li>{t('warningLookalikeItem2', 'Capture credit card or banking details')}</li>
-              <li>{t('warningLookalikeItem3', 'Deliver malware disguised as the real service')}</li>
-            </ul>
-            <div className="text-gray-500 text-xs mt-3 pt-2 border-t border-gray-800">
-              {t(
-                'warningLookalikeDetected',
-                'Detected by on-device lookalike analysis. Your URL never left this browser.',
-              )}
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="text-gray-200 font-bold mb-2">
-              {t(
-                'warningListHeader',
-                'This domain is listed in known malware/phishing databases.',
-              )}
-            </div>
-            <div className="text-gray-400">
-              {t('warningListIntro', 'Visiting this site may:')}
-            </div>
-            <ul className="text-gray-400 list-disc list-inside mt-1 space-y-0.5">
-              <li>{t('warningListItem1', 'Install malware on your device')}</li>
-              <li>{t('warningListItem2', 'Steal your passwords or personal data')}</li>
-              <li>{t('warningListItem3', 'Hijack your browser or accounts')}</li>
-            </ul>
-          </>
-        )}
-      </div>
+        <h1 className="mt-7 text-3xl md:text-[2.6rem] font-black leading-tight tracking-tight text-white [word-break:keep-all]">
+          {title}
+        </h1>
 
-      <div className="flex flex-col gap-2">
-        <button
-          className="w-full py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded"
-          onClick={goBack}
-        >
-          ← {t('warningGoBack', 'Go Back (Safe)')}
-        </button>
-        {isCountry && <CountryActions />}
-        {isLookalike && <ReportButton />}
-        {!isCountry && (
-        <details className="text-xs text-gray-500">
-          <summary className="cursor-pointer hover:text-gray-300">
-            {t('warningUnderstandRisk', 'I understand the risk')}
-          </summary>
-          {isLookalike && target ? (
-            <div className="mt-2 p-2 bg-black/40 rounded">
-              <button
-                className="w-full py-2 rounded border border-red-800/60 text-red-300 hover:bg-red-900/40 transition font-bold"
-                onClick={() => void proceedAnyway()}
-              >
-                {t('warningProceedAnyway', 'Proceed anyway (not recommended)')}
-              </button>
-            </div>
-          ) : (
-            <div className="mt-2 p-2 bg-black/40 rounded">
-              {t(
-                'warningOverrideDetail',
-                "To proceed anyway, remove this domain from your blocklist via Zevr Guard's popup (block/unblock button), then reload.",
-              )}
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <span className="text-[11px] uppercase tracking-[0.2em] text-gray-600 font-mono">
+            {t('warningBlockedSiteLabel', 'Zevr Guard blocked access to:')}
+          </span>
+          <span
+            className={`inline-block max-w-full break-all rounded-full border px-4 py-1.5 font-mono text-[13px] ${
+              tone === 'red'
+                ? 'border-red-500/40 bg-red-500/[0.07] text-red-300'
+                : 'border-sky-500/40 bg-sky-500/[0.07] text-sky-300'
+            }`}
+          >
+            {blocked}
+          </span>
+          {isLookalike && brand && (
+            <div className="flex flex-wrap items-center justify-center gap-2 text-[12px]">
+              <span className="text-gray-500">
+                {t('warningLookalikeNotSame', 'Not the same as:')}
+              </span>
+              <span className="break-all rounded-full border border-emerald-500/40 bg-emerald-500/[0.07] px-3 py-0.5 font-mono text-emerald-300">
+                {brand}
+              </span>
             </div>
           )}
-        </details>
-        )}
-      </div>
+        </div>
 
-      <div className="text-center text-gray-600 text-xs mt-6">
-        {t('warningFooter', 'Protected by Zevr Guard · Safe browsing for everyone')}
+        <div className="mt-8 max-w-md">
+          {isCountry ? (
+            <>
+              <p className="font-medium text-gray-200 [word-break:keep-all]">
+                {t(
+                  'warningCountryHeader',
+                  `This site communicates from ${countryDisplayName(countryCode)}, which you chose to block.`,
+                  countryDisplayName(countryCode),
+                )}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                {t(
+                  'warningCountryDetail',
+                  'You enabled country blocking for this region in Zevr Guard. Nothing is wrong with your device — this is your own rule doing its job.',
+                )}
+              </p>
+            </>
+          ) : isLookalike ? (
+            <>
+              <p className="font-medium text-gray-200 [word-break:keep-all]">
+                {t(
+                  'warningLookalikeHeader',
+                  `This address imitates ${brand} but is not the real site.`,
+                  brand,
+                )}
+              </p>
+              <p className="mt-3 text-sm text-gray-500">
+                {t('warningLookalikeIntro', 'Lookalike sites are typically used to:')}
+              </p>
+              <ul className="mt-2 space-y-1 text-sm text-gray-400">
+                <li>{t('warningLookalikeItem1', 'Steal your password or login codes')}</li>
+                <li>{t('warningLookalikeItem2', 'Capture credit card or banking details')}</li>
+                <li>{t('warningLookalikeItem3', 'Deliver malware disguised as the real service')}</li>
+              </ul>
+              <p className="mt-4 border-t border-white/[0.06] pt-3 text-xs text-gray-600">
+                {t(
+                  'warningLookalikeDetected',
+                  'Detected by on-device lookalike analysis. Your URL never left this browser.',
+                )}
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="font-medium text-gray-200 [word-break:keep-all]">
+                {t(
+                  'warningListHeader',
+                  'This domain is listed in known malware/phishing databases.',
+                )}
+              </p>
+              <p className="mt-3 text-sm text-gray-500">
+                {t('warningListIntro', 'Visiting this site may:')}
+              </p>
+              <ul className="mt-2 space-y-1 text-sm text-gray-400">
+                <li>{t('warningListItem1', 'Install malware on your device')}</li>
+                <li>{t('warningListItem2', 'Steal your passwords or personal data')}</li>
+                <li>{t('warningListItem3', 'Hijack your browser or accounts')}</li>
+              </ul>
+            </>
+          )}
+        </div>
+
+        <div className="mt-9 flex w-full max-w-sm flex-col items-center gap-3">
+          <button
+            className="w-full rounded-full bg-white px-6 py-3 text-sm font-bold text-black transition hover:bg-gray-200"
+            onClick={goBack}
+          >
+            ← {t('warningGoBack', 'Go Back (Safe)')}
+          </button>
+          {isCountry && <CountryActions />}
+          {isLookalike && <ReportButton />}
+          {!isCountry && (
+            <details className="w-full text-xs text-gray-600">
+              <summary className="cursor-pointer py-1 transition hover:text-gray-300">
+                {t('warningUnderstandRisk', 'I understand the risk')}
+              </summary>
+              {isLookalike && target ? (
+                <div className="mt-2">
+                  <button
+                    className="w-full rounded-full border border-red-500/40 px-5 py-2.5 font-bold text-red-300 transition hover:bg-red-500/10"
+                    onClick={() => void proceedAnyway()}
+                  >
+                    {t('warningProceedAnyway', 'Proceed anyway (not recommended)')}
+                  </button>
+                </div>
+              ) : (
+                <p className="mt-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-left leading-relaxed">
+                  {t(
+                    'warningOverrideDetail',
+                    "To proceed anyway, remove this domain from your blocklist via Zevr Guard's popup (block/unblock button), then reload.",
+                  )}
+                </p>
+              )}
+            </details>
+          )}
+        </div>
+
+        <div className="mt-12 text-[10px] uppercase tracking-[0.25em] text-gray-700 font-mono">
+          {t('warningFooter', 'Protected by Zevr Guard · Safe browsing for everyone')}
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 

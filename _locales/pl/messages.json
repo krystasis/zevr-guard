@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "ocena ryzyka"
   },
+  "riskBreakdownTitle": {
+    "message": "Z czego wynika ten wynik"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Zablokowane (nieliczone)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting i reklamy ważą więcej niż infrastruktura. Zablokowane połączenie nie liczy się do wyniku."
+  },
   "riskLabelSafe": {
     "message": "BEZPIECZNA"
   },

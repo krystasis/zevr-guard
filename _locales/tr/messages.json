@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "risk puanı"
   },
+  "riskBreakdownTitle": {
+    "message": "Bu puanı ne oluşturur"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Engellendi (sayılmaz)"
+  },
+  "riskBreakdownNote": {
+    "message": "Parmak izi ve reklamlar altyapıdan daha ağır basar. Engellenen bağlantı puandan çıkarılır."
+  },
   "riskLabelSafe": {
     "message": "GÜVENLİ"
   },

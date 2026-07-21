@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "score de risque"
   },
+  "riskBreakdownTitle": {
+    "message": "Ce qui compose ce score"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Bloquées (non comptées)"
+  },
+  "riskBreakdownNote": {
+    "message": "Le fingerprinting et la pub pèsent plus que l’infrastructure. Bloquer une connexion la retire du score."
+  },
   "riskLabelSafe": {
     "message": "SÛR"
   },

@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "skóre rizika"
   },
+  "riskBreakdownTitle": {
+    "message": "Z čeho se skóre skládá"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Blokováno (nepočítá se)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting a reklama váží víc než infrastruktura. Zablokované připojení se do skóre nepočítá."
+  },
   "riskLabelSafe": {
     "message": "BEZPEČNÉ"
   },

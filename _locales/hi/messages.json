@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "रिस्क स्कोर"
   },
+  "riskBreakdownTitle": {
+    "message": "यह स्कोर किससे बनता है"
+  },
+  "riskBreakdownBlocked": {
+    "message": "ब्लॉक किए गए (गिनती में नहीं)"
+  },
+  "riskBreakdownNote": {
+    "message": "फ़िंगरप्रिंटिंग और विज्ञापन इन्फ्रास्ट्रक्चर से ज़्यादा वज़न रखते हैं। कनेक्शन ब्लॉक करने पर वह स्कोर से हट जाता है।"
+  },
   "riskLabelSafe": {
     "message": "सुरक्षित"
   },

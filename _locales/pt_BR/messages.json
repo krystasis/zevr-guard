@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "pontuação de risco"
   },
+  "riskBreakdownTitle": {
+    "message": "O que compõe esta pontuação"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Bloqueadas (não contam)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting e anúncios pesam mais que infraestrutura. Bloquear uma conexão a remove da pontuação."
+  },
   "riskLabelSafe": {
     "message": "SEGURO"
   },

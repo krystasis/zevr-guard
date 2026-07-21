@@ -552,6 +552,7 @@ const Header: React.FC<{
   today: TodayStats | null;
   activeTab: { id: number; supported: boolean } | null;
 }> = ({ stats, today, activeTab }) => {
+  const [showBreakdown, setShowBreakdown] = useState(false);
   if (!stats) {
     return (
       <div className="p-5 border-b border-cyan-900/40 text-center">
@@ -616,7 +617,11 @@ const Header: React.FC<{
               {stats.host}
             </div>
           </div>
-          <div className="text-right shrink-0">
+          <button
+            className="text-right shrink-0 cursor-pointer group"
+            onClick={() => setShowBreakdown((v) => !v)}
+            title={t('riskBreakdownTitle', 'What makes this score')}
+          >
             <div className="flex items-baseline gap-0.5 justify-end">
               <div
                 className={`text-[42px] font-black leading-none ${RISK_TEXT[riskLevel]} ${RISK_GLOW[riskLevel]}`}
@@ -630,13 +635,15 @@ const Header: React.FC<{
                 %
               </div>
             </div>
-            <div className="text-[9px] uppercase tracking-[0.2em] text-gray-500 mt-1">
-              {t('riskScoreLabel', 'risk score')}
+            <div className="text-[9px] uppercase tracking-[0.2em] text-gray-500 mt-1 group-hover:text-gray-300 transition-colors">
+              {t('riskScoreLabel', 'risk score')} {showBreakdown ? '▴' : '▾'}
             </div>
-          </div>
+          </button>
         </div>
 
         <RiskGauge score={stats.riskScore} riskLevel={riskLevel} />
+
+        {showBreakdown && <ScoreBreakdown stats={stats} />}
 
         <div className="relative grid grid-cols-3 gap-2 mt-3 text-center">
           <Metric label={t('metricDomains', 'domains')} value={domainCount} accent="text-cyan-300" />
@@ -655,6 +662,54 @@ const Header: React.FC<{
 
       {today && <TodayStrip today={today} />}
     </>
+  );
+};
+
+// "Why is it 34%?" — the score moved opaquely (block one row: -2, reload:
+// -5) which read as noise. Show what feeds it: connection counts per class,
+// with blocked ones listed as removed.
+const ScoreBreakdown: React.FC<{ stats: PageStats }> = ({ stats }) => {
+  const conns = Object.values(stats.connections);
+  const active = conns.filter((c) => !c.isBlocked);
+  const blocked = conns.length - active.length;
+  const count = (level: RiskLevel) =>
+    active.filter((c) => c.riskLevel === level).length;
+  const rows: Array<{ dot: string; label: string; n: number }> = [
+    { dot: 'bg-red-400', label: t('legendDangerous', 'Dangerous'), n: count('dangerous') },
+    { dot: 'bg-amber-400', label: t('legendSuspicious', 'Ad & tracking'), n: count('suspicious') },
+    { dot: 'bg-sky-400', label: t('legendTracker', 'Service'), n: count('tracker') },
+    { dot: 'bg-emerald-400', label: t('legendSafe', 'Safe'), n: count('safe') },
+  ];
+  return (
+    <div className="relative mt-3 rounded-lg border border-cyan-900/40 bg-black/30 p-3">
+      <div className="text-[9px] uppercase tracking-[0.25em] text-gray-500 mb-2">
+        {t('riskBreakdownTitle', 'What makes this score')}
+      </div>
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+        {rows.map((r) => (
+          <div key={r.label} className="flex items-center gap-1.5 text-[11px]">
+            <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${r.dot}`} />
+            <span className="text-gray-400 truncate flex-1">{r.label}</span>
+            <span className="text-gray-200 tabular-nums">{r.n}</span>
+          </div>
+        ))}
+        {blocked > 0 && (
+          <div className="flex items-center gap-1.5 text-[11px]">
+            <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-gray-600" />
+            <span className="text-gray-500 truncate flex-1">
+              {t('riskBreakdownBlocked', 'Blocked (not counted)')}
+            </span>
+            <span className="text-gray-400 tabular-nums">{blocked}</span>
+          </div>
+        )}
+      </div>
+      <div className="text-gray-600 text-[10px] mt-2 leading-relaxed">
+        {t(
+          'riskBreakdownNote',
+          'Fingerprinting and ads weigh more than infrastructure. Blocking a connection removes it from the score.',
+        )}
+      </div>
+    </div>
   );
 };
 

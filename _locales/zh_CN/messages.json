@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "风险评分"
   },
+  "riskBreakdownTitle": {
+    "message": "分数构成"
+  },
+  "riskBreakdownBlocked": {
+    "message": "已拦截(不计入)"
+  },
+  "riskBreakdownNote": {
+    "message": "指纹识别和广告的权重高于基础设施。拦截连接后将不再计入分数。"
+  },
   "riskLabelSafe": {
     "message": "安全"
   },

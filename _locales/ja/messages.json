@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "リスクスコア"
   },
+  "riskBreakdownTitle": {
+    "message": "スコアの内訳"
+  },
+  "riskBreakdownBlocked": {
+    "message": "ブロック済み(集計外)"
+  },
+  "riskBreakdownNote": {
+    "message": "フィンガープリンティングや広告はインフラ系より重く評価されます。接続をブロックするとスコアから除外されます。"
+  },
   "riskLabelSafe": {
     "message": "安全"
   },

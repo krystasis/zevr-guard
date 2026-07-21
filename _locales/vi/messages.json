@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "điểm rủi ro"
   },
+  "riskBreakdownTitle": {
+    "message": "Điểm này gồm những gì"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Đã chặn (không tính)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting và quảng cáo có trọng số cao hơn hạ tầng. Chặn một kết nối sẽ loại nó khỏi điểm."
+  },
   "riskLabelSafe": {
     "message": "AN TOÀN"
   },

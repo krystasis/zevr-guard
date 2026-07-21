@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "risk score"
   },
+  "riskBreakdownTitle": {
+    "message": "What makes this score"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Blocked (not counted)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting and ads weigh more than infrastructure. Blocking a connection removes it from the score."
+  },
   "riskLabelSafe": {
     "message": "SAFE"
   },

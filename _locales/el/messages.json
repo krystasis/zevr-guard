@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "βαθμός κινδύνου"
   },
+  "riskBreakdownTitle": {
+    "message": "Από τι αποτελείται το σκορ"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Αποκλεισμένες (δεν μετρούν)"
+  },
+  "riskBreakdownNote": {
+    "message": "Το fingerprinting και οι διαφημίσεις βαραίνουν περισσότερο από την υποδομή. Ο αποκλεισμός μιας σύνδεσης την αφαιρεί από το σκορ."
+  },
   "riskLabelSafe": {
     "message": "ΑΣΦΑΛΕΣ"
   },

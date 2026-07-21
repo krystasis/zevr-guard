@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "위험 점수"
   },
+  "riskBreakdownTitle": {
+    "message": "점수 구성"
+  },
+  "riskBreakdownBlocked": {
+    "message": "차단됨(집계 제외)"
+  },
+  "riskBreakdownNote": {
+    "message": "핑거프린팅과 광고는 인프라보다 가중치가 높습니다. 연결을 차단하면 점수에서 제외됩니다."
+  },
   "riskLabelSafe": {
     "message": "안전"
   },

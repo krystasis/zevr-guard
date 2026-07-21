@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "skor risiko"
   },
+  "riskBreakdownTitle": {
+    "message": "Apa yang membentuk skor ini"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Disekat (tidak dikira)"
+  },
+  "riskBreakdownNote": {
+    "message": "Pengecapan jari dan iklan lebih berat daripada infrastruktur. Menyekat sambungan mengeluarkannya daripada skor."
+  },
   "riskLabelSafe": {
     "message": "SELAMAT"
   },

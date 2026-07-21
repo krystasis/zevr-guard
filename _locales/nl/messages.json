@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "risicoscore"
   },
+  "riskBreakdownTitle": {
+    "message": "Waaruit deze score bestaat"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Geblokkeerd (telt niet mee)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting en advertenties wegen zwaarder dan infrastructuur. Een geblokkeerde verbinding telt niet meer mee."
+  },
   "riskLabelSafe": {
     "message": "VEILIG"
   },

@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "คะแนนความเสี่ยง"
   },
+  "riskBreakdownTitle": {
+    "message": "คะแนนนี้มาจากอะไร"
+  },
+  "riskBreakdownBlocked": {
+    "message": "ถูกบล็อก (ไม่นับ)"
+  },
+  "riskBreakdownNote": {
+    "message": "ฟิงเกอร์พรินต์และโฆษณามีน้ำหนักมากกว่าโครงสร้างพื้นฐาน การบล็อกการเชื่อมต่อจะตัดออกจากคะแนน"
+  },
   "riskLabelSafe": {
     "message": "ปลอดภัย"
   },

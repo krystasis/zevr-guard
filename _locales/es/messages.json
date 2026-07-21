@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "puntuación de riesgo"
   },
+  "riskBreakdownTitle": {
+    "message": "Qué compone esta puntuación"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Bloqueadas (no cuentan)"
+  },
+  "riskBreakdownNote": {
+    "message": "El fingerprinting y la publicidad pesan más que la infraestructura. Bloquear una conexión la excluye de la puntuación."
+  },
   "riskLabelSafe": {
     "message": "SEGURO"
   },

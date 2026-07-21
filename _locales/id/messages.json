@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "skor risiko"
   },
+  "riskBreakdownTitle": {
+    "message": "Apa yang membentuk skor ini"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Diblokir (tidak dihitung)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting dan iklan berbobot lebih besar daripada infrastruktur. Memblokir koneksi menghapusnya dari skor."
+  },
   "riskLabelSafe": {
     "message": "AMAN"
   },

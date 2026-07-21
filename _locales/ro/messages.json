@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "scor de risc"
   },
+  "riskBreakdownTitle": {
+    "message": "Din ce e compus acest scor"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Blocate (nu se numără)"
+  },
+  "riskBreakdownNote": {
+    "message": "Fingerprinting-ul și reclamele cântăresc mai mult decât infrastructura. Blocarea unei conexiuni o scoate din scor."
+  },
   "riskLabelSafe": {
     "message": "SIGUR"
   },

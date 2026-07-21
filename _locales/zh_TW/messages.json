@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "風險分數"
   },
+  "riskBreakdownTitle": {
+    "message": "分數組成"
+  },
+  "riskBreakdownBlocked": {
+    "message": "已封鎖(不計入)"
+  },
+  "riskBreakdownNote": {
+    "message": "指紋辨識與廣告的權重高於基礎設施。封鎖連線後將不再計入分數。"
+  },
   "riskLabelSafe": {
     "message": "安全"
   },

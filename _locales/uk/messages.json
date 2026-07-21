@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "оцінка ризику"
   },
+  "riskBreakdownTitle": {
+    "message": "З чого складається оцінка"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Заблоковано (не враховується)"
+  },
+  "riskBreakdownNote": {
+    "message": "Фінгерпринтинг і реклама важать більше за інфраструктуру. Заблоковані зʼєднання не враховуються."
+  },
   "riskLabelSafe": {
     "message": "БЕЗПЕЧНО"
   },

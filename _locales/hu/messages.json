@@ -320,6 +320,15 @@
   "riskScoreLabel": {
     "message": "kockázati pontszám"
   },
+  "riskBreakdownTitle": {
+    "message": "Miből áll ez a pontszám"
+  },
+  "riskBreakdownBlocked": {
+    "message": "Blokkolva (nem számít)"
+  },
+  "riskBreakdownNote": {
+    "message": "Az ujjlenyomat-készítés és a hirdetések többet nyomnak, mint az infrastruktúra. A blokkolt kapcsolat kikerül a pontszámból."
+  },
   "riskLabelSafe": {
     "message": "BIZTONSÁGOS"
   },

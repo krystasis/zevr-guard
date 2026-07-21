@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Начать просмотр"
   },
+  "ctaTour": {
+    "message": "Пройти 90-секундный тур"
+  },
   "trustTrackers": {
     "message": "$N$ сигналов трекеров",
     "placeholders": {

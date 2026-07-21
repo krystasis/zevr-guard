@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "开始浏览"
   },
+  "ctaTour": {
+    "message": "试试 90 秒体验之旅"
+  },
   "trustTrackers": {
     "message": "$N$ 个跟踪器信号",
     "placeholders": {

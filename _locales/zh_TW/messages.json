@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "開始瀏覽"
   },
+  "ctaTour": {
+    "message": "試試 90 秒體驗之旅"
+  },
   "trustTrackers": {
     "message": "$N$ 筆追蹤器特徵",
     "placeholders": {

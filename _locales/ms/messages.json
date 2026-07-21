@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Mula melayari"
   },
+  "ctaTour": {
+    "message": "Cuba lawatan 90 saat"
+  },
   "trustTrackers": {
     "message": "$N$ isyarat penjejak",
     "placeholders": {

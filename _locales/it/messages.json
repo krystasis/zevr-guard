@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Inizia a navigare"
   },
+  "ctaTour": {
+    "message": "Prova il tour di 90 secondi"
+  },
   "trustTrackers": {
     "message": "$N$ segnali tracker",
     "placeholders": {

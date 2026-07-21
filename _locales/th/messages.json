@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "เริ่มท่องเว็บ"
   },
+  "ctaTour": {
+    "message": "ลองทัวร์ 90 วินาที"
+  },
   "trustTrackers": {
     "message": "สัญญาณตัวติดตาม $N$ รายการ",
     "placeholders": {

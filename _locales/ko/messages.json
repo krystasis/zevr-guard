@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "브라우징 시작"
   },
+  "ctaTour": {
+    "message": "90초 체험 투어 시작"
+  },
   "trustTrackers": {
     "message": "추적 신호 $N$개",
     "placeholders": {

@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "ब्राउज़िंग शुरू करें"
   },
+  "ctaTour": {
+    "message": "90 सेकंड का टूर आज़माएँ"
+  },
   "trustTrackers": {
     "message": "$N$ ट्रैकर सिग्नल",
     "placeholders": {

@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Bắt đầu duyệt web"
   },
+  "ctaTour": {
+    "message": "Thử tour 90 giây"
+  },
   "trustTrackers": {
     "message": "$N$ tín hiệu theo dõi",
     "placeholders": {

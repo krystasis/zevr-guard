@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Začít prohlížet"
   },
+  "ctaTour": {
+    "message": "Vyzkoušet 90sekundovou prohlídku"
+  },
   "trustTrackers": {
     "message": "$N$ signálů trackerů",
     "placeholders": {

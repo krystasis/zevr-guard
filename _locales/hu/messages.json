@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Böngészés indítása"
   },
+  "ctaTour": {
+    "message": "Próbáld ki a 90 másodperces túrát"
+  },
   "trustTrackers": {
     "message": "$N$ nyomkövető-jelzés",
     "placeholders": {

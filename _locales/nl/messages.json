@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Begin met browsen"
   },
+  "ctaTour": {
+    "message": "Probeer de tour van 90 seconden"
+  },
   "trustTrackers": {
     "message": "$N$ trackersignalen",
     "placeholders": {

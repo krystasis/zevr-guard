@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Έναρξη περιήγησης"
   },
+  "ctaTour": {
+    "message": "Δοκιμάστε την ξενάγηση των 90 δευτερολέπτων"
+  },
   "trustTrackers": {
     "message": "$N$ σήματα trackers",
     "placeholders": {

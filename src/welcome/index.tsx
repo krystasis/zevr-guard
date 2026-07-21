@@ -5,6 +5,7 @@ import { AppIcon, BrandMark } from '../shared/AppIcon';
 import { TechBackground } from '../shared/TechBackground';
 import {
   t,
+  getLocale,
   loadLocale,
   LOCALE_NAMES,
   SUPPORTED_LOCALES,
@@ -272,6 +273,12 @@ const Hero: React.FC = () => (
         </svg>
         {t('ctaOpenGlobe', 'Open Live Globe')}
       </button>
+      <a
+        href={getLocale() === 'ja' ? 'https://zevrhq.com/ja/tour/' : 'https://zevrhq.com/tour/'}
+        className="px-6 py-3 border border-violet-500/60 hover:border-violet-400/90 text-white font-bold rounded-full transition backdrop-blur"
+      >
+        {t('ctaTour', 'Try the 90-second tour')} →
+      </a>
       <button
         className="px-6 py-3 border border-cyan-600/60 hover:border-cyan-400/80 text-white font-bold rounded-full transition backdrop-blur"
         onClick={() => window.close()}

@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "ブラウジングを開始"
   },
+  "ctaTour": {
+    "message": "90秒の体験ツアーへ"
+  },
   "trustTrackers": {
     "message": "$N$ トラッカー",
     "placeholders": {

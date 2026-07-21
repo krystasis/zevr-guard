@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Gezinmeye başla"
   },
+  "ctaTour": {
+    "message": "90 saniyelik tura katıl"
+  },
   "trustTrackers": {
     "message": "$N$ izleyici sinyali",
     "placeholders": {

@@ -29,6 +29,9 @@
   "ctaStartBrowsing": {
     "message": "Mulai menjelajah"
   },
+  "ctaTour": {
+    "message": "Coba tur 90 detik"
+  },
   "trustTrackers": {
     "message": "$N$ sinyal pelacak",
     "placeholders": {

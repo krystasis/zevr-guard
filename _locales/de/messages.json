@@ -421,6 +421,23 @@
   "block": {
     "message": "blockieren"
   },
+  "blockToastMsg": {
+    "message": "$DOMAIN$ blockiert",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "blockToastUndo": {
+    "message": "Rückgängig"
+  },
+  "blockConfirmShort": {
+    "message": "sicher?"
+  },
+  "blockBreakRisk": {
+    "message": "Wird evtl. von dieser Seite gebraucht — zweimal klicken zum Blockieren."
+  },
   "unblock": {
     "message": "freigeben"
   },

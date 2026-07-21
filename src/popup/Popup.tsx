@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { openLiveGlobe } from '../shared/compat';
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
 import { renderShareCard } from '../shared/sharecard';
 import { ShareModal } from '../shared/ShareModal';
+import { BlockButton, UndoToast } from '../shared/BlockButton';
 import type {
   Connection,
   LeakEvent,
@@ -109,6 +110,8 @@ export const Popup: React.FC = () => {
   } | null>(null);
   const [today, setToday] = useState<TodayStats | null>(null);
   const [showWatchHint, setShowWatchHint] = useState(false);
+  const [blockToast, setBlockToast] = useState<string | null>(null);
+  const toastTimer = useRef<number | undefined>(undefined);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
   const [view, setView] = useState<'list' | 'settings'>('list');
@@ -181,6 +184,11 @@ export const Popup: React.FC = () => {
   async function handleBlock(domain: string) {
     await chrome.runtime.sendMessage({ type: 'BLOCK_DOMAIN', domain });
     await loadData();
+    // The row sinks below the fold when blocked — confirm it happened and
+    // keep an undo within reach.
+    setBlockToast(domain);
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setBlockToast(null), 5000);
   }
 
   async function handleUnblock(domain: string) {
@@ -426,6 +434,17 @@ export const Popup: React.FC = () => {
         )}
 
         <Footer stats={stats} />
+
+        {blockToast && (
+          <UndoToast
+            domain={blockToast}
+            onUndo={() => {
+              void handleUnblock(blockToast);
+              setBlockToast(null);
+            }}
+            onClose={() => setBlockToast(null)}
+          />
+        )}
 
         {share && (
           <ShareModal
@@ -1178,20 +1197,12 @@ const ConnectionRow: React.FC<{
     <div className="text-gray-500 text-[10px] tabular-nums flex-shrink-0">
       {connection.count}×
     </div>
-    <button
-      className={`flex-shrink-0 px-1.5 h-5 rounded text-[9px] font-bold uppercase tracking-wider transition ${
-        connection.isBlocked
-          ? 'bg-gray-700/60 text-gray-300 hover:bg-gray-600'
-          : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
-      }`}
-      onClick={(e) => {
-        e.stopPropagation();
-        if (connection.isBlocked) onUnblock(connection.domain);
-        else onBlock(connection.domain);
-      }}
-    >
-      {connection.isBlocked ? t('unblock', 'unblock') : t('block', 'block')}
-    </button>
+    <BlockButton
+      blocked={connection.isBlocked}
+      riskLevel={connection.riskLevel}
+      onBlock={() => onBlock(connection.domain)}
+      onUnblock={() => onUnblock(connection.domain)}
+    />
   </div>
 );
 

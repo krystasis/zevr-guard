@@ -5,6 +5,7 @@ import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
 import { groupByCountry, type CountryGroup } from '../shared/grouping';
 import { registrableDomain } from '../shared/domain';
+import { BlockButton, UndoToast } from '../shared/BlockButton';
 import countryCentroids from '../data/country_centroids.json';
 import type { Connection, PageStats, RiskLevel, Settings } from '../types';
 
@@ -126,6 +127,8 @@ export const SidePanel: React.FC = () => {
     domains: number;
   } | null>(null);
   const mapRef = useRef<WorldMap | null>(null);
+  const [blockToast, setBlockToast] = useState<string | null>(null);
+  const toastTimer = useRef<number | undefined>(undefined);
   const animatedRef = useRef<Set<string>>(new Set());
   const userLocRef = useRef<{ lat: number; lng: number } | null>(null);
 
@@ -253,6 +256,11 @@ export const SidePanel: React.FC = () => {
   async function handleBlock(domain: string) {
     await chrome.runtime.sendMessage({ type: 'BLOCK_DOMAIN', domain });
     await refreshSettings();
+    // The row sinks to the bottom when blocked — confirm it happened and
+    // keep an undo within reach.
+    setBlockToast(domain);
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setBlockToast(null), 5000);
   }
 
   async function handleUnblock(domain: string) {
@@ -426,6 +434,17 @@ export const SidePanel: React.FC = () => {
           </>
         )}
       </div>
+
+      {blockToast && (
+        <UndoToast
+          domain={blockToast}
+          onUndo={() => {
+            void handleUnblock(blockToast);
+            setBlockToast(null);
+          }}
+          onClose={() => setBlockToast(null)}
+        />
+      )}
     </div>
   );
 };
@@ -965,20 +984,12 @@ const ConnectionRow: React.FC<{
       <div className="text-gray-500 text-[10px] flex-shrink-0 tabular-nums">
         {connection.count}x
       </div>
-      <button
-        className={`flex-shrink-0 px-1.5 h-5 rounded text-[9px] font-bold uppercase tracking-wider transition ${
-          blocked
-            ? 'bg-gray-700/60 text-gray-300 hover:bg-gray-600'
-            : 'bg-red-900/30 text-red-300 border border-red-800/50 hover:bg-red-900/60 hover:border-red-500'
-        }`}
-        onClick={(e) => {
-          e.stopPropagation();
-          if (blocked) onUnblock(connection.domain);
-          else onBlock(connection.domain);
-        }}
-      >
-        {blocked ? t('unblock', 'unblock') : t('block', 'block')}
-      </button>
+      <BlockButton
+        blocked={blocked}
+        riskLevel={connection.riskLevel}
+        onBlock={() => onBlock(connection.domain)}
+        onUnblock={() => onUnblock(connection.domain)}
+      />
     </div>
   );
 };

@@ -421,6 +421,23 @@
   "block": {
     "message": "engelle"
   },
+  "blockToastMsg": {
+    "message": "$DOMAIN$ engellendi",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "blockToastUndo": {
+    "message": "Geri al"
+  },
+  "blockConfirmShort": {
+    "message": "emin misin?"
+  },
+  "blockBreakRisk": {
+    "message": "Bu siteye gerekli olabilir — engellemek için iki kez tıklayın."
+  },
   "unblock": {
     "message": "engeli kaldır"
   },

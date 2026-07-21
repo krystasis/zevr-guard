@@ -197,7 +197,17 @@ export const Report: React.FC = () => {
             className="ml-auto flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-cyan-500/90 text-black hover:bg-cyan-400 transition shadow-[0_0_16px_rgba(56,189,248,0.35)]"
             onClick={() => void handleShare()}
           >
-            {sharing ? '…' : '📤'} {t('weeklyShareTitle', 'Share your week')}
+            {sharing ? (
+              '…'
+            ) : (
+              // inline SVG: the emoji glyph renders as an odd blob with some
+              // platform emoji fonts on the cyan fill
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M12 15V4m0 0L7.5 8.5M12 4l4.5 4.5" />
+                <path d="M4 14v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+              </svg>
+            )}{' '}
+            {t('weeklyShareTitle', 'Share your week')}
           </button>
         </header>
 

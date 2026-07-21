@@ -1055,18 +1055,19 @@ const ConnectionRow: React.FC<{
             <span className="truncate">{connection.company}</span>
           )}
           {connection.company && connection.category && (
-            <span className="text-gray-700">·</span>
+            <span className="text-gray-700 shrink-0">·</span>
           )}
           {connection.category && (
-            <span className="truncate">{connection.category}</span>
+            // Categories are short fixed vocabulary — never cut them mid-word
+            <span className="whitespace-nowrap shrink-0">{connection.category}</span>
           )}
           {(connection.company || connection.category) && connection.countryName && (
-            <span className="text-gray-700">·</span>
+            <span className="text-gray-700 shrink-0">·</span>
           )}
           {connection.countryName && (
             <>
               <Flag code={connection.country} size={11} />
-              <span className="truncate">{connection.countryName}</span>
+              <span className="truncate shrink-[2]">{connection.countryName}</span>
             </>
           )}
         </div>

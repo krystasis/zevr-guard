@@ -278,7 +278,10 @@ export const SidePanel: React.FC = () => {
   function handleMapClick(px: number, py: number, w: number, h: number) {
     if (!stats) return;
     let best: Connection | null = null;
-    let bestDist = 18; // px radius
+    // Generous hit radius: the dots are ~6px, but a fingertip (or a quick
+    // mouse flick) lands tens of pixels off the centroid. Nearest dot wins,
+    // so a large radius stays unambiguous.
+    let bestDist = 36; // px radius
     for (const c of Object.values(stats.connections)) {
       if (c.lat == null || c.lon == null || !c.country) continue;
       const x = ((c.lon + 180) / 360) * w;

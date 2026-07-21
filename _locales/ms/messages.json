@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Muat semula tab untuk mula memantau."
   },
+  "popupReloadBtn": {
+    "message": "Muat semula tab ini"
+  },
+  "popupOpenSite": {
+    "message": "Buka laman web untuk melihat dengan siapa ia berhubung."
+  },
   "metricDomains": {
     "message": "domain"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Belum ada data — layari sedikit dahulu."
+  },
+  "reportZeroBlocked": {
+    "message": "Tiada apa yang perlu disekat — tiada trafik berbahaya minggu ini."
   },
   "reportFooter": {
     "message": "Semua data disimpan secara setempat pada peranti ini."

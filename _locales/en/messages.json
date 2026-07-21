@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Reload the tab to start monitoring."
   },
+  "popupReloadBtn": {
+    "message": "Reload this tab"
+  },
+  "popupOpenSite": {
+    "message": "Open a website to see who it talks to."
+  },
   "metricDomains": {
     "message": "domains"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "No data yet — browse a little first."
+  },
+  "reportZeroBlocked": {
+    "message": "Nothing needed blocking — no dangerous traffic this week."
   },
   "reportFooter": {
     "message": "All data is stored locally on this device."

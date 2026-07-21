@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Tải lại thẻ để bắt đầu giám sát."
   },
+  "popupReloadBtn": {
+    "message": "Tải lại thẻ này"
+  },
+  "popupOpenSite": {
+    "message": "Mở một trang web để xem nó liên lạc với ai."
+  },
   "metricDomains": {
     "message": "tên miền"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Chưa có dữ liệu — hãy duyệt web một chút trước."
+  },
+  "reportZeroBlocked": {
+    "message": "Không có gì cần chặn — tuần này không có lưu lượng nguy hiểm."
   },
   "reportFooter": {
     "message": "Mọi dữ liệu được lưu cục bộ trên thiết bị này."

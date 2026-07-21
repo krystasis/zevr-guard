@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "重新載入分頁即可開始監測。"
   },
+  "popupReloadBtn": {
+    "message": "重新載入此分頁"
+  },
+  "popupOpenSite": {
+    "message": "開啟一個網站即可查看它在與誰通訊。"
+  },
   "metricDomains": {
     "message": "網域"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "尚無資料——先瀏覽幾個網頁吧。"
+  },
+  "reportZeroBlocked": {
+    "message": "無需封鎖任何內容 — 本週沒有危險流量。"
   },
   "reportFooter": {
     "message": "所有資料皆儲存在本機裝置上。"

@@ -236,10 +236,18 @@ export const Report: React.FC = () => {
               const h = Math.max(3, Math.round((v / maxBlocked) * 96));
               return (
                 <div key={d.date} className="flex-1 flex flex-col items-center gap-1.5">
-                  <div className="text-[10px] text-red-300 tabular-nums">{v}</div>
                   <div
-                    className="w-full rounded-t bg-gradient-to-t from-red-900/70 to-red-500/90 shadow-[0_0_8px_rgba(239,68,68,0.35)]"
-                    style={{ height: `${h}px` }}
+                    className={`text-[10px] tabular-nums ${v > 0 ? 'text-red-300' : 'text-gray-600'}`}
+                  >
+                    {v}
+                  </div>
+                  <div
+                    className={
+                      v > 0
+                        ? 'w-full rounded-t bg-gradient-to-t from-red-900/70 to-red-500/90 shadow-[0_0_8px_rgba(239,68,68,0.35)]'
+                        : 'w-full rounded-t bg-white/10'
+                    }
+                    style={{ height: `${v > 0 ? h : 3}px` }}
                   />
                   <div className="text-[9px] text-gray-500">{d.date.slice(5)}</div>
                 </div>
@@ -259,7 +267,15 @@ export const Report: React.FC = () => {
             title={t('reportTopBlocked', 'Most blocked domains')}
             entries={totals.topBlocked}
             barClass="from-red-900/70 to-red-500/80"
-            emptyLabel={t('reportNoData', 'No data yet — browse a little first.')}
+            emptyLabel={
+              totals.connections > 0
+                ? '✓ ' +
+                  t(
+                    'reportZeroBlocked',
+                    'Nothing needed blocking — no dangerous traffic this week.',
+                  )
+                : t('reportNoData', 'No data yet — browse a little first.')
+            }
             mono
           />
         </div>

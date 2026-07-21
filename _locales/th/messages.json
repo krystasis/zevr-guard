@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "โหลดแท็บใหม่เพื่อเริ่มการตรวจสอบ"
   },
+  "popupReloadBtn": {
+    "message": "โหลดแท็บนี้ใหม่"
+  },
+  "popupOpenSite": {
+    "message": "เปิดเว็บไซต์เพื่อดูว่ามันคุยกับใคร"
+  },
   "metricDomains": {
     "message": "โดเมน"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "ยังไม่มีข้อมูล ลองท่องเว็บสักครู่ก่อน"
+  },
+  "reportZeroBlocked": {
+    "message": "ไม่มีอะไรต้องบล็อก — สัปดาห์นี้ไม่มีทราฟฟิกอันตราย"
   },
   "reportFooter": {
     "message": "ข้อมูลทั้งหมดถูกเก็บไว้ในอุปกรณ์นี้เท่านั้น"

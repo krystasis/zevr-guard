@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "निगरानी शुरू करने के लिए टैब रीलोड करें।"
   },
+  "popupReloadBtn": {
+    "message": "यह टैब फिर लोड करें"
+  },
+  "popupOpenSite": {
+    "message": "कोई वेबसाइट खोलें और देखें वह किससे बात करती है।"
+  },
   "metricDomains": {
     "message": "डोमेन"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "अभी डेटा नहीं — पहले थोड़ी ब्राउज़िंग करें।"
+  },
+  "reportZeroBlocked": {
+    "message": "कुछ ब्लॉक करने की ज़रूरत नहीं पड़ी — इस हफ़्ते कोई ख़तरनाक ट्रैफ़िक नहीं।"
   },
   "reportFooter": {
     "message": "सारा डेटा इसी डिवाइस पर लोकली सेव रहता है।"

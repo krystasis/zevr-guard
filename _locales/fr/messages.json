@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Rechargez l'onglet pour lancer la surveillance."
   },
+  "popupReloadBtn": {
+    "message": "Recharger cet onglet"
+  },
+  "popupOpenSite": {
+    "message": "Ouvrez un site web pour voir avec qui il communique."
+  },
   "metricDomains": {
     "message": "domaines"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Pas encore de données — naviguez un peu d'abord."
+  },
+  "reportZeroBlocked": {
+    "message": "Rien à bloquer — aucun trafic dangereux cette semaine."
   },
   "reportFooter": {
     "message": "Toutes les données sont stockées localement sur cet appareil."

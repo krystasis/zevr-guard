@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "重新加载标签页即可开始监测。"
   },
+  "popupReloadBtn": {
+    "message": "重新加载此标签页"
+  },
+  "popupOpenSite": {
+    "message": "打开一个网站即可查看它在与谁通信。"
+  },
   "metricDomains": {
     "message": "域名"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "暂无数据——先随便浏览一会儿吧。"
+  },
+  "reportZeroBlocked": {
+    "message": "无需拦截任何内容 — 本周没有危险流量。"
   },
   "reportFooter": {
     "message": "所有数据均存储在本设备上。"

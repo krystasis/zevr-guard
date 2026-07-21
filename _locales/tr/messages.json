@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "İzlemeyi başlatmak için sekmeyi yeniden yükleyin."
   },
+  "popupReloadBtn": {
+    "message": "Bu sekmeyi yenile"
+  },
+  "popupOpenSite": {
+    "message": "Kiminle konuştuğunu görmek için bir site açın."
+  },
   "metricDomains": {
     "message": "alan adı"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Henüz veri yok — önce biraz gezinin."
+  },
+  "reportZeroBlocked": {
+    "message": "Engellenecek bir şey yoktu — bu hafta tehlikeli trafik yok."
   },
   "reportFooter": {
     "message": "Tüm veriler bu cihazda yerel olarak saklanır."

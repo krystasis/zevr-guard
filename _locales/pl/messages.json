@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Odśwież kartę, aby rozpocząć monitorowanie."
   },
+  "popupReloadBtn": {
+    "message": "Odśwież tę kartę"
+  },
+  "popupOpenSite": {
+    "message": "Otwórz stronę, aby zobaczyć, z kim się łączy."
+  },
   "metricDomains": {
     "message": "domen"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Brak danych — najpierw poprzeglądaj trochę internet."
+  },
+  "reportZeroBlocked": {
+    "message": "Nie było nic do zablokowania — brak groźnego ruchu w tym tygodniu."
   },
   "reportFooter": {
     "message": "Wszystkie dane są przechowywane lokalnie na tym urządzeniu."

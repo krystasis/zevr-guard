@@ -103,6 +103,10 @@ type GroupBy = 'domain' | 'company' | 'country';
 
 export const Popup: React.FC = () => {
   const [stats, setStats] = useState<PageStats | null>(null);
+  const [activeTab, setActiveTab] = useState<{
+    id: number;
+    supported: boolean;
+  } | null>(null);
   const [today, setToday] = useState<TodayStats | null>(null);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
@@ -128,6 +132,11 @@ export const Popup: React.FC = () => {
 
   async function loadData() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    setActiveTab(
+      tab?.id
+        ? { id: tab.id, supported: /^https?:/.test(tab.url ?? '') }
+        : null,
+    );
     if (!tab?.id) {
       setLoading(false);
       return;
@@ -334,7 +343,7 @@ export const Popup: React.FC = () => {
           />
         ) : (
           <>
-            <Header stats={stats} today={today} />
+            <Header stats={stats} today={today} activeTab={activeTab} />
             {settings && stats && (
               <AllowBar
                 host={stats.host}
@@ -538,19 +547,37 @@ const AllowBar: React.FC<{
   );
 };
 
-const Header: React.FC<{ stats: PageStats | null; today: TodayStats | null }> = ({
-  stats,
-  today,
-}) => {
+const Header: React.FC<{
+  stats: PageStats | null;
+  today: TodayStats | null;
+  activeTab: { id: number; supported: boolean } | null;
+}> = ({ stats, today, activeTab }) => {
   if (!stats) {
     return (
       <div className="p-5 border-b border-cyan-900/40 text-center">
-        <div className="text-gray-300 text-sm">
-          {t('popupNoData', 'No data for this page yet.')}
-        </div>
-        <div className="text-gray-500 text-[11px] mt-1">
-          {t('popupReloadToMonitor', 'Reload the tab to start monitoring.')}
-        </div>
+        {activeTab?.supported ? (
+          <>
+            <div className="text-gray-300 text-sm">
+              {t('popupNoData', 'No data for this page yet.')}
+            </div>
+            <div className="text-gray-500 text-[11px] mt-1">
+              {t('popupReloadToMonitor', 'Reload the tab to start monitoring.')}
+            </div>
+            <button
+              onClick={() => {
+                void chrome.tabs.reload(activeTab.id);
+                window.close();
+              }}
+              className="mt-3 px-4 py-1.5 rounded-full border border-cyan-500/40 bg-cyan-500/10 text-cyan-300 text-[12px] font-bold hover:bg-cyan-500/20 transition-colors"
+            >
+              {t('popupReloadBtn', 'Reload this tab')}
+            </button>
+          </>
+        ) : (
+          <div className="text-gray-300 text-sm">
+            {t('popupOpenSite', 'Open a website to see who it talks to.')}
+          </div>
+        )}
         {today && <TodayStrip today={today} />}
       </div>
     );

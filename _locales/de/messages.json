@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Lade den Tab neu, um die Überwachung zu starten."
   },
+  "popupReloadBtn": {
+    "message": "Diesen Tab neu laden"
+  },
+  "popupOpenSite": {
+    "message": "Öffne eine Website, um ihre Verbindungen zu sehen."
+  },
   "metricDomains": {
     "message": "Domains"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Noch keine Daten — surf erst ein wenig."
+  },
+  "reportZeroBlocked": {
+    "message": "Nichts zu blockieren — diese Woche kein gefährlicher Datenverkehr."
   },
   "reportFooter": {
     "message": "Alle Daten werden lokal auf diesem Gerät gespeichert."

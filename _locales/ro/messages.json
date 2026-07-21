@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Reîncarcă fila pentru a începe monitorizarea."
   },
+  "popupReloadBtn": {
+    "message": "Reîncarcă această filă"
+  },
+  "popupOpenSite": {
+    "message": "Deschide un site ca să vezi cu cine comunică."
+  },
   "metricDomains": {
     "message": "domenii"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Încă nu există date — navighează puțin mai întâi."
+  },
+  "reportZeroBlocked": {
+    "message": "Nimic de blocat — fără trafic periculos săptămâna aceasta."
   },
   "reportFooter": {
     "message": "Toate datele sunt stocate local pe acest dispozitiv."

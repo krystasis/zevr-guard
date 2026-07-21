@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Znovu načtěte kartu a spusťte sledování."
   },
+  "popupReloadBtn": {
+    "message": "Znovu načíst tuto kartu"
+  },
+  "popupOpenSite": {
+    "message": "Otevřete web a uvidíte, s kým komunikuje."
+  },
   "metricDomains": {
     "message": "domény"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Zatím žádná data — nejdřív chvíli prohlížejte."
+  },
+  "reportZeroBlocked": {
+    "message": "Nebylo co blokovat — tento týden žádný nebezpečný provoz."
   },
   "reportFooter": {
     "message": "Všechna data jsou uložena lokálně v tomto zařízení."

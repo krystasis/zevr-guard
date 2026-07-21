@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Recarga la pestaña para iniciar la supervisión."
   },
+  "popupReloadBtn": {
+    "message": "Recargar esta pestaña"
+  },
+  "popupOpenSite": {
+    "message": "Abre un sitio web para ver con quién se comunica."
+  },
   "metricDomains": {
     "message": "dominios"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Aún no hay datos: navega un poco primero."
+  },
+  "reportZeroBlocked": {
+    "message": "No hubo nada que bloquear — sin tráfico peligroso esta semana."
   },
   "reportFooter": {
     "message": "Todos los datos se guardan localmente en este dispositivo."

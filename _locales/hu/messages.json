@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Töltsd újra a lapot a megfigyelés indításához."
   },
+  "popupReloadBtn": {
+    "message": "Lap újratöltése"
+  },
+  "popupOpenSite": {
+    "message": "Nyiss meg egy webhelyet, hogy lásd, kivel kommunikál."
+  },
   "metricDomains": {
     "message": "domain"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Még nincs adat — böngéssz előbb egy kicsit."
+  },
+  "reportZeroBlocked": {
+    "message": "Nem kellett semmit blokkolni — a héten nem volt veszélyes forgalom."
   },
   "reportFooter": {
     "message": "Minden adat helyben, ezen az eszközön tárolódik."

@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Herlaad het tabblad om te beginnen met monitoren."
   },
+  "popupReloadBtn": {
+    "message": "Dit tabblad herladen"
+  },
+  "popupOpenSite": {
+    "message": "Open een website om te zien met wie die praat."
+  },
   "metricDomains": {
     "message": "domeinen"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Nog geen gegevens — surf eerst even rond."
+  },
+  "reportZeroBlocked": {
+    "message": "Niets te blokkeren — geen gevaarlijk verkeer deze week."
   },
   "reportFooter": {
     "message": "Alle gegevens worden lokaal op dit apparaat opgeslagen."

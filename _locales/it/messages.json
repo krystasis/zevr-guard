@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "Ricarica la scheda per avviare il monitoraggio."
   },
+  "popupReloadBtn": {
+    "message": "Ricarica questa scheda"
+  },
+  "popupOpenSite": {
+    "message": "Apri un sito web per vedere con chi comunica."
+  },
   "metricDomains": {
     "message": "domini"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "Ancora nessun dato: prima naviga un po'."
+  },
+  "reportZeroBlocked": {
+    "message": "Niente da bloccare — nessun traffico pericoloso questa settimana."
   },
   "reportFooter": {
     "message": "Tutti i dati sono salvati in locale su questo dispositivo."

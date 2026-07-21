@@ -293,6 +293,12 @@
   "popupReloadToMonitor": {
     "message": "タブをリロードして監視を開始"
   },
+  "popupReloadBtn": {
+    "message": "このタブを再読み込み"
+  },
+  "popupOpenSite": {
+    "message": "ウェブサイトを開くと、通信相手が表示されます。"
+  },
   "metricDomains": {
     "message": "ドメイン"
   },
@@ -561,6 +567,9 @@
   },
   "reportNoData": {
     "message": "まだデータがありません。少しブラウジングしてみてください。"
+  },
+  "reportZeroBlocked": {
+    "message": "ブロックの必要はありませんでした — 今週は危険な通信ゼロです。"
   },
   "reportFooter": {
     "message": "すべてのデータはこの端末内にのみ保存されます。"

@@ -170,3 +170,23 @@ export function scoreToRiskLevel(score: number): RiskLevel {
   if (score >= 10) return 'tracker';
   return 'safe';
 }
+
+/**
+ * Page-level status. Unlike the pure score bands, "suspicious" is reserved
+ * for pages with an actual dangerous connection — a large amount of ordinary
+ * ad/analytics traffic is typical for ad-funded sites and stays in the
+ * tracker tier no matter how heavy it gets, so the amber state keeps
+ * meaning "something here deserves your attention".
+ */
+export function pageRiskLevel(
+  score: number,
+  connections: Record<string, Connection>,
+): RiskLevel {
+  if (score >= 80) return 'dangerous';
+  const hasDanger = Object.values(connections).some(
+    (c) => !c.isBlocked && c.riskLevel === 'dangerous',
+  );
+  if (hasDanger) return 'suspicious';
+  if (score >= 10) return 'tracker';
+  return 'safe';
+}

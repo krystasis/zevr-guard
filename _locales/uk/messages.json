@@ -179,10 +179,10 @@
     "message": "Ця сторінка безпечна"
   },
   "riskMsgTracker": {
-    "message": "Виявлено трекери"
+    "message": "Виявлено трекери — звично для сайтів з рекламою"
   },
   "riskMsgSuspicious": {
-    "message": "Виявлено підозрілий трафік"
+    "message": "Виявлено ризиковане зʼєднання"
   },
   "riskMsgDangerous": {
     "message": "Виявлено небезпечний трафік"
@@ -345,10 +345,10 @@
     "message": "Небезп."
   },
   "filterSuspicShort": {
-    "message": "Підозр."
+    "message": "Реклама"
   },
   "filterTrackerShort": {
-    "message": "Трекер"
+    "message": "Сервіс"
   },
   "filterSafeShort": {
     "message": "Безп."
@@ -413,10 +413,10 @@
     "message": "Безпечно"
   },
   "legendTracker": {
-    "message": "Трекер"
+    "message": "Сервіс"
   },
   "legendSuspicious": {
-    "message": "Підозріло"
+    "message": "Реклама і трекінг"
   },
   "legendDangerous": {
     "message": "Небезпечно"

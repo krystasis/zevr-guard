@@ -7,7 +7,7 @@ import {
   getRiskLevel,
   isMalware,
   lookupTracker,
-  scoreToRiskLevel,
+  pageRiskLevel,
 } from './risk';
 import { initFeed, refreshFeed } from './feed';
 import { t, getLocale, loadLocale, subscribeLocale } from '../shared/i18n';
@@ -305,7 +305,7 @@ async function handleRequest(
     base.totalCount += 1;
     if (outcome === 'blocked') base.blockedCount += 1;
     base.riskScore = calcRiskScore(base.connections);
-    base.riskLevel = scoreToRiskLevel(base.riskScore);
+    base.riskLevel = pageRiskLevel(base.riskScore, base.connections);
     base.lastUpdated = Date.now();
     return base;
   });

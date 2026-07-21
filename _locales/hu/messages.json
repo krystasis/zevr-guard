@@ -179,10 +179,10 @@
     "message": "Ez az oldal biztonságos"
   },
   "riskMsgTracker": {
-    "message": "Nyomkövetők észlelve"
+    "message": "Nyomkövetők észlelve — hirdetéses oldalakon megszokott"
   },
   "riskMsgSuspicious": {
-    "message": "Gyanús forgalom észlelve"
+    "message": "Kockázatos kapcsolat észlelve"
   },
   "riskMsgDangerous": {
     "message": "Veszélyes forgalom észlelve"
@@ -345,10 +345,10 @@
     "message": "Veszély"
   },
   "filterSuspicShort": {
-    "message": "Gyanús"
+    "message": "Hirdetés"
   },
   "filterTrackerShort": {
-    "message": "Követő"
+    "message": "Szolgáltatás"
   },
   "filterSafeShort": {
     "message": "Biztonságos"
@@ -413,10 +413,10 @@
     "message": "Biztonságos"
   },
   "legendTracker": {
-    "message": "Nyomkövető"
+    "message": "Szolgáltatás"
   },
   "legendSuspicious": {
-    "message": "Gyanús"
+    "message": "Hirdetés és követés"
   },
   "legendDangerous": {
     "message": "Veszélyes"

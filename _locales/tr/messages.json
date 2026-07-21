@@ -179,10 +179,10 @@
     "message": "Bu sayfa güvenli"
   },
   "riskMsgTracker": {
-    "message": "İzleyici tespit edildi"
+    "message": "İzleyiciler algılandı — reklamlı sitelerde olağan"
   },
   "riskMsgSuspicious": {
-    "message": "Şüpheli trafik tespit edildi"
+    "message": "Riskli bağlantı algılandı"
   },
   "riskMsgDangerous": {
     "message": "Tehlikeli trafik tespit edildi"
@@ -345,10 +345,10 @@
     "message": "Tehlike"
   },
   "filterSuspicShort": {
-    "message": "Şüpheli"
+    "message": "Reklam"
   },
   "filterTrackerShort": {
-    "message": "İzleyici"
+    "message": "Hizmet"
   },
   "filterSafeShort": {
     "message": "Güvenli"
@@ -413,10 +413,10 @@
     "message": "Güvenli"
   },
   "legendTracker": {
-    "message": "İzleyici"
+    "message": "Hizmet"
   },
   "legendSuspicious": {
-    "message": "Şüpheli"
+    "message": "Reklam ve izleme"
   },
   "legendDangerous": {
     "message": "Tehlikeli"

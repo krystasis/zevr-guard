@@ -179,10 +179,10 @@
     "message": "Esta página es segura"
   },
   "riskMsgTracker": {
-    "message": "Rastreadores detectados"
+    "message": "Rastreadores detectados — habitual en sitios con publicidad"
   },
   "riskMsgSuspicious": {
-    "message": "Tráfico sospechoso detectado"
+    "message": "Conexión peligrosa detectada"
   },
   "riskMsgDangerous": {
     "message": "Tráfico peligroso detectado"
@@ -345,10 +345,10 @@
     "message": "Peligro"
   },
   "filterSuspicShort": {
-    "message": "Sospech"
+    "message": "Anuncios"
   },
   "filterTrackerShort": {
-    "message": "Rastreo"
+    "message": "Servicio"
   },
   "filterSafeShort": {
     "message": "Seguro"
@@ -413,10 +413,10 @@
     "message": "Seguro"
   },
   "legendTracker": {
-    "message": "Rastreador"
+    "message": "Servicio"
   },
   "legendSuspicious": {
-    "message": "Sospechoso"
+    "message": "Publicidad y rastreo"
   },
   "legendDangerous": {
     "message": "Peligroso"

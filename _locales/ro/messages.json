@@ -179,10 +179,10 @@
     "message": "Această pagină este sigură"
   },
   "riskMsgTracker": {
-    "message": "Trackere detectate"
+    "message": "Trackere detectate — obișnuit pe site-urile cu reclame"
   },
   "riskMsgSuspicious": {
-    "message": "Trafic suspect detectat"
+    "message": "Conexiune riscantă detectată"
   },
   "riskMsgDangerous": {
     "message": "Trafic periculos detectat"
@@ -345,10 +345,10 @@
     "message": "Pericol"
   },
   "filterSuspicShort": {
-    "message": "Suspect"
+    "message": "Reclame"
   },
   "filterTrackerShort": {
-    "message": "Tracker"
+    "message": "Serviciu"
   },
   "filterSafeShort": {
     "message": "Sigur"
@@ -413,10 +413,10 @@
     "message": "Sigur"
   },
   "legendTracker": {
-    "message": "Tracker"
+    "message": "Serviciu"
   },
   "legendSuspicious": {
-    "message": "Suspect"
+    "message": "Reclame și urmărire"
   },
   "legendDangerous": {
     "message": "Periculos"

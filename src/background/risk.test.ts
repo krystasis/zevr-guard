@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   calcRiskScore,
   lookupTracker,
+  pageRiskLevel,
   scoreToRiskLevel,
   setTrackerOverride,
 } from './risk';
@@ -64,6 +65,32 @@ describe('calcRiskScore', () => {
       ),
     );
     expect(many).toBeGreaterThan(few);
+  });
+});
+
+describe('pageRiskLevel', () => {
+  it('keeps heavy but ordinary tracking in the tracker tier', () => {
+    const conns = toMap(
+      Array.from({ length: 30 }, () =>
+        conn({ riskLevel: 'suspicious', category: 'advertising' }),
+      ),
+    );
+    const score = calcRiskScore(conns);
+    expect(score).toBeGreaterThanOrEqual(40); // would read "suspicious" by score alone
+    expect(pageRiskLevel(score, conns)).toBe('tracker');
+  });
+
+  it('flags the page when a dangerous connection is present', () => {
+    const conns = toMap([
+      conn({ riskLevel: 'dangerous' }),
+      conn({ riskLevel: 'safe' }),
+    ]);
+    expect(pageRiskLevel(calcRiskScore(conns), conns)).toBe('suspicious');
+  });
+
+  it('calms down once the dangerous connection is blocked', () => {
+    const conns = toMap([conn({ riskLevel: 'dangerous', isBlocked: true })]);
+    expect(pageRiskLevel(calcRiskScore(conns), conns)).toBe('safe');
   });
 });
 

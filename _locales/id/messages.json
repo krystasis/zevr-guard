@@ -179,10 +179,10 @@
     "message": "Halaman ini aman"
   },
   "riskMsgTracker": {
-    "message": "Pelacak terdeteksi"
+    "message": "Pelacak terdeteksi — umum di situs berbasis iklan"
   },
   "riskMsgSuspicious": {
-    "message": "Lalu lintas mencurigakan terdeteksi"
+    "message": "Koneksi berisiko terdeteksi"
   },
   "riskMsgDangerous": {
     "message": "Lalu lintas berbahaya terdeteksi"
@@ -345,10 +345,10 @@
     "message": "Bahaya"
   },
   "filterSuspicShort": {
-    "message": "Curiga"
+    "message": "Iklan"
   },
   "filterTrackerShort": {
-    "message": "Pelacak"
+    "message": "Layanan"
   },
   "filterSafeShort": {
     "message": "Aman"
@@ -413,10 +413,10 @@
     "message": "Aman"
   },
   "legendTracker": {
-    "message": "Pelacak"
+    "message": "Layanan"
   },
   "legendSuspicious": {
-    "message": "Mencurigakan"
+    "message": "Iklan & pelacakan"
   },
   "legendDangerous": {
     "message": "Berbahaya"

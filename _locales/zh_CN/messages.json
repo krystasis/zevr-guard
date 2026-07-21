@@ -179,10 +179,10 @@
     "message": "此页面安全"
   },
   "riskMsgTracker": {
-    "message": "检测到跟踪器"
+    "message": "检测到跟踪器 — 广告支持的网站中很常见"
   },
   "riskMsgSuspicious": {
-    "message": "检测到可疑流量"
+    "message": "检测到危险连接"
   },
   "riskMsgDangerous": {
     "message": "检测到危险流量"
@@ -345,10 +345,10 @@
     "message": "危险"
   },
   "filterSuspicShort": {
-    "message": "可疑"
+    "message": "广告/跟踪"
   },
   "filterTrackerShort": {
-    "message": "跟踪"
+    "message": "服务"
   },
   "filterSafeShort": {
     "message": "安全"
@@ -413,10 +413,10 @@
     "message": "安全"
   },
   "legendTracker": {
-    "message": "跟踪"
+    "message": "服务"
   },
   "legendSuspicious": {
-    "message": "可疑"
+    "message": "广告与跟踪"
   },
   "legendDangerous": {
     "message": "危险"

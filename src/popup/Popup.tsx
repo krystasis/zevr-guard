@@ -66,9 +66,9 @@ const riskMessage = (r: RiskLevel): string => {
     case 'safe':
       return t('riskMsgSafe', 'This page is safe');
     case 'tracker':
-      return t('riskMsgTracker', 'Trackers detected');
+      return t('riskMsgTracker', 'Trackers detected — common on ad-supported sites');
     case 'suspicious':
-      return t('riskMsgSuspicious', 'Suspicious traffic detected');
+      return t('riskMsgSuspicious', 'Risky connection detected');
     case 'dangerous':
       return t('riskMsgDangerous', 'Dangerous traffic detected');
   }
@@ -639,8 +639,8 @@ const RiskGauge: React.FC<{ score: number; riskLevel: RiskLevel }> = ({
     <div className="relative mt-3">
       <div className="flex justify-between text-[8px] uppercase tracking-[0.18em] text-gray-600 mb-1">
         <span>{t('legendSafe', 'Safe')}</span>
-        <span>{t('legendTracker', 'Tracker')}</span>
-        <span>{t('legendSuspicious', 'Suspicious')}</span>
+        <span>{t('legendTracker', 'Service')}</span>
+        <span>{t('legendSuspicious', 'Ad & tracking')}</span>
         <span>{t('legendDangerous', 'Dangerous')}</span>
       </div>
       <div className="relative h-1.5 rounded-full border border-cyan-900/30 overflow-hidden">
@@ -717,8 +717,8 @@ const Toolbar: React.FC<{
   const chips: Array<{ key: RiskLevel | null; label: string; count: number }> = [
     { key: null, label: t('filterAll', 'All'), count: total },
     { key: 'dangerous', label: t('filterDangerShort', 'Danger'), count: counts.dangerous },
-    { key: 'suspicious', label: t('filterSuspicShort', 'Suspic'), count: counts.suspicious },
-    { key: 'tracker', label: t('filterTrackerShort', 'Tracker'), count: counts.tracker },
+    { key: 'suspicious', label: t('filterSuspicShort', 'Ad/Track'), count: counts.suspicious },
+    { key: 'tracker', label: t('filterTrackerShort', 'Service'), count: counts.tracker },
     { key: 'safe', label: t('filterSafeShort', 'Safe'), count: counts.safe },
   ];
   return (

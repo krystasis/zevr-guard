@@ -179,10 +179,10 @@
     "message": "Эта страница безопасна"
   },
   "riskMsgTracker": {
-    "message": "Обнаружены трекеры"
+    "message": "Обнаружены трекеры — обычно для сайтов с рекламой"
   },
   "riskMsgSuspicious": {
-    "message": "Обнаружен подозрительный трафик"
+    "message": "Обнаружено рискованное соединение"
   },
   "riskMsgDangerous": {
     "message": "Обнаружен опасный трафик"
@@ -345,10 +345,10 @@
     "message": "Опасные"
   },
   "filterSuspicShort": {
-    "message": "Подозр."
+    "message": "Реклама"
   },
   "filterTrackerShort": {
-    "message": "Трекеры"
+    "message": "Сервис"
   },
   "filterSafeShort": {
     "message": "Безоп."
@@ -413,10 +413,10 @@
     "message": "Безопасные"
   },
   "legendTracker": {
-    "message": "Трекеры"
+    "message": "Сервис"
   },
   "legendSuspicious": {
-    "message": "Подозрительные"
+    "message": "Реклама и трекинг"
   },
   "legendDangerous": {
     "message": "Опасные"

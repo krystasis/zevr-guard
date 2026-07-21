@@ -179,10 +179,10 @@
     "message": "Cette page est sûre"
   },
   "riskMsgTracker": {
-    "message": "Traqueurs détectés"
+    "message": "Traqueurs détectés — courant sur les sites financés par la pub"
   },
   "riskMsgSuspicious": {
-    "message": "Trafic suspect détecté"
+    "message": "Connexion à risque détectée"
   },
   "riskMsgDangerous": {
     "message": "Trafic dangereux détecté"
@@ -345,10 +345,10 @@
     "message": "Danger"
   },
   "filterSuspicShort": {
-    "message": "Suspect"
+    "message": "Pub/Pistage"
   },
   "filterTrackerShort": {
-    "message": "Traqueur"
+    "message": "Service"
   },
   "filterSafeShort": {
     "message": "Sûr"
@@ -413,10 +413,10 @@
     "message": "Sûr"
   },
   "legendTracker": {
-    "message": "Traqueur"
+    "message": "Service"
   },
   "legendSuspicious": {
-    "message": "Suspect"
+    "message": "Pub & pistage"
   },
   "legendDangerous": {
     "message": "Dangereux"

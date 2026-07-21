@@ -179,10 +179,10 @@
     "message": "Αυτή η σελίδα είναι ασφαλής"
   },
   "riskMsgTracker": {
-    "message": "Εντοπίστηκαν trackers"
+    "message": "Εντοπίστηκαν trackers — σύνηθες σε ιστότοπους με διαφημίσεις"
   },
   "riskMsgSuspicious": {
-    "message": "Εντοπίστηκε ύποπτη κίνηση"
+    "message": "Εντοπίστηκε επικίνδυνη σύνδεση"
   },
   "riskMsgDangerous": {
     "message": "Εντοπίστηκε επικίνδυνη κίνηση"
@@ -345,10 +345,10 @@
     "message": "Κίνδυνος"
   },
   "filterSuspicShort": {
-    "message": "Ύποπτο"
+    "message": "Διαφημίσεις"
   },
   "filterTrackerShort": {
-    "message": "Tracker"
+    "message": "Υπηρεσία"
   },
   "filterSafeShort": {
     "message": "Ασφαλές"
@@ -413,10 +413,10 @@
     "message": "Ασφαλές"
   },
   "legendTracker": {
-    "message": "Tracker"
+    "message": "Υπηρεσία"
   },
   "legendSuspicious": {
-    "message": "Ύποπτο"
+    "message": "Διαφημίσεις & παρακολούθηση"
   },
   "legendDangerous": {
     "message": "Επικίνδυνο"

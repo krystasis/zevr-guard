@@ -179,10 +179,10 @@
     "message": "Tato stránka je bezpečná"
   },
   "riskMsgTracker": {
-    "message": "Zjištěny trackery"
+    "message": "Zjištěny trackery — na webech s reklamou běžné"
   },
   "riskMsgSuspicious": {
-    "message": "Zjištěn podezřelý provoz"
+    "message": "Zjištěno rizikové připojení"
   },
   "riskMsgDangerous": {
     "message": "Zjištěn nebezpečný provoz"
@@ -345,10 +345,10 @@
     "message": "Nebezpečí"
   },
   "filterSuspicShort": {
-    "message": "Podezřelé"
+    "message": "Reklama"
   },
   "filterTrackerShort": {
-    "message": "Tracker"
+    "message": "Služba"
   },
   "filterSafeShort": {
     "message": "Bezpečné"
@@ -413,10 +413,10 @@
     "message": "Bezpečné"
   },
   "legendTracker": {
-    "message": "Tracker"
+    "message": "Služba"
   },
   "legendSuspicious": {
-    "message": "Podezřelé"
+    "message": "Reklama a sledování"
   },
   "legendDangerous": {
     "message": "Nebezpečné"

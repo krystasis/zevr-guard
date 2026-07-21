@@ -179,10 +179,10 @@
     "message": "Deze pagina is veilig"
   },
   "riskMsgTracker": {
-    "message": "Trackers gedetecteerd"
+    "message": "Trackers gevonden — gebruikelijk op advertentiesites"
   },
   "riskMsgSuspicious": {
-    "message": "Verdacht verkeer gedetecteerd"
+    "message": "Riskante verbinding gedetecteerd"
   },
   "riskMsgDangerous": {
     "message": "Gevaarlijk verkeer gedetecteerd"
@@ -345,10 +345,10 @@
     "message": "Gevaar"
   },
   "filterSuspicShort": {
-    "message": "Verdacht"
+    "message": "Adv./Track"
   },
   "filterTrackerShort": {
-    "message": "Tracker"
+    "message": "Dienst"
   },
   "filterSafeShort": {
     "message": "Veilig"
@@ -413,10 +413,10 @@
     "message": "Veilig"
   },
   "legendTracker": {
-    "message": "Tracker"
+    "message": "Dienst"
   },
   "legendSuspicious": {
-    "message": "Verdacht"
+    "message": "Advertenties & tracking"
   },
   "legendDangerous": {
     "message": "Gevaarlijk"

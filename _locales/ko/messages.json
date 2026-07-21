@@ -179,10 +179,10 @@
     "message": "이 페이지는 안전합니다"
   },
   "riskMsgTracker": {
-    "message": "추적기가 감지되었습니다"
+    "message": "트래커 감지됨 — 광고 기반 사이트에서는 일반적입니다"
   },
   "riskMsgSuspicious": {
-    "message": "의심스러운 트래픽이 감지되었습니다"
+    "message": "위험한 연결이 감지되었습니다"
   },
   "riskMsgDangerous": {
     "message": "위험한 트래픽이 감지되었습니다"
@@ -345,10 +345,10 @@
     "message": "위험"
   },
   "filterSuspicShort": {
-    "message": "의심"
+    "message": "광고/추적"
   },
   "filterTrackerShort": {
-    "message": "추적"
+    "message": "서비스"
   },
   "filterSafeShort": {
     "message": "안전"
@@ -413,10 +413,10 @@
     "message": "안전"
   },
   "legendTracker": {
-    "message": "추적"
+    "message": "서비스"
   },
   "legendSuspicious": {
-    "message": "의심"
+    "message": "광고·추적"
   },
   "legendDangerous": {
     "message": "위험"

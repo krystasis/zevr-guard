@@ -179,10 +179,10 @@
     "message": "यह पेज सुरक्षित है"
   },
   "riskMsgTracker": {
-    "message": "ट्रैकर मिले"
+    "message": "ट्रैकर मिले — विज्ञापन वाली साइटों पर आम है"
   },
   "riskMsgSuspicious": {
-    "message": "संदिग्ध ट्रैफ़िक मिला"
+    "message": "जोखिम भरा कनेक्शन मिला"
   },
   "riskMsgDangerous": {
     "message": "खतरनाक ट्रैफ़िक मिला"
@@ -345,10 +345,10 @@
     "message": "खतरा"
   },
   "filterSuspicShort": {
-    "message": "संदिग्ध"
+    "message": "विज्ञापन"
   },
   "filterTrackerShort": {
-    "message": "ट्रैकर"
+    "message": "सेवा"
   },
   "filterSafeShort": {
     "message": "सुरक्षित"
@@ -413,10 +413,10 @@
     "message": "सुरक्षित"
   },
   "legendTracker": {
-    "message": "ट्रैकर"
+    "message": "सेवा"
   },
   "legendSuspicious": {
-    "message": "संदिग्ध"
+    "message": "विज्ञापन और ट्रैकिंग"
   },
   "legendDangerous": {
     "message": "खतरनाक"

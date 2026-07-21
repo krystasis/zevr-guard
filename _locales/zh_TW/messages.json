@@ -179,10 +179,10 @@
     "message": "此頁面安全"
   },
   "riskMsgTracker": {
-    "message": "偵測到追蹤器"
+    "message": "偵測到追蹤器 — 廣告支撐的網站中很常見"
   },
   "riskMsgSuspicious": {
-    "message": "偵測到可疑流量"
+    "message": "偵測到危險連線"
   },
   "riskMsgDangerous": {
     "message": "偵測到危險流量"
@@ -345,10 +345,10 @@
     "message": "危險"
   },
   "filterSuspicShort": {
-    "message": "可疑"
+    "message": "廣告/追蹤"
   },
   "filterTrackerShort": {
-    "message": "追蹤"
+    "message": "服務"
   },
   "filterSafeShort": {
     "message": "安全"
@@ -413,10 +413,10 @@
     "message": "安全"
   },
   "legendTracker": {
-    "message": "追蹤器"
+    "message": "服務"
   },
   "legendSuspicious": {
-    "message": "可疑"
+    "message": "廣告與追蹤"
   },
   "legendDangerous": {
     "message": "危險"

@@ -179,10 +179,10 @@
     "message": "Ta strona jest bezpieczna"
   },
   "riskMsgTracker": {
-    "message": "Wykryto trackery"
+    "message": "Wykryto trackery — typowe dla stron z reklamami"
   },
   "riskMsgSuspicious": {
-    "message": "Wykryto podejrzany ruch"
+    "message": "Wykryto ryzykowne połączenie"
   },
   "riskMsgDangerous": {
     "message": "Wykryto niebezpieczny ruch"
@@ -345,10 +345,10 @@
     "message": "Groźne"
   },
   "filterSuspicShort": {
-    "message": "Podejrz."
+    "message": "Reklamy"
   },
   "filterTrackerShort": {
-    "message": "Trackery"
+    "message": "Usługa"
   },
   "filterSafeShort": {
     "message": "Bezpieczne"
@@ -413,10 +413,10 @@
     "message": "Bezpieczna"
   },
   "legendTracker": {
-    "message": "Tracker"
+    "message": "Usługa"
   },
   "legendSuspicious": {
-    "message": "Podejrzana"
+    "message": "Reklamy i śledzenie"
   },
   "legendDangerous": {
     "message": "Niebezpieczna"

@@ -179,10 +179,10 @@
     "message": "Trang này an toàn"
   },
   "riskMsgTracker": {
-    "message": "Phát hiện trình theo dõi"
+    "message": "Phát hiện trình theo dõi — thường gặp ở trang có quảng cáo"
   },
   "riskMsgSuspicious": {
-    "message": "Phát hiện lưu lượng đáng ngờ"
+    "message": "Phát hiện kết nối rủi ro"
   },
   "riskMsgDangerous": {
     "message": "Phát hiện lưu lượng nguy hiểm"
@@ -345,10 +345,10 @@
     "message": "Nguy hiểm"
   },
   "filterSuspicShort": {
-    "message": "Đáng ngờ"
+    "message": "Quảng cáo"
   },
   "filterTrackerShort": {
-    "message": "Theo dõi"
+    "message": "Dịch vụ"
   },
   "filterSafeShort": {
     "message": "An toàn"
@@ -413,10 +413,10 @@
     "message": "An toàn"
   },
   "legendTracker": {
-    "message": "Theo dõi"
+    "message": "Dịch vụ"
   },
   "legendSuspicious": {
-    "message": "Đáng ngờ"
+    "message": "Quảng cáo & theo dõi"
   },
   "legendDangerous": {
     "message": "Nguy hiểm"

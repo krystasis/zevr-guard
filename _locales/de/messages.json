@@ -179,10 +179,10 @@
     "message": "Diese Seite ist sicher"
   },
   "riskMsgTracker": {
-    "message": "Tracker erkannt"
+    "message": "Tracker erkannt — auf werbefinanzierten Seiten üblich"
   },
   "riskMsgSuspicious": {
-    "message": "Verdächtiger Traffic erkannt"
+    "message": "Riskante Verbindung erkannt"
   },
   "riskMsgDangerous": {
     "message": "Gefährlicher Traffic erkannt"
@@ -345,10 +345,10 @@
     "message": "Gefahr"
   },
   "filterSuspicShort": {
-    "message": "Verdacht"
+    "message": "Werbung"
   },
   "filterTrackerShort": {
-    "message": "Tracker"
+    "message": "Dienst"
   },
   "filterSafeShort": {
     "message": "Sicher"
@@ -413,10 +413,10 @@
     "message": "Sicher"
   },
   "legendTracker": {
-    "message": "Tracker"
+    "message": "Dienst"
   },
   "legendSuspicious": {
-    "message": "Verdächtig"
+    "message": "Werbung & Tracking"
   },
   "legendDangerous": {
     "message": "Gefährlich"

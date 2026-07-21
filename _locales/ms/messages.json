@@ -179,10 +179,10 @@
     "message": "Halaman ini selamat"
   },
   "riskMsgTracker": {
-    "message": "Penjejak dikesan"
+    "message": "Penjejak dikesan — biasa di tapak berasaskan iklan"
   },
   "riskMsgSuspicious": {
-    "message": "Trafik mencurigakan dikesan"
+    "message": "Sambungan berisiko dikesan"
   },
   "riskMsgDangerous": {
     "message": "Trafik berbahaya dikesan"
@@ -345,10 +345,10 @@
     "message": "Bahaya"
   },
   "filterSuspicShort": {
-    "message": "Curiga"
+    "message": "Iklan"
   },
   "filterTrackerShort": {
-    "message": "Penjejak"
+    "message": "Servis"
   },
   "filterSafeShort": {
     "message": "Selamat"
@@ -413,10 +413,10 @@
     "message": "Selamat"
   },
   "legendTracker": {
-    "message": "Penjejak"
+    "message": "Perkhidmatan"
   },
   "legendSuspicious": {
-    "message": "Mencurigakan"
+    "message": "Iklan & penjejakan"
   },
   "legendDangerous": {
     "message": "Berbahaya"

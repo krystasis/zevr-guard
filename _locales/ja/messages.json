@@ -179,10 +179,10 @@
     "message": "このページは安全です"
   },
   "riskMsgTracker": {
-    "message": "トラッカーが検出されました"
+    "message": "トラッカーを検出 — 広告のあるサイトでは一般的です"
   },
   "riskMsgSuspicious": {
-    "message": "疑わしい通信があります"
+    "message": "危険な接続が検出されました"
   },
   "riskMsgDangerous": {
     "message": "危険な通信を検知しました"
@@ -345,10 +345,10 @@
     "message": "危険"
   },
   "filterSuspicShort": {
-    "message": "疑わし"
+    "message": "広告/追跡"
   },
   "filterTrackerShort": {
-    "message": "トラッカー"
+    "message": "サービス"
   },
   "filterSafeShort": {
     "message": "安全"
@@ -413,10 +413,10 @@
     "message": "安全"
   },
   "legendTracker": {
-    "message": "トラッカー"
+    "message": "サービス"
   },
   "legendSuspicious": {
-    "message": "疑わしい"
+    "message": "広告・追跡"
   },
   "legendDangerous": {
     "message": "危険"

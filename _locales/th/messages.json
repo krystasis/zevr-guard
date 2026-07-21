@@ -179,10 +179,10 @@
     "message": "หน้านี้ปลอดภัย"
   },
   "riskMsgTracker": {
-    "message": "พบตัวติดตาม"
+    "message": "พบตัวติดตาม — เป็นเรื่องปกติของเว็บไซต์ที่มีโฆษณา"
   },
   "riskMsgSuspicious": {
-    "message": "พบทราฟฟิกน่าสงสัย"
+    "message": "พบการเชื่อมต่อที่เสี่ยง"
   },
   "riskMsgDangerous": {
     "message": "พบทราฟฟิกอันตราย"
@@ -345,10 +345,10 @@
     "message": "อันตราย"
   },
   "filterSuspicShort": {
-    "message": "น่าสงสัย"
+    "message": "โฆษณา"
   },
   "filterTrackerShort": {
-    "message": "ติดตาม"
+    "message": "บริการ"
   },
   "filterSafeShort": {
     "message": "ปลอดภัย"
@@ -413,10 +413,10 @@
     "message": "ปลอดภัย"
   },
   "legendTracker": {
-    "message": "ตัวติดตาม"
+    "message": "บริการ"
   },
   "legendSuspicious": {
-    "message": "น่าสงสัย"
+    "message": "โฆษณาและการติดตาม"
   },
   "legendDangerous": {
     "message": "อันตราย"

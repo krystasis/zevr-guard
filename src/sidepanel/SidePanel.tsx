@@ -33,9 +33,9 @@ const riskLabel = (r: RiskLevel): string => {
     case 'safe':
       return t('legendSafe', 'Safe');
     case 'tracker':
-      return t('legendTracker', 'Tracker');
+      return t('legendTracker', 'Service');
     case 'suspicious':
-      return t('legendSuspicious', 'Suspicious');
+      return t('legendSuspicious', 'Ad & tracking');
     case 'dangerous':
       return t('legendDangerous', 'Dangerous');
   }

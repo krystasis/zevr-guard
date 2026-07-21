@@ -69,18 +69,30 @@ const SUSPICIOUS_CATEGORIES = new Set([
   'social',
 ]);
 
+function hasKnownCompany(entry: TrackerEntry): boolean {
+  return !!entry.company && entry.company !== 'Unknown';
+}
+
 export function lookupTracker(domain: string): TrackerEntry | null {
   if (!TRACKERS) return null;
-  const direct = TRACKERS[domain];
-  if (direct) return direct;
 
+  // Most-specific entry wins for category/prevalence, but ~90% of feed
+  // entries carry company "Unknown" while a parent domain often names the
+  // owner (cm.g.doubleclick.net -> doubleclick.net "Google"). Keep walking
+  // up until a known company fills the gap.
+  let hit: TrackerEntry | null = TRACKERS[domain] ?? null;
   const parts = domain.split('.');
   for (let i = 1; i < parts.length - 1; i++) {
-    const parent = parts.slice(i).join('.');
-    const hit = TRACKERS[parent];
-    if (hit) return hit;
+    if (hit && hasKnownCompany(hit)) break;
+    const parent = TRACKERS[parts.slice(i).join('.')];
+    if (!parent) continue;
+    if (!hit) {
+      hit = parent;
+    } else if (hasKnownCompany(parent)) {
+      hit = { ...hit, company: parent.company };
+    }
   }
-  return null;
+  return hit;
 }
 
 export function isMalware(domain: string): boolean {

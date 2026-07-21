@@ -49,6 +49,7 @@ import {
 } from './lookalike';
 import { isFreshVisit, markInstalled, recordVisit } from './visits';
 import { isSameSite } from '../shared/domain';
+import { resolveOwner } from './companies';
 import {
   buildHaystack,
   computeEntry,
@@ -283,7 +284,7 @@ async function handleRequest(
         }
       : {
           domain,
-          company: tracker?.company ?? null,
+          company: resolveOwner(domain, tracker?.company),
           category: tracker?.category ?? null,
           country: geo?.countryCode ?? null,
           countryName: geo?.country ?? null,
@@ -371,7 +372,7 @@ async function updateTodayStats(
     } else {
       today.trackerDomains[domain] = {
         count: 1,
-        company: tracker?.company ?? null,
+        company: resolveOwner(domain, tracker?.company),
         category: tracker?.category ?? null,
         country: geo?.countryCode ?? null,
         countryName: geo?.country ?? null,
@@ -379,12 +380,12 @@ async function updateTodayStats(
       };
     }
   }
-  if (tracker?.company) {
-    if (!today.companiesDetected.includes(tracker.company)) {
-      today.companiesDetected.push(tracker.company);
+  const owner = tracker ? resolveOwner(domain, tracker.company) : null;
+  if (owner) {
+    if (!today.companiesDetected.includes(owner)) {
+      today.companiesDetected.push(owner);
     }
-    today.companyCounts[tracker.company] =
-      (today.companyCounts[tracker.company] ?? 0) + 1;
+    today.companyCounts[owner] = (today.companyCounts[owner] ?? 0) + 1;
   }
   markTodayDirty();
 }

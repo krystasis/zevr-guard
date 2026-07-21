@@ -1,5 +1,11 @@
-import { describe, expect, it } from 'vitest';
-import { calcRiskScore, scoreToRiskLevel } from './risk';
+import { afterEach, describe, expect, it } from 'vitest';
+import {
+  calcRiskScore,
+  lookupTracker,
+  scoreToRiskLevel,
+  setTrackerOverride,
+} from './risk';
+import { resolveOwner } from './companies';
 import type { Connection } from '../types';
 
 function conn(over: Partial<Connection>): Connection {
@@ -58,6 +64,53 @@ describe('calcRiskScore', () => {
       ),
     );
     expect(many).toBeGreaterThan(few);
+  });
+});
+
+describe('lookupTracker', () => {
+  afterEach(() => setTrackerOverride(null));
+
+  it('borrows the owner from a parent entry when the hit says Unknown', () => {
+    setTrackerOverride({
+      'g.doubleclick.net': { company: 'Unknown', category: 'advertising' },
+      'doubleclick.net': { company: 'Google', category: 'advertising' },
+    });
+    const hit = lookupTracker('cm.g.doubleclick.net');
+    expect(hit?.company).toBe('Google');
+    expect(hit?.category).toBe('advertising');
+  });
+
+  it('keeps the most specific category while resolving the owner', () => {
+    setTrackerOverride({
+      'files.bbci.co.uk': { company: 'Unknown', category: 'tracking' },
+      'bbci.co.uk': { company: 'BBC', category: 'cdn' },
+    });
+    const hit = lookupTracker('static.files.bbci.co.uk');
+    expect(hit?.company).toBe('BBC');
+    expect(hit?.category).toBe('tracking');
+  });
+
+  it('returns the direct hit untouched when its owner is known', () => {
+    setTrackerOverride({
+      'pagead2.googlesyndication.com': { company: 'Google', category: 'advertising' },
+      'googlesyndication.com': { company: 'Other', category: 'cdn' },
+    });
+    expect(lookupTracker('pagead2.googlesyndication.com')?.company).toBe('Google');
+  });
+});
+
+describe('resolveOwner', () => {
+  it('prefers a real DB company', () => {
+    expect(resolveOwner('x.doubleclick.net', 'Acme')).toBe('Acme');
+  });
+
+  it('falls back to the curated map for Unknown', () => {
+    expect(resolveOwner('x.doubleclick.net', 'Unknown')).toBe('Google');
+    expect(resolveOwner('tag.yjtag.jp', null)).toBe('LY Corporation');
+  });
+
+  it('returns null instead of the literal Unknown', () => {
+    expect(resolveOwner('tracker.example-nowhere.dev', 'Unknown')).toBeNull();
   });
 });
 

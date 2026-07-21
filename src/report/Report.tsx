@@ -63,6 +63,9 @@ export const Report: React.FC = () => {
       trackers += Object.keys(d.trackerDomains).length || d.trackersDetected;
       dangerous += d.dangerousDetected;
       for (const [c, n] of Object.entries(d.companyCounts)) {
+        // Days recorded before owner resolution landed may still carry the
+        // feed's literal "Unknown" bucket — never surface it as a company.
+        if (c === 'Unknown') continue;
         companyCounts[c] = (companyCounts[c] ?? 0) + n;
       }
       for (const [dom, n] of Object.entries(d.blockedDomains)) {

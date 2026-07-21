@@ -1,4 +1,5 @@
 import type { Connection, RiskLevel } from '../types';
+import { registrableDomain } from './domain';
 
 // Shared connection-grouping used by both the popup and the side panel.
 
@@ -26,7 +27,9 @@ export interface CompanyGroup {
 export function groupByCompany(connections: Connection[]): CompanyGroup[] {
   const map = new Map<string, Connection[]>();
   for (const c of connections) {
-    const key = c.company ?? '(unknown)';
+    // No owner on record: group by the root domain instead of piling
+    // everything into one meaningless "unknown" bucket.
+    const key = c.company ?? registrableDomain(c.domain);
     const arr = map.get(key) ?? [];
     arr.push(c);
     map.set(key, arr);

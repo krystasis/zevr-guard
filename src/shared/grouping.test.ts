@@ -55,13 +55,16 @@ describe('groupByCountry', () => {
 });
 
 describe('groupByCompany', () => {
-  it('buckets unknown company under a single key', () => {
+  it('groups unknown-company connections by their root domain', () => {
     const groups = groupByCompany([
-      conn({ domain: 'a', company: null }),
-      conn({ domain: 'b', company: null }),
+      conn({ domain: 'cm.g.ads.example.com', company: null }),
+      conn({ domain: 'pixel.ads.example.com', company: null }),
+      conn({ domain: 'cdn.other.net', company: null }),
     ]);
-    expect(groups).toHaveLength(1);
-    expect(groups[0].domains).toHaveLength(2);
+    expect(groups).toHaveLength(2);
+    const keys = groups.map((g) => g.company).sort();
+    expect(keys).toEqual(['example.com', 'other.net']);
+    expect(groups.find((g) => g.company === 'example.com')?.domains).toHaveLength(2);
   });
 
   it('carries the group top risk', () => {

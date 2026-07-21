@@ -4,6 +4,7 @@ import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
 import { groupByCountry, type CountryGroup } from '../shared/grouping';
+import { registrableDomain } from '../shared/domain';
 import countryCentroids from '../data/country_centroids.json';
 import type { Connection, PageStats, RiskLevel, Settings } from '../types';
 
@@ -719,14 +720,16 @@ const DetailPanel: React.FC<{
       { requests: number; domains: number; country: string | null }
     >();
     for (const c of list) {
-      if (!c.company) continue;
-      const existing = companyMap.get(c.company);
+      // No owner on record: fall back to the root domain so unclassified
+      // connections stay visible instead of vanishing from this view.
+      const key = c.company ?? registrableDomain(c.domain);
+      const existing = companyMap.get(key);
       if (existing) {
         existing.requests += c.count;
         existing.domains += 1;
         if (!existing.country) existing.country = c.country;
       } else {
-        companyMap.set(c.company, {
+        companyMap.set(key, {
           requests: c.count,
           domains: 1,
           country: c.country,

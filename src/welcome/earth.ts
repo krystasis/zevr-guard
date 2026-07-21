@@ -121,9 +121,128 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
   const atmosphere = new THREE.Mesh(sphereGeometry, atmosphereMaterial);
   atmosphere.scale.setScalar(1.04);
 
+  // --- live connection arcs -----------------------------------------------
+  // Ambient "who talks to whom" traffic between world cities, in the same
+  // color language as the Live Globe. Parented to the globe so anchors
+  // rotate with the surface. (latLngToVec3 math inlined rather than imported
+  // from shared/globe to avoid pulling core 'three' next to 'three/webgpu'.)
+  const latLngToVec3 = (lat: number, lng: number, radius: number): THREE.Vector3 => {
+    const phi = (90 - lat) * (Math.PI / 180);
+    const theta = (lng + 180) * (Math.PI / 180);
+    return new THREE.Vector3(
+      -radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta),
+    );
+  };
+
+  const CITIES: Array<[number, number]> = [
+    [35.68, 139.69], [37.56, 126.97], [1.35, 103.81], [28.61, 77.2],
+    [55.75, 37.61], [52.52, 13.4], [51.5, -0.12], [40.71, -74.0],
+    [37.77, -122.41], [19.43, -99.13], [-23.55, -46.63], [30.04, 31.23],
+    [-33.86, 151.2], [39.9, 116.4], [25.2, 55.27], [59.33, 18.06],
+  ];
+  const ARC_COLORS = [0x38bdf8, 0x38bdf8, 0x38bdf8, 0x38bdf8, 0xfacc15, 0xef4444];
+  const ARC_POINTS = 48;
+  const ARC_LIFE = 4200;
+
+  interface HeroArc {
+    tube: THREE.Mesh;
+    head: THREE.Mesh;
+    dots: THREE.Mesh[];
+    curve: THREE.QuadraticBezierCurve3;
+    material: THREE.MeshBasicMaterial;
+    dotMaterial: THREE.MeshBasicMaterial;
+    bornAt: number;
+  }
+  const arcGroup = new THREE.Group();
+  const liveArcs: HeroArc[] = [];
+  const dotGeometry = new THREE.SphereGeometry(0.012, 8, 8);
+  const headGeometry = new THREE.SphereGeometry(0.016, 8, 8);
+
+  // Prefer endpoints on the camera-facing side of the sphere: with the
+  // horizon composition only the front-top cap is visible, and an arc with
+  // both ends behind the planet never shows up.
+  // Endpoints must sit on the camera-facing upper cap — with the horizon
+  // composition anything else is hidden behind the planet or below the fold.
+  const worldProbe = new THREE.Vector3();
+  function cityFacingCamera(): [number, number] {
+    for (let i = 0; i < 12; i++) {
+      const c = CITIES[Math.floor(Math.random() * CITIES.length)];
+      worldProbe.copy(latLngToVec3(c[0], c[1], 1));
+      globe.localToWorld(worldProbe);
+      if (worldProbe.z > 0.1 && worldProbe.y > -1.2) return c;
+    }
+    return CITIES[Math.floor(Math.random() * CITIES.length)];
+  }
+
+  function spawnArc(now: number) {
+    const a = cityFacingCamera();
+    let b = cityFacingCamera();
+    if (b === a) b = CITIES[(CITIES.indexOf(a) + 5) % CITIES.length];
+    const from = latLngToVec3(a[0], a[1], 1.005);
+    const to = latLngToVec3(b[0], b[1], 1.005);
+    const lift = 1 + from.angleTo(to) * 0.35;
+    const mid = from.clone().add(to).multiplyScalar(0.5).normalize().multiplyScalar(lift);
+    const curve = new THREE.QuadraticBezierCurve3(from, mid, to);
+    const colorHex = ARC_COLORS[Math.floor(Math.random() * ARC_COLORS.length)];
+    const material = new THREE.MeshBasicMaterial({
+      color: colorHex,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const tube = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, ARC_POINTS, 0.006, 6, false),
+      material,
+    );
+    const dotMaterial = new THREE.MeshBasicMaterial({
+      color: colorHex,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const dots = [from, to].map((p) => {
+      const m = new THREE.Mesh(dotGeometry, dotMaterial);
+      m.position.copy(p);
+      return m;
+    });
+    const head = new THREE.Mesh(headGeometry, dotMaterial);
+    head.position.copy(from);
+    arcGroup.add(tube, head, ...dots);
+    liveArcs.push({ tube, head, dots, curve, material, dotMaterial, bornAt: now });
+  }
+
+  const headPos = new THREE.Vector3();
+  function updateArcs(now: number) {
+    for (let i = liveArcs.length - 1; i >= 0; i--) {
+      const arc = liveArcs[i];
+      const age = (now - arc.bornAt) / ARC_LIFE;
+      if (age >= 1) {
+        arcGroup.remove(arc.tube, arc.head, ...arc.dots);
+        arc.tube.geometry.dispose();
+        arc.material.dispose();
+        arc.dotMaterial.dispose();
+        liveArcs.splice(i, 1);
+        continue;
+      }
+      // fade in fast, hold, fade out; a bright head travels the curve
+      const fadeIn = Math.min(1, age / 0.12);
+      const fadeOut = age > 0.72 ? 1 - (age - 0.72) / 0.28 : 1;
+      arc.material.opacity = 0.55 * fadeIn * fadeOut;
+      arc.dotMaterial.opacity = 0.95 * fadeIn * fadeOut;
+      const t = Math.min(1, age / 0.55);
+      arc.curve.getPointAt(t, headPos);
+      arc.head.position.copy(headPos);
+    }
+  }
+
   // "rising earth" composition: most of the sphere sits below the fold so
   // the lit horizon arcs across the hero's lower half
   const earthGroup = new THREE.Group();
+  globe.add(arcGroup);
   earthGroup.add(globe, atmosphere);
   earthGroup.position.y = -2.05;
   earthGroup.rotation.z = -0.12;
@@ -136,11 +255,19 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let last = performance.now();
+  let nextArcAt = performance.now() + 800;
   renderer.setAnimationLoop(() => {
     const now = performance.now();
     const delta = Math.min((now - last) / 1000, 0.1);
     last = now;
-    if (!reducedMotion) globe.rotation.y += delta * 0.02;
+    if (!reducedMotion) {
+      globe.rotation.y += delta * 0.02;
+      if (now >= nextArcAt && liveArcs.length < 22) {
+        spawnArc(now);
+        nextArcAt = now + 260 + Math.random() * 320;
+      }
+      updateArcs(now);
+    }
     renderer.render(scene, camera);
   });
 

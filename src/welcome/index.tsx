@@ -400,53 +400,59 @@ const FeatureSection: React.FC = () => (
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <FeatureCard
-          accent="red"
-          index="01"
-          title={t('feature1Title', 'Auto-block malware')}
-          desc={t(
-            'feature1Desc',
-            'Known malware and phishing domains are blocked before you notice them. Threat lists are bundled with the extension and refreshed daily.',
-          )}
-        />
-        <FeatureCard
-          accent="violet"
-          index="02"
-          title={t('featureLookalikeTitle', 'Catch lookalike phishing')}
-          desc={t(
-            'featureLookalikeDesc',
-            'Fake domains that imitate real brands — examp1e.com, exаmple.com — are caught by on-device analysis, before they reach any blocklist.',
-          )}
-        />
-        <FeatureCard
-          accent="sky"
-          index="03"
-          title={t('feature2Title', 'See every tracker')}
-          desc={t(
-            'feature2Desc',
-            'A 115,000+ tracker-signal database identifies which companies reach your browser, how often, and from where.',
-          )}
-        />
-        <FeatureCard
-          accent="amber"
-          index="04"
-          title={t('feature3Title', 'Warn on suspicious')}
-          desc={t(
-            'feature3Desc',
-            "Ads, analytics, and fingerprinting domains are highlighted by color. See each page's tracking density in real time.",
-          )}
-        />
-        <FeatureCard
-          accent="emerald"
-          index="05"
-          wide
-          title={t('feature4Title', 'Local matching. Your URLs never leave.')}
-          desc={t(
-            'feature4Desc',
-            'Threat databases and map assets are bundled locally. No external servers, no data collection. Works offline.',
-          )}
-        />
+      {/* numbered hairline list — quieter than a wall of gradient cards */}
+      <div className="border-t border-white/[0.07]">
+        {[
+          {
+            num: '01',
+            title: t('feature1Title', 'Auto-block malware'),
+            desc: t(
+              'feature1Desc',
+              'Known malware and phishing domains are blocked before you notice them. Threat lists are bundled with the extension and refreshed daily.',
+            ),
+          },
+          {
+            num: '02',
+            title: t('featureLookalikeTitle', 'Catch lookalike phishing'),
+            desc: t(
+              'featureLookalikeDesc',
+              'Fake domains that imitate real brands — examp1e.com, exаmple.com — are caught by on-device analysis, before they reach any blocklist.',
+            ),
+          },
+          {
+            num: '03',
+            title: t('feature2Title', 'See every tracker'),
+            desc: t(
+              'feature2Desc',
+              'A 115,000+ tracker-signal database identifies which companies reach your browser, how often, and from where.',
+            ),
+          },
+          {
+            num: '04',
+            title: t('feature3Title', 'Warn on suspicious'),
+            desc: t(
+              'feature3Desc',
+              "Ads, analytics, and fingerprinting domains are highlighted by color. See each page's tracking density in real time.",
+            ),
+          },
+          {
+            num: '05',
+            title: t('feature4Title', 'Local matching. Your URLs never leave.'),
+            desc: t(
+              'feature4Desc',
+              'Threat databases and map assets are bundled locally. No external servers, no data collection. Works offline.',
+            ),
+          },
+        ].map((f) => (
+          <div
+            key={f.num}
+            className="group grid gap-2 border-b border-white/[0.07] py-7 md:grid-cols-[72px_290px_1fr] md:items-baseline md:gap-6 transition-colors hover:bg-white/[0.015]"
+          >
+            <span className="font-mono text-[13px] text-cyan-400/80">{f.num}</span>
+            <h3 className="text-lg font-bold text-white [word-break:keep-all]">{f.title}</h3>
+            <p className="text-[14px] leading-relaxed text-gray-400">{f.desc}</p>
+          </div>
+        ))}
       </div>
 
       <div className="mt-10 text-center">
@@ -600,60 +606,6 @@ const WatchSetupSection: React.FC = () => {
   );
 };
 
-const FeatureCard: React.FC<{
-  accent: 'red' | 'sky' | 'amber' | 'emerald' | 'violet';
-  index: string;
-  title: string;
-  desc: string;
-  wide?: boolean;
-}> = ({ accent, index, title, desc, wide }) => {
-  const accentBg = {
-    red: 'from-red-500/20 to-transparent',
-    sky: 'from-sky-500/20 to-transparent',
-    amber: 'from-amber-500/20 to-transparent',
-    emerald: 'from-emerald-500/20 to-transparent',
-    violet: 'from-violet-500/20 to-transparent',
-  }[accent];
-  const accentBorder = {
-    red: 'border-red-900/40 hover:border-red-600/60',
-    sky: 'border-sky-900/40 hover:border-sky-600/60',
-    amber: 'border-amber-900/40 hover:border-amber-600/60',
-    emerald: 'border-emerald-900/40 hover:border-emerald-600/60',
-    violet: 'border-violet-900/40 hover:border-violet-600/60',
-  }[accent];
-  const accentText = {
-    red: 'text-red-400',
-    sky: 'text-sky-400',
-    amber: 'text-amber-400',
-    emerald: 'text-emerald-400',
-    violet: 'text-violet-400',
-  }[accent];
-  const accentBlob = {
-    red: 'bg-red-500',
-    sky: 'bg-sky-500',
-    amber: 'bg-amber-500',
-    emerald: 'bg-emerald-500',
-    violet: 'bg-violet-500',
-  }[accent];
-  return (
-    <div
-      className={`group relative p-6 rounded-lg border ${accentBorder} bg-gradient-to-br ${accentBg} backdrop-blur-sm transition overflow-hidden ${wide ? 'md:col-span-2' : ''}`}
-    >
-      <div
-        className={`absolute -top-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-30 ${accentBlob}`}
-      />
-      <div className="relative">
-        <div
-          className={`text-[10px] uppercase tracking-[0.3em] font-bold ${accentText} mb-2`}
-        >
-          {index}
-        </div>
-        <div className="text-white font-bold text-lg mb-2">{title}</div>
-        <div className="text-gray-200 text-sm leading-relaxed">{desc}</div>
-      </div>
-    </div>
-  );
-};
 
 const CredibilitySection: React.FC = () => (
   <section className="relative py-16 px-6 border-t border-cyan-800/30 bg-black">

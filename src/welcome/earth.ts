@@ -254,8 +254,14 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let last = performance.now();
   let nextArcAt = performance.now() + 800;
-  renderer.setAnimationLoop(() => {
+  // Keep the scene cheap: cap at ~30fps and stop rendering entirely while
+  // the hero is scrolled out of view.
+  const FRAME_MS = 1000 / 30;
+  let lastFrame = 0;
+  const loop = () => {
     const now = performance.now();
+    if (now - lastFrame < FRAME_MS) return;
+    lastFrame = now;
     const delta = Math.min((now - last) / 1000, 0.1);
     last = now;
     if (!reducedMotion) {
@@ -267,7 +273,18 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
       updateArcs(now);
     }
     renderer.render(scene, camera);
-  });
+  };
+  renderer.setAnimationLoop(loop);
+
+  const visibility = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.some((e) => e.isIntersecting);
+      renderer.setAnimationLoop(visible ? loop : null);
+      if (visible) last = performance.now();
+    },
+    { threshold: 0.05 },
+  );
+  visibility.observe(host);
 
   function resize() {
     const w = host.clientWidth || 1;
@@ -283,7 +300,7 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
     const dV = fitH / Math.tan(vFov / 2);
     const dH = fitH / (Math.tan(vFov / 2) * camera.aspect);
     camera.position.z = Math.max(dV, dH) * 1.02;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(w, h, false);
   }
   resize();
@@ -292,6 +309,7 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
 
   return () => {
     observer.disconnect();
+    visibility.disconnect();
     renderer.setAnimationLoop(null);
     renderer.dispose();
     sphereGeometry.dispose();

@@ -33,6 +33,7 @@ const Welcome: React.FC = () => {
       <PinHint />
       <Hero />
       <FeatureSection />
+      <WatchSetupSection />
       <CredibilitySection />
       <Footer />
     </div>
@@ -427,6 +428,123 @@ const FeatureSection: React.FC = () => (
     </div>
   </section>
 );
+
+// The data-exfiltration monitor shipped buried in the popup's settings tab
+// where nobody found it. Offer the 10-second setup right on the welcome
+// page — it is the one feature that needs user input to be useful.
+const WatchSetupSection: React.FC = () => {
+  const [kind, setKind] = React.useState<'email' | 'phone' | 'custom'>('email');
+  const [value, setValue] = React.useState('');
+  const [items, setItems] = React.useState<Array<{ id: string; display: string }>>([]);
+  const [tooShort, setTooShort] = React.useState(false);
+
+  React.useEffect(() => {
+    void (async () => {
+      try {
+        const w = (await chrome.runtime.sendMessage({ type: 'GET_WATCH' })) as
+          | { watch?: Array<{ id: string; display: string }> }
+          | undefined;
+        setItems(w?.watch ?? []);
+      } catch {
+        // background not ready — the section still renders, adding retries
+      }
+    })();
+  }, []);
+
+  async function add() {
+    const v = value.trim();
+    if (!v) return;
+    const res = (await chrome.runtime.sendMessage({
+      type: 'ADD_WATCH',
+      kind,
+      value: v,
+    })) as { success?: boolean } | undefined;
+    if (res?.success) {
+      setValue('');
+      setTooShort(false);
+      const w = (await chrome.runtime.sendMessage({ type: 'GET_WATCH' })) as
+        | { watch?: Array<{ id: string; display: string }> }
+        | undefined;
+      setItems(w?.watch ?? []);
+    } else {
+      setTooShort(true);
+    }
+  }
+
+  return (
+    <section className="relative py-20 px-6 bg-black border-t border-cyan-900/30">
+      <div className="max-w-3xl mx-auto">
+        <div className="relative p-8 rounded-2xl border border-violet-800/40 bg-gradient-to-br from-violet-500/10 to-transparent overflow-hidden">
+          <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full blur-3xl opacity-25 bg-violet-500" />
+          <div className="relative">
+            <div className="text-[10px] uppercase tracking-[0.35em] font-bold text-violet-400 mb-2">
+              {t('welcomeWatchTagline', 'Optional · 10-second setup · stays on this device')}
+            </div>
+            <h2 className="text-white font-bold text-2xl mb-2 [word-break:keep-all]">
+              {t('watchTitle', 'Watch your info')}
+            </h2>
+            <p className="text-gray-300 text-sm leading-relaxed mb-5 max-w-xl">
+              {t(
+                'watchDesc',
+                'Warns you when your email, phone, or any value you add is sent to another site — even hashed. All matching stays on your device.',
+              )}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <select
+                value={kind}
+                onChange={(e) => setKind(e.target.value as typeof kind)}
+                className="bg-black/50 border border-violet-800/50 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-violet-500/70"
+              >
+                <option value="email">{t('watchKindEmail', 'Email')}</option>
+                <option value="phone">{t('watchKindPhone', 'Phone')}</option>
+                <option value="custom">{t('watchKindCustom', 'Custom')}</option>
+              </select>
+              <input
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                  setTooShort(false);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') void add();
+                }}
+                placeholder={t('watchPlaceholder', 'value to watch for')}
+                className="flex-1 min-w-[220px] bg-black/50 border border-violet-800/50 rounded-lg px-3 py-2 text-sm text-gray-200 placeholder-gray-600 focus:outline-none focus:border-violet-500/70"
+              />
+              <button
+                onClick={() => void add()}
+                className="px-5 py-2 rounded-lg bg-violet-500 hover:bg-violet-400 text-black text-sm font-bold transition"
+              >
+                {t('watchAdd', 'Add')}
+              </button>
+            </div>
+            {tooShort && (
+              <div className="text-xs text-red-400 mt-2">
+                {t('watchTooShort', 'Too short to watch safely (5+ characters).')}
+              </div>
+            )}
+            {items.length > 0 && (
+              <div className="mt-4 space-y-1">
+                {items.map((it) => (
+                  <div key={it.id} className="flex items-center gap-2 text-sm">
+                    <span className="text-emerald-400">✓</span>
+                    <span className="font-mono text-gray-200">{it.display}</span>
+                  </div>
+                ))}
+                <p className="text-gray-400 text-xs mt-2">
+                  {t(
+                    'welcomeWatchDone',
+                    'Watching. You will see a red banner the moment it is sent to another site.',
+                  )}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const FeatureCard: React.FC<{
   accent: 'red' | 'sky' | 'amber' | 'emerald' | 'violet';

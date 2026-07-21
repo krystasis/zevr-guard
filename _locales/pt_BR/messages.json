@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Vigiar seus dados"
   },
+  "welcomeWatchTagline": {
+    "message": "Opcional · 10 segundos · fica neste dispositivo"
+  },
+  "welcomeWatchDone": {
+    "message": "Monitorando. Você verá um banner vermelho assim que for enviado a outro site."
+  },
   "watchDesc": {
     "message": "Avisa quando seu e-mail, telefone ou qualquer valor adicionado é enviado a outro site — mesmo com hash. Toda a comparação fica no seu dispositivo."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Adicionar"
+  },
+  "watchHintMsg": {
+    "message": "Novo: seja avisado quando seu e-mail for enviado a outro site."
+  },
+  "watchHintCta": {
+    "message": "Configurar"
   },
   "watchTooShort": {
     "message": "Curto demais para vigiar (5+ caracteres)."

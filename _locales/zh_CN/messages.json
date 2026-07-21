@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "监视你的信息"
   },
+  "welcomeWatchTagline": {
+    "message": "可选 · 10 秒设置 · 不离开此设备"
+  },
+  "welcomeWatchDone": {
+    "message": "监控中。一旦被发送到其他网站,你会立即看到红色横幅。"
+  },
   "watchDesc": {
     "message": "当您的邮箱、电话或任何添加的值被发送到其他网站时发出警告——即使经过哈希。所有匹配都在您的设备上完成。"
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "添加"
+  },
+  "watchHintMsg": {
+    "message": "新功能:当你的邮箱被发送到其他网站时收到警告。"
+  },
+  "watchHintCta": {
+    "message": "设置"
   },
   "watchTooShort": {
     "message": "太短，无法安全监视（5 个以上字符）。"

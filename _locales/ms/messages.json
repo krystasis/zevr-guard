@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Perhatikan maklumat anda"
   },
+  "welcomeWatchTagline": {
+    "message": "Pilihan · persediaan 10 saat · kekal pada peranti ini"
+  },
+  "welcomeWatchDone": {
+    "message": "Sedang dipantau. Anda akan nampak sepanduk merah sebaik sahaja ia dihantar ke tapak lain."
+  },
   "watchDesc": {
     "message": "Memberi amaran apabila e-mel, telefon, atau apa-apa nilai yang anda tambah dihantar ke laman lain — walaupun telah dicincang. Semua padanan kekal pada peranti anda."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Tambah"
+  },
+  "watchHintMsg": {
+    "message": "Baharu: dapatkan amaran apabila e-mel anda dihantar ke tapak lain."
+  },
+  "watchHintCta": {
+    "message": "Sediakan"
   },
   "watchTooShort": {
     "message": "Terlalu pendek untuk diperhatikan dengan selamat (5+ aksara)."

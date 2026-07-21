@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Theo dõi thông tin"
   },
+  "welcomeWatchTagline": {
+    "message": "Tùy chọn · cài đặt 10 giây · không rời thiết bị này"
+  },
+  "welcomeWatchDone": {
+    "message": "Đang theo dõi. Bạn sẽ thấy biểu ngữ đỏ ngay khi nó được gửi đến trang khác."
+  },
   "watchDesc": {
     "message": "Cảnh báo khi email, số điện thoại hoặc bất kỳ giá trị nào bạn thêm được gửi tới trang khác — kể cả đã băm. Mọi việc đối chiếu diễn ra trên thiết bị của bạn."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Thêm"
+  },
+  "watchHintMsg": {
+    "message": "Mới: nhận cảnh báo khi email của bạn được gửi đến trang khác."
+  },
+  "watchHintCta": {
+    "message": "Thiết lập"
   },
   "watchTooShort": {
     "message": "Quá ngắn để theo dõi an toàn (5+ ký tự)."

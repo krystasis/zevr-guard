@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Hlídejte své údaje"
   },
+  "welcomeWatchTagline": {
+    "message": "Volitelné · nastavení za 10 sekund · zůstává v tomto zařízení"
+  },
+  "welcomeWatchDone": {
+    "message": "Sledujeme. Jakmile se odešle na jiný web, uvidíte červený banner."
+  },
   "watchDesc": {
     "message": "Upozorní vás, když se váš e-mail, telefon nebo jakákoli přidaná hodnota odešle na jiný web — i v zahashované podobě. Veškeré porovnávání zůstává ve vašem zařízení."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Přidat"
+  },
+  "watchHintMsg": {
+    "message": "Novinka: upozornění, když se váš e-mail odešle na jiný web."
+  },
+  "watchHintCta": {
+    "message": "Nastavit"
   },
   "watchTooShort": {
     "message": "Příliš krátké pro bezpečné hlídání (5+ znaků)."

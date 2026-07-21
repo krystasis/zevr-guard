@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "情報の見張り"
   },
+  "welcomeWatchTagline": {
+    "message": "任意 · 10秒で設定 · この端末から出ません"
+  },
+  "welcomeWatchDone": {
+    "message": "監視中です。別のサイトへ送信された瞬間に赤いバナーでお知らせします。"
+  },
   "watchDesc": {
     "message": "メール・電話番号など登録した値が他サイトに送信されたら警告します(ハッシュ化されていても検知)。照合はすべて端末内で行います。"
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "追加"
+  },
+  "watchHintMsg": {
+    "message": "新機能: メールアドレスが他サイトへ送信されたら警告できます。"
+  },
+  "watchHintCta": {
+    "message": "設定する"
   },
   "watchTooShort": {
     "message": "短すぎて安全に監視できません(5文字以上)。"

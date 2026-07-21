@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Daten überwachen"
   },
+  "welcomeWatchTagline": {
+    "message": "Optional · in 10 Sekunden eingerichtet · bleibt auf diesem Gerät"
+  },
+  "welcomeWatchDone": {
+    "message": "Wird überwacht. Du siehst sofort ein rotes Banner, wenn es an eine andere Seite gesendet wird."
+  },
   "watchDesc": {
     "message": "Warnt, wenn Ihre E-Mail, Telefonnummer oder ein hinzugefügter Wert an eine andere Website gesendet wird — auch gehasht. Der Abgleich bleibt auf Ihrem Gerät."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Hinzufügen"
+  },
+  "watchHintMsg": {
+    "message": "Neu: Warnung, wenn deine E-Mail an eine andere Seite gesendet wird."
+  },
+  "watchHintCta": {
+    "message": "Einrichten"
   },
   "watchTooShort": {
     "message": "Zu kurz zum sicheren Überwachen (mind. 5 Zeichen)."

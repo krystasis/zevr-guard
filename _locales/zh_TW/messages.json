@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "監視你的資訊"
   },
+  "welcomeWatchTagline": {
+    "message": "可選 · 10 秒設定 · 不離開此裝置"
+  },
+  "welcomeWatchDone": {
+    "message": "監控中。一旦被傳送到其他網站,你會立即看到紅色橫幅。"
+  },
   "watchDesc": {
     "message": "當您的電子郵件、電話或任何新增的值被傳送到其他網站時發出警告——即使經過雜湊。所有比對都在您的裝置上完成。"
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "新增"
+  },
+  "watchHintMsg": {
+    "message": "新功能:當你的信箱被傳送到其他網站時收到警告。"
+  },
+  "watchHintCta": {
+    "message": "設定"
   },
   "watchTooShort": {
     "message": "太短，無法安全監視（5 個以上字元）。"

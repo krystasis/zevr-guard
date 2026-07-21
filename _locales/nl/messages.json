@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Bewaak je gegevens"
   },
+  "welcomeWatchTagline": {
+    "message": "Optioneel · 10 seconden · blijft op dit apparaat"
+  },
+  "welcomeWatchDone": {
+    "message": "Wordt bewaakt. Je ziet direct een rode banner zodra het naar een andere site wordt gestuurd."
+  },
   "watchDesc": {
     "message": "Waarschuwt wanneer je e-mail, telefoon of toegevoegde waarde naar een andere site wordt gestuurd — ook gehasht. Alle vergelijking blijft op je apparaat."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Toevoegen"
+  },
+  "watchHintMsg": {
+    "message": "Nieuw: krijg een waarschuwing als je e-mail naar een andere site gaat."
+  },
+  "watchHintCta": {
+    "message": "Instellen"
   },
   "watchTooShort": {
     "message": "Te kort om veilig te bewaken (5+ tekens)."

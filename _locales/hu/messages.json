@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Figyeld az adataidat"
   },
+  "welcomeWatchTagline": {
+    "message": "Opcionális · 10 másodperces beállítás · ezen az eszközön marad"
+  },
+  "welcomeWatchDone": {
+    "message": "Figyeljük. Piros sávot látsz, amint egy másik oldalra kerül."
+  },
   "watchDesc": {
     "message": "Figyelmeztet, ha az e-mailed, telefonszámod vagy bármely hozzáadott érték másik oldalra kerül — akár hashelve is. Minden egyeztetés az eszközödön marad."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Hozzáadás"
+  },
+  "watchHintMsg": {
+    "message": "Újdonság: figyelmeztetés, ha az e-mail-címed egy másik oldalra kerül."
+  },
+  "watchHintCta": {
+    "message": "Beállítás"
   },
   "watchTooShort": {
     "message": "Túl rövid a biztonságos figyeléshez (5+ karakter)."

@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Surveiller vos infos"
   },
+  "welcomeWatchTagline": {
+    "message": "Facultatif · 10 secondes · reste sur cet appareil"
+  },
+  "welcomeWatchDone": {
+    "message": "Sous surveillance. Un bandeau rouge apparaîtra dès qu’elle sera envoyée à un autre site."
+  },
   "watchDesc": {
     "message": "Vous alerte quand votre e-mail, téléphone ou toute valeur ajoutée est envoyé à un autre site — même haché. Toute la comparaison reste sur votre appareil."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Ajouter"
+  },
+  "watchHintMsg": {
+    "message": "Nouveau : soyez averti quand votre e-mail est envoyé à un autre site."
+  },
+  "watchHintCta": {
+    "message": "Configurer"
   },
   "watchTooShort": {
     "message": "Trop court pour surveiller (5+ caractères)."

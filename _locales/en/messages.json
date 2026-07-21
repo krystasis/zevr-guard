@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Watch your info"
   },
+  "welcomeWatchTagline": {
+    "message": "Optional · 10-second setup · stays on this device"
+  },
+  "welcomeWatchDone": {
+    "message": "Watching. You will see a red banner the moment it is sent to another site."
+  },
   "watchDesc": {
     "message": "Warns you when your email, phone, or any value you add is sent to another site — even hashed. All matching stays on your device."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Add"
+  },
+  "watchHintMsg": {
+    "message": "New: get warned when your email is sent to another site."
+  },
+  "watchHintCta": {
+    "message": "Set up"
   },
   "watchTooShort": {
     "message": "Too short to watch safely (5+ characters)."

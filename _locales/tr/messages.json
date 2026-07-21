@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Bilgini izle"
   },
+  "welcomeWatchTagline": {
+    "message": "İsteğe bağlı · 10 saniyede kurulum · bu cihazda kalır"
+  },
+  "welcomeWatchDone": {
+    "message": "İzleniyor. Başka bir siteye gönderildiği anda kırmızı bir uyarı göreceksiniz."
+  },
   "watchDesc": {
     "message": "E-postanız, telefonunuz veya eklediğiniz herhangi bir değer başka bir siteye gönderildiğinde — hashlenmiş olsa bile — sizi uyarır. Tüm eşleştirme cihazınızda kalır."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Ekle"
+  },
+  "watchHintMsg": {
+    "message": "Yeni: e-postanız başka bir siteye gönderildiğinde uyarı alın."
+  },
+  "watchHintCta": {
+    "message": "Kur"
   },
   "watchTooShort": {
     "message": "İzlemek için çok kısa (5+ karakter)."

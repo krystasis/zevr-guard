@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "내 정보 감시"
   },
+  "welcomeWatchTagline": {
+    "message": "선택 사항 · 10초 설정 · 이 기기 밖으로 나가지 않음"
+  },
+  "welcomeWatchDone": {
+    "message": "감시 중입니다. 다른 사이트로 전송되는 순간 빨간 배너로 알려드립니다."
+  },
   "watchDesc": {
     "message": "등록한 이메일·전화번호 등의 값이 다른 사이트로 전송되면 경고합니다(해시된 경우도 감지). 대조는 모두 기기 안에서 이루어집니다."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "추가"
+  },
+  "watchHintMsg": {
+    "message": "신기능: 이메일이 다른 사이트로 전송되면 경고를 받으세요."
+  },
+  "watchHintCta": {
+    "message": "설정"
   },
   "watchTooShort": {
     "message": "감시하기에 너무 짧습니다(5자 이상)."

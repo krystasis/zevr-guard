@@ -891,6 +891,12 @@
   "watchTitle": {
     "message": "Pantau data Anda"
   },
+  "welcomeWatchTagline": {
+    "message": "Opsional · penyiapan 10 detik · tetap di perangkat ini"
+  },
+  "welcomeWatchDone": {
+    "message": "Sedang dipantau. Anda akan melihat spanduk merah begitu dikirim ke situs lain."
+  },
   "watchDesc": {
     "message": "Memperingatkan saat email, telepon, atau nilai apa pun yang Anda tambahkan dikirim ke situs lain — bahkan yang di-hash. Semua pencocokan tetap di perangkat Anda."
   },
@@ -908,6 +914,12 @@
   },
   "watchAdd": {
     "message": "Tambah"
+  },
+  "watchHintMsg": {
+    "message": "Baru: dapatkan peringatan saat email Anda dikirim ke situs lain."
+  },
+  "watchHintCta": {
+    "message": "Siapkan"
   },
   "watchTooShort": {
     "message": "Terlalu pendek untuk dipantau (5+ karakter)."

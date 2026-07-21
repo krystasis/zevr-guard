@@ -108,6 +108,7 @@ export const Popup: React.FC = () => {
     supported: boolean;
   } | null>(null);
   const [today, setToday] = useState<TodayStats | null>(null);
+  const [showWatchHint, setShowWatchHint] = useState(false);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
   const [view, setView] = useState<'list' | 'settings'>('list');
@@ -129,6 +130,29 @@ export const Popup: React.FC = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  // One-time pointer at the watch feature: it needs user input to do
+  // anything, and buried in the settings tab nobody discovered it.
+  useEffect(() => {
+    void (async () => {
+      try {
+        const flag = await chrome.storage.local.get('zg.watchHintDismissed');
+        if (flag['zg.watchHintDismissed']) return;
+        const w = (await chrome.runtime.sendMessage({ type: 'GET_WATCH' })) as
+          | { watch?: unknown[] }
+          | undefined;
+        if (!w?.watch?.length) setShowWatchHint(true);
+      } catch {
+        // storage unavailable — skip the hint
+      }
+    })();
+  }, []);
+
+  function dismissWatchHint(openSettings: boolean) {
+    setShowWatchHint(false);
+    void chrome.storage.local.set({ 'zg.watchHintDismissed': true });
+    if (openSettings) setView('settings');
+  }
 
   async function loadData() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -344,6 +368,29 @@ export const Popup: React.FC = () => {
         ) : (
           <>
             <Header stats={stats} today={today} activeTab={activeTab} />
+            {showWatchHint && (
+              <div className="flex items-center gap-2 px-3 py-2 bg-violet-500/10 border-b border-violet-800/40 text-[11px]">
+                <span className="text-violet-300 flex-1 leading-snug">
+                  {t(
+                    'watchHintMsg',
+                    'New: get warned when your email is sent to another site.',
+                  )}
+                </span>
+                <button
+                  className="flex-none px-2.5 py-1 rounded-full bg-violet-500/80 hover:bg-violet-400 text-black font-bold"
+                  onClick={() => dismissWatchHint(true)}
+                >
+                  {t('watchHintCta', 'Set up')}
+                </button>
+                <button
+                  className="flex-none text-gray-500 hover:text-gray-300 px-1"
+                  aria-label={t('pwWarnDismiss', 'Dismiss')}
+                  onClick={() => dismissWatchHint(false)}
+                >
+                  ✕
+                </button>
+              </div>
+            )}
             {settings && stats && (
               <AllowBar
                 host={stats.host}

@@ -28,34 +28,10 @@ export interface LookalikeHit {
 
 // --- registrable-domain approximation --------------------------------------
 
-// Compact set of multi-label public suffixes covering the brand list and the
-// markets the extension ships in. Not a full PSL — unknown suffixes simply
-// fall back to the last two labels, which is fine for these heuristics.
-const MULTI_SUFFIXES = new Set([
-  'co.jp', 'ne.jp', 'or.jp', 'ac.jp', 'go.jp',
-  'co.uk', 'org.uk', 'ac.uk', 'gov.uk',
-  'co.kr', 'or.kr', 'go.kr',
-  'com.au', 'net.au', 'org.au', 'gov.au',
-  'com.br', 'net.br', 'org.br', 'gov.br',
-  'com.cn', 'net.cn', 'org.cn', 'gov.cn',
-  'com.tw', 'org.tw', 'com.hk', 'com.sg', 'com.my',
-  'co.id', 'or.id', 'co.th', 'or.th', 'com.vn',
-  'com.tr', 'gov.tr', 'com.ua', 'gov.ua',
-  'co.in', 'net.in', 'org.in', 'gov.in',
-  'com.mx', 'com.ar', 'com.co', 'com.pe', 'com.cl',
-  'com.ph', 'com.pk', 'co.za', 'com.sa', 'com.ng',
-  'co.nz', 'net.nz', 'org.nz', 'co.il', 'com.pl',
-]);
-
-export function registrableDomain(host: string): string {
-  const parts = host.split('.');
-  if (parts.length <= 2) return host;
-  const lastTwo = parts.slice(-2).join('.');
-  if (MULTI_SUFFIXES.has(lastTwo) && parts.length >= 3) {
-    return parts.slice(-3).join('.');
-  }
-  return lastTwo;
-}
+// Shared with the UI grouping code; re-exported so existing call sites keep
+// importing it from here.
+export { registrableDomain } from '../shared/domain';
+import { registrableDomain } from '../shared/domain';
 
 // --- punycode (RFC 3492 decode only) ----------------------------------------
 

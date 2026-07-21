@@ -262,6 +262,9 @@ export async function initEarthHero(canvas: HTMLCanvasElement): Promise<() => vo
     const now = performance.now();
     if (now - lastFrame < FRAME_MS) return;
     lastFrame = now;
+    // debug/verification hook: lets tests prove rendering halts off-screen
+    (window as unknown as { __earthFrames?: number }).__earthFrames =
+      ((window as unknown as { __earthFrames?: number }).__earthFrames ?? 0) + 1;
     const delta = Math.min((now - last) / 1000, 0.1);
     last = now;
     if (!reducedMotion) {

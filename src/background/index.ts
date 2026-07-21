@@ -48,6 +48,7 @@ import {
   isLookalikeBypassed,
 } from './lookalike';
 import { isFreshVisit, markInstalled, recordVisit } from './visits';
+import { isSameSite } from '../shared/domain';
 import {
   buildHaystack,
   computeEntry,
@@ -122,6 +123,7 @@ interface RequestEvent {
   ip?: string;
   timeStamp?: number;
   initiator?: string;
+  type?: string;
 }
 
 // Navigation start per tab, used to drop events that were emitted for the
@@ -203,6 +205,11 @@ async function handleRequest(
     return;
   }
 
+  // A main-frame load is the page itself, never one of its connections.
+  // It also races tab.url (still the previous document here), which used
+  // to attribute each navigation to the page the user just left.
+  if (details.type === 'main_frame') return;
+
   const navStart = navStartTimes.get(details.tabId);
   if (navStart && details.timeStamp && details.timeStamp < navStart) return;
 
@@ -225,7 +232,10 @@ async function handleRequest(
     return;
   }
   if (!/^https?:$/.test(tabUrl.protocol)) return;
-  if (domain === tabUrl.hostname) return;
+  // First-party means the same registrable domain, not the same hostname —
+  // a site's own subdomains (cdn.example.com on example.com) are not
+  // third-party connections and must not raise the page's risk score.
+  if (isSameSite(domain, tabUrl.hostname)) return;
 
   // Give the stored feed a chance to become the active DB before falling
   // back to fetching the bundled tracker JSON.

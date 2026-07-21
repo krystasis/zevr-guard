@@ -768,9 +768,17 @@ async function main(): Promise<void> {
   ]);
   const seed = await loadSeedDomains();
 
+  // Harmless test domain we operate for the hands-on tour at
+  // zevrhq.com/tour — the EICAR of this feed. Listing it lets users watch
+  // the auto-block work against a real (but safe) "threat" without ever
+  // touching actual malware. First so the session-rule cap can't evict it.
+  const TOUR_TEST_DOMAIN = 'zevr-tour-threat.krystasis12.workers.dev';
+
   // Interleave the two live feeds so ThreatFox's unique IOCs are not entirely
   // crowded out of the capped set by URLhaus, then top up from the seed.
-  const merged = Array.from(new Set([...interleave(urlhaus, threatfox), ...seed]));
+  const merged = Array.from(
+    new Set([TOUR_TEST_DOMAIN, ...interleave(urlhaus, threatfox), ...seed]),
+  );
   const capped = merged.slice(0, Math.floor(URLHAUS_MAX / 2));
 
   console.log(

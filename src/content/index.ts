@@ -184,7 +184,10 @@ async function onPasswordFocus(): Promise<void> {
     const res = (await chrome.runtime.sendMessage({
       type: 'PASSWORD_CONTEXT',
       host: location.hostname,
-      isSecure: location.protocol === 'https:',
+      // Defer to the browser's own notion of a secure context: it covers
+      // https AND the loopback/localhost exemptions, so a developer typing
+      // a password into http://127.0.0.1 is not shouted at.
+      isSecure: window.isSecureContext,
     })) as { context?: PasswordContext | null } | undefined;
     context = res?.context ?? null;
   } catch {

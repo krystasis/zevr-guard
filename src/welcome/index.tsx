@@ -261,10 +261,15 @@ const Hero: React.FC = () => (
 
     <div className="flex flex-wrap gap-3 mb-20 justify-center">
       <button
-        className="group relative px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition shadow-[0_0_24px_rgba(56,189,248,0.5)] hover:shadow-[0_0_36px_rgba(56,189,248,0.8)]"
+        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition shadow-[0_0_24px_rgba(56,189,248,0.5)] hover:shadow-[0_0_36px_rgba(56,189,248,0.8)]"
         onClick={openSidePanel}
       >
-        🌐 {t('ctaOpenGlobe', 'Open Live Globe')}
+        {/* inline SVG: emoji glyphs render inconsistently on the cyan fill */}
+        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
+        </svg>
+        {t('ctaOpenGlobe', 'Open Live Globe')}
       </button>
       <button
         className="px-6 py-3 border border-cyan-600/60 hover:border-cyan-400/80 text-white font-bold rounded-full transition backdrop-blur"

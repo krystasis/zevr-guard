@@ -158,27 +158,36 @@ export const Popup: React.FC = () => {
   }
 
   async function loadData() {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    setActiveTab(
-      tab?.id
-        ? { id: tab.id, supported: /^https?:/.test(tab.url ?? '') }
-        : null,
-    );
-    if (!tab?.id) {
+    // Never leave the popup on the SCANNING screen: if the background is
+    // unreachable, fall through to the empty state and let the 2s poll retry.
+    try {
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+      setActiveTab(
+        tab?.id
+          ? { id: tab.id, supported: /^https?:/.test(tab.url ?? '') }
+          : null,
+      );
+      if (!tab?.id) return;
+
+      const [statsRes, settingsRes, todayRes] = await Promise.all([
+        chrome.runtime
+          .sendMessage({ type: 'GET_PAGE_STATS', tabId: tab.id })
+          .catch(() => null),
+        chrome.runtime.sendMessage({ type: 'GET_SETTINGS' }).catch(() => null),
+        chrome.runtime
+          .sendMessage({ type: 'GET_TODAY_STATS' })
+          .catch(() => null),
+      ]);
+
+      setStats(statsRes?.stats ?? null);
+      setSettings(settingsRes?.settings ?? null);
+      setToday(todayRes?.today ?? null);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const [statsRes, settingsRes, todayRes] = await Promise.all([
-      chrome.runtime.sendMessage({ type: 'GET_PAGE_STATS', tabId: tab.id }),
-      chrome.runtime.sendMessage({ type: 'GET_SETTINGS' }),
-      chrome.runtime.sendMessage({ type: 'GET_TODAY_STATS' }),
-    ]);
-
-    setStats(statsRes?.stats ?? null);
-    setSettings(settingsRes?.settings ?? null);
-    setToday(todayRes?.today ?? null);
-    setLoading(false);
   }
 
   async function handleBlock(domain: string) {

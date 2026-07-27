@@ -224,17 +224,26 @@ const EarthBackdrop: React.FC<{ onResult: (ok: boolean) => void }> = ({ onResult
   React.useEffect(() => {
     let dispose: (() => void) | null = null;
     let cancelled = false;
+    let settled = false;
+    const settle = (ok: boolean) => {
+      if (cancelled || settled) return;
+      settled = true;
+      window.clearTimeout(watchdog);
+      onResult(ok);
+    };
+    // Some environments (software rendering, headless review VMs) neither
+    // resolve nor reject the renderer init — fall back instead of hanging.
+    const watchdog = window.setTimeout(() => settle(false), 10_000);
     import('./earth')
       .then(async (m) => {
         if (!ref.current || cancelled) return;
         dispose = await m.initEarthHero(ref.current);
-        if (!cancelled) onResult(true);
+        settle(true);
       })
-      .catch(() => {
-        if (!cancelled) onResult(false);
-      });
+      .catch(() => settle(false));
     return () => {
       cancelled = true;
+      window.clearTimeout(watchdog);
       dispose?.();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

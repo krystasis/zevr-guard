@@ -1,5 +1,10 @@
 import type { MalwareMeta, TrackerDB } from '../types';
-import { setMalwareMetaOverride, setMalwareOverride, setTrackerOverride } from './risk';
+import {
+  setMalwareMetaLoader,
+  setMalwareMetaOverride,
+  setMalwareOverride,
+  setTrackerOverride,
+} from './risk';
 import { syncMalwareSessionRules } from './blocking';
 import { hasCachedTrackers, putCachedTrackers } from './feedcache';
 
@@ -152,11 +157,15 @@ export async function initFeed(): Promise<void> {
   try {
     // The tracker feed lives in the Cache API and is parsed lazily by
     // risk.ts, so cold start no longer touches the 8MB blob here.
-    const stored = await chrome.storage.local.get([STORAGE_MALWARE, STORAGE_MALWARE_META]);
+    const stored = await chrome.storage.local.get(STORAGE_MALWARE);
     const malware = stored[STORAGE_MALWARE] as string[] | undefined;
     if (malware) setMalwareOverride(malware);
-    const malwareMeta = stored[STORAGE_MALWARE_META] as MalwareMeta | undefined;
-    if (malwareMeta) setMalwareMetaOverride(malwareMeta);
+    // The provenance blob (~120KB) is only ever read by the warning page, so
+    // risk.ts loads it on the first lookup rather than on every cold start.
+    setMalwareMetaLoader(async () => {
+      const s = await chrome.storage.local.get(STORAGE_MALWARE_META);
+      return (s[STORAGE_MALWARE_META] as MalwareMeta | undefined) ?? null;
+    });
   } catch {
     // ignore — bundled data remains active
   }

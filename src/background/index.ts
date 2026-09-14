@@ -10,6 +10,7 @@ import type {
 import {
   calcRiskScore,
   ensureTrackerDB,
+  ensureMalwareMeta,
   getMalwareFeedGeneratedAt,
   getRiskLevel,
   isMalware,
@@ -58,7 +59,7 @@ import {
   isLookalikeBypassed,
 } from './lookalike';
 import { isEstablishedSite, isFreshVisit, getVisitRecord, markInstalled, recordVisit } from './visits';
-import { isSameSite } from '../shared/domain';
+import { isSameSite, isValidHostname } from '../shared/domain';
 import { resolveOwner } from './companies';
 import {
   buildHaystack,
@@ -96,14 +97,6 @@ import {
   reconcilePause,
   resumeAll,
 } from './pause';
-
-// RFC-1123-ish hostname check (no scheme, path or port). Used to sanitize a
-// domain that may have arrived from the web-accessible warning page's params.
-const HOSTNAME_RE =
-  /^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?)+$/;
-function isValidHostname(host: string): boolean {
-  return host.length <= 253 && HOSTNAME_RE.test(host);
-}
 
 const pageLocks = new Map<number, Promise<void>>();
 
@@ -932,6 +925,7 @@ chrome.runtime.onMessage.addListener(
             const record = await getVisitRecord(domain);
             if (record) established = { since: record.first, n: record.n };
           }
+          if (source === 'feed') await ensureMalwareMeta();
           const listed = source === 'feed' ? lookupMalwareMeta(domain) : null;
           const context: BlockContext = {
             blockedByUs,

@@ -203,14 +203,21 @@ const ReportButton: React.FC = () => {
 // which is what makes this work for feed entries the popup cannot reach
 // (the popup only offers "allow" for the page it is open on, and on the
 // warning page that is the extension itself).
-const AllowAndOpen: React.FC<{ url: string | null }> = ({ url }) => {
+const AllowAndOpen: React.FC<{ url: string | null; scope?: 'session' | 'permanent' }> = ({
+  url,
+  scope = 'permanent',
+}) => {
+  // The two ways past a list block differ only in how long the exception
+  // lasts: a session allow disappears when the browser closes, so a genuine
+  // compromise starts being blocked again by itself.
+  const session = scope === 'session';
   const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
   async function allow() {
     if (isFramed) return;
     setState('working');
     try {
       const res = (await chrome.runtime.sendMessage({
-        type: 'ALLOW_AND_OPEN',
+        type: session ? 'ALLOW_FOR_SESSION_AND_OPEN' : 'ALLOW_AND_OPEN',
         domain: blocked,
         url: url ?? undefined,
       })) as { success?: boolean; url?: string } | undefined;
@@ -224,22 +231,30 @@ const AllowAndOpen: React.FC<{ url: string | null }> = ({ url }) => {
     }
   }
   return (
-    <div className="mt-2">
+    <div className={session ? 'w-full' : 'mt-2'}>
       <button
-        className="w-full rounded-full border border-red-500/40 px-5 py-2.5 font-bold text-red-300 transition hover:bg-red-500/10 disabled:opacity-50"
+        className={`w-full rounded-full border px-5 py-2.5 font-bold transition disabled:opacity-50 ${
+          session
+            ? 'border-amber-500/50 text-sm text-amber-300 hover:bg-amber-500/10'
+            : 'border-red-500/40 text-red-300 hover:bg-red-500/10'
+        }`}
         disabled={state === 'working'}
         onClick={() => void allow()}
       >
         {state === 'working'
           ? '…'
-          : t('warningAllowAndOpen', `Allow ${blocked} and continue (not recommended)`, blocked)}
+          : session
+            ? t('warningContinueOnce', 'Continue this time (until browser restart)')
+            : t('warningAllowAndOpen', `Allow ${blocked} and continue (not recommended)`, blocked)}
       </button>
-      <p className="mt-2 text-[11px] leading-relaxed text-gray-600">
-        {t(
-          'warningAllowAndOpenDetail',
-          'The domain is added to your allow list. You can remove it again from Settings in the Zevr Guard popup.',
-        )}
-      </p>
+      {!session && (
+        <p className="mt-2 text-[11px] leading-relaxed text-gray-600">
+          {t(
+            'warningAllowAndOpenDetail',
+            'The domain is added to your allow list. You can remove it again from Settings in the Zevr Guard popup.',
+          )}
+        </p>
+      )}
       {state === 'error' && (
         <div className="mt-1 text-[11px] text-amber-300">
           {t('warningAllowAndOpenError', "Couldn't allow the domain. Please try again.")}
@@ -357,46 +372,6 @@ const ReportSafeButton: React.FC<{ context: 'list' | 'soft'; url: string | null 
       {state === 'error' && (
         <div className="mt-1 text-[11px] text-amber-300">
           {t('reportPhishingError', "Couldn't send the report. Please try again later.")}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const ContinueOnce: React.FC<{ url: string | null }> = ({ url }) => {
-  const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
-  async function go() {
-    if (isFramed) return;
-    setState('working');
-    try {
-      const res = (await chrome.runtime.sendMessage({
-        type: 'ALLOW_FOR_SESSION_AND_OPEN',
-        domain: blocked,
-        url: url ?? undefined,
-      })) as { success?: boolean; url?: string } | undefined;
-      if (res?.success && res.url) {
-        window.location.href = res.url;
-        return;
-      }
-      setState('error');
-    } catch {
-      setState('error');
-    }
-  }
-  return (
-    <div className="w-full">
-      <button
-        className="w-full rounded-full border border-amber-500/50 px-5 py-2.5 text-sm font-bold text-amber-300 transition hover:bg-amber-500/10 disabled:opacity-50"
-        disabled={state === 'working'}
-        onClick={() => void go()}
-      >
-        {state === 'working'
-          ? '…'
-          : t('warningContinueOnce', 'Continue this time (until browser restart)')}
-      </button>
-      {state === 'error' && (
-        <div className="mt-1 text-[11px] text-amber-300">
-          {t('warningAllowAndOpenError', "Couldn't allow the domain. Please try again.")}
         </div>
       )}
     </div>
@@ -659,7 +634,7 @@ const Warning: React.FC = () => {
             ← {t('warningGoBack', 'Go Back (Safe)')}
           </button>
           {isCountry && <CountryActions country={ctx?.country ?? null} />}
-          {soft && <ContinueOnce url={ctx?.url ?? null} />}
+          {soft && <AllowAndOpen url={ctx?.url ?? null} scope="session" />}
           {isLookalike && <ReportButton />}
           {!isCountry && (isLookalike ? target !== null : ctx?.blockedByUs === true) && (
             <details className="w-full text-xs text-gray-600">

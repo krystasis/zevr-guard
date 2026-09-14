@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { openLiveGlobe, prepareLiveGlobe } from '../shared/compat';
 import { LOCALE_NAMES, SUPPORTED_LOCALES, type Locale } from '../shared/i18n';
 import { useLocale } from '../shared/useLocale';
+import { isValidHostname } from '../shared/domain';
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
@@ -2156,8 +2157,7 @@ function normalizeDomainInput(raw: string): string | null {
   v = v.split('/')[0].split('?')[0].split('#')[0];
   v = v.split('@').pop() ?? v; // strip any user info
   v = v.replace(/:\d+$/, '').replace(/\.$/, '');
-  const ok = /^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?)+$/;
-  return v.length <= 253 && ok.test(v) ? v : null;
+  return isValidHostname(v) ? v : null;
 }
 
 const LinkRow: React.FC<{

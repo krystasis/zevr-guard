@@ -5,6 +5,10 @@ import { fileURLToPath } from 'node:url';
 import { resolveOwner } from '../src/background/companies';
 import { applySafelist, createSafelist } from './safelist';
 import { FEED_MAX_DOMAINS } from '../src/shared/limits';
+// `s` is omitted for domains carried over from a seed that predates this file:
+// we do not know which feed first listed them, and guessing would put a wrong
+// attribution in front of the user.
+import type { MalwareMeta, MalwareMetaEntry } from '../src/types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -261,21 +265,6 @@ function interleave(a: string[], b: string[]): string[] {
     if (i < b.length) out.push(b[i]);
   }
   return out;
-}
-
-/**
- * `s`: source (u=URLhaus, t=ThreatFox, m=reviewed user report). Omitted when
- * a domain is carried over from an older seed that predates this file — we
- * genuinely do not know which feed first listed it, and guessing would put a
- * wrong attribution in front of the user. `f`: first listed, UTC date.
- */
-interface MalwareMetaEntry {
-  s?: 'u' | 't' | 'm';
-  f: string;
-}
-interface MalwareMeta {
-  generatedAt: string;
-  domains: Record<string, MalwareMetaEntry>;
 }
 
 /**

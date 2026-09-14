@@ -1,5 +1,6 @@
 import type { Settings } from '../types';
 import { getSettings, setSettings } from './storage';
+import { findSelfOrParent } from '../shared/domain';
 import { COUNTRY_ID_BASE, matchesDomainOrParent } from './blocking';
 
 // ---------------------------------------------------------------------------
@@ -108,14 +109,7 @@ export async function isCountryBlockedDomain(domain: string): Promise<boolean> {
  */
 export async function getBlockingCountry(domain: string): Promise<string | null> {
   const map = await getRuleMap();
-  const exact = map[domain];
-  if (exact) return exact.country;
-  const parts = domain.split('.');
-  for (let i = 1; i < parts.length - 1; i++) {
-    const parent = map[parts.slice(i).join('.')];
-    if (parent) return parent.country;
-  }
-  return null;
+  return findSelfOrParent(domain, (c) => map[c]?.country) ?? null;
 }
 
 // Allocate ids from the dedicated country range, so they never collide with

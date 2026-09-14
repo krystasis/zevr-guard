@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { matchesDomainOrParent } from './blocking';
+import { sessionRuleStub, type StubRule } from '../test/dnr-stub';
+
+function stubSessionRules(initial: StubRule[] = []) {
+  const stub = sessionRuleStub(initial);
+  (globalThis as unknown as { chrome: Record<string, unknown> }).chrome = {
+    ...(globalThis as unknown as { chrome: Record<string, unknown> }).chrome,
+    declarativeNetRequest: stub.api,
+  };
+  return stub.read;
+}
 
 describe('matchesDomainOrParent', () => {
   it('matches an exact domain', () => {
@@ -39,28 +49,6 @@ describe('matchesDomainOrParent', () => {
 // --- session allow rules -----------------------------------------------------
 // These live above SESSION_ALLOW_ID_BASE so the feed mirror, which rewrites its
 // own range on every refresh, cannot wipe the user's "continue this time".
-
-interface StubRule {
-  id: number;
-  priority: number;
-  action: { type: string };
-  condition: { urlFilter?: string; resourceTypes?: string[] };
-}
-
-function stubSessionRules(initial: StubRule[] = []) {
-  let rules = [...initial];
-  (globalThis as unknown as { chrome: Record<string, unknown> }).chrome = {
-    ...(globalThis as unknown as { chrome: Record<string, unknown> }).chrome,
-    declarativeNetRequest: {
-      getSessionRules: async () => rules,
-      updateSessionRules: async (o: { removeRuleIds?: number[]; addRules?: StubRule[] }) => {
-        const remove = new Set(o.removeRuleIds ?? []);
-        rules = rules.filter((r) => !remove.has(r.id)).concat(o.addRules ?? []);
-      },
-    },
-  };
-  return () => rules;
-}
 
 describe('allowDomainForSession', () => {
   it('allocates above the feed range and is idempotent', async () => {

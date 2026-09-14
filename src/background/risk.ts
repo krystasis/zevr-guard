@@ -12,6 +12,7 @@ import type {
 // override is active.
 import trackersUrl from '../data/trackers.json?url';
 import malwareDB from '../data/malware.json';
+import { findSelfOrParent } from '../shared/domain';
 import { readCachedTrackers } from './feedcache';
 
 const BUNDLED_MALWARE: Set<string> = new Set(malwareDB as string[]);
@@ -75,6 +76,35 @@ let MALWARE_META: MalwareMeta | null = null;
 
 export function setMalwareMetaOverride(meta: MalwareMeta | null): void {
   MALWARE_META = meta && meta.domains ? meta : null;
+  metaLoader = null;
+}
+
+// Deferred read of the stored provenance blob. Only the warning page ever
+// needs it, so paying ~120KB of storage read and parse on every cold start
+// would be for nothing.
+let metaLoader: (() => Promise<MalwareMeta | null>) | null = null;
+let metaLoading: Promise<void> | null = null;
+
+export function setMalwareMetaLoader(load: () => Promise<MalwareMeta | null>): void {
+  if (MALWARE_META) return;
+  metaLoader = load;
+}
+
+/** Resolve the provenance blob if it has not been read yet. */
+export function ensureMalwareMeta(): Promise<void> {
+  if (MALWARE_META || !metaLoader) return Promise.resolve();
+  if (!metaLoading) {
+    const load = metaLoader;
+    metaLoading = load()
+      .then((meta) => {
+        if (meta?.domains) MALWARE_META = meta;
+        metaLoader = null;
+      })
+      .catch(() => {
+        metaLoader = null;
+      });
+  }
+  return metaLoading;
 }
 
 export function getMalwareFeedGeneratedAt(): string | null {
@@ -86,13 +116,7 @@ export function getMalwareFeedGeneratedAt(): string | null {
 export function lookupMalwareMeta(domain: string): MalwareMetaEntry | null {
   const domains = MALWARE_META?.domains;
   if (!domains) return null;
-  if (domains[domain]) return domains[domain];
-  const parts = domain.split('.');
-  for (let i = 1; i < parts.length - 1; i++) {
-    const hit = domains[parts.slice(i).join('.')];
-    if (hit) return hit;
-  }
-  return null;
+  return findSelfOrParent(domain, (c) => domains[c]) ?? null;
 }
 
 const SUSPICIOUS_CATEGORIES = new Set([
@@ -130,12 +154,7 @@ export function lookupTracker(domain: string): TrackerEntry | null {
 }
 
 export function isMalware(domain: string): boolean {
-  if (MALWARE_SET.has(domain)) return true;
-  const parts = domain.split('.');
-  for (let i = 1; i < parts.length - 1; i++) {
-    if (MALWARE_SET.has(parts.slice(i).join('.'))) return true;
-  }
-  return false;
+  return findSelfOrParent(domain, (c) => (MALWARE_SET.has(c) ? true : undefined)) === true;
 }
 
 export function getRiskLevel(domain: string): RiskLevel {

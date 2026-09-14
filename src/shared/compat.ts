@@ -44,6 +44,25 @@ function sidePanelApi():
   ).sidePanel;
 }
 
+/** Find the active tab and register the panel against it. */
+async function resolveGlobeTarget(): Promise<number | null> {
+  const sidePanel = sidePanelApi();
+  if (!sidePanel) return null;
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab?.id == null) return null;
+    await sidePanel.setOptions({
+      tabId: tab.id,
+      path: 'src/sidepanel/index.html',
+      enabled: true,
+    });
+    globeTarget = { tabId: tab.id };
+    return tab.id;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Resolve everything opening the globe needs, so the click handler can stay
  * synchronous. Call it when a page carrying the button mounts; it is safe to
@@ -51,22 +70,8 @@ function sidePanelApi():
  * window-global and needs no tab id.
  */
 export function prepareLiveGlobe(): void {
-  const sidePanel = sidePanelApi();
-  if (!sidePanel) return;
-  void (async () => {
-    try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (tab?.id == null) return;
-      await sidePanel.setOptions({
-        tabId: tab.id,
-        path: 'src/sidepanel/index.html',
-        enabled: true,
-      });
-      globeTarget = { tabId: tab.id };
-    } catch {
-      // leave globeTarget null; openLiveGlobe falls back to doing the work itself
-    }
-  })();
+  if (!sidePanelApi()) return;
+  void resolveGlobeTarget();
 }
 
 /**
@@ -90,18 +95,9 @@ export function openLiveGlobe(): Promise<void> {
   // prepareLiveGlobe() was never called or had not finished. Do its work now
   // and accept the race we were trying to avoid — still better than nothing.
   return (async () => {
-    try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (tab?.id == null) return;
-      await sidePanel.setOptions({
-        tabId: tab.id,
-        path: 'src/sidepanel/index.html',
-        enabled: true,
-      });
-      await sidePanel.open({ tabId: tab.id });
-    } catch {
-      // nothing more to try
-    }
+    const tabId = await resolveGlobeTarget();
+    if (tabId == null) return;
+    await sidePanel.open({ tabId }).catch(() => undefined);
   })();
 }
 

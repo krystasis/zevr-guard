@@ -30,6 +30,37 @@ export function registrableDomain(host: string): string {
   return lastTwo;
 }
 
+// RFC-1123-ish hostname check: no scheme, path or port. Used wherever a
+// domain arrives from somewhere untrusted — the warning page's query string,
+// the settings panel's text field, a message from another context.
+const HOSTNAME_RE =
+  /^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?)+$/;
+
+export function isValidHostname(host: string): boolean {
+  return host.length <= 253 && HOSTNAME_RE.test(host);
+}
+
+/**
+ * Walk a hostname's parent labels, stopping before the bare TLD, and return
+ * the first one `hit` accepts. Blocking, allowing and provenance lookups all
+ * need the same walk: a rule on `example.com` covers `a.b.example.com`, but a
+ * rule on `ads.example.com` must not cover `example.com`, and nothing may
+ * match on `com` alone.
+ */
+export function findSelfOrParent<T>(
+  host: string,
+  hit: (candidate: string) => T | undefined,
+): T | undefined {
+  const exact = hit(host);
+  if (exact !== undefined) return exact;
+  const parts = host.split('.');
+  for (let i = 1; i < parts.length - 1; i++) {
+    const found = hit(parts.slice(i).join('.'));
+    if (found !== undefined) return found;
+  }
+  return undefined;
+}
+
 const IPV4 = /^\d{1,3}(\.\d{1,3}){3}$/;
 
 /**

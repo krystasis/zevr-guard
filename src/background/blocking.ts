@@ -1,3 +1,4 @@
+import { findSelfOrParent } from '../shared/domain';
 import { FEED_MAX_DOMAINS } from '../shared/limits';
 import { getSettings, setSettings } from './storage';
 import { getMalwareDomains } from './risk';
@@ -282,12 +283,7 @@ export async function resumeSite(host: string): Promise<void> {
  * blocked/allowed sets must walk parent labels too.
  */
 export function matchesDomainOrParent(domain: string, set: Set<string>): boolean {
-  if (set.has(domain)) return true;
-  const parts = domain.split('.');
-  for (let i = 1; i < parts.length - 1; i++) {
-    if (set.has(parts.slice(i).join('.'))) return true;
-  }
-  return false;
+  return findSelfOrParent(domain, (c) => (set.has(c) ? true : undefined)) === true;
 }
 
 const SESSION_APPLIED_KEY = 'zg.sessionRules.applied';

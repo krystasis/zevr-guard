@@ -5,7 +5,7 @@
 
 ## いまの状態
 - ブランチ `fix/feed-safelist-and-allow`(main から数コミット)。`git log main..HEAD` で内容確認。**コミット署名(Co-Authored-By 等)は付けない方針**(オーナー指示)。
-- 通っているもの: `npm test`(153件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(84/84、3 回連続)。
+- 通っているもの: `npm test`(161件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(**104/104 を 10 回連続**)。
 - 手で確認するときは `scripts/dev/build-variant.sh <ref> <label>` で任意のコミットを別フォルダに出せる(`chrome://extensions` にラベル付きで並ぶ)。**古いコミットも今日のデータでビルドされる**ので、当時の誤ブロック再現にはストア版 1.5.12 を有効にすること。
 - 未 push、未リリース。ストア版 1.5.12 は静的ルールに steamcommunity.com が焼かれたまま。**1.5.13 が届くまで利用者側は直らない**。
 - ストアレビューへの返信は済み(「早急に除外します」「次のバージョンで」)。約束した内容はすべて実装済みで、あとは配信するだけ。
@@ -39,12 +39,15 @@
 - 「ブロックされない」ことの確認は、対照を必ず付ける。ナビゲーションが単に成立していないだけでも通ってしまう(lookalike の一時停止テストがその例)。
 - 訪問記録は 2 秒の遅延書き込み(`visits.ts` の `FLUSH_MS`)。storage を直接読んで確かめるなら 3 秒待つ。
 - `webRequest` の `onCompleted` は `<all_urls>` なので **拡張自身のページも流れてくる**。ホスト名を扱うときは http(s) で絞ること。
+- `country.ts` は国別ルール表を、`visits.ts` は訪問表をモジュール内にキャッシュする。e2e から storage を直接書いても反映されない。国別は単体テスト(`country.test.ts`)で担保している。
+- **警告ページは web_accessible**。`?reason=` や `?brand=` は攻撃者が指定できる。操作を出す条件は必ず背景の `GET_BLOCK_CONTEXT`(`blockedByUs` / `country` / `lookalike`)から取ること。URL パラメータは表示にしか使わない。
+- **カテゴリルール(広告・追跡)は共有インフラを載せない**。`hasCategoryEvidence` が所有者・分類・実績で裏付けを要求する。ここを緩めると `||amazonaws.com` が復活する。
 
 ## 検証の仕方
 ```
 npm test && npx tsc -b --noEmit && npm run build:app
 npm i -D playwright && npx playwright install chromium   # 初回のみ
-node scripts/e2e/verify-extension.mjs                     # 84/84 PASS が基準
+node scripts/e2e/verify-extension.mjs                     # 104/104 PASS が基準
 ```
 
 ## 関連

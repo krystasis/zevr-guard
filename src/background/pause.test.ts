@@ -142,6 +142,43 @@ describe('global pause', () => {
     expect(isPaused()).toBe(false);
   });
 
+  it('does not answer "not paused" before the state is restored', async () => {
+    // A worker woken by the first navigation of a paused session used to say
+    // protection was on, and fire the interstitials the pause exists to stop.
+    const first = await load();
+    await first.pauseAll(null);
+    const keptRules = rules;
+    const keptSession = session;
+
+    vi.resetModules();
+    rules = keptRules;
+    session = keptSession;
+    const second = await load();
+    let ready = false;
+    void second.pauseReady().then(() => {
+      ready = true;
+    });
+    await new Promise((r) => setTimeout(r, 0));
+    expect(ready).toBe(false); // nothing known yet, so callers must wait
+    await second.reconcilePause();
+    await second.pauseReady();
+    expect(second.isPaused()).toBe(true);
+  });
+
+  it('stays paused when the rule cannot be removed', async () => {
+    const { pauseAll, resumeAll, isPaused } = await load();
+    await pauseAll(60);
+    const chromeObj = (globalThis as unknown as { chrome: { declarativeNetRequest: Record<string, unknown> } }).chrome;
+    chromeObj.declarativeNetRequest.updateSessionRules = async () => {
+      throw new Error('quota');
+    };
+    const ok = await resumeAll();
+    expect(ok).toBe(false);
+    // Reporting "protection active" with an allow-everything rule still
+    // installed is the one outcome that must not happen.
+    expect(isPaused()).toBe(true);
+  });
+
   it('restores state from the rule after a worker restart', async () => {
     const first = await load();
     await first.pauseAll(null);

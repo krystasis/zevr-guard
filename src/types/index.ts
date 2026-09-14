@@ -97,10 +97,16 @@ export type MessageRequest =
   | { type: 'BLOCK_DOMAIN'; domain: string }
   | { type: 'UNBLOCK_DOMAIN'; domain: string }
   | { type: 'ALLOW_DOMAIN'; domain: string }
-  | { type: 'ALLOW_AND_OPEN'; domain: string }
-  | { type: 'GET_BLOCK_CONTEXT'; domain: string; country?: string }
-  | { type: 'ALLOW_FOR_SESSION_AND_OPEN'; domain: string }
-  | { type: 'REPORT_FALSE_POSITIVE'; domain: string; context: 'list' | 'soft'; alsoAllow?: boolean }
+  | { type: 'ALLOW_AND_OPEN'; domain: string; url?: string }
+  | { type: 'GET_BLOCK_CONTEXT'; domain: string }
+  | { type: 'ALLOW_FOR_SESSION_AND_OPEN'; domain: string; url?: string }
+  | {
+      type: 'REPORT_FALSE_POSITIVE';
+      domain: string;
+      context: 'list' | 'soft';
+      alsoAllow?: boolean;
+      url?: string;
+    }
   | { type: 'PAUSE_ALL'; minutes: number | null }
   | { type: 'RESUME_ALL' }
   | { type: 'GET_PAUSE_STATE' }
@@ -150,8 +156,11 @@ export interface BlockContext {
   source: 'feed' | 'manual' | 'country' | null;
   /** The http(s) URL this tab was heading to, when it is on `domain`. */
   url: string | null;
-  /** True when the country in the params is really on the user's block list. */
-  countryBlocked: boolean;
+  /**
+   * The country whose rule blocks this domain, when that is why it is
+   * blocked. Derived from our own rules, never from the page's parameters.
+   */
+  country: string | null;
   /**
    * Set only for a feed block on a site the user has a history with: the
    * warning page then offers a softer, reversible way through instead of

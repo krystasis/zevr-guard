@@ -29,8 +29,14 @@ export function flashDangerBadge(tabId: number): void {
   chrome.action.setBadgeText({ text: '!', tabId });
 }
 
+/**
+ * Drop this tab's own badge text so it follows whatever the global default is.
+ * `''` would not do: an empty string is still a tab-specific value, and it
+ * wins over the default — which is how the paused indicator ended up invisible
+ * on every tab that was already open.
+ */
 export function clearBadge(tabId: number): void {
-  chrome.action.setBadgeText({ text: '', tabId });
+  chrome.action.setBadgeText({ text: null as unknown as string, tabId });
 }
 
 // --- global pause -----------------------------------------------------------
@@ -49,7 +55,14 @@ export async function showPausedBadge(): Promise<void> {
   }
   try {
     for (const tab of await chrome.tabs.query({})) {
-      if (tab.id !== undefined) chrome.action.setBadgeText({ text: '', tabId: tab.id });
+      if (tab.id === undefined) continue;
+      // Clear the per-tab text *and* colour, or a tab left red by a block
+      // keeps that colour under the paused glyph.
+      clearBadge(tab.id);
+      chrome.action.setBadgeBackgroundColor({
+        color: PAUSED_BADGE_COLOR,
+        tabId: tab.id,
+      });
     }
   } catch {
     // tabs unavailable — the default still shows on tabs without their own text

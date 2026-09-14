@@ -32,6 +32,30 @@ let pausedUntil: number | null = null;
 let pausedSince: number | null = null;
 let pausedNow = false;
 
+// Until reconcilePause() has looked at the rules, memory says "not paused"
+// simply because it knows nothing yet. A worker woken by the first navigation
+// of a paused session would answer isPaused() === false and fire the very
+// interruptions the pause exists to stop. Callers that can afford to wait
+// await this first.
+let resolveReady: (() => void) | null = null;
+let readyPromise: Promise<void> | null = null;
+
+/** Resolves once the pause state has been restored from the live rules. */
+export function pauseReady(): Promise<void> {
+  if (!readyPromise) {
+    readyPromise = new Promise<void>((res) => {
+      resolveReady = res;
+    });
+  }
+  return readyPromise;
+}
+
+function markReady(): void {
+  pauseReady();
+  resolveReady?.();
+  resolveReady = null;
+}
+
 /** True while all interruptions are suspended. Safe to call on a hot path. */
 export function isPaused(): boolean {
   if (!pausedNow) return false;
@@ -70,24 +94,34 @@ export async function pauseAll(minutes: number | null): Promise<PauseState> {
   if (!chrome.declarativeNetRequest?.updateSessionRules) return snapshot();
 
   const now = Date.now();
+  const until = minutes === null ? null : now + minutes * 60_000;
+
+  // Install the rule first. Claiming "paused" before it exists would leave the
+  // popup saying protection is off while every block is still live.
+  try {
+    await chrome.declarativeNetRequest.updateSessionRules({
+      removeRuleIds: [GLOBAL_PAUSE_RULE_ID],
+      addRules: [
+        {
+          id: GLOBAL_PAUSE_RULE_ID,
+          priority: ALLOW_PRIORITY,
+          action: { type: ALLOW_ACTION },
+          condition: {
+            urlFilter: '*',
+            resourceTypes: ALL_RESOURCES,
+          },
+        },
+      ],
+    });
+  } catch (err) {
+    console.warn('[Zevr Guard] could not pause:', (err as Error).message);
+    markReady();
+    return snapshot();
+  }
+
   pausedNow = true;
   pausedSince = now;
-  pausedUntil = minutes === null ? null : now + minutes * 60_000;
-
-  await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [GLOBAL_PAUSE_RULE_ID],
-    addRules: [
-      {
-        id: GLOBAL_PAUSE_RULE_ID,
-        priority: ALLOW_PRIORITY,
-        action: { type: ALLOW_ACTION },
-        condition: {
-          urlFilter: '*',
-          resourceTypes: ALL_RESOURCES,
-        },
-      },
-    ],
-  });
+  pausedUntil = until;
 
   // Replace any earlier deadline: switching 5 minutes -> 1 hour must not leave
   // the first alarm behind to cut the second short.
@@ -102,22 +136,38 @@ export async function pauseAll(minutes: number | null): Promise<PauseState> {
 
   await writeState();
   await showPausedBadge();
+  markReady();
   return snapshot();
 }
 
-export async function resumeAll(): Promise<void> {
-  pausedNow = false;
-  pausedUntil = null;
-  pausedSince = null;
-
+export async function resumeAll(): Promise<boolean> {
+  // Removing an id that is not there does not reject, so a rejection here is a
+  // real failure — and dropping the flags anyway would report "protection
+  // active" with an allow-everything rule still installed.
   try {
     await chrome.declarativeNetRequest.updateSessionRules({
       removeRuleIds: [GLOBAL_PAUSE_RULE_ID],
       addRules: [],
     });
-  } catch {
-    // nothing to remove
+  } catch (err) {
+    console.warn('[Zevr Guard] could not resume:', (err as Error).message);
+    let stillThere = true;
+    try {
+      const rules = await chrome.declarativeNetRequest.getSessionRules();
+      stillThere = rules.some((r) => r.id === GLOBAL_PAUSE_RULE_ID);
+    } catch {
+      // cannot tell; assume the worst and stay paused
+    }
+    if (stillThere) {
+      markReady();
+      return false;
+    }
   }
+
+  pausedNow = false;
+  pausedUntil = null;
+  pausedSince = null;
+
   try {
     await chrome.alarms.clear(EXPIRY_ALARM);
   } catch {
@@ -125,6 +175,8 @@ export async function resumeAll(): Promise<void> {
   }
   await writeState();
   clearPausedBadge();
+  markReady();
+  return true;
 }
 
 export async function getPauseState(): Promise<PauseState> {
@@ -140,13 +192,17 @@ export async function getPauseState(): Promise<PauseState> {
  * writes failed, and an orphaned rule would silently leave protection off.
  */
 export async function reconcilePause(): Promise<void> {
-  if (!chrome.declarativeNetRequest?.getSessionRules) return;
+  if (!chrome.declarativeNetRequest?.getSessionRules) {
+    markReady();
+    return;
+  }
 
   let hasRule = false;
   try {
     const rules = await chrome.declarativeNetRequest.getSessionRules();
     hasRule = rules.some((r) => r.id === GLOBAL_PAUSE_RULE_ID);
   } catch {
+    markReady();
     return;
   }
 
@@ -161,6 +217,7 @@ export async function reconcilePause(): Promise<void> {
   if (!hasRule) {
     // No rule: nothing is paused, whatever the stored state claims.
     if (stored) await resumeAll();
+    markReady();
     return;
   }
 
@@ -170,7 +227,7 @@ export async function reconcilePause(): Promise<void> {
 
   if (pausedUntil !== null && Date.now() >= pausedUntil) {
     await resumeAll();
-    return;
+    return; // resumeAll marked readiness
   }
   try {
     await chrome.alarms.clear(EXPIRY_ALARM);
@@ -182,6 +239,7 @@ export async function reconcilePause(): Promise<void> {
   }
   await writeState();
   await showPausedBadge();
+  markReady();
 }
 
 chrome.alarms.onAlarm.addListener((alarm) => {

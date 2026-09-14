@@ -4,6 +4,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveOwner } from '../src/background/companies';
 import { applySafelist, createSafelist } from './safelist';
+import { FEED_MAX_DOMAINS } from '../src/shared/limits';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,7 +44,8 @@ function feedPublishEnabled(): boolean {
 }
 
 const URLHAUS_API = 'https://urlhaus.abuse.ch/downloads/hostfile/';
-const URLHAUS_MAX = 5000;
+// Two static rules per domain, matching what the session mirror builds.
+const STATIC_RULES_MAX = FEED_MAX_DOMAINS * 2;
 // ThreatFox (also abuse.ch) shares URLhaus' permissive terms and adds C2 /
 // botnet / payload-hosting IOCs that the URLhaus hostfile alone misses.
 // The recent-IOC export is public; if abuse.ch requires an Auth-Key on the
@@ -370,7 +372,7 @@ function buildRules(domains: string[]): BlockRule[] {
       },
     });
 
-    if (rules.length >= URLHAUS_MAX) break;
+    if (rules.length >= STATIC_RULES_MAX) break;
   }
 
   return rules;
@@ -881,7 +883,9 @@ async function main(): Promise<void> {
       `[build-rules] review: ${c.host} is blocked but ranks #${c.rank} — check it is not a mistake`,
     );
   }
-  const capped = kept.slice(0, Math.floor(URLHAUS_MAX / 2));
+  // Never publish more than the extension can actually turn into rules: the
+  // surplus would be reported as dangerous while nothing blocked it.
+  const capped = kept.slice(0, FEED_MAX_DOMAINS);
 
   console.log(
     `[build-rules] urlhaus ${urlhaus.length}, threatfox ${threatfox.length}, seed ${seed.length}, safelisted ${dropped.length}, ${capped.length} final`,

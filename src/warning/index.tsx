@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import type { BlockContext } from '../types';
 import ReactDOM from 'react-dom/client';
 import { AppIcon } from '../shared/AppIcon';
-import { t, loadLocale } from '../shared/i18n';
+import { bcp47, t, loadLocale } from '../shared/i18n';
 import { useLocale } from '../shared/useLocale';
 import '../styles/tailwind.css';
 
@@ -64,7 +64,6 @@ function useBlockContext(): BlockContext | null {
         const res = (await chrome.runtime.sendMessage({
           type: 'GET_BLOCK_CONTEXT',
           domain: blocked,
-          country: countryCode || undefined,
         })) as { context?: BlockContext } | undefined;
         if (live && res?.context) setCtx(res.context);
       } catch {
@@ -76,6 +75,31 @@ function useBlockContext(): BlockContext | null {
     };
   }, []);
   return ctx;
+}
+
+/**
+ * A feed entry's "first listed" is a bare UTC date (`2026-09-14`). Parsed as a
+ * plain Date it becomes UTC midnight, which renders as the previous day for
+ * anyone west of UTC — so it is formatted in UTC, in the language the user
+ * chose here rather than whatever the browser defaults to.
+ */
+function formatUtcDate(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  try {
+    return new Intl.DateTimeFormat(bcp47(), { dateStyle: 'medium', timeZone: 'UTC' }).format(d);
+  } catch {
+    return iso;
+  }
+}
+
+/** A local timestamp, shown in the user's chosen language and own timezone. */
+function formatLocalDate(ms: number): string {
+  try {
+    return new Intl.DateTimeFormat(bcp47(), { dateStyle: 'medium' }).format(new Date(ms));
+  } catch {
+    return new Date(ms).toLocaleDateString();
+  }
 }
 
 function goBack() {
@@ -179,7 +203,7 @@ const ReportButton: React.FC = () => {
 // which is what makes this work for feed entries the popup cannot reach
 // (the popup only offers "allow" for the page it is open on, and on the
 // warning page that is the extension itself).
-const AllowAndOpen: React.FC = () => {
+const AllowAndOpen: React.FC<{ url: string | null }> = ({ url }) => {
   const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
   async function allow() {
     if (isFramed) return;
@@ -188,6 +212,7 @@ const AllowAndOpen: React.FC = () => {
       const res = (await chrome.runtime.sendMessage({
         type: 'ALLOW_AND_OPEN',
         domain: blocked,
+        url: url ?? undefined,
       })) as { success?: boolean; url?: string } | undefined;
       if (res?.success && res.url) {
         window.location.href = res.url;
@@ -230,7 +255,10 @@ const AllowAndOpen: React.FC = () => {
 // itself, and nothing lands in the permanent allow list.
 // The counterpart to ReportButton: the user telling us a block is wrong.
 // Reports are reviewed by hand upstream — see the background handler.
-const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) => {
+const ReportSafeButton: React.FC<{ context: 'list' | 'soft'; url: string | null }> = ({
+  context,
+  url,
+}) => {
   const [state, setState] = useState<
     'idle' | 'confirm' | 'sending' | 'done' | 'allowed-only' | 'error'
   >('idle');
@@ -244,6 +272,7 @@ const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) =
         domain: blocked,
         context,
         alsoAllow,
+        url: url ?? undefined,
       })) as { success?: boolean; allowed?: boolean; url?: string | null } | undefined;
       // The allow is applied locally before the report is sent, so the two
       // can disagree. Never claim the report went through when it did not.
@@ -334,7 +363,7 @@ const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) =
   );
 };
 
-const ContinueOnce: React.FC = () => {
+const ContinueOnce: React.FC<{ url: string | null }> = ({ url }) => {
   const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
   async function go() {
     if (isFramed) return;
@@ -343,6 +372,7 @@ const ContinueOnce: React.FC = () => {
       const res = (await chrome.runtime.sendMessage({
         type: 'ALLOW_FOR_SESSION_AND_OPEN',
         domain: blocked,
+        url: url ?? undefined,
       })) as { success?: boolean; url?: string } | undefined;
       if (res?.success && res.url) {
         window.location.href = res.url;
@@ -378,10 +408,7 @@ const ContinueOnce: React.FC = () => {
 // which a bare "this is dangerous" does not.
 const SourceLine: React.FC<{ ctx: BlockContext }> = ({ ctx }) => {
   if (ctx.source !== 'feed') return null;
-  const fmt = (iso: string) => {
-    const d = new Date(iso);
-    return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString();
-  };
+  const fmt = formatUtcDate;
   const named =
     ctx.meta?.src === 'u'
       ? 'URLhaus (abuse.ch)'
@@ -390,7 +417,9 @@ const SourceLine: React.FC<{ ctx: BlockContext }> = ({ ctx }) => {
         : ctx.meta?.src === 'm'
           ? t('warningSourceReports', 'reviewed user reports')
           : null;
-  const updated = ctx.feedGeneratedAt ? fmt(ctx.feedGeneratedAt) : null;
+  // The feed timestamp is a full instant, not a date-only value, so it reads
+  // in the user's own timezone.
+  const updated = ctx.feedGeneratedAt ? formatLocalDate(Date.parse(ctx.feedGeneratedAt)) : null;
   const text =
     named && ctx.meta
       ? t('warningSourceLine', `Listed by ${named} since ${fmt(ctx.meta.since)}`, named, fmt(ctx.meta.since))
@@ -407,10 +436,15 @@ const SourceLine: React.FC<{ ctx: BlockContext }> = ({ ctx }) => {
   );
 };
 
-const CountryActions: React.FC<{ enabled: boolean }> = ({ enabled }) => {
+// `country` is whatever the background says actually holds a rule over this
+// domain. Taking it from the page's own ?country= would let a hostile site
+// deep-link here and talk the user into lifting a whole country's block for a
+// domain Zevr never blocked — the one control that escaped the same gate as
+// the allow buttons.
+const CountryActions: React.FC<{ country: string | null }> = ({ country }) => {
   const [unblocked, setUnblocked] = useState(false);
-  if (!enabled) return null;
-  const name = countryDisplayName(countryCode);
+  if (!country) return null;
+  const name = countryDisplayName(country);
   if (unblocked) {
     return (
       <div className="text-center text-emerald-300 text-xs py-2">
@@ -423,7 +457,7 @@ const CountryActions: React.FC<{ enabled: boolean }> = ({ enabled }) => {
       className="w-full rounded-full border border-sky-500/40 px-5 py-2.5 text-sm font-bold text-sky-300 transition hover:bg-sky-500/10"
       onClick={() => {
         void chrome.runtime
-          .sendMessage({ type: 'UNBLOCK_COUNTRY', country: countryCode })
+          .sendMessage({ type: 'UNBLOCK_COUNTRY', country })
           .then(() => setUnblocked(true));
       }}
     >
@@ -533,8 +567,8 @@ const Warning: React.FC = () => {
               <p className="font-medium text-gray-200 [word-break:keep-all]">
                 {t(
                   'warningCountryHeader',
-                  `This site communicates from ${countryDisplayName(countryCode)}, which you chose to block.`,
-                  countryDisplayName(countryCode),
+                  `This site communicates from ${countryDisplayName(ctx?.country ?? countryCode)}, which you chose to block.`,
+                  countryDisplayName(ctx?.country ?? countryCode),
                 )}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-gray-500">
@@ -583,9 +617,9 @@ const Warning: React.FC = () => {
               <p className="font-medium text-gray-200 [word-break:keep-all]">
                 {t(
                   'warningSoftHeader',
-                  `You have been using ${blocked} since ${new Date(ctx.established.since).toLocaleDateString()}.`,
+                  `You have been using ${blocked} since ${formatLocalDate(ctx.established.since)}.`,
                   blocked,
-                  new Date(ctx.established.since).toLocaleDateString(),
+                  formatLocalDate(ctx.established.since),
                 )}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-gray-500">
@@ -624,8 +658,8 @@ const Warning: React.FC = () => {
           >
             ← {t('warningGoBack', 'Go Back (Safe)')}
           </button>
-          {isCountry && <CountryActions enabled={ctx?.countryBlocked === true} />}
-          {soft && <ContinueOnce />}
+          {isCountry && <CountryActions country={ctx?.country ?? null} />}
+          {soft && <ContinueOnce url={ctx?.url ?? null} />}
           {isLookalike && <ReportButton />}
           {!isCountry && (isLookalike ? target !== null : ctx?.blockedByUs === true) && (
             <details className="w-full text-xs text-gray-600">
@@ -643,8 +677,13 @@ const Warning: React.FC = () => {
                 </div>
               ) : (
                 <>
-                  <AllowAndOpen />
-                  {ctx?.source === 'feed' && <ReportSafeButton context={soft ? 'soft' : 'list'} />}
+                  <AllowAndOpen url={ctx?.url ?? null} />
+                  {ctx?.source === 'feed' && (
+                    <ReportSafeButton
+                      context={soft ? 'soft' : 'list'}
+                      url={ctx?.url ?? null}
+                    />
+                  )}
                 </>
               )}
             </details>

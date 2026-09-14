@@ -1,3 +1,4 @@
+import { FEED_MAX_DOMAINS } from '../shared/limits';
 import { getSettings, setSettings } from './storage';
 import { getMalwareDomains } from './risk';
 
@@ -130,7 +131,19 @@ export async function getBlockedDomains(): Promise<Set<string>> {
   return blocked;
 }
 
+/**
+ * Whitelist a domain. Allowing something the user had previously blocked by
+ * hand also lifts that block: three entry points reach this (the warning
+ * page, the popup's allow button, a false-positive report) and without it
+ * they disagreed, leaving the same domain in customBlockList and
+ * customWhiteList at once and listed twice in Settings.
+ */
 export async function allowDomain(domain: string): Promise<void> {
+  const current = await getSettings();
+  if (current.customBlockList.includes(domain)) {
+    await unblockDomain(domain);
+  }
+
   const rules = await chrome.declarativeNetRequest.getDynamicRules();
   const existingAllow = rules.find(
     (r) =>
@@ -279,8 +292,9 @@ export function matchesDomainOrParent(domain: string, set: Set<string>): boolean
 
 const SESSION_APPLIED_KEY = 'zg.sessionRules.applied';
 // Chrome caps session rules at 5,000 and each domain takes two rules
-// (main_frame redirect + everything-else block).
-const MAX_SESSION_DOMAINS = 2400;
+// (main_frame redirect + everything-else block). Shared with the feed build so
+// the list can never be longer than what gets mirrored into rules.
+const MAX_SESSION_DOMAINS = FEED_MAX_DOMAINS;
 
 // Session-scoped "allow for this browser session" rules live above this id.
 // The feed mirror below owns 1..MAX_SESSION_DOMAINS*2 and must never remove
@@ -369,15 +383,35 @@ export async function syncMalwareSessionRules(): Promise<void> {
 const STATIC_MALWARE_RULESET = 'block_rules';
 
 /**
- * The packaged `block_rules` ruleset is a snapshot of the feed on release
- * day and only exists so a fresh install is protected before the worker
- * has applied session rules. Once the live feed is mirrored into session
- * rules it must step aside: otherwise a domain the feed has since removed
- * (a false positive such as steamcommunity.com in 1.5.12) stays blocked
- * until the next store release, and the malware toggle cannot switch it
- * off. The enabled state persists across browser restarts but resets on
- * extension update, so this is re-checked on every sync.
+ * The packaged `block_rules` ruleset is a snapshot of the feed on build day.
+ * Once the live feed is mirrored into session rules it must step aside:
+ * otherwise a domain the feed has since dropped (a false positive such as
+ * steamcommunity.com in 1.5.12) stays blocked until the next store release,
+ * and the malware toggle cannot switch it off.
+ *
+ * It is not retired for good, though. Session rules die with the browser
+ * while the disabled state persists, so retiring it once would leave every
+ * subsequent launch unprotected from the first restored tab until the worker
+ * finished rebuilding ~4,800 rules. armStaticMalwareRules() puts it back at
+ * startup and this takes it away again as soon as the mirror is live.
  */
+/**
+ * Re-enable the packaged ruleset so something covers the window between
+ * browser launch and the first session-rule sync. Safe because the packaged
+ * set is built with the same safelist as the feed: nothing popular is in it.
+ */
+export async function armStaticMalwareRules(): Promise<void> {
+  const dnr = chrome.declarativeNetRequest;
+  if (!dnr?.getEnabledRulesets || !dnr.updateEnabledRulesets) return;
+  try {
+    const enabled = await dnr.getEnabledRulesets();
+    if (enabled.includes(STATIC_MALWARE_RULESET)) return;
+    await dnr.updateEnabledRulesets({ enableRulesetIds: [STATIC_MALWARE_RULESET] });
+  } catch (err) {
+    console.warn('[Zevr Guard] could not arm static rules:', (err as Error).message);
+  }
+}
+
 async function retireStaticMalwareRules(): Promise<void> {
   const dnr = chrome.declarativeNetRequest;
   if (!dnr?.getEnabledRulesets || !dnr.updateEnabledRulesets) return;

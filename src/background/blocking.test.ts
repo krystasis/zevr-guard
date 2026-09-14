@@ -118,3 +118,53 @@ describe('allowDomainForSession', () => {
     expect(allows.some((r) => r.condition.urlFilter === '||d100.example')).toBe(true);
   });
 });
+
+describe('allowDomain', () => {
+  it('lifts a manual block instead of leaving the domain on both lists', async () => {
+    let settings = {
+      customBlockList: ['example.com'],
+      customWhiteList: [] as string[],
+    };
+    let rules: Array<{ id: number; action: { type: string }; condition: { urlFilter?: string } }> = [
+      { id: 10001, action: { type: 'block' }, condition: { urlFilter: '||example.com' } },
+    ];
+    (globalThis as unknown as { chrome: Record<string, unknown> }).chrome = {
+      ...(globalThis as unknown as { chrome: Record<string, unknown> }).chrome,
+      storage: {
+        local: {
+          get: async () => ({ settings }),
+          set: async (o: { settings: typeof settings }) => {
+            settings = o.settings;
+          },
+        },
+        session: { get: async () => ({}), set: async () => {}, remove: async () => {} },
+        onChanged: { addListener: () => {} },
+      },
+      declarativeNetRequest: {
+        getDynamicRules: async () => rules,
+        updateDynamicRules: async (o: { removeRuleIds?: number[]; addRules?: typeof rules }) => {
+          const remove = new Set(o.removeRuleIds ?? []);
+          rules = rules.filter((r) => !remove.has(r.id)).concat(o.addRules ?? []);
+        },
+      },
+    };
+    const { allowDomain } = await import('./blocking');
+    await allowDomain('example.com');
+    expect(settings.customWhiteList).toContain('example.com');
+    expect(settings.customBlockList).not.toContain('example.com');
+    expect(rules.some((r) => r.action.type === 'block')).toBe(false);
+  });
+});
+
+describe('feed budget', () => {
+  it('never lists more domains than the session mirror can carry', async () => {
+    const { FEED_MAX_DOMAINS } = await import('../shared/limits');
+    const malware = (await import('../data/malware.json')).default as string[];
+    // A longer list would leave a tail that isMalware() calls dangerous while
+    // no rule blocks it — the exact hole retiring the static ruleset opened.
+    expect(malware.length).toBeLessThanOrEqual(FEED_MAX_DOMAINS);
+    // Two session rules per domain, plus 100 session allows and one pause,
+    // has to stay under Chrome's 5,000-rule cap.
+    expect(FEED_MAX_DOMAINS * 2 + 100 + 1).toBeLessThanOrEqual(5000);
+  });
+});

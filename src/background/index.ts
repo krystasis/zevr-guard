@@ -42,6 +42,7 @@ import {
 import {
   allowDomain,
   allowDomainForSession,
+  armStaticMalwareRules,
   blockDomain,
   disallowDomain,
   getBlockedDomains,
@@ -80,6 +81,7 @@ import { recallDomainGeo, rememberDomainGeo } from './domaingeo';
 import {
   blockCountry,
   getCountryRuleStats,
+  getBlockingCountry,
   isCountryBlockedDomain,
   noteConnection,
   syncCountryBlocking,
@@ -90,6 +92,7 @@ import {
   getPauseState,
   isPaused,
   pauseAll,
+  pauseReady,
   reconcilePause,
   resumeAll,
 } from './pause';
@@ -158,17 +161,32 @@ const lastMainFrameUrl = new Map<number, string>();
  * allowed domain — never an arbitrary URL, so the warning page cannot be
  * turned into an open redirect.
  */
-function resolveResumeUrl(tabId: number | undefined, domain: string): string | null {
-  const remembered = tabId !== undefined ? lastMainFrameUrl.get(tabId) : undefined;
-  if (!remembered) return null;
+function sameSiteHttpUrl(candidate: string | undefined, domain: string): string | null {
+  if (!candidate) return null;
   try {
-    const url = new URL(remembered);
+    const url = new URL(candidate);
     if (!/^https?:$/.test(url.protocol)) return null;
     if (!matchesDomainOrParent(url.hostname.toLowerCase(), new Set([domain]))) return null;
-    return remembered;
+    return candidate;
   } catch {
     return null;
   }
+}
+
+/**
+ * `offered` is the URL the warning page was handed by GET_BLOCK_CONTEXT and
+ * sends back when the user acts. The map below is the better source but lives
+ * only in this worker's memory: read a warning page for half a minute, the
+ * worker idles out, and the deep link would be lost — so the page's copy is
+ * accepted as a fallback, held to exactly the same check.
+ */
+function resolveResumeUrl(
+  tabId: number | undefined,
+  domain: string,
+  offered?: string,
+): string | null {
+  const remembered = tabId !== undefined ? lastMainFrameUrl.get(tabId) : undefined;
+  return sameSiteHttpUrl(remembered, domain) ?? sameSiteHttpUrl(offered, domain);
 }
 
 /**
@@ -179,23 +197,35 @@ function resolveResumeUrl(tabId: number | undefined, domain: string): string | n
  */
 async function classifyBlock(
   domain: string,
-): Promise<{ blockedByUs: boolean; source: 'feed' | 'manual' | 'country' | null }> {
-  if (isMalware(domain)) return { blockedByUs: true, source: 'feed' };
+): Promise<{
+  blockedByUs: boolean;
+  source: 'feed' | 'manual' | 'country' | null;
+  country: string | null;
+}> {
+  // The user's own block is checked first: when a domain they blocked by hand
+  // later turns up on the feed, calling it a feed block would offer them a
+  // "report this as a mistake" button for their own decision.
   const settings = await getSettings();
   if (matchesDomainOrParent(domain, new Set(settings.customBlockList))) {
-    return { blockedByUs: true, source: 'manual' };
+    return { blockedByUs: true, source: 'manual', country: null };
   }
+  if (isMalware(domain)) return { blockedByUs: true, source: 'feed', country: null };
   const blocked = await getBlockedDomains();
-  if (matchesDomainOrParent(domain, blocked)) return { blockedByUs: true, source: 'manual' };
-  if (await isCountryBlockedDomain(domain)) return { blockedByUs: true, source: 'country' };
-  return { blockedByUs: false, source: null };
+  if (matchesDomainOrParent(domain, blocked)) {
+    return { blockedByUs: true, source: 'manual', country: null };
+  }
+  const country = await getBlockingCountry(domain);
+  if (country) return { blockedByUs: true, source: 'country', country };
+  return { blockedByUs: false, source: null, country: null };
 }
 
 async function resetPage(tabId: number): Promise<void> {
   navStartTimes.set(tabId, Date.now());
   leakSeen.delete(tabId);
   await updatePage(tabId, () => null);
-  clearBadge(tabId);
+  // While paused the badge carries the paused indicator; clearing per-tab text
+  // on every navigation would wipe it off each tab as the user browses.
+  if (!isPaused()) clearBadge(tabId);
 }
 
 /**
@@ -261,6 +291,9 @@ async function handleRequest(
   details: RequestEvent,
   outcome: RequestOutcome = 'completed',
 ): Promise<void> {
+  // Badge writes below consult isPaused(); knowing the answer keeps a restart
+  // from painting over the paused indicator.
+  await pauseReady();
   if (details.tabId < 0) {
     await handleBackgroundRequest(details, outcome);
     return;
@@ -269,7 +302,28 @@ async function handleRequest(
   // A main-frame load is the page itself, never one of its connections.
   // It also races tab.url (still the previous document here), which used
   // to attribute each navigation to the page the user just left.
-  if (details.type === 'main_frame') return;
+  if (details.type === 'main_frame') {
+    // Recorded here rather than on the request, so that "have I been here
+    // before" means the page actually loaded. A blocked navigation redirects
+    // to the extension's warning page and never completes on the original
+    // host, so retries at a blocked site cannot accumulate into a history —
+    // while a site the user allowed, or visited with protection paused, gets
+    // the record it needs for the first-password notice and the softer
+    // warning variant.
+    if (outcome === 'completed') {
+      try {
+        const url = new URL(details.url);
+        // http(s) only. The warning page and the popup are main-frame loads
+        // too, and recording the extension's own id as a visited site both
+        // pollutes the history and, because the map is written back whole,
+        // overwrites the real entries.
+        if (/^https?:$/.test(url.protocol)) void recordVisit(url.hostname);
+      } catch {
+        // unparsable URL
+      }
+    }
+    return;
+  }
 
   const navStart = navStartTimes.get(details.tabId);
   if (navStart && details.timeStamp && details.timeStamp < navStart) return;
@@ -463,16 +517,18 @@ chrome.webRequest.onBeforeRequest.addListener(
       if (/^https?:$/.test(url.protocol)) {
         lastMainFrameUrl.set(details.tabId, details.url);
       }
-      // A listed domain is about to be redirected to the warning page. Not
-      // counting it keeps a blocked site from slowly promoting itself into
-      // "you have used this for a while" through the user's retries.
-      if (!isMalware(url.hostname)) void recordVisit(url.hostname);
     } catch {
       // unparsable URL
     }
     // Paused means "stop interrupting me": DNR blocks are lifted by the pause
-    // rule, and this interstitial has to stand down with them.
-    if (!isPaused()) void checkNavigation(details.tabId, details.url);
+    // rule, and this interstitial has to stand down with them. Right after a
+    // service-worker restart the pause state is not known yet, so wait for it
+    // rather than assume protection is on and swap the tab out from under a
+    // user who explicitly paused.
+    void (async () => {
+      await pauseReady();
+      if (!isPaused()) void checkNavigation(details.tabId, details.url);
+    })();
   },
   {
     urls: ['http://*/*', 'https://*/*'],
@@ -533,7 +589,10 @@ async function reportLeaks(
   }
   if (fresh.length === 0) return;
 
-  flashDangerBadge(details.tabId);
+  // The alert itself still fires while paused — a pause is about not blocking,
+  // not about hiding that data just left. The badge is the one thing that must
+  // keep saying "paused".
+  if (!isPaused()) flashDangerBadge(details.tabId);
 
   const kindWord = (k: WatchEntry['kind']): string =>
     t(
@@ -780,6 +839,10 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 chrome.runtime.onStartup.addListener(() => {
+  // Session rules are gone after a restart and take a moment to rebuild, so
+  // put the packaged ruleset back first; initFeed retires it again once the
+  // live mirror is in place.
+  void armStaticMalwareRules();
   void initFeed();
   void syncFromStoredSettings();
   void initWeeklyReport();
@@ -852,7 +915,7 @@ chrome.runtime.onMessage.addListener(
                 blockedByUs: false,
                 source: null,
                 url: null,
-                countryBlocked: false,
+                country: null,
                 established: null,
                 meta: null,
                 feedGeneratedAt: null,
@@ -860,9 +923,7 @@ chrome.runtime.onMessage.addListener(
             });
             break;
           }
-          const { blockedByUs, source } = await classifyBlock(domain);
-          const country = message.country?.trim().toUpperCase() ?? '';
-          const settings = await getSettings();
+          const { blockedByUs, source, country } = await classifyBlock(domain);
           // Only the feed can be wrong about a site the user already knows.
           // A block they set themselves needs no softening, and a country
           // block has its own answer.
@@ -876,8 +937,7 @@ chrome.runtime.onMessage.addListener(
             blockedByUs,
             source,
             url: resolveResumeUrl(_sender.tab?.id, domain),
-            countryBlocked:
-              /^[A-Z]{2}$/.test(country) && settings.blockedCountries.includes(country),
+            country,
             established,
             meta: listed ? { src: listed.s ?? null, since: listed.f } : null,
             feedGeneratedAt: source === 'feed' ? getMalwareFeedGeneratedAt() : null,
@@ -896,7 +956,9 @@ chrome.runtime.onMessage.addListener(
           await allowDomainForSession(domain);
           sendResponse({
             success: true,
-            url: resolveResumeUrl(_sender.tab?.id, domain) ?? `https://${domain}/`,
+            url:
+              resolveResumeUrl(_sender.tab?.id, domain, message.url) ??
+              `https://${domain}/`,
           });
           break;
         }
@@ -913,12 +975,12 @@ chrome.runtime.onMessage.addListener(
             sendResponse({ success: false });
             break;
           }
-          const current = await getSettings();
-          if (current.customBlockList.includes(domain)) await unblockDomain(domain);
           await allowDomain(domain);
           sendResponse({
             success: true,
-            url: resolveResumeUrl(_sender.tab?.id, domain) ?? `https://${domain}/`,
+            url:
+              resolveResumeUrl(_sender.tab?.id, domain, message.url) ??
+              `https://${domain}/`,
           });
           break;
         }
@@ -969,6 +1031,7 @@ chrome.runtime.onMessage.addListener(
           sendResponse({ stats: await getCountryRuleStats() });
           break;
         case 'PASSWORD_CONTEXT': {
+          await pauseReady();
           const settings = await getSettings();
           let context: {
             level: 'danger' | 'notice';
@@ -1084,7 +1147,8 @@ chrome.runtime.onMessage.addListener(
             success: reported,
             allowed: message.alsoAllow === true,
             url: message.alsoAllow
-              ? (resolveResumeUrl(_sender.tab?.id, fpDomain) ?? `https://${fpDomain}/`)
+              ? (resolveResumeUrl(_sender.tab?.id, fpDomain, message.url) ??
+                `https://${fpDomain}/`)
               : null,
           });
           break;
@@ -1101,8 +1165,8 @@ chrome.runtime.onMessage.addListener(
           break;
         }
         case 'RESUME_ALL': {
-          await resumeAll();
-          sendResponse({ state: await getPauseState() });
+          const ok = await resumeAll();
+          sendResponse({ success: ok, state: await getPauseState() });
           break;
         }
         case 'GET_PAUSE_STATE': {

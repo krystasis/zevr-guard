@@ -505,6 +505,118 @@ await sw.evaluate(async (domain) => {
   await page.close();
 }
 
+// --- 5h. the re-review findings, each with its own probe ------------------
+{
+  // A1: every listed domain has rules behind it. The tail used to be reported
+  // as dangerous with nothing blocking it.
+  const budget = await swEval(async () => {
+    const session = await chrome.declarativeNetRequest.getSessionRules();
+    const feed = session.filter((r) => r.id < 900_000);
+    const domains = new Set(feed.map((r) => r.condition.urlFilter));
+    return { rules: feed.length, domains: domains.size };
+  });
+  const listed = await swEval(async () => {
+    const res = await fetch(chrome.runtime.getURL('src/data/malware.json')).catch(() => null);
+    return res ? (await res.json()).length : null;
+  });
+  check('every listed malware domain has rules behind it',
+    listed === null || budget.domains === listed, `${budget.domains} covered / ${listed} listed`);
+
+  // A2: the country unblock is gated on our own rules, not the page's params.
+  const spoof = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'not-blocked-by-us.example' })).context;
+  check('a domain we do not block reports no blocking country', spoof.country === null, JSON.stringify(spoof));
+  const cpage = await ctx.newPage();
+  await cpage.goto(
+    `chrome-extension://${extId}/src/warning/index.html?blocked=not-blocked-by-us.example&reason=country&country=JP`,
+  );
+  await sleep(1500);
+  check('a deep-linked country warning offers no unblock',
+    (await cpage.getByRole('button', { name: /unblock/i }).count()) === 0);
+  await cpage.close();
+
+  // A4: a site the user allowed is recorded, so the first-password notice and
+  // the softer variant can still reach it. Start from a clean history so the
+  // assertions are about this navigation and not an earlier section's.
+  await swEval(async () => chrome.storage.local.remove('zg.seenExactHosts'));
+  await send({ type: 'BLOCK_DOMAIN', domain: 'example.com' });
+  const probe = await ctx.newPage();
+  await probe.goto('https://example.com/', { waitUntil: 'commit', timeout: 20000 }).catch(() => {});
+  // visits.ts batches its writes on a 2s timer, so read after that lands.
+  await sleep(3000);
+  const afterBlocked = await swEval(async () =>
+    Object.keys((await chrome.storage.local.get('zg.seenExactHosts'))['zg.seenExactHosts'] ?? {}));
+  check('a blocked navigation is not recorded as a visit',
+    !afterBlocked.includes('example.com'), JSON.stringify(afterBlocked));
+
+  await send({ type: 'ALLOW_DOMAIN', domain: 'example.com' });
+  await sleep(400);
+  await probe.goto('https://example.com/', { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
+  await sleep(3000);
+  const afterAllowed = await swEval(async () =>
+    Object.keys((await chrome.storage.local.get('zg.seenExactHosts'))['zg.seenExactHosts'] ?? {}));
+  check('an allowed site is recorded as a visit',
+    afterAllowed.includes('example.com'), JSON.stringify(afterAllowed));
+  check('the extension\'s own pages are never recorded as visits',
+    !afterAllowed.some((h) => h === extId), JSON.stringify(afterAllowed));
+
+  // A5: allowing lifts the manual block rather than listing it twice.
+  const lists = await swEval(async () => {
+    const st = await chrome.storage.local.get(null);
+    const v = Object.values(st).find((x) => x && typeof x === 'object' && Array.isArray(x.customWhiteList));
+    return { wl: v?.customWhiteList ?? [], bl: v?.customBlockList ?? [] };
+  });
+  check('allowing removes the manual block', lists.wl.includes('example.com') && !lists.bl.includes('example.com'), JSON.stringify(lists));
+  await send({ type: 'DISALLOW_DOMAIN', domain: 'example.com' });
+  await probe.close();
+
+  // A6: the paused indicator survives on tabs that were already open.
+  const open1 = await ctx.newPage();
+  await open1.goto('https://example.com/', { waitUntil: 'domcontentloaded' }).catch(() => {});
+  await sleep(500);
+  await send({ type: 'PAUSE_ALL', minutes: 5 });
+  await sleep(800);
+  const badge = await swEval(async () => {
+    const tabs = await chrome.tabs.query({});
+    const texts = [];
+    for (const tb of tabs) {
+      if (tb.id !== undefined) texts.push(await chrome.action.getBadgeText({ tabId: tb.id }));
+    }
+    return texts;
+  });
+  check('the paused badge shows on already-open tabs',
+    badge.length > 0 && badge.every((x) => x === '||'), JSON.stringify(badge));
+
+  // ...and survives the navigations that used to wipe it.
+  await open1.goto('https://example.com/elsewhere', { waitUntil: 'domcontentloaded' }).catch(() => {});
+  await sleep(1200);
+  const afterNav = await swEval(async () => {
+    const [tb] = await chrome.tabs.query({ active: true, currentWindow: true });
+    return tb?.id === undefined ? null : chrome.action.getBadgeText({ tabId: tb.id });
+  });
+  check('the paused badge survives a navigation', afterNav === '||', String(afterNav));
+  await send({ type: 'RESUME_ALL' });
+  await sleep(600);
+  await open1.close();
+
+  // A7: the packaged ruleset is armed again at startup and retired after sync.
+  const armed = await swEval(async () => {
+    await chrome.declarativeNetRequest.updateEnabledRulesets({ enableRulesetIds: ['block_rules'] });
+    const before = await chrome.declarativeNetRequest.getEnabledRulesets();
+    await chrome.storage.session.remove('zg.sessionRules.applied');
+    return before;
+  });
+  check('the packaged ruleset can be re-armed', armed.includes('block_rules'), JSON.stringify(armed));
+  const settingsForSync = await swEval(async () => {
+    const st = await chrome.storage.local.get(null);
+    const k = Object.keys(st).find((x) => st[x] && typeof st[x] === 'object' && st[x].blockCategories);
+    return st[k];
+  });
+  await send({ type: 'UPDATE_SETTINGS', settings: settingsForSync });
+  await sleep(1500);
+  const retired = await swEval(async () => chrome.declarativeNetRequest.getEnabledRulesets());
+  check('a sync retires it again', !retired.includes('block_rules'), JSON.stringify(retired));
+}
+
 // --- 6. framed warning page refuses to act --------------------------------
 {
   const page = await ctx.newPage();

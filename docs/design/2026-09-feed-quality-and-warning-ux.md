@@ -235,6 +235,7 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 - **id 帯域の切り分け(先にやる)**。`src/background/blocking.ts` に `export const SESSION_GLOBAL_ID_BASE = 950_000;` を追加し、`allowDomainForSession` / `getSessionAllowedDomains` が自分のものとして扱う範囲を `SESSION_ALLOW_ID_BASE <= id < SESSION_GLOBAL_ID_BASE` に**絞る**。現状は `id >= SESSION_ALLOW_ID_BASE` なので、そのままだと一時停止ルールを FIFO の削除対象・max id の基準にしてしまう。`syncMalwareSessionRules` は `id < SESSION_ALLOW_ID_BASE` だけ消すので変更不要。予算: 4,800 + 100 + 1 ≤ 5,000。
 - **なぜセッションルールか**: ブラウザ終了で必ず消える = 「閉じるまで」がそのまま実装になる。時限のものも、期限前にブラウザが落ちれば保護が早めに戻る(安全側に倒れる)。
 - **状態**: `chrome.storage.session['zg.pause'] = { since: number; until: number | null }`(`null` = ブラウザを閉じるまで)。ポップアップが残り時間を出すため。
+- **B5(受容)**: 完全ホストの訪問記録は 1.5.13 以降に始まるので、更新した既存利用者はソフト変種が最短でも 7 日は出ない。更新時点で既にフィードに載っているドメインは、許可するまで記録が始まらない(A4 の修正で、許可後は記録される)。仕様として受容する。
 - **実装時の追加**: `isPaused()` は期限切れを遅延検出する(SW が alarm を寝過ごしても保護が戻らない事態を防ぐ)。ポップアップのヘッダーは停止中に「protection live」と言わないよう `popupStatusPaused` に切り替える。
 - **期限**: `chrome.alarms.create('zg-pause-expiry', { when: until })`、`onAlarm` で `resumeAll()`。再度 `PAUSE_ALL` が来たら `alarms.clear` してから作り直す(5 分 → 1 時間の切り替え)。Chrome の alarm 最小粒度 30 秒なので 5 分 / 60 分は問題なし。
 - **SW 再起動**: セッションルールも alarm もブラウザセッション単位で残るため再適用不要。ただし `initFeed` の後に `reconcilePause()` を 1 回呼び、ルールの有無を正として `zg.pause` とメモリキャッシュを揃える(ルールがあるのに状態が無ければ `until: null` として復元、逆なら状態を消す)。

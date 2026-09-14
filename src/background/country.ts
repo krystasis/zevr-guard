@@ -101,6 +101,23 @@ export async function isCountryBlockedDomain(domain: string): Promise<boolean> {
   return matchesDomainOrParent(domain, new Set(Object.keys(map)));
 }
 
+/**
+ * Which blocked country actually holds a rule over this domain, or null.
+ * The warning page cannot be trusted to say: it is web-accessible, so its
+ * ?country= parameter is whatever the page that opened it chose.
+ */
+export async function getBlockingCountry(domain: string): Promise<string | null> {
+  const map = await getRuleMap();
+  const exact = map[domain];
+  if (exact) return exact.country;
+  const parts = domain.split('.');
+  for (let i = 1; i < parts.length - 1; i++) {
+    const parent = map[parts.slice(i).join('.')];
+    if (parent) return parent.country;
+  }
+  return null;
+}
+
 // Allocate ids from the dedicated country range, so they never collide with
 // manual block/allow/pause rules (which allocate below COUNTRY_ID_BASE).
 async function nextRuleIds(count: number): Promise<number[]> {

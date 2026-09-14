@@ -144,6 +144,57 @@ const ReportButton: React.FC = () => {
   );
 };
 
+// List-blocked (feed / bundled / manual) domains have no "proceed" URL in
+// the redirect, so the background resolves the tab's last requested page
+// after whitelisting the domain. Whitelisting outranks every block source,
+// which is what makes this work for feed entries the popup cannot reach
+// (the popup only offers "allow" for the page it is open on, and on the
+// warning page that is the extension itself).
+const AllowAndOpen: React.FC = () => {
+  const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
+  async function allow() {
+    if (isFramed) return;
+    setState('working');
+    try {
+      const res = (await chrome.runtime.sendMessage({
+        type: 'ALLOW_AND_OPEN',
+        domain: blocked,
+      })) as { success?: boolean; url?: string } | undefined;
+      if (res?.success && res.url) {
+        window.location.href = res.url;
+        return;
+      }
+      setState('error');
+    } catch {
+      setState('error');
+    }
+  }
+  return (
+    <div className="mt-2">
+      <button
+        className="w-full rounded-full border border-red-500/40 px-5 py-2.5 font-bold text-red-300 transition hover:bg-red-500/10 disabled:opacity-50"
+        disabled={state === 'working'}
+        onClick={() => void allow()}
+      >
+        {state === 'working'
+          ? '…'
+          : t('warningAllowAndOpen', `Allow ${blocked} and continue (not recommended)`, blocked)}
+      </button>
+      <p className="mt-2 text-[11px] leading-relaxed text-gray-600">
+        {t(
+          'warningAllowAndOpenDetail',
+          'The domain is added to your allow list. You can remove it again from Settings in the Zevr Guard popup.',
+        )}
+      </p>
+      {state === 'error' && (
+        <div className="mt-1 text-[11px] text-amber-300">
+          {t('warningAllowAndOpenError', "Couldn't allow the domain. Please try again.")}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const CountryActions: React.FC = () => {
   const [unblocked, setUnblocked] = useState(false);
   const name = countryDisplayName(countryCode);
@@ -332,12 +383,7 @@ const Warning: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <p className="mt-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-left leading-relaxed">
-                  {t(
-                    'warningOverrideDetail',
-                    "To proceed anyway, remove this domain from your blocklist via Zevr Guard's popup (block/unblock button), then reload.",
-                  )}
-                </p>
+                <AllowAndOpen />
               )}
             </details>
           )}

@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Ik begrijp het risico"
   },
-  "warningOverrideDetail": {
-    "message": "Wil je toch doorgaan? Verwijder dit domein uit je blokkeerlijst via de popup van Zevr Guard (knop blokkeren/deblokkeren) en herlaad de pagina."
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ toestaan en doorgaan (niet aanbevolen)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Het domein wordt aan je toestaanlijst toegevoegd. Je kunt het weer verwijderen via Instellingen in de Zevr Guard-popup."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Het domein kon niet worden toegestaan. Probeer het opnieuw."
   },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"

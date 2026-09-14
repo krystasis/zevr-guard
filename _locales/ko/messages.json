@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "위험을 이해했습니다"
   },
-  "warningOverrideDetail": {
-    "message": "그래도 진행하려면 Zevr Guard 팝업(차단/차단 해제 버튼)에서 이 도메인을 차단 목록에서 제거한 뒤 새로고침하세요."
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ 허용하고 계속 (권장하지 않음)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "이 도메인이 허용 목록에 추가됩니다. Zevr Guard 팝업의 설정에서 언제든지 제거할 수 있습니다."
+  },
+  "warningAllowAndOpenError": {
+    "message": "도메인을 허용하지 못했습니다. 다시 시도해 주세요."
   },
   "warningFooter": {
     "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"

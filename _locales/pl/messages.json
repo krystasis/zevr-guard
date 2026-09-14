@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Rozumiem ryzyko"
   },
-  "warningOverrideDetail": {
-    "message": "Aby mimo to przejść dalej, usuń tę domenę z listy blokowanych w oknie Zevr Guard (przycisk blokuj/odblokuj), a następnie odśwież stronę."
+  "warningAllowAndOpen": {
+    "message": "Zezwól na $DOMAIN$ i przejdź dalej (niezalecane)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Domena zostanie dodana do listy dozwolonych. Możesz ją usunąć w Ustawieniach w oknie Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Nie udało się zezwolić na domenę. Spróbuj ponownie."
   },
   "warningFooter": {
     "message": "Pod ochroną Zevr Guard · Bezpieczne przeglądanie dla każdego"

@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "मुझे जोखिम पता है"
   },
-  "warningOverrideDetail": {
-    "message": "फिर भी आगे बढ़ने के लिए, Zevr Guard के पॉपअप (ब्लॉक/अनब्लॉक बटन) से इस डोमेन को अपनी ब्लॉकलिस्ट से हटाएँ, फिर पेज रीलोड करें।"
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ को अनुमति दें और आगे बढ़ें (अनुशंसित नहीं)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "यह डोमेन आपकी अनुमति सूची में जोड़ दिया जाएगा। आप इसे Zevr Guard पॉपअप की सेटिंग्स से हटा सकते हैं।"
+  },
+  "warningAllowAndOpenError": {
+    "message": "डोमेन को अनुमति नहीं दी जा सकी। कृपया फिर से प्रयास करें।"
   },
   "warningFooter": {
     "message": "Zevr Guard द्वारा सुरक्षित · सबके लिए सुरक्षित ब्राउज़िंग"

@@ -3,12 +3,17 @@ import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveOwner } from '../src/background/companies';
+import { applySafelist, createSafelist } from './safelist';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, '..');
 
 const MALWARE_SEED_PATH = resolve(ROOT, 'src/data/malware.json');
+// Tranco top sites (https://tranco-list.eu, snapshot 2026-07-18, top 10k).
+// Feeds the safelist that keeps shared/popular sites out of the malware
+// set — see scripts/safelist.ts and docs/sources/tranco.md.
+const TRANCO_SNAPSHOT_PATH = resolve(ROOT, 'src/data/tranco.snapshot.json');
 const BLOCK_RULES_PATH = resolve(ROOT, 'public/rules/block_rules.json');
 const ADS_RULES_PATH = resolve(ROOT, 'public/rules/ads_rules.json');
 const TRACKING_RULES_PATH = resolve(ROOT, 'public/rules/tracking_rules.json');
@@ -249,6 +254,17 @@ function interleave(a: string[], b: string[]): string[] {
     if (i < b.length) out.push(b[i]);
   }
   return out;
+}
+
+async function loadTrancoSnapshot(): Promise<string[]> {
+  const raw = await readFile(TRANCO_SNAPSHOT_PATH, 'utf8');
+  const list = JSON.parse(raw) as unknown;
+  if (!Array.isArray(list) || list.length < 1000) {
+    // Refuse to build a feed without the guard rail rather than silently
+    // shipping a popular-site block again.
+    throw new Error(`[build-rules] tranco snapshot missing or too small: ${TRANCO_SNAPSHOT_PATH}`);
+  }
+  return list as string[];
 }
 
 async function loadSeedDomains(): Promise<string[]> {
@@ -779,10 +795,20 @@ async function main(): Promise<void> {
   const merged = Array.from(
     new Set([TOUR_TEST_DOMAIN, ...interleave(urlhaus, threatfox), ...seed]),
   );
-  const capped = merged.slice(0, Math.floor(URLHAUS_MAX / 2));
+
+  // Upstream feeds list hosts, we block domains: a popular site that once
+  // hosted one bad file (steamcommunity.com, t.me, cdn.jsdelivr.net) must
+  // never become a whole-site block. Applied to the seed as well so an
+  // entry that slipped through an older build cannot survive via carry-over.
+  const safelist = createSafelist({ popular: await loadTrancoSnapshot() });
+  const { kept, dropped } = applySafelist(merged, safelist);
+  for (const d of dropped) {
+    console.log(`[build-rules] safelist dropped ${d.host} (${d.reason})`);
+  }
+  const capped = kept.slice(0, Math.floor(URLHAUS_MAX / 2));
 
   console.log(
-    `[build-rules] urlhaus ${urlhaus.length}, threatfox ${threatfox.length}, seed ${seed.length}, ${capped.length} final`,
+    `[build-rules] urlhaus ${urlhaus.length}, threatfox ${threatfox.length}, seed ${seed.length}, safelisted ${dropped.length}, ${capped.length} final`,
   );
 
   await writeFile(MALWARE_SEED_PATH, JSON.stringify(capped, null, 2) + '\n');

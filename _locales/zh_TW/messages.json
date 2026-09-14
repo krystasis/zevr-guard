@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "我了解風險"
   },
-  "warningOverrideDetail": {
-    "message": "若仍要前往，請在 Zevr Guard 的彈出視窗中（封鎖／解除封鎖按鈕）將此網域從封鎖清單移除，再重新載入頁面。"
+  "warningAllowAndOpen": {
+    "message": "允許 $DOMAIN$ 並繼續（不建議）",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "此網域將加入允許清單。你可以隨時在 Zevr Guard 彈出視窗的設定中移除。"
+  },
+  "warningAllowAndOpenError": {
+    "message": "無法允許此網域，請再試一次。"
   },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"

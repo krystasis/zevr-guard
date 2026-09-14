@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Tôi hiểu rủi ro"
   },
-  "warningOverrideDetail": {
-    "message": "Để vẫn tiếp tục, hãy gỡ tên miền này khỏi danh sách chặn trong popup của Zevr Guard (nút chặn/bỏ chặn), rồi tải lại trang."
+  "warningAllowAndOpen": {
+    "message": "Cho phép $DOMAIN$ và tiếp tục (không khuyến nghị)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Tên miền này được thêm vào danh sách cho phép. Bạn có thể gỡ lại trong Cài đặt ở popup của Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Không thể cho phép tên miền. Vui lòng thử lại."
   },
   "warningFooter": {
     "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"

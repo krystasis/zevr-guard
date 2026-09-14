@@ -98,6 +98,7 @@ export type MessageRequest =
   | { type: 'BLOCK_DOMAIN'; domain: string }
   | { type: 'UNBLOCK_DOMAIN'; domain: string }
   | { type: 'ALLOW_DOMAIN'; domain: string }
+  | { type: 'ALLOW_AND_OPEN'; domain: string }
   | { type: 'DISALLOW_DOMAIN'; domain: string }
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }

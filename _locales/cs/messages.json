@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Rozumím riziku"
   },
-  "warningOverrideDetail": {
-    "message": "Chcete-li přesto pokračovat, odeberte doménu z blokačního seznamu ve vyskakovacím okně Zevr Guard (tlačítko blokovat/odblokovat) a stránku znovu načtěte."
+  "warningAllowAndOpen": {
+    "message": "Povolit $DOMAIN$ a pokračovat (nedoporučeno)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Doména bude přidána do seznamu povolených. Odebrat ji můžete v Nastavení ve vyskakovacím okně Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Doménu se nepodařilo povolit. Zkuste to znovu."
   },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"

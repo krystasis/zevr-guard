@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Înțeleg riscul"
   },
-  "warningOverrideDetail": {
-    "message": "Pentru a continua totuși, scoate domeniul din lista de blocare prin popup-ul Zevr Guard (butonul blocare/deblocare), apoi reîncarcă pagina."
+  "warningAllowAndOpen": {
+    "message": "Permite $DOMAIN$ și continuă (nerecomandat)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Domeniul este adăugat în lista de permise. Îl poți elimina din Setări, în popup-ul Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Domeniul nu a putut fi permis. Încearcă din nou."
   },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"

@@ -131,6 +131,11 @@ interface RequestEvent {
 // previous document but processed (async) after the tab moved on.
 const navStartTimes = new Map<number, number>();
 
+// Last http(s) main-frame URL requested per tab. A DNR redirect to the
+// warning page carries only the blocked domain, so this is how "allow and
+// continue" finds its way back to the page the user actually asked for.
+const lastMainFrameUrl = new Map<number, string>();
+
 async function resetPage(tabId: number): Promise<void> {
   navStartTimes.set(tabId, Date.now());
   leakSeen.delete(tabId);
@@ -397,7 +402,11 @@ chrome.webRequest.onBeforeRequest.addListener(
   (details) => {
     if (details.tabId < 0) return;
     try {
-      void recordVisit(new URL(details.url).hostname);
+      const url = new URL(details.url);
+      if (/^https?:$/.test(url.protocol)) {
+        lastMainFrameUrl.set(details.tabId, details.url);
+      }
+      void recordVisit(url.hostname);
     } catch {
       // unparsable URL
     }
@@ -675,6 +684,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 
 chrome.tabs.onRemoved.addListener(async (tabId) => {
   navStartTimes.delete(tabId);
+  lastMainFrameUrl.delete(tabId);
   await updatePage(tabId, () => null);
 });
 
@@ -747,6 +757,33 @@ chrome.runtime.onMessage.addListener(
           await allowDomain(message.domain);
           sendResponse({ success: true });
           break;
+        case 'ALLOW_AND_OPEN': {
+          // From the warning interstitial: whitelist the domain (which
+          // outranks every feed / static / manual block rule), lift a
+          // manual block if that is what tripped, and hand back the URL
+          // the tab was heading to so the page can resume it.
+          const domain = message.domain.toLowerCase();
+          if (!isValidHostname(domain)) {
+            sendResponse({ success: false });
+            break;
+          }
+          const current = await getSettings();
+          if (current.customBlockList.includes(domain)) await unblockDomain(domain);
+          await allowDomain(domain);
+          const tabId = _sender.tab?.id;
+          const remembered = tabId !== undefined ? lastMainFrameUrl.get(tabId) : undefined;
+          let url = `https://${domain}/`;
+          if (remembered) {
+            try {
+              const host = new URL(remembered).hostname.toLowerCase();
+              if (matchesDomainOrParent(host, new Set([domain]))) url = remembered;
+            } catch {
+              // keep the domain root
+            }
+          }
+          sendResponse({ success: true, url });
+          break;
+        }
         case 'DISALLOW_DOMAIN':
           await disallowDomain(message.domain);
           sendResponse({ success: true });

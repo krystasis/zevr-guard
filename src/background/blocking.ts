@@ -296,7 +296,10 @@ export async function syncMalwareSessionRules(): Promise<void> {
   const key = `${enabled}:${domains.length}:${domains[0] ?? ''}:${domains[domains.length - 1] ?? ''}`;
   try {
     const stored = await chrome.storage.session.get(SESSION_APPLIED_KEY);
-    if (stored[SESSION_APPLIED_KEY] === key) return;
+    if (stored[SESSION_APPLIED_KEY] === key) {
+      await retireStaticMalwareRules();
+      return;
+    }
   } catch {
     // session storage unavailable — apply unconditionally
   }
@@ -339,5 +342,30 @@ export async function syncMalwareSessionRules(): Promise<void> {
     await chrome.storage.session.set({ [SESSION_APPLIED_KEY]: key });
   } catch {
     // ignore
+  }
+  await retireStaticMalwareRules();
+}
+
+const STATIC_MALWARE_RULESET = 'block_rules';
+
+/**
+ * The packaged `block_rules` ruleset is a snapshot of the feed on release
+ * day and only exists so a fresh install is protected before the worker
+ * has applied session rules. Once the live feed is mirrored into session
+ * rules it must step aside: otherwise a domain the feed has since removed
+ * (a false positive such as steamcommunity.com in 1.5.12) stays blocked
+ * until the next store release, and the malware toggle cannot switch it
+ * off. The enabled state persists across browser restarts but resets on
+ * extension update, so this is re-checked on every sync.
+ */
+async function retireStaticMalwareRules(): Promise<void> {
+  const dnr = chrome.declarativeNetRequest;
+  if (!dnr?.getEnabledRulesets || !dnr.updateEnabledRulesets) return;
+  try {
+    const enabled = await dnr.getEnabledRulesets();
+    if (!enabled.includes(STATIC_MALWARE_RULESET)) return;
+    await dnr.updateEnabledRulesets({ disableRulesetIds: [STATIC_MALWARE_RULESET] });
+  } catch (err) {
+    console.warn('[Zevr Guard] could not retire static rules:', (err as Error).message);
   }
 }

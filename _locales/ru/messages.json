@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Я понимаю риск"
   },
-  "warningOverrideDetail": {
-    "message": "Чтобы всё же продолжить, удалите этот домен из списка блокировки во всплывающем окне Zevr Guard (кнопка блокировки/разблокировки) и перезагрузите страницу."
+  "warningAllowAndOpen": {
+    "message": "Разрешить $DOMAIN$ и продолжить (не рекомендуется)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Домен будет добавлен в список разрешённых. Его можно удалить в настройках всплывающего окна Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Не удалось разрешить домен. Попробуйте ещё раз."
   },
   "warningFooter": {
     "message": "Под защитой Zevr Guard · Безопасный интернет для всех"

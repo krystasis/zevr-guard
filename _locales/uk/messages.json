@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Я усвідомлюю ризик"
   },
-  "warningOverrideDetail": {
-    "message": "Щоб усе ж перейти, видаліть цей домен зі списку блокування у спливному вікні Zevr Guard (кнопка блокування/розблокування) і перезавантажте сторінку."
+  "warningAllowAndOpen": {
+    "message": "Дозволити $DOMAIN$ і продовжити (не рекомендовано)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Домен буде додано до списку дозволених. Його можна видалити в налаштуваннях спливного вікна Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Не вдалося дозволити домен. Спробуйте ще раз."
   },
   "warningFooter": {
     "message": "Під захистом Zevr Guard · Безпечний перегляд для всіх"

@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "I understand the risk"
   },
-  "warningOverrideDetail": {
-    "message": "To proceed anyway, remove this domain from your blocklist via Zevr Guard's popup (block/unblock button), then reload."
+  "warningAllowAndOpen": {
+    "message": "Allow $DOMAIN$ and continue (not recommended)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "The domain is added to your allow list. You can remove it again from Settings in the Zevr Guard popup."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Couldn't allow the domain. Please try again."
   },
   "warningFooter": {
     "message": "Protected by Zevr Guard · Safe browsing for everyone"

@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "リスクを理解した上で進む"
   },
-  "warningOverrideDetail": {
-    "message": "どうしてもアクセスする場合は、Zevr Guardのポップアップからこのドメインをブロックリストから外してから再読み込みしてください。"
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ を許可して進む(非推奨)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "このドメインは許可リストに追加されます。Zevr Guard ポップアップの設定からいつでも外せます。"
+  },
+  "warningAllowAndOpenError": {
+    "message": "許可できませんでした。もう一度お試しください。"
   },
   "warningFooter": {
     "message": "Zevr Guardによる保護 · すべての人に安全なブラウジングを"

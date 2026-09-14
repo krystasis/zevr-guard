@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Κατανοώ τον κίνδυνο"
   },
-  "warningOverrideDetail": {
-    "message": "Για να συνεχίσετε παρ' όλα αυτά, αφαιρέστε το domain από τη λίστα αποκλεισμού μέσω του popup του Zevr Guard (κουμπί αποκλεισμού/άρσης) και φορτώστε ξανά τη σελίδα."
+  "warningAllowAndOpen": {
+    "message": "Να επιτραπεί το $DOMAIN$ και συνέχεια (δεν συνιστάται)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Το domain προστίθεται στη λίστα επιτρεπόμενων. Μπορείτε να το αφαιρέσετε από τις Ρυθμίσεις στο popup του Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Δεν ήταν δυνατό να επιτραπεί το domain. Δοκιμάστε ξανά."
   },
   "warningFooter": {
     "message": "Προστασία από το Zevr Guard · Ασφαλής περιήγηση για όλους"

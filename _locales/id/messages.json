@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Saya memahami risikonya"
   },
-  "warningOverrideDetail": {
-    "message": "Untuk tetap melanjutkan, hapus domain ini dari daftar blokir Anda melalui popup Zevr Guard (tombol blokir/buka blokir), lalu muat ulang."
+  "warningAllowAndOpen": {
+    "message": "Izinkan $DOMAIN$ dan lanjutkan (tidak disarankan)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Domain ini ditambahkan ke daftar izin Anda. Anda dapat menghapusnya lagi dari Pengaturan di popup Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Tidak dapat mengizinkan domain. Silakan coba lagi."
   },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"

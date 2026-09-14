@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Capisco il rischio"
   },
-  "warningOverrideDetail": {
-    "message": "Per procedere comunque, rimuovi questo dominio dalla blocklist tramite il popup di Zevr Guard (pulsante blocca/sblocca), poi ricarica la pagina."
+  "warningAllowAndOpen": {
+    "message": "Consenti $DOMAIN$ e continua (sconsigliato)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Il dominio viene aggiunto alla tua lista dei consentiti. Puoi rimuoverlo dalle Impostazioni nel popup di Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Impossibile consentire il dominio. Riprova."
   },
   "warningFooter": {
     "message": "Protetto da Zevr Guard · Navigazione sicura per tutti"

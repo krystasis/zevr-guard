@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Saya faham risikonya"
   },
-  "warningOverrideDetail": {
-    "message": "Untuk meneruskan juga, keluarkan domain ini daripada senarai sekatan melalui popup Zevr Guard (butang sekat/nyahsekat), kemudian muat semula."
+  "warningAllowAndOpen": {
+    "message": "Benarkan $DOMAIN$ dan teruskan (tidak disyorkan)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Domain ini ditambah ke senarai benar anda. Anda boleh mengeluarkannya semula daripada Tetapan dalam popup Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Domain tidak dapat dibenarkan. Sila cuba lagi."
   },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Pelayaran selamat untuk semua"

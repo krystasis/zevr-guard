@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "我了解风险"
   },
-  "warningOverrideDetail": {
-    "message": "如仍要继续，请在 Zevr Guard 弹窗中（拦截/解除拦截按钮）将该域名从拦截列表移除，然后重新加载页面。"
+  "warningAllowAndOpen": {
+    "message": "允许 $DOMAIN$ 并继续（不推荐）",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "该域名将被加入允许列表。你可以在 Zevr Guard 弹窗的设置中随时移除。"
+  },
+  "warningAllowAndOpenError": {
+    "message": "无法允许该域名，请重试。"
   },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"

@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "ฉันเข้าใจความเสี่ยง"
   },
-  "warningOverrideDetail": {
-    "message": "หากต้องการดำเนินการต่อ ให้ลบโดเมนนี้ออกจากบัญชีบล็อกผ่านป๊อปอัปของ Zevr Guard (ปุ่มบล็อก/เลิกบล็อก) แล้วโหลดหน้าใหม่"
+  "warningAllowAndOpen": {
+    "message": "อนุญาต $DOMAIN$ แล้วดำเนินการต่อ (ไม่แนะนำ)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "โดเมนนี้จะถูกเพิ่มในรายการอนุญาตของคุณ คุณสามารถลบออกได้จากการตั้งค่าในป๊อปอัปของ Zevr Guard"
+  },
+  "warningAllowAndOpenError": {
+    "message": "ไม่สามารถอนุญาตโดเมนได้ กรุณาลองอีกครั้ง"
   },
   "warningFooter": {
     "message": "ปกป้องโดย Zevr Guard · การท่องเว็บที่ปลอดภัยสำหรับทุกคน"

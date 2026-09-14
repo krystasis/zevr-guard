@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Riski anlıyorum"
   },
-  "warningOverrideDetail": {
-    "message": "Yine de devam etmek için bu alan adını Zevr Guard açılır penceresinden (engelle/engeli kaldır düğmesi) engel listenizden çıkarın, ardından sayfayı yeniden yükleyin."
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ alan adına izin ver ve devam et (önerilmez)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Alan adı izin listenize eklenir. Zevr Guard açılır penceresindeki Ayarlar'dan yeniden kaldırabilirsiniz."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Alan adına izin verilemedi. Lütfen tekrar deneyin."
   },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"

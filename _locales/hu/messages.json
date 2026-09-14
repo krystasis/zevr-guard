@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Értem a kockázatot"
   },
-  "warningOverrideDetail": {
-    "message": "Ha mégis tovább akarsz lépni, távolítsd el a domaint a tiltólistáról a Zevr Guard felugró ablakában (blokkolás/feloldás gomb), majd töltsd újra az oldalt."
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ engedélyezése és továbblépés (nem ajánlott)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "A domain felkerül az engedélyezett listára. A Zevr Guard felugró ablakának Beállításai között bármikor eltávolíthatod."
+  },
+  "warningAllowAndOpenError": {
+    "message": "A domain engedélyezése nem sikerült. Próbáld újra."
   },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"

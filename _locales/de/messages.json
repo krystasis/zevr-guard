@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Ich verstehe das Risiko"
   },
-  "warningOverrideDetail": {
-    "message": "Um trotzdem fortzufahren, entferne diese Domain über das Zevr-Guard-Popup (Blockieren/Freigeben-Button) von deiner Blockliste und lade die Seite neu."
+  "warningAllowAndOpen": {
+    "message": "$DOMAIN$ zulassen und fortfahren (nicht empfohlen)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Die Domain wird deiner Freigabeliste hinzugefügt. Du kannst sie in den Einstellungen des Zevr-Guard-Popups wieder entfernen."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Die Domain konnte nicht freigegeben werden. Bitte versuche es erneut."
   },
   "warningFooter": {
     "message": "Geschützt durch Zevr Guard · Sicheres Surfen für alle"

@@ -172,8 +172,19 @@
   "warningUnderstandRisk": {
     "message": "Je comprends le risque"
   },
-  "warningOverrideDetail": {
-    "message": "Pour continuer malgré tout, retirez ce domaine de votre liste de blocage via le popup de Zevr Guard (bouton bloquer/débloquer), puis rechargez la page."
+  "warningAllowAndOpen": {
+    "message": "Autoriser $DOMAIN$ et continuer (déconseillé)",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningAllowAndOpenDetail": {
+    "message": "Le domaine est ajouté à votre liste d'autorisations. Vous pouvez le retirer depuis les réglages du popup Zevr Guard."
+  },
+  "warningAllowAndOpenError": {
+    "message": "Impossible d'autoriser le domaine. Veuillez réessayer."
   },
   "warningFooter": {
     "message": "Protégé par Zevr Guard · Une navigation sûre pour tous"

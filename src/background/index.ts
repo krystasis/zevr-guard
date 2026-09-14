@@ -809,18 +809,41 @@ chrome.runtime.onMessage.addListener(
   (message: MessageRequest, _sender, sendResponse) => {
     (async () => {
       switch (message.type) {
-        case 'BLOCK_DOMAIN':
-          await blockDomain(message.domain);
+        // These four take a domain that, since the settings panel grew a text
+        // field, can be anything a person typed. The popup validates first, but
+        // a bad string here would become a DNR urlFilter — and a rejected
+        // updateDynamicRules throws past sendResponse, leaving the caller
+        // hanging — so the background checks again rather than trust it.
+        case 'BLOCK_DOMAIN': {
+          const domain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(domain)) {
+            sendResponse({ success: false });
+            break;
+          }
+          await blockDomain(domain);
           sendResponse({ success: true });
           break;
-        case 'UNBLOCK_DOMAIN':
-          await unblockDomain(message.domain);
+        }
+        case 'UNBLOCK_DOMAIN': {
+          const domain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(domain)) {
+            sendResponse({ success: false });
+            break;
+          }
+          await unblockDomain(domain);
           sendResponse({ success: true });
           break;
-        case 'ALLOW_DOMAIN':
-          await allowDomain(message.domain);
+        }
+        case 'ALLOW_DOMAIN': {
+          const domain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(domain)) {
+            sendResponse({ success: false });
+            break;
+          }
+          await allowDomain(domain);
           sendResponse({ success: true });
           break;
+        }
         case 'GET_BLOCK_CONTEXT': {
           const domain = message.domain.trim().toLowerCase();
           if (!isValidHostname(domain)) {
@@ -899,10 +922,16 @@ chrome.runtime.onMessage.addListener(
           });
           break;
         }
-        case 'DISALLOW_DOMAIN':
-          await disallowDomain(message.domain);
+        case 'DISALLOW_DOMAIN': {
+          const domain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(domain)) {
+            sendResponse({ success: false });
+            break;
+          }
+          await disallowDomain(domain);
           sendResponse({ success: true });
           break;
+        }
         case 'PAUSE_SITE':
           await pauseSite(message.host);
           sendResponse({ success: true });

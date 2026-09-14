@@ -115,6 +115,13 @@ await sw.evaluate(async (domain) => {
   const bogusCtx = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'not a hostname' })).context;
   check('invalid hostname is rejected', bogusCtx.blockedByUs === false);
 
+  // Free-text input reaches these handlers now; garbage must be refused
+  // rather than turned into a DNR rule (or thrown past the response).
+  const badAllow = await send({ type: 'ALLOW_DOMAIN', domain: 'not a hostname' });
+  const badBlock = await send({ type: 'BLOCK_DOMAIN', domain: 'http://evil.example/path' });
+  check('ALLOW_DOMAIN rejects a malformed domain', badAllow?.success === false, JSON.stringify(badAllow));
+  check('BLOCK_DOMAIN rejects a malformed domain', badBlock?.success === false, JSON.stringify(badBlock));
+
   // R5: the background refuses to whitelist a domain it never blocked, even
   // though the message can be sent from the web-accessible warning page.
   const refused = await send({ type: 'ALLOW_AND_OPEN', domain: 'not-blocked-by-us.example' });

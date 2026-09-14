@@ -1,4 +1,4 @@
-import { openLiveGlobe, IS_GECKO } from '../shared/compat';
+import { openLiveGlobe, prepareLiveGlobe, IS_GECKO } from '../shared/compat';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AppIcon, BrandMark } from '../shared/AppIcon';
@@ -15,10 +15,10 @@ import { useLocale } from '../shared/useLocale';
 import '../styles/tailwind.css';
 
 function openSidePanel() {
-  // Synchronous: Firefox's sidebarAction.open() only works inside the click
-  // gesture, which an await here would break.
+  // Synchronous dispatch: both browsers want the open inside the click
+  // gesture. prepareLiveGlobe() below has already done the async part.
   try {
-    openLiveGlobe();
+    void openLiveGlobe();
   } catch {
     // ignore
   }
@@ -27,6 +27,10 @@ function openSidePanel() {
 const Welcome: React.FC = () => {
   // re-render on locale change
   useLocale();
+  // Same reason as the popup: keep the globe button's click handler synchronous.
+  React.useEffect(() => {
+    prepareLiveGlobe();
+  }, []);
   return (
     <div className="min-h-screen bg-black text-gray-100 relative font-sans">
       <LanguageSwitcher />

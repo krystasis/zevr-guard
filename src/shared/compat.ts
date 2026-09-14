@@ -24,32 +24,84 @@ if (IS_GECKO && g.browser?.runtime?.id) {
 /**
  * Open the Live Globe: the side panel on Chromium, the sidebar on Firefox.
  *
- * MUST be called synchronously from a click handler with no `await` before
- * it. Firefox rejects `sidebarAction.open()` unless it runs inside the user
- * input handler, and a preceding await loses that context. The Firefox
- * branch therefore opens first (the sidebar is window-global — no tab id
- * needed); the Chromium branch does its own async tab lookup, which Chrome
- * tolerates across awaits.
+ * Both browsers want the open call to happen inside the click handler, and on
+ * Chromium the popup that hosts the button closes itself immediately after —
+ * which tears the popup's JS context down. Anything awaited before the open
+ * call is therefore racing that teardown: when the query loses, the panel
+ * never opens and the click looks dead. So the async part (finding the tab and
+ * registering the panel path) runs ahead of time via prepareLiveGlobe(), and
+ * the click itself only dispatches the open.
  */
-export function openLiveGlobe(): void {
-  const sidePanel = (
-    chrome as { sidePanel?: { setOptions: (o: object) => Promise<void>; open: (o: object) => Promise<void> } }
+let globeTarget: { tabId: number } | null = null;
+
+function sidePanelApi():
+  | { setOptions: (o: object) => Promise<void>; open: (o: object) => Promise<void> }
+  | undefined {
+  return (
+    chrome as {
+      sidePanel?: { setOptions: (o: object) => Promise<void>; open: (o: object) => Promise<void> };
+    }
   ).sidePanel;
+}
+
+/**
+ * Resolve everything opening the globe needs, so the click handler can stay
+ * synchronous. Call it when a page carrying the button mounts; it is safe to
+ * call more than once and does nothing on Firefox, whose sidebar is
+ * window-global and needs no tab id.
+ */
+export function prepareLiveGlobe(): void {
+  const sidePanel = sidePanelApi();
+  if (!sidePanel) return;
+  void (async () => {
+    try {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab?.id == null) return;
+      await sidePanel.setOptions({
+        tabId: tab.id,
+        path: 'src/sidepanel/index.html',
+        enabled: true,
+      });
+      globeTarget = { tabId: tab.id };
+    } catch {
+      // leave globeTarget null; openLiveGlobe falls back to doing the work itself
+    }
+  })();
+}
+
+/**
+ * Open the globe. Call it directly from the click handler, with no `await`
+ * before it. The returned promise settles once the panel has been asked to
+ * open, so a caller that wants to close its own window can wait for it
+ * instead of racing it.
+ */
+export function openLiveGlobe(): Promise<void> {
+  const sidePanel = sidePanelApi();
 
   if (!sidePanel) {
-    void g.browser?.sidebarAction?.open();
-    return;
+    // Firefox: window-global sidebar, no tab id, must be inside the gesture.
+    return Promise.resolve(g.browser?.sidebarAction?.open?.()).then(() => undefined);
   }
 
-  void (async () => {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab?.id == null) return;
-    await sidePanel.setOptions({
-      tabId: tab.id,
-      path: 'src/sidepanel/index.html',
-      enabled: true,
-    });
-    await sidePanel.open({ tabId: tab.id });
+  if (globeTarget) {
+    return sidePanel.open({ tabId: globeTarget.tabId }).catch(() => undefined);
+  }
+
+  // prepareLiveGlobe() was never called or had not finished. Do its work now
+  // and accept the race we were trying to avoid — still better than nothing.
+  return (async () => {
+    try {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab?.id == null) return;
+      await sidePanel.setOptions({
+        tabId: tab.id,
+        path: 'src/sidepanel/index.html',
+        enabled: true,
+      });
+      await sidePanel.open({ tabId: tab.id });
+    } catch {
+      // nothing more to try
+    }
   })();
 }
 

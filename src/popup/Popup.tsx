@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { openLiveGlobe } from '../shared/compat';
+import { openLiveGlobe, prepareLiveGlobe } from '../shared/compat';
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
@@ -10,6 +10,7 @@ import type {
   Connection,
   LeakEvent,
   PageStats,
+  PauseState,
   RiskLevel,
   Settings,
   TodayStats,
@@ -125,9 +126,13 @@ export const Popup: React.FC = () => {
     tweet: string;
   } | null>(null);
   const [sharing, setSharing] = useState(false);
+  const [pause, setPause] = useState<PauseState | null>(null);
 
   useEffect(() => {
     void loadData();
+    // Resolve what the globe button needs now, so its click handler can stay
+    // synchronous and not race this popup closing itself.
+    prepareLiveGlobe();
     const interval = setInterval(() => {
       void loadData();
     }, 2000);
@@ -161,6 +166,14 @@ export const Popup: React.FC = () => {
     // Never leave the popup on the SCANNING screen: if the background is
     // unreachable, fall through to the empty state and let the 2s poll retry.
     try {
+      // Pause is global, so it is read before anything tab-dependent: the bar
+      // has to show on pages that have no scan of their own (chrome://, the
+      // new tab), which is exactly where a stuck user goes looking for it.
+      const pauseRes = await chrome.runtime
+        .sendMessage({ type: 'GET_PAUSE_STATE' })
+        .catch(() => null);
+      setPause(pauseRes?.state ?? null);
+
       const [tab] = await chrome.tabs.query({
         active: true,
         currentWindow: true,
@@ -188,6 +201,22 @@ export const Popup: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handlePauseAll(minutes: number | null) {
+    const res = await chrome.runtime
+      .sendMessage({ type: 'PAUSE_ALL', minutes })
+      .catch(() => null);
+    setPause(res?.state ?? null);
+    await loadData();
+  }
+
+  async function handleResumeAll() {
+    const res = await chrome.runtime
+      .sendMessage({ type: 'RESUME_ALL' })
+      .catch(() => null);
+    setPause(res?.state ?? null);
+    await loadData();
   }
 
   async function handleBlock(domain: string) {
@@ -361,6 +390,7 @@ export const Popup: React.FC = () => {
           onToggle={setView}
           onShare={stats ? handleShare : undefined}
           sharing={sharing}
+          paused={pause?.paused === true}
         />
 
         {view === 'settings' && settings ? (
@@ -385,6 +415,11 @@ export const Popup: React.FC = () => {
         ) : (
           <>
             <Header stats={stats} today={today} activeTab={activeTab} />
+            <PauseBar
+              state={pause}
+              onPause={handlePauseAll}
+              onResume={handleResumeAll}
+            />
             {showWatchHint && (
               <div className="flex items-center gap-2 px-3 py-2 bg-violet-500/10 border-b border-violet-800/40 text-[11px]">
                 <span className="text-violet-300 flex-1 leading-snug">
@@ -478,13 +513,13 @@ export const Popup: React.FC = () => {
 };
 
 function openSidePanel() {
-  // Call openLiveGlobe synchronously — Firefox's sidebarAction.open() only
-  // works inside the click gesture, which an await here would break.
+  // Dispatch synchronously — both browsers want the open inside the click
+  // gesture — and close the popup only once the panel has been asked to open.
+  // Closing first tore down this context mid-flight and the click did nothing.
   try {
-    openLiveGlobe();
-    window.close();
+    void openLiveGlobe().finally(() => window.close());
   } catch {
-    // ignore
+    window.close();
   }
 }
 
@@ -499,15 +534,26 @@ const TopBar: React.FC<{
   onToggle: (v: 'list' | 'settings') => void;
   onShare?: () => void;
   sharing?: boolean;
-}> = ({ view, onToggle, onShare, sharing }) => (
+  paused?: boolean;
+}> = ({ view, onToggle, onShare, sharing, paused }) => (
   <div className="flex items-center justify-between px-3 py-2 bg-black/60 backdrop-blur border-b border-cyan-900/40">
     <div className="flex items-center gap-2">
       <AppIcon size={22} className="drop-shadow-[0_0_6px_rgba(56,189,248,0.6)]" />
       <div className="leading-tight">
         <div className="font-bold tracking-[0.22em] text-[13px]">ZEVR GUARD</div>
-        <div className="flex items-center gap-1 text-[9px] text-emerald-400 uppercase tracking-widest">
-          <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
-          {t('popupStatusLive', 'protection live')}
+        <div
+          className={`flex items-center gap-1 text-[9px] uppercase tracking-widest ${
+            paused ? 'text-amber-400' : 'text-emerald-400'
+          }`}
+        >
+          <span
+            className={`w-1 h-1 rounded-full ${
+              paused ? 'bg-amber-400' : 'bg-emerald-400 animate-pulse'
+            }`}
+          />
+          {paused
+            ? t('popupStatusPaused', 'protection paused')
+            : t('popupStatusLive', 'protection live')}
         </div>
       </div>
     </div>
@@ -578,6 +624,122 @@ const IconButton: React.FC<{
     {children}
   </button>
 );
+
+// Global pause. Deliberately the first thing under the header: this is where
+// someone goes when something is broken and they cannot tell which domain did
+// it — the state the store review described as "nothing I can do".
+const PauseBar: React.FC<{
+  state: PauseState | null;
+  onPause: (minutes: number | null) => void;
+  onResume: () => void;
+}> = ({ state, onPause, onResume }) => {
+  const [choosing, setChoosing] = useState(false);
+  const [now, setNow] = useState(Date.now());
+
+  const paused = state?.paused === true;
+  const until = state?.until ?? null;
+
+  // Tick only while a deadline is actually counting down.
+  useEffect(() => {
+    if (!paused || until === null) return;
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [paused, until]);
+
+  useEffect(() => {
+    if (paused) setChoosing(false);
+  }, [paused]);
+
+  if (paused) {
+    const left = until === null ? null : Math.max(0, until - now);
+    const label =
+      left === null
+        ? t('pauseAllPausedSession', 'Paused until browser closes')
+        : t(
+            'pauseAllPausedFor',
+            `Paused · ${formatLeft(left)} left`,
+            formatLeft(left),
+          );
+    return (
+      <div className="flex items-center justify-between gap-2 border-b border-amber-700/40 bg-amber-500/[0.07] px-3 py-2">
+        <div className="min-w-0 flex-1">
+          <div className="text-[9px] uppercase tracking-[0.25em] text-amber-500/80">
+            {t('pauseAllLabel', 'Pause all protection')}
+          </div>
+          <div className="mt-0.5 truncate text-[11px] font-bold text-amber-200">
+            {label}
+          </div>
+        </div>
+        <button
+          className="h-6 flex-shrink-0 rounded-full bg-amber-500/90 px-2.5 text-[10px] font-bold uppercase tracking-wider text-black transition hover:bg-amber-400"
+          onClick={onResume}
+        >
+          {t('pauseAllResume', 'Resume')}
+        </button>
+      </div>
+    );
+  }
+
+  if (choosing) {
+    return (
+      <div className="border-b border-cyan-900/40 bg-black/30 px-3 py-2">
+        <div className="mb-1.5 text-[9px] uppercase tracking-[0.25em] text-gray-500">
+          {t('pauseAllLabel', 'Pause all protection')}
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {([[5, t('pauseAll5m', '5 minutes')],
+             [60, t('pauseAll1h', '1 hour')],
+             [null, t('pauseAllSession', 'Until browser closes')]] as Array<
+            [number | null, string]
+          >).map(([minutes, label]) => (
+            <button
+              key={String(minutes)}
+              className="rounded-full bg-amber-500/80 px-2.5 py-1 text-[10px] font-bold text-black transition hover:bg-amber-400"
+              onClick={() => onPause(minutes)}
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            className="rounded-full border border-white/15 px-2.5 py-1 text-[10px] text-gray-300 transition hover:bg-white/[0.06]"
+            onClick={() => setChoosing(false)}
+          >
+            {t('reportPhishingCancel', 'Cancel')}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center justify-between gap-2 border-b border-cyan-900/40 bg-black/30 px-3 py-2">
+      <div className="min-w-0 flex-1">
+        <div className="text-[9px] uppercase tracking-[0.25em] text-gray-500">
+          {t('pauseAllLabel', 'Pause all protection')}
+        </div>
+        <div className="mt-0.5 truncate text-[11px] text-emerald-300">
+          {t('pauseAllActive', 'Protection active')}
+        </div>
+      </div>
+      <button
+        className="h-6 flex-shrink-0 rounded-full bg-gray-700/60 px-2.5 text-[10px] font-bold uppercase tracking-wider text-gray-200 transition hover:bg-gray-600"
+        onClick={() => setChoosing(true)}
+        title={t('pauseAllTitle', 'Temporarily stop all blocking and warnings')}
+      >
+        {t('pauseAllPause', 'Pause')}
+      </button>
+    </div>
+  );
+};
+
+/** m:ss while under an hour, else a rounded "59m". */
+function formatLeft(ms: number): string {
+  const total = Math.ceil(ms / 1000);
+  if (total >= 3600) return `${Math.round(total / 60)}m`;
+  const m = Math.floor(total / 60);
+  const sec = total % 60;
+  return `${m}:${String(sec).padStart(2, '0')}`;
+}
 
 const AllowBar: React.FC<{
   host: string;

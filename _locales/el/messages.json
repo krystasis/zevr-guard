@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Άρση αποκλεισμού αυτού του domain"
   },
+  "allowThisDomain": {
+    "message": "Να επιτραπεί αυτό το domain"
+  },
+  "allowConfirm": {
+    "message": "Πατήστε ξανά για να επιτραπεί"
+  },
+  "allowThisDomainHint": {
+    "message": "Αποκλείστηκε από τη λίστα απειλών ή έναν κανόνα χώρας, όχι από εσάς. Η έγκριση υπερισχύει κάθε κανόνα αποκλεισμού για αυτό το domain."
+  },
   "blockThisDomain": {
     "message": "Αποκλεισμός αυτού του domain"
   },

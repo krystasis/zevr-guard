@@ -31,7 +31,14 @@ function safeTargetUrl(): string | null {
   if (!raw) return null;
   try {
     const u = new URL(raw);
-    return /^https?:$/.test(u.protocol) ? u.href : null;
+    if (!/^https?:$/.test(u.protocol)) return null;
+    // ...and it has to be the site this page is warning about. Without this
+    // the page shows one domain and sends the user to another, from the
+    // extension's own origin — an open redirect wearing our branding.
+    const host = u.hostname.toLowerCase();
+    const target = blocked.toLowerCase();
+    if (host !== target && !host.endsWith(`.${target}`)) return null;
+    return u.href;
   } catch {
     return null;
   }
@@ -524,13 +531,13 @@ const Warning: React.FC = () => {
           >
             {blocked}
           </span>
-          {isLookalike && brand && (
+          {isLookalike && (ctx?.lookalike ?? brand) && (
             <div className="flex flex-wrap items-center justify-center gap-2 text-[12px]">
               <span className="text-gray-500">
                 {t('warningLookalikeNotSame', 'Not the same as:')}
               </span>
               <span className="break-all rounded-full border border-emerald-500/40 bg-emerald-500/[0.07] px-3 py-0.5 font-mono text-emerald-300">
-                {brand}
+                {ctx?.lookalike ?? brand}
               </span>
             </div>
           )}
@@ -635,8 +642,11 @@ const Warning: React.FC = () => {
           </button>
           {isCountry && <CountryActions country={ctx?.country ?? null} />}
           {soft && <AllowAndOpen url={ctx?.url ?? null} scope="session" />}
-          {isLookalike && <ReportButton />}
-          {!isCountry && (isLookalike ? target !== null : ctx?.blockedByUs === true) && (
+          {isLookalike && ctx?.lookalike && <ReportButton />}
+          {!isCountry &&
+            (isLookalike
+              ? target !== null && ctx?.lookalike != null
+              : ctx?.blockedByUs === true) && (
             <details className="w-full text-xs text-gray-600">
               <summary className="cursor-pointer py-1 transition hover:text-gray-300">
                 {t('warningUnderstandRisk', 'I understand the risk')}

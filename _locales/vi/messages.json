@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Bỏ chặn tên miền này"
   },
+  "allowThisDomain": {
+    "message": "Cho phép tên miền này"
+  },
+  "allowConfirm": {
+    "message": "Chạm lần nữa để cho phép"
+  },
+  "allowThisDomainHint": {
+    "message": "Bị chặn bởi danh sách mối đe dọa hoặc quy tắc quốc gia, không phải bởi bạn. Cho phép sẽ được ưu tiên hơn mọi quy tắc chặn cho tên miền này."
+  },
   "blockThisDomain": {
     "message": "Chặn tên miền này"
   },

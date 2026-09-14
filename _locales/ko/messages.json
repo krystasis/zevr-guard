@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "이 도메인 차단 해제"
   },
+  "allowThisDomain": {
+    "message": "이 도메인 허용"
+  },
+  "allowConfirm": {
+    "message": "허용하려면 다시 누르세요"
+  },
+  "allowThisDomainHint": {
+    "message": "사용자가 아니라 위협 목록이나 국가 규칙이 차단했습니다. 허용하면 이 도메인의 모든 차단 규칙보다 우선합니다."
+  },
   "blockThisDomain": {
     "message": "이 도메인 차단"
   },

@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Nyahsekat domain ini"
   },
+  "allowThisDomain": {
+    "message": "Benarkan domain ini"
+  },
+  "allowConfirm": {
+    "message": "Ketik sekali lagi untuk membenarkan"
+  },
+  "allowThisDomainHint": {
+    "message": "Disekat oleh senarai ancaman atau peraturan negara, bukan oleh anda. Membenarkannya mengatasi semua peraturan sekatan bagi domain ini."
+  },
   "blockThisDomain": {
     "message": "Sekat domain ini"
   },

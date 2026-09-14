@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Bu alan adının engelini kaldır"
   },
+  "allowThisDomain": {
+    "message": "Bu alan adına izin ver"
+  },
+  "allowConfirm": {
+    "message": "İzin vermek için tekrar dokunun"
+  },
+  "allowThisDomainHint": {
+    "message": "Sizin değil, tehdit listesinin veya bir ülke kuralının engellemesi. İzin vermek bu alan adı için tüm engelleme kurallarının önüne geçer."
+  },
   "blockThisDomain": {
     "message": "Bu alan adını engelle"
   },

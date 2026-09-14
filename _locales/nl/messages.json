@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Deblokkeer dit domein"
   },
+  "allowThisDomain": {
+    "message": "Dit domein toestaan"
+  },
+  "allowConfirm": {
+    "message": "Tik nogmaals om toe te staan"
+  },
+  "allowThisDomainHint": {
+    "message": "Geblokkeerd door de dreigingslijst of een landregel, niet door jou. Toestaan gaat boven elke blokkeerregel voor dit domein."
+  },
   "blockThisDomain": {
     "message": "Blokkeer dit domein"
   },

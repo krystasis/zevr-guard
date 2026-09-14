@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Odblokovat tuto doménu"
   },
+  "allowThisDomain": {
+    "message": "Povolit tuto doménu"
+  },
+  "allowConfirm": {
+    "message": "Dalším klepnutím povolíte"
+  },
+  "allowThisDomainHint": {
+    "message": "Blokováno seznamem hrozeb nebo pravidlem země, ne vámi. Povolení má přednost před každým blokovacím pravidlem pro tuto doménu."
+  },
   "blockThisDomain": {
     "message": "Blokovat tuto doménu"
   },

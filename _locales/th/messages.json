@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "เลิกบล็อกโดเมนนี้"
   },
+  "allowThisDomain": {
+    "message": "อนุญาตโดเมนนี้"
+  },
+  "allowConfirm": {
+    "message": "แตะอีกครั้งเพื่ออนุญาต"
+  },
+  "allowThisDomainHint": {
+    "message": "ถูกบล็อกโดยรายการภัยคุกคามหรือกฎประเทศ ไม่ใช่โดยคุณ การอนุญาตจะมีผลเหนือกฎการบล็อกทั้งหมดของโดเมนนี้"
+  },
   "blockThisDomain": {
     "message": "บล็อกโดเมนนี้"
   },

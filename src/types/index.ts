@@ -162,6 +162,12 @@ export interface BlockContext {
    */
   country: string | null;
   /**
+   * The brand this host imitates, when our own detector says it imitates one.
+   * `reason=lookalike` in the page's URL proves nothing — anyone can put it
+   * there — so the controls that act on a lookalike verdict read this instead.
+   */
+  lookalike: string | null;
+  /**
    * Set only for a feed block on a site the user has a history with: the
    * warning page then offers a softer, reversible way through instead of
    * treating it like a site they have never seen.

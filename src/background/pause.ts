@@ -40,11 +40,24 @@ let pausedNow = false;
 let resolveReady: (() => void) | null = null;
 let readyPromise: Promise<void> | null = null;
 
+// Bumped by every deliberate change. The restore runs across several awaits,
+// so it has to know whether a pause or resume overtook it: an expiry alarm
+// waking a dead worker starts both at once, every time.
+let generation = 0;
+
+// Every request goes through this before it is handled, so a readiness signal
+// that never arrives would stop the extension dead — no stats, no badges, no
+// blocking attribution. The restore marks readiness in a finally block, and
+// this timeout is the second belt: after it, the worst case is the old
+// behaviour of assuming "not paused".
+const READY_TIMEOUT_MS = 3000;
+
 /** Resolves once the pause state has been restored from the live rules. */
 export function pauseReady(): Promise<void> {
   if (!readyPromise) {
     readyPromise = new Promise<void>((res) => {
       resolveReady = res;
+      setTimeout(res, READY_TIMEOUT_MS);
     });
   }
   return readyPromise;
@@ -62,6 +75,9 @@ export function isPaused(): boolean {
   // A missed alarm (the worker was asleep past the deadline) must not leave
   // protection off: treat an elapsed deadline as resumed and tidy up.
   if (pausedUntil !== null && Date.now() >= pausedUntil) {
+    // Drop the flag before the async cleanup, or every isPaused() call until
+    // resumeAll() lands starts another one — dozens per page load.
+    pausedNow = false;
     void resumeAll();
     return false;
   }
@@ -119,6 +135,7 @@ export async function pauseAll(minutes: number | null): Promise<PauseState> {
     return snapshot();
   }
 
+  generation += 1;
   pausedNow = true;
   pausedSince = now;
   pausedUntil = until;
@@ -164,6 +181,7 @@ export async function resumeAll(): Promise<boolean> {
     }
   }
 
+  generation += 1;
   pausedNow = false;
   pausedUntil = null;
   pausedSince = null;
@@ -192,17 +210,25 @@ export async function getPauseState(): Promise<PauseState> {
  * writes failed, and an orphaned rule would silently leave protection off.
  */
 export async function reconcilePause(): Promise<void> {
-  if (!chrome.declarativeNetRequest?.getSessionRules) {
+  try {
+    await restoreFromRules();
+  } catch (err) {
+    // Whatever went wrong, the request path must not be left waiting.
+    console.warn('[Zevr Guard] pause restore failed:', (err as Error).message);
+  } finally {
     markReady();
-    return;
   }
+}
+
+async function restoreFromRules(): Promise<void> {
+  if (!chrome.declarativeNetRequest?.getSessionRules) return;
+  const started = generation;
 
   let hasRule = false;
   try {
     const rules = await chrome.declarativeNetRequest.getSessionRules();
     hasRule = rules.some((r) => r.id === GLOBAL_PAUSE_RULE_ID);
   } catch {
-    markReady();
     return;
   }
 
@@ -214,20 +240,33 @@ export async function reconcilePause(): Promise<void> {
     stored = undefined;
   }
 
+  // A pause or resume landed while we were reading. Its view is current and
+  // ours is not; writing ours would resurrect a pause the user just ended, or
+  // undo one they just started.
+  if (generation !== started) return;
+
   if (!hasRule) {
     // No rule: nothing is paused, whatever the stored state claims.
     if (stored) await resumeAll();
-    markReady();
+    return;
+  }
+
+  if (!stored) {
+    // A rule with no recorded deadline. The rule itself carries no expiry, so
+    // treating it as "until the browser closes" would turn a five-minute pause
+    // whose bookkeeping failed into an indefinite one. Resolve toward
+    // protection instead and let the user pause again if they meant to.
+    await resumeAll();
     return;
   }
 
   pausedNow = true;
-  pausedSince = stored?.since ?? Date.now();
-  pausedUntil = stored?.until ?? null;
+  pausedSince = stored.since ?? Date.now();
+  pausedUntil = stored.until ?? null;
 
   if (pausedUntil !== null && Date.now() >= pausedUntil) {
     await resumeAll();
-    return; // resumeAll marked readiness
+    return;
   }
   try {
     await chrome.alarms.clear(EXPIRY_ALARM);
@@ -239,7 +278,6 @@ export async function reconcilePause(): Promise<void> {
   }
   await writeState();
   await showPausedBadge();
-  markReady();
 }
 
 chrome.alarms.onAlarm.addListener((alarm) => {

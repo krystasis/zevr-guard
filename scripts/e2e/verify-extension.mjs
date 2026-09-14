@@ -617,6 +617,166 @@ await sw.evaluate(async (domain) => {
   check('a sync retires it again', !retired.includes('block_rules'), JSON.stringify(retired));
 }
 
+// --- 5i. the store review's three complaints, stated as tests -------------
+// "Blocks steamcommunity.com", "cannot register a domain to allow it", and
+// "it blocks only after fetching". These are the reason the branch exists, so
+// they get checks of their own rather than being implied by the others.
+{
+  const steam = await swEval(async () => ({
+    listed: (await chrome.declarativeNetRequest.getSessionRules()).some(
+      (r) => r.condition.urlFilter === '||steamcommunity.com',
+    ),
+  }));
+  check('review 1: steamcommunity.com is not on the block list', !steam.listed);
+
+  const page = await ctx.newPage();
+  await page.goto('https://steamcommunity.com/', { waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
+  await sleep(1200);
+  check('review 1: steamcommunity.com loads', page.url().startsWith('https://steamcommunity.com'), page.url());
+
+  // Review 2 had two halves: no way in from the warning page, and no way in at
+  // all for a domain you cannot navigate to. Both are covered above (5 and
+  // 5g); here we prove the allowlist actually takes effect on a live block.
+  await send({ type: 'BLOCK_DOMAIN', domain: 'example.com' });
+  await sleep(400);
+  await send({ type: 'ALLOW_DOMAIN', domain: 'example.com' });
+  await sleep(600);
+  await page.goto('https://example.com/allowed', { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
+  await sleep(400);
+  check('review 2: an allowed domain really loads', page.url() === 'https://example.com/allowed', page.url());
+  await send({ type: 'DISALLOW_DOMAIN', domain: 'example.com' });
+
+  // Review 3: list blocking happens before the request leaves the browser.
+  // A blocked sub-resource fails in about a millisecond; a live one takes a
+  // network round trip. Without the control, "fast" would prove nothing.
+  await send({ type: 'BLOCK_DOMAIN', domain: 'example.net' });
+  await sleep(600);
+  const timings = await page.evaluate(async () => {
+    const time = async (url) => {
+      const t0 = performance.now();
+      try {
+        await fetch(url, { mode: 'no-cors', cache: 'no-store' });
+      } catch {
+        // blocked or offline
+      }
+      return performance.now() - t0;
+    };
+    return { blocked: await time('https://example.net/x'), control: await time('https://example.org/x') };
+  });
+  check('review 3: a blocked request never reaches the network',
+    timings.blocked < 20 && timings.control > timings.blocked,
+    `blocked ${Math.round(timings.blocked)}ms vs control ${Math.round(timings.control)}ms`);
+  await send({ type: 'UNBLOCK_DOMAIN', domain: 'example.net' });
+  await page.close();
+}
+
+// --- 5j. the features that existed before this branch still work ----------
+// Everything here predates the changes; it is checked because the branch
+// rewrote request handling, badge writes and the settings panel underneath it.
+{
+  const page = await ctx.newPage();
+  await page.goto('https://example.com/', { waitUntil: 'domcontentloaded' }).catch(() => {});
+  await sleep(2500);
+
+  const stats = await send({ type: 'GET_TODAY_STATS' });
+  check('daily statistics are still recorded', stats?.today !== undefined && stats?.today !== null, JSON.stringify(stats?.today ?? null).slice(0, 80));
+
+  const tabId = await swEval(async () => {
+    const [tb] = await chrome.tabs.query({ active: true, currentWindow: true });
+    return tb?.id ?? null;
+  });
+  const pageStats = await extPage.evaluate(
+    (id) => new Promise((res) => chrome.runtime.sendMessage({ type: 'GET_PAGE_STATS', tabId: id }, res)),
+    tabId,
+  );
+  check('per-page connection stats still resolve', pageStats !== undefined, JSON.stringify(pageStats).slice(0, 80));
+
+  // The popup's own block button, which never went through the warning page.
+  await send({ type: 'BLOCK_DOMAIN', domain: 'blocked-by-popup.example' });
+  const settingsNow = (await send({ type: 'GET_SETTINGS' })).settings;
+  check('popup blocking still reaches the blocklist',
+    settingsNow.customBlockList.includes('blocked-by-popup.example'), JSON.stringify(settingsNow.customBlockList));
+  check('the dead blockingEnabled setting is gone', !('blockingEnabled' in settingsNow), JSON.stringify(Object.keys(settingsNow)));
+  await send({ type: 'UNBLOCK_DOMAIN', domain: 'blocked-by-popup.example' });
+
+  // Category rulesets are separate from the malware feed and must still toggle.
+  const base = (await send({ type: 'GET_SETTINGS' })).settings;
+  base.blockCategories.advertising = true;
+  await send({ type: 'UPDATE_SETTINGS', settings: base });
+  await sleep(1200);
+  const withAds = await swEval(async () => chrome.declarativeNetRequest.getEnabledRulesets());
+  check('the advertising ruleset still turns on', withAds.includes('ads_rules'), JSON.stringify(withAds));
+  base.blockCategories.advertising = false;
+  await send({ type: 'UPDATE_SETTINGS', settings: base });
+  await sleep(1200);
+  const withoutAds = await swEval(async () => chrome.declarativeNetRequest.getEnabledRulesets());
+  check('the advertising ruleset still turns off', !withoutAds.includes('ads_rules'), JSON.stringify(withoutAds));
+
+  // Country blocking: rules are learned, and the popup path can undo them.
+  await send({ type: 'BLOCK_COUNTRY', country: 'AQ' });
+  const countryOn = (await send({ type: 'GET_SETTINGS' })).settings;
+  check('country blocking still records the choice', countryOn.blockedCountries.includes('AQ'));
+  await send({ type: 'UNBLOCK_COUNTRY', country: 'AQ' });
+  const countryOff = (await send({ type: 'GET_SETTINGS' })).settings;
+  check('country blocking still undoes it', !countryOff.blockedCountries.includes('AQ'));
+
+  // The data-leak watch is the one alert a pause must not silence.
+  await send({ type: 'ADD_WATCH', kind: 'custom', value: 'zevr-regression-probe' });
+  const watch = await send({ type: 'GET_WATCH' });
+  const items = watch?.watch ?? watch?.items ?? [];
+  // The raw value is deliberately never stored — only a masked display form —
+  // so the check is that the entry exists, not that the text came back.
+  check('the exfiltration watch still accepts values',
+    Array.isArray(items) && items.some((x) => x?.kind === 'custom'), JSON.stringify(items).slice(0, 90));
+  check('the watched value is stored masked, never in the clear',
+    !JSON.stringify(watch).includes('zevr-regression-probe'));
+  for (const it of Array.isArray(items) ? items : []) {
+    if (it?.id) await send({ type: 'REMOVE_WATCH', id: it.id });
+  }
+
+  // Badges go back to normal after a pause, rather than staying stuck.
+  await send({ type: 'PAUSE_ALL', minutes: 5 });
+  await sleep(700);
+  await send({ type: 'RESUME_ALL' });
+  await sleep(700);
+  const globalBadge = await swEval(async () => chrome.action.getBadgeText({}));
+  check('the global badge clears when protection resumes', globalBadge === '', JSON.stringify(globalBadge));
+  await page.close();
+}
+
+// --- 5k. the second-round findings -----------------------------------------
+{
+  // The country path is covered by a unit test instead: country.ts caches its
+  // rule map in module scope, so a probe cannot seed it from out here.
+
+  // A page cannot dress the warning up as a lookalike verdict we never made.
+  const spoofed = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'not-a-typosquat.example' })).context;
+  check('a domain we did not flag reports no lookalike brand', spoofed.lookalike === null, JSON.stringify(spoofed.lookalike));
+  const realSquat = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'amazom.com' })).context;
+  check('a real typosquat reports the brand it imitates', realSquat.lookalike === 'amazon.com', JSON.stringify(realSquat.lookalike));
+
+  // ...and cannot get an arbitrary domain blocked through the report button.
+  const spoofReport = await send({ type: 'REPORT_PHISHING', domain: 'www.example.org', context: 'warning-page', alsoBlock: true });
+  const blocklist = (await send({ type: 'GET_SETTINGS' })).settings.customBlockList;
+  check('a phishing report is refused for a domain we never flagged',
+    spoofReport?.success === false && !blocklist.includes('www.example.org'), JSON.stringify(blocklist));
+
+  // ...nor pre-seed a lookalike bypass for its own typosquat.
+  const spoofBypass = await send({ type: 'BYPASS_LOOKALIKE', host: 'not-a-typosquat.example' });
+  check('a lookalike bypass is refused for a domain we never flagged', spoofBypass?.success === false);
+
+  // The category rulesets must not carry shared infrastructure.
+  const adsHits = await swEval(async () => {
+    const res = await fetch(chrome.runtime.getURL('public/rules/ads_rules.json')).catch(() => null);
+    if (!res) return null;
+    const rules = await res.json();
+    const doms = new Set(rules.map((r) => r.condition.urlFilter));
+    return ['||amazonaws.com', '||googleapis.com', '||cloudfront.net', '||workers.dev'].filter((d) => doms.has(d));
+  });
+  check('the advertising ruleset carries no shared infrastructure',
+    adsHits === null || adsHits.length === 0, JSON.stringify(adsHits));
+}
+
 // --- 6. framed warning page refuses to act --------------------------------
 {
   const page = await ctx.newPage();

@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Sblocca questo dominio"
   },
+  "allowThisDomain": {
+    "message": "Consenti questo dominio"
+  },
+  "allowConfirm": {
+    "message": "Tocca di nuovo per consentire"
+  },
+  "allowThisDomainHint": {
+    "message": "Bloccato dalla lista delle minacce o da una regola per paese, non da te. Consentirlo ha la precedenza su ogni regola di blocco per questo dominio."
+  },
   "blockThisDomain": {
     "message": "Blocca questo dominio"
   },

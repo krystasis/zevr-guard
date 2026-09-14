@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Buka blokir domain ini"
   },
+  "allowThisDomain": {
+    "message": "Izinkan domain ini"
+  },
+  "allowConfirm": {
+    "message": "Ketuk lagi untuk mengizinkan"
+  },
+  "allowThisDomainHint": {
+    "message": "Diblokir oleh daftar ancaman atau aturan negara, bukan oleh Anda. Mengizinkannya mengalahkan semua aturan pemblokiran untuk domain ini."
+  },
   "blockThisDomain": {
     "message": "Blokir domain ini"
   },

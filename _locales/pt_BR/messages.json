@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Desbloquear este domínio"
   },
+  "allowThisDomain": {
+    "message": "Permitir este domínio"
+  },
+  "allowConfirm": {
+    "message": "Toque de novo para permitir"
+  },
+  "allowThisDomainHint": {
+    "message": "Bloqueado pela lista de ameaças ou por uma regra de país, não por você. Permitir tem prioridade sobre qualquer regra de bloqueio para este domínio."
+  },
   "blockThisDomain": {
     "message": "Bloquear este domínio"
   },

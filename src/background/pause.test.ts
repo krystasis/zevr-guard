@@ -204,3 +204,92 @@ describe('global pause', () => {
     expect(session['zg.pause']).toBeUndefined();
   });
 });
+
+describe('readiness can never strand the request path', () => {
+  it('signals readiness even when the restore throws', async () => {
+    const chromeObj = (globalThis as unknown as {
+      chrome: { declarativeNetRequest: Record<string, unknown> };
+    }).chrome;
+    chromeObj.declarativeNetRequest.getSessionRules = async () => {
+      throw new Error('boom');
+    };
+    const { reconcilePause, pauseReady } = await load();
+    await reconcilePause();
+    // handleRequest awaits this before touching anything; a hang here would
+    // silently stop stats, badges and block attribution for the whole session.
+    await expect(pauseReady()).resolves.toBeUndefined();
+  });
+
+  it('signals readiness even when the badge write throws', async () => {
+    const chromeObj = (globalThis as unknown as {
+      chrome: { action: Record<string, unknown> };
+    }).chrome;
+    const { pauseAll } = await load();
+    await pauseAll(null);
+    chromeObj.action.setBadgeText = () => {
+      throw new Error('no action API');
+    };
+    vi.resetModules();
+    const again = await load();
+    await again.reconcilePause();
+    await expect(again.pauseReady()).resolves.toBeUndefined();
+  });
+});
+
+describe('races with the restore', () => {
+  it('a resume landing mid-restore is not undone by it', async () => {
+    // An expiry alarm waking a dead worker starts both of these at once, so
+    // this interleaving happens by construction, not by bad luck.
+    const first = await load();
+    await first.pauseAll(5);
+    const keptRules = rules;
+    const keptSession = session;
+
+    vi.resetModules();
+    rules = keptRules;
+    session = keptSession;
+    const second = await load();
+
+    let release: () => void = () => {};
+    const gate = new Promise<void>((r) => {
+      release = r;
+    });
+    const chromeObj = (globalThis as unknown as {
+      chrome: { declarativeNetRequest: Record<string, unknown> };
+    }).chrome;
+    const realGet = chromeObj.declarativeNetRequest.getSessionRules as () => Promise<unknown>;
+    chromeObj.declarativeNetRequest.getSessionRules = async () => {
+      await gate;
+      return realGet();
+    };
+
+    const restoring = second.reconcilePause();
+    await second.resumeAll(); // the alarm's own cleanup, mid-restore
+    release();
+    await restoring;
+
+    // The restore's stale snapshot must not resurrect the pause.
+    expect(second.isPaused()).toBe(false);
+    expect(rules.some((r) => r.id === second.GLOBAL_PAUSE_RULE_ID)).toBe(false);
+  });
+
+  it('a rule with no recorded deadline resolves toward protection', async () => {
+    // If the bookkeeping write failed, the rule alone cannot say when the
+    // pause should end — and "forever" is the one answer never on offer.
+    const { GLOBAL_PAUSE_RULE_ID } = await load();
+    rules = [
+      {
+        id: GLOBAL_PAUSE_RULE_ID,
+        priority: 1000,
+        action: { type: 'allow' },
+        condition: { urlFilter: '*' },
+      },
+    ];
+    session = {};
+    vi.resetModules();
+    const fresh = await load();
+    await fresh.reconcilePause();
+    expect(fresh.isPaused()).toBe(false);
+    expect(rules).toHaveLength(0);
+  });
+});

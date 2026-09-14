@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "解除拦截此域名"
   },
+  "allowThisDomain": {
+    "message": "允许该域名"
+  },
+  "allowConfirm": {
+    "message": "再次点击以允许"
+  },
+  "allowThisDomainHint": {
+    "message": "这是威胁列表或国家/地区规则的拦截，不是你设置的。允许后将优先于该域名的所有拦截规则。"
+  },
   "blockThisDomain": {
     "message": "拦截此域名"
   },

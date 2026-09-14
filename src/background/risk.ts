@@ -97,11 +97,18 @@ export function ensureMalwareMeta(): Promise<void> {
     const load = metaLoader;
     metaLoading = load()
       .then((meta) => {
-        if (meta?.domains) MALWARE_META = meta;
-        metaLoader = null;
+        if (meta?.domains) {
+          MALWARE_META = meta;
+          metaLoader = null;
+        }
+        // Nothing stored yet: keep the loader so the next lookup retries,
+        // rather than disabling provenance for the life of this worker.
       })
       .catch(() => {
-        metaLoader = null;
+        // transient; leave the loader in place for a retry
+      })
+      .finally(() => {
+        metaLoading = null;
       });
   }
   return metaLoading;

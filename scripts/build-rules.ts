@@ -723,22 +723,71 @@ const TRACKING_CATEGORIES = new Set([
   'social',
 ]);
 
+// Categories that describe infrastructure rather than advertising. When the
+// tracker DB says a domain is one of these, an EasyList hit on it is an
+// artefact of our own extraction, not a verdict about the domain.
+const INFRASTRUCTURE_CATEGORIES = new Set([
+  'cdn',
+  'embed',
+  'maps',
+  'video',
+  'payment',
+  'consent',
+  'login',
+  'chat',
+  'monitoring',
+  'other',
+]);
+
+/**
+ * A category block is a whole-domain block, so it needs evidence that the
+ * domain really is what the list says. Without this, `||amazonaws.com`,
+ * `||googleapis.com` and `||workers.dev` all ended up in the rulesets:
+ * turning on "Advertising" would have broken every site serving assets from
+ * S3 or Google's CDN — the same shared-host failure that put steamcommunity
+ * in the malware list, one ruleset over.
+ *
+ * Evidence is a named owner, a category that is actually about advertising or
+ * tracking, and some measured presence on the web — or simply being obscure
+ * enough that a mistake costs little. The prevalence bar is deliberately low:
+ * real ad networks measure well under 1% (taboola 0.034, outbrain 0.049), so
+ * anything higher would throw them out along with the noise.
+ */
+function hasCategoryEvidence(
+  domain: string,
+  entry: TrackerEntry | undefined,
+  popularRank: Map<string, number>,
+): boolean {
+  if (!popularRank.has(domain)) return true; // obscure: low blast radius
+  if (!entry) return false; // popular and only EasyList says so
+  if (INFRASTRUCTURE_CATEGORIES.has(entry.category)) return false;
+  const known = !!entry.company && entry.company !== 'Unknown';
+  return known && (entry.prevalence ?? 0) >= 0.01;
+}
+
 function collectAdvertisingDomains(
   trackers: TrackerDB,
   easyListDomains: TrackerDB,
+  popularRank: Map<string, number>,
 ): string[] {
   const set = new Set<string>();
   for (const [domain, entry] of Object.entries(trackers)) {
     if (entry.category === 'advertising') set.add(domain);
   }
   for (const domain of Object.keys(easyListDomains)) set.add(domain);
-  return Array.from(set).sort();
+  return Array.from(set)
+    .filter((d) => hasCategoryEvidence(d, trackers[d], popularRank))
+    .sort((a, b) => (trackers[b]?.prevalence ?? 0) - (trackers[a]?.prevalence ?? 0));
 }
 
-function collectTrackingDomains(trackers: TrackerDB): string[] {
+function collectTrackingDomains(
+  trackers: TrackerDB,
+  popularRank: Map<string, number>,
+): string[] {
   const entries: Array<{ domain: string; prevalence: number }> = [];
   for (const [domain, entry] of Object.entries(trackers)) {
     if (!TRACKING_CATEGORIES.has(entry.category)) continue;
+    if (!hasCategoryEvidence(domain, entry, popularRank)) continue;
     entries.push({ domain, prevalence: entry.prevalence ?? 0 });
   }
   // Higher prevalence first so the most-seen trackers win the per-ruleset cap.
@@ -858,8 +907,10 @@ async function main(): Promise<void> {
   // Only the top ranks are protected outright: malware earns Tranco ranks of
   // its own further down (see scripts/safelist.ts). The band below is
   // reported instead, for a human to glance at.
+  const tranco = await loadTrancoSnapshot();
+  const popularRank = new Map(tranco.slice(0, 10_000).map((d, i) => [d, i + 1]));
   const safelist = createSafelist({
-    popular: await loadTrancoSnapshot(),
+    popular: tranco,
     limit: 10_000,
     reviewLimit: 50_000,
   });
@@ -906,21 +957,24 @@ async function main(): Promise<void> {
   }
 
   const trackers = await buildTrackerDB();
-  await buildCategoryRulesets(trackers);
+  await buildCategoryRulesets(trackers, popularRank);
   await writeFeedManifest();
   await downloadGeoLite();
   await downloadTwemojiFlags();
 }
 
-async function buildCategoryRulesets(trackers: TrackerDB): Promise<void> {
+async function buildCategoryRulesets(
+  trackers: TrackerDB,
+  popularRank: Map<string, number>,
+): Promise<void> {
   const easyList = await fetchEasyListDomains();
 
-  const adsDomains = collectAdvertisingDomains(trackers, easyList);
+  const adsDomains = collectAdvertisingDomains(trackers, easyList, popularRank);
   const adsRules = buildCategoryRules(adsDomains);
   await ensureDir(ADS_RULES_PATH);
   await writeFile(ADS_RULES_PATH, JSON.stringify(adsRules, null, 2) + '\n');
 
-  const trackingDomains = collectTrackingDomains(trackers);
+  const trackingDomains = collectTrackingDomains(trackers, popularRank);
   const trackingRules = buildCategoryRules(trackingDomains);
   await ensureDir(TRACKING_RULES_PATH);
   await writeFile(

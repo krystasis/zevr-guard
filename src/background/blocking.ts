@@ -286,6 +286,20 @@ export function matchesDomainOrParent(domain: string, set: Set<string>): boolean
   return findSelfOrParent(domain, (c) => (set.has(c) ? true : undefined)) === true;
 }
 
+/** FNV-1a over the joined list: cheap, and sensitive to any single change. */
+function hashDomains(domains: string[]): string {
+  let h = 0x811c9dc5;
+  for (const domain of domains) {
+    for (let i = 0; i < domain.length; i++) {
+      h ^= domain.charCodeAt(i);
+      h = Math.imul(h, 0x01000193);
+    }
+    h ^= 0x2f; // '/' separator, so ['ab','c'] and ['a','bc'] differ
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0).toString(36);
+}
+
 const SESSION_APPLIED_KEY = 'zg.sessionRules.applied';
 // Chrome caps session rules at 5,000 and each domain takes two rules
 // (main_frame redirect + everything-else block). Shared with the feed build so
@@ -319,8 +333,12 @@ export async function syncMalwareSessionRules(): Promise<void> {
   const enabled = settings.blockCategories.malware !== false;
   const domains = enabled ? getMalwareDomains().slice(0, MAX_SESSION_DOMAINS) : [];
 
-  // Skip the (frequent) service-worker restarts where nothing changed.
-  const key = `${enabled}:${domains.length}:${domains[0] ?? ''}:${domains[domains.length - 1] ?? ''}`;
+  // Skip the (frequent) service-worker restarts where nothing changed. The
+  // key has to be content-derived: the list is prevalence-sorted and truncated
+  // to exactly FEED_MAX_DOMAINS, so length and endpoints barely move between
+  // daily builds — and a false positive removed today would then keep
+  // blocking until the browser restarted.
+  const key = `${enabled}:${domains.length}:${hashDomains(domains)}`;
   try {
     const stored = await chrome.storage.session.get(SESSION_APPLIED_KEY);
     if (stored[SESSION_APPLIED_KEY] === key) {
@@ -360,20 +378,28 @@ export async function syncMalwareSessionRules(): Promise<void> {
     });
   }
 
-  const existing = await chrome.declarativeNetRequest.getSessionRules();
-  await chrome.declarativeNetRequest.updateSessionRules({
-    // Only the feed mirror's own id range. Session allow rules (the
-    // "continue this time" escape hatch) are owned by allowDomainForSession
-    // and must survive every feed refresh.
-    removeRuleIds: existing.filter((r) => r.id < SESSION_ALLOW_ID_BASE).map((r) => r.id),
-    addRules,
-  });
   try {
-    await chrome.storage.session.set({ [SESSION_APPLIED_KEY]: key });
-  } catch {
-    // ignore
+    const existing = await chrome.declarativeNetRequest.getSessionRules();
+    await chrome.declarativeNetRequest.updateSessionRules({
+      // Only the feed mirror's own id range. Session allow rules (the
+      // "continue this time" escape hatch) are owned by allowDomainForSession
+      // and must survive every feed refresh.
+      removeRuleIds: existing.filter((r) => r.id < SESSION_ALLOW_ID_BASE).map((r) => r.id),
+      addRules,
+    });
+    try {
+      await chrome.storage.session.set({ [SESSION_APPLIED_KEY]: key });
+    } catch {
+      // ignore
+    }
+    await retireStaticMalwareRules();
+  } catch (err) {
+    // The mirror failed, so the packaged snapshot stays on: stale beats
+    // nothing. Without this the ruleset armed at startup would also be left
+    // enabled for the whole session, blocking domains the feed has dropped.
+    console.warn('[Zevr Guard] session rule sync failed:', (err as Error).message);
+    throw err;
   }
-  await retireStaticMalwareRules();
 }
 
 const STATIC_MALWARE_RULESET = 'block_rules';
@@ -399,12 +425,33 @@ const STATIC_MALWARE_RULESET = 'block_rules';
 export async function armStaticMalwareRules(): Promise<void> {
   const dnr = chrome.declarativeNetRequest;
   if (!dnr?.getEnabledRulesets || !dnr.updateEnabledRulesets) return;
+  // Never against the user's wishes: someone who turned malware blocking off
+  // would otherwise get the packaged list back on at every browser start, for
+  // exactly the window in which restored tabs load.
+  const settings = await getSettings();
+  if (settings.blockCategories.malware === false) return;
   try {
     const enabled = await dnr.getEnabledRulesets();
     if (enabled.includes(STATIC_MALWARE_RULESET)) return;
     await dnr.updateEnabledRulesets({ enableRulesetIds: [STATIC_MALWARE_RULESET] });
   } catch (err) {
     console.warn('[Zevr Guard] could not arm static rules:', (err as Error).message);
+  }
+}
+
+/**
+ * True while the packaged snapshot is still doing the blocking — the window
+ * between browser launch and the first session-rule sync. Its contents are a
+ * superset of the live feed from build day, so a domain it blocks may not be
+ * on the current list at all.
+ */
+export async function isStaticMalwareRuleActive(): Promise<boolean> {
+  const dnr = chrome.declarativeNetRequest;
+  if (!dnr?.getEnabledRulesets) return false;
+  try {
+    return (await dnr.getEnabledRulesets()).includes(STATIC_MALWARE_RULESET);
+  } catch {
+    return false;
   }
 }
 

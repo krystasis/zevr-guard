@@ -153,7 +153,21 @@ export async function refreshFeed(force = false): Promise<void> {
   }
 }
 
-export async function initFeed(): Promise<void> {
+let initPromise: Promise<void> | null = null;
+
+/**
+ * Idempotent: the module body starts this, and `onStartup` asks for it again a
+ * moment later. Running it twice meant two 8MB tracker downloads and two
+ * 4,800-rule writes racing each other at browser start, with the loser
+ * rejected on duplicate ids — and a rejected write skips retiring the
+ * packaged ruleset.
+ */
+export function initFeed(): Promise<void> {
+  if (!initPromise) initPromise = runInitFeed();
+  return initPromise;
+}
+
+async function runInitFeed(): Promise<void> {
   try {
     // The tracker feed lives in the Cache API and is parsed lazily by
     // risk.ts, so cold start no longer touches the 8MB blob here.

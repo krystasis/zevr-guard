@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Domain feloldása"
   },
+  "allowThisDomain": {
+    "message": "Domain engedélyezése"
+  },
+  "allowConfirm": {
+    "message": "Koppints újra az engedélyezéshez"
+  },
+  "allowThisDomainHint": {
+    "message": "Nem te tiltottad le, hanem a fenyegetéslista vagy egy országszabály. Az engedélyezés minden tiltószabályt felülír erre a domainre."
+  },
   "blockThisDomain": {
     "message": "Domain blokkolása"
   },

@@ -413,9 +413,11 @@ export const Popup: React.FC = () => {
           <ConnectionDetail
             connection={selected}
             blockedCountries={settings?.blockedCountries ?? []}
+            manuallyBlocked={settings?.customBlockList.includes(selected.domain) === true}
             onBack={() => setSelectedDomain(null)}
             onBlock={handleBlock}
             onUnblock={handleUnblock}
+            onAllow={handleAllow}
             onBlockCountry={handleBlockCountry}
             onUnblockCountry={handleUnblockCountry}
           />
@@ -1479,6 +1481,79 @@ const ConnectionRow: React.FC<{
   </div>
 );
 
+/**
+ * The detail view's main action. "Unblock" only means anything for a block the
+ * user set themselves: unblockDomain removes their own dynamic rules and
+ * nothing else, so for a feed, country or category block it is a no-op. Those
+ * need allow-listing instead, which outranks every rule source — and because
+ * that waives protection on a domain something flagged, it asks twice.
+ */
+const DetailBlockButton: React.FC<{
+  connection: Connection;
+  manuallyBlocked: boolean;
+  onBlock: (domain: string) => void;
+  onUnblock: (domain: string) => void;
+  onAllow: (domain: string) => void;
+}> = ({ connection, manuallyBlocked, onBlock, onUnblock, onAllow }) => {
+  const [confirming, setConfirming] = useState(false);
+  const timer = useRef<number | undefined>(undefined);
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+
+  const allowMode = connection.isBlocked && !manuallyBlocked;
+
+  function click() {
+    if (connection.isBlocked && !allowMode) {
+      onUnblock(connection.domain);
+      return;
+    }
+    if (!connection.isBlocked) {
+      onBlock(connection.domain);
+      return;
+    }
+    if (!confirming) {
+      setConfirming(true);
+      timer.current = window.setTimeout(() => setConfirming(false), 2500);
+      return;
+    }
+    window.clearTimeout(timer.current);
+    setConfirming(false);
+    onAllow(connection.domain);
+  }
+
+  const label = !connection.isBlocked
+    ? `🚫 ${t('blockThisDomain', 'Block this domain')}`
+    : allowMode
+      ? confirming
+        ? t('allowConfirm', 'Tap again to allow')
+        : `✓ ${t('allowThisDomain', 'Allow this domain')}`
+      : `✓ ${t('unblockThisDomain', 'Unblock this domain')}`;
+
+  return (
+    <>
+      <button
+        className={`mt-3 w-full rounded py-2.5 text-xs font-bold uppercase tracking-wider transition ${
+          !connection.isBlocked
+            ? 'bg-red-600 text-white shadow-[0_0_12px_rgba(239,68,68,0.4)] hover:bg-red-500'
+            : confirming
+              ? 'bg-emerald-600 text-white'
+              : 'bg-gray-700 text-gray-100 hover:bg-gray-600'
+        }`}
+        onClick={click}
+      >
+        {label}
+      </button>
+      {allowMode && (
+        <p className="mt-1.5 text-[10px] leading-relaxed text-gray-500">
+          {t(
+            'allowThisDomainHint',
+            'Blocked by the threat list or a country rule, not by you. Allowing it overrides every blocking rule for this domain.',
+          )}
+        </p>
+      )}
+    </>
+  );
+};
+
 const ReportPhishingRow: React.FC<{ domain: string }> = ({ domain }) => {
   const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>(
     'idle',
@@ -1555,17 +1630,23 @@ const ReportPhishingRow: React.FC<{ domain: string }> = ({ domain }) => {
 const ConnectionDetail: React.FC<{
   connection: Connection;
   blockedCountries: string[];
+  /** True when the user blocked this domain themselves, rather than the feed,
+   *  a country rule or a category ruleset doing it. */
+  manuallyBlocked: boolean;
   onBack: () => void;
   onBlock: (domain: string) => void;
   onUnblock: (domain: string) => void;
+  onAllow: (domain: string) => void;
   onBlockCountry: (country: string) => void;
   onUnblockCountry: (country: string) => void;
 }> = ({
   connection,
   blockedCountries,
+  manuallyBlocked,
   onBack,
   onBlock,
   onUnblock,
+  onAllow,
   onBlockCountry,
   onUnblockCountry,
 }) => (
@@ -1630,21 +1711,13 @@ const ConnectionDetail: React.FC<{
       {riskExplain(connection.riskLevel)}
     </div>
 
-    <button
-      className={`w-full py-2.5 rounded text-xs font-bold uppercase tracking-wider mt-3 transition ${
-        connection.isBlocked
-          ? 'bg-gray-700 text-gray-100 hover:bg-gray-600'
-          : 'bg-red-600 text-white hover:bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.4)]'
-      }`}
-      onClick={() => {
-        if (connection.isBlocked) onUnblock(connection.domain);
-        else onBlock(connection.domain);
-      }}
-    >
-      {connection.isBlocked
-        ? `✓ ${t('unblockThisDomain', 'Unblock this domain')}`
-        : `🚫 ${t('blockThisDomain', 'Block this domain')}`}
-    </button>
+    <DetailBlockButton
+      connection={connection}
+      manuallyBlocked={manuallyBlocked}
+      onBlock={onBlock}
+      onUnblock={onUnblock}
+      onAllow={onAllow}
+    />
 
     {connection.country && (
       <button

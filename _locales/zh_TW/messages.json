@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "解除封鎖此網域"
   },
+  "allowThisDomain": {
+    "message": "允許此網域"
+  },
+  "allowConfirm": {
+    "message": "再次點擊以允許"
+  },
+  "allowThisDomainHint": {
+    "message": "這是威脅清單或國家／地區規則的封鎖，不是你設定的。允許後將優先於此網域的所有封鎖規則。"
+  },
   "blockThisDomain": {
     "message": "封鎖此網域"
   },

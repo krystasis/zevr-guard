@@ -45,6 +45,7 @@ import {
   allowDomainForSession,
   armStaticMalwareRules,
   blockDomain,
+  isStaticMalwareRuleActive,
   disallowDomain,
   getBlockedDomains,
   matchesDomainOrParent,
@@ -56,6 +57,7 @@ import {
 import {
   addLookalikeBypass,
   checkNavigation,
+  detectLookalike,
   isLookalikeBypassed,
 } from './lookalike';
 import { isEstablishedSite, isFreshVisit, getVisitRecord, markInstalled, recordVisit } from './visits';
@@ -203,12 +205,22 @@ async function classifyBlock(
     return { blockedByUs: true, source: 'manual', country: null };
   }
   if (isMalware(domain)) return { blockedByUs: true, source: 'feed', country: null };
+  // Country rules are dynamic rules too, so the generic sweep below would
+  // claim them as "manual" and the warning page would lose its unblock
+  // button. Ask the country bookkeeping first, the way the stats path does.
+  const country = await getBlockingCountry(domain);
+  if (country) return { blockedByUs: true, source: 'country', country };
   const blocked = await getBlockedDomains();
   if (matchesDomainOrParent(domain, blocked)) {
     return { blockedByUs: true, source: 'manual', country: null };
   }
-  const country = await getBlockingCountry(domain);
-  if (country) return { blockedByUs: true, source: 'country', country };
+  // Between browser launch and the first feed sync the packaged snapshot is
+  // armed again, and it can still carry a domain the live feed has since
+  // dropped. Without this the warning page would tell the user we are not
+  // blocking the very address we just blocked, and offer no way through.
+  if (await isStaticMalwareRuleActive()) {
+    return { blockedByUs: true, source: 'feed', country: null };
+  }
   return { blockedByUs: false, source: null, country: null };
 }
 
@@ -832,9 +844,12 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 chrome.runtime.onStartup.addListener(() => {
-  // Session rules are gone after a restart and take a moment to rebuild, so
-  // put the packaged ruleset back first; initFeed retires it again once the
-  // live mirror is in place.
+  // The module body below already kicked all of this off when the worker
+  // started — this listener fires moments later, so everything here has to be
+  // idempotent. initFeed() returns its in-flight promise; the other two are
+  // cheap reads. Arming the packaged ruleset comes first because session rules
+  // are gone after a restart and take a moment to rebuild; the sync retires it
+  // again once the live mirror is in place.
   void armStaticMalwareRules();
   void initFeed();
   void syncFromStoredSettings();
@@ -909,6 +924,7 @@ chrome.runtime.onMessage.addListener(
                 source: null,
                 url: null,
                 country: null,
+                lookalike: null,
                 established: null,
                 meta: null,
                 feedGeneratedAt: null,
@@ -932,6 +948,7 @@ chrome.runtime.onMessage.addListener(
             source,
             url: resolveResumeUrl(_sender.tab?.id, domain),
             country,
+            lookalike: detectLookalike(domain)?.brand ?? null,
             established,
             meta: listed ? { src: listed.s ?? null, since: listed.f } : null,
             feedGeneratedAt: source === 'feed' ? getMalwareFeedGeneratedAt() : null,
@@ -996,10 +1013,19 @@ chrome.runtime.onMessage.addListener(
           await resumeSite(message.host);
           sendResponse({ success: true });
           break;
-        case 'BYPASS_LOOKALIKE':
-          await addLookalikeBypass(message.host);
+        case 'BYPASS_LOOKALIKE': {
+          // Only for a host our own detector actually flagged. Otherwise a
+          // page could pre-seed the bypass for its own typosquat, so the
+          // interstitial never appears when the real phishing attempt comes.
+          const host = message.host.trim().toLowerCase();
+          if (!isValidHostname(host) || !detectLookalike(host)) {
+            sendResponse({ success: false });
+            break;
+          }
+          await addLookalikeBypass(host);
           sendResponse({ success: true });
           break;
+        }
         case 'GET_STATS_HISTORY':
           sendResponse({ history: await getStatsHistory() });
           break;
@@ -1075,7 +1101,16 @@ chrome.runtime.onMessage.addListener(
           // query params, so validate it as a bare hostname before it becomes
           // a DNR filter or a report payload.
           const reportDomain = message.domain.trim().toLowerCase();
-          if (!isValidHostname(reportDomain)) {
+          // Our own verdict, not the page's: warning/index.html is
+          // web-accessible, so any site can open it with ?reason=lookalike&
+          // blocked=<their target> and offer the user a credible-looking
+          // "report this as phishing" button. Acting on that would let a page
+          // have an arbitrary domain — the user's bank, an update server —
+          // permanently blocked on their device in two clicks.
+          const reportedIsOurs =
+            detectLookalike(reportDomain) !== null ||
+            (await classifyBlock(reportDomain)).blockedByUs;
+          if (!isValidHostname(reportDomain) || !reportedIsOurs) {
             sendResponse({ success: false, blocked: false });
             break;
           }
@@ -1148,6 +1183,10 @@ chrome.runtime.onMessage.addListener(
           break;
         }
         case 'PAUSE_ALL': {
+          // The message itself may be what woke the worker; answering before
+          // the state is restored would tell the popup protection is active
+          // while the browser is globally paused.
+          await pauseReady();
           // Only the three offers the UI makes; anything else would let a
           // stray caller park protection off for an arbitrary span.
           const minutes = message.minutes;
@@ -1159,11 +1198,19 @@ chrome.runtime.onMessage.addListener(
           break;
         }
         case 'RESUME_ALL': {
+          // The message itself may be what woke the worker; answering before
+          // the state is restored would tell the popup protection is active
+          // while the browser is globally paused.
+          await pauseReady();
           const ok = await resumeAll();
           sendResponse({ success: ok, state: await getPauseState() });
           break;
         }
         case 'GET_PAUSE_STATE': {
+          // The message itself may be what woke the worker; answering before
+          // the state is restored would tell the popup protection is active
+          // while the browser is globally paused.
+          await pauseReady();
           sendResponse({ state: await getPauseState() });
           break;
         }

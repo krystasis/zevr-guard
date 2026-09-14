@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Unblock this domain"
   },
+  "allowThisDomain": {
+    "message": "Allow this domain"
+  },
+  "allowConfirm": {
+    "message": "Tap again to allow"
+  },
+  "allowThisDomainHint": {
+    "message": "Blocked by the threat list or a country rule, not by you. Allowing it overrides every blocking rule for this domain."
+  },
   "blockThisDomain": {
     "message": "Block this domain"
   },

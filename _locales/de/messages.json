@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Diese Domain freigeben"
   },
+  "allowThisDomain": {
+    "message": "Diese Domain zulassen"
+  },
+  "allowConfirm": {
+    "message": "Zum Zulassen erneut tippen"
+  },
+  "allowThisDomainHint": {
+    "message": "Nicht von dir blockiert, sondern von der Bedrohungsliste oder einer Länderregel. Zulassen setzt jede Blockierregel für diese Domain außer Kraft."
+  },
   "blockThisDomain": {
     "message": "Diese Domain blockieren"
   },

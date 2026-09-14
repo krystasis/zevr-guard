@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Deblochează acest domeniu"
   },
+  "allowThisDomain": {
+    "message": "Permite acest domeniu"
+  },
+  "allowConfirm": {
+    "message": "Apasă din nou pentru a permite"
+  },
+  "allowThisDomainHint": {
+    "message": "Blocat de lista de amenințări sau de o regulă de țară, nu de tine. Permiterea are prioritate față de orice regulă de blocare pentru acest domeniu."
+  },
   "blockThisDomain": {
     "message": "Blochează acest domeniu"
   },

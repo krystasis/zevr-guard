@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "Odblokuj tę domenę"
   },
+  "allowThisDomain": {
+    "message": "Zezwól na tę domenę"
+  },
+  "allowConfirm": {
+    "message": "Naciśnij ponownie, aby zezwolić"
+  },
+  "allowThisDomainHint": {
+    "message": "Zablokowane przez listę zagrożeń lub regułę krajową, nie przez Ciebie. Zezwolenie ma pierwszeństwo przed każdą regułą blokowania tej domeny."
+  },
   "blockThisDomain": {
     "message": "Zablokuj tę domenę"
   },

@@ -571,6 +571,15 @@
   "unblockThisDomain": {
     "message": "このドメインを解除"
   },
+  "allowThisDomain": {
+    "message": "このドメインを許可"
+  },
+  "allowConfirm": {
+    "message": "もう一度押すと許可"
+  },
+  "allowThisDomainHint": {
+    "message": "あなたではなく脅威リストや国別ルールがブロックしています。許可すると、このドメインへのすべてのブロックより優先されます。"
+  },
   "blockThisDomain": {
     "message": "このドメインをブロック"
   },

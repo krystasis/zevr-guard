@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "本次繼續（重新啟動瀏覽器前有效）"
   },
+  "warningSourceLine": {
+    "message": "由 $SOURCE$ 自 $SINCE$ 收錄",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "自 $SINCE$ 起在 Zevr Guard 威脅清單中",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "在 Zevr Guard 威脅清單中"
+  },
+  "warningSourceUpdated": {
+    "message": "清單更新於 $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "經審核的使用者回報"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
   },

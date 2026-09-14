@@ -193,6 +193,8 @@ await sw.evaluate(async (domain) => {
 
   const page = await ctx2Page(feedDomain);
   const softTitle = await page.getByText(/on today's threat list/i).count();
+  check('warning page names the list the domain came from',
+    (await page.getByText(/Zevr Guard's threat list|URLhaus|ThreatFox/i).count()) > 0);
   const onceBtn = page.getByRole('button', { name: /Continue this time/i });
   check('warning page shows the softer variant', softTitle > 0);
   check('warning page offers "Continue this time"', (await onceBtn.count()) > 0);

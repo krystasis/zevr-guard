@@ -123,6 +123,19 @@ export type MessageRequest =
   | { type: 'CLEAR_LEAKS' };
 
 /**
+ * Per-domain provenance for the malware feed. `src` is omitted for domains
+ * carried over from a seed that predates the metadata file.
+ */
+export interface MalwareMetaEntry {
+  s?: 'u' | 't' | 'm';
+  f: string;
+}
+export interface MalwareMeta {
+  generatedAt: string;
+  domains: Record<string, MalwareMetaEntry>;
+}
+
+/**
  * What the background knows about a domain the warning page is showing.
  * The warning page is web-accessible, so any site can deep-link it with
  * arbitrary params; every state-changing control on that page is gated on
@@ -142,6 +155,10 @@ export interface BlockContext {
    * treating it like a site they have never seen.
    */
   established: { since: number; n: number } | null;
+  /** Which upstream list named this domain, and when it first appeared. */
+  meta: { src: 'u' | 't' | 'm' | null; since: string } | null;
+  /** When the threat list this verdict came from was built. */
+  feedGeneratedAt: string | null;
 }
 
 /** A value the user asked Zevr Guard to watch for in outbound traffic. */

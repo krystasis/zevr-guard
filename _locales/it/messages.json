@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Continua per questa volta (fino al riavvio del browser)"
   },
+  "warningSourceLine": {
+    "message": "Segnalato da $SOURCE$ dal $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Nella lista delle minacce di Zevr Guard dal $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Nella lista delle minacce di Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "lista aggiornata il $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "segnalazioni verificate"
+  },
   "warningFooter": {
     "message": "Protetto da Zevr Guard · Navigazione sicura per tutti"
   },

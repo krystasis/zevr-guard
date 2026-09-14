@@ -14,6 +14,10 @@ const MALWARE_SEED_PATH = resolve(ROOT, 'src/data/malware.json');
 // Feeds the safelist that keeps shared/popular sites out of the malware
 // set — see scripts/safelist.ts and docs/sources/tranco.md.
 const TRANCO_SNAPSHOT_PATH = resolve(ROOT, 'src/data/tranco.snapshot.json');
+// Per-domain provenance for the malware set: which upstream source listed a
+// domain and when it first appeared. Shown on the warning page so a block can
+// be traced to something the user can look up, instead of being a bare verdict.
+const MALWARE_META_PATH = resolve(ROOT, 'src/data/malware.meta.json');
 const BLOCK_RULES_PATH = resolve(ROOT, 'public/rules/block_rules.json');
 const ADS_RULES_PATH = resolve(ROOT, 'public/rules/ads_rules.json');
 const TRACKING_RULES_PATH = resolve(ROOT, 'public/rules/tracking_rules.json');
@@ -30,6 +34,7 @@ const LP_FEED_DIR =
   process.env.FEED_PUBLISH_DIR ?? resolve(ROOT, 'lp/public/feed/v1');
 const LP_FEED_TRACKERS = resolve(LP_FEED_DIR, 'trackers.json');
 const LP_FEED_MALWARE = resolve(LP_FEED_DIR, 'malware.json');
+const LP_FEED_MALWARE_META = resolve(LP_FEED_DIR, 'malware.meta.json');
 const LP_FEED_MANIFEST = resolve(LP_FEED_DIR, 'feed.json');
 
 function feedPublishEnabled(): boolean {
@@ -254,6 +259,59 @@ function interleave(a: string[], b: string[]): string[] {
     if (i < b.length) out.push(b[i]);
   }
   return out;
+}
+
+/**
+ * `s`: source (u=URLhaus, t=ThreatFox, m=reviewed user report). Omitted when
+ * a domain is carried over from an older seed that predates this file — we
+ * genuinely do not know which feed first listed it, and guessing would put a
+ * wrong attribution in front of the user. `f`: first listed, UTC date.
+ */
+interface MalwareMetaEntry {
+  s?: 'u' | 't' | 'm';
+  f: string;
+}
+interface MalwareMeta {
+  generatedAt: string;
+  domains: Record<string, MalwareMetaEntry>;
+}
+
+/**
+ * Previous run's provenance, so "first listed" keeps meaning first — not
+ * "first seen by the run that happened to write this file". The published
+ * feed wins over the local build output: CI starts from a clean checkout.
+ */
+async function loadPreviousMeta(): Promise<Record<string, MalwareMetaEntry>> {
+  for (const path of [LP_FEED_MALWARE_META, MALWARE_META_PATH]) {
+    try {
+      const raw = JSON.parse(await readFile(path, 'utf8')) as MalwareMeta;
+      if (raw?.domains && typeof raw.domains === 'object') return raw.domains;
+    } catch {
+      // try next source
+    }
+  }
+  return {};
+}
+
+function buildMalwareMeta(
+  domains: string[],
+  origin: Map<string, 'u' | 't'>,
+  previous: Record<string, MalwareMetaEntry>,
+  today: string,
+): MalwareMeta {
+  const out: Record<string, MalwareMetaEntry> = {};
+  for (const domain of domains) {
+    const before = previous[domain];
+    // A domain carried over from the seed has no live source this run; keep
+    // what it was first listed as, and leave it unset when even that is
+    // unknown rather than inventing an attribution.
+    const source = origin.get(domain) ?? before?.s;
+    out[domain] = {
+      ...(source ? { s: source } : {}),
+      f: before?.f ?? today,
+    };
+  }
+  return { generatedAt: new Date().toISOString(), domains: out };
 }
 
 async function loadTrancoSnapshot(): Promise<string[]> {
@@ -792,6 +850,12 @@ async function main(): Promise<void> {
 
   // Interleave the two live feeds so ThreatFox's unique IOCs are not entirely
   // crowded out of the capped set by URLhaus, then top up from the seed.
+  // Which live source listed each domain this run. URLhaus wins a tie: it is
+  // the narrower, better-curated of the two.
+  const origin = new Map<string, 'u' | 't'>();
+  for (const d of threatfox) origin.set(d, 't');
+  for (const d of urlhaus) origin.set(d, 'u');
+
   const merged = Array.from(
     new Set([TOUR_TEST_DOMAIN, ...interleave(urlhaus, threatfox), ...seed]),
   );
@@ -813,6 +877,17 @@ async function main(): Promise<void> {
 
   await writeFile(MALWARE_SEED_PATH, JSON.stringify(capped, null, 2) + '\n');
 
+  const meta = buildMalwareMeta(
+    capped,
+    origin,
+    await loadPreviousMeta(),
+    new Date().toISOString().slice(0, 10),
+  );
+  if (Object.keys(meta.domains).length !== capped.length) {
+    throw new Error('[build-rules] malware meta does not cover the malware set');
+  }
+  await writeFile(MALWARE_META_PATH, JSON.stringify(meta, null, 2) + '\n');
+
   const rules = buildRules(capped);
   await ensureDir(BLOCK_RULES_PATH);
   await writeFile(BLOCK_RULES_PATH, JSON.stringify(rules, null, 2) + '\n');
@@ -822,6 +897,7 @@ async function main(): Promise<void> {
   if (feedPublishEnabled()) {
     await ensureDir(LP_FEED_MALWARE);
     await writeFile(LP_FEED_MALWARE, JSON.stringify(capped));
+    await writeFile(LP_FEED_MALWARE_META, JSON.stringify(meta));
   }
 
   const trackers = await buildTrackerDB();
@@ -865,6 +941,7 @@ async function writeFeedManifest(): Promise<void> {
     files: {
       trackers: 'trackers.json',
       malware: 'malware.json',
+      malwareMeta: 'malware.meta.json',
     },
   };
   await ensureDir(LP_FEED_MANIFEST);

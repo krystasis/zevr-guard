@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "इस बार आगे बढ़ें (ब्राउज़र पुनः शुरू होने तक)"
   },
+  "warningSourceLine": {
+    "message": "$SOURCE$ द्वारा $SINCE$ से सूचीबद्ध",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "$SINCE$ से Zevr Guard की खतरा सूची में",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Zevr Guard की खतरा सूची में"
+  },
+  "warningSourceUpdated": {
+    "message": "सूची अपडेट $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "समीक्षित उपयोगकर्ता रिपोर्ट"
+  },
   "warningFooter": {
     "message": "Zevr Guard द्वारा सुरक्षित · सबके लिए सुरक्षित ब्राउज़िंग"
   },

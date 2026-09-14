@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Продолжить в этот раз (до перезапуска браузера)"
   },
+  "warningSourceLine": {
+    "message": "В списке $SOURCE$ с $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "В списке угроз Zevr Guard с $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "В списке угроз Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "список обновлён $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "проверенные сообщения пользователей"
+  },
   "warningFooter": {
     "message": "Под защитой Zevr Guard · Безопасный интернет для всех"
   },

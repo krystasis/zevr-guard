@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Deze keer doorgaan (tot herstart van de browser)"
   },
+  "warningSourceLine": {
+    "message": "Vermeld door $SOURCE$ sinds $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Op de dreigingslijst van Zevr Guard sinds $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Op de dreigingslijst van Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "lijst bijgewerkt op $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "gecontroleerde meldingen"
+  },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
   },

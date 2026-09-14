@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "ไปต่อครั้งนี้ (จนกว่าจะเริ่มเบราว์เซอร์ใหม่)"
   },
+  "warningSourceLine": {
+    "message": "อยู่ในรายการของ $SOURCE$ ตั้งแต่ $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "อยู่ในรายการภัยคุกคามของ Zevr Guard ตั้งแต่ $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "อยู่ในรายการภัยคุกคามของ Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "อัปเดตรายการเมื่อ $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "รายงานจากผู้ใช้ที่ตรวจสอบแล้ว"
+  },
   "warningFooter": {
     "message": "ปกป้องโดย Zevr Guard · การท่องเว็บที่ปลอดภัยสำหรับทุกคน"
   },

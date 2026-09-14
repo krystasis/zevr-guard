@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Продовжити цього разу (до перезапуску браузера)"
   },
+  "warningSourceLine": {
+    "message": "У списку $SOURCE$ з $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "У списку загроз Zevr Guard з $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "У списку загроз Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "список оновлено $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "перевірені повідомлення користувачів"
+  },
   "warningFooter": {
     "message": "Під захистом Zevr Guard · Безпечний перегляд для всіх"
   },

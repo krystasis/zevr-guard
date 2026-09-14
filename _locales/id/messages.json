@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Lanjutkan kali ini (sampai peramban dimulai ulang)"
   },
+  "warningSourceLine": {
+    "message": "Terdaftar oleh $SOURCE$ sejak $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Ada di daftar ancaman Zevr Guard sejak $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Ada di daftar ancaman Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "daftar diperbarui $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "laporan pengguna yang ditinjau"
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"
   },

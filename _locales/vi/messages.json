@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Tiếp tục lần này (đến khi khởi động lại trình duyệt)"
   },
+  "warningSourceLine": {
+    "message": "Được $SOURCE$ liệt kê từ $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Trong danh sách mối đe dọa của Zevr Guard từ $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Trong danh sách mối đe dọa của Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "danh sách cập nhật $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "báo cáo người dùng đã được xem xét"
+  },
   "warningFooter": {
     "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"
   },

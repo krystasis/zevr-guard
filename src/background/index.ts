@@ -10,8 +10,10 @@ import type {
 import {
   calcRiskScore,
   ensureTrackerDB,
+  getMalwareFeedGeneratedAt,
   getRiskLevel,
   isMalware,
+  lookupMalwareMeta,
   lookupTracker,
   pageRiskLevel,
 } from './risk';
@@ -810,7 +812,15 @@ chrome.runtime.onMessage.addListener(
           const domain = message.domain.trim().toLowerCase();
           if (!isValidHostname(domain)) {
             sendResponse({
-              context: { blockedByUs: false, source: null, url: null, countryBlocked: false },
+              context: {
+                blockedByUs: false,
+                source: null,
+                url: null,
+                countryBlocked: false,
+                established: null,
+                meta: null,
+                feedGeneratedAt: null,
+              } satisfies BlockContext,
             });
             break;
           }
@@ -825,6 +835,7 @@ chrome.runtime.onMessage.addListener(
             const record = await getVisitRecord(domain);
             if (record) established = { since: record.first, n: record.n };
           }
+          const listed = source === 'feed' ? lookupMalwareMeta(domain) : null;
           const context: BlockContext = {
             blockedByUs,
             source,
@@ -832,6 +843,8 @@ chrome.runtime.onMessage.addListener(
             countryBlocked:
               /^[A-Z]{2}$/.test(country) && settings.blockedCountries.includes(country),
             established,
+            meta: listed ? { src: listed.s ?? null, since: listed.f } : null,
+            feedGeneratedAt: source === 'feed' ? getMalwareFeedGeneratedAt() : null,
           };
           sendResponse({ context });
           break;

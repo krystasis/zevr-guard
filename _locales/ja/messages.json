@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "今回だけ進む(ブラウザ再起動まで)"
   },
+  "warningSourceLine": {
+    "message": "$SOURCE$ に $SINCE$ から登録",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Zevr Guard の脅威リストに $SINCE$ から登録",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Zevr Guard の脅威リストに登録"
+  },
+  "warningSourceUpdated": {
+    "message": "リスト更新 $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "確認済みの利用者報告"
+  },
   "warningFooter": {
     "message": "Zevr Guardによる保護 · すべての人に安全なブラウジングを"
   },

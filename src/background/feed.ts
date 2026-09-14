@@ -1,5 +1,5 @@
-import type { TrackerDB } from '../types';
-import { setMalwareOverride, setTrackerOverride } from './risk';
+import type { MalwareMeta, TrackerDB } from '../types';
+import { setMalwareMetaOverride, setMalwareOverride, setTrackerOverride } from './risk';
 import { syncMalwareSessionRules } from './blocking';
 import { hasCachedTrackers, putCachedTrackers } from './feedcache';
 
@@ -12,6 +12,7 @@ const STALE_MS = 25 * 60 * 60 * 1000;
 // initFeed can evict the ~8MB blob from profiles that stored it.
 const STORAGE_TRACKERS = 'zg.feed.trackers';
 const STORAGE_MALWARE = 'zg.feed.malware';
+const STORAGE_MALWARE_META = 'zg.feed.malwareMeta';
 const STORAGE_META = 'zg.feed.meta';
 
 interface FeedChannelMeta {
@@ -21,6 +22,7 @@ interface FeedChannelMeta {
 interface FeedMeta {
   trackers?: FeedChannelMeta;
   malware?: FeedChannelMeta;
+  malwareMeta?: FeedChannelMeta;
 }
 
 async function getMeta(): Promise<FeedMeta> {
@@ -102,6 +104,13 @@ export async function refreshFeed(force = false): Promise<void> {
       STORAGE_MALWARE,
       force ? undefined : meta.malware?.etag,
     ),
+    // Provenance for the warning page. Optional: an older feed has no such
+    // file, and a failure here must not hold back the blocking data.
+    fetchChannel<MalwareMeta>(
+      `${FEED_BASE}/malware.meta.json`,
+      STORAGE_MALWARE_META,
+      force ? undefined : meta.malwareMeta?.etag,
+    ),
   ]);
 
   const now = Date.now();
@@ -122,6 +131,14 @@ export async function refreshFeed(force = false): Promise<void> {
     console.warn('[zg-feed] malware refresh failed:', results[1].reason);
   }
 
+  if (results[2].status === 'fulfilled') {
+    const r = results[2].value;
+    if (r.data) setMalwareMetaOverride(r.data);
+    nextMeta.malwareMeta = { etag: r.etag ?? meta.malwareMeta?.etag, updatedAt: now };
+  } else {
+    console.warn('[zg-feed] malware meta refresh failed:', results[2].reason);
+  }
+
   await setMeta(nextMeta);
 
   try {
@@ -135,9 +152,11 @@ export async function initFeed(): Promise<void> {
   try {
     // The tracker feed lives in the Cache API and is parsed lazily by
     // risk.ts, so cold start no longer touches the 8MB blob here.
-    const stored = await chrome.storage.local.get(STORAGE_MALWARE);
+    const stored = await chrome.storage.local.get([STORAGE_MALWARE, STORAGE_MALWARE_META]);
     const malware = stored[STORAGE_MALWARE] as string[] | undefined;
     if (malware) setMalwareOverride(malware);
+    const malwareMeta = stored[STORAGE_MALWARE_META] as MalwareMeta | undefined;
+    if (malwareMeta) setMalwareMetaOverride(malwareMeta);
   } catch {
     // ignore — bundled data remains active
   }

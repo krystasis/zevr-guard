@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "本次继续（重启浏览器前有效）"
   },
+  "warningSourceLine": {
+    "message": "由 $SOURCE$ 自 $SINCE$ 收录",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "自 $SINCE$ 起在 Zevr Guard 威胁列表中",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "在 Zevr Guard 威胁列表中"
+  },
+  "warningSourceUpdated": {
+    "message": "列表更新于 $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "经审核的用户报告"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
   },

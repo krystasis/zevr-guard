@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Συνέχεια αυτή τη φορά (μέχρι την επανεκκίνηση)"
   },
+  "warningSourceLine": {
+    "message": "Καταχωρίστηκε από $SOURCE$ από $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Στη λίστα απειλών του Zevr Guard από $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Στη λίστα απειλών του Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "η λίστα ενημερώθηκε $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "ελεγμένες αναφορές χρηστών"
+  },
   "warningFooter": {
     "message": "Προστασία από το Zevr Guard · Ασφαλής περιήγηση για όλους"
   },

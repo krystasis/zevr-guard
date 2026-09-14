@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Bu seferlik devam et (tarayıcı yeniden başlayana kadar)"
   },
+  "warningSourceLine": {
+    "message": "$SOURCE$ tarafından $SINCE$ tarihinden beri listeleniyor",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "$SINCE$ tarihinden beri Zevr Guard tehdit listesinde",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Zevr Guard tehdit listesinde"
+  },
+  "warningSourceUpdated": {
+    "message": "liste güncellendi: $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "incelenmiş kullanıcı bildirimleri"
+  },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
   },

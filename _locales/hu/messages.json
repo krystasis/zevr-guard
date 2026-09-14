@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Most az egyszer tovább (a böngésző újraindításáig)"
   },
+  "warningSourceLine": {
+    "message": "$SOURCE$ listázta $SINCE$ óta",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "A Zevr Guard fenyegetéslistáján $SINCE$ óta",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "A Zevr Guard fenyegetéslistáján"
+  },
+  "warningSourceUpdated": {
+    "message": "lista frissítve: $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "ellenőrzött felhasználói jelentések"
+  },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
   },

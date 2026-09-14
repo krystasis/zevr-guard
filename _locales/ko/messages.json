@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "이번만 계속 (브라우저 재시작 전까지)"
   },
+  "warningSourceLine": {
+    "message": "$SINCE$부터 $SOURCE$에 등재",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "$SINCE$부터 Zevr Guard 위협 목록에 등재",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Zevr Guard 위협 목록에 등재"
+  },
+  "warningSourceUpdated": {
+    "message": "목록 업데이트 $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "검토된 사용자 신고"
+  },
   "warningFooter": {
     "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"
   },

@@ -267,6 +267,40 @@ const ContinueOnce: React.FC = () => {
   );
 };
 
+// Where the verdict came from. Naming the upstream list (and the day the
+// domain first appeared on it) gives the user something they can look up,
+// which a bare "this is dangerous" does not.
+const SourceLine: React.FC<{ ctx: BlockContext }> = ({ ctx }) => {
+  if (ctx.source !== 'feed') return null;
+  const fmt = (iso: string) => {
+    const d = new Date(iso);
+    return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString();
+  };
+  const named =
+    ctx.meta?.src === 'u'
+      ? 'URLhaus (abuse.ch)'
+      : ctx.meta?.src === 't'
+        ? 'ThreatFox (abuse.ch)'
+        : ctx.meta?.src === 'm'
+          ? t('warningSourceReports', 'reviewed user reports')
+          : null;
+  const updated = ctx.feedGeneratedAt ? fmt(ctx.feedGeneratedAt) : null;
+  const text =
+    named && ctx.meta
+      ? t('warningSourceLine', `Listed by ${named} since ${fmt(ctx.meta.since)}`, named, fmt(ctx.meta.since))
+      : ctx.meta
+        ? t('warningSourceGeneric', `On Zevr Guard's threat list since ${fmt(ctx.meta.since)}`, fmt(ctx.meta.since))
+        : t('warningSourceUnknown', "On Zevr Guard's threat list");
+  return (
+    <p className="mt-3 border-t border-white/[0.06] pt-3 text-xs leading-relaxed text-gray-600">
+      {text}
+      {updated
+        ? ` · ${t('warningSourceUpdated', `list updated ${updated}`, updated)}`
+        : ''}
+    </p>
+  );
+};
+
 const CountryActions: React.FC<{ enabled: boolean }> = ({ enabled }) => {
   const [unblocked, setUnblocked] = useState(false);
   if (!enabled) return null;
@@ -454,6 +488,7 @@ const Warning: React.FC = () => {
                   'It was added to the threat list recently. That usually means the site was compromised — but it can also be a mistake in the list. Continuing this time is safe to undo: the exception disappears when you restart your browser.',
                 )}
               </p>
+              {ctx && <SourceLine ctx={ctx} />}
             </>
           ) : (
             <>
@@ -471,6 +506,7 @@ const Warning: React.FC = () => {
                 <li>{t('warningListItem2', 'Steal your passwords or personal data')}</li>
                 <li>{t('warningListItem3', 'Hijack your browser or accounts')}</li>
               </ul>
+              {ctx && <SourceLine ctx={ctx} />}
             </>
           )}
         </div>

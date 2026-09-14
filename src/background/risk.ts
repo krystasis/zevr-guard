@@ -1,4 +1,11 @@
-import type { Connection, RiskLevel, TrackerDB, TrackerEntry } from '../types';
+import type {
+  Connection,
+  MalwareMeta,
+  MalwareMetaEntry,
+  RiskLevel,
+  TrackerDB,
+  TrackerEntry,
+} from '../types';
 // The tracker DB is ~8MB; import it as an asset URL instead of inlining it
 // into the service-worker bundle, which made every SW cold start re-parse
 // 8MB of JavaScript. It is fetched lazily and skipped entirely once a feed
@@ -59,6 +66,33 @@ export function setMalwareOverride(list: string[] | null): void {
 
 export function getMalwareDomains(): string[] {
   return Array.from(MALWARE_SET);
+}
+
+// Provenance for the active malware set. Feed-only: the bundled JSON is not
+// imported here, because parsing it would add to every service-worker cold
+// start for something only the warning page ever reads.
+let MALWARE_META: MalwareMeta | null = null;
+
+export function setMalwareMetaOverride(meta: MalwareMeta | null): void {
+  MALWARE_META = meta && meta.domains ? meta : null;
+}
+
+export function getMalwareFeedGeneratedAt(): string | null {
+  return MALWARE_META?.generatedAt ?? null;
+}
+
+/** Walks parent labels the same way isMalware does, so a hit on a listed
+ *  parent domain reports that parent's provenance. */
+export function lookupMalwareMeta(domain: string): MalwareMetaEntry | null {
+  const domains = MALWARE_META?.domains;
+  if (!domains) return null;
+  if (domains[domain]) return domains[domain];
+  const parts = domain.split('.');
+  for (let i = 1; i < parts.length - 1; i++) {
+    const hit = domains[parts.slice(i).join('.')];
+    if (hit) return hit;
+  }
+  return null;
 }
 
 const SUSPICIOUS_CATEGORIES = new Set([

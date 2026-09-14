@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Tentokrát pokračovat (do restartu prohlížeče)"
   },
+  "warningSourceLine": {
+    "message": "Uvedeno zdrojem $SOURCE$ od $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Na seznamu hrozeb Zevr Guard od $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Na seznamu hrozeb Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "seznam aktualizován $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "ověřená hlášení uživatelů"
+  },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
   },

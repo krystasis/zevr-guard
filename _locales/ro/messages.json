@@ -209,6 +209,39 @@
   "warningContinueOnce": {
     "message": "Continuă de data aceasta (până la repornirea browserului)"
   },
+  "warningSourceLine": {
+    "message": "Listat de $SOURCE$ din $SINCE$",
+    "placeholders": {
+      "source": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSourceGeneric": {
+    "message": "Pe lista de amenințări Zevr Guard din $SINCE$",
+    "placeholders": {
+      "since": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceUnknown": {
+    "message": "Pe lista de amenințări Zevr Guard"
+  },
+  "warningSourceUpdated": {
+    "message": "listă actualizată la $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "warningSourceReports": {
+    "message": "raportări verificate"
+  },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
   },

@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Gemeld en toegestaan. Bedankt — elke melding wordt met de hand bekeken."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Toegestaan op dit apparaat, maar de melding kon niet worden verzonden. Probeer het later opnieuw."
+  },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
   },

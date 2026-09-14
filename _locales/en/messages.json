@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Reported and allowed. Thank you — every report is reviewed by hand."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Allowed on this device, but the report couldn't be sent. Please try again later."
+  },
   "warningFooter": {
     "message": "Protected by Zevr Guard · Safe browsing for everyone"
   },

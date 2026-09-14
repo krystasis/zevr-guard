@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "已回報並允許。謝謝 — 每份回報都會人工複核。"
   },
+  "reportSafeAllowedNotSent": {
+    "message": "已在本裝置上允許，但回報未能傳送。請稍後再試。"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
   },

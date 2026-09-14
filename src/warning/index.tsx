@@ -231,7 +231,9 @@ const AllowAndOpen: React.FC = () => {
 // The counterpart to ReportButton: the user telling us a block is wrong.
 // Reports are reviewed by hand upstream — see the background handler.
 const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) => {
-  const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>('idle');
+  const [state, setState] = useState<
+    'idle' | 'confirm' | 'sending' | 'done' | 'allowed-only' | 'error'
+  >('idle');
   const [alsoAllow, setAlsoAllow] = useState(true);
 
   async function send() {
@@ -243,13 +245,15 @@ const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) =
         context,
         alsoAllow,
       })) as { success?: boolean; allowed?: boolean; url?: string | null } | undefined;
+      // The allow is applied locally before the report is sent, so the two
+      // can disagree. Never claim the report went through when it did not.
       if (res?.success || res?.allowed) {
-        setState('done');
+        setState(res.success ? 'done' : 'allowed-only');
         if (res.allowed && res.url) {
           const url = res.url;
           window.setTimeout(() => {
             window.location.href = url;
-          }, 1500);
+          }, 2000);
         }
         return;
       }
@@ -266,6 +270,17 @@ const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) =
         {alsoAllow
           ? t('reportSafeDoneAllowed', 'Reported and allowed. Thank you — every report is reviewed by hand.')
           : t('reportSafeDone', 'Reported. Thank you — every report is reviewed by hand.')}
+      </div>
+    );
+  }
+
+  if (state === 'allowed-only') {
+    return (
+      <div className="py-2 text-center text-xs text-amber-300">
+        {t(
+          'reportSafeAllowedNotSent',
+          "Allowed on this device, but the report couldn't be sent. Please try again later.",
+        )}
       </div>
     );
   }

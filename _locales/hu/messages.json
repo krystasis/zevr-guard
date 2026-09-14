@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Jelentve és engedélyezve. Köszönjük — minden jelentést kézzel nézünk át."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Ezen az eszközön engedélyezve, de a jelentést nem sikerült elküldeni. Próbáld újra később."
+  },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
   },

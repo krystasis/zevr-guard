@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Dilaporkan dan diizinkan. Terima kasih — setiap laporan ditinjau manual."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Diizinkan di perangkat ini, tetapi laporan gagal dikirim. Silakan coba lagi nanti."
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"
   },

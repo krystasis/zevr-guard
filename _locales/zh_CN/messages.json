@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "已报告并允许。谢谢 — 每份报告都会人工复核。"
   },
+  "reportSafeAllowedNotSent": {
+    "message": "已在本设备上允许，但报告未能发送。请稍后重试。"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
   },

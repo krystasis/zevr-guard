@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Segnalato e consentito. Grazie — ogni segnalazione è verificata a mano."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Consentito su questo dispositivo, ma la segnalazione non è stata inviata. Riprova più tardi."
+  },
   "warningFooter": {
     "message": "Protetto da Zevr Guard · Navigazione sicura per tutti"
   },

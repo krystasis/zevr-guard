@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Bildirildi ve izin verildi. Teşekkürler — her bildirim elle incelenir."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Bu cihazda izin verildi, ancak bildirim gönderilemedi. Lütfen daha sonra tekrar deneyin."
+  },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
   },

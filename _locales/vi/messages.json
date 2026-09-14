@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Đã báo cáo và cho phép. Cảm ơn bạn — mọi báo cáo đều được người xem xét."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Đã cho phép trên thiết bị này, nhưng không gửi được báo cáo. Vui lòng thử lại sau."
+  },
   "warningFooter": {
     "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"
   },

@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Raportat și permis. Mulțumim — fiecare raport este verificat manual."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Permis pe acest dispozitiv, dar raportul nu a putut fi trimis. Încearcă din nou mai târziu."
+  },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
   },

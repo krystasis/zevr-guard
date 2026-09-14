@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "신고하고 허용했습니다. 감사합니다 — 모든 신고는 사람이 검토합니다."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "이 기기에서는 허용했지만 신고는 보내지 못했습니다. 나중에 다시 시도해 주세요."
+  },
   "warningFooter": {
     "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"
   },

@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Gemeldet und freigegeben. Danke — jede Meldung wird von Hand geprüft."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Auf diesem Gerät freigegeben, aber die Meldung konnte nicht gesendet werden. Bitte später erneut versuchen."
+  },
   "warningFooter": {
     "message": "Geschützt durch Zevr Guard · Sicheres Surfen für alle"
   },

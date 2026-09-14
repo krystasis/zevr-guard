@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Zgłoszono i zezwolono. Dziękujemy — każde zgłoszenie sprawdzamy ręcznie."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Zezwolono na tym urządzeniu, ale nie udało się wysłać zgłoszenia. Spróbuj ponownie później."
+  },
   "warningFooter": {
     "message": "Pod ochroną Zevr Guard · Bezpieczne przeglądanie dla każdego"
   },

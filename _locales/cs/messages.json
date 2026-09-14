@@ -260,6 +260,9 @@
   "reportSafeDoneAllowed": {
     "message": "Nahlášeno a povoleno. Děkujeme — každé hlášení kontrolujeme ručně."
   },
+  "reportSafeAllowedNotSent": {
+    "message": "Na tomto zařízení povoleno, ale hlášení se nepodařilo odeslat. Zkuste to prosím později."
+  },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
   },

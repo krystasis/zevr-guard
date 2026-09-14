@@ -9,7 +9,6 @@ import type {
 
 export function getDefaultSettings(): Settings {
   return {
-    blockingEnabled: false,
     notificationsEnabled: true,
     blockCategories: {
       advertising: false,

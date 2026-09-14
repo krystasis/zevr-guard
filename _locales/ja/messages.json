@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "この端末では許可しましたが、報告は送信できませんでした。時間をおいて再度お試しください。"
   },
+  "pauseAllLabel": {
+    "message": "保護をすべて一時停止"
+  },
+  "pauseAllActive": {
+    "message": "保護は有効"
+  },
+  "pauseAllPause": {
+    "message": "一時停止"
+  },
+  "pauseAll5m": {
+    "message": "5分"
+  },
+  "pauseAll1h": {
+    "message": "1時間"
+  },
+  "pauseAllSession": {
+    "message": "ブラウザを閉じるまで"
+  },
+  "pauseAllPausedFor": {
+    "message": "停止中 · 残り $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "停止中(ブラウザを閉じるまで)"
+  },
+  "pauseAllResume": {
+    "message": "再開"
+  },
+  "pauseAllTitle": {
+    "message": "ブロックと警告を一時的にすべて止めます"
+  },
   "warningFooter": {
     "message": "Zevr Guardによる保護 · すべての人に安全なブラウジングを"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "保護中"
+  },
+  "popupStatusPaused": {
+    "message": "保護は停止中"
   },
   "popupScanning": {
     "message": "スキャン中..."

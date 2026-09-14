@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "อนุญาตบนอุปกรณ์นี้แล้ว แต่ส่งรายงานไม่สำเร็จ กรุณาลองใหม่ภายหลัง"
   },
+  "pauseAllLabel": {
+    "message": "หยุดการป้องกันทั้งหมดชั่วคราว"
+  },
+  "pauseAllActive": {
+    "message": "การป้องกันทำงานอยู่"
+  },
+  "pauseAllPause": {
+    "message": "หยุดชั่วคราว"
+  },
+  "pauseAll5m": {
+    "message": "5 นาที"
+  },
+  "pauseAll1h": {
+    "message": "1 ชั่วโมง"
+  },
+  "pauseAllSession": {
+    "message": "จนกว่าจะปิดเบราว์เซอร์"
+  },
+  "pauseAllPausedFor": {
+    "message": "หยุดชั่วคราว · เหลือ $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "หยุดชั่วคราวจนกว่าจะปิดเบราว์เซอร์"
+  },
+  "pauseAllResume": {
+    "message": "ทำงานต่อ"
+  },
+  "pauseAllTitle": {
+    "message": "หยุดการบล็อกและคำเตือนทั้งหมดชั่วคราว"
+  },
   "warningFooter": {
     "message": "ปกป้องโดย Zevr Guard · การท่องเว็บที่ปลอดภัยสำหรับทุกคน"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "กำลังป้องกัน"
+  },
+  "popupStatusPaused": {
+    "message": "การป้องกันหยุดชั่วคราว"
   },
   "popupScanning": {
     "message": "กำลังสแกน..."

@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Auf diesem Gerät freigegeben, aber die Meldung konnte nicht gesendet werden. Bitte später erneut versuchen."
   },
+  "pauseAllLabel": {
+    "message": "Gesamten Schutz pausieren"
+  },
+  "pauseAllActive": {
+    "message": "Schutz aktiv"
+  },
+  "pauseAllPause": {
+    "message": "Pause"
+  },
+  "pauseAll5m": {
+    "message": "5 Minuten"
+  },
+  "pauseAll1h": {
+    "message": "1 Stunde"
+  },
+  "pauseAllSession": {
+    "message": "Bis der Browser geschlossen wird"
+  },
+  "pauseAllPausedFor": {
+    "message": "Pausiert · noch $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Pausiert, bis der Browser geschlossen wird"
+  },
+  "pauseAllResume": {
+    "message": "Fortsetzen"
+  },
+  "pauseAllTitle": {
+    "message": "Blockieren und Warnungen vorübergehend ganz aussetzen"
+  },
   "warningFooter": {
     "message": "Geschützt durch Zevr Guard · Sicheres Surfen für alle"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "Schutz aktiv"
+  },
+  "popupStatusPaused": {
+    "message": "Schutz pausiert"
   },
   "popupScanning": {
     "message": "SCANNE..."

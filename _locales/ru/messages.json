@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Разрешено на этом устройстве, но сообщение не отправлено. Попробуйте позже."
   },
+  "pauseAllLabel": {
+    "message": "Приостановить всю защиту"
+  },
+  "pauseAllActive": {
+    "message": "Защита активна"
+  },
+  "pauseAllPause": {
+    "message": "Пауза"
+  },
+  "pauseAll5m": {
+    "message": "5 минут"
+  },
+  "pauseAll1h": {
+    "message": "1 час"
+  },
+  "pauseAllSession": {
+    "message": "До закрытия браузера"
+  },
+  "pauseAllPausedFor": {
+    "message": "Пауза · осталось $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Пауза до закрытия браузера"
+  },
+  "pauseAllResume": {
+    "message": "Возобновить"
+  },
+  "pauseAllTitle": {
+    "message": "Временно отключить все блокировки и предупреждения"
+  },
   "warningFooter": {
     "message": "Под защитой Zevr Guard · Безопасный интернет для всех"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "защита активна"
+  },
+  "popupStatusPaused": {
+    "message": "защита на паузе"
   },
   "popupScanning": {
     "message": "СКАНИРОВАНИЕ..."

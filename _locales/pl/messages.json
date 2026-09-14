@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Zezwolono na tym urządzeniu, ale nie udało się wysłać zgłoszenia. Spróbuj ponownie później."
   },
+  "pauseAllLabel": {
+    "message": "Wstrzymaj całą ochronę"
+  },
+  "pauseAllActive": {
+    "message": "Ochrona aktywna"
+  },
+  "pauseAllPause": {
+    "message": "Wstrzymaj"
+  },
+  "pauseAll5m": {
+    "message": "5 minut"
+  },
+  "pauseAll1h": {
+    "message": "1 godzina"
+  },
+  "pauseAllSession": {
+    "message": "Do zamknięcia przeglądarki"
+  },
+  "pauseAllPausedFor": {
+    "message": "Wstrzymano · pozostało $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Wstrzymano do zamknięcia przeglądarki"
+  },
+  "pauseAllResume": {
+    "message": "Wznów"
+  },
+  "pauseAllTitle": {
+    "message": "Tymczasowo wyłącz wszystkie blokady i ostrzeżenia"
+  },
   "warningFooter": {
     "message": "Pod ochroną Zevr Guard · Bezpieczne przeglądanie dla każdego"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "ochrona działa"
+  },
+  "popupStatusPaused": {
+    "message": "ochrona wstrzymana"
   },
   "popupScanning": {
     "message": "SKANOWANIE..."

@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Дозволено на цьому пристрої, але повідомлення не надіслано. Спробуйте пізніше."
   },
+  "pauseAllLabel": {
+    "message": "Призупинити весь захист"
+  },
+  "pauseAllActive": {
+    "message": "Захист активний"
+  },
+  "pauseAllPause": {
+    "message": "Пауза"
+  },
+  "pauseAll5m": {
+    "message": "5 хвилин"
+  },
+  "pauseAll1h": {
+    "message": "1 година"
+  },
+  "pauseAllSession": {
+    "message": "До закриття браузера"
+  },
+  "pauseAllPausedFor": {
+    "message": "Призупинено · лишилось $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Призупинено до закриття браузера"
+  },
+  "pauseAllResume": {
+    "message": "Відновити"
+  },
+  "pauseAllTitle": {
+    "message": "Тимчасово вимкнути всі блокування та попередження"
+  },
   "warningFooter": {
     "message": "Під захистом Zevr Guard · Безпечний перегляд для всіх"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "захист активний"
+  },
+  "popupStatusPaused": {
+    "message": "захист призупинено"
   },
   "popupScanning": {
     "message": "СКАНУВАННЯ..."

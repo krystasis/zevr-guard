@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Επιτράπηκε σε αυτή τη συσκευή, αλλά η αναφορά δεν στάλθηκε. Δοκιμάστε ξανά αργότερα."
   },
+  "pauseAllLabel": {
+    "message": "Παύση όλης της προστασίας"
+  },
+  "pauseAllActive": {
+    "message": "Η προστασία είναι ενεργή"
+  },
+  "pauseAllPause": {
+    "message": "Παύση"
+  },
+  "pauseAll5m": {
+    "message": "5 λεπτά"
+  },
+  "pauseAll1h": {
+    "message": "1 ώρα"
+  },
+  "pauseAllSession": {
+    "message": "Μέχρι να κλείσει το πρόγραμμα περιήγησης"
+  },
+  "pauseAllPausedFor": {
+    "message": "Σε παύση · απομένουν $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Σε παύση μέχρι να κλείσει το πρόγραμμα περιήγησης"
+  },
+  "pauseAllResume": {
+    "message": "Συνέχιση"
+  },
+  "pauseAllTitle": {
+    "message": "Προσωρινή διακοπή όλων των αποκλεισμών και προειδοποιήσεων"
+  },
   "warningFooter": {
     "message": "Προστασία από το Zevr Guard · Ασφαλής περιήγηση για όλους"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "προστασία ενεργή"
+  },
+  "popupStatusPaused": {
+    "message": "η προστασία σε παύση"
   },
   "popupScanning": {
     "message": "ΣΑΡΩΣΗ..."

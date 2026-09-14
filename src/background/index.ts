@@ -86,6 +86,13 @@ import {
   unblockCountry,
 } from './country';
 import { initWeeklyReport } from './weekly';
+import {
+  getPauseState,
+  isPaused,
+  pauseAll,
+  reconcilePause,
+  resumeAll,
+} from './pause';
 
 // RFC-1123-ish hostname check (no scheme, path or port). Used to sanitize a
 // domain that may have arrived from the web-accessible warning page's params.
@@ -366,7 +373,9 @@ async function handleRequest(
   const blockedByUs =
     outcome === 'blocked' && (await isBlockAttributedToUs(domain, tracker));
 
-  if (page) {
+  // While paused the badge carries the paused indicator; per-tab writes would
+  // paint over it and hide the one thing the user needs to see.
+  if (page && !isPaused()) {
     if (blockedByUs) {
       flashBlockedBadge(details.tabId, () =>
         updateBadge(details.tabId, page.riskLevel, page.riskScore),
@@ -378,7 +387,7 @@ async function handleRequest(
 
   await updateTodayStats(domain, tracker, riskLevel, geo, blockedByUs);
 
-  if (riskLevel === 'dangerous' && outcome === 'completed') {
+  if (riskLevel === 'dangerous' && outcome === 'completed' && !isPaused()) {
     flashDangerBadge(details.tabId);
     const settings = await getSettings();
     if (settings.notificationsEnabled) {
@@ -461,7 +470,9 @@ chrome.webRequest.onBeforeRequest.addListener(
     } catch {
       // unparsable URL
     }
-    void checkNavigation(details.tabId, details.url);
+    // Paused means "stop interrupting me": DNR blocks are lifted by the pause
+    // rule, and this interstitial has to stand down with them.
+    if (!isPaused()) void checkNavigation(details.tabId, details.url);
   },
   {
     urls: ['http://*/*', 'https://*/*'],
@@ -704,6 +715,7 @@ chrome.notifications.onClicked.addListener((id) => {
 });
 
 chrome.tabs.onActivated.addListener(async ({ tabId }) => {
+  if (isPaused()) return; // leave the paused indicator in place
   const pages = await getPagesCached();
   const page = pages[tabId];
   if (page) updateBadge(tabId, page.riskLevel, page.riskScore);
@@ -791,6 +803,7 @@ const feedReady = initFeed().catch(() => {});
 void loadLocale();
 void syncFromStoredSettings();
 void initWeeklyReport();
+void reconcilePause();
 
 chrome.runtime.onMessage.addListener(
   (message: MessageRequest, _sender, sendResponse) => {
@@ -934,7 +947,7 @@ chrome.runtime.onMessage.addListener(
             message: string;
             dismiss: string;
           } | null = null;
-          if (settings.passwordWarningsEnabled) {
+          if (settings.passwordWarningsEnabled && !isPaused()) {
             const dismiss = t('pwWarnDismiss', 'Dismiss');
             if (await isLookalikeBypassed(message.host)) {
               context = {
@@ -1045,6 +1058,26 @@ chrome.runtime.onMessage.addListener(
               ? (resolveResumeUrl(_sender.tab?.id, fpDomain) ?? `https://${fpDomain}/`)
               : null,
           });
+          break;
+        }
+        case 'PAUSE_ALL': {
+          // Only the three offers the UI makes; anything else would let a
+          // stray caller park protection off for an arbitrary span.
+          const minutes = message.minutes;
+          if (minutes !== null && minutes !== 5 && minutes !== 60) {
+            sendResponse({ state: await getPauseState() });
+            break;
+          }
+          sendResponse({ state: await pauseAll(minutes) });
+          break;
+        }
+        case 'RESUME_ALL': {
+          await resumeAll();
+          sendResponse({ state: await getPauseState() });
+          break;
+        }
+        case 'GET_PAUSE_STATE': {
+          sendResponse({ state: await getPauseState() });
           break;
         }
         case 'GET_PAGE_STATS': {

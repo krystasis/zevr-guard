@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Ezen az eszközön engedélyezve, de a jelentést nem sikerült elküldeni. Próbáld újra később."
   },
+  "pauseAllLabel": {
+    "message": "Teljes védelem szüneteltetése"
+  },
+  "pauseAllActive": {
+    "message": "A védelem aktív"
+  },
+  "pauseAllPause": {
+    "message": "Szünet"
+  },
+  "pauseAll5m": {
+    "message": "5 perc"
+  },
+  "pauseAll1h": {
+    "message": "1 óra"
+  },
+  "pauseAllSession": {
+    "message": "A böngésző bezárásáig"
+  },
+  "pauseAllPausedFor": {
+    "message": "Szünetel · még $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Szünetel a böngésző bezárásáig"
+  },
+  "pauseAllResume": {
+    "message": "Folytatás"
+  },
+  "pauseAllTitle": {
+    "message": "Minden blokkolás és figyelmeztetés ideiglenes leállítása"
+  },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "védelem fut"
+  },
+  "popupStatusPaused": {
+    "message": "a védelem szünetel"
   },
   "popupScanning": {
     "message": "VIZSGÁLAT..."

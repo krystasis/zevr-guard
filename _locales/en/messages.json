@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Allowed on this device, but the report couldn't be sent. Please try again later."
   },
+  "pauseAllLabel": {
+    "message": "Pause all protection"
+  },
+  "pauseAllActive": {
+    "message": "Protection active"
+  },
+  "pauseAllPause": {
+    "message": "Pause"
+  },
+  "pauseAll5m": {
+    "message": "5 minutes"
+  },
+  "pauseAll1h": {
+    "message": "1 hour"
+  },
+  "pauseAllSession": {
+    "message": "Until browser closes"
+  },
+  "pauseAllPausedFor": {
+    "message": "Paused · $LEFT$ left",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Paused until browser closes"
+  },
+  "pauseAllResume": {
+    "message": "Resume"
+  },
+  "pauseAllTitle": {
+    "message": "Temporarily stop all blocking and warnings"
+  },
   "warningFooter": {
     "message": "Protected by Zevr Guard · Safe browsing for everyone"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "protection live"
+  },
+  "popupStatusPaused": {
+    "message": "protection paused"
   },
   "popupScanning": {
     "message": "SCANNING..."

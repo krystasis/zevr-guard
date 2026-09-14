@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Toegestaan op dit apparaat, maar de melding kon niet worden verzonden. Probeer het later opnieuw."
   },
+  "pauseAllLabel": {
+    "message": "Alle bescherming pauzeren"
+  },
+  "pauseAllActive": {
+    "message": "Bescherming actief"
+  },
+  "pauseAllPause": {
+    "message": "Pauzeren"
+  },
+  "pauseAll5m": {
+    "message": "5 minuten"
+  },
+  "pauseAll1h": {
+    "message": "1 uur"
+  },
+  "pauseAllSession": {
+    "message": "Tot de browser sluit"
+  },
+  "pauseAllPausedFor": {
+    "message": "Gepauzeerd · nog $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Gepauzeerd tot de browser sluit"
+  },
+  "pauseAllResume": {
+    "message": "Hervatten"
+  },
+  "pauseAllTitle": {
+    "message": "Blokkeren en waarschuwingen tijdelijk helemaal stoppen"
+  },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "bescherming actief"
+  },
+  "popupStatusPaused": {
+    "message": "bescherming gepauzeerd"
   },
   "popupScanning": {
     "message": "SCANNEN..."

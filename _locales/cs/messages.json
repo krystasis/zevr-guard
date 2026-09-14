@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Na tomto zařízení povoleno, ale hlášení se nepodařilo odeslat. Zkuste to prosím později."
   },
+  "pauseAllLabel": {
+    "message": "Pozastavit veškerou ochranu"
+  },
+  "pauseAllActive": {
+    "message": "Ochrana aktivní"
+  },
+  "pauseAllPause": {
+    "message": "Pozastavit"
+  },
+  "pauseAll5m": {
+    "message": "5 minut"
+  },
+  "pauseAll1h": {
+    "message": "1 hodina"
+  },
+  "pauseAllSession": {
+    "message": "Do zavření prohlížeče"
+  },
+  "pauseAllPausedFor": {
+    "message": "Pozastaveno · zbývá $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Pozastaveno do zavření prohlížeče"
+  },
+  "pauseAllResume": {
+    "message": "Obnovit"
+  },
+  "pauseAllTitle": {
+    "message": "Dočasně vypnout všechno blokování a varování"
+  },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "ochrana běží"
+  },
+  "popupStatusPaused": {
+    "message": "ochrana pozastavena"
   },
   "popupScanning": {
     "message": "SKENUJI..."

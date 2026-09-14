@@ -86,6 +86,27 @@ describe('allowDomainForSession', () => {
     expect(read().some((r) => r.id === 1)).toBe(true);
   });
 
+  it('leaves the global pause rule alone', async () => {
+    const { SESSION_GLOBAL_ID_BASE } = await import('./blocking');
+    const read = stubSessionRules([
+      {
+        id: SESSION_GLOBAL_ID_BASE,
+        priority: 1000,
+        action: { type: 'allow' },
+        condition: { urlFilter: '*' },
+      },
+    ]);
+    const { allowDomainForSession, getSessionAllowedDomains } = await import('./blocking');
+
+    await allowDomainForSession('example.com');
+    // The pause rule is neither evicted nor treated as the id high-water mark.
+    expect(read().some((r) => r.id === SESSION_GLOBAL_ID_BASE)).toBe(true);
+    const added = read().find((r) => r.condition.urlFilter === '||example.com');
+    expect(added?.id).toBeLessThan(SESSION_GLOBAL_ID_BASE);
+    // ...nor reported as a domain the user allowed.
+    expect(await getSessionAllowedDomains()).toEqual(new Set(['example.com']));
+  });
+
   it('evicts the oldest once the budget is spent', async () => {
     const read = stubSessionRules();
     const { allowDomainForSession, SESSION_ALLOW_ID_BASE } = await import('./blocking');

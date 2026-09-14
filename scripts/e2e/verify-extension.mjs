@@ -260,6 +260,173 @@ await sw.evaluate(async (domain) => {
   });
 }
 
+// --- 5c. every extension page renders without errors ----------------------
+{
+  const pages = [
+    ['popup', 'src/popup/index.html'],
+    ['side panel', 'src/sidepanel/index.html'],
+    ['report', 'src/report/index.html'],
+    ['welcome', 'src/welcome/index.html'],
+  ];
+  for (const [label, path] of pages) {
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(String(e.message)));
+    page.on('console', (m) => {
+      if (m.type() === 'error') errors.push(m.text());
+    });
+    await page.goto(`chrome-extension://${extId}/${path}`);
+    await sleep(2500);
+    const bodyLength = (await page.evaluate(() => document.body.innerText.length)) ?? 0;
+    check(`${label} renders`, bodyLength > 0, `${bodyLength} chars`);
+    check(`${label} logs no errors`, errors.length === 0, errors.slice(0, 2).join(' | '));
+    await page.close();
+  }
+}
+
+// --- 5d. the globe button actually asks the side panel to open -------------
+{
+  // The click handler used to await a tab lookup and then close the popup,
+  // so the open call raced the popup's own teardown and often never ran.
+  const site = await ctx.newPage();
+  await site.goto('https://example.com/', { waitUntil: 'domcontentloaded' });
+
+  const page = await ctx.newPage();
+  // Report out to node: the popup closes itself once the panel has been asked
+  // to open, so anything read from the page afterwards is gone.
+  const opened = [];
+  let closed = false;
+  page.on('close', () => { closed = true; });
+  await page.exposeFunction('__reportOpen', (o) => { opened.push(o); });
+  await page.goto(`chrome-extension://${extId}/src/popup/index.html`);
+  await sleep(2500); // let prepareLiveGlobe() resolve the tab
+
+  await page.evaluate(() => {
+    const real = chrome.sidePanel.open.bind(chrome.sidePanel);
+    chrome.sidePanel.open = (opts) => {
+      void window.__reportOpen({ ...opts });
+      return real(opts);
+    };
+  });
+
+  const globe = page.locator('button[title*="globe" i]');
+  check('popup has the globe button', (await globe.count()) > 0);
+  if ((await globe.count()) > 0) {
+    await globe.first().click().catch(() => {});
+    await sleep(1500);
+    check('globe click opens the side panel', opened.length === 1, JSON.stringify(opened));
+    check('globe click targets a tab', typeof opened[0]?.tabId === 'number', JSON.stringify(opened[0]));
+    check('popup closes only after the open call', closed && opened.length === 1, `closed=${closed}`);
+  }
+  if (!closed) await page.close();
+  await site.close();
+}
+
+// --- 5e. global pause suspends everything, then restores it ---------------
+{
+  await send({ type: 'BLOCK_DOMAIN', domain: 'example.com' });
+  await sleep(400);
+
+  const page = await ctx.newPage();
+  await page.goto('https://example.com/', { waitUntil: 'commit', timeout: 20000 }).catch(() => {});
+  await sleep(800);
+  check('precondition: the domain is blocked', page.url().startsWith('chrome-extension://'), page.url());
+
+  const paused = (await send({ type: 'PAUSE_ALL', minutes: 5 })).state;
+  check('pause reports a deadline about 5 minutes out',
+    paused.paused === true && paused.until !== null && Math.abs(paused.until - Date.now() - 300_000) < 10_000,
+    JSON.stringify(paused));
+
+  const ruleIds = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getSessionRules())
+      .filter((r) => r.id >= 950_000)
+      .map((r) => `${r.id}:${r.action.type}:${r.condition.urlFilter}`));
+  check('pause installs one allow-everything rule', ruleIds.length === 1 && ruleIds[0].endsWith(':allow:*'), JSON.stringify(ruleIds));
+
+  await page.goto('https://example.com/paused', { waitUntil: 'domcontentloaded', timeout: 20000 }).catch(() => {});
+  await sleep(400);
+  check('paused: a blocked domain loads', page.url() === 'https://example.com/paused', page.url());
+
+  // The lookalike interstitial is a tabs.update, not a DNR rule, so it has to
+  // stand down separately or "pause" would only half work. It fires before DNS,
+  // so a typosquat that does not resolve still proves the point — as long as
+  // the control below shows the interception is live once protection is back.
+  await page.goto('https://amazom.com/', { waitUntil: 'commit', timeout: 20000 }).catch(() => {});
+  await sleep(1200);
+  const pausedLookalikeUrl = page.url();
+  check('paused: the lookalike interstitial stands down', !pausedLookalikeUrl.startsWith('chrome-extension://'), pausedLookalikeUrl);
+
+  // A feed refresh rewrites the session rules; it must not sweep the pause away.
+  const settings = await swEval(async () => {
+    const st = await chrome.storage.local.get(null);
+    const k = Object.keys(st).find((x) => st[x] && typeof st[x] === 'object' && st[x].blockCategories);
+    return st[k];
+  });
+  await send({ type: 'UPDATE_SETTINGS', settings });
+  await sleep(1200);
+  const survived = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getSessionRules()).some((r) => r.id >= 950_000));
+  check('pause survives a feed resync', survived);
+
+  check('an unsupported duration is refused',
+    (await send({ type: 'PAUSE_ALL', minutes: 999 })).state.until === paused.until);
+
+  await send({ type: 'RESUME_ALL' });
+  await sleep(600);
+  const after = (await send({ type: 'GET_PAUSE_STATE' })).state;
+  check('resume clears the pause state', after.paused === false && after.until === null, JSON.stringify(after));
+  const gone = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getSessionRules()).every((r) => r.id < 950_000));
+  check('resume removes the pause rule', gone);
+
+  await page.goto('https://example.com/after', { waitUntil: 'commit', timeout: 20000 }).catch(() => {});
+  await sleep(800);
+  check('resumed: the domain is blocked again', page.url().startsWith('chrome-extension://'), page.url());
+
+  // Control for the check above: with protection back, the same navigation is
+  // intercepted. Without this, "not on the warning page" could just mean the
+  // navigation never went anywhere.
+  await page.goto('https://amazom.com/', { waitUntil: 'commit', timeout: 20000 }).catch(() => {});
+  await sleep(1200);
+  check('resumed: the lookalike interstitial fires again',
+    page.url().includes('reason=lookalike'), page.url());
+
+  await send({ type: 'UNBLOCK_DOMAIN', domain: 'example.com' });
+  await page.close();
+}
+
+// --- 5f. the pause bar drives it from the popup ---------------------------
+{
+  const page = await ctx.newPage();
+  await page.goto(`chrome-extension://${extId}/src/popup/index.html`);
+  await sleep(2500);
+
+  const pauseBtn = page.getByRole('button', { name: /^Pause$/i });
+  check('popup shows the pause control', (await pauseBtn.count()) > 0);
+  if ((await pauseBtn.count()) > 0) {
+    await pauseBtn.first().click();
+    await sleep(400);
+    const fiveMin = page.getByRole('button', { name: /5 minutes/i });
+    check('pause offers a choice of durations', (await fiveMin.count()) > 0);
+    await fiveMin.first().click();
+    await sleep(1200);
+    const state = (await send({ type: 'GET_PAUSE_STATE' })).state;
+    check('choosing 5 minutes pauses protection', state.paused === true, JSON.stringify(state));
+    const resumeBtn = page.getByRole('button', { name: /^Resume$/i });
+    check('the bar switches to a resume control', (await resumeBtn.count()) > 0);
+    check('the header stops claiming protection is live',
+      (await page.getByText(/protection paused/i).count()) > 0 &&
+        (await page.getByText(/protection live/i).count()) === 0);
+    if ((await resumeBtn.count()) > 0) {
+      await resumeBtn.first().click();
+      await sleep(1200);
+      check('resuming from the popup restores protection',
+        (await send({ type: 'GET_PAUSE_STATE' })).state.paused === false);
+    }
+  }
+  await page.close();
+}
+
 // --- 6. framed warning page refuses to act --------------------------------
 {
   const page = await ctx.newPage();

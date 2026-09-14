@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Đã cho phép trên thiết bị này, nhưng không gửi được báo cáo. Vui lòng thử lại sau."
   },
+  "pauseAllLabel": {
+    "message": "Tạm dừng toàn bộ bảo vệ"
+  },
+  "pauseAllActive": {
+    "message": "Bảo vệ đang hoạt động"
+  },
+  "pauseAllPause": {
+    "message": "Tạm dừng"
+  },
+  "pauseAll5m": {
+    "message": "5 phút"
+  },
+  "pauseAll1h": {
+    "message": "1 giờ"
+  },
+  "pauseAllSession": {
+    "message": "Đến khi đóng trình duyệt"
+  },
+  "pauseAllPausedFor": {
+    "message": "Đang tạm dừng · còn $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Tạm dừng đến khi đóng trình duyệt"
+  },
+  "pauseAllResume": {
+    "message": "Tiếp tục"
+  },
+  "pauseAllTitle": {
+    "message": "Tạm thời dừng mọi chặn và cảnh báo"
+  },
   "warningFooter": {
     "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "đang bảo vệ"
+  },
+  "popupStatusPaused": {
+    "message": "bảo vệ đang tạm dừng"
   },
   "popupScanning": {
     "message": "ĐANG QUÉT..."

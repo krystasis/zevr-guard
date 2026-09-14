@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Permitido neste dispositivo, mas não foi possível enviar o relato. Tente novamente mais tarde."
   },
+  "pauseAllLabel": {
+    "message": "Pausar toda a proteção"
+  },
+  "pauseAllActive": {
+    "message": "Proteção ativa"
+  },
+  "pauseAllPause": {
+    "message": "Pausar"
+  },
+  "pauseAll5m": {
+    "message": "5 minutos"
+  },
+  "pauseAll1h": {
+    "message": "1 hora"
+  },
+  "pauseAllSession": {
+    "message": "Até fechar o navegador"
+  },
+  "pauseAllPausedFor": {
+    "message": "Pausado · resta $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Pausado até fechar o navegador"
+  },
+  "pauseAllResume": {
+    "message": "Retomar"
+  },
+  "pauseAllTitle": {
+    "message": "Parar temporariamente todos os bloqueios e avisos"
+  },
   "warningFooter": {
     "message": "Protegido pelo Zevr Guard · Navegação segura para todos"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "proteção ativa"
+  },
+  "popupStatusPaused": {
+    "message": "proteção pausada"
   },
   "popupScanning": {
     "message": "ESCANEANDO..."

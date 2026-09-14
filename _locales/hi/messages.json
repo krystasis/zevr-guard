@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "इस डिवाइस पर अनुमति दी गई, पर रिपोर्ट नहीं भेजी जा सकी। कृपया बाद में फिर प्रयास करें।"
   },
+  "pauseAllLabel": {
+    "message": "सारी सुरक्षा रोकें"
+  },
+  "pauseAllActive": {
+    "message": "सुरक्षा सक्रिय"
+  },
+  "pauseAllPause": {
+    "message": "रोकें"
+  },
+  "pauseAll5m": {
+    "message": "5 मिनट"
+  },
+  "pauseAll1h": {
+    "message": "1 घंटा"
+  },
+  "pauseAllSession": {
+    "message": "ब्राउज़र बंद होने तक"
+  },
+  "pauseAllPausedFor": {
+    "message": "रुका हुआ · $LEFT$ बाकी",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "ब्राउज़र बंद होने तक रुका हुआ"
+  },
+  "pauseAllResume": {
+    "message": "फिर शुरू करें"
+  },
+  "pauseAllTitle": {
+    "message": "सभी ब्लॉकिंग और चेतावनियाँ अस्थायी रूप से बंद करें"
+  },
   "warningFooter": {
     "message": "Zevr Guard द्वारा सुरक्षित · सबके लिए सुरक्षित ब्राउज़िंग"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "सुरक्षा चालू"
+  },
+  "popupStatusPaused": {
+    "message": "सुरक्षा रुकी हुई"
   },
   "popupScanning": {
     "message": "स्कैन हो रहा है..."

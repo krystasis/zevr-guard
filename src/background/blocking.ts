@@ -25,13 +25,15 @@ const ALL_RESOURCES = [
 ] as unknown as chrome.declarativeNetRequest.ResourceType[];
 
 const MAIN_FRAME = 'main_frame' as unknown as chrome.declarativeNetRequest.ResourceType;
+
+export { ALL_RESOURCES, ALLOW_ACTION };
 const BLOCK_ACTION = 'block' as unknown as chrome.declarativeNetRequest.RuleActionType;
 const REDIRECT_ACTION = 'redirect' as unknown as chrome.declarativeNetRequest.RuleActionType;
 const ALLOW_ACTION = 'allow' as unknown as chrome.declarativeNetRequest.RuleActionType;
 
 // Allow rules must beat every block/redirect/category rule, so give them
 // a far higher priority than anything else dynamic or static.
-const ALLOW_PRIORITY = 1000;
+export const ALLOW_PRIORITY = 1000;
 
 // Country-learning rules live in their own id range (see country.ts). Manual
 // block/allow/pause rules must never allocate into it, and must never be
@@ -285,7 +287,15 @@ const MAX_SESSION_DOMAINS = 2400;
 // them: 2400*2 = 4800 feed rules + at most MAX_SESSION_ALLOWS = 100 allows
 // stays under Chrome's 5,000 session-rule cap.
 export const SESSION_ALLOW_ID_BASE = 900_000;
+// The global pause owns everything above this, and must never be counted,
+// evicted or overwritten by the per-domain allows below it. Budget:
+// 4,800 feed + 100 per-domain allows + 1 pause, under Chrome's 5,000.
+export const SESSION_GLOBAL_ID_BASE = 950_000;
 const MAX_SESSION_ALLOWS = 100;
+
+function isSessionAllowId(id: number): boolean {
+  return id >= SESSION_ALLOW_ID_BASE && id < SESSION_GLOBAL_ID_BASE;
+}
 
 /**
  * Mirror the current malware feed into DNR session rules so blocking follows
@@ -390,7 +400,7 @@ async function retireStaticMalwareRules(): Promise<void> {
 export async function allowDomainForSession(domain: string): Promise<void> {
   if (!chrome.declarativeNetRequest?.updateSessionRules) return;
   const existing = await chrome.declarativeNetRequest.getSessionRules();
-  const allows = existing.filter((r) => r.id >= SESSION_ALLOW_ID_BASE);
+  const allows = existing.filter((r) => isSessionAllowId(r.id));
   if (allows.some((r) => r.condition.urlFilter === `||${domain}`)) return;
 
   // FIFO eviction: oldest (lowest id) goes first when the budget is spent.
@@ -430,7 +440,7 @@ export async function getSessionAllowedDomains(): Promise<Set<string>> {
   const rules = await chrome.declarativeNetRequest.getSessionRules();
   const allowed = new Set<string>();
   for (const r of rules) {
-    if (r.id < SESSION_ALLOW_ID_BASE) continue;
+    if (!isSessionAllowId(r.id)) continue;
     const filter = r.condition.urlFilter;
     if (filter?.startsWith('||')) allowed.add(filter.slice(2));
   }

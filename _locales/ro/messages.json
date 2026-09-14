@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Permis pe acest dispozitiv, dar raportul nu a putut fi trimis. Încearcă din nou mai târziu."
   },
+  "pauseAllLabel": {
+    "message": "Suspendă toată protecția"
+  },
+  "pauseAllActive": {
+    "message": "Protecție activă"
+  },
+  "pauseAllPause": {
+    "message": "Pauză"
+  },
+  "pauseAll5m": {
+    "message": "5 minute"
+  },
+  "pauseAll1h": {
+    "message": "1 oră"
+  },
+  "pauseAllSession": {
+    "message": "Până la închiderea browserului"
+  },
+  "pauseAllPausedFor": {
+    "message": "În pauză · au mai rămas $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "În pauză până la închiderea browserului"
+  },
+  "pauseAllResume": {
+    "message": "Reia"
+  },
+  "pauseAllTitle": {
+    "message": "Oprește temporar toate blocările și avertismentele"
+  },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "protecție activă"
+  },
+  "popupStatusPaused": {
+    "message": "protecție în pauză"
   },
   "popupScanning": {
     "message": "SCANARE..."

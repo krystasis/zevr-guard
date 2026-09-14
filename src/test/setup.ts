@@ -11,10 +11,22 @@ const noopListener = { addListener: () => {}, removeListener: () => {} };
   },
   storage: {
     local: { get: async () => ({}), set: async () => {} },
-    session: { get: async () => ({}), set: async () => {} },
+    session: { get: async () => ({}), set: async () => {}, remove: async () => {} },
     onChanged: noopListener,
   },
   i18n: { getUILanguage: () => 'en' },
+  action: {
+    setBadgeBackgroundColor: () => {},
+    setBadgeText: () => {},
+    setBadgeTextColor: () => {},
+  },
+  tabs: { query: async () => [] },
+  alarms: {
+    create: async () => {},
+    clear: async () => {},
+    get: async () => undefined,
+    onAlarm: noopListener,
+  },
   declarativeNetRequest: {
     getDynamicRules: async () => [],
     updateDynamicRules: async () => {},

@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "已在本设备上允许，但报告未能发送。请稍后重试。"
   },
+  "pauseAllLabel": {
+    "message": "暂停全部保护"
+  },
+  "pauseAllActive": {
+    "message": "保护运行中"
+  },
+  "pauseAllPause": {
+    "message": "暂停"
+  },
+  "pauseAll5m": {
+    "message": "5 分钟"
+  },
+  "pauseAll1h": {
+    "message": "1 小时"
+  },
+  "pauseAllSession": {
+    "message": "直到关闭浏览器"
+  },
+  "pauseAllPausedFor": {
+    "message": "已暂停 · 剩余 $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "已暂停，直到关闭浏览器"
+  },
+  "pauseAllResume": {
+    "message": "恢复"
+  },
+  "pauseAllTitle": {
+    "message": "临时停止所有拦截与警告"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "防护运行中"
+  },
+  "popupStatusPaused": {
+    "message": "保护已暂停"
   },
   "popupScanning": {
     "message": "扫描中..."

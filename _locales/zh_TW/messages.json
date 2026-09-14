@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "已在本裝置上允許，但回報未能傳送。請稍後再試。"
   },
+  "pauseAllLabel": {
+    "message": "暫停全部保護"
+  },
+  "pauseAllActive": {
+    "message": "保護運作中"
+  },
+  "pauseAllPause": {
+    "message": "暫停"
+  },
+  "pauseAll5m": {
+    "message": "5 分鐘"
+  },
+  "pauseAll1h": {
+    "message": "1 小時"
+  },
+  "pauseAllSession": {
+    "message": "直到關閉瀏覽器"
+  },
+  "pauseAllPausedFor": {
+    "message": "已暫停 · 剩餘 $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "已暫停，直到關閉瀏覽器"
+  },
+  "pauseAllResume": {
+    "message": "恢復"
+  },
+  "pauseAllTitle": {
+    "message": "暫時停止所有封鎖與警告"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "防護運作中"
+  },
+  "popupStatusPaused": {
+    "message": "保護已暫停"
   },
   "popupScanning": {
     "message": "掃描中..."

@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Bu cihazda izin verildi, ancak bildirim gönderilemedi. Lütfen daha sonra tekrar deneyin."
   },
+  "pauseAllLabel": {
+    "message": "Tüm korumayı duraklat"
+  },
+  "pauseAllActive": {
+    "message": "Koruma etkin"
+  },
+  "pauseAllPause": {
+    "message": "Duraklat"
+  },
+  "pauseAll5m": {
+    "message": "5 dakika"
+  },
+  "pauseAll1h": {
+    "message": "1 saat"
+  },
+  "pauseAllSession": {
+    "message": "Tarayıcı kapanana kadar"
+  },
+  "pauseAllPausedFor": {
+    "message": "Duraklatıldı · $LEFT$ kaldı",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Tarayıcı kapanana kadar duraklatıldı"
+  },
+  "pauseAllResume": {
+    "message": "Sürdür"
+  },
+  "pauseAllTitle": {
+    "message": "Tüm engellemeleri ve uyarıları geçici olarak durdur"
+  },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "koruma devrede"
+  },
+  "popupStatusPaused": {
+    "message": "koruma duraklatıldı"
   },
   "popupScanning": {
     "message": "TARANIYOR..."

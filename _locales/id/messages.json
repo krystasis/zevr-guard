@@ -263,6 +263,41 @@
   "reportSafeAllowedNotSent": {
     "message": "Diizinkan di perangkat ini, tetapi laporan gagal dikirim. Silakan coba lagi nanti."
   },
+  "pauseAllLabel": {
+    "message": "Jeda semua perlindungan"
+  },
+  "pauseAllActive": {
+    "message": "Perlindungan aktif"
+  },
+  "pauseAllPause": {
+    "message": "Jeda"
+  },
+  "pauseAll5m": {
+    "message": "5 menit"
+  },
+  "pauseAll1h": {
+    "message": "1 jam"
+  },
+  "pauseAllSession": {
+    "message": "Sampai peramban ditutup"
+  },
+  "pauseAllPausedFor": {
+    "message": "Dijeda · sisa $LEFT$",
+    "placeholders": {
+      "left": {
+        "content": "$1"
+      }
+    }
+  },
+  "pauseAllPausedSession": {
+    "message": "Dijeda sampai peramban ditutup"
+  },
+  "pauseAllResume": {
+    "message": "Lanjutkan"
+  },
+  "pauseAllTitle": {
+    "message": "Hentikan sementara semua pemblokiran dan peringatan"
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"
   },
@@ -374,6 +409,9 @@
   },
   "popupStatusLive": {
     "message": "perlindungan aktif"
+  },
+  "popupStatusPaused": {
+    "message": "perlindungan dijeda"
   },
   "popupScanning": {
     "message": "MEMINDAI..."

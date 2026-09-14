@@ -39,7 +39,6 @@ export interface BlockCategories {
 }
 
 export interface Settings {
-  blockingEnabled: boolean;
   notificationsEnabled: boolean;
   blockCategories: BlockCategories;
   customBlockList: string[];
@@ -102,6 +101,9 @@ export type MessageRequest =
   | { type: 'GET_BLOCK_CONTEXT'; domain: string; country?: string }
   | { type: 'ALLOW_FOR_SESSION_AND_OPEN'; domain: string }
   | { type: 'REPORT_FALSE_POSITIVE'; domain: string; context: 'list' | 'soft'; alsoAllow?: boolean }
+  | { type: 'PAUSE_ALL'; minutes: number | null }
+  | { type: 'RESUME_ALL' }
+  | { type: 'GET_PAUSE_STATE' }
   | { type: 'DISALLOW_DOMAIN'; domain: string }
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }
@@ -160,6 +162,16 @@ export interface BlockContext {
   meta: { src: 'u' | 't' | 'm' | null; since: string } | null;
   /** When the threat list this verdict came from was built. */
   feedGeneratedAt: string | null;
+}
+
+/**
+ * Global pause. `until` is null for "until the browser closes"; both
+ * timestamps are null when nothing is paused.
+ */
+export interface PauseState {
+  paused: boolean;
+  until: number | null;
+  since: number | null;
 }
 
 /** A value the user asked Zevr Guard to watch for in outbound traffic. */

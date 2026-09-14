@@ -99,6 +99,7 @@ export type MessageRequest =
   | { type: 'UNBLOCK_DOMAIN'; domain: string }
   | { type: 'ALLOW_DOMAIN'; domain: string }
   | { type: 'ALLOW_AND_OPEN'; domain: string }
+  | { type: 'GET_BLOCK_CONTEXT'; domain: string; country?: string }
   | { type: 'DISALLOW_DOMAIN'; domain: string }
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }
@@ -119,6 +120,22 @@ export type MessageRequest =
   | { type: 'REMOVE_WATCH'; id: string }
   | { type: 'GET_LEAKS' }
   | { type: 'CLEAR_LEAKS' };
+
+/**
+ * What the background knows about a domain the warning page is showing.
+ * The warning page is web-accessible, so any site can deep-link it with
+ * arbitrary params; every state-changing control on that page is gated on
+ * this answer rather than on the params themselves.
+ */
+export interface BlockContext {
+  /** True only when one of our own rule sources actually blocks this domain. */
+  blockedByUs: boolean;
+  source: 'feed' | 'manual' | 'country' | null;
+  /** The http(s) URL this tab was heading to, when it is on `domain`. */
+  url: string | null;
+  /** True when the country in the params is really on the user's block list. */
+  countryBlocked: boolean;
+}
 
 /** A value the user asked Zevr Guard to watch for in outbound traffic. */
 export interface WatchItem {

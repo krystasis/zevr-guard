@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "A domain engedélyezése nem sikerült. Próbáld újra."
   },
+  "warningNotBlocked": {
+    "message": "A Zevr Guard jelenleg nem blokkolja ezt a címet. Ha linkről érkeztél ide, zárd be az oldalt, és nyisd meg a webhelyet közvetlenül."
+  },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Az eszközön futó hasonmás-elemzés észlelte. Az URL-ed soha nem hagyta el ezt a böngészőt."
   },
+  "warningLookalikeTiming": {
+    "message": "Ez az ellenőrzés az oldal betöltésének indulásakor fut, ezért az oldal egy pillanatra megjelenhet a figyelmeztetés előtt."
+  },
   "warningProceedAnyway": {
     "message": "Folytatás mégis (nem ajánlott)"
   },
@@ -806,7 +812,7 @@
     "message": "Nincs. Nyisd meg egy kapcsolat részleteit az országa blokkolásához."
   },
   "settingsBlockedCountriesHint": {
-    "message": "A domainek blokkolva lesznek, amint forgalom érkezik ezekből az országokból."
+    "message": "Az új oldalhoz érkező első kérés átmegy, hogy az ország azonosítható legyen; ezután a domaint blokkoljuk."
   },
   "blockCountry": {
     "message": "Minden forgalom blokkolása innen: $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "A Zevr Guardban bekapcsoltad az országblokkolást ehhez a régióhoz. Az eszközöddel semmi baj — a saját szabályod teszi a dolgát."
+  },
+  "warningCountryTiming": {
+    "message": "Az országblokkolás a forgalomból tanul: az új oldalhoz érkező első kérés átmegy, hogy az ország azonosítható legyen, a továbbiak blokkolódnak."
   },
   "warningCountryUnblock": {
     "message": "$COUNTRY$ feloldása",

@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Doménu se nepodařilo povolit. Zkuste to znovu."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard tuto adresu momentálně neblokuje. Pokud jste sem přišli z odkazu, stránku zavřete a web otevřete přímo."
+  },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Zjištěno analýzou napodobených domén v zařízení. Vaše URL nikdy neopustila tento prohlížeč."
   },
+  "warningLookalikeTiming": {
+    "message": "Tato kontrola běží už při zahájení načítání, takže se web může na okamžik zobrazit před tímto varováním."
+  },
   "warningProceedAnyway": {
     "message": "Přesto pokračovat (nedoporučeno)"
   },
@@ -806,7 +812,7 @@
     "message": "Žádné. Otevřete detail spojení a zablokujte jeho zemi."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domény se blokují, jakmile je zaznamenán provoz z těchto zemí."
+    "message": "První požadavek na nový web projde, aby bylo možné určit jeho zemi; poté je doména blokována."
   },
   "blockCountry": {
     "message": "Blokovat veškerý provoz z: $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Pro tento region jste v Zevr Guard zapnuli blokování zemí. Vaše zařízení je v pořádku — jen funguje vaše vlastní pravidlo."
+  },
+  "warningCountryTiming": {
+    "message": "Blokování podle země se učí z provozu: první požadavek na nový web projde, aby bylo možné určit jeho zemi, další jsou blokovány."
   },
   "warningCountryUnblock": {
     "message": "Odblokovat $COUNTRY$",

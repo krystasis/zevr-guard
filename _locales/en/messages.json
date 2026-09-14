@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Couldn't allow the domain. Please try again."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard is not currently blocking this address. If you reached this page from a link, close it and open the site directly."
+  },
   "warningFooter": {
     "message": "Protected by Zevr Guard · Safe browsing for everyone"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Detected by on-device lookalike analysis. Your URL never left this browser."
   },
+  "warningLookalikeTiming": {
+    "message": "This check runs as the page starts loading, so the site may appear for a moment before this warning."
+  },
   "warningProceedAnyway": {
     "message": "Proceed anyway (not recommended)"
   },
@@ -806,7 +812,7 @@
     "message": "None. Open a connection's detail view to block its country."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domains are blocked as soon as traffic from these countries is observed."
+    "message": "The first request to a new site goes through so its country can be identified; from then on that domain is blocked."
   },
   "blockCountry": {
     "message": "Block all traffic from $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "You enabled country blocking for this region in Zevr Guard. Nothing is wrong with your device — this is your own rule doing its job."
+  },
+  "warningCountryTiming": {
+    "message": "Country blocking learns from traffic: the first request to a new site goes through so its country can be identified, and later requests are blocked."
   },
   "warningCountryUnblock": {
     "message": "Unblock $COUNTRY$",

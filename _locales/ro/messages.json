@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Domeniul nu a putut fi permis. Încearcă din nou."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard nu blochează momentan această adresă. Dacă ai ajuns aici dintr-un link, închide pagina și deschide site-ul direct."
+  },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Detectat prin analiza domeniilor-copie pe dispozitiv. URL-ul tău nu a părăsit niciodată acest browser."
   },
+  "warningLookalikeTiming": {
+    "message": "Această verificare rulează la începutul încărcării, așa că site-ul poate apărea o clipă înainte de acest avertisment."
+  },
   "warningProceedAnyway": {
     "message": "Continuă totuși (nerecomandat)"
   },
@@ -806,7 +812,7 @@
     "message": "Niciuna. Deschide detaliile unei conexiuni pentru a-i bloca țara."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domeniile sunt blocate imediat ce se observă trafic din aceste țări."
+    "message": "Prima cerere către un site nou trece pentru a-i identifica țara; apoi domeniul este blocat."
   },
   "blockCountry": {
     "message": "Blochează tot traficul din $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Ai activat blocarea pe țări pentru această regiune în Zevr Guard. Dispozitivul tău este în regulă — este propria ta regulă care își face treaba."
+  },
+  "warningCountryTiming": {
+    "message": "Blocarea pe țări învață din trafic: prima cerere către un site nou trece pentru a-i identifica țara, iar următoarele sunt blocate."
   },
   "warningCountryUnblock": {
     "message": "Deblochează $COUNTRY$",

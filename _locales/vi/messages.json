@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Không thể cho phép tên miền. Vui lòng thử lại."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard hiện không chặn địa chỉ này. Nếu bạn đến đây từ một liên kết, hãy đóng trang này và mở trang web trực tiếp."
+  },
   "warningFooter": {
     "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Phát hiện bằng phân tích tên miền giả mạo ngay trên thiết bị. URL của bạn chưa từng rời trình duyệt này."
   },
+  "warningLookalikeTiming": {
+    "message": "Việc kiểm tra này chạy ngay khi trang bắt đầu tải, nên trang web có thể hiện ra trong chốc lát trước cảnh báo này."
+  },
   "warningProceedAnyway": {
     "message": "Vẫn tiếp tục (không khuyến nghị)"
   },
@@ -806,7 +812,7 @@
     "message": "Chưa có. Mở chi tiết một kết nối để chặn quốc gia của nó."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Tên miền sẽ bị chặn ngay khi phát hiện lưu lượng từ các quốc gia này."
+    "message": "Yêu cầu đầu tiên tới một trang mới được cho qua để nhận diện quốc gia; sau đó tên miền này sẽ bị chặn."
   },
   "blockCountry": {
     "message": "Chặn mọi lưu lượng từ $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Bạn đã bật chặn quốc gia cho khu vực này trong Zevr Guard. Thiết bị của bạn không có vấn đề gì — đây chính là quy tắc do bạn đặt ra đang hoạt động."
+  },
+  "warningCountryTiming": {
+    "message": "Chặn theo quốc gia học từ lưu lượng: yêu cầu đầu tiên tới một trang mới được cho qua để nhận diện quốc gia, các yêu cầu sau sẽ bị chặn."
   },
   "warningCountryUnblock": {
     "message": "Bỏ chặn $COUNTRY$",

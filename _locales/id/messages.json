@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Tidak dapat mengizinkan domain. Silakan coba lagi."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard saat ini tidak memblokir alamat ini. Jika Anda tiba di sini dari sebuah tautan, tutup halaman ini dan buka situsnya langsung."
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Terdeteksi oleh analisis situs tiruan di perangkat. URL Anda tidak pernah meninggalkan browser ini."
   },
+  "warningLookalikeTiming": {
+    "message": "Pemeriksaan ini berjalan saat halaman mulai dimuat, sehingga situs bisa tampak sekejap sebelum peringatan ini."
+  },
   "warningProceedAnyway": {
     "message": "Tetap lanjutkan (tidak disarankan)"
   },
@@ -806,7 +812,7 @@
     "message": "Tidak ada. Buka tampilan detail sebuah koneksi untuk memblokir negaranya."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domain langsung diblokir begitu lalu lintas dari negara-negara ini terdeteksi."
+    "message": "Permintaan pertama ke situs baru diloloskan agar negaranya dapat dikenali; setelah itu domain tersebut diblokir."
   },
   "blockCountry": {
     "message": "Blokir semua lalu lintas dari $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Anda mengaktifkan pemblokiran negara untuk wilayah ini di Zevr Guard. Perangkat Anda baik-baik saja — ini aturan Anda sendiri yang sedang bekerja."
+  },
+  "warningCountryTiming": {
+    "message": "Pemblokiran negara belajar dari lalu lintas: permintaan pertama ke situs baru diloloskan agar negaranya dapat dikenali, berikutnya diblokir."
   },
   "warningCountryUnblock": {
     "message": "Buka blokir $COUNTRY$",

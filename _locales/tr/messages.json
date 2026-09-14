@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Alan adına izin verilemedi. Lütfen tekrar deneyin."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard şu anda bu adresi engellemiyor. Buraya bir bağlantıdan geldiyseniz sayfayı kapatın ve siteyi doğrudan açın."
+  },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Cihaz üzerinde çalışan taklit analiziyle tespit edildi. URL'niz bu tarayıcıdan hiç çıkmadı."
   },
+  "warningLookalikeTiming": {
+    "message": "Bu denetim sayfa yüklenmeye başlarken çalışır, bu nedenle site bu uyarıdan önce bir an görünebilir."
+  },
   "warningProceedAnyway": {
     "message": "Yine de devam et (önerilmez)"
   },
@@ -806,7 +812,7 @@
     "message": "Yok. Bir ülkeyi engellemek için bağlantının ayrıntı görünümünü açın."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Bu ülkelerden trafik gözlemlendiği anda ilgili alan adları engellenir."
+    "message": "Yeni bir siteye giden ilk istek, ülkesinin belirlenebilmesi için geçer; sonrasında o alan adı engellenir."
   },
   "blockCountry": {
     "message": "$COUNTRY$ kaynaklı tüm trafiği engelle",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Bu bölge için ülke engellemesini Zevr Guard'da siz etkinleştirdiniz. Cihazınızda hiçbir sorun yok — bu, kendi kuralınızın görevini yapmasından ibaret."
+  },
+  "warningCountryTiming": {
+    "message": "Ülke engelleme trafikten öğrenir: yeni bir siteye giden ilk istek, ülkesinin belirlenebilmesi için geçer; sonrakiler engellenir."
   },
   "warningCountryUnblock": {
     "message": "$COUNTRY$ engelini kaldır",

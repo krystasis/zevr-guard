@@ -280,6 +280,13 @@ const SESSION_APPLIED_KEY = 'zg.sessionRules.applied';
 // (main_frame redirect + everything-else block).
 const MAX_SESSION_DOMAINS = 2400;
 
+// Session-scoped "allow for this browser session" rules live above this id.
+// The feed mirror below owns 1..MAX_SESSION_DOMAINS*2 and must never remove
+// them: 2400*2 = 4800 feed rules + at most MAX_SESSION_ALLOWS = 100 allows
+// stays under Chrome's 5,000 session-rule cap.
+export const SESSION_ALLOW_ID_BASE = 900_000;
+const MAX_SESSION_ALLOWS = 100;
+
 /**
  * Mirror the current malware feed into DNR session rules so blocking follows
  * the daily feed instead of the rules baked into the store package. Session
@@ -335,7 +342,10 @@ export async function syncMalwareSessionRules(): Promise<void> {
 
   const existing = await chrome.declarativeNetRequest.getSessionRules();
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: existing.map((r) => r.id),
+    // Only the feed mirror's own id range. Session allow rules (the
+    // "continue this time" escape hatch) are owned by allowDomainForSession
+    // and must survive every feed refresh.
+    removeRuleIds: existing.filter((r) => r.id < SESSION_ALLOW_ID_BASE).map((r) => r.id),
     addRules,
   });
   try {
@@ -368,4 +378,61 @@ async function retireStaticMalwareRules(): Promise<void> {
   } catch (err) {
     console.warn('[Zevr Guard] could not retire static rules:', (err as Error).message);
   }
+}
+
+/**
+ * Allow a domain until the browser restarts. Used by the warning page's
+ * "continue this time" choice for sites the user has a history with: it
+ * outranks every block source (same priority as a permanent allow) but
+ * leaves no trace in customWhiteList, and session rules are dropped on
+ * restart, so protection comes back on its own.
+ */
+export async function allowDomainForSession(domain: string): Promise<void> {
+  if (!chrome.declarativeNetRequest?.updateSessionRules) return;
+  const existing = await chrome.declarativeNetRequest.getSessionRules();
+  const allows = existing.filter((r) => r.id >= SESSION_ALLOW_ID_BASE);
+  if (allows.some((r) => r.condition.urlFilter === `||${domain}`)) return;
+
+  // FIFO eviction: oldest (lowest id) goes first when the budget is spent.
+  const removeRuleIds: number[] = [];
+  if (allows.length >= MAX_SESSION_ALLOWS) {
+    const overflow = allows.length - MAX_SESSION_ALLOWS + 1;
+    removeRuleIds.push(
+      ...allows
+        .map((r) => r.id)
+        .sort((a, b) => a - b)
+        .slice(0, overflow),
+    );
+  }
+  const maxId = allows.length > 0
+    ? Math.max(...allows.map((r) => r.id))
+    : SESSION_ALLOW_ID_BASE - 1;
+
+  await chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds,
+    addRules: [
+      {
+        id: maxId + 1,
+        priority: ALLOW_PRIORITY,
+        action: { type: ALLOW_ACTION },
+        condition: {
+          urlFilter: `||${domain}`,
+          resourceTypes: ALL_RESOURCES,
+        },
+      },
+    ],
+  });
+}
+
+/** Domains currently allowed for this browser session only. */
+export async function getSessionAllowedDomains(): Promise<Set<string>> {
+  if (!chrome.declarativeNetRequest?.getSessionRules) return new Set();
+  const rules = await chrome.declarativeNetRequest.getSessionRules();
+  const allowed = new Set<string>();
+  for (const r of rules) {
+    if (r.id < SESSION_ALLOW_ID_BASE) continue;
+    const filter = r.condition.urlFilter;
+    if (filter?.startsWith('||')) allowed.add(filter.slice(2));
+  }
+  return allowed;
 }

@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "無法允許此網域，請再試一次。"
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard 目前沒有封鎖此網址。若你是透過連結來到此頁，請關閉它並直接開啟網站。"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "由裝置端仿冒網域分析偵測。你的網址從未離開這個瀏覽器。"
   },
+  "warningLookalikeTiming": {
+    "message": "這項檢查在頁面開始載入時執行，因此在出現此警告前網站可能會短暫顯示。"
+  },
   "warningProceedAnyway": {
     "message": "仍要繼續（不建議）"
   },
@@ -806,7 +812,7 @@
     "message": "尚無。開啟任一連線的詳細資訊即可封鎖其所在國家。"
   },
   "settingsBlockedCountriesHint": {
-    "message": "一旦偵測到來自這些國家的流量，相關網域就會立即被封鎖。"
+    "message": "對新網站的第一次請求會放行以辨識其所屬國家／地區，之後便會封鎖該網域。"
   },
   "blockCountry": {
     "message": "封鎖來自 $COUNTRY$ 的所有流量",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "你在 Zevr Guard 中啟用了針對這個地區的國家封鎖。你的裝置沒有任何問題——這是你自己設定的規則正在發揮作用。"
+  },
+  "warningCountryTiming": {
+    "message": "國家／地區封鎖依靠流量學習：對新網站的第一次請求會放行以辨識其所屬國家／地區，之後的請求才會被封鎖。"
   },
   "warningCountryUnblock": {
     "message": "解除封鎖 $COUNTRY$",

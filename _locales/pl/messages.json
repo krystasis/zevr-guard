@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Nie udało się zezwolić na domenę. Spróbuj ponownie."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard obecnie nie blokuje tego adresu. Jeśli trafiłeś tu z linku, zamknij tę stronę i otwórz witrynę bezpośrednio."
+  },
   "warningFooter": {
     "message": "Pod ochroną Zevr Guard · Bezpieczne przeglądanie dla każdego"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Wykryto analizą podobieństwa na urządzeniu. Twój adres URL nigdy nie opuścił tej przeglądarki."
   },
+  "warningLookalikeTiming": {
+    "message": "To sprawdzenie działa już przy rozpoczęciu ładowania, więc strona może pojawić się na moment przed tym ostrzeżeniem."
+  },
   "warningProceedAnyway": {
     "message": "Przejdź mimo to (niezalecane)"
   },
@@ -806,7 +812,7 @@
     "message": "Brak. Otwórz szczegóły połączenia, aby zablokować jego kraj."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domeny są blokowane natychmiast po wykryciu ruchu z tych krajów."
+    "message": "Pierwsze żądanie do nowej witryny przechodzi, aby rozpoznać jej kraj; potem domena jest blokowana."
   },
   "blockCountry": {
     "message": "Zablokuj cały ruch z kraju: $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Blokowanie tego regionu włączono w Zevr Guard. Z Twoim urządzeniem wszystko jest w porządku — to Twoja własna reguła działa zgodnie z przeznaczeniem."
+  },
+  "warningCountryTiming": {
+    "message": "Blokowanie krajów uczy się z ruchu: pierwsze żądanie do nowej witryny przechodzi, aby rozpoznać jej kraj, kolejne są blokowane."
   },
   "warningCountryUnblock": {
     "message": "Odblokuj kraj: $COUNTRY$",

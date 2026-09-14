@@ -1,5 +1,6 @@
 import '../shared/compat';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { BlockContext } from '../types';
 import ReactDOM from 'react-dom/client';
 import { AppIcon } from '../shared/AppIcon';
 import { t, loadLocale } from '../shared/i18n';
@@ -48,6 +49,34 @@ const isFramed = (() => {
     return true; // cross-origin access threw — we are framed
   }
 })();
+
+// The params on this page are attacker-controllable (it is web-accessible),
+// so every state-changing control below is gated on what the background
+// reports instead. `null` while the answer is still in flight: controls stay
+// hidden rather than flashing in and disappearing.
+function useBlockContext(): BlockContext | null {
+  const [ctx, setCtx] = useState<BlockContext | null>(null);
+  useEffect(() => {
+    if (isFramed) return;
+    let live = true;
+    void (async () => {
+      try {
+        const res = (await chrome.runtime.sendMessage({
+          type: 'GET_BLOCK_CONTEXT',
+          domain: blocked,
+          country: countryCode || undefined,
+        })) as { context?: BlockContext } | undefined;
+        if (live && res?.context) setCtx(res.context);
+      } catch {
+        // background unreachable — leave the controls hidden
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, []);
+  return ctx;
+}
 
 function goBack() {
   if (window.history.length > 1) window.history.back();
@@ -195,8 +224,9 @@ const AllowAndOpen: React.FC = () => {
   );
 };
 
-const CountryActions: React.FC = () => {
+const CountryActions: React.FC<{ enabled: boolean }> = ({ enabled }) => {
   const [unblocked, setUnblocked] = useState(false);
+  if (!enabled) return null;
   const name = countryDisplayName(countryCode);
   if (unblocked) {
     return (
@@ -244,6 +274,7 @@ const DangerGlyph: React.FC<{ tone: 'red' | 'sky' }> = ({ tone }) => (
 
 const Warning: React.FC = () => {
   useLocale();
+  const ctx = useBlockContext();
   const target = safeTargetUrl();
   const tone: 'red' | 'sky' = isCountry ? 'sky' : 'red';
   const title = isLookalike
@@ -314,6 +345,12 @@ const Warning: React.FC = () => {
                   'You enabled country blocking for this region in Zevr Guard. Nothing is wrong with your device — this is your own rule doing its job.',
                 )}
               </p>
+              <p className="mt-3 border-t border-white/[0.06] pt-3 text-xs leading-relaxed text-gray-600">
+                {t(
+                  'warningCountryTiming',
+                  'Country blocking learns from traffic: the first request to a new site goes through so its country can be identified, and later requests are blocked.',
+                )}
+              </p>
             </>
           ) : isLookalike ? (
             <>
@@ -332,10 +369,14 @@ const Warning: React.FC = () => {
                 <li>{t('warningLookalikeItem2', 'Capture credit card or banking details')}</li>
                 <li>{t('warningLookalikeItem3', 'Deliver malware disguised as the real service')}</li>
               </ul>
-              <p className="mt-4 border-t border-white/[0.06] pt-3 text-xs text-gray-600">
+              <p className="mt-4 border-t border-white/[0.06] pt-3 text-xs leading-relaxed text-gray-600">
                 {t(
                   'warningLookalikeDetected',
                   'Detected by on-device lookalike analysis. Your URL never left this browser.',
+                )}{' '}
+                {t(
+                  'warningLookalikeTiming',
+                  'This check runs as the page starts loading, so the site may appear for a moment before this warning.',
                 )}
               </p>
             </>
@@ -366,9 +407,9 @@ const Warning: React.FC = () => {
           >
             ← {t('warningGoBack', 'Go Back (Safe)')}
           </button>
-          {isCountry && <CountryActions />}
+          {isCountry && <CountryActions enabled={ctx?.countryBlocked === true} />}
           {isLookalike && <ReportButton />}
-          {!isCountry && (
+          {!isCountry && (isLookalike ? target !== null : ctx?.blockedByUs === true) && (
             <details className="w-full text-xs text-gray-600">
               <summary className="cursor-pointer py-1 transition hover:text-gray-300">
                 {t('warningUnderstandRisk', 'I understand the risk')}
@@ -386,6 +427,14 @@ const Warning: React.FC = () => {
                 <AllowAndOpen />
               )}
             </details>
+          )}
+          {!isCountry && !isLookalike && ctx !== null && !ctx.blockedByUs && (
+            <p className="w-full rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 text-left text-xs leading-relaxed text-gray-500">
+              {t(
+                'warningNotBlocked',
+                'Zevr Guard is not currently blocking this address. If you reached this page from a link, close it and open the site directly.',
+              )}
+            </p>
           )}
         </div>
 

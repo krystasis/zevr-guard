@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "許可できませんでした。もう一度お試しください。"
   },
+  "warningNotBlocked": {
+    "message": "このアドレスは現在 Zevr Guard ではブロックしていません。リンクからこのページに来た場合は閉じて、サイトを直接開いてください。"
+  },
   "warningFooter": {
     "message": "Zevr Guardによる保護 · すべての人に安全なブラウジングを"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "端末内のなりすまし解析で検知しました。URLはブラウザの外に送信されていません。"
   },
+  "warningLookalikeTiming": {
+    "message": "この判定はページの読み込み開始と同時に走るため、警告が出る前に一瞬サイトが表示されることがあります。"
+  },
   "warningProceedAnyway": {
     "message": "危険を理解して進む(非推奨)"
   },
@@ -806,7 +812,7 @@
     "message": "なし。通信先の詳細画面から国をブロックできます。"
   },
   "settingsBlockedCountriesHint": {
-    "message": "これらの国への通信を検知し次第、ドメイン単位でブロックします。"
+    "message": "新しいサイトへの最初の 1 回は国を特定するために通り、それ以降そのドメインをブロックします。"
   },
   "blockCountry": {
     "message": "$COUNTRY$ への通信をすべてブロック",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Zevr Guard の国ブロック設定によるものです。端末の異常ではなく、あなたのルールが機能しています。"
+  },
+  "warningCountryTiming": {
+    "message": "国別ブロックは通信から学習します。新しいサイトへの最初の 1 回は国を特定するために通り、それ以降がブロックされます。"
   },
   "warningCountryUnblock": {
     "message": "$COUNTRY$ のブロックを解除",

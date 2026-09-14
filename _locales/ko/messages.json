@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "도메인을 허용하지 못했습니다. 다시 시도해 주세요."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard는 현재 이 주소를 차단하고 있지 않습니다. 링크를 통해 이 페이지에 왔다면 창을 닫고 사이트를 직접 여세요."
+  },
   "warningFooter": {
     "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "기기 내 사칭 도메인 분석으로 감지되었습니다. URL은 이 브라우저를 벗어나지 않았습니다."
   },
+  "warningLookalikeTiming": {
+    "message": "이 검사는 페이지 로딩이 시작될 때 실행되므로, 경고가 뜨기 전에 사이트가 잠깐 보일 수 있습니다."
+  },
   "warningProceedAnyway": {
     "message": "그래도 진행 (권장하지 않음)"
   },
@@ -806,7 +812,7 @@
     "message": "없음. 연결의 상세 보기에서 해당 국가를 차단할 수 있어요."
   },
   "settingsBlockedCountriesHint": {
-    "message": "이 국가들의 트래픽이 감지되는 즉시 해당 도메인이 차단돼요."
+    "message": "새 사이트로의 첫 요청은 국가를 확인하기 위해 통과하며, 그 이후 해당 도메인을 차단합니다."
   },
   "blockCountry": {
     "message": "$COUNTRY$의 모든 트래픽 차단",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Zevr Guard에서 이 지역에 대한 국가 차단을 켜 두셨어요. 기기에는 아무 문제가 없어요. 직접 만든 규칙이 제 역할을 하고 있는 거예요."
+  },
+  "warningCountryTiming": {
+    "message": "국가 차단은 트래픽에서 학습합니다. 새 사이트로의 첫 요청은 국가를 확인하기 위해 통과하고, 이후 요청부터 차단됩니다."
   },
   "warningCountryUnblock": {
     "message": "$COUNTRY$ 차단 해제",

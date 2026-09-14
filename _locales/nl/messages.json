@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Het domein kon niet worden toegestaan. Probeer het opnieuw."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard blokkeert dit adres op dit moment niet. Kwam je hier via een link? Sluit deze pagina en open de site rechtstreeks."
+  },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Gedetecteerd door lookalike-analyse op je apparaat. Je URL heeft deze browser nooit verlaten."
   },
+  "warningLookalikeTiming": {
+    "message": "Deze controle draait zodra de pagina begint te laden, dus de site kan even verschijnen voordat deze waarschuwing komt."
+  },
   "warningProceedAnyway": {
     "message": "Toch doorgaan (niet aanbevolen)"
   },
@@ -806,7 +812,7 @@
     "message": "Geen. Open de details van een verbinding om het land ervan te blokkeren."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domeinen worden geblokkeerd zodra er verkeer uit deze landen wordt waargenomen."
+    "message": "Het eerste verzoek aan een nieuwe site gaat door om het land te bepalen; daarna wordt dat domein geblokkeerd."
   },
   "blockCountry": {
     "message": "Blokkeer al het verkeer uit $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Je hebt in Zevr Guard landblokkering voor deze regio ingeschakeld. Er is niets mis met je apparaat — dit is je eigen regel die zijn werk doet."
+  },
+  "warningCountryTiming": {
+    "message": "Landblokkering leert van verkeer: het eerste verzoek aan een nieuwe site gaat door om het land te bepalen, latere verzoeken worden geblokkeerd."
   },
   "warningCountryUnblock": {
     "message": "Deblokkeer $COUNTRY$",

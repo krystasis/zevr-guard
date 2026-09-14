@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "无法允许该域名，请重试。"
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard 目前没有拦截此地址。如果你是通过链接来到此页，请关闭它并直接打开网站。"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "由设备端仿冒分析检测。你的网址从未离开此浏览器。"
   },
+  "warningLookalikeTiming": {
+    "message": "该检测在页面开始加载时运行，因此在出现此警告前网站可能会短暂显示。"
+  },
   "warningProceedAnyway": {
     "message": "仍要继续（不推荐）"
   },
@@ -806,7 +812,7 @@
     "message": "暂无。打开某个连接的详情即可屏蔽其所在国家/地区。"
   },
   "settingsBlockedCountriesHint": {
-    "message": "一旦发现来自这些国家/地区的流量，相关域名会立即被拦截。"
+    "message": "对新站点的第一次请求会放行以识别其所属国家/地区，此后该域名将被拦截。"
   },
   "blockCountry": {
     "message": "屏蔽来自 $COUNTRY$ 的所有流量",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "你在 Zevr Guard 中启用了对该地区的国家屏蔽。你的设备没有任何问题——这是你自己设定的规则在发挥作用。"
+  },
+  "warningCountryTiming": {
+    "message": "国家/地区拦截依靠流量学习：对新站点的第一次请求会放行以识别其所属国家/地区，之后的请求才会被拦截。"
   },
   "warningCountryUnblock": {
     "message": "取消屏蔽 $COUNTRY$",

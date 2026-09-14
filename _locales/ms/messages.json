@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Domain tidak dapat dibenarkan. Sila cuba lagi."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard tidak menyekat alamat ini buat masa ini. Jika anda tiba di sini daripada pautan, tutup halaman ini dan buka tapak secara terus."
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Pelayaran selamat untuk semua"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Dikesan oleh analisis domain tiruan pada peranti. URL anda tidak pernah meninggalkan pelayar ini."
   },
+  "warningLookalikeTiming": {
+    "message": "Pemeriksaan ini berjalan sebaik halaman mula dimuatkan, jadi tapak mungkin kelihatan sekejap sebelum amaran ini."
+  },
   "warningProceedAnyway": {
     "message": "Teruskan juga (tidak disyorkan)"
   },
@@ -806,7 +812,7 @@
     "message": "Tiada. Buka paparan butiran sesuatu sambungan untuk menyekat negaranya."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domain disekat sebaik sahaja trafik dari negara ini dikesan."
+    "message": "Permintaan pertama ke tapak baharu dibenarkan supaya negaranya dapat dikenal pasti; selepas itu domain tersebut disekat."
   },
   "blockCountry": {
     "message": "Sekat semua trafik dari $COUNTRY$",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Anda mengaktifkan sekatan negara untuk wilayah ini dalam Zevr Guard. Tiada masalah dengan peranti anda — ini peraturan anda sendiri yang sedang berfungsi."
+  },
+  "warningCountryTiming": {
+    "message": "Sekatan negara belajar daripada trafik: permintaan pertama ke tapak baharu dibenarkan supaya negaranya dapat dikenal pasti, yang seterusnya disekat."
   },
   "warningCountryUnblock": {
     "message": "Nyahsekat $COUNTRY$",

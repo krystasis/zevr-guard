@@ -1,6 +1,12 @@
 import { createNotificationSafe, reviewPageUrl } from '../shared/compat';
 import './buffer-polyfill';
-import type { Connection, MessageRequest, PageStats, UserLocation } from '../types';
+import type {
+  BlockContext,
+  Connection,
+  MessageRequest,
+  PageStats,
+  UserLocation,
+} from '../types';
 import {
   calcRiskScore,
   ensureTrackerDB,
@@ -135,6 +141,45 @@ const navStartTimes = new Map<number, number>();
 // warning page carries only the blocked domain, so this is how "allow and
 // continue" finds its way back to the page the user actually asked for.
 const lastMainFrameUrl = new Map<number, string>();
+
+/**
+ * Where to send the tab after the user allows `domain`. Only ever the URL
+ * this tab was actually heading to, and only when it really belongs to the
+ * allowed domain — never an arbitrary URL, so the warning page cannot be
+ * turned into an open redirect.
+ */
+function resolveResumeUrl(tabId: number | undefined, domain: string): string | null {
+  const remembered = tabId !== undefined ? lastMainFrameUrl.get(tabId) : undefined;
+  if (!remembered) return null;
+  try {
+    const url = new URL(remembered);
+    if (!/^https?:$/.test(url.protocol)) return null;
+    if (!matchesDomainOrParent(url.hostname.toLowerCase(), new Set([domain]))) return null;
+    return remembered;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Which of our own rule sources blocks this domain, if any. Used to gate the
+ * warning page's state-changing controls: the page is web-accessible, so a
+ * hostile site could open it with ?blocked=<attacker domain> and try to get
+ * the user to click "allow".
+ */
+async function classifyBlock(
+  domain: string,
+): Promise<{ blockedByUs: boolean; source: 'feed' | 'manual' | 'country' | null }> {
+  if (isMalware(domain)) return { blockedByUs: true, source: 'feed' };
+  const settings = await getSettings();
+  if (matchesDomainOrParent(domain, new Set(settings.customBlockList))) {
+    return { blockedByUs: true, source: 'manual' };
+  }
+  const blocked = await getBlockedDomains();
+  if (matchesDomainOrParent(domain, blocked)) return { blockedByUs: true, source: 'manual' };
+  if (await isCountryBlockedDomain(domain)) return { blockedByUs: true, source: 'country' };
+  return { blockedByUs: false, source: null };
+}
 
 async function resetPage(tabId: number): Promise<void> {
   navStartTimes.set(tabId, Date.now());
@@ -757,31 +802,47 @@ chrome.runtime.onMessage.addListener(
           await allowDomain(message.domain);
           sendResponse({ success: true });
           break;
+        case 'GET_BLOCK_CONTEXT': {
+          const domain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(domain)) {
+            sendResponse({
+              context: { blockedByUs: false, source: null, url: null, countryBlocked: false },
+            });
+            break;
+          }
+          const { blockedByUs, source } = await classifyBlock(domain);
+          const country = message.country?.trim().toUpperCase() ?? '';
+          const settings = await getSettings();
+          const context: BlockContext = {
+            blockedByUs,
+            source,
+            url: resolveResumeUrl(_sender.tab?.id, domain),
+            countryBlocked:
+              /^[A-Z]{2}$/.test(country) && settings.blockedCountries.includes(country),
+          };
+          sendResponse({ context });
+          break;
+        }
         case 'ALLOW_AND_OPEN': {
           // From the warning interstitial: whitelist the domain (which
           // outranks every feed / static / manual block rule), lift a
           // manual block if that is what tripped, and hand back the URL
           // the tab was heading to so the page can resume it.
-          const domain = message.domain.toLowerCase();
-          if (!isValidHostname(domain)) {
+          const domain = message.domain.trim().toLowerCase();
+          // Refuse for a domain we do not actually block: the page asking is
+          // web-accessible, so this must not become a way for a site to talk
+          // a user into whitelisting somewhere we never warned about.
+          if (!isValidHostname(domain) || !(await classifyBlock(domain)).blockedByUs) {
             sendResponse({ success: false });
             break;
           }
           const current = await getSettings();
           if (current.customBlockList.includes(domain)) await unblockDomain(domain);
           await allowDomain(domain);
-          const tabId = _sender.tab?.id;
-          const remembered = tabId !== undefined ? lastMainFrameUrl.get(tabId) : undefined;
-          let url = `https://${domain}/`;
-          if (remembered) {
-            try {
-              const host = new URL(remembered).hostname.toLowerCase();
-              if (matchesDomainOrParent(host, new Set([domain]))) url = remembered;
-            } catch {
-              // keep the domain root
-            }
-          }
-          sendResponse({ success: true, url });
+          sendResponse({
+            success: true,
+            url: resolveResumeUrl(_sender.tab?.id, domain) ?? `https://${domain}/`,
+          });
           break;
         }
         case 'DISALLOW_DOMAIN':

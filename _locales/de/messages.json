@@ -186,6 +186,9 @@
   "warningAllowAndOpenError": {
     "message": "Die Domain konnte nicht freigegeben werden. Bitte versuche es erneut."
   },
+  "warningNotBlocked": {
+    "message": "Zevr Guard blockiert diese Adresse derzeit nicht. Wenn du über einen Link hierherkamst, schließe die Seite und öffne die Website direkt."
+  },
   "warningFooter": {
     "message": "Geschützt durch Zevr Guard · Sicheres Surfen für alle"
   },
@@ -721,6 +724,9 @@
   "warningLookalikeDetected": {
     "message": "Erkannt durch lokale Ähnlichkeitsanalyse. Ihre URL hat den Browser nie verlassen."
   },
+  "warningLookalikeTiming": {
+    "message": "Diese Prüfung läuft, während die Seite zu laden beginnt — die Website kann daher kurz erscheinen, bevor diese Warnung kommt."
+  },
   "warningProceedAnyway": {
     "message": "Trotzdem fortfahren (nicht empfohlen)"
   },
@@ -806,7 +812,7 @@
     "message": "Keine. Öffnen Sie die Detailansicht einer Verbindung, um ihr Land zu blockieren."
   },
   "settingsBlockedCountriesHint": {
-    "message": "Domains werden blockiert, sobald Traffic aus diesen Ländern beobachtet wird."
+    "message": "Die erste Anfrage an eine neue Website geht durch, damit ihr Land erkannt werden kann; danach wird die Domain blockiert."
   },
   "blockCountry": {
     "message": "Gesamten Traffic aus $COUNTRY$ blockieren",
@@ -837,6 +843,9 @@
   },
   "warningCountryDetail": {
     "message": "Sie haben die Länderblockierung für diese Region in Zevr Guard aktiviert. Mit Ihrem Gerät ist alles in Ordnung — Ihre eigene Regel tut ihren Dienst."
+  },
+  "warningCountryTiming": {
+    "message": "Die Ländersperre lernt aus dem Datenverkehr: Die erste Anfrage an eine neue Website geht durch, damit ihr Land erkannt werden kann; spätere Anfragen werden blockiert."
   },
   "warningCountryUnblock": {
     "message": "$COUNTRY$ freigeben",

@@ -270,7 +270,7 @@
     "message": "Защита активна"
   },
   "pauseAllPause": {
-    "message": "Пауза"
+    "message": "Всё на паузу"
   },
   "pauseAll5m": {
     "message": "5 минут"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Общие"
+  },
+  "settingsLanguage": {
+    "message": "Язык"
+  },
+  "settingsLanguageDesc": {
+    "message": "Применяется ко всем экранам Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Начало работы"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Снова открыть введение и обзор"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Разрешить домен"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Разрешить"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Введите домен, например example.com"
+  },
+  "hostPermShort": {
+    "message": "Без доступа к данным сайтов Zevr Guard не видит ни одного соединения."
   },
   "settingsNotifications": {
     "message": "Уведомления"

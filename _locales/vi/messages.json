@@ -270,7 +270,7 @@
     "message": "Bảo vệ đang hoạt động"
   },
   "pauseAllPause": {
-    "message": "Tạm dừng"
+    "message": "Tạm dừng tất cả"
   },
   "pauseAll5m": {
     "message": "5 phút"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Chung"
+  },
+  "settingsLanguage": {
+    "message": "Ngôn ngữ"
+  },
+  "settingsLanguageDesc": {
+    "message": "Áp dụng cho mọi màn hình của Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Bắt đầu"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Mở lại phần giới thiệu và hướng dẫn"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Cho phép một tên miền"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Cho phép"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Nhập một tên miền như example.com"
+  },
+  "hostPermShort": {
+    "message": "Không có quyền truy cập dữ liệu trang web, Zevr Guard không thấy bất kỳ kết nối nào."
   },
   "settingsNotifications": {
     "message": "Thông báo"

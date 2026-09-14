@@ -270,7 +270,7 @@
     "message": "Bescherming actief"
   },
   "pauseAllPause": {
-    "message": "Pauzeren"
+    "message": "Alles pauzeren"
   },
   "pauseAll5m": {
     "message": "5 minuten"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Algemeen"
+  },
+  "settingsLanguage": {
+    "message": "Taal"
+  },
+  "settingsLanguageDesc": {
+    "message": "Geldt voor alle schermen van Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Aan de slag"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Introductie en rondleiding opnieuw openen"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Domein toestaan"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Toestaan"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Voer een domein in zoals example.com"
+  },
+  "hostPermShort": {
+    "message": "Zonder toegang tot websitegegevens ziet Zevr Guard geen enkele verbinding."
   },
   "settingsNotifications": {
     "message": "Meldingen"

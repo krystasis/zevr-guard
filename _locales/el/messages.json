@@ -270,7 +270,7 @@
     "message": "Η προστασία είναι ενεργή"
   },
   "pauseAllPause": {
-    "message": "Παύση"
+    "message": "Παύση όλων"
   },
   "pauseAll5m": {
     "message": "5 λεπτά"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Γενικά"
+  },
+  "settingsLanguage": {
+    "message": "Γλώσσα"
+  },
+  "settingsLanguageDesc": {
+    "message": "Ισχύει για όλες τις οθόνες του Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Ξεκινήστε"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Άνοιγμα ξανά της εισαγωγής και της ξενάγησης"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Να επιτραπεί ένα domain"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Να επιτραπεί"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Εισαγάγετε ένα domain όπως example.com"
+  },
+  "hostPermShort": {
+    "message": "Χωρίς πρόσβαση στα δεδομένα ιστότοπων, το Zevr Guard δεν βλέπει καμία σύνδεση."
   },
   "settingsNotifications": {
     "message": "Ειδοποιήσεις"

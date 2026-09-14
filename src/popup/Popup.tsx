@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { openLiveGlobe, prepareLiveGlobe } from '../shared/compat';
+import { LOCALE_NAMES, SUPPORTED_LOCALES, type Locale } from '../shared/i18n';
+import { useLocale } from '../shared/useLocale';
 import { Flag } from '../shared/Flag';
 import { AppIcon } from '../shared/AppIcon';
 import { t } from '../shared/i18n';
@@ -196,7 +198,10 @@ export const Popup: React.FC = () => {
       ]);
 
       setStats(statsRes?.stats ?? null);
-      setSettings(settingsRes?.settings ?? null);
+      // Settings always exist; a null here only ever means the message failed.
+      // Overwriting with it would unmount the settings panel under the user
+      // mid-edit, on nothing worse than a busy service worker.
+      if (settingsRes?.settings) setSettings(settingsRes.settings);
       setToday(todayRes?.today ?? null);
     } finally {
       setLoading(false);
@@ -397,6 +402,7 @@ export const Popup: React.FC = () => {
           <SettingsPanel
             settings={settings}
             onChange={handleSettingsChange}
+            onAllow={handleAllow}
             onUnblock={handleUnblock}
             onDisallow={handleDisallow}
             onResume={handleResume}
@@ -415,6 +421,7 @@ export const Popup: React.FC = () => {
         ) : (
           <>
             <Header stats={stats} today={today} activeTab={activeTab} />
+            <HostPermissionBar />
             <PauseBar
               state={pause}
               onPause={handlePauseAll}
@@ -625,6 +632,61 @@ const IconButton: React.FC<{
   </button>
 );
 
+// Without access to website data the extension sees nothing at all, and the
+// only place that asked for it was the welcome page — which opens once on
+// install and is unreachable afterwards. Someone who declined, or who set
+// Chrome's site access to "on click", was stuck with a silently inert
+// extension and no way back.
+const HostPermissionBar: React.FC = () => {
+  const [missing, setMissing] = useState(false);
+
+  useEffect(() => {
+    let live = true;
+    void (async () => {
+      try {
+        const granted = await chrome.permissions.contains({ origins: ['<all_urls>'] });
+        if (live) setMissing(!granted);
+      } catch {
+        // API unavailable — assume granted rather than nag
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, []);
+
+  if (!missing) return null;
+
+  async function request() {
+    try {
+      // Must stay inside the click gesture; no await before this call.
+      const granted = await chrome.permissions.request({ origins: ['<all_urls>'] });
+      if (granted) setMissing(false);
+    } catch {
+      // ignore — the button stays for a retry
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-2 border-b border-amber-600/50 bg-amber-500/[0.10] px-3 py-2">
+      <div className="min-w-0 flex-1">
+        <div className="text-[9px] uppercase tracking-[0.25em] text-amber-500/90">
+          {t('hostPermTitle', 'Turn on full protection')}
+        </div>
+        <div className="mt-0.5 text-[10px] leading-snug text-amber-100/80">
+          {t('hostPermShort', 'Zevr Guard cannot see any connections without access to website data.')}
+        </div>
+      </div>
+      <button
+        className="h-6 flex-shrink-0 rounded-full bg-amber-400 px-2.5 text-[10px] font-bold uppercase tracking-wider text-black transition hover:bg-amber-300"
+        onClick={() => void request()}
+      >
+        {t('hostPermGrant', 'Grant access')}
+      </button>
+    </div>
+  );
+};
+
 // Global pause. Deliberately the first thing under the header: this is where
 // someone goes when something is broken and they cannot tell which domain did
 // it — the state the store review described as "nothing I can do".
@@ -726,7 +788,7 @@ const PauseBar: React.FC<{
         onClick={() => setChoosing(true)}
         title={t('pauseAllTitle', 'Temporarily stop all blocking and warnings')}
       >
-        {t('pauseAllPause', 'Pause')}
+        {t('pauseAllPause', 'Pause all')}
       </button>
     </div>
   );
@@ -1749,11 +1811,12 @@ const WatchSection: React.FC = () => {
 const SettingsPanel: React.FC<{
   settings: Settings;
   onChange: (s: Settings) => void;
+  onAllow: (domain: string) => void;
   onUnblock: (domain: string) => void;
   onDisallow: (domain: string) => void;
   onResume: (host: string) => void;
   onUnblockCountry: (country: string) => void;
-}> = ({ settings, onChange, onUnblock, onDisallow, onResume, onUnblockCountry }) => {
+}> = ({ settings, onChange, onAllow, onUnblock, onDisallow, onResume, onUnblockCountry }) => {
   function toggle<K extends keyof Settings>(key: K, value: Settings[K]) {
     onChange({ ...settings, [key]: value });
   }
@@ -1775,6 +1838,16 @@ const SettingsPanel: React.FC<{
   return (
     <div className="p-3 space-y-1">
       <SectionLabel>{t('settingsGeneral', 'General')}</SectionLabel>
+      <LanguageRow />
+      <LinkRow
+        label={t('settingsOpenWelcome', 'Getting started')}
+        description={t('settingsOpenWelcomeDesc', 'Reopen the introduction and the guided tour')}
+        onClick={() =>
+          void chrome.tabs.create({
+            url: chrome.runtime.getURL('src/welcome/index.html'),
+          })
+        }
+      />
       <ToggleRow
         label={t('settingsNotifications', 'Notifications')}
         description={t('settingsNotificationsDesc', 'Notify when dangerous traffic is detected')}
@@ -1947,6 +2020,7 @@ const SettingsPanel: React.FC<{
             'Domains added here bypass all blocking rules, even malware.',
           )}
         </div>
+        <AllowlistAdd onAllow={onAllow} existing={allowedDomains} />
         {allowedDomains.length === 0 ? (
           <div className="text-[10px] text-gray-600 py-2">
             {t('settingsAllowlistEmpty', 'No allowed domains')}
@@ -1976,6 +2050,132 @@ const SettingsPanel: React.FC<{
     </div>
   );
 };
+
+// The language picker used to live only on the welcome page, which opens once
+// on install and is unreachable afterwards — so whatever language the browser
+// happened to be in was final. Same control, somewhere people can get back to.
+const LanguageRow: React.FC = () => {
+  const [locale, setLocale] = useLocale();
+  return (
+    <label className="flex items-center justify-between gap-3 py-2 cursor-pointer border-b border-cyan-900/20">
+      <div className="min-w-0">
+        <div className="text-gray-100">{t('settingsLanguage', 'Language')}</div>
+        <div className="text-gray-500 text-[10px]">
+          {t('settingsLanguageDesc', 'Applies to every Zevr Guard screen')}
+        </div>
+      </div>
+      <select
+        value={locale}
+        onChange={(e) => setLocale(e.target.value as Locale)}
+        aria-label={t('languageSwitchLabel', 'Language')}
+        className="flex-shrink-0 bg-black/40 border border-cyan-900/40 rounded px-1.5 py-1 text-[11px] text-gray-200 focus:outline-none focus:border-cyan-500/60 [&>option]:bg-gray-900"
+      >
+        {SUPPORTED_LOCALES.map((l) => (
+          <option key={l} value={l}>
+            {LOCALE_NAMES[l]}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+};
+
+/**
+ * Accepts a hostname typed or pasted by hand. Until now the only way onto the
+ * allowlist was to be standing on the site, which is no help when the blocked
+ * domain is a sub-resource you can never navigate to — the dead end the store
+ * review ran into.
+ */
+const AllowlistAdd: React.FC<{
+  onAllow: (domain: string) => void;
+  existing: string[];
+}> = ({ onAllow, existing }) => {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  function submit() {
+    const domain = normalizeDomainInput(value);
+    if (!domain) {
+      setError(t('settingsAllowlistInvalid', 'Enter a domain like example.com'));
+      return;
+    }
+    if (existing.includes(domain)) {
+      setValue('');
+      setError(null);
+      return;
+    }
+    onAllow(domain);
+    setValue('');
+    setError(null);
+  }
+
+  return (
+    <div className="pb-2">
+      <div className="flex items-center gap-1.5">
+        <input
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            setError(null);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') submit();
+          }}
+          placeholder={t('settingsAllowlistPlaceholder', 'example.com')}
+          aria-label={t('settingsAllowlistAdd', 'Allow a domain')}
+          className="flex-1 min-w-0 bg-black/40 border border-cyan-900/40 rounded px-2 py-1 text-[11px] text-gray-200 placeholder-gray-600 focus:outline-none focus:border-emerald-500/60"
+        />
+        <button
+          className="flex-shrink-0 px-2.5 h-6 rounded-full bg-emerald-500/80 text-black text-[10px] font-bold uppercase tracking-wider transition hover:bg-emerald-400 disabled:opacity-40"
+          disabled={value.trim() === ''}
+          onClick={submit}
+        >
+          {t('settingsAllowlistAddButton', 'Allow')}
+        </button>
+      </div>
+      {error && <div className="mt-1 text-[10px] text-amber-300">{error}</div>}
+    </div>
+  );
+};
+
+/**
+ * Take what a person is likely to paste — a full URL, a host with a port, a
+ * trailing dot — and reduce it to the bare hostname the rules are keyed on.
+ * Returns null when there is no plausible hostname in there.
+ */
+function normalizeDomainInput(raw: string): string | null {
+  let v = raw.trim().toLowerCase();
+  if (!v) return null;
+  if (v.includes('://')) {
+    try {
+      v = new URL(v).hostname;
+    } catch {
+      return null;
+    }
+  }
+  v = v.split('/')[0].split('?')[0].split('#')[0];
+  v = v.split('@').pop() ?? v; // strip any user info
+  v = v.replace(/:\d+$/, '').replace(/\.$/, '');
+  const ok = /^[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,62}[a-z0-9])?)+$/;
+  return v.length <= 253 && ok.test(v) ? v : null;
+}
+
+const LinkRow: React.FC<{
+  label: string;
+  description?: string;
+  onClick: () => void;
+}> = ({ label, description, onClick }) => (
+  <button
+    className="flex w-full items-center justify-between gap-3 border-b border-cyan-900/20 py-2 text-left transition hover:bg-white/[0.03]"
+    onClick={onClick}
+  >
+    <div className="min-w-0">
+      <div className="text-gray-100">{label}</div>
+      {description && <div className="text-[10px] text-gray-500">{description}</div>}
+    </div>
+    <span className="flex-shrink-0 text-gray-500">→</span>
+  </button>
+);
 
 const SectionLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="pt-2 pb-1 text-[9px] uppercase tracking-[0.25em] text-cyan-500">

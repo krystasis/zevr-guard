@@ -270,7 +270,7 @@
     "message": "Ochrana aktivní"
   },
   "pauseAllPause": {
-    "message": "Pozastavit"
+    "message": "Pozastavit vše"
   },
   "pauseAll5m": {
     "message": "5 minut"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Obecné"
+  },
+  "settingsLanguage": {
+    "message": "Jazyk"
+  },
+  "settingsLanguageDesc": {
+    "message": "Platí pro všechny obrazovky Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Začínáme"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Znovu otevřít úvod a prohlídku"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Povolit doménu"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Povolit"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Zadejte doménu, například example.com"
+  },
+  "hostPermShort": {
+    "message": "Bez přístupu k datům webů Zevr Guard nevidí žádná spojení."
   },
   "settingsNotifications": {
     "message": "Oznámení"

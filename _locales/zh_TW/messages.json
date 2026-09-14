@@ -270,7 +270,7 @@
     "message": "保護運作中"
   },
   "pauseAllPause": {
-    "message": "暫停"
+    "message": "全部暫停"
   },
   "pauseAll5m": {
     "message": "5 分鐘"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "一般"
+  },
+  "settingsLanguage": {
+    "message": "語言"
+  },
+  "settingsLanguageDesc": {
+    "message": "適用於 Zevr Guard 的所有畫面"
+  },
+  "settingsOpenWelcome": {
+    "message": "快速上手"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "重新開啟介紹與導覽"
+  },
+  "settingsAllowlistAdd": {
+    "message": "允許某個網域"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "允許"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "請輸入類似 example.com 的網域"
+  },
+  "hostPermShort": {
+    "message": "沒有網站資料存取權限，Zevr Guard 看不到任何連線。"
   },
   "settingsNotifications": {
     "message": "通知"

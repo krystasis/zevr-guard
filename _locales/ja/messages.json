@@ -270,7 +270,7 @@
     "message": "保護は有効"
   },
   "pauseAllPause": {
-    "message": "一時停止"
+    "message": "すべて停止"
   },
   "pauseAll5m": {
     "message": "5分"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "一般"
+  },
+  "settingsLanguage": {
+    "message": "言語"
+  },
+  "settingsLanguageDesc": {
+    "message": "Zevr Guard のすべての画面に適用されます"
+  },
+  "settingsOpenWelcome": {
+    "message": "はじめに"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "紹介画面とガイドツアーをもう一度開く"
+  },
+  "settingsAllowlistAdd": {
+    "message": "ドメインを許可"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "許可"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "example.com のような形式で入力してください"
+  },
+  "hostPermShort": {
+    "message": "ウェブサイトデータへのアクセスが無いと、Zevr Guard は通信を一切見られません。"
   },
   "settingsNotifications": {
     "message": "通知"

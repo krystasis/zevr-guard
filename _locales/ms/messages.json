@@ -270,7 +270,7 @@
     "message": "Perlindungan aktif"
   },
   "pauseAllPause": {
-    "message": "Jeda"
+    "message": "Jeda semua"
   },
   "pauseAll5m": {
     "message": "5 minit"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Umum"
+  },
+  "settingsLanguage": {
+    "message": "Bahasa"
+  },
+  "settingsLanguageDesc": {
+    "message": "Digunakan pada semua skrin Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Mulakan"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Buka semula pengenalan dan lawatan berpandu"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Benarkan satu domain"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Benarkan"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Masukkan domain seperti example.com"
+  },
+  "hostPermShort": {
+    "message": "Tanpa akses kepada data tapak web, Zevr Guard tidak melihat sebarang sambungan."
   },
   "settingsNotifications": {
     "message": "Pemberitahuan"

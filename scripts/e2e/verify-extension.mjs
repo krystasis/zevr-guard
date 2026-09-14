@@ -401,7 +401,7 @@ await sw.evaluate(async (domain) => {
   await page.goto(`chrome-extension://${extId}/src/popup/index.html`);
   await sleep(2500);
 
-  const pauseBtn = page.getByRole('button', { name: /^Pause$/i });
+  const pauseBtn = page.getByRole('button', { name: /^Pause all$/i });
   check('popup shows the pause control', (await pauseBtn.count()) > 0);
   if ((await pauseBtn.count()) > 0) {
     await pauseBtn.first().click();
@@ -423,6 +423,77 @@ await sw.evaluate(async (domain) => {
       check('resuming from the popup restores protection',
         (await send({ type: 'GET_PAUSE_STATE' })).state.paused === false);
     }
+  }
+  await page.close();
+}
+
+// --- 5g. settings reach what only the welcome page used to offer ----------
+// The language round-trip runs last on purpose: every label below is
+// localised, so asserting on English wording has to happen before it.
+{
+  const page = await ctx.newPage();
+  await page.goto(`chrome-extension://${extId}/src/popup/index.html`);
+  await sleep(2500);
+  await page.getByRole('button', { name: /settings/i }).first().click().catch(() => {});
+  const welcomeLink = page.getByRole('button', { name: /getting started/i });
+  await welcomeLink.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+  check('settings link back to the welcome page', (await welcomeLink.count()) > 0);
+
+  // Allowlist by hand: the review's dead end was having no way to add one.
+  const input = page.locator('input[placeholder="example.com"]');
+  check('settings offer an allowlist input', (await input.count()) > 0);
+  if ((await input.count()) > 0) {
+    // A pasted URL should reduce to its hostname.
+    await input.first().fill('https://Manually-Added.example/some/path?q=1');
+    await page.getByRole('button', { name: /^Allow$/i }).first().click();
+    await sleep(1200);
+    const wl = await swEval(async () => {
+      const st = await chrome.storage.local.get(null);
+      const v = Object.values(st).find((x) => x && typeof x === 'object' && Array.isArray(x.customWhiteList));
+      return v?.customWhiteList ?? [];
+    });
+    check('a hand-typed domain reaches the allowlist', wl.includes('manually-added.example'), JSON.stringify(wl));
+
+    await input.first().fill('not a domain');
+    await page.getByRole('button', { name: /^Allow$/i }).first().click();
+    await sleep(600);
+    check('nonsense input is refused with a message',
+      (await page.getByText(/Enter a domain like/i).count()) > 0);
+    await send({ type: 'DISALLOW_DOMAIN', domain: 'manually-added.example' });
+  }
+
+  // Language: the picker lived only on the welcome page, which opens once on
+  // install. Identify it by its option values — its aria-label is localised
+  // too, so it stops matching the moment the language changes.
+  const langSelect = page.locator('select:has(option[value="ja"])');
+  const pick = async (value) => {
+    await langSelect.first().selectOption(value, { timeout: 8000 }).catch(async () => {
+      // selectOption's actionability wait gets flaky against this popup once
+      // the run has several pages open; the change event is what the control
+      // actually reacts to.
+      await page.evaluate((v) => {
+        const el = document.querySelector('select option[value="ja"]')?.parentElement;
+        if (!el) return;
+        el.value = v;
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }, value);
+    });
+    await sleep(1500);
+  };
+
+  check('settings offer a language picker', (await langSelect.count()) > 0);
+  if ((await langSelect.count()) > 0) {
+    await pick('ja');
+    const stored = await swEval(async () => {
+      const st = await chrome.storage.local.get(null);
+      return Object.entries(st).find(([k]) => k.toLowerCase().includes('locale'))?.[1] ?? null;
+    });
+    check('choosing a language persists it', stored === 'ja', String(stored));
+    check('the popup redraws in the chosen language', (await page.getByText('言語').count()) > 0);
+
+    await pick('en');
+    check('switching back restores English',
+      (await page.getByText(/^Language$/).count()) > 0 && (await page.getByText('言語').count()) === 0);
   }
   await page.close();
 }

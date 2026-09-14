@@ -270,7 +270,7 @@
     "message": "Protection active"
   },
   "pauseAllPause": {
-    "message": "Pause"
+    "message": "Tout suspendre"
   },
   "pauseAll5m": {
     "message": "5 minutes"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Général"
+  },
+  "settingsLanguage": {
+    "message": "Langue"
+  },
+  "settingsLanguageDesc": {
+    "message": "S'applique à tous les écrans de Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Prise en main"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Rouvrir l'introduction et la visite guidée"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Autoriser un domaine"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Autoriser"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Saisissez un domaine comme example.com"
+  },
+  "hostPermShort": {
+    "message": "Sans accès aux données des sites, Zevr Guard ne voit aucune connexion."
   },
   "settingsNotifications": {
     "message": "Notifications"

@@ -270,7 +270,7 @@
     "message": "การป้องกันทำงานอยู่"
   },
   "pauseAllPause": {
-    "message": "หยุดชั่วคราว"
+    "message": "หยุดทั้งหมด"
   },
   "pauseAll5m": {
     "message": "5 นาที"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "ทั่วไป"
+  },
+  "settingsLanguage": {
+    "message": "ภาษา"
+  },
+  "settingsLanguageDesc": {
+    "message": "ใช้กับทุกหน้าจอของ Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "เริ่มต้นใช้งาน"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "เปิดคำแนะนำและทัวร์อีกครั้ง"
+  },
+  "settingsAllowlistAdd": {
+    "message": "อนุญาตโดเมน"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "อนุญาต"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "กรอกโดเมนเช่น example.com"
+  },
+  "hostPermShort": {
+    "message": "หากไม่มีสิทธิ์เข้าถึงข้อมูลเว็บไซต์ Zevr Guard จะไม่เห็นการเชื่อมต่อใดเลย"
   },
   "settingsNotifications": {
     "message": "การแจ้งเตือน"

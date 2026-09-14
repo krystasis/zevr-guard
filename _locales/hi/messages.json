@@ -270,7 +270,7 @@
     "message": "सुरक्षा सक्रिय"
   },
   "pauseAllPause": {
-    "message": "रोकें"
+    "message": "सब रोकें"
   },
   "pauseAll5m": {
     "message": "5 मिनट"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "सामान्य"
+  },
+  "settingsLanguage": {
+    "message": "भाषा"
+  },
+  "settingsLanguageDesc": {
+    "message": "Zevr Guard की सभी स्क्रीन पर लागू"
+  },
+  "settingsOpenWelcome": {
+    "message": "शुरू करें"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "परिचय और गाइडेड टूर फिर से खोलें"
+  },
+  "settingsAllowlistAdd": {
+    "message": "डोमेन की अनुमति दें"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "अनुमति दें"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "example.com जैसा डोमेन दर्ज करें"
+  },
+  "hostPermShort": {
+    "message": "वेबसाइट डेटा तक पहुँच के बिना Zevr Guard कोई कनेक्शन नहीं देख सकता।"
   },
   "settingsNotifications": {
     "message": "सूचनाएँ"

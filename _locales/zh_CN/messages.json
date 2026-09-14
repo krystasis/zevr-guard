@@ -270,7 +270,7 @@
     "message": "保护运行中"
   },
   "pauseAllPause": {
-    "message": "暂停"
+    "message": "全部暂停"
   },
   "pauseAll5m": {
     "message": "5 分钟"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "常规"
+  },
+  "settingsLanguage": {
+    "message": "语言"
+  },
+  "settingsLanguageDesc": {
+    "message": "适用于 Zevr Guard 的所有界面"
+  },
+  "settingsOpenWelcome": {
+    "message": "快速上手"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "重新打开介绍与导览"
+  },
+  "settingsAllowlistAdd": {
+    "message": "允许某个域名"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "允许"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "请输入类似 example.com 的域名"
+  },
+  "hostPermShort": {
+    "message": "没有网站数据访问权限，Zevr Guard 看不到任何连接。"
   },
   "settingsNotifications": {
     "message": "通知"

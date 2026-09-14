@@ -270,7 +270,7 @@
     "message": "Ochrona aktywna"
   },
   "pauseAllPause": {
-    "message": "Wstrzymaj"
+    "message": "Wstrzymaj wszystko"
   },
   "pauseAll5m": {
     "message": "5 minut"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Ogólne"
+  },
+  "settingsLanguage": {
+    "message": "Język"
+  },
+  "settingsLanguageDesc": {
+    "message": "Dotyczy wszystkich ekranów Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Pierwsze kroki"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Otwórz ponownie wprowadzenie i przewodnik"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Zezwól na domenę"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Zezwól"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Podaj domenę, np. example.com"
+  },
+  "hostPermShort": {
+    "message": "Bez dostępu do danych witryn Zevr Guard nie widzi żadnych połączeń."
   },
   "settingsNotifications": {
     "message": "Powiadomienia"

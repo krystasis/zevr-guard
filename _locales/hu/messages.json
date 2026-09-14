@@ -270,7 +270,7 @@
     "message": "A védelem aktív"
   },
   "pauseAllPause": {
-    "message": "Szünet"
+    "message": "Mind szünetel"
   },
   "pauseAll5m": {
     "message": "5 perc"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Általános"
+  },
+  "settingsLanguage": {
+    "message": "Nyelv"
+  },
+  "settingsLanguageDesc": {
+    "message": "A Zevr Guard minden képernyőjére vonatkozik"
+  },
+  "settingsOpenWelcome": {
+    "message": "Első lépések"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Bevezető és túra újranyitása"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Domain engedélyezése"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Engedélyezés"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Adj meg egy domaint, például example.com"
+  },
+  "hostPermShort": {
+    "message": "A webhelyadatokhoz való hozzáférés nélkül a Zevr Guard egyetlen kapcsolatot sem lát."
   },
   "settingsNotifications": {
     "message": "Értesítések"

@@ -270,7 +270,7 @@
     "message": "Protecție activă"
   },
   "pauseAllPause": {
-    "message": "Pauză"
+    "message": "Suspendă tot"
   },
   "pauseAll5m": {
     "message": "5 minute"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "General"
+  },
+  "settingsLanguage": {
+    "message": "Limbă"
+  },
+  "settingsLanguageDesc": {
+    "message": "Se aplică tuturor ecranelor Zevr Guard"
+  },
+  "settingsOpenWelcome": {
+    "message": "Primii pași"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Redeschide introducerea și turul ghidat"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Permite un domeniu"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "Permite"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "Introdu un domeniu precum example.com"
+  },
+  "hostPermShort": {
+    "message": "Fără acces la datele site-urilor, Zevr Guard nu vede nicio conexiune."
   },
   "settingsNotifications": {
     "message": "Notificări"

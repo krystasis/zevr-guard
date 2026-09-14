@@ -270,7 +270,7 @@
     "message": "Koruma etkin"
   },
   "pauseAllPause": {
-    "message": "Duraklat"
+    "message": "Tümünü duraklat"
   },
   "pauseAll5m": {
     "message": "5 dakika"
@@ -315,6 +315,33 @@
   },
   "settingsGeneral": {
     "message": "Genel"
+  },
+  "settingsLanguage": {
+    "message": "Dil"
+  },
+  "settingsLanguageDesc": {
+    "message": "Tüm Zevr Guard ekranları için geçerlidir"
+  },
+  "settingsOpenWelcome": {
+    "message": "Başlarken"
+  },
+  "settingsOpenWelcomeDesc": {
+    "message": "Tanıtımı ve rehberli turu yeniden aç"
+  },
+  "settingsAllowlistAdd": {
+    "message": "Alan adına izin ver"
+  },
+  "settingsAllowlistAddButton": {
+    "message": "İzin ver"
+  },
+  "settingsAllowlistPlaceholder": {
+    "message": "example.com"
+  },
+  "settingsAllowlistInvalid": {
+    "message": "example.com gibi bir alan adı girin"
+  },
+  "hostPermShort": {
+    "message": "Web sitesi verilerine erişim olmadan Zevr Guard hiçbir bağlantıyı göremez."
   },
   "settingsNotifications": {
     "message": "Bildirimler"

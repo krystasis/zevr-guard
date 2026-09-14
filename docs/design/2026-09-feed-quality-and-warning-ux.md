@@ -6,7 +6,11 @@
 
 ---
 
-> **実装状況(2026-09-14 時点)**: §2〜§5 の A/B/C/D と §6 の R5/R6 はすべてブランチ `fix/feed-safelist-and-allow` に実装・コミット済み。実機 34/34、単体 140 件通過。**§5b の E(全体一時停止)は設計のみで未実装** — 次の担当(Opus)はそこから。残るは push・フィード再配信・版上げ(§8)で、いずれも人の作業。R2 は実装中に結論が変わった(下表を読むこと)。
+> **実装状況(2026-09-14 時点)**: A/B/C/D/E と R5/R6 は **すべて実装・コミット済み**(ブランチ `fix/feed-safelist-and-allow`)。単体 149 件、実機 63/63。残るは push・フィード再配信・版上げ(§8)で、いずれも人の作業。
+>
+> 実装中に2つ結論が変わった。**R2**(Tranco 中位帯の保護)は危険なので不採用にした(下表)。**リリースは 1.5.13 に全部まとめる**(当初は 1.5.13 / 1.5.14 に分ける想定だった。§1 の順序は実装順として読むこと)。
+>
+> 設計外で直したもの: 地球儀ボタン(ポップアップが自分を閉じる処理が、サイドパネルを開く非同期処理と競合していた)。`src/shared/compat.ts` の `prepareLiveGlobe()`。
 
 ## 0. 現状(ブランチ `fix/feed-safelist-and-allow`、コミット済み・未 push)
 
@@ -27,13 +31,14 @@
 
 ## 1. 実装順序と受け入れ条件
 
-1. **D(説明文)** → 1.5.13 に同梱。返信で約束した文言。30分。
-2. **§6 R5/R6(警告ページのガードとセッションルール範囲)** → 1.5.13 に同梱。A の前提でもある。1時間。
-3. **1.5.13 を提出**(§8)。ここまでは審査リスクを増やさない範囲。
-4. **A(訪問履歴ソフトブロック)** → 1.5.14。
-5. **C(ブロック理由)** → 1.5.14。フィード側(build-rules)は先に出してよい(1.5.13 クライアントは新ファイルを無視する)。
-6. **B(誤検知申告)** → 1.5.14。Worker 側の変更を伴う。
-7. **E(全体一時停止)** → 1.5.14。§5b。A の `SESSION_ALLOW_ID_BASE` 帯域の切り分けが前提。
+> 以下は**実装順**。リリースは全部まとめて 1.5.13 として出す。
+>
+1. **D(説明文)** 返信で約束した文言。30分。
+2. **§6 R5/R6(警告ページのガードとセッションルール範囲)** A の前提でもある。
+3. **A(訪問履歴ソフトブロック)**
+4. **C(ブロック理由)**
+5. **B(誤検知申告)** Worker 側の変更を伴う。
+6. **E(全体一時停止)** §5b。A の `SESSION_ALLOW_ID_BASE` 帯域の切り分けが前提。
 
 各項目の受け入れ条件は各節末尾。共通条件: `npm test` / `npx tsc -b --noEmit` / `npm run build:app` / `npm run build:firefox` が通り、`scripts/e2e/verify-extension.mjs` が全項目 PASS。
 
@@ -208,7 +213,7 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 受け入れ条件: 文言が3箇所に出る(e2e で lookalike `amazom.com` と country は擬似ルールで確認)。
 
 
-## 5b. 機能 E: 全体一時停止(Pause all protection)
+## 5b. 機能 E: 全体一時停止(Pause all protection) — 実装済み
 
 ### 狙い
 「何かが壊れたが、どのドメインが原因か分からない」ときの逃げ場。レビューの「どうにもならない」はこれが無いことの表れでもある。**時間を区切って止め、自動で戻す**。恒久的な OFF は作らない(切り忘れて無防備のまま使い続けるのが最悪の結果)。
@@ -230,6 +235,7 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 - **id 帯域の切り分け(先にやる)**。`src/background/blocking.ts` に `export const SESSION_GLOBAL_ID_BASE = 950_000;` を追加し、`allowDomainForSession` / `getSessionAllowedDomains` が自分のものとして扱う範囲を `SESSION_ALLOW_ID_BASE <= id < SESSION_GLOBAL_ID_BASE` に**絞る**。現状は `id >= SESSION_ALLOW_ID_BASE` なので、そのままだと一時停止ルールを FIFO の削除対象・max id の基準にしてしまう。`syncMalwareSessionRules` は `id < SESSION_ALLOW_ID_BASE` だけ消すので変更不要。予算: 4,800 + 100 + 1 ≤ 5,000。
 - **なぜセッションルールか**: ブラウザ終了で必ず消える = 「閉じるまで」がそのまま実装になる。時限のものも、期限前にブラウザが落ちれば保護が早めに戻る(安全側に倒れる)。
 - **状態**: `chrome.storage.session['zg.pause'] = { since: number; until: number | null }`(`null` = ブラウザを閉じるまで)。ポップアップが残り時間を出すため。
+- **実装時の追加**: `isPaused()` は期限切れを遅延検出する(SW が alarm を寝過ごしても保護が戻らない事態を防ぐ)。ポップアップのヘッダーは停止中に「protection live」と言わないよう `popupStatusPaused` に切り替える。
 - **期限**: `chrome.alarms.create('zg-pause-expiry', { when: until })`、`onAlarm` で `resumeAll()`。再度 `PAUSE_ALL` が来たら `alarms.clear` してから作り直す(5 分 → 1 時間の切り替え)。Chrome の alarm 最小粒度 30 秒なので 5 分 / 60 分は問題なし。
 - **SW 再起動**: セッションルールも alarm もブラウザセッション単位で残るため再適用不要。ただし `initFeed` の後に `reconcilePause()` を 1 回呼び、ルールの有無を正として `zg.pause` とメモリキャッシュを揃える(ルールがあるのに状態が無ければ `until: null` として復元、逆なら状態を消す)。
 
@@ -330,7 +336,7 @@ export function clearPausedBadge(): void;  // 既定を消す。各タブは次�
 2. `zevr-guard-site` の GitHub Actions「Refresh threat feed」を `workflow_dispatch` で実行 → `public/feed/v1/malware.json` から steamcommunity.com / t.me / telegram.me / cdn.jsdelivr.net / raw.githubusercontent.com / community.fandom.com が消えていることを確認。
 3. `manifest.json` / `package.json` を 1.5.13 に上げ、`chore(release): 1.5.13 — feed safelist, allow from warning page` で commit・tag・push(`docs/ai-driven.md` §7 の人の手順)。`npm run build`(`build:data` 込み。安全リスト適用済みの同梱ルールになる)→ zip → Chrome Web Store / Edge / AMO に提出。
 4. 審査通過後、ストアレビューに「1.5.13 で修正しました」と追記。
-5. A/B/C/E は 1.5.14 として同じ流れ。B の Worker 変更(D1 スキーマ + ルート)は拡張より **先に** デプロイする(古い拡張は叩かないので安全)。
+5. A/B/C/D/E はすべて 1.5.13 に含める(分割しない)。B の Worker 変更(D1 スキーマ + ルート)は拡張の提出より **先に** デプロイする(古い拡張は叩かないので安全)。
 
 ---
 

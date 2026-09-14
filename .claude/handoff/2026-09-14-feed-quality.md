@@ -1,11 +1,11 @@
 # 引き継ぎ: ストアレビュー対応(steamcommunity.com 誤ブロック)— 2026-09-14
 
 ## 一言で
-レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。**次にやるのは E(全体一時停止)の実装** — 設計は `docs/design/2026-09-feed-quality-and-warning-ux.md` §5b に、触るファイル・API・受け入れ条件まで書いてある。そのあと push・フィード再配信・版上げ(人の作業)。
+レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。コードは完成している。残りは push・Worker デプロイ・フィード再配信・版上げで、**すべて人の作業**。判断の根拠は `docs/design/2026-09-feed-quality-and-warning-ux.md`。
 
 ## いまの状態
 - ブランチ `fix/feed-safelist-and-allow`(main から数コミット)。`git log main..HEAD` で内容確認。**コミット署名(Co-Authored-By 等)は付けない方針**(オーナー指示)。
-- 通っているもの: `npm test`(140件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(34/34)。
+- 通っているもの: `npm test`(149件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(63/63)。
 - 手で確認するときは `scripts/dev/build-variant.sh <ref> <label>` で任意のコミットを別フォルダに出せる(`chrome://extensions` にラベル付きで並ぶ)。**古いコミットも今日のデータでビルドされる**ので、当時の誤ブロック再現にはストア版 1.5.12 を有効にすること。
 - 未 push、未リリース。ストア版 1.5.12 は静的ルールに steamcommunity.com が焼かれたまま。**1.5.13 が届くまで利用者側は直らない**。
 - ストアレビューへの返信は済み(「早急に除外します」「次のバージョンで」)。約束した内容はすべて実装済みで、あとは配信するだけ。
@@ -18,11 +18,8 @@
 - **A** 訪問履歴ソフトブロック(琥珀色の警告 + 「今回だけ進む」= セッション allow)
 - **C** ブロック理由の表示(`malware.meta.json` を別チャネルで配信)
 - **B** 誤検知の申告(`/v1/false-positive`、Worker のスキーマとルートも実装済み)
-
-## 次の実装(Opus): E 全体一時停止
-- 設計書 §5b をそのまま実装する。順番: (1) `blocking.ts` に `SESSION_GLOBAL_ID_BASE = 950_000` を足し、`allowDomainForSession` / `getSessionAllowedDomains` の範囲を `[900_000, 950_000)` に絞る → (2) `src/background/pause.ts` 新規 → (3) `index.ts` の割り込み抑止 3 箇所 → (4) `badge.ts` → (5) `Popup.tsx` の `PauseBar` → (6) 24 言語 → (7) `Settings.blockingEnabled` 削除 → (8) 単体 + e2e 追記。
-- 実機確認は `scripts/e2e/verify-extension.mjs` に項目を足して回す。バッジ文字 `'⏸'` だけは目で見て決める。
-- 1.5.14 の便に乗せる。1.5.13 には入れない。
+- **E** 全体一時停止(5分 / 1時間 / ブラウザを閉じるまで。セッションルール1本 + alarm。`Settings.blockingEnabled` は削除した)
+- 設計外: 地球儀ボタンの修正(ポップアップの自己クローズがサイドパネルを開く処理と競合していた)
 
 ## 残っている人の作業
 1. push → main にマージ
@@ -37,13 +34,15 @@
 - `build:data` は `src/data/malware.json`(gitignore)を seed として持ち越す。安全リストは seed にも掛かるので、古い混入は次のビルドで消える。
 - `tldts` は devDependency(ビルド専用)。`scripts/**/*.test.ts` は `vitest.config.ts` の include に足してある。
 - **Tranco の順位で自動保護していいのは上位1万まで**。それ以下は稼働中のマルウェアが自力で順位を得る(実測: `dontworry.su` #14,230 が ThreatFox 掲載)。1万〜5万位はビルドログに報告するだけ。ここを「もっと深くまで保護しよう」と変えないこと。
-- 訪問履歴(`visits.ts`)はモジュール内にキャッシュを持つ。e2e で `zg.seenHosts` を仕込むなら、最初のナビゲーションより前に書くこと。
+- 訪問履歴(`visits.ts`)はモジュール内にキャッシュを持つ。e2e で `zg.seenExactHosts` を仕込むなら、最初のナビゲーションより前に書くこと。
+- ポップアップは `window.close()` を呼ぶ。e2e でポップアップのページを操作すると**本当に閉じる**ので、クリック後に `page.evaluate` で値を読もうとすると落ちる。`page.exposeFunction` で node 側に吐き出すこと(地球儀のテストがその形)。
+- 「ブロックされない」ことの確認は、対照を必ず付ける。ナビゲーションが単に成立していないだけでも通ってしまう(lookalike の一時停止テストがその例)。
 
 ## 検証の仕方
 ```
 npm test && npx tsc -b --noEmit && npm run build:app
 npm i -D playwright && npx playwright install chromium   # 初回のみ
-node scripts/e2e/verify-extension.mjs                     # 34/34 PASS が基準(E 実装後は項目が増える)
+node scripts/e2e/verify-extension.mjs                     # 63/63 PASS が基準
 ```
 
 ## 関連

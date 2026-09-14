@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard 目前沒有封鎖此網址。若你是透過連結來到此頁，請關閉它並直接開啟網站。"
   },
+  "warningSoftTitle": {
+    "message": "此網站在今天的威脅清單中"
+  },
+  "warningSoftHeader": {
+    "message": "你從 $SINCE$ 起一直在使用 $DOMAIN$。",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "它最近才被加入威脅清單。這通常代表網站被入侵，但也可能是清單出錯。本次繼續可以復原：重新啟動瀏覽器後這個例外就會消失。"
+  },
+  "warningContinueOnce": {
+    "message": "本次繼續（重新啟動瀏覽器前有效）"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
   },

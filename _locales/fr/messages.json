@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard ne bloque pas cette adresse actuellement. Si vous êtes arrivé ici par un lien, fermez cette page et ouvrez le site directement."
   },
+  "warningSoftTitle": {
+    "message": "Ce site figure sur la liste de menaces du jour"
+  },
+  "warningSoftHeader": {
+    "message": "Vous utilisez $DOMAIN$ depuis le $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Il a été ajouté récemment à la liste de menaces. Cela signifie généralement que le site a été compromis, mais il peut aussi s'agir d'une erreur de la liste. Continuer cette fois reste réversible : l'exception disparaît au redémarrage du navigateur."
+  },
+  "warningContinueOnce": {
+    "message": "Continuer cette fois (jusqu'au redémarrage du navigateur)"
+  },
   "warningFooter": {
     "message": "Protégé par Zevr Guard · Une navigation sûre pour tous"
   },

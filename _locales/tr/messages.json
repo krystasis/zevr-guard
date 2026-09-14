@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard şu anda bu adresi engellemiyor. Buraya bir bağlantıdan geldiyseniz sayfayı kapatın ve siteyi doğrudan açın."
   },
+  "warningSoftTitle": {
+    "message": "Bu site bugünün tehdit listesinde"
+  },
+  "warningSoftHeader": {
+    "message": "$DOMAIN$ sitesini $SINCE$ tarihinden beri kullanıyorsunuz.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Tehdit listesine yakın zamanda eklendi. Bu genelde sitenin ele geçirildiği anlamına gelir, ancak listenin hatası da olabilir. Bu seferlik devam etmek geri alınabilir: istisna, tarayıcıyı yeniden başlattığınızda kaybolur."
+  },
+  "warningContinueOnce": {
+    "message": "Bu seferlik devam et (tarayıcı yeniden başlayana kadar)"
+  },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
   },

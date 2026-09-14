@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard 目前没有拦截此地址。如果你是通过链接来到此页，请关闭它并直接打开网站。"
   },
+  "warningSoftTitle": {
+    "message": "该网站在今天的威胁列表中"
+  },
+  "warningSoftHeader": {
+    "message": "你从 $SINCE$ 起一直在使用 $DOMAIN$。",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "它最近才被加入威胁列表。这通常意味着网站被入侵，但也可能是列表出错。本次继续可以撤销：重启浏览器后该例外就会消失。"
+  },
+  "warningContinueOnce": {
+    "message": "本次继续（重启浏览器前有效）"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
   },

@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard tuto adresu momentálně neblokuje. Pokud jste sem přišli z odkazu, stránku zavřete a web otevřete přímo."
   },
+  "warningSoftTitle": {
+    "message": "Tento web je na dnešním seznamu hrozeb"
+  },
+  "warningSoftHeader": {
+    "message": "Web $DOMAIN$ používáte od $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Na seznam hrozeb byl přidán nedávno. Obvykle to znamená, že web byl kompromitován — může jít ale i o chybu seznamu. Pokračovat tentokrát lze vzít zpět: výjimka zmizí po restartu prohlížeče."
+  },
+  "warningContinueOnce": {
+    "message": "Tentokrát pokračovat (do restartu prohlížeče)"
+  },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
   },

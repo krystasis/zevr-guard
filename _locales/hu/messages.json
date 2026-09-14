@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "A Zevr Guard jelenleg nem blokkolja ezt a címet. Ha linkről érkeztél ide, zárd be az oldalt, és nyisd meg a webhelyet közvetlenül."
   },
+  "warningSoftTitle": {
+    "message": "Ez az oldal a mai fenyegetéslistán szerepel"
+  },
+  "warningSoftHeader": {
+    "message": "$DOMAIN$ oldalt $SINCE$ óta használod.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Nemrég került fel a fenyegetéslistára. Ez általában feltört oldalt jelent, de a lista tévedése is lehet. A mostani továbblépés visszavonható: a kivétel a böngésző újraindításakor eltűnik."
+  },
+  "warningContinueOnce": {
+    "message": "Most az egyszer tovább (a böngésző újraindításáig)"
+  },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
   },

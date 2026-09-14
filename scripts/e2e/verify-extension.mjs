@@ -46,6 +46,32 @@ await extPage.goto(`chrome-extension://${extId}/src/warning/index.html?blocked=p
 const send = (msg) =>
   extPage.evaluate((m) => new Promise((res) => chrome.runtime.sendMessage(m, res)), msg);
 
+// Open the warning page for a domain directly. The page asks the background
+// for its own context, so this renders exactly what a real redirect would.
+async function ctx2Page(domain) {
+  const p = await ctx.newPage();
+  await p.goto(`chrome-extension://${extId}/src/warning/index.html?blocked=${domain}`);
+  await sleep(1200);
+  return p;
+}
+
+// A feed-listed domain the user will look like a regular of. visits.ts caches
+// the seen-map in module scope the first time anything reads it, so this has to
+// be seeded before the first navigation below triggers that read.
+const establishedDomain = await swEval(async () =>
+  (await chrome.declarativeNetRequest.getSessionRules())
+    .map((r) => r.condition.urlFilter)
+    .filter((u) => u?.startsWith('||'))
+    .map((u) => u.slice(2))
+    .find((d) => d.split('.').length === 2));
+await sw.evaluate(async (domain) => {
+  const DAY = 86400000;
+  await chrome.storage.local.set({
+    'zg.seenHosts': { [domain]: { first: Date.now() - 30 * DAY, last: Date.now(), n: 9 } },
+    'zg.installedAt': Date.now() - 30 * DAY,
+  });
+}, establishedDomain);
+
 // --- 1. static ruleset retired, feed session rules live -------------------
 {
   const st = await swEval(async () => ({
@@ -157,6 +183,43 @@ const send = (msg) =>
 
   await send({ type: 'DISALLOW_DOMAIN', domain: 'example.com' });
   await page.close();
+}
+
+// --- 5b. established site -> softer variant + continue this time ----------
+{
+  const feedDomain = establishedDomain;
+  const blockCtx = (await send({ type: 'GET_BLOCK_CONTEXT', domain: feedDomain })).context;
+  check('established feed domain reports a visit history', blockCtx.established?.n === 9, JSON.stringify(blockCtx.established));
+
+  const page = await ctx2Page(feedDomain);
+  const softTitle = await page.getByText(/on today's threat list/i).count();
+  const onceBtn = page.getByRole('button', { name: /Continue this time/i });
+  check('warning page shows the softer variant', softTitle > 0);
+  check('warning page offers "Continue this time"', (await onceBtn.count()) > 0);
+
+  if ((await onceBtn.count()) > 0) {
+    await onceBtn.click();
+    await sleep(1500);
+    const st = await swEval(async () => {
+      const rules = await chrome.declarativeNetRequest.getSessionRules();
+      const s = await chrome.storage.local.get(null);
+      const v = Object.values(s).find((x) => x && typeof x === 'object' && Array.isArray(x.customWhiteList));
+      return {
+        allow: rules.filter((r) => r.id >= 900000).map((r) => r.condition.urlFilter),
+        wl: v?.customWhiteList ?? [],
+      };
+    });
+    check('continue this time creates a session allow', st.allow.includes(`||${feedDomain}`), JSON.stringify(st.allow));
+    check('continue this time leaves no permanent allow', st.wl.length === 0, JSON.stringify(st.wl));
+  }
+  await page.close();
+  await swEval(async () => {
+    const rules = await chrome.declarativeNetRequest.getSessionRules();
+    await chrome.declarativeNetRequest.updateSessionRules({
+      removeRuleIds: rules.filter((r) => r.id >= 900000).map((r) => r.id),
+    });
+    await chrome.storage.local.remove(['zg.seenHosts', 'zg.installedAt']);
+  });
 }
 
 // --- 6. framed warning page refuses to act --------------------------------

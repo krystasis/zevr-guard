@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard blokkeert dit adres op dit moment niet. Kwam je hier via een link? Sluit deze pagina en open de site rechtstreeks."
   },
+  "warningSoftTitle": {
+    "message": "Deze site staat op de dreigingslijst van vandaag"
+  },
+  "warningSoftHeader": {
+    "message": "Je gebruikt $DOMAIN$ al sinds $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "De site is onlangs aan de dreigingslijst toegevoegd. Meestal betekent dat een gehackte site, maar het kan ook een fout in de lijst zijn. Deze ene keer doorgaan is omkeerbaar: de uitzondering verdwijnt zodra je je browser herstart."
+  },
+  "warningContinueOnce": {
+    "message": "Deze keer doorgaan (tot herstart van de browser)"
+  },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
   },

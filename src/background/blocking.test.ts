@@ -35,3 +35,65 @@ describe('matchesDomainOrParent', () => {
     expect(matchesDomainOrParent('evil.com', new Set())).toBe(false);
   });
 });
+
+// --- session allow rules -----------------------------------------------------
+// These live above SESSION_ALLOW_ID_BASE so the feed mirror, which rewrites its
+// own range on every refresh, cannot wipe the user's "continue this time".
+
+interface StubRule {
+  id: number;
+  priority: number;
+  action: { type: string };
+  condition: { urlFilter?: string; resourceTypes?: string[] };
+}
+
+function stubSessionRules(initial: StubRule[] = []) {
+  let rules = [...initial];
+  (globalThis as unknown as { chrome: Record<string, unknown> }).chrome = {
+    ...(globalThis as unknown as { chrome: Record<string, unknown> }).chrome,
+    declarativeNetRequest: {
+      getSessionRules: async () => rules,
+      updateSessionRules: async (o: { removeRuleIds?: number[]; addRules?: StubRule[] }) => {
+        const remove = new Set(o.removeRuleIds ?? []);
+        rules = rules.filter((r) => !remove.has(r.id)).concat(o.addRules ?? []);
+      },
+    },
+  };
+  return () => rules;
+}
+
+describe('allowDomainForSession', () => {
+  it('allocates above the feed range and is idempotent', async () => {
+    const read = stubSessionRules([
+      { id: 1, priority: 2, action: { type: 'redirect' }, condition: { urlFilter: '||feed.example' } },
+    ]);
+    const { allowDomainForSession, getSessionAllowedDomains, SESSION_ALLOW_ID_BASE } =
+      await import('./blocking');
+
+    await allowDomainForSession('example.com');
+    const added = read().filter((r) => r.id >= SESSION_ALLOW_ID_BASE);
+    expect(added).toHaveLength(1);
+    expect(added[0].condition.urlFilter).toBe('||example.com');
+    expect(added[0].action.type).toBe('allow');
+    // Must outrank the feed's redirect (priority 2) and block (priority 1).
+    expect(added[0].priority).toBeGreaterThan(2);
+    expect(added[0].condition.resourceTypes).toContain('main_frame');
+
+    await allowDomainForSession('example.com');
+    expect(read().filter((r) => r.id >= SESSION_ALLOW_ID_BASE)).toHaveLength(1);
+    expect(await getSessionAllowedDomains()).toEqual(new Set(['example.com']));
+    // The feed rule is untouched.
+    expect(read().some((r) => r.id === 1)).toBe(true);
+  });
+
+  it('evicts the oldest once the budget is spent', async () => {
+    const read = stubSessionRules();
+    const { allowDomainForSession, SESSION_ALLOW_ID_BASE } = await import('./blocking');
+    for (let i = 0; i < 101; i++) await allowDomainForSession(`d${i}.example`);
+    const allows = read().filter((r) => r.id >= SESSION_ALLOW_ID_BASE);
+    expect(allows).toHaveLength(100);
+    // d0 was the first in, so it is the first out; the newest is still there.
+    expect(allows.some((r) => r.condition.urlFilter === '||d0.example')).toBe(false);
+    expect(allows.some((r) => r.condition.urlFilter === '||d100.example')).toBe(true);
+  });
+});

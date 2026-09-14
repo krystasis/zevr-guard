@@ -39,6 +39,7 @@ import {
 } from './badge';
 import {
   allowDomain,
+  allowDomainForSession,
   blockDomain,
   disallowDomain,
   getBlockedDomains,
@@ -53,7 +54,7 @@ import {
   checkNavigation,
   isLookalikeBypassed,
 } from './lookalike';
-import { isFreshVisit, markInstalled, recordVisit } from './visits';
+import { isEstablishedSite, isFreshVisit, getVisitRecord, markInstalled, recordVisit } from './visits';
 import { isSameSite } from '../shared/domain';
 import { resolveOwner } from './companies';
 import {
@@ -451,7 +452,10 @@ chrome.webRequest.onBeforeRequest.addListener(
       if (/^https?:$/.test(url.protocol)) {
         lastMainFrameUrl.set(details.tabId, details.url);
       }
-      void recordVisit(url.hostname);
+      // A listed domain is about to be redirected to the warning page. Not
+      // counting it keeps a blocked site from slowly promoting itself into
+      // "you have used this for a while" through the user's retries.
+      if (!isMalware(url.hostname)) void recordVisit(url.hostname);
     } catch {
       // unparsable URL
     }
@@ -813,14 +817,38 @@ chrome.runtime.onMessage.addListener(
           const { blockedByUs, source } = await classifyBlock(domain);
           const country = message.country?.trim().toUpperCase() ?? '';
           const settings = await getSettings();
+          // Only the feed can be wrong about a site the user already knows.
+          // A block they set themselves needs no softening, and a country
+          // block has its own answer.
+          let established: BlockContext['established'] = null;
+          if (source === 'feed' && (await isEstablishedSite(domain))) {
+            const record = await getVisitRecord(domain);
+            if (record) established = { since: record.first, n: record.n };
+          }
           const context: BlockContext = {
             blockedByUs,
             source,
             url: resolveResumeUrl(_sender.tab?.id, domain),
             countryBlocked:
               /^[A-Z]{2}$/.test(country) && settings.blockedCountries.includes(country),
+            established,
           };
           sendResponse({ context });
+          break;
+        }
+        case 'ALLOW_FOR_SESSION_AND_OPEN': {
+          // "Continue this time": allow until the browser restarts, leaving
+          // no permanent trace. Same gate as ALLOW_AND_OPEN.
+          const domain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(domain) || !(await classifyBlock(domain)).blockedByUs) {
+            sendResponse({ success: false });
+            break;
+          }
+          await allowDomainForSession(domain);
+          sendResponse({
+            success: true,
+            url: resolveResumeUrl(_sender.tab?.id, domain) ?? `https://${domain}/`,
+          });
           break;
         }
         case 'ALLOW_AND_OPEN': {

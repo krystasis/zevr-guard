@@ -100,6 +100,7 @@ export type MessageRequest =
   | { type: 'ALLOW_DOMAIN'; domain: string }
   | { type: 'ALLOW_AND_OPEN'; domain: string }
   | { type: 'GET_BLOCK_CONTEXT'; domain: string; country?: string }
+  | { type: 'ALLOW_FOR_SESSION_AND_OPEN'; domain: string }
   | { type: 'DISALLOW_DOMAIN'; domain: string }
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }
@@ -135,6 +136,12 @@ export interface BlockContext {
   url: string | null;
   /** True when the country in the params is really on the user's block list. */
   countryBlocked: boolean;
+  /**
+   * Set only for a feed block on a site the user has a history with: the
+   * warning page then offers a softer, reversible way through instead of
+   * treating it like a site they have never seen.
+   */
+  established: { since: number; n: number } | null;
 }
 
 /** A value the user asked Zevr Guard to watch for in outbound traffic. */

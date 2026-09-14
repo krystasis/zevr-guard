@@ -224,6 +224,49 @@ const AllowAndOpen: React.FC = () => {
   );
 };
 
+// "Continue this time" for a feed block on a site the user has a history
+// with. Backed by a session-scoped allow rule: it disappears on the next
+// browser restart, so a genuine compromise starts being blocked again by
+// itself, and nothing lands in the permanent allow list.
+const ContinueOnce: React.FC = () => {
+  const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
+  async function go() {
+    if (isFramed) return;
+    setState('working');
+    try {
+      const res = (await chrome.runtime.sendMessage({
+        type: 'ALLOW_FOR_SESSION_AND_OPEN',
+        domain: blocked,
+      })) as { success?: boolean; url?: string } | undefined;
+      if (res?.success && res.url) {
+        window.location.href = res.url;
+        return;
+      }
+      setState('error');
+    } catch {
+      setState('error');
+    }
+  }
+  return (
+    <div className="w-full">
+      <button
+        className="w-full rounded-full border border-amber-500/50 px-5 py-2.5 text-sm font-bold text-amber-300 transition hover:bg-amber-500/10 disabled:opacity-50"
+        disabled={state === 'working'}
+        onClick={() => void go()}
+      >
+        {state === 'working'
+          ? '…'
+          : t('warningContinueOnce', 'Continue this time (until browser restart)')}
+      </button>
+      {state === 'error' && (
+        <div className="mt-1 text-[11px] text-amber-300">
+          {t('warningAllowAndOpenError', "Couldn't allow the domain. Please try again.")}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const CountryActions: React.FC<{ enabled: boolean }> = ({ enabled }) => {
   const [unblocked, setUnblocked] = useState(false);
   if (!enabled) return null;
@@ -251,14 +294,28 @@ const CountryActions: React.FC<{ enabled: boolean }> = ({ enabled }) => {
 
 // Big custom glyph instead of an emoji bolted onto the app icon: a rounded
 // octagon with an exclamation, tinted per variant.
-const DangerGlyph: React.FC<{ tone: 'red' | 'sky' }> = ({ tone }) => (
+type Tone = 'red' | 'sky' | 'amber';
+
+const TONE_GLYPH: Record<Tone, string> = {
+  red: 'text-red-500 drop-shadow-[0_0_28px_rgba(239,68,68,0.45)]',
+  sky: 'text-sky-400 drop-shadow-[0_0_28px_rgba(56,189,248,0.4)]',
+  amber: 'text-amber-400 drop-shadow-[0_0_28px_rgba(251,191,36,0.4)]',
+};
+const TONE_GLOW: Record<Tone, string> = {
+  red: 'bg-red-600/[0.14]',
+  sky: 'bg-sky-500/[0.12]',
+  amber: 'bg-amber-500/[0.12]',
+};
+const TONE_CHIP: Record<Tone, string> = {
+  red: 'border-red-500/40 bg-red-500/[0.07] text-red-300',
+  sky: 'border-sky-500/40 bg-sky-500/[0.07] text-sky-300',
+  amber: 'border-amber-500/40 bg-amber-500/[0.07] text-amber-300',
+};
+
+const DangerGlyph: React.FC<{ tone: Tone }> = ({ tone }) => (
   <svg
     viewBox="0 0 96 96"
-    className={`h-20 w-20 ${
-      tone === 'red'
-        ? 'text-red-500 drop-shadow-[0_0_28px_rgba(239,68,68,0.45)]'
-        : 'text-sky-400 drop-shadow-[0_0_28px_rgba(56,189,248,0.4)]'
-    }`}
+    className={`h-20 w-20 ${TONE_GLYPH[tone]}`}
     fill="none"
     aria-hidden
   >
@@ -276,19 +333,24 @@ const Warning: React.FC = () => {
   useLocale();
   const ctx = useBlockContext();
   const target = safeTargetUrl();
-  const tone: 'red' | 'sky' = isCountry ? 'sky' : 'red';
+  // Softer treatment for a threat-feed listing on a site this user has been
+  // using for a while: still blocked, but the likeliest explanations are a
+  // fresh compromise or a mistake in the list, and both deserve a calmer
+  // page than "you have wandered somewhere dangerous".
+  const soft = !isCountry && !isLookalike && ctx?.established != null && ctx.source === 'feed';
+  const tone: Tone = isCountry ? 'sky' : soft ? 'amber' : 'red';
   const title = isLookalike
     ? t('warningLookalikeTitle', 'Suspected Phishing Blocked')
     : isCountry
       ? t('warningCountryTitle', 'Blocked by Your Country Rule')
-      : t('warningTitle', 'Dangerous Site Blocked');
+      : soft
+        ? t('warningSoftTitle', "This site is on today's threat list")
+        : t('warningTitle', 'Dangerous Site Blocked');
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0a0507] font-sans text-gray-100">
       {/* one glow, tinted per variant */}
       <div
-        className={`pointer-events-none absolute -top-1/3 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full blur-3xl ${
-          tone === 'red' ? 'bg-red-600/[0.14]' : 'bg-sky-500/[0.12]'
-        }`}
+        className={`pointer-events-none absolute -top-1/3 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full blur-3xl ${TONE_GLOW[tone]}`}
       />
       <div className="relative mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center px-6 py-16 text-center">
         <div className="mb-10 flex items-center gap-2.5">
@@ -309,11 +371,7 @@ const Warning: React.FC = () => {
             {t('warningBlockedSiteLabel', 'Zevr Guard blocked access to:')}
           </span>
           <span
-            className={`inline-block max-w-full break-all rounded-full border px-4 py-1.5 font-mono text-[13px] ${
-              tone === 'red'
-                ? 'border-red-500/40 bg-red-500/[0.07] text-red-300'
-                : 'border-sky-500/40 bg-sky-500/[0.07] text-sky-300'
-            }`}
+            className={`inline-block max-w-full break-all rounded-full border px-4 py-1.5 font-mono text-[13px] ${TONE_CHIP[tone]}`}
           >
             {blocked}
           </span>
@@ -380,6 +438,23 @@ const Warning: React.FC = () => {
                 )}
               </p>
             </>
+          ) : soft && ctx?.established ? (
+            <>
+              <p className="font-medium text-gray-200 [word-break:keep-all]">
+                {t(
+                  'warningSoftHeader',
+                  `You have been using ${blocked} since ${new Date(ctx.established.since).toLocaleDateString()}.`,
+                  blocked,
+                  new Date(ctx.established.since).toLocaleDateString(),
+                )}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                {t(
+                  'warningSoftDetail',
+                  'It was added to the threat list recently. That usually means the site was compromised — but it can also be a mistake in the list. Continuing this time is safe to undo: the exception disappears when you restart your browser.',
+                )}
+              </p>
+            </>
           ) : (
             <>
               <p className="font-medium text-gray-200 [word-break:keep-all]">
@@ -408,6 +483,7 @@ const Warning: React.FC = () => {
             ← {t('warningGoBack', 'Go Back (Safe)')}
           </button>
           {isCountry && <CountryActions enabled={ctx?.countryBlocked === true} />}
+          {soft && <ContinueOnce />}
           {isLookalike && <ReportButton />}
           {!isCountry && (isLookalike ? target !== null : ctx?.blockedByUs === true) && (
             <details className="w-full text-xs text-gray-600">

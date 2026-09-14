@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard는 현재 이 주소를 차단하고 있지 않습니다. 링크를 통해 이 페이지에 왔다면 창을 닫고 사이트를 직접 여세요."
   },
+  "warningSoftTitle": {
+    "message": "이 사이트는 오늘의 위협 목록에 있습니다"
+  },
+  "warningSoftHeader": {
+    "message": "$SINCE$부터 $DOMAIN$을(를) 사용해 왔습니다.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "최근에 위협 목록에 추가되었습니다. 보통은 사이트가 침해되었다는 뜻이지만, 목록의 오류일 수도 있습니다. 이번만 진행해도 되돌릴 수 있습니다. 이 예외는 브라우저를 다시 시작하면 사라집니다."
+  },
+  "warningContinueOnce": {
+    "message": "이번만 계속 (브라우저 재시작 전까지)"
+  },
   "warningFooter": {
     "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"
   },

@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard blockiert diese Adresse derzeit nicht. Wenn du über einen Link hierherkamst, schließe die Seite und öffne die Website direkt."
   },
+  "warningSoftTitle": {
+    "message": "Diese Website steht auf der heutigen Bedrohungsliste"
+  },
+  "warningSoftHeader": {
+    "message": "Du nutzt $DOMAIN$ seit $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Sie wurde kürzlich zur Bedrohungsliste hinzugefügt. Meist bedeutet das, dass die Website kompromittiert wurde — es kann aber auch ein Fehler in der Liste sein. Dieses eine Mal fortzufahren ist umkehrbar: Die Ausnahme verschwindet beim Neustart des Browsers."
+  },
+  "warningContinueOnce": {
+    "message": "Dieses Mal fortfahren (bis zum Browser-Neustart)"
+  },
   "warningFooter": {
     "message": "Geschützt durch Zevr Guard · Sicheres Surfen für alle"
   },

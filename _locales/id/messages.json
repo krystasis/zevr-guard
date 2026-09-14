@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard saat ini tidak memblokir alamat ini. Jika Anda tiba di sini dari sebuah tautan, tutup halaman ini dan buka situsnya langsung."
   },
+  "warningSoftTitle": {
+    "message": "Situs ini ada di daftar ancaman hari ini"
+  },
+  "warningSoftHeader": {
+    "message": "Anda memakai $DOMAIN$ sejak $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Situs ini baru saja masuk daftar ancaman. Biasanya itu berarti situs diretas, tetapi bisa juga keliru. Melanjutkan kali ini bisa dibatalkan: pengecualiannya hilang saat Anda memulai ulang peramban."
+  },
+  "warningContinueOnce": {
+    "message": "Lanjutkan kali ini (sampai peramban dimulai ulang)"
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Penjelajahan aman untuk semua"
   },

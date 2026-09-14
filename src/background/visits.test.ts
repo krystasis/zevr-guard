@@ -63,3 +63,67 @@ describe('visits: first-visit freshness', () => {
     expect(await isFreshVisit('old.com')).toBe(false);
   });
 });
+
+const DAY = 1000 * 60 * 60 * 24;
+
+describe('visits: established sites', () => {
+  const installedLongAgo = () => {
+    store['zg.installedAt'] = Date.now() - 30 * DAY;
+  };
+
+  it('counts repeat visits', async () => {
+    installedLongAgo();
+    const { recordVisit, getVisitRecord } = await load();
+    await recordVisit('shop.example.com');
+    await recordVisit('www.example.com'); // same registrable domain
+    await recordVisit('example.com');
+    expect((await getVisitRecord('example.com'))?.n).toBe(3);
+  });
+
+  it('needs both enough visits and enough history', async () => {
+    installedLongAgo();
+    store['zg.seenHosts'] = {
+      'few.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 2 },
+      'enough.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 3 },
+      'recent.com': { first: Date.now() - 6 * DAY, last: Date.now(), n: 20 },
+      'old-enough.com': { first: Date.now() - 7 * DAY, last: Date.now(), n: 3 },
+    };
+    const { isEstablishedSite } = await load();
+    expect(await isEstablishedSite('few.com')).toBe(false); // 2 visits
+    expect(await isEstablishedSite('enough.com')).toBe(true);
+    expect(await isEstablishedSite('recent.com')).toBe(false); // 6 days old
+    expect(await isEstablishedSite('old-enough.com')).toBe(true);
+  });
+
+  it('treats a subdomain as the same site', async () => {
+    installedLongAgo();
+    store['zg.seenHosts'] = {
+      'example.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 5 },
+    };
+    const { isEstablishedSite } = await load();
+    expect(await isEstablishedSite('community.example.com')).toBe(true);
+  });
+
+  it('stays quiet during the post-install learning window', async () => {
+    store['zg.installedAt'] = Date.now() - 1000 * 60;
+    store['zg.seenHosts'] = {
+      'example.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 9 },
+    };
+    const { isEstablishedSite } = await load();
+    expect(await isEstablishedSite('example.com')).toBe(false);
+  });
+
+  it('never promotes an unknown site', async () => {
+    installedLongAgo();
+    const { isEstablishedSite } = await load();
+    expect(await isEstablishedSite('never-seen.com')).toBe(false);
+  });
+
+  it('counts a legacy entry as a single visit, not an established one', async () => {
+    installedLongAgo();
+    store['zg.seenHosts'] = { 'legacy.com': Date.now() - 30 * DAY };
+    const { isEstablishedSite, getVisitRecord } = await load();
+    expect((await getVisitRecord('legacy.com'))?.n).toBe(1);
+    expect(await isEstablishedSite('legacy.com')).toBe(false);
+  });
+});

@@ -18,5 +18,9 @@ const noopListener = { addListener: () => {}, removeListener: () => {} };
   declarativeNetRequest: {
     getDynamicRules: async () => [],
     updateDynamicRules: async () => {},
+    getSessionRules: async () => [],
+    updateSessionRules: async () => {},
+    getEnabledRulesets: async () => [],
+    updateEnabledRulesets: async () => {},
   },
 };

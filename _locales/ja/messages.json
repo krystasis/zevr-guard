@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "このアドレスは現在 Zevr Guard ではブロックしていません。リンクからこのページに来た場合は閉じて、サイトを直接開いてください。"
   },
+  "warningSoftTitle": {
+    "message": "このサイトは本日の脅威リストに載っています"
+  },
+  "warningSoftHeader": {
+    "message": "$DOMAIN$ は $SINCE$ から使われています。",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "最近このリストに追加されました。多くはサイトが侵害されたことを意味しますが、リスト側の誤りの可能性もあります。今回だけ進む場合も元に戻せます。この例外はブラウザを再起動すると消えます。"
+  },
+  "warningContinueOnce": {
+    "message": "今回だけ進む(ブラウザ再起動まで)"
+  },
   "warningFooter": {
     "message": "Zevr Guardによる保護 · すべての人に安全なブラウジングを"
   },

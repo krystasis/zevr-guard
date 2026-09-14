@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard nu blochează momentan această adresă. Dacă ai ajuns aici dintr-un link, închide pagina și deschide site-ul direct."
   },
+  "warningSoftTitle": {
+    "message": "Acest site este pe lista de amenințări de azi"
+  },
+  "warningSoftHeader": {
+    "message": "Folosești $DOMAIN$ din $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "A fost adăugat recent pe lista de amenințări. De obicei înseamnă că site-ul a fost compromis, dar poate fi și o eroare a listei. Continuarea de data aceasta e reversibilă: excepția dispare la repornirea browserului."
+  },
+  "warningContinueOnce": {
+    "message": "Continuă de data aceasta (până la repornirea browserului)"
+  },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
   },

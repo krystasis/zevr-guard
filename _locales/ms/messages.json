@@ -189,6 +189,26 @@
   "warningNotBlocked": {
     "message": "Zevr Guard tidak menyekat alamat ini buat masa ini. Jika anda tiba di sini daripada pautan, tutup halaman ini dan buka tapak secara terus."
   },
+  "warningSoftTitle": {
+    "message": "Tapak ini ada dalam senarai ancaman hari ini"
+  },
+  "warningSoftHeader": {
+    "message": "Anda menggunakan $DOMAIN$ sejak $SINCE$.",
+    "placeholders": {
+      "domain": {
+        "content": "$1"
+      },
+      "since": {
+        "content": "$2"
+      }
+    }
+  },
+  "warningSoftDetail": {
+    "message": "Ia baru sahaja dimasukkan ke dalam senarai ancaman. Lazimnya ini bermakna tapak telah dicerobohi, tetapi ia juga boleh jadi kesilapan senarai. Meneruskan kali ini boleh dibatalkan: pengecualian akan hilang apabila anda memulakan semula pelayar."
+  },
+  "warningContinueOnce": {
+    "message": "Teruskan kali ini (sehingga pelayar dimulakan semula)"
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Pelayaran selamat untuk semua"
   },

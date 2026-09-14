@@ -5,8 +5,17 @@ import { registrableDomain } from './lookalike';
 // capped so the map cannot grow without bound.
 
 const STORAGE_KEY = 'zg.seenHosts';
+// Exact-hostname history, kept separately from the registrable-domain map
+// above. The "established site" check cannot use that map: registrableDomain
+// is a last-two-labels approximation, so every tenant of a hosting provider
+// collapses onto one key — a single workers.dev site the user visits weekly
+// would vouch for all 58 workers.dev phishing hosts in today's feed. Keying
+// on the full hostname and only counting the blocked domain and what sits
+// under it keeps one tenant from speaking for its neighbours.
+const EXACT_KEY = 'zg.seenExactHosts';
 const INSTALL_KEY = 'zg.installedAt';
 const MAX_ENTRIES = 3000;
+const MAX_EXACT_ENTRIES = 1500;
 const FLUSH_MS = 2000;
 // A visit still counts as "first" while the site was discovered this
 // recently — long enough to reach the login form, short enough that a site
@@ -42,6 +51,7 @@ export interface VisitRecord {
 }
 
 let cache: Record<string, SeenEntry> | null = null;
+let exactCache: Record<string, SeenEntry> | null = null;
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 
 async function getSeen(): Promise<Record<string, SeenEntry>> {
@@ -65,6 +75,17 @@ async function getSeen(): Promise<Record<string, SeenEntry>> {
   return cache;
 }
 
+async function getExact(): Promise<Record<string, SeenEntry>> {
+  if (exactCache) return exactCache;
+  try {
+    const s = await chrome.storage.local.get(EXACT_KEY);
+    exactCache = (s[EXACT_KEY] as Record<string, SeenEntry> | undefined) ?? {};
+  } catch {
+    exactCache = {};
+  }
+  return exactCache;
+}
+
 function scheduleFlush(): void {
   if (flushTimer) return;
   flushTimer = setTimeout(() => {
@@ -77,8 +98,18 @@ function scheduleFlush(): void {
         entries.sort((a, b) => b[1].last - a[1].last);
         cache = Object.fromEntries(entries.slice(0, MAX_ENTRIES));
       }
+      if (exactCache) {
+        const exact = Object.entries(exactCache);
+        if (exact.length > MAX_EXACT_ENTRIES) {
+          exact.sort((a, b) => b[1].last - a[1].last);
+          exactCache = Object.fromEntries(exact.slice(0, MAX_EXACT_ENTRIES));
+        }
+      }
       try {
-        await chrome.storage.local.set({ [STORAGE_KEY]: cache });
+        await chrome.storage.local.set({
+          [STORAGE_KEY]: cache,
+          ...(exactCache ? { [EXACT_KEY]: exactCache } : {}),
+        });
       } catch {
         // best-effort
       }
@@ -86,18 +117,27 @@ function scheduleFlush(): void {
   }, FLUSH_MS);
 }
 
-export async function recordVisit(host: string): Promise<void> {
-  const domain = registrableDomain(host.toLowerCase());
-  if (!domain) return;
-  const seen = await getSeen();
-  const now = Date.now();
-  const entry = seen[domain];
+function normalizeHost(host: string): string {
+  return host.toLowerCase().replace(/\.$/, '');
+}
+
+function touch(map: Record<string, SeenEntry>, key: string, now: number): void {
+  const entry = map[key];
   if (entry) {
     entry.last = now; // touch for LRU; keep first fixed
     entry.n += 1;
   } else {
-    seen[domain] = { first: now, last: now, n: 1 };
+    map[key] = { first: now, last: now, n: 1 };
   }
+}
+
+export async function recordVisit(host: string): Promise<void> {
+  const normalized = normalizeHost(host);
+  const domain = registrableDomain(normalized);
+  if (!domain) return;
+  const now = Date.now();
+  touch(await getSeen(), domain, now);
+  touch(await getExact(), normalized, now);
   scheduleFlush();
 }
 
@@ -129,12 +169,25 @@ export async function isFreshVisit(host: string): Promise<boolean> {
   return entry !== undefined && Date.now() - entry.first < FRESH_MS;
 }
 
-/** What we know about the user's history with this site. */
+/**
+ * The user's history with exactly this site: visits to the domain itself and
+ * to anything under it, and nothing else. `evil.workers.dev` therefore never
+ * inherits the history of another workers.dev tenant.
+ */
 export async function getVisitRecord(host: string): Promise<VisitRecord | null> {
-  const domain = registrableDomain(host.toLowerCase());
+  const domain = normalizeHost(host);
   if (!domain) return null;
-  const seen = await getSeen();
-  return seen[domain] ?? null;
+  const exact = await getExact();
+  let first = Infinity;
+  let last = 0;
+  let n = 0;
+  for (const [seenHost, entry] of Object.entries(exact)) {
+    if (seenHost !== domain && !seenHost.endsWith(`.${domain}`)) continue;
+    first = Math.min(first, entry.first);
+    last = Math.max(last, entry.last);
+    n += entry.n;
+  }
+  return n > 0 ? { first, last, n } : null;
 }
 
 /**

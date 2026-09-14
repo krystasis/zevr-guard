@@ -67,7 +67,9 @@ const establishedDomain = await swEval(async () =>
 await sw.evaluate(async (domain) => {
   const DAY = 86400000;
   await chrome.storage.local.set({
-    'zg.seenHosts': { [domain]: { first: Date.now() - 30 * DAY, last: Date.now(), n: 9 } },
+    // The established check reads the exact-hostname map, so that one tenant
+    // of a shared host cannot vouch for its neighbours.
+    'zg.seenExactHosts': { [domain]: { first: Date.now() - 30 * DAY, last: Date.now(), n: 9 } },
     'zg.installedAt': Date.now() - 30 * DAY,
   });
 }, establishedDomain);
@@ -191,6 +193,18 @@ await sw.evaluate(async (domain) => {
   const blockCtx = (await send({ type: 'GET_BLOCK_CONTEXT', domain: feedDomain })).context;
   check('established feed domain reports a visit history', blockCtx.established?.n === 9, JSON.stringify(blockCtx.established));
 
+  // A neighbour on a shared host must not inherit that history.
+  const neighbour = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getSessionRules())
+      .map((r) => r.condition.urlFilter)
+      .filter((u) => u?.startsWith('||'))
+      .map((u) => u.slice(2))
+      .find((d) => d.endsWith('.workers.dev')));
+  if (neighbour) {
+    const nCtx = (await send({ type: 'GET_BLOCK_CONTEXT', domain: neighbour })).context;
+    check('a shared-host neighbour inherits no history', nCtx.established === null, `${neighbour} ${JSON.stringify(nCtx.established)}`);
+  }
+
   const page = await ctx2Page(feedDomain);
   const softTitle = await page.getByText(/on today's threat list/i).count();
   check('warning page names the list the domain came from',
@@ -242,7 +256,7 @@ await sw.evaluate(async (domain) => {
     await chrome.declarativeNetRequest.updateSessionRules({
       removeRuleIds: rules.filter((r) => r.id >= 900000).map((r) => r.id),
     });
-    await chrome.storage.local.remove(['zg.seenHosts', 'zg.installedAt']);
+    await chrome.storage.local.remove(['zg.seenHosts', 'zg.seenExactHosts', 'zg.installedAt']);
   });
 }
 

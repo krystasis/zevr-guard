@@ -71,18 +71,20 @@ describe('visits: established sites', () => {
     store['zg.installedAt'] = Date.now() - 30 * DAY;
   };
 
-  it('counts repeat visits', async () => {
+  it('counts visits to the domain and everything under it', async () => {
     installedLongAgo();
     const { recordVisit, getVisitRecord } = await load();
     await recordVisit('shop.example.com');
-    await recordVisit('www.example.com'); // same registrable domain
+    await recordVisit('www.example.com');
     await recordVisit('example.com');
     expect((await getVisitRecord('example.com'))?.n).toBe(3);
+    // Asking about one subdomain counts only that subdomain.
+    expect((await getVisitRecord('shop.example.com'))?.n).toBe(1);
   });
 
   it('needs both enough visits and enough history', async () => {
     installedLongAgo();
-    store['zg.seenHosts'] = {
+    store['zg.seenExactHosts'] = {
       'few.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 2 },
       'enough.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 3 },
       'recent.com': { first: Date.now() - 6 * DAY, last: Date.now(), n: 20 },
@@ -95,18 +97,46 @@ describe('visits: established sites', () => {
     expect(await isEstablishedSite('old-enough.com')).toBe(true);
   });
 
-  it('treats a subdomain as the same site', async () => {
+  it('lets visits to a subdomain vouch for the site itself', async () => {
     installedLongAgo();
-    store['zg.seenHosts'] = {
-      'example.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 5 },
+    store['zg.seenExactHosts'] = {
+      'www.example.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 5 },
     };
     const { isEstablishedSite } = await load();
-    expect(await isEstablishedSite('community.example.com')).toBe(true);
+    expect(await isEstablishedSite('example.com')).toBe(true);
+  });
+
+  it('never lets one tenant vouch for another on a shared host', async () => {
+    // The whole reason the exact-host map exists: registrableDomain() would
+    // fold every workers.dev tenant onto "workers.dev".
+    installedLongAgo();
+    store['zg.seenExactHosts'] = {
+      'my-own-app.workers.dev': { first: Date.now() - 60 * DAY, last: Date.now(), n: 40 },
+    };
+    const { isEstablishedSite } = await load();
+    expect(await isEstablishedSite('my-own-app.workers.dev')).toBe(true);
+    expect(await isEstablishedSite('phishing-kit.workers.dev')).toBe(false);
+    // Asking about the bare suffix does aggregate its children, because for a
+    // real site that is exactly what we want (www.x.com vouches for x.com).
+    // It is moot here: the feed safelist drops public suffixes, so a bare
+    // suffix is never a blocked domain in the first place.
+    expect(await isEstablishedSite('workers.dev')).toBe(true);
+  });
+
+  it('does not let a subdomain vouch for an unrelated sibling', async () => {
+    installedLongAgo();
+    store['zg.seenExactHosts'] = {
+      'good.example.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 9 },
+    };
+    const { isEstablishedSite } = await load();
+    expect(await isEstablishedSite('evil.example.com')).toBe(false);
+    // A suffix that merely ends with the same text is not a subdomain.
+    expect(await isEstablishedSite('notexample.com')).toBe(false);
   });
 
   it('stays quiet during the post-install learning window', async () => {
     store['zg.installedAt'] = Date.now() - 1000 * 60;
-    store['zg.seenHosts'] = {
+    store['zg.seenExactHosts'] = {
       'example.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 9 },
     };
     const { isEstablishedSite } = await load();
@@ -119,11 +149,13 @@ describe('visits: established sites', () => {
     expect(await isEstablishedSite('never-seen.com')).toBe(false);
   });
 
-  it('counts a legacy entry as a single visit, not an established one', async () => {
+  it('ignores the legacy registrable-domain map for this check', async () => {
     installedLongAgo();
-    store['zg.seenHosts'] = { 'legacy.com': Date.now() - 30 * DAY };
-    const { isEstablishedSite, getVisitRecord } = await load();
-    expect((await getVisitRecord('legacy.com'))?.n).toBe(1);
+    store['zg.seenHosts'] = {
+      'legacy.com': { first: Date.now() - 30 * DAY, last: Date.now(), n: 50 },
+    };
+    const { isEstablishedSite } = await load();
+    // Upgrading users start over here rather than inheriting a coarse count.
     expect(await isEstablishedSite('legacy.com')).toBe(false);
   });
 });

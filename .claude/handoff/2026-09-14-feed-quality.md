@@ -1,11 +1,11 @@
 # 引き継ぎ: ストアレビュー対応(steamcommunity.com 誤ブロック)— 2026-09-14
 
 ## 一言で
-レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。ただし **2026-09-14 の再レビューで A 優先度 7 件の指摘が出ており、リリース前に修正が要る**。指示は `.claude/handoff/2026-09-14-review-fixes.md`(次の担当はそこから)。その後に push・Worker デプロイ・フィード再配信・版上げ(人の作業)。
+レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。2026-09-14 の再レビューで出た A 優先 7 件 / B 5 件 / C も **すべて対応済み**(経緯は `.claude/handoff/2026-09-14-review-fixes.md`)。残りは push・Worker デプロイ・フィード再配信・版上げで、**すべて人の作業**。
 
 ## いまの状態
 - ブランチ `fix/feed-safelist-and-allow`(main から数コミット)。`git log main..HEAD` で内容確認。**コミット署名(Co-Authored-By 等)は付けない方針**(オーナー指示)。
-- 通っているもの: `npm test`(149件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(63/63)。
+- 通っているもの: `npm test`(153件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(84/84、3 回連続)。
 - 手で確認するときは `scripts/dev/build-variant.sh <ref> <label>` で任意のコミットを別フォルダに出せる(`chrome://extensions` にラベル付きで並ぶ)。**古いコミットも今日のデータでビルドされる**ので、当時の誤ブロック再現にはストア版 1.5.12 を有効にすること。
 - 未 push、未リリース。ストア版 1.5.12 は静的ルールに steamcommunity.com が焼かれたまま。**1.5.13 が届くまで利用者側は直らない**。
 - ストアレビューへの返信は済み(「早急に除外します」「次のバージョンで」)。約束した内容はすべて実装済みで、あとは配信するだけ。
@@ -37,12 +37,14 @@
 - 訪問履歴(`visits.ts`)はモジュール内にキャッシュを持つ。e2e で `zg.seenExactHosts` を仕込むなら、最初のナビゲーションより前に書くこと。
 - ポップアップは `window.close()` を呼ぶ。e2e でポップアップのページを操作すると**本当に閉じる**ので、クリック後に `page.evaluate` で値を読もうとすると落ちる。`page.exposeFunction` で node 側に吐き出すこと(地球儀のテストがその形)。
 - 「ブロックされない」ことの確認は、対照を必ず付ける。ナビゲーションが単に成立していないだけでも通ってしまう(lookalike の一時停止テストがその例)。
+- 訪問記録は 2 秒の遅延書き込み(`visits.ts` の `FLUSH_MS`)。storage を直接読んで確かめるなら 3 秒待つ。
+- `webRequest` の `onCompleted` は `<all_urls>` なので **拡張自身のページも流れてくる**。ホスト名を扱うときは http(s) で絞ること。
 
 ## 検証の仕方
 ```
 npm test && npx tsc -b --noEmit && npm run build:app
 npm i -D playwright && npx playwright install chromium   # 初回のみ
-node scripts/e2e/verify-extension.mjs                     # 63/63 PASS が基準
+node scripts/e2e/verify-extension.mjs                     # 84/84 PASS が基準
 ```
 
 ## 関連

@@ -6,7 +6,7 @@
 
 ---
 
-> **実装状況(2026-09-14 時点)**: §2〜§5 の A/B/C/D と §6 の R5/R6 はすべてブランチ `fix/feed-safelist-and-allow` に実装・コミット済み。実機 33/33、単体 138 件通過。残るは push・フィード再配信・版上げ(§8)で、いずれも人の作業。R2 は実装中に結論が変わった(下表を読むこと)。
+> **実装状況(2026-09-14 時点)**: §2〜§5 の A/B/C/D と §6 の R5/R6 はすべてブランチ `fix/feed-safelist-and-allow` に実装・コミット済み。実機 34/34、単体 140 件通過。**§5b の E(全体一時停止)は設計のみで未実装** — 次の担当(Opus)はそこから。残るは push・フィード再配信・版上げ(§8)で、いずれも人の作業。R2 は実装中に結論が変わった(下表を読むこと)。
 
 ## 0. 現状(ブランチ `fix/feed-safelist-and-allow`、コミット済み・未 push)
 
@@ -33,6 +33,7 @@
 4. **A(訪問履歴ソフトブロック)** → 1.5.14。
 5. **C(ブロック理由)** → 1.5.14。フィード側(build-rules)は先に出してよい(1.5.13 クライアントは新ファイルを無視する)。
 6. **B(誤検知申告)** → 1.5.14。Worker 側の変更を伴う。
+7. **E(全体一時停止)** → 1.5.14。§5b。A の `SESSION_ALLOW_ID_BASE` 帯域の切り分けが前提。
 
 各項目の受け入れ条件は各節末尾。共通条件: `npm test` / `npx tsc -b --noEmit` / `npm run build:app` / `npm run build:firefox` が通り、`scripts/e2e/verify-extension.mjs` が全項目 PASS。
 
@@ -206,6 +207,93 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 
 受け入れ条件: 文言が3箇所に出る(e2e で lookalike `amazom.com` と country は擬似ルールで確認)。
 
+
+## 5b. 機能 E: 全体一時停止(Pause all protection)
+
+### 狙い
+「何かが壊れたが、どのドメインが原因か分からない」ときの逃げ場。レビューの「どうにもならない」はこれが無いことの表れでもある。**時間を区切って止め、自動で戻す**。恒久的な OFF は作らない(切り忘れて無防備のまま使い続けるのが最悪の結果)。
+
+### 何が止まり、何が続くか
+| 止まる(割り込みをやめる) | 続く(観測は続ける) |
+|---|---|
+| DNR のブロック全部: フィード / 手動 / 国別 / 広告 / トラッキング | 接続の観測、ポップアップの一覧、日次統計の記録 |
+| lookalike の警告ページ差し替え(`checkNavigation`) | データ流出(watch)アラート `reportLeaks` — **唯一の例外**。自分の情報が出て行った事実は停止中でも知らせる価値がある |
+| パスワード警告トースト(`PASSWORD_CONTEXT` → `context: null`) | 国別学習 `noteConnection` — ルールは積まれるが停止中は allow が勝ち、再開後に効く |
+| ブロック時のバッジ点滅 | フィード更新 |
+
+### 仕組み
+- **セッションルール 1 本**。`pauseSite` の `PAUSE_URL_FILTER = '*'` から `initiatorDomains` を外した形:
+  ```ts
+  { id: GLOBAL_PAUSE_RULE_ID, priority: ALLOW_PRIORITY /* 1000 */, action: { type: 'allow' },
+    condition: { urlFilter: '*', resourceTypes: ALL_RESOURCES } }
+  ```
+- **id 帯域の切り分け(先にやる)**。`src/background/blocking.ts` に `export const SESSION_GLOBAL_ID_BASE = 950_000;` を追加し、`allowDomainForSession` / `getSessionAllowedDomains` が自分のものとして扱う範囲を `SESSION_ALLOW_ID_BASE <= id < SESSION_GLOBAL_ID_BASE` に**絞る**。現状は `id >= SESSION_ALLOW_ID_BASE` なので、そのままだと一時停止ルールを FIFO の削除対象・max id の基準にしてしまう。`syncMalwareSessionRules` は `id < SESSION_ALLOW_ID_BASE` だけ消すので変更不要。予算: 4,800 + 100 + 1 ≤ 5,000。
+- **なぜセッションルールか**: ブラウザ終了で必ず消える = 「閉じるまで」がそのまま実装になる。時限のものも、期限前にブラウザが落ちれば保護が早めに戻る(安全側に倒れる)。
+- **状態**: `chrome.storage.session['zg.pause'] = { since: number; until: number | null }`(`null` = ブラウザを閉じるまで)。ポップアップが残り時間を出すため。
+- **期限**: `chrome.alarms.create('zg-pause-expiry', { when: until })`、`onAlarm` で `resumeAll()`。再度 `PAUSE_ALL` が来たら `alarms.clear` してから作り直す(5 分 → 1 時間の切り替え)。Chrome の alarm 最小粒度 30 秒なので 5 分 / 60 分は問題なし。
+- **SW 再起動**: セッションルールも alarm もブラウザセッション単位で残るため再適用不要。ただし `initFeed` の後に `reconcilePause()` を 1 回呼び、ルールの有無を正として `zg.pause` とメモリキャッシュを揃える(ルールがあるのに状態が無ければ `until: null` として復元、逆なら状態を消す)。
+
+### API(`src/types/index.ts`)
+```ts
+| { type: 'PAUSE_ALL'; minutes: 5 | 60 | null }   // null = until browser closes
+| { type: 'RESUME_ALL' }
+| { type: 'GET_PAUSE_STATE' }
+```
+応答は共通で `{ paused: boolean; until: number | null; since: number | null }`。
+
+### `src/background/pause.ts`(新規)
+```ts
+export const GLOBAL_PAUSE_RULE_ID = 950_000;
+export interface PauseState { paused: boolean; until: number | null; since: number | null }
+export async function pauseAll(minutes: number | null): Promise<PauseState>;
+export async function resumeAll(): Promise<void>;
+export async function getPauseState(): Promise<PauseState>;
+export function isPaused(): boolean;            // hot path 用。メモリ変数が正、reconcilePause で復元
+export async function reconcilePause(): Promise<void>;
+```
+`chrome.alarms.onAlarm` の購読はこのファイル内に置く(feed.ts / weekly.ts と同じ流儀)。
+
+### 割り込みの抑止(`src/background/index.ts`)
+- main_frame の `onBeforeRequest`: `recordVisit` は続け、`checkNavigation` の前で `if (isPaused()) return;`。
+- `PASSWORD_CONTEXT`: `isPaused()` なら `context: null` を返す。
+- `handleRequest` 内の `updateBadge` / `flashBlockedBadge`: `isPaused()` なら呼ばない(停止表示を上書きしない)。
+- `reportLeaks` / `noteConnection`: 変更なし。
+
+### バッジ(`src/background/badge.ts`)
+```ts
+export function showPausedBadge(): void;   // tabId なし = 全タブの既定。背景 #f59e0b
+export function clearPausedBadge(): void;  // 既定を消す。各タブは次の updateBadge で復帰
+```
+- per-tab の値は既定より優先されるので、`pauseAll` 時に `chrome.tabs.query({})` で開いている全タブの per-tab バッジを `clearBadge(tabId)` してから既定を出す。
+- 文字は `'⏸'`。Chrome のバッジは 4 文字までで絵文字 1 個は入るが、**実機で見て決める**(Firefox は要確認、`'II'` が代替)。
+
+### ポップアップ(`src/popup/Popup.tsx`)
+- `Header` の直下、`watchHint` の上に `PauseBar`。`stats` が無いページ(chrome:// 等)でも出す(ここが per-site Pause との違い)。
+- 通常時: 左に "Protection active"、右に "Pause" → 押すと同じ行が `5 min` / `1 hour` / `Until browser closes` / Cancel に変わる。
+- 停止中: 行が琥珀色(`AllowBar` の paused 配色を流用)。左に "Paused · 4:32 left"(`until === null` なら "Paused until browser closes")、右に "Resume"。残り時間は既存の 1 秒 interval(`Popup.tsx:131`)で更新。
+- `loadData` で `GET_PAUSE_STATE` も取る。
+- 既存の per-site Pause と混同しないよう文言で区別: 全体は "Pause all protection"、サイト単位は現状どおり "Pause"(title は "Pause blocking on this site")。
+
+### 設定の死にフィールド
+- `Settings.blockingEnabled` は **削除**(型と `getDefaultSettings`)。どこからも読まれておらず、既定 `false` が「ブロック無効」と誤読させる。永続 boolean の全体 OFF は切り忘れを生むので、この機能の置き場としても再利用しない。`getSettings` の merge は明示キーだけ拾うので、保存済みの値は次回保存で自然に消える。
+
+### ロケール(24言語)
+`pauseAllLabel` "Pause all protection" / `pauseAllActive` "Protection active" / `pauseAll5m` "5 minutes" / `pauseAll1h` "1 hour" / `pauseAllSession` "Until browser closes" / `pauseAllPausedFor` "Paused · $LEFT$ left"(placeholder `left` = `$1`) / `pauseAllPausedSession` "Paused until browser closes" / `pauseAllResume` "Resume" / Cancel は既存 `reportPhishingCancel` を流用。
+
+### 受け入れ条件
+- vitest `src/background/pause.test.ts`: `pauseAll` がルールを id 950,000 で 1 本だけ作る(2 回呼んでも増えない)/ `minutes` → `until` の計算 / `resumeAll` がルール・状態・alarm を消す / alarm ハンドラが `resumeAll` を呼ぶ(`src/test/setup.ts` に `chrome.alarms` と `chrome.tabs.query` のスタブを追加)。
+- vitest `blocking.test.ts` に追加: `allowDomainForSession` が id 950,000 を FIFO 対象にも max id の基準にもしない。
+- e2e(`scripts/e2e/verify-extension.mjs` に追記): `PAUSE_ALL(null)` → 手動ブロック中の example.com が警告ページに行かず開く → `amazom.com` も差し替わらない → `GET_PAUSE_STATE.paused === true` → `UPDATE_SETTINGS` でフィード再同期しても停止ルールが残る → `RESUME_ALL` → example.com が再び警告ページ。
+- 手動(実機 1 回): 5 分停止 → バッジが停止表示 → 5 分後に自動で戻り、バッジも戻る。
+
+### 危うさ
+| 危うさ | 対策 |
+|---|---|
+| 切り忘れ | 時限 + セッション限定で構造的に防ぐ。恒久 OFF は作らない |
+| 停止中にフィッシングを踏む | 利用者が明示的に選んだ状態で、バッジに常時出る。lookalike も止めるのは「割り込みをやめる」の一貫性のため(残す案もあるが、止まる物と止まらない物が混ざる方が混乱する) |
+| 停止中の国別学習 | ルールは積まれるが allow が勝つ。再開後は「初回は通す」が済んだ状態になるだけで、想定内 |
+| Firefox | session rules / alarms は対応済み。バッジの絵文字だけ実機確認 |
+
 ---
 
 ## 6. 危うい点の再検討と対策
@@ -242,14 +330,14 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 2. `zevr-guard-site` の GitHub Actions「Refresh threat feed」を `workflow_dispatch` で実行 → `public/feed/v1/malware.json` から steamcommunity.com / t.me / telegram.me / cdn.jsdelivr.net / raw.githubusercontent.com / community.fandom.com が消えていることを確認。
 3. `manifest.json` / `package.json` を 1.5.13 に上げ、`chore(release): 1.5.13 — feed safelist, allow from warning page` で commit・tag・push(`docs/ai-driven.md` §7 の人の手順)。`npm run build`(`build:data` 込み。安全リスト適用済みの同梱ルールになる)→ zip → Chrome Web Store / Edge / AMO に提出。
 4. 審査通過後、ストアレビューに「1.5.13 で修正しました」と追記。
-5. A/B/C は 1.5.14 として同じ流れ。B の Worker 変更(D1 スキーマ + ルート)は拡張より **先に** デプロイする(古い拡張は叩かないので安全)。
+5. A/B/C/E は 1.5.14 として同じ流れ。B の Worker 変更(D1 スキーマ + ルート)は拡張より **先に** デプロイする(古い拡張は叩かないので安全)。
 
 ---
 
 ## 付録: 触るファイル一覧
 
 拡張(`zevr-guard`):
-`src/background/{visits,blocking,index,feed,risk}.ts`, `src/types/index.ts`, `src/warning/index.tsx`, `src/popup/Popup.tsx`(国別説明文のみ), `src/test/setup.ts`, `src/background/{visits,blocking,risk}.test.ts`, `scripts/{safelist,build-rules}.ts`, `scripts/safelist.manual.json`, `scripts/safelist.test.ts`, `scripts/e2e/verify-extension.mjs`, `_locales/*/messages.json`(24), `.gitignore`(`src/data/malware.meta.json`), `docs/sources/tranco.md`。
+`src/background/{visits,blocking,index,feed,risk,pause,badge}.ts`, `src/types/index.ts`, `src/warning/index.tsx`, `src/popup/Popup.tsx`(国別説明文のみ), `src/test/setup.ts`, `src/background/{visits,blocking,risk}.test.ts`, `scripts/{safelist,build-rules}.ts`, `scripts/safelist.manual.json`, `scripts/safelist.test.ts`, `scripts/e2e/verify-extension.mjs`, `_locales/*/messages.json`(24), `.gitignore`(`src/data/malware.meta.json`), `docs/sources/tranco.md`。
 
 サイト(`zevr-guard-site`):
 `feedback-worker/{schema.sql,src/index.js,stats.sh}`, `.github/workflows/refresh-feed.yml`(変更不要。`build:data` が meta も書く)。

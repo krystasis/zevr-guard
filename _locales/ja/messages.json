@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "確認済みの利用者報告"
   },
+  "reportSafeButton": {
+    "message": "これは安全なサイトです — 誤りを報告"
+  },
+  "reportSafeConfirm": {
+    "message": "このドメインだけを Zevr に送って確認してもらいますか?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "この端末でも許可する"
+  },
+  "reportSafeSend": {
+    "message": "報告を送る"
+  },
+  "reportSafeDone": {
+    "message": "報告しました。ありがとうございます。すべて人が確認します。"
+  },
+  "reportSafeDoneAllowed": {
+    "message": "報告して許可しました。ありがとうございます。すべて人が確認します。"
+  },
   "warningFooter": {
     "message": "Zevr Guardによる保護 · すべての人に安全なブラウジングを"
   },

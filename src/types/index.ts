@@ -101,6 +101,7 @@ export type MessageRequest =
   | { type: 'ALLOW_AND_OPEN'; domain: string }
   | { type: 'GET_BLOCK_CONTEXT'; domain: string; country?: string }
   | { type: 'ALLOW_FOR_SESSION_AND_OPEN'; domain: string }
+  | { type: 'REPORT_FALSE_POSITIVE'; domain: string; context: 'list' | 'soft'; alsoAllow?: boolean }
   | { type: 'DISALLOW_DOMAIN'; domain: string }
   | { type: 'PAUSE_SITE'; host: string }
   | { type: 'RESUME_SITE'; host: string }

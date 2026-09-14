@@ -1,4 +1,5 @@
 import { getDomain, getPublicSuffix } from 'tldts';
+import manualList from './safelist.manual.json';
 
 // ---------------------------------------------------------------------------
 // Feed safelist.
@@ -26,37 +27,40 @@ import { getDomain, getPublicSuffix } from 'tldts';
 // Losing a genuine C2 host that happens to live under a popular apex is an
 // acceptable cost: the user never notices a missing block, but a blocked
 // steamcommunity.com is an uninstall.
+//
+// The rank cut-off is deliberately shallow. Tranco ranks by DNS query volume,
+// so live malware infrastructure earns a rank of its own: in the top 50k we
+// measured okiloveyoupleasedonttouchme.net (#11,453), dontworry.su (#14,230)
+// and dnsrecordsarepowerful.com (#27,967), all of them listed by ThreatFox at
+// the same time. Protecting that far down would unblock working C2. Ranks
+// past the cut-off are only *reported* for human review (reviewCandidates),
+// and confirmed mistakes go in safelist.manual.json.
 // ---------------------------------------------------------------------------
 
 /**
  * Shared hosts on private-suffix providers, where the registrable domain
- * *is* the shared endpoint. Matched exactly or as a parent.
+ * *is* the shared endpoint. Matched exactly or as a parent. Maintained by
+ * hand in safelist.manual.json, fed by reviewed false-positive reports.
  */
-export const SHARED_HOSTS: ReadonlySet<string> = new Set([
-  'raw.githubusercontent.com',
-  'objects.githubusercontent.com',
-  'user-images.githubusercontent.com',
-  'avatars.githubusercontent.com',
-  'gist.githubusercontent.com',
-  'cdn.discordapp.com',
-  'media.discordapp.net',
-  'dl.dropboxusercontent.com',
-  'storage.googleapis.com',
-  'firebasestorage.googleapis.com',
-  'drive.usercontent.google.com',
-  'lh3.googleusercontent.com',
-  'i.imgur.com',
-  'pbs.twimg.com',
-  'cdn.jsdelivr.net',
-  'unpkg.com',
-  'cdnjs.cloudflare.com',
-]);
+export const SHARED_HOSTS: ReadonlySet<string> = new Set(manualList.shared_hosts);
+
+/**
+ * Registrable domains protected along with everything under them, for sites
+ * that sit too far down the Tranco list for the rank check to catch.
+ */
+export const NEVER_BLOCK: ReadonlySet<string> = new Set(manualList.never_block);
 
 export interface SafelistOptions {
   /** Ranked list of registrable domains (Tranco order). */
   popular: Iterable<string>;
-  /** Only the first `limit` entries of `popular` count. Default: all. */
+  /** How far down `popular` counts as protected. Default: all of it. */
   limit?: number;
+  /**
+   * Ranks between `limit` and this are not protected — malware earns Tranco
+   * ranks too — but are surfaced by reviewCandidates() so a human can spot a
+   * genuine mistake and add it to safelist.manual.json.
+   */
+  reviewLimit?: number;
 }
 
 export interface Safelist {
@@ -64,14 +68,25 @@ export interface Safelist {
   isProtected(host: string): boolean;
   /** Reason for the decision, for build logs. Null when blockable. */
   why(host: string): string | null;
+  /**
+   * Blockable hosts whose registrable domain still ranks somewhere in the
+   * review band. Not dropped — just worth a human glance before a popular
+   * site turns out to be blocked for everyone.
+   */
+  reviewCandidates(hosts: string[]): Array<{ host: string; rank: number }>;
 }
 
 export function createSafelist(opts: SafelistOptions): Safelist {
-  const popular = new Set<string>();
+  const protectedLimit = opts.limit ?? Infinity;
+  const reviewLimit = Math.max(opts.reviewLimit ?? 0, Number.isFinite(protectedLimit) ? protectedLimit : 0);
+  const subtree = new Set<string>();
+  const reviewRank = new Map<string, number>();
   let n = 0;
   for (const d of opts.popular) {
-    if (opts.limit !== undefined && n >= opts.limit) break;
-    popular.add(d.toLowerCase());
+    if (n >= reviewLimit && n >= protectedLimit) break;
+    const domain = d.toLowerCase();
+    if (n < protectedLimit) subtree.add(domain);
+    else reviewRank.set(domain, n + 1);
     n += 1;
   }
 
@@ -87,13 +102,15 @@ export function createSafelist(opts: SafelistOptions): Safelist {
     const reg = getDomain(host, { allowPrivateDomains: true });
     if (!reg) return 'unparseable';
 
+    if (NEVER_BLOCK.has(reg)) return `never-block:${reg}`;
+
     // 2. Walk host -> registrable domain (inclusive), stopping there so a
     //    private suffix (workers.dev) never protects its tenants.
     const labels = host.split('.');
     const regLabels = reg.split('.').length;
     for (let i = 0; i <= labels.length - regLabels; i++) {
       const candidate = labels.slice(i).join('.');
-      if (popular.has(candidate)) return `popular:${candidate}`;
+      if (subtree.has(candidate)) return `popular:${candidate}`;
     }
 
     // 3. Curated shared hosts, matched as host or parent.
@@ -105,9 +122,21 @@ export function createSafelist(opts: SafelistOptions): Safelist {
     return null;
   }
 
+  function reviewCandidates(hosts: string[]): Array<{ host: string; rank: number }> {
+    const out: Array<{ host: string; rank: number }> = [];
+    for (const raw of hosts) {
+      const host = raw.toLowerCase().replace(/\.$/, '');
+      const reg = getDomain(host, { allowPrivateDomains: true });
+      const rank = reg ? reviewRank.get(reg) : undefined;
+      if (rank !== undefined) out.push({ host, rank });
+    }
+    return out.sort((a, b) => a.rank - b.rank);
+  }
+
   return {
     why,
     isProtected: (host) => why(host) !== null,
+    reviewCandidates,
   };
 }
 

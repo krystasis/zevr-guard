@@ -6,6 +6,8 @@
 
 ---
 
+> **実装状況(2026-09-14 時点)**: §2〜§5 の A/B/C/D と §6 の R5/R6 はすべてブランチ `fix/feed-safelist-and-allow` に実装・コミット済み。実機 33/33、単体 138 件通過。残るは push・フィード再配信・版上げ(§8)で、いずれも人の作業。R2 は実装中に結論が変わった(下表を読むこと)。
+
 ## 0. 現状(ブランチ `fix/feed-safelist-and-allow`、コミット済み・未 push)
 
 | 変更 | ファイル | 状態 |
@@ -148,11 +150,11 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 
 ### 運用ループ
 - 週1で `stats.sh` を見る → 妥当なものを `scripts/safelist.manual.json` に追加(次項)→ 次の日次フィードから除外。ドメインごとの判断は `docs/sources/tranco.md` の末尾に理由付きで追記。
-- `scripts/safelist.ts` の `SHARED_HOSTS` を `scripts/safelist.manual.json` に外出し:
+- `scripts/safelist.ts` の `SHARED_HOSTS` を `scripts/safelist.manual.json` に外出し済み:
   ```json
   { "shared_hosts": ["raw.githubusercontent.com", ...], "never_block": [] }
   ```
-  `never_block` は登録ドメイン単位(配下も含めて保護)。`createSafelist` は両方を読む。テストは既存を維持しつつ `never_block` の1ケースを追加。
+  `never_block` は登録ドメイン単位(配下も含めて保護)。`createSafelist` は両方を読む。**誤検知の申告を反映する唯一の場所がここ**(R2 のとおり、順位で自動保護してはいけない)。
 
 ### 受け入れ条件
 - vitest: `safelist.test.ts` に `never_block` のケース。
@@ -211,7 +213,7 @@ export async function getSessionAllowedDomains(): Promise<Set<string>>;
 | # | 危うさ | 判断 | 対策 / 実装メモ |
 |---|---|---|---|
 | R1 | 静的ルール無効化後、ブラウザ起動〜セッションルール貼り直しの間だけマルウェア保護が空く | **受容** | `chrome.runtime.onStartup` は登録済み(`index.ts:719`)なので SW は起動直後に走り、同梱データからネット無しで貼る(数十 ms)。`blocking.ts` の `retireStaticMalwareRules` コメントに「起動直後の隙間は onStartup + 同梱データで埋める」と明記。1.5.12 は静的ルールで常時埋めていたので厳密には後退だが、誤検知固定化の害の方が大きい。 |
-| R2 | 安全リストが Tranco 上位1万まで。下位の正規サイトは素通りしない | **対策(小)** | `scripts/safelist.ts` を2段構えに: 上位 10,000 は配下ごと保護(現状)、10,001〜50,000 は **登録ドメインそのものと www. のみ** 保護(配下の個別ホストは残す)。`createSafelist({ popular, subtreeLimit: 10_000, apexLimit: 50_000 })`。スナップショットを 5 万件に伸ばす(`docs/sources/tranco.md` の手順、ビルド専用でパッケージには入らない)。テスト追加: 12,000 位の `example-mid.com` は保護、`foo.example-mid.com` は残る。 |
+| R2 | 安全リストが Tranco 上位1万まで。下位の正規サイトは素通りしない | **設計変更(実装時に判明)** | 当初案(10,001〜50,000 位の登録ドメインも保護)は **危険なので採用しない**。Tranco は DNS 問い合わせ量で順位を付けるため、稼働中のマルウェア基盤が自力で順位を得る。実測: `okiloveyoupleasedonttouchme.net` #11,453 / `dontworry.su` #14,230 / `dnsrecordsarepowerful.com` #27,967 — いずれも同時に ThreatFox 掲載。中位帯を保護すると生きた C2 のブロックを外す。代わりに **保護は上位1万のまま**、1万〜5万位に載るブロック対象は `safelist.reviewCandidates()` が**ビルドログに報告するだけ**にして人が見る。確認できた誤検知は `scripts/safelist.manual.json` の `never_block` に手で入れる。スナップショットは報告のため 5 万件に拡張済み(ビルド専用)。 |
 | R3 | 誤検知が運営に届かない | **機能 B** | — |
 | R4 | 「Allow and continue」は恒久許可。侵害中のサイトを永久に通す | **機能 A** | ソフト変種では「今回だけ」を副導線に、恒久許可は `<details>` の中へ。ハード変種は現状どおり(明示的に「非推奨」表示)。 |
 | R5 | 警告ページは web_accessible。悪意あるページが `?blocked=attacker.example` で開き、利用者に赤い「Allow」を押させれば攻撃者ドメインが許可される | **対策(1.5.13)** | `GET_BLOCK_CONTEXT.blockedByUs` が false なら `AllowAndOpen` / `ReportSafe` / ソフト変種を描画せず、`Go Back` のみ。`isFramed` ガードは維持。 |

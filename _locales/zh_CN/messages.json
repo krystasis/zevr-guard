@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "经审核的用户报告"
   },
+  "reportSafeButton": {
+    "message": "这是安全网站 — 报告误判"
+  },
+  "reportSafeConfirm": {
+    "message": "仅将该域名发送给 Zevr 进行复核？"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "同时在本设备上允许"
+  },
+  "reportSafeSend": {
+    "message": "发送报告"
+  },
+  "reportSafeDone": {
+    "message": "已报告。谢谢 — 每份报告都会人工复核。"
+  },
+  "reportSafeDoneAllowed": {
+    "message": "已报告并允许。谢谢 — 每份报告都会人工复核。"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供保护 · 让每个人都能安全上网"
   },

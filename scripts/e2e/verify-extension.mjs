@@ -214,6 +214,28 @@ await sw.evaluate(async (domain) => {
     check('continue this time creates a session allow', st.allow.includes(`||${feedDomain}`), JSON.stringify(st.allow));
     check('continue this time leaves no permanent allow', st.wl.length === 0, JSON.stringify(st.wl));
   }
+  // "This is a safe site" reports the block and, on request, allows it. The
+  // upstream call is stubbed: the point is the extension's own behaviour.
+  await page.route('https://feedback.zevrhq.com/v1/false-positive', (r) =>
+    r.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': '*' } }));
+  const page2 = await ctx2Page(feedDomain);
+  await page2.locator('summary').first().click().catch(() => {});
+  const reportLink = page2.getByRole('button', { name: /safe site/i });
+  check('warning page offers a false-positive report', (await reportLink.count()) > 0);
+  if ((await reportLink.count()) > 0) {
+    await reportLink.click();
+    await page2.getByRole('button', { name: /Send report/i }).click();
+    await sleep(1500);
+    const wl = await swEval(async () => {
+      const st = await chrome.storage.local.get(null);
+      const v = Object.values(st).find((x) => x && typeof x === 'object' && Array.isArray(x.customWhiteList));
+      return v?.customWhiteList ?? [];
+    });
+    check('reporting with "also allow" whitelists the domain', wl.includes(feedDomain), JSON.stringify(wl));
+    await send({ type: 'DISALLOW_DOMAIN', domain: feedDomain });
+  }
+  await page2.close();
+
   await page.close();
   await swEval(async () => {
     const rules = await chrome.declarativeNetRequest.getSessionRules();

@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "raportări verificate"
   },
+  "reportSafeButton": {
+    "message": "Acest site este sigur — raportează greșeala"
+  },
+  "reportSafeConfirm": {
+    "message": "Trimiți doar acest domeniu la Zevr pentru verificare?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Permite-l și pe acest dispozitiv"
+  },
+  "reportSafeSend": {
+    "message": "Trimite raportul"
+  },
+  "reportSafeDone": {
+    "message": "Raportat. Mulțumim — fiecare raport este verificat manual."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Raportat și permis. Mulțumim — fiecare raport este verificat manual."
+  },
   "warningFooter": {
     "message": "Protejat de Zevr Guard · Navigare sigură pentru toți"
   },

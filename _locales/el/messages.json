@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "ελεγμένες αναφορές χρηστών"
   },
+  "reportSafeButton": {
+    "message": "Αυτός ο ιστότοπος είναι ασφαλής — αναφορά λάθους"
+  },
+  "reportSafeConfirm": {
+    "message": "Να σταλεί μόνο αυτό το domain στη Zevr για έλεγχο;"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Να επιτραπεί και σε αυτή τη συσκευή"
+  },
+  "reportSafeSend": {
+    "message": "Αποστολή αναφοράς"
+  },
+  "reportSafeDone": {
+    "message": "Αναφέρθηκε. Ευχαριστούμε — κάθε αναφορά ελέγχεται από άνθρωπο."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Αναφέρθηκε και επιτράπηκε. Ευχαριστούμε — κάθε αναφορά ελέγχεται από άνθρωπο."
+  },
   "warningFooter": {
     "message": "Προστασία από το Zevr Guard · Ασφαλής περιήγηση για όλους"
   },

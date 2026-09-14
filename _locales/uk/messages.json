@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "перевірені повідомлення користувачів"
   },
+  "reportSafeButton": {
+    "message": "Це безпечний сайт — повідомити про помилку"
+  },
+  "reportSafeConfirm": {
+    "message": "Надіслати до Zevr лише цей домен на перевірку?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Також дозволити на цьому пристрої"
+  },
+  "reportSafeSend": {
+    "message": "Надіслати повідомлення"
+  },
+  "reportSafeDone": {
+    "message": "Надіслано. Дякуємо — кожне повідомлення перевіряє людина."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Надіслано й дозволено. Дякуємо — кожне повідомлення перевіряє людина."
+  },
   "warningFooter": {
     "message": "Під захистом Zevr Guard · Безпечний перегляд для всіх"
   },

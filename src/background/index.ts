@@ -1004,6 +1004,49 @@ chrome.runtime.onMessage.addListener(
           sendResponse({ success: reported, blocked: message.alsoBlock === true });
           break;
         }
+        case 'REPORT_FALSE_POSITIVE': {
+          // The mirror image of REPORT_PHISHING: the user says a block is
+          // wrong. Reports are reviewed by hand before anything reaches the
+          // safelist — taking them automatically would let anyone unblock a
+          // live malware domain by reporting it.
+          const fpDomain = message.domain.trim().toLowerCase();
+          if (!isValidHostname(fpDomain) || !(await classifyBlock(fpDomain)).blockedByUs) {
+            sendResponse({ success: false, allowed: false, url: null });
+            break;
+          }
+          // Honour the user's own choice first; the report is best-effort.
+          if (message.alsoAllow) {
+            await allowDomain(fpDomain).catch(() => {});
+          }
+          const listed = lookupMalwareMeta(fpDomain);
+          let reported = false;
+          try {
+            const res = await fetch('https://feedback.zevrhq.com/v1/false-positive', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                domain: fpDomain,
+                context: message.context,
+                locale: getLocale(),
+                version: chrome.runtime.getManifest().version,
+                source: listed?.s ?? null,
+                feedGeneratedAt: getMalwareFeedGeneratedAt(),
+              }),
+              signal: AbortSignal.timeout(10_000),
+            });
+            reported = res.ok;
+          } catch {
+            reported = false;
+          }
+          sendResponse({
+            success: reported,
+            allowed: message.alsoAllow === true,
+            url: message.alsoAllow
+              ? (resolveResumeUrl(_sender.tab?.id, fpDomain) ?? `https://${fpDomain}/`)
+              : null,
+          });
+          break;
+        }
         case 'GET_PAGE_STATS': {
           const pages = await getPagesCached();
           const page = pages[message.tabId] ?? null;

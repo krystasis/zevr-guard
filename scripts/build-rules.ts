@@ -864,10 +864,22 @@ async function main(): Promise<void> {
   // hosted one bad file (steamcommunity.com, t.me, cdn.jsdelivr.net) must
   // never become a whole-site block. Applied to the seed as well so an
   // entry that slipped through an older build cannot survive via carry-over.
-  const safelist = createSafelist({ popular: await loadTrancoSnapshot() });
+  // Only the top ranks are protected outright: malware earns Tranco ranks of
+  // its own further down (see scripts/safelist.ts). The band below is
+  // reported instead, for a human to glance at.
+  const safelist = createSafelist({
+    popular: await loadTrancoSnapshot(),
+    limit: 10_000,
+    reviewLimit: 50_000,
+  });
   const { kept, dropped } = applySafelist(merged, safelist);
   for (const d of dropped) {
     console.log(`[build-rules] safelist dropped ${d.host} (${d.reason})`);
+  }
+  for (const c of safelist.reviewCandidates(kept)) {
+    console.log(
+      `[build-rules] review: ${c.host} is blocked but ranks #${c.rank} — check it is not a mistake`,
+    );
   }
   const capped = kept.slice(0, Math.floor(URLHAUS_MAX / 2));
 

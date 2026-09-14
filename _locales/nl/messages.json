@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "gecontroleerde meldingen"
   },
+  "reportSafeButton": {
+    "message": "Dit is een veilige site — meld de fout"
+  },
+  "reportSafeConfirm": {
+    "message": "Alleen dit domein ter controle naar Zevr sturen?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Sta het ook toe op dit apparaat"
+  },
+  "reportSafeSend": {
+    "message": "Melding versturen"
+  },
+  "reportSafeDone": {
+    "message": "Gemeld. Bedankt — elke melding wordt met de hand bekeken."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Gemeld en toegestaan. Bedankt — elke melding wordt met de hand bekeken."
+  },
   "warningFooter": {
     "message": "Beschermd door Zevr Guard · Veilig browsen voor iedereen"
   },

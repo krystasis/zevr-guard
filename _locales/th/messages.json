@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "รายงานจากผู้ใช้ที่ตรวจสอบแล้ว"
   },
+  "reportSafeButton": {
+    "message": "นี่คือเว็บไซต์ที่ปลอดภัย — รายงานข้อผิดพลาด"
+  },
+  "reportSafeConfirm": {
+    "message": "ส่งเฉพาะโดเมนนี้ให้ Zevr ตรวจสอบหรือไม่?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "อนุญาตบนอุปกรณ์นี้ด้วย"
+  },
+  "reportSafeSend": {
+    "message": "ส่งรายงาน"
+  },
+  "reportSafeDone": {
+    "message": "ส่งรายงานแล้ว ขอบคุณ — ทุกรายงานมีคนตรวจสอบ"
+  },
+  "reportSafeDoneAllowed": {
+    "message": "ส่งรายงานและอนุญาตแล้ว ขอบคุณ — ทุกรายงานมีคนตรวจสอบ"
+  },
   "warningFooter": {
     "message": "ปกป้องโดย Zevr Guard · การท่องเว็บที่ปลอดภัยสำหรับทุกคน"
   },

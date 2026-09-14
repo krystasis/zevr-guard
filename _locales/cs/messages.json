@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "ověřená hlášení uživatelů"
   },
+  "reportSafeButton": {
+    "message": "Tento web je bezpečný — nahlásit chybu"
+  },
+  "reportSafeConfirm": {
+    "message": "Odeslat k posouzení jen tuto doménu?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Povolit ji i na tomto zařízení"
+  },
+  "reportSafeSend": {
+    "message": "Odeslat hlášení"
+  },
+  "reportSafeDone": {
+    "message": "Nahlášeno. Děkujeme — každé hlášení kontrolujeme ručně."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Nahlášeno a povoleno. Děkujeme — každé hlášení kontrolujeme ručně."
+  },
   "warningFooter": {
     "message": "Chráněno Zevr Guard · Bezpečné prohlížení pro všechny"
   },

@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "reviewed user reports"
   },
+  "reportSafeButton": {
+    "message": "This is a safe site — report the mistake"
+  },
+  "reportSafeConfirm": {
+    "message": "Send this domain (and nothing else) to Zevr for review?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Also allow it on this device"
+  },
+  "reportSafeSend": {
+    "message": "Send report"
+  },
+  "reportSafeDone": {
+    "message": "Reported. Thank you — every report is reviewed by hand."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Reported and allowed. Thank you — every report is reviewed by hand."
+  },
   "warningFooter": {
     "message": "Protected by Zevr Guard · Safe browsing for everyone"
   },

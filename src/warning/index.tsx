@@ -228,6 +228,97 @@ const AllowAndOpen: React.FC = () => {
 // with. Backed by a session-scoped allow rule: it disappears on the next
 // browser restart, so a genuine compromise starts being blocked again by
 // itself, and nothing lands in the permanent allow list.
+// The counterpart to ReportButton: the user telling us a block is wrong.
+// Reports are reviewed by hand upstream — see the background handler.
+const ReportSafeButton: React.FC<{ context: 'list' | 'soft' }> = ({ context }) => {
+  const [state, setState] = useState<'idle' | 'confirm' | 'sending' | 'done' | 'error'>('idle');
+  const [alsoAllow, setAlsoAllow] = useState(true);
+
+  async function send() {
+    setState('sending');
+    try {
+      const res = (await chrome.runtime.sendMessage({
+        type: 'REPORT_FALSE_POSITIVE',
+        domain: blocked,
+        context,
+        alsoAllow,
+      })) as { success?: boolean; allowed?: boolean; url?: string | null } | undefined;
+      if (res?.success || res?.allowed) {
+        setState('done');
+        if (res.allowed && res.url) {
+          const url = res.url;
+          window.setTimeout(() => {
+            window.location.href = url;
+          }, 1500);
+        }
+        return;
+      }
+      setState('error');
+    } catch {
+      setState('error');
+    }
+  }
+
+  if (state === 'done') {
+    return (
+      <div className="py-2 text-center text-xs text-emerald-300">
+        ✓{' '}
+        {alsoAllow
+          ? t('reportSafeDoneAllowed', 'Reported and allowed. Thank you — every report is reviewed by hand.')
+          : t('reportSafeDone', 'Reported. Thank you — every report is reviewed by hand.')}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-3 border-t border-white/[0.06] pt-3 text-center">
+      {state === 'confirm' || state === 'sending' ? (
+        <div className="text-xs text-gray-400">
+          <div className="mb-2">
+            {t('reportSafeConfirm', 'Send this domain (and nothing else) to Zevr for review?')}
+          </div>
+          <label className="mb-3 flex cursor-pointer items-center justify-center gap-2 text-gray-300">
+            <input
+              type="checkbox"
+              checked={alsoAllow}
+              onChange={(e) => setAlsoAllow(e.target.checked)}
+              className="accent-cyan-500"
+            />
+            {t('reportSafeAlsoAllow', 'Also allow it on this device')}
+          </label>
+          <div className="flex justify-center gap-2">
+            <button
+              className="rounded-full bg-cyan-500 px-4 py-1.5 font-bold text-black transition hover:bg-cyan-400 disabled:opacity-50"
+              disabled={state === 'sending'}
+              onClick={() => void send()}
+            >
+              {state === 'sending' ? '…' : t('reportSafeSend', 'Send report')}
+            </button>
+            <button
+              className="rounded-full border border-white/15 px-4 py-1.5 text-gray-300 transition hover:bg-white/[0.06]"
+              onClick={() => setState('idle')}
+            >
+              {t('reportPhishingCancel', 'Cancel')}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          className="text-xs text-cyan-400 underline underline-offset-2 transition hover:text-cyan-200"
+          onClick={() => setState('confirm')}
+        >
+          {t('reportSafeButton', 'This is a safe site — report the mistake')}
+        </button>
+      )}
+      {state === 'error' && (
+        <div className="mt-1 text-[11px] text-amber-300">
+          {t('reportPhishingError', "Couldn't send the report. Please try again later.")}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ContinueOnce: React.FC = () => {
   const [state, setState] = useState<'idle' | 'working' | 'error'>('idle');
   async function go() {
@@ -536,7 +627,10 @@ const Warning: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <AllowAndOpen />
+                <>
+                  <AllowAndOpen />
+                  {ctx?.source === 'feed' && <ReportSafeButton context={soft ? 'soft' : 'list'} />}
+                </>
               )}
             </details>
           )}

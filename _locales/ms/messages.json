@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "laporan pengguna yang disemak"
   },
+  "reportSafeButton": {
+    "message": "Ini tapak yang selamat — laporkan kesilapan"
+  },
+  "reportSafeConfirm": {
+    "message": "Hantar domain ini sahaja kepada Zevr untuk disemak?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Benarkan juga pada peranti ini"
+  },
+  "reportSafeSend": {
+    "message": "Hantar laporan"
+  },
+  "reportSafeDone": {
+    "message": "Dilaporkan. Terima kasih — setiap laporan disemak secara manual."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Dilaporkan dan dibenarkan. Terima kasih — setiap laporan disemak secara manual."
+  },
   "warningFooter": {
     "message": "Dilindungi oleh Zevr Guard · Pelayaran selamat untuk semua"
   },

@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "ellenőrzött felhasználói jelentések"
   },
+  "reportSafeButton": {
+    "message": "Ez biztonságos oldal — tévedés jelentése"
+  },
+  "reportSafeConfirm": {
+    "message": "Csak ezt a domaint küldjük el a Zevrnek ellenőrzésre?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Engedélyezés ezen az eszközön is"
+  },
+  "reportSafeSend": {
+    "message": "Jelentés küldése"
+  },
+  "reportSafeDone": {
+    "message": "Jelentve. Köszönjük — minden jelentést kézzel nézünk át."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Jelentve és engedélyezve. Köszönjük — minden jelentést kézzel nézünk át."
+  },
   "warningFooter": {
     "message": "A Zevr Guard védelme alatt · Biztonságos böngészés mindenkinek"
   },

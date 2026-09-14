@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "báo cáo người dùng đã được xem xét"
   },
+  "reportSafeButton": {
+    "message": "Đây là trang an toàn — báo lỗi nhận diện"
+  },
+  "reportSafeConfirm": {
+    "message": "Chỉ gửi tên miền này tới Zevr để xem xét?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Cho phép trên thiết bị này luôn"
+  },
+  "reportSafeSend": {
+    "message": "Gửi báo cáo"
+  },
+  "reportSafeDone": {
+    "message": "Đã báo cáo. Cảm ơn bạn — mọi báo cáo đều được người xem xét."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Đã báo cáo và cho phép. Cảm ơn bạn — mọi báo cáo đều được người xem xét."
+  },
   "warningFooter": {
     "message": "Được bảo vệ bởi Zevr Guard · Duyệt web an toàn cho mọi người"
   },

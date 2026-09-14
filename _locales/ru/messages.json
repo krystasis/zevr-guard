@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "проверенные сообщения пользователей"
   },
+  "reportSafeButton": {
+    "message": "Это безопасный сайт — сообщить об ошибке"
+  },
+  "reportSafeConfirm": {
+    "message": "Отправить в Zevr только этот домен на проверку?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Также разрешить на этом устройстве"
+  },
+  "reportSafeSend": {
+    "message": "Отправить сообщение"
+  },
+  "reportSafeDone": {
+    "message": "Отправлено. Спасибо — каждое сообщение проверяет человек."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Отправлено и разрешено. Спасибо — каждое сообщение проверяет человек."
+  },
   "warningFooter": {
     "message": "Под защитой Zevr Guard · Безопасный интернет для всех"
   },

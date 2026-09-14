@@ -1,0 +1,23 @@
+{
+  "_comment": "Hand-maintained additions to the feed safelist. shared_hosts: single hosts on a shared provider where the registrable domain IS the shared endpoint, so a block there hits everyone. never_block: registrable domains protected along with everything under them, for sites too far down the Tranco list for the rank check to catch. Both are reviewed by hand from false-positive reports; see docs/design/2026-09-feed-quality-and-warning-ux.md.",
+  "shared_hosts": [
+    "raw.githubusercontent.com",
+    "objects.githubusercontent.com",
+    "user-images.githubusercontent.com",
+    "avatars.githubusercontent.com",
+    "gist.githubusercontent.com",
+    "cdn.discordapp.com",
+    "media.discordapp.net",
+    "dl.dropboxusercontent.com",
+    "storage.googleapis.com",
+    "firebasestorage.googleapis.com",
+    "drive.usercontent.google.com",
+    "lh3.googleusercontent.com",
+    "i.imgur.com",
+    "pbs.twimg.com",
+    "cdn.jsdelivr.net",
+    "unpkg.com",
+    "cdnjs.cloudflare.com"
+  ],
+  "never_block": []
+}

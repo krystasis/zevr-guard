@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "signalements vérifiés"
   },
+  "reportSafeButton": {
+    "message": "Ce site est sûr — signaler l'erreur"
+  },
+  "reportSafeConfirm": {
+    "message": "Envoyer uniquement ce domaine à Zevr pour vérification ?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "L'autoriser aussi sur cet appareil"
+  },
+  "reportSafeSend": {
+    "message": "Envoyer le signalement"
+  },
+  "reportSafeDone": {
+    "message": "Signalé. Merci — chaque signalement est vérifié à la main."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Signalé et autorisé. Merci — chaque signalement est vérifié à la main."
+  },
   "warningFooter": {
     "message": "Protégé par Zevr Guard · Une navigation sûre pour tous"
   },

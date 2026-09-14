@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "zweryfikowane zgłoszenia"
   },
+  "reportSafeButton": {
+    "message": "To bezpieczna witryna — zgłoś pomyłkę"
+  },
+  "reportSafeConfirm": {
+    "message": "Wysłać do Zevr tylko tę domenę do sprawdzenia?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Zezwól też na tym urządzeniu"
+  },
+  "reportSafeSend": {
+    "message": "Wyślij zgłoszenie"
+  },
+  "reportSafeDone": {
+    "message": "Zgłoszono. Dziękujemy — każde zgłoszenie sprawdzamy ręcznie."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Zgłoszono i zezwolono. Dziękujemy — każde zgłoszenie sprawdzamy ręcznie."
+  },
   "warningFooter": {
     "message": "Pod ochroną Zevr Guard · Bezpieczne przeglądanie dla każdego"
   },

@@ -89,3 +89,34 @@ describe('safelist', () => {
     expect(dropped.map((d) => d.host)).toEqual(['steamcommunity.com', 't.me']);
   });
 });
+
+describe('safelist: the review band', () => {
+  // Ranks 1-2 are protected; 3-4 are only reported.
+  const tiered = createSafelist({
+    popular: ['top.com', 'top2.com', 'mid.com', 'mid2.com'],
+    limit: 2,
+    reviewLimit: 4,
+  });
+
+  it('protects the whole subtree of a top-ranked site', () => {
+    expect(tiered.why('top.com')).toBe('popular:top.com');
+    expect(tiered.why('anything.top.com')).toBe('popular:top.com');
+  });
+
+  it('does not protect a domain in the review band', () => {
+    // Tranco ranks live malware too, so a rank this deep proves nothing.
+    expect(tiered.why('mid.com')).toBeNull();
+    expect(tiered.why('www.mid.com')).toBeNull();
+  });
+
+  it('reports review-band domains with their rank', () => {
+    expect(tiered.reviewCandidates(['evil.example', 'mid2.com', 'www.mid.com'])).toEqual([
+      { host: 'www.mid.com', rank: 3 },
+      { host: 'mid2.com', rank: 4 },
+    ]);
+  });
+
+  it('never reports a protected domain', () => {
+    expect(tiered.reviewCandidates(['top.com'])).toEqual([]);
+  });
+});

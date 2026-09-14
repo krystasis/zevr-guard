@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "समीक्षित उपयोगकर्ता रिपोर्ट"
   },
+  "reportSafeButton": {
+    "message": "यह सुरक्षित साइट है — गलती की रिपोर्ट करें"
+  },
+  "reportSafeConfirm": {
+    "message": "समीक्षा के लिए Zevr को केवल यह डोमेन भेजें?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "इसे इस डिवाइस पर भी अनुमति दें"
+  },
+  "reportSafeSend": {
+    "message": "रिपोर्ट भेजें"
+  },
+  "reportSafeDone": {
+    "message": "रिपोर्ट भेजी गई। धन्यवाद — हर रिपोर्ट की जाँच व्यक्ति करता है।"
+  },
+  "reportSafeDoneAllowed": {
+    "message": "रिपोर्ट भेजी और अनुमति दी। धन्यवाद — हर रिपोर्ट की जाँच व्यक्ति करता है।"
+  },
   "warningFooter": {
     "message": "Zevr Guard द्वारा सुरक्षित · सबके लिए सुरक्षित ब्राउज़िंग"
   },

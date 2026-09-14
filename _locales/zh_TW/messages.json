@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "經審核的使用者回報"
   },
+  "reportSafeButton": {
+    "message": "這是安全網站 — 回報誤判"
+  },
+  "reportSafeConfirm": {
+    "message": "僅將此網域傳送給 Zevr 進行複核？"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "同時在本裝置上允許"
+  },
+  "reportSafeSend": {
+    "message": "傳送回報"
+  },
+  "reportSafeDone": {
+    "message": "已回報。謝謝 — 每份回報都會人工複核。"
+  },
+  "reportSafeDoneAllowed": {
+    "message": "已回報並允許。謝謝 — 每份回報都會人工複核。"
+  },
   "warningFooter": {
     "message": "由 Zevr Guard 提供防護 · 讓每個人都能安心瀏覽"
   },

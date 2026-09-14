@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "incelenmiş kullanıcı bildirimleri"
   },
+  "reportSafeButton": {
+    "message": "Bu güvenli bir site — hatayı bildir"
+  },
+  "reportSafeConfirm": {
+    "message": "İnceleme için Zevr'e yalnızca bu alan adı gönderilsin mi?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "Bu cihazda da izin ver"
+  },
+  "reportSafeSend": {
+    "message": "Bildirimi gönder"
+  },
+  "reportSafeDone": {
+    "message": "Bildirildi. Teşekkürler — her bildirim elle incelenir."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "Bildirildi ve izin verildi. Teşekkürler — her bildirim elle incelenir."
+  },
   "warningFooter": {
     "message": "Zevr Guard koruması · Herkes için güvenli gezinme"
   },

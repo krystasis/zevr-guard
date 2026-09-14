@@ -242,6 +242,24 @@
   "warningSourceReports": {
     "message": "검토된 사용자 신고"
   },
+  "reportSafeButton": {
+    "message": "안전한 사이트입니다 — 오류 신고"
+  },
+  "reportSafeConfirm": {
+    "message": "이 도메인만 Zevr에 보내 검토를 요청할까요?"
+  },
+  "reportSafeAlsoAllow": {
+    "message": "이 기기에서도 허용"
+  },
+  "reportSafeSend": {
+    "message": "신고 보내기"
+  },
+  "reportSafeDone": {
+    "message": "신고했습니다. 감사합니다 — 모든 신고는 사람이 검토합니다."
+  },
+  "reportSafeDoneAllowed": {
+    "message": "신고하고 허용했습니다. 감사합니다 — 모든 신고는 사람이 검토합니다."
+  },
   "warningFooter": {
     "message": "Zevr Guard가 보호 중 · 모두를 위한 안전한 브라우징"
   },

@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Chiếm quyền điều khiển trình duyệt hoặc tài khoản của bạn"
   },
+  "warningListTiming": {
+    "message": "Chưa từng kết nối tới tên miền này: việc chặn diễn ra trước khi yêu cầu rời khỏi trình duyệt, nên không có gì được tải về từ đó."
+  },
   "warningGoBack": {
     "message": "Quay lại (An toàn)"
   },

@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Détourner votre navigateur ou vos comptes"
   },
+  "warningListTiming": {
+    "message": "Ce domaine n'a jamais été contacté : le blocage agit avant que la requête ne quitte votre navigateur, donc rien n'en a été téléchargé."
+  },
   "warningGoBack": {
     "message": "Retour (sécurisé)"
   },

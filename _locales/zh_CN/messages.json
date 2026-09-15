@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "劫持你的浏览器或账户"
   },
+  "warningListTiming": {
+    "message": "从未与该域名通信：拦截发生在请求离开浏览器之前，因此没有从它那里下载任何内容。"
+  },
   "warningGoBack": {
     "message": "返回（安全）"
   },

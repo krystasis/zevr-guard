@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Eltérítheti a böngésződet vagy a fiókjaidat"
   },
+  "warningListTiming": {
+    "message": "Ezzel a domainnel nem jött létre kapcsolat: a tiltás azelőtt lép életbe, hogy a kérés elhagyná a böngészőt, így semmi nem töltődött le róla."
+  },
   "warningGoBack": {
     "message": "Vissza (biztonságos)"
   },

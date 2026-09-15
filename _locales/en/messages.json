@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Hijack your browser or accounts"
   },
+  "warningListTiming": {
+    "message": "This domain was never contacted: the block happens before the request leaves your browser, so nothing was downloaded from it."
+  },
   "warningGoBack": {
     "message": "Go Back (Safe)"
   },

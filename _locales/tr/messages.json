@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Tarayıcınızın veya hesaplarınızın ele geçirilmesi"
   },
+  "warningListTiming": {
+    "message": "Bu alan adına hiç bağlanılmadı: engelleme, istek tarayıcınızdan çıkmadan önce devreye girer; oradan hiçbir şey indirilmedi."
+  },
   "warningGoBack": {
     "message": "Geri Dön (Güvenli)"
   },

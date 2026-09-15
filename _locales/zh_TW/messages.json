@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "挾持你的瀏覽器或帳號"
   },
+  "warningListTiming": {
+    "message": "從未與此網域通訊：封鎖發生在請求離開瀏覽器之前，因此沒有從它下載任何內容。"
+  },
   "warningGoBack": {
     "message": "返回安全頁面"
   },

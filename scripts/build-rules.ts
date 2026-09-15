@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveOwner } from '../src/background/companies';
+import { getPublicSuffix } from 'tldts';
 import { applySafelist, createSafelist } from './safelist';
 import { FEED_MAX_DOMAINS } from '../src/shared/limits';
 // `s` is omitted for domains carried over from a seed that predates this file:
@@ -28,6 +29,9 @@ const MALWARE_META_PATH = resolve(ROOT, 'src/data/malware.meta.json');
 // what arrives is not what we published.
 const POPULAR_PATH = resolve(ROOT, 'src/data/popular.json');
 const POPULAR_COUNT = 10_000;
+// The tour's own harmless "threat", deliberately listed so the guided tour on
+// the site can show a block happening. The client guard must never drop it.
+const TOUR_TEST_DOMAIN = 'zevr-tour-threat.krystasis12.workers.dev';
 const BLOCK_RULES_PATH = resolve(ROOT, 'public/rules/block_rules.json');
 const ADS_RULES_PATH = resolve(ROOT, 'public/rules/ads_rules.json');
 const TRACKING_RULES_PATH = resolve(ROOT, 'public/rules/tracking_rules.json');
@@ -198,8 +202,8 @@ async function fetchURLhausDomains(): Promise<string[]> {
       .split('\n')
       .map((l) => l.trim())
       .filter((l) => l && !l.startsWith('#'))
-      .map((l) => l.replace(/^127\.0\.0\.1\s+/, ''))
-      .filter((d) => /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(d));
+      .map((l) => l.replace(/^127\.0\.0\.1\s+/, '').toLowerCase())
+      .filter((d) => /^[a-z0-9.-]+\.[a-z]{2,}$/.test(d));
     return Array.from(new Set(domains));
   } catch (err) {
     console.warn(
@@ -698,6 +702,33 @@ async function fetchEasyListDomains(): Promise<TrackerDB> {
   return fetchABPDomains(EASYLIST_URL, 'EasyList');
 }
 
+/**
+ * The popular-domain guard shipped to the extension. It cannot run the public
+ * suffix list itself, so the split is made here:
+ *
+ * - `subtree` — ordinary sites. Anything under them is the same site, so a
+ *   feed entry naming `login.steamcommunity.com` is refused along with the
+ *   apex.
+ * - `apexOnly` — shared hosting (workers.dev, duckdns.org, on.aws …). Every
+ *   tenant is a different site and the feed is full of malicious ones, so only
+ *   a rule naming the provider itself is refused.
+ * - `pinned` — ours, and must survive whatever the lists say.
+ */
+function buildPopularGuard(tranco: string[]): {
+  subtree: string[];
+  apexOnly: string[];
+  pinned: string[];
+} {
+  const subtree: string[] = [];
+  const apexOnly: string[] = [];
+  for (const domain of tranco.slice(0, POPULAR_COUNT)) {
+    const isSharedSuffix =
+      getPublicSuffix(domain, { allowPrivateDomains: true }) === domain;
+    (isSharedSuffix ? apexOnly : subtree).push(domain);
+  }
+  return { subtree, apexOnly, pinned: [TOUR_TEST_DOMAIN] };
+}
+
 function buildCategoryRules(domains: string[]): BlockRule[] {
   const rules: BlockRule[] = [];
   // NB: main_frame stays unblocked. Omitting resourceTypes matches every
@@ -891,7 +922,6 @@ async function main(): Promise<void> {
   // zevrhq.com/tour — the EICAR of this feed. Listing it lets users watch
   // the auto-block work against a real (but safe) "threat" without ever
   // touching actual malware. First so the session-rule cap can't evict it.
-  const TOUR_TEST_DOMAIN = 'zevr-tour-threat.krystasis12.workers.dev';
 
   // Interleave the two live feeds so ThreatFox's unique IOCs are not entirely
   // crowded out of the capped set by URLhaus, then top up from the seed.
@@ -938,7 +968,7 @@ async function main(): Promise<void> {
 
   await writeFile(MALWARE_SEED_PATH, JSON.stringify(capped, null, 2) + '\n');
 
-  await writeFile(POPULAR_PATH, JSON.stringify(tranco.slice(0, POPULAR_COUNT)));
+  await writeFile(POPULAR_PATH, JSON.stringify(buildPopularGuard(tranco)));
 
   const meta = buildMalwareMeta(
     capped,

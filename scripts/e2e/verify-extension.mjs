@@ -11,7 +11,7 @@
 //    sends to itself, so extension messages are sent from an extension PAGE.
 import { chromium } from 'playwright';
 import { startFixtureServer } from './fixture-server.mjs';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -524,20 +524,45 @@ await sw.evaluate(async (domain) => {
 
 // --- 5h. the re-review findings, each with its own probe ------------------
 {
-  // A1: every listed domain has rules behind it. The tail used to be reported
-  // as dangerous with nothing blocking it.
+  // A1: every domain the extension considers listed has rules behind it. The
+  // tail used to be reported as dangerous with nothing blocking it.
+  //
+  // The list is read here rather than fetched from inside the extension:
+  // src/data/ is not web-accessible, so that fetch always failed and the
+  // check passed on a null — which is how it missed the guard dropping
+  // tenants of shared hosts.
   const budget = await swEval(async () => {
     const session = await chrome.declarativeNetRequest.getSessionRules();
     const feed = session.filter((r) => r.id < 900_000);
-    const domains = new Set(feed.map((r) => r.condition.urlFilter));
-    return { rules: feed.length, domains: domains.size };
+    return { domains: new Set(feed.map((r) => r.condition.urlFilter)).size };
   });
-  const listed = await swEval(async () => {
-    const res = await fetch(chrome.runtime.getURL('src/data/malware.json')).catch(() => null);
-    return res ? (await res.json()).length : null;
+  const bundled = JSON.parse(
+    readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../src/data/malware.json'), 'utf8'),
+  );
+  // The live feed usually supersedes the bundled list, so compare against
+  // whichever the worker actually applied.
+  const applied = await swEval(async () => {
+    const stored = (await chrome.storage.local.get('zg.feed.malware.v2'))['zg.feed.malware.v2'];
+    return Array.isArray(stored) ? stored.length : null;
   });
+  const expected = applied ?? bundled.length;
   check('every listed malware domain has rules behind it',
-    listed === null || budget.domains === listed, `${budget.domains} covered / ${listed} listed`);
+    budget.domains === expected, `${budget.domains} covered / ${expected} listed`);
+  check('the list is big enough to be the real feed', expected > 1000, `${expected}`);
+
+  // The tour on the site depends on this one being blocked. The client guard
+  // used to drop it along with every other workers.dev tenant.
+  const tourBlocked = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getSessionRules()).some(
+      (r) => r.condition.urlFilter === '||zevr-tour-threat.krystasis12.workers.dev',
+    ));
+  check("the site tour's demo domain is still blocked", tourBlocked);
+
+  // ...and tenants of shared hosts in general survive the guard.
+  const tenants = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getSessionRules())
+      .filter((r) => (r.condition.urlFilter ?? '').endsWith('.workers.dev')).length);
+  check('phishing hosts on shared providers are not thrown away', tenants > 0, `${tenants} tenants`);
 
   // A2: the country unblock is gated on our own rules, not the page's params.
   const spoof = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'not-blocked-by-us.example' })).context;
@@ -683,6 +708,14 @@ await sw.evaluate(async (domain) => {
   check('review 3: a blocked request never reaches the network',
     timings.blocked < 20 && timings.control > timings.blocked,
     `blocked ${Math.round(timings.blocked)}ms vs control ${Math.round(timings.control)}ms`);
+  // ...and the warning page has to say so, on the variant the reviewer saw.
+  await send({ type: 'BLOCK_DOMAIN', domain: 'example.net' });
+  await sleep(400);
+  await page.goto('https://example.net/', { waitUntil: 'commit', timeout: 20000 }).catch(() => {});
+  await sleep(1200);
+  check('review 3: the warning page says the request never left',
+    (await page.getByText(/never contacted|before the request leaves/i).count()) > 0, page.url());
+
   await send({ type: 'UNBLOCK_DOMAIN', domain: 'example.net' });
   await page.close();
 }

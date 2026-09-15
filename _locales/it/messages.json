@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Prendere il controllo del browser o dei tuoi account"
   },
+  "warningListTiming": {
+    "message": "Questo dominio non è mai stato contattato: il blocco agisce prima che la richiesta lasci il browser, quindi non è stato scaricato nulla."
+  },
   "warningGoBack": {
     "message": "Torna indietro (sicuro)"
   },

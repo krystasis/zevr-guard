@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "브라우저·계정 하이재킹"
   },
+  "warningListTiming": {
+    "message": "이 도메인과는 통신하지 않았습니다. 차단은 요청이 브라우저를 떠나기 전에 이뤄지므로 이곳에서 받은 것은 없습니다."
+  },
   "warningGoBack": {
     "message": "돌아가기 (안전)"
   },

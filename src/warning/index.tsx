@@ -628,6 +628,12 @@ const Warning: React.FC = () => {
                 <li>{t('warningListItem2', 'Steal your passwords or personal data')}</li>
                 <li>{t('warningListItem3', 'Hijack your browser or accounts')}</li>
               </ul>
+              <p className="mt-4 border-t border-white/[0.06] pt-3 text-xs leading-relaxed text-gray-600">
+                {t(
+                  'warningListTiming',
+                  'This domain was never contacted: the block happens before the request leaves your browser, so nothing was downloaded from it.',
+                )}
+              </p>
               {ctx && <SourceLine ctx={ctx} />}
             </>
           )}

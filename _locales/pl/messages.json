@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Przejąć Twoją przeglądarkę lub konta"
   },
+  "warningListTiming": {
+    "message": "Z tą domeną nigdy się nie połączono: blokada działa, zanim żądanie opuści przeglądarkę, więc nic z niej nie pobrano."
+  },
   "warningGoBack": {
     "message": "Wróć (bezpiecznie)"
   },

@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Je browser of accounts kapen"
   },
+  "warningListTiming": {
+    "message": "Dit domein is nooit benaderd: de blokkering werkt voordat het verzoek je browser verlaat, dus er is niets van gedownload."
+  },
   "warningGoBack": {
     "message": "Ga terug (veilig)"
   },

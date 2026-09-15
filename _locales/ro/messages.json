@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Prelua controlul browserului sau al conturilor tale"
   },
+  "warningListTiming": {
+    "message": "Acest domeniu nu a fost contactat niciodată: blocarea acționează înainte ca cererea să iasă din browser, deci nu s-a descărcat nimic de la el."
+  },
   "warningGoBack": {
     "message": "Înapoi (sigur)"
   },

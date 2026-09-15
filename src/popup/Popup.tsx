@@ -1979,7 +1979,7 @@ const SettingsPanel: React.FC<{
             <div className="text-[10px] text-gray-500 pb-1">
               {t(
                 'settingsBlockedCountriesHint',
-                'Domains are blocked as soon as traffic from these countries is observed.',
+                'The first request to a new site goes through so its country can be identified; from then on that domain is blocked.',
               )}
             </div>
             <div className="max-h-[140px] overflow-y-auto border border-red-900/30 rounded bg-black/30 mb-2">

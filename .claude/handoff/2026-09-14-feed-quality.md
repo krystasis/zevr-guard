@@ -1,11 +1,11 @@
 # 引き継ぎ: ストアレビュー対応(steamcommunity.com 誤ブロック)— 2026-09-14
 
 ## 一言で
-レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。2026-09-14 の再レビューで出た A 優先 7 件 / B 5 件 / C も **すべて対応済み**(経緯は `.claude/handoff/2026-09-14-review-fixes.md`)。**2026-09-15 のリリース前レビューで必須 2 件が出た → `.claude/handoff/2026-09-15-prerelease-review.md`(次の担当はそこから)**。それが済んだら push・Worker デプロイ・フィード再配信・版上げ(人の作業)。
+レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。2026-09-14 の再レビューで出た A 優先 7 件 / B 5 件 / C も **すべて対応済み**(経緯は `.claude/handoff/2026-09-14-review-fixes.md`)。2026-09-15 のリリース前レビューで出た必須 2 件・任意 4 件も対応済み(`.claude/handoff/2026-09-15-prerelease-review.md`)。残りは push・Worker デプロイ・フィード再配信・版上げで、**すべて人の作業**。
 
 ## いまの状態
 - ブランチ `fix/feed-safelist-and-allow`(main から数コミット)。`git log main..HEAD` で内容確認。**コミット署名(Co-Authored-By 等)は付けない方針**(オーナー指示)。
-- 通っているもの: `npm test`(168件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`npm run e2e`(**117/117**)。
+- 通っているもの: `npm test`(170件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`npm run e2e`(**122/122**、3 回連続)。
 - 実機検証は `/e2e-check` スキル(`.claude/skills/e2e-check/`)から回す。既定は画面に出ないヘッドレスで、`show` / `offscreen` も同じ判定になることを確認済み。
 - 手で確認するときは `scripts/dev/build-variant.sh <ref> <label>` で任意のコミットを別フォルダに出せる(`chrome://extensions` にラベル付きで並ぶ)。**古いコミットも今日のデータでビルドされる**ので、当時の誤ブロック再現にはストア版 1.5.12 を有効にすること。
 - 未 push、未リリース。ストア版 1.5.12 は静的ルールに steamcommunity.com が焼かれたまま。**1.5.13 が届くまで利用者側は直らない**。

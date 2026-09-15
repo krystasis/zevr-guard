@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Sequestrar seu navegador ou suas contas"
   },
+  "warningListTiming": {
+    "message": "Este domínio nunca foi contatado: o bloqueio age antes de a requisição sair do navegador, então nada foi baixado dele."
+  },
   "warningGoBack": {
     "message": "Voltar (seguro)"
   },

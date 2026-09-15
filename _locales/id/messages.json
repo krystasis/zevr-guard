@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Membajak browser atau akun Anda"
   },
+  "warningListTiming": {
+    "message": "Domain ini tidak pernah dihubungi: pemblokiran terjadi sebelum permintaan keluar dari peramban, jadi tidak ada yang diunduh darinya."
+  },
   "warningGoBack": {
     "message": "Kembali (Aman)"
   },

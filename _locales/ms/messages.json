@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Merampas pelayar atau akaun anda"
   },
+  "warningListTiming": {
+    "message": "Domain ini tidak pernah dihubungi: sekatan berlaku sebelum permintaan keluar daripada pelayar, jadi tiada apa-apa dimuat turun daripadanya."
+  },
   "warningGoBack": {
     "message": "Kembali (Selamat)"
   },

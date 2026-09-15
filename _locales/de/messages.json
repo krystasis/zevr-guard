@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Deinen Browser oder deine Konten kapern"
   },
+  "warningListTiming": {
+    "message": "Diese Domain wurde nie kontaktiert: Die Sperre greift, bevor die Anfrage deinen Browser verlässt — es wurde nichts von dort geladen."
+  },
   "warningGoBack": {
     "message": "Zurück (sicher)"
   },

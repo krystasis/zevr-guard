@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "ブラウザ/アカウントを乗っ取られる"
   },
+  "warningListTiming": {
+    "message": "このドメインへの通信は行われていません。ブロックはリクエストがブラウザから出る前に働くため、ここから何かを取得したことはありません。"
+  },
   "warningGoBack": {
     "message": "戻る（安全）"
   },

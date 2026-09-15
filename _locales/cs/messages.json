@@ -166,6 +166,9 @@
   "warningListItem3": {
     "message": "Ovládnout váš prohlížeč nebo účty"
   },
+  "warningListTiming": {
+    "message": "S touto doménou nikdy nedošlo ke spojení: blokování zabírá dřív, než požadavek opustí prohlížeč, takže se z ní nic nestáhlo."
+  },
   "warningGoBack": {
     "message": "Zpět (bezpečné)"
   },

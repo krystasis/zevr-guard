@@ -6,7 +6,11 @@ import { sanitizeMalwareFeed, setPopularDomains } from './feedguard';
 // rebuilt from a branch without the safelist and steamcommunity.com came back
 // — a patched client applied it without question. These tests pin the fix.
 beforeEach(() => {
-  setPopularDomains(['steamcommunity.com', 't.me', 'google.com', 'workers.dev']);
+  setPopularDomains({
+    subtree: ['steamcommunity.com', 't.me', 'google.com'],
+    apexOnly: ['workers.dev'],
+    pinned: ['zevr-tour-threat.krystasis12.workers.dev'],
+  });
 });
 
 describe('sanitizeMalwareFeed', () => {
@@ -25,14 +29,19 @@ describe('sanitizeMalwareFeed', () => {
     expect(kept).toEqual(['ok.example']);
   });
 
-  it('keeps a tenant whose own name is the registrable domain', () => {
-    // `workers.dev` is popular, but each tenant is a separate site and the
-    // feed is full of them. Only an entry that would take the provider down
-    // is refused — matching how the build-time safelist reasons.
-    const { kept } = sanitizeMalwareFeed(['workers.dev', 'phish.workers.dev']);
-    expect(kept).toEqual([]);
-    // (the build safelist keeps tenants; the client is deliberately stricter,
-    // because here we cannot tell a private suffix from an ordinary domain)
+  it('keeps tenants of a shared host, refusing only the host itself', () => {
+    // Blocking `||workers.dev` would take every tenant down; blocking one
+    // tenant is exactly what the feed is for. Treating the two the same threw
+    // away 13 real phishing hosts from a single day's feed — and the tour's
+    // own demo domain with them.
+    const { kept, dropped } = sanitizeMalwareFeed(['workers.dev', 'phish.workers.dev']);
+    expect(kept).toEqual(['phish.workers.dev']);
+    expect(dropped.map((d) => d.reason)).toEqual(['shared-suffix:workers.dev']);
+  });
+
+  it('keeps the tour domain, which is listed on purpose', () => {
+    const { kept } = sanitizeMalwareFeed(['zevr-tour-threat.krystasis12.workers.dev']);
+    expect(kept).toEqual(['zevr-tour-threat.krystasis12.workers.dev']);
   });
 
   it('drops malformed entries rather than letting them fail the whole write', () => {
@@ -61,5 +70,18 @@ describe('sanitizeMalwareFeed', () => {
   it('returns nothing for a payload that is not a list', () => {
     expect(sanitizeMalwareFeed({ oops: true }).kept).toEqual([]);
     expect(sanitizeMalwareFeed(null).kept).toEqual([]);
+  });
+});
+
+describe('the list can never outgrow the rules', () => {
+  it('truncates a feed longer than the mirror can carry', async () => {
+    // Otherwise isMalware() calls the surplus dangerous while nothing blocks
+    // it, and the popup reports blocks that never happened.
+    const { FEED_MAX_DOMAINS } = await import('../shared/limits');
+    setPopularDomains(null);
+    const list = Array.from({ length: FEED_MAX_DOMAINS + 50 }, (_, i) => `d${i}.example`);
+    const { kept, dropped } = sanitizeMalwareFeed(list);
+    expect(kept).toHaveLength(FEED_MAX_DOMAINS);
+    expect(dropped.filter((d) => d.reason === 'over-budget')).toHaveLength(50);
   });
 });

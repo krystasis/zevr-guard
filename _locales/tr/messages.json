@@ -246,7 +246,7 @@
     "message": "Bu güvenli bir site — hatayı bildir"
   },
   "reportSafeConfirm": {
-    "message": "İnceleme için Zevr'e yalnızca bu alan adı gönderilsin mi?"
+    "message": "Bu alan adı inceleme için Zevr'e gönderilsin mi? Sizinle veya gezinmenizle ilgili hiçbir şey gönderilmez."
   },
   "reportSafeAlsoAllow": {
     "message": "Bu cihazda da izin ver"

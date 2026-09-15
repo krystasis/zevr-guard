@@ -246,7 +246,7 @@
     "message": "Este sitio es seguro — informar del error"
   },
   "reportSafeConfirm": {
-    "message": "¿Enviar solo este dominio a Zevr para su revisión?"
+    "message": "¿Enviar este dominio a Zevr para su revisión? No se envía nada sobre ti ni sobre tu navegación."
   },
   "reportSafeAlsoAllow": {
     "message": "Permitirlo también en este dispositivo"

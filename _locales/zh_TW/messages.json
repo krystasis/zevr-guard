@@ -246,7 +246,7 @@
     "message": "這是安全網站 — 回報誤判"
   },
   "reportSafeConfirm": {
-    "message": "僅將此網域傳送給 Zevr 進行複核？"
+    "message": "將此網域傳送給 Zevr 複核？不會傳送任何與你或你的瀏覽有關的資訊。"
   },
   "reportSafeAlsoAllow": {
     "message": "同時在本裝置上允許"

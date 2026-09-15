@@ -246,7 +246,7 @@
     "message": "Ini situs yang aman — laporkan kekeliruan"
   },
   "reportSafeConfirm": {
-    "message": "Kirim hanya domain ini ke Zevr untuk ditinjau?"
+    "message": "Kirim domain ini ke Zevr untuk ditinjau? Tidak ada informasi tentang Anda atau penelusuran Anda yang dikirim."
   },
   "reportSafeAlsoAllow": {
     "message": "Izinkan juga di perangkat ini"

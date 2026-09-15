@@ -246,7 +246,7 @@
     "message": "Dit is een veilige site — meld de fout"
   },
   "reportSafeConfirm": {
-    "message": "Alleen dit domein ter controle naar Zevr sturen?"
+    "message": "Dit domein ter controle naar Zevr sturen? Er wordt niets over jou of je surfgedrag verzonden."
   },
   "reportSafeAlsoAllow": {
     "message": "Sta het ook toe op dit apparaat"

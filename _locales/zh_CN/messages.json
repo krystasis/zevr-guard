@@ -246,7 +246,7 @@
     "message": "这是安全网站 — 报告误判"
   },
   "reportSafeConfirm": {
-    "message": "仅将该域名发送给 Zevr 进行复核？"
+    "message": "将该域名发送给 Zevr 复核？不会发送任何与你或你的浏览有关的信息。"
   },
   "reportSafeAlsoAllow": {
     "message": "同时在本设备上允许"

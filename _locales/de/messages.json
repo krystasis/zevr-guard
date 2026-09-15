@@ -246,7 +246,7 @@
     "message": "Das ist eine sichere Website — Fehler melden"
   },
   "reportSafeConfirm": {
-    "message": "Nur diese Domain zur Prüfung an Zevr senden?"
+    "message": "Diese Domain zur Prüfung an Zevr senden? Nichts über dich oder dein Surfen wird gesendet."
   },
   "reportSafeAlsoAllow": {
     "message": "Auch auf diesem Gerät zulassen"

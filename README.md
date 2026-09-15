@@ -41,7 +41,8 @@ If you want to verify this, the code in this repository is the code that ships i
 
 - the threat-DB update in [`src/background/feed.ts`](./src/background/feed.ts) (anonymous, daily, from Zevr's own CDN);
 - an approximate-location lookup at `https://feedback.zevrhq.com/v1/whereami` in [`src/background/index.ts`](./src/background/index.ts) — Zevr's own CDN returns the coarse location Cloudflare already resolved from the request, so the map can draw a "you are here" marker. It sends nothing about you or the sites you visit, contacts no third party, is cached after the first call, and stores nothing server-side;
-- the phishing-report submission in [`src/background/index.ts`](./src/background/index.ts) — sent **only when you explicitly click "Report as phishing"**, and containing only the reported domain name, never the page you were on or anything about you.
+- the phishing-report submission in [`src/background/index.ts`](./src/background/index.ts) — sent **only when you explicitly click "Report as phishing"**, and containing only the reported domain name, never the page you were on or anything about you;
+- the false-positive report in [`src/background/index.ts`](./src/background/index.ts) — sent **only when you explicitly click "This is a safe site — report the mistake"** on a warning page. It carries the domain you are disputing, which threat list named it, when that list was built, and the extension version — enough to find the mistake and fix it. Everything in it describes the domain and the list entry; nothing describes you, your language, or the rest of your browsing.
 
 Every other `fetch(` targets assets bundled inside the extension package. The lookalike phishing heuristics in [`src/background/lookalike.ts`](./src/background/lookalike.ts), the password-entry guard, and country blocking all run entirely on-device.
 

@@ -246,7 +246,7 @@
     "message": "This is a safe site — report the mistake"
   },
   "reportSafeConfirm": {
-    "message": "Send this domain (and nothing else) to Zevr for review?"
+    "message": "Send this domain to Zevr for review? Nothing about you or your browsing is sent."
   },
   "reportSafeAlsoAllow": {
     "message": "Also allow it on this device"

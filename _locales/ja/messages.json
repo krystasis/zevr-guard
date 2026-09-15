@@ -246,7 +246,7 @@
     "message": "これは安全なサイトです — 誤りを報告"
   },
   "reportSafeConfirm": {
-    "message": "このドメインだけを Zevr に送って確認してもらいますか?"
+    "message": "このドメインを Zevr に送って確認してもらいますか? あなたや閲覧内容に関する情報は送りません。"
   },
   "reportSafeAlsoAllow": {
     "message": "この端末でも許可する"

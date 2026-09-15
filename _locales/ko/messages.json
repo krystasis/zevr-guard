@@ -246,7 +246,7 @@
     "message": "안전한 사이트입니다 — 오류 신고"
   },
   "reportSafeConfirm": {
-    "message": "이 도메인만 Zevr에 보내 검토를 요청할까요?"
+    "message": "이 도메인을 Zevr에 보내 검토를 요청할까요? 사용자나 탐색 내용에 관한 정보는 보내지 않습니다."
   },
   "reportSafeAlsoAllow": {
     "message": "이 기기에서도 허용"

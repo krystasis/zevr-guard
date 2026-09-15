@@ -246,7 +246,7 @@
     "message": "Tento web je bezpečný — nahlásit chybu"
   },
   "reportSafeConfirm": {
-    "message": "Odeslat k posouzení jen tuto doménu?"
+    "message": "Odeslat tuto doménu k posouzení? Nic o vás ani o vašem prohlížení se neodesílá."
   },
   "reportSafeAlsoAllow": {
     "message": "Povolit ji i na tomto zařízení"

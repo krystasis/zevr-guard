@@ -246,7 +246,7 @@
     "message": "To bezpieczna witryna — zgłoś pomyłkę"
   },
   "reportSafeConfirm": {
-    "message": "Wysłać do Zevr tylko tę domenę do sprawdzenia?"
+    "message": "Wysłać tę domenę do Zevr do sprawdzenia? Nic o Tobie ani o Twoim przeglądaniu nie jest wysyłane."
   },
   "reportSafeAlsoAllow": {
     "message": "Zezwól też na tym urządzeniu"

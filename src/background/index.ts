@@ -1158,10 +1158,14 @@ chrome.runtime.onMessage.addListener(
             const res = await fetch('https://feedback.zevrhq.com/v1/false-positive', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
+              // Everything here describes the disputed domain and the list
+              // entry behind it — enough to find the mistake. Nothing about
+              // the person reporting: their language would be a weak
+              // fingerprint, and whether they are a regular of the site says
+              // something about their browsing, which is the one thing this
+              // extension promises never to send.
               body: JSON.stringify({
                 domain: fpDomain,
-                context: message.context,
-                locale: getLocale(),
                 version: chrome.runtime.getManifest().version,
                 source: listed?.s ?? null,
                 feedGeneratedAt: getMalwareFeedGeneratedAt(),

@@ -246,7 +246,7 @@
     "message": "Đây là trang an toàn — báo lỗi nhận diện"
   },
   "reportSafeConfirm": {
-    "message": "Chỉ gửi tên miền này tới Zevr để xem xét?"
+    "message": "Gửi tên miền này tới Zevr để xem xét? Không gửi bất kỳ thông tin nào về bạn hoặc việc duyệt web của bạn."
   },
   "reportSafeAlsoAllow": {
     "message": "Cho phép trên thiết bị này luôn"

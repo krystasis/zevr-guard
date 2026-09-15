@@ -246,7 +246,7 @@
     "message": "Acest site este sigur — raportează greșeala"
   },
   "reportSafeConfirm": {
-    "message": "Trimiți doar acest domeniu la Zevr pentru verificare?"
+    "message": "Trimiți acest domeniu la Zevr pentru verificare? Nu se trimite nimic despre tine sau navigarea ta."
   },
   "reportSafeAlsoAllow": {
     "message": "Permite-l și pe acest dispozitiv"

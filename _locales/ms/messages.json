@@ -246,7 +246,7 @@
     "message": "Ini tapak yang selamat — laporkan kesilapan"
   },
   "reportSafeConfirm": {
-    "message": "Hantar domain ini sahaja kepada Zevr untuk disemak?"
+    "message": "Hantar domain ini kepada Zevr untuk disemak? Tiada maklumat tentang anda atau pelayaran anda dihantar."
   },
   "reportSafeAlsoAllow": {
     "message": "Benarkan juga pada peranti ini"

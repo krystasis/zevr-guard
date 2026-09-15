@@ -246,7 +246,7 @@
     "message": "Ez biztonságos oldal — tévedés jelentése"
   },
   "reportSafeConfirm": {
-    "message": "Csak ezt a domaint küldjük el a Zevrnek ellenőrzésre?"
+    "message": "Elküldjük ezt a domaint a Zevrnek ellenőrzésre? Rólad és a böngészésedről semmit nem küldünk."
   },
   "reportSafeAlsoAllow": {
     "message": "Engedélyezés ezen az eszközön is"

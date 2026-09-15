@@ -1,7 +1,7 @@
 # 引き継ぎ: ストアレビュー対応(steamcommunity.com 誤ブロック)— 2026-09-14
 
 ## 一言で
-レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。2026-09-14 の再レビューで出た A 優先 7 件 / B 5 件 / C も **すべて対応済み**(経緯は `.claude/handoff/2026-09-14-review-fixes.md`)。2026-09-15 のリリース前レビューで出た必須 2 件・任意 4 件も対応済み(`.claude/handoff/2026-09-15-prerelease-review.md`)。**2026-09-15: 1.5.13 として公開済み**(両リポジトリ main にマージ・push、タグ `v1.5.13`、フィード再配信済み、zip は `release/`)。残るはストアへのアップロードと `feedback-worker` のデプロイのみ。後者は Cloudflare の別アカウント(`krystasis12@gmail.com`)が要る。
+レビュー「steamcommunity.com をブロック / 許可できない / 取得後にブロック」への対応は **A/B/C/D/E + R5/R6 まで全部ブランチ `fix/feed-safelist-and-allow` に実装済み(未 push)**。2026-09-14 の再レビューで出た A 優先 7 件 / B 5 件 / C も **すべて対応済み**(経緯は `.claude/handoff/2026-09-14-review-fixes.md`)。2026-09-15 のリリース前レビューで出た必須 2 件・任意 4 件も対応済み(`.claude/handoff/2026-09-15-prerelease-review.md`)。**2026-09-15: 1.5.13 として公開済み**(両リポジトリ main にマージ・push、タグ `v1.5.13`、フィード再配信済み、zip は `release/`)。`feedback-worker` もデプロイ済み(本番で全経路を確認)。**残るはストアへの zip アップロードのみ**。
 
 ## いまの状態
 - ブランチ `fix/feed-safelist-and-allow`(main から数コミット)。`git log main..HEAD` で内容確認。**コミット署名(Co-Authored-By 等)は付けない方針**(オーナー指示)。

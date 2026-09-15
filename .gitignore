@@ -18,5 +18,6 @@ public/rules/tracking_rules.json
 src/data/trackers.json
 src/data/malware.json
 src/data/malware.meta.json
+src/data/popular.json
 dist-firefox/
 dist-variants/

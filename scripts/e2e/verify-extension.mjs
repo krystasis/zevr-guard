@@ -10,12 +10,15 @@
 //  - The service worker's own onMessage does not fire for messages the SW
 //    sends to itself, so extension messages are sent from an extension PAGE.
 import { chromium } from 'playwright';
+import { startFixtureServer } from './fixture-server.mjs';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const DIST = resolve(dirname(fileURLToPath(import.meta.url)), '../../dist');
+// A site we control, so the checks do not depend on what a real one serves.
+const fixture = await startFixtureServer();
 const results = [];
 const check = (name, ok, detail = '') => {
   results.push({ name, ok, detail });
@@ -23,19 +26,33 @@ const check = (name, ok, detail = '') => {
 };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// How the browser is shown. MV3 service workers do not start under
+// Playwright's own `headless: true` (it hangs waiting for one), but Chrome's
+// new headless mode runs them fine — so that is the default: same checks, no
+// window stealing focus mid-typing.
+//   ZEVR_E2E_WINDOW=headless  (default) new headless, invisible
+//   ZEVR_E2E_WINDOW=offscreen           a real window, parked off-screen
+//   ZEVR_E2E_WINDOW=show                a real window you can watch
+const WINDOW_MODE = process.env.ZEVR_E2E_WINDOW ?? 'headless';
+const WINDOW_ARGS = {
+  headless: ['--headless=new', '--window-size=1200,800'],
+  offscreen: ['--window-position=-4000,-4000', '--window-size=1200,800'],
+  show: ['--window-size=1200,800'],
+}[WINDOW_MODE] ?? ['--headless=new', '--window-size=1200,800'];
+
 const userDataDir = mkdtempSync(join(tmpdir(), 'zg-verify-'));
 const ctx = await chromium.launchPersistentContext(userDataDir, {
-  headless: false,
+  headless: false, // the flag above decides; Playwright's own switch cannot run MV3
   args: [
     `--disable-extensions-except=${DIST}`,
     `--load-extension=${DIST}`,
     '--no-first-run',
-    '--window-size=1200,800',
+    ...WINDOW_ARGS,
   ],
 });
 let sw = ctx.serviceWorkers()[0] || (await ctx.waitForEvent('serviceworker', { timeout: 30000 }));
 const extId = new URL(sw.url()).host;
-console.log('extension id', extId);
+console.log(`extension id ${extId} (window: ${WINDOW_MODE})`);
 await sleep(4000); // let initFeed apply session rules + retire the static ruleset
 
 const swEval = (fn) => sw.evaluate(fn);
@@ -777,6 +794,103 @@ await sw.evaluate(async (domain) => {
     adsHits === null || adsHits.length === 0, JSON.stringify(adsHits));
 }
 
+// --- 5l. the features nothing else reaches --------------------------------
+// Every message the background answers, and the two things the content script
+// puts on the page. Driven against the local fixture so they are hermetic.
+{
+  // Per-site pause: the older, narrower sibling of the global one.
+  const host = `localhost:${fixture.port}`;
+  await send({ type: 'PAUSE_SITE', host: 'localhost' });
+  const paused = (await send({ type: 'GET_SETTINGS' })).settings;
+  check('a single site can be paused', paused.pausedSites.includes('localhost'), JSON.stringify(paused.pausedSites));
+  const pauseRule = await swEval(async () =>
+    (await chrome.declarativeNetRequest.getDynamicRules()).some(
+      (r) => r.action.type === 'allow' && r.condition.initiatorDomains?.includes('localhost'),
+    ));
+  check('pausing a site writes an allow rule scoped to it', pauseRule);
+  await send({ type: 'RESUME_SITE', host: 'localhost' });
+  const resumed = (await send({ type: 'GET_SETTINGS' })).settings;
+  check('resuming a site removes it again', !resumed.pausedSites.includes('localhost'));
+
+  // Read-only reporting surfaces the popup and report page depend on.
+  const history = await send({ type: 'GET_STATS_HISTORY' });
+  check('the statistics history is readable', Array.isArray(history?.history), JSON.stringify(history).slice(0, 60));
+  const countryStats = await send({ type: 'GET_COUNTRY_STATS' });
+  check('country rule counts are readable', typeof countryStats?.stats === 'object', JSON.stringify(countryStats).slice(0, 60));
+  const leaksBefore = await send({ type: 'GET_LEAKS' });
+  check('the leak log is readable', Array.isArray(leaksBefore?.leaks), JSON.stringify(leaksBefore).slice(0, 60));
+
+  // Approximate location for the map. It is a network call, so a failure here
+  // is reported as "unreachable" rather than failing the run.
+  const loc = await send({ type: 'GET_USER_LOCATION' });
+  check('the coarse location lookup answers or degrades quietly',
+    loc !== undefined, JSON.stringify(loc).slice(0, 80));
+
+  // The password guard: the background decides, the content script renders.
+  // Plain HTTP would be the obvious trigger, but Chrome treats localhost as a
+  // secure context, so the "not encrypted" branch never fires here. The
+  // first-visit notice is the one this fixture can earn — it needs the
+  // extension to have been installed long enough for its history to mean
+  // something, which a fresh profile has not.
+  const DAY = 86400000;
+  await swEval(async () => chrome.storage.local.set({ 'zg.installedAt': Date.now() - 30 * 86400000 }));
+  void DAY;
+
+  const plainHttp = await send({ type: 'PASSWORD_CONTEXT', host: 'localhost', isSecure: false });
+  check('the password guard warns about an unencrypted page',
+    plainHttp?.context?.level === 'danger', String(JSON.stringify(plainHttp)).slice(0, 90));
+
+  const page = await ctx.newPage();
+  await page.goto(fixture.page(), { waitUntil: 'domcontentloaded' });
+  await sleep(2500); // let the visit be recorded, so "first visit" is true
+
+  const firstVisit = await send({ type: 'PASSWORD_CONTEXT', host: 'localhost', isSecure: true });
+  check('the password guard notices a first sign-in on a new site',
+    firstVisit?.context?.level === 'notice', String(JSON.stringify(firstVisit)).slice(0, 90));
+
+  // ...and the content script actually paints it when a password field takes
+  // focus. The banner lives in a closed shadow root on a fixed-position host.
+  await page.locator('#pw').focus();
+  await sleep(2000);
+  const banner = await page.evaluate(() =>
+    [...document.body.children].filter(
+      (el) => el.tagName === 'DIV' && el.style.zIndex === '2147483647',
+    ).length);
+  check('focusing a password field paints the guard banner', banner > 0, `hosts=${banner}`);
+
+  // Paused means no interruptions, including this one.
+  await send({ type: 'PAUSE_ALL', minutes: 5 });
+  const whilePaused = await send({ type: 'PASSWORD_CONTEXT', host: 'localhost', isSecure: false });
+  check('the password guard stands down while protection is paused',
+    whilePaused?.context === null, String(JSON.stringify(whilePaused)).slice(0, 60));
+  await send({ type: 'RESUME_ALL' });
+
+  // The exfiltration watch, end to end: register a value, have the page send
+  // it to another host, and see it logged.
+  const secret = `zevr-e2e-${Date.now()}`;
+  await send({ type: 'ADD_WATCH', kind: 'custom', value: secret });
+  await sleep(600);
+  const leakPage = await ctx.newPage();
+  await leakPage.goto(fixture.page(`/?v=${encodeURIComponent(secret)}`), { waitUntil: 'domcontentloaded' });
+  await sleep(800);
+  await leakPage.locator('#leak').click();
+  await sleep(2000);
+  const leaksAfter = await send({ type: 'GET_LEAKS' });
+  const logged = (leaksAfter?.leaks ?? []).some((l) => l?.host === '127.0.0.1');
+  check('a watched value leaving for another host is recorded', logged, JSON.stringify(leaksAfter?.leaks ?? []).slice(0, 120));
+
+  await send({ type: 'CLEAR_LEAKS' });
+  const cleared = await send({ type: 'GET_LEAKS' });
+  check('the leak log can be cleared', (cleared?.leaks ?? []).length === 0, JSON.stringify(cleared?.leaks ?? []).slice(0, 60));
+  const watchItems = (await send({ type: 'GET_WATCH' }))?.watch ?? [];
+  for (const it of watchItems) if (it?.id) await send({ type: 'REMOVE_WATCH', id: it.id });
+  check('a watched value can be removed', ((await send({ type: 'GET_WATCH' }))?.watch ?? []).length === 0);
+
+  await leakPage.close();
+  await page.close();
+  void host;
+}
+
 // --- 6. framed warning page refuses to act --------------------------------
 {
   const page = await ctx.newPage();
@@ -849,7 +963,12 @@ await sw.evaluate(async (domain) => {
 }
 
 await ctx.close();
+await fixture.close();
 try { rmSync(userDataDir, { recursive: true, force: true }); } catch {}
 const failed = results.filter((r) => !r.ok);
 console.log(`\n${results.length - failed.length}/${results.length} passed`);
+if (failed.length > 0) {
+  console.log('\nfailed checks:');
+  for (const f of failed) console.log(`  - ${f.name}${f.detail ? ` — ${f.detail}` : ''}`);
+}
 process.exit(failed.length ? 1 : 0);

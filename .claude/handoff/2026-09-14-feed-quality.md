@@ -5,7 +5,8 @@
 
 ## いまの状態
 - ブランチ `fix/feed-safelist-and-allow`(main から数コミット)。`git log main..HEAD` で内容確認。**コミット署名(Co-Authored-By 等)は付けない方針**(オーナー指示)。
-- 通っているもの: `npm test`(161件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`scripts/e2e/verify-extension.mjs`(**104/104 を 10 回連続**)。
+- 通っているもの: `npm test`(168件)、`npx tsc -b --noEmit`、`npm run build:app`、`npm run build:firefox`、`npm run e2e`(**117/117**)。
+- 実機検証は `/e2e-check` スキル(`.claude/skills/e2e-check/`)から回す。既定は画面に出ないヘッドレスで、`show` / `offscreen` も同じ判定になることを確認済み。
 - 手で確認するときは `scripts/dev/build-variant.sh <ref> <label>` で任意のコミットを別フォルダに出せる(`chrome://extensions` にラベル付きで並ぶ)。**古いコミットも今日のデータでビルドされる**ので、当時の誤ブロック再現にはストア版 1.5.12 を有効にすること。
 - 未 push、未リリース。ストア版 1.5.12 は静的ルールに steamcommunity.com が焼かれたまま。**1.5.13 が届くまで利用者側は直らない**。
 - ストアレビューへの返信は済み(「早急に除外します」「次のバージョンで」)。約束した内容はすべて実装済みで、あとは配信するだけ。
@@ -47,7 +48,7 @@
 ```
 npm test && npx tsc -b --noEmit && npm run build:app
 npm i -D playwright && npx playwright install chromium   # 初回のみ
-node scripts/e2e/verify-extension.mjs                     # 104/104 PASS が基準
+npm run e2e                                              # 117/117 PASS が基準
 ```
 
 ## 関連

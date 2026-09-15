@@ -7,6 +7,7 @@ import {
 } from './risk';
 import { syncMalwareSessionRules } from './blocking';
 import { hasCachedTrackers, putCachedTrackers } from './feedcache';
+import { ensurePopularDomains, sanitizeMalwareFeed } from './feedguard';
 
 const FEED_BASE = 'https://zevrhq.com/feed/v1';
 const ALARM_NAME = 'zg-feed-update';
@@ -16,7 +17,11 @@ const STALE_MS = 25 * 60 * 60 * 1000;
 // Legacy key: the tracker feed used to be persisted here. Kept only so
 // initFeed can evict the ~8MB blob from profiles that stored it.
 const STORAGE_TRACKERS = 'zg.feed.trackers';
-const STORAGE_MALWARE = 'zg.feed.malware';
+// v2: entries are now filtered through the client-side guard before being
+// stored, so a blob written by an older build is ignored and re-fetched
+// rather than trusted.
+const STORAGE_MALWARE = 'zg.feed.malware.v2';
+const STORAGE_MALWARE_LEGACY = 'zg.feed.malware';
 const STORAGE_MALWARE_META = 'zg.feed.malwareMeta';
 const STORAGE_META = 'zg.feed.meta';
 
@@ -100,15 +105,47 @@ async function fetchTrackers(
   return { etag };
 }
 
+/**
+ * The malware channel, filtered before it is stored or applied. Everything
+ * downstream — session rules, isMalware(), the stats — trusts this list, so
+ * the guard has to run here rather than at the point of use.
+ */
+async function fetchMalware(
+  prevEtag: string | undefined,
+): Promise<{ data: string[] | null; etag?: string }> {
+  const headers: Record<string, string> = { Accept: 'application/json' };
+  if (prevEtag) headers['If-None-Match'] = prevEtag;
+  const res = await fetch(`${FEED_BASE}/malware.json`, {
+    signal: AbortSignal.timeout(60_000),
+    cache: 'no-store',
+    headers,
+  });
+  if (res.status === 304) return { data: null, etag: prevEtag };
+  if (!res.ok) throw new Error(`${FEED_BASE}/malware.json -> ${res.status}`);
+  const raw = (await res.json()) as unknown;
+
+  await ensurePopularDomains();
+  const { kept, dropped } = sanitizeMalwareFeed(raw);
+  for (const d of dropped) {
+    console.warn(`[zg-feed] refused ${d.host} (${d.reason})`);
+  }
+  // An empty result means something is badly wrong upstream; keep whatever we
+  // already had rather than disabling protection.
+  if (kept.length === 0) return { data: null, etag: prevEtag };
+
+  try {
+    await chrome.storage.local.set({ [STORAGE_MALWARE]: kept });
+  } catch (err) {
+    console.warn('[zg-feed] storage.set failed:', (err as Error).message);
+  }
+  return { data: kept, etag: res.headers.get('etag') ?? undefined };
+}
+
 export async function refreshFeed(force = false): Promise<void> {
   const meta = await getMeta();
   const results = await Promise.allSettled([
     fetchTrackers(force ? undefined : meta.trackers?.etag),
-    fetchChannel<string[]>(
-      `${FEED_BASE}/malware.json`,
-      STORAGE_MALWARE,
-      force ? undefined : meta.malware?.etag,
-    ),
+    fetchMalware(force ? undefined : meta.malware?.etag),
     // Provenance for the warning page. Optional: an older feed has no such
     // file, and a failure here must not hold back the blocking data.
     fetchChannel<MalwareMeta>(
@@ -187,7 +224,7 @@ async function runInitFeed(): Promise<void> {
   // Evict the legacy 8MB trackers blob from profiles that predate the
   // Cache API storage; it pinned ~80% of the chrome.storage.local quota.
   try {
-    void chrome.storage.local.remove(STORAGE_TRACKERS);
+    void chrome.storage.local.remove([STORAGE_TRACKERS, STORAGE_MALWARE_LEGACY]);
   } catch {
     // ignore
   }

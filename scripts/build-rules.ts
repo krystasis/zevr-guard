@@ -23,6 +23,11 @@ const TRANCO_SNAPSHOT_PATH = resolve(ROOT, 'src/data/tranco.snapshot.json');
 // domain and when it first appeared. Shown on the warning page so a block can
 // be traced to something the user can look up, instead of being a bare verdict.
 const MALWARE_META_PATH = resolve(ROOT, 'src/data/malware.meta.json');
+// The popular-domain guard the extension itself applies to a downloaded feed.
+// The build safelist protects what we publish; this protects the user when
+// what arrives is not what we published.
+const POPULAR_PATH = resolve(ROOT, 'src/data/popular.json');
+const POPULAR_COUNT = 10_000;
 const BLOCK_RULES_PATH = resolve(ROOT, 'public/rules/block_rules.json');
 const ADS_RULES_PATH = resolve(ROOT, 'public/rules/ads_rules.json');
 const TRACKING_RULES_PATH = resolve(ROOT, 'public/rules/tracking_rules.json');
@@ -932,6 +937,8 @@ async function main(): Promise<void> {
   );
 
   await writeFile(MALWARE_SEED_PATH, JSON.stringify(capped, null, 2) + '\n');
+
+  await writeFile(POPULAR_PATH, JSON.stringify(tranco.slice(0, POPULAR_COUNT)));
 
   const meta = buildMalwareMeta(
     capped,

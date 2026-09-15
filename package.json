@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
+    "e2e": "npm run build:app && node scripts/e2e/verify-extension.mjs",
     "test:watch": "vitest",
     "build:app": "tsc -b --noEmit && vite build",
     "build:firefox": "npm run build:app && node scripts/build-firefox.mjs"

@@ -8,6 +8,7 @@ import { registrableDomain } from '../shared/domain';
 import { BlockButton, UndoToast } from '../shared/BlockButton';
 import countryCentroids from '../data/country_centroids.json';
 import type { Connection, PageStats, RiskLevel, Settings } from '../types';
+import { useLocale } from '../shared/useLocale';
 
 type ListView = 'domains' | 'countries';
 
@@ -114,6 +115,10 @@ async function fetchAccurateUserLocation(): Promise<
 }
 
 export const SidePanel: React.FC = () => {
+  // Redraw when the language changes. t() reads the active dictionary at call
+  // time but is not reactive, so a page that does not subscribe keeps whatever
+  // language it rendered with until something else happens to repaint it.
+  useLocale();
   const [stats, setStats] = useState<PageStats | null>(null);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [tabUrl, setTabUrl] = useState<string | null>(null);

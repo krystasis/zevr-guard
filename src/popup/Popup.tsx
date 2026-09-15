@@ -107,6 +107,11 @@ const riskExplain = (r: RiskLevel): string => {
 type GroupBy = 'domain' | 'company' | 'country';
 
 export const Popup: React.FC = () => {
+  // Redraw when the language changes. t() reads the active dictionary at call
+  // time but is not reactive, so without this only the picker itself changed
+  // and the rest of the popup waited for the next 2s poll to repaint — which
+  // reads as "changing the language does nothing".
+  useLocale();
   const [stats, setStats] = useState<PageStats | null>(null);
   const [activeTab, setActiveTab] = useState<{
     id: number;

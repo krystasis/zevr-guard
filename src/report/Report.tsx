@@ -4,6 +4,7 @@ import { ShareModal } from '../shared/ShareModal';
 import { bcp47, t } from '../shared/i18n';
 import { renderWeeklyCard, type WeeklyCardPoint } from '../shared/sharecard';
 import type { TodayStats } from '../types';
+import { useLocale } from '../shared/useLocale';
 
 interface DayEntry {
   date: string;
@@ -22,6 +23,10 @@ function lastNDates(n: number): string[] {
 }
 
 export const Report: React.FC = () => {
+  // Redraw when the language changes. t() reads the active dictionary at call
+  // time but is not reactive, so a page that does not subscribe keeps whatever
+  // language it rendered with until something else happens to repaint it.
+  useLocale();
   const [history, setHistory] = useState<TodayStats[]>([]);
   const [today, setToday] = useState<TodayStats | null>(null);
   const [loading, setLoading] = useState(true);

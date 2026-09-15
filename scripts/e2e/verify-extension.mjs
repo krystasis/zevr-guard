@@ -515,6 +515,10 @@ await sw.evaluate(async (domain) => {
     check('choosing a language persists it', stored === 'ja', String(stored));
     check('the popup redraws in the chosen language', (await page.getByText('言語').count()) > 0);
 
+    // Whether the popup follows because it *subscribes* or because its 2s poll
+    // happened to repaint it cannot be told apart from out here — a popup
+    // repaints for many reasons. That invariant is pinned structurally in
+    // src/shared/locale-subscription.test.ts instead.
     await pick('en');
     check('switching back restores English',
       (await page.getByText(/^Language$/).count()) > 0 && (await page.getByText('言語').count()) === 0);

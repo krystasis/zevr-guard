@@ -17,13 +17,16 @@ function samplePage(): PageStats {
 
 // In-memory chrome.storage.local so the module's write-behind cache persists
 // within a test. Keys listed in `failing` reject the way the real API does
-// once QUOTA_BYTES is reached.
+// once QUOTA_BYTES is reached. `setAttempts` counts tries per key, including
+// the ones that reject, so a test can tell a backoff from a retry spin.
 const store: Record<string, unknown> = {};
 const failing = new Set<string>();
+const setAttempts: Record<string, number> = {};
 let suspendListener: (() => void) | null = null;
 
 beforeEach(() => {
   for (const k of Object.keys(store)) delete store[k];
+  for (const k of Object.keys(setAttempts)) delete setAttempts[k];
   failing.clear();
   suspendListener = null;
   vi.resetModules();
@@ -33,6 +36,7 @@ beforeEach(() => {
         get: async (k: string) => ({ [k]: store[k] }),
         set: async (o: Record<string, unknown>) => {
           for (const k of Object.keys(o)) {
+            setAttempts[k] = (setAttempts[k] ?? 0) + 1;
             if (failing.has(k)) {
               throw new Error('QUOTA_BYTES quota exceeded');
             }
@@ -128,6 +132,82 @@ describe('storage: write-behind flush under a failing storage quota', () => {
     markTodayDirty();
     await vi.advanceTimersByTimeAsync(30_600);
     expect(storedToday().totalConnections).toBe(2);
+  });
+
+  it('backs the failing key off while traffic keeps the flush running', async () => {
+    vi.useFakeTimers();
+    const { getPagesCached, getTodayStats, markPagesDirty, markTodayDirty } =
+      await load();
+
+    const pages = await getPagesCached();
+    pages[1] = samplePage();
+    const today = await getTodayStats();
+    delete store.pages;
+
+    failing.add('pages');
+    markPagesDirty();
+    await vi.advanceTimersByTimeAsync(600);
+    expect(setAttempts.pages).toBe(1);
+
+    // Browsing continues, so every mark arms a fresh 500ms timer. The
+    // over-quota key must not be re-serialized on each of those passes.
+    for (let i = 1; i <= 6; i += 1) {
+      today.totalConnections = i;
+      markTodayDirty();
+      markPagesDirty();
+      await vi.advanceTimersByTimeAsync(600);
+      expect(storedToday().totalConnections).toBe(i);
+    }
+    expect(setAttempts.pages).toBe(1);
+
+    // The backoff still ends on time once it is up.
+    failing.clear();
+    await vi.advanceTimersByTimeAsync(30_000);
+    expect(store.pages).toEqual({ 1: samplePage() });
+  });
+
+  it('does not make a healthy key wait out another key’s backoff', async () => {
+    vi.useFakeTimers();
+    const { getPagesCached, getTodayStats, markPagesDirty, markTodayDirty } =
+      await load();
+
+    await getPagesCached();
+    const today = await getTodayStats();
+    delete store.pages;
+    delete store.todayStats;
+
+    failing.add('pages');
+    markPagesDirty();
+    await vi.advanceTimersByTimeAsync(600);
+    expect(store.pages).toBeUndefined();
+
+    // `todayStats` is writable, so it flushes on the usual cadence rather than
+    // sitting in the 30s retry the failing key asked for — the worker can be
+    // torn down at any point in that window.
+    today.totalConnections = 42;
+    markTodayDirty();
+    await vi.advanceTimersByTimeAsync(600);
+    expect(store.todayStats).toMatchObject({ totalConnections: 42 });
+  });
+
+  it('still tries a backed-off key when the worker is suspending', async () => {
+    vi.useFakeTimers();
+    const { getTodayStats, markTodayDirty } = await load();
+    const today = await getTodayStats();
+    delete store.todayStats;
+
+    failing.add('todayStats');
+    today.totalConnections = 3;
+    markTodayDirty();
+    await vi.advanceTimersByTimeAsync(600);
+    expect(store.todayStats).toBeUndefined();
+
+    // There is no "30s from now" for a worker that is going away, so the
+    // backoff is skipped and the data gets its last chance.
+    failing.clear();
+    suspendListener?.();
+    await vi.advanceTimersByTimeAsync(10);
+    expect(store.todayStats).toMatchObject({ totalConnections: 3 });
   });
 
   it('does not let a failing write escape the onSuspend flush', async () => {

@@ -77,7 +77,10 @@ export async function setPages(pages: Record<number, PageStats>): Promise<void> 
 
 const FLUSH_MS = 500;
 // A write that failed (quota, mostly) will not start succeeding 500ms later,
-// so back the retry off instead of spinning on it twice a second.
+// so back that one block off instead of spinning on it twice a second. The
+// backoff is per block rather than on the shared timer: a key that is over
+// quota must not hold the keys that are still writable at arm's length, and a
+// mark arriving during the backoff must not pull the failing write forward.
 const RETRY_MS = 30_000;
 const HISTORY_DAYS = 30;
 
@@ -92,53 +95,93 @@ export const MAX_COMPANIES = 300;
 
 let pagesCache: Record<number, PageStats> | null = null;
 let pagesDirty = false;
+let pagesRetryAt = 0;
 let todayCache: TodayStats | null = null;
 let todayDirty = false;
+let todayRetryAt = 0;
 let lifetimeCache: { blocked: number } | null = null;
 let lifetimeDirty = false;
+let lifetimeRetryAt = 0;
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
+let flushDueAt = 0;
 
 // Every write stands alone: chrome.storage.local rejects once the quota is
 // reached, and a failure must not throw away the in-memory copy it was about
 // to persist, skip the writes after it, or escape as an unhandled rejection
-// (the callers are `void flush()`). So each block re-arms its dirty flag and a
-// retry is scheduled instead.
-async function flush(): Promise<void> {
-  let failed = false;
+// (the callers are `void flush()`). So each block re-arms its dirty flag, holds
+// itself back until its own RETRY_MS has passed, and a flush is scheduled for
+// when the earliest of those backoffs ends.
+//
+// `ignoreBackoff` is for the onSuspend flush: the worker is going away, so
+// there is no later attempt to save the data for.
+async function flush(ignoreBackoff = false): Promise<void> {
+  const now = Date.now();
+  // Earliest moment a still-dirty block may be written again, 0 if none.
+  let nextRetryAt = 0;
+  const retryAfter = (at: number): void => {
+    if (!nextRetryAt || at < nextRetryAt) nextRetryAt = at;
+  };
+
   if (pagesDirty && pagesCache) {
-    pagesDirty = false;
-    try {
-      await setPages(pagesCache);
-    } catch {
-      pagesDirty = true;
-      failed = true;
+    if (!ignoreBackoff && now < pagesRetryAt) {
+      retryAfter(pagesRetryAt);
+    } else {
+      pagesDirty = false;
+      try {
+        await setPages(pagesCache);
+        pagesRetryAt = 0;
+      } catch {
+        pagesDirty = true;
+        pagesRetryAt = now + RETRY_MS;
+        retryAfter(pagesRetryAt);
+      }
     }
   }
   if (todayDirty && todayCache) {
-    todayDirty = false;
-    try {
-      await setTodayStats(todayCache);
-    } catch {
-      todayDirty = true;
-      failed = true;
+    if (!ignoreBackoff && now < todayRetryAt) {
+      retryAfter(todayRetryAt);
+    } else {
+      todayDirty = false;
+      try {
+        await setTodayStats(todayCache);
+        todayRetryAt = 0;
+      } catch {
+        todayDirty = true;
+        todayRetryAt = now + RETRY_MS;
+        retryAfter(todayRetryAt);
+      }
     }
   }
   if (lifetimeDirty && lifetimeCache) {
-    lifetimeDirty = false;
-    try {
-      await chrome.storage.local.set({ 'zg.lifetime': lifetimeCache });
-    } catch {
-      lifetimeDirty = true;
-      failed = true;
+    if (!ignoreBackoff && now < lifetimeRetryAt) {
+      retryAfter(lifetimeRetryAt);
+    } else {
+      lifetimeDirty = false;
+      try {
+        await chrome.storage.local.set({ 'zg.lifetime': lifetimeCache });
+        lifetimeRetryAt = 0;
+      } catch {
+        lifetimeDirty = true;
+        lifetimeRetryAt = now + RETRY_MS;
+        retryAfter(lifetimeRetryAt);
+      }
     }
   }
-  if (failed) scheduleFlush(RETRY_MS);
+  if (nextRetryAt) scheduleFlush(Math.max(0, nextRetryAt - Date.now()));
 }
 
+// Earliest deadline wins: a pending retry must not swallow the 500ms flush a
+// new mark asks for, and a new mark must not push an armed retry back.
 function scheduleFlush(delayMs = FLUSH_MS): void {
-  if (flushTimer) return;
+  const dueAt = Date.now() + delayMs;
+  if (flushTimer) {
+    if (dueAt >= flushDueAt) return;
+    clearTimeout(flushTimer);
+  }
+  flushDueAt = dueAt;
   flushTimer = setTimeout(() => {
     flushTimer = null;
+    flushDueAt = 0;
     void flush();
   }, delayMs);
 }
@@ -272,7 +315,7 @@ export async function getStatsHistory(): Promise<TodayStats[]> {
 // Best-effort flush when the service worker is about to be torn down.
 try {
   chrome.runtime.onSuspend?.addListener(() => {
-    void flush();
+    void flush(true);
   });
 } catch {
   // ignore

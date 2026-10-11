@@ -76,7 +76,19 @@ export async function setPages(pages: Record<number, PageStats>): Promise<void> 
 // ---------------------------------------------------------------------------
 
 const FLUSH_MS = 500;
+// A write that failed (quota, mostly) will not start succeeding 500ms later,
+// so back the retry off instead of spinning on it twice a second.
+const RETRY_MS = 30_000;
 const HISTORY_DAYS = 30;
+
+// Per-day caps for the maps that grow one entry per distinct domain / company
+// seen. Thirty days of these live in `statsHistory` and chrome.storage.local
+// is capped at 10MB (no `unlimitedStorage`), so an uncapped heavy day can take
+// the whole key over quota and stop every stats write. The busiest entries are
+// what the popup and the weekly report show, so those are the ones kept.
+export const MAX_TRACKER_DOMAINS = 500;
+export const MAX_BLOCKED_DOMAINS = 500;
+export const MAX_COMPANIES = 300;
 
 let pagesCache: Record<number, PageStats> | null = null;
 let pagesDirty = false;
@@ -86,27 +98,49 @@ let lifetimeCache: { blocked: number } | null = null;
 let lifetimeDirty = false;
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 
+// Every write stands alone: chrome.storage.local rejects once the quota is
+// reached, and a failure must not throw away the in-memory copy it was about
+// to persist, skip the writes after it, or escape as an unhandled rejection
+// (the callers are `void flush()`). So each block re-arms its dirty flag and a
+// retry is scheduled instead.
 async function flush(): Promise<void> {
+  let failed = false;
   if (pagesDirty && pagesCache) {
     pagesDirty = false;
-    await setPages(pagesCache);
+    try {
+      await setPages(pagesCache);
+    } catch {
+      pagesDirty = true;
+      failed = true;
+    }
   }
   if (todayDirty && todayCache) {
     todayDirty = false;
-    await setTodayStats(todayCache);
+    try {
+      await setTodayStats(todayCache);
+    } catch {
+      todayDirty = true;
+      failed = true;
+    }
   }
   if (lifetimeDirty && lifetimeCache) {
     lifetimeDirty = false;
-    await chrome.storage.local.set({ 'zg.lifetime': lifetimeCache });
+    try {
+      await chrome.storage.local.set({ 'zg.lifetime': lifetimeCache });
+    } catch {
+      lifetimeDirty = true;
+      failed = true;
+    }
   }
+  if (failed) scheduleFlush(RETRY_MS);
 }
 
-function scheduleFlush(): void {
+function scheduleFlush(delayMs = FLUSH_MS): void {
   if (flushTimer) return;
   flushTimer = setTimeout(() => {
     flushTimer = null;
     void flush();
-  }, FLUSH_MS);
+  }, delayMs);
 }
 
 export async function getPagesCached(): Promise<Record<number, PageStats>> {
@@ -151,9 +185,53 @@ export function markTodayDirty(): void {
   scheduleFlush();
 }
 
+/** Keep the `max` busiest entries of a counted map, dropping the rest. */
+function capByCount<T>(
+  map: Record<string, T>,
+  max: number,
+  countOf: (value: T) => number,
+): Record<string, T> {
+  const keys = Object.keys(map);
+  if (keys.length <= max) return map;
+  keys.sort((a, b) => countOf(map[b]) - countOf(map[a]));
+  const kept: Record<string, T> = {};
+  for (const key of keys.slice(0, max)) kept[key] = map[key];
+  return kept;
+}
+
+/**
+ * Bound a day's per-domain maps, in place so the in-memory copy shrinks with
+ * the stored one. Nothing below the cap is touched.
+ */
+export function capTodayStats(stats: TodayStats): TodayStats {
+  stats.trackerDomains = capByCount(
+    stats.trackerDomains,
+    MAX_TRACKER_DOMAINS,
+    (info) => info.count,
+  );
+  stats.blockedDomains = capByCount(
+    stats.blockedDomains,
+    MAX_BLOCKED_DOMAINS,
+    (count) => count,
+  );
+  const companyCounts = capByCount(
+    stats.companyCounts,
+    MAX_COMPANIES,
+    (count) => count,
+  );
+  if (companyCounts !== stats.companyCounts) {
+    stats.companyCounts = companyCounts;
+    // The list and the counts name the same companies; keep them in step.
+    stats.companiesDetected = stats.companiesDetected.filter(
+      (company) => company in companyCounts,
+    );
+  }
+  return stats;
+}
+
 export async function setTodayStats(stats: TodayStats): Promise<void> {
   todayCache = stats;
-  await chrome.storage.local.set({ todayStats: stats });
+  await chrome.storage.local.set({ todayStats: capTodayStats(stats) });
 }
 
 /** Roll a finished day into the bounded history used by the weekly report. */

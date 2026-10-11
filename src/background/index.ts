@@ -150,6 +150,23 @@ const navStartTimes = new Map<number, number>();
 // continue" finds its way back to the page the user actually asked for.
 const lastMainFrameUrl = new Map<number, string>();
 
+// Per-tab dedupe for the dangerous-connection notification, the same way
+// leakSeen guards the leak alert. A domain the user allowed is still malware
+// as far as the threat DB is concerned — an allow is only a DNR rule — so a
+// page embedding it completes request after request to it, and without this
+// every single one raised its own toast. Cleared by resetPage(), so the next
+// navigation gets to warn once more.
+const dangerSeen = new Map<number, Set<string>>();
+
+/** True the first time this tab sees `domain` as dangerous, false after. */
+function noteDangerSeen(tabId: number, domain: string): boolean {
+  const seen = dangerSeen.get(tabId) ?? new Set<string>();
+  dangerSeen.set(tabId, seen);
+  if (seen.has(domain)) return false;
+  seen.add(domain);
+  return true;
+}
+
 /**
  * Where to send the tab after the user allows `domain`. Only ever the URL
  * this tab was actually heading to, and only when it really belongs to the
@@ -227,6 +244,7 @@ async function classifyBlock(
 async function resetPage(tabId: number): Promise<void> {
   navStartTimes.set(tabId, Date.now());
   leakSeen.delete(tabId);
+  dangerSeen.delete(tabId);
   await updatePage(tabId, () => null);
   // While paused the badge carries the paused indicator; clearing per-tab text
   // on every navigation would wipe it off each tab as the user browses.
@@ -449,7 +467,7 @@ async function handleRequest(
   if (riskLevel === 'dangerous' && outcome === 'completed' && !isPaused()) {
     flashDangerBadge(details.tabId);
     const settings = await getSettings();
-    if (settings.notificationsEnabled) {
+    if (settings.notificationsEnabled && noteDangerSeen(details.tabId, domain)) {
       chrome.notifications.create(`danger-${domain}-${Date.now()}`, {
         type: 'basic',
         iconUrl: chrome.runtime.getURL('public/icons/icon48.png'),
@@ -812,6 +830,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
 chrome.tabs.onRemoved.addListener(async (tabId) => {
   navStartTimes.delete(tabId);
   lastMainFrameUrl.delete(tabId);
+  dangerSeen.delete(tabId);
   await updatePage(tabId, () => null);
 });
 

@@ -33,6 +33,7 @@ jobs:
         run: |
           [ -f src/data/malware.json ] || echo '[]' > src/data/malware.json
           [ -f src/data/trackers.json ] || echo '{}' > src/data/trackers.json
+          [ -f src/data/popular.json ] || echo '{"subtree":[],"apexOnly":[],"pinned":[]}' > src/data/popular.json
           mkdir -p public/rules
           for f in block_rules ads_rules tracking_rules; do
             [ -f "public/rules/$f.json" ] || echo '[]' > "public/rules/$f.json"

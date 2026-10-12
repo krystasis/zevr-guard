@@ -1240,15 +1240,28 @@ chrome.runtime.onMessage.addListener(
         case 'GET_PAGE_STATS': {
           const pages = await getPagesCached();
           const page = pages[message.tabId] ?? null;
-          if (page) {
-            const blocked = await getBlockedDomains();
-            for (const domain of Object.keys(page.connections)) {
-              page.connections[domain].isBlocked =
-                page.connections[domain].isBlocked ||
-                matchesDomainOrParent(domain, blocked);
-            }
+          if (!page) {
+            sendResponse({ stats: null });
+            break;
           }
-          sendResponse({ stats: page });
+          // The current block list is laid over a copy, never over the cache
+          // itself: getPagesCached() hands back the live write-behind record,
+          // and writing the flag into it would latch for as long as the tab
+          // stays on this document. Both score functions treat a blocked
+          // connection as neutralized, so after the user unblocks the domain
+          // every later request would keep scoring the page as if it were
+          // still blocked — the popup and badge understating the real
+          // exposure.
+          const blocked = await getBlockedDomains();
+          const connections: Record<string, Connection> = {};
+          for (const [domain, connection] of Object.entries(page.connections)) {
+            connections[domain] = {
+              ...connection,
+              isBlocked:
+                connection.isBlocked || matchesDomainOrParent(domain, blocked),
+            };
+          }
+          sendResponse({ stats: { ...page, connections } });
           break;
         }
         case 'GET_TODAY_STATS':

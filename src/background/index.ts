@@ -19,6 +19,7 @@ import {
   pageRiskLevel,
 } from './risk';
 import { initFeed, refreshFeed } from './feed';
+import { classifyBlock } from './classify';
 import { t, getLocale, loadLocale, subscribeLocale } from '../shared/i18n';
 import { syncCategoryRulesets } from './rulesets';
 import { getGeoData, countryCentroid } from './geo';
@@ -45,7 +46,6 @@ import {
   allowDomainForSession,
   armStaticMalwareRules,
   blockDomain,
-  isStaticMalwareRuleActive,
   disallowDomain,
   getBlockedDomains,
   matchesDomainOrParent,
@@ -84,7 +84,6 @@ import { recallDomainGeo, rememberDomainGeo } from './domaingeo';
 import {
   blockCountry,
   getCountryRuleStats,
-  getBlockingCountry,
   isCountryBlockedDomain,
   noteConnection,
   syncCountryBlocking,
@@ -199,46 +198,6 @@ function resolveResumeUrl(
 ): string | null {
   const remembered = tabId !== undefined ? lastMainFrameUrl.get(tabId) : undefined;
   return sameSiteHttpUrl(remembered, domain) ?? sameSiteHttpUrl(offered, domain);
-}
-
-/**
- * Which of our own rule sources blocks this domain, if any. Used to gate the
- * warning page's state-changing controls: the page is web-accessible, so a
- * hostile site could open it with ?blocked=<attacker domain> and try to get
- * the user to click "allow".
- */
-async function classifyBlock(
-  domain: string,
-): Promise<{
-  blockedByUs: boolean;
-  source: 'feed' | 'manual' | 'country' | null;
-  country: string | null;
-}> {
-  // The user's own block is checked first: when a domain they blocked by hand
-  // later turns up on the feed, calling it a feed block would offer them a
-  // "report this as a mistake" button for their own decision.
-  const settings = await getSettings();
-  if (matchesDomainOrParent(domain, new Set(settings.customBlockList))) {
-    return { blockedByUs: true, source: 'manual', country: null };
-  }
-  if (isMalware(domain)) return { blockedByUs: true, source: 'feed', country: null };
-  // Country rules are dynamic rules too, so the generic sweep below would
-  // claim them as "manual" and the warning page would lose its unblock
-  // button. Ask the country bookkeeping first, the way the stats path does.
-  const country = await getBlockingCountry(domain);
-  if (country) return { blockedByUs: true, source: 'country', country };
-  const blocked = await getBlockedDomains();
-  if (matchesDomainOrParent(domain, blocked)) {
-    return { blockedByUs: true, source: 'manual', country: null };
-  }
-  // Between browser launch and the first feed sync the packaged snapshot is
-  // armed again, and it can still carry a domain the live feed has since
-  // dropped. Without this the warning page would tell the user we are not
-  // blocking the very address we just blocked, and offer no way through.
-  if (await isStaticMalwareRuleActive()) {
-    return { blockedByUs: true, source: 'feed', country: null };
-  }
-  return { blockedByUs: false, source: null, country: null };
 }
 
 async function resetPage(tabId: number): Promise<void> {

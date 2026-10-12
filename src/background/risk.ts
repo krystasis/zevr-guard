@@ -164,6 +164,16 @@ export function isMalware(domain: string): boolean {
   return findSelfOrParent(domain, (c) => (MALWARE_SET.has(c) ? true : undefined)) === true;
 }
 
+/**
+ * Whether the list packaged with this build carries the domain (or a parent:
+ * the packaged ruleset matches with `||domain`, which covers subdomains). The
+ * packaged block_rules ruleset is generated from this same list, so this is
+ * what that ruleset blocks — regardless of what the live feed says now.
+ */
+export function isBundledMalware(domain: string): boolean {
+  return findSelfOrParent(domain, (c) => (BUNDLED_MALWARE.has(c) ? true : undefined)) === true;
+}
+
 export function getRiskLevel(domain: string): RiskLevel {
   if (isMalware(domain)) return 'dangerous';
 

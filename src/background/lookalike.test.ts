@@ -31,6 +31,12 @@ describe('detectLookalike', () => {
     ['rakuten-card-jp.com', 'embedding', 'rakuten-card.co.jp'],
     ['secure-paypal.com', 'embedding', 'paypal.com'],
     ['mufg-bank.jp', 'embedding', 'mufg.jp'],
+    ['tmobile-login.com', 'embedding', 't-mobile.com'], // hyphen-less spelling of a hyphenated brand
+    ['smbccard-login.com', 'embedding', 'smbc-card.com'],
+    ['chase-bank-login.com', 'embedding', 'chase.com'], // dictionary word, but owned by the brand in domain context
+    // private resale suffixes are not public suffixes: this is still paypal.com inside a stranger's domain
+    ['paypal.com.ru', 'embedding', 'paypal.com'],
+    ['apple.com.de', 'embedding', 'apple.com'],
     ['xn--mazon-3ve.co.jp', 'homoglyph', 'amazon.co.jp'], // Cyrillic а; names the brand on the visited suffix
   ];
 
@@ -87,6 +93,18 @@ describe('detectLookalike', () => {
     'line-art.com',
     'my-apple-tree.org',
     'paypal-community.com',
+    // a brand label that is also a lure word (mail.ru) must not turn every webmail into an imitation
+    'web-mail.com',
+    'my-mail.com',
+    'secure-mail.com',
+    // brand labels that are everyday words sit out the lure rule
+    'live-support.com',
+    'my-office.com',
+    'united-bank.com',
+    'delta-card.com',
+    'secure-line.com',
+    'office-online.com',
+    'my-crypto.com',
   ];
 
   it.each(clean)('leaves %s alone', (host) => {
@@ -101,12 +119,15 @@ describe('registrableDomain', () => {
     ['sub.example.com.au', 'example.com.au'],
     ['example.com', 'example.com'],
     ['localhost', 'localhost'],
-    // generic second level under a ccTLD that the hand-written table lacks
+    // ICANN two-label suffixes beyond the markets the extension ships in
     ['google.com.eg', 'google.com.eg'],
     ['www.google.com.eg', 'google.com.eg'],
     ['foo.co.ke', 'foo.co.ke'],
-    ['sub.gov.tr.example', 'tr.example'], // only two-letter TLDs qualify
     ['com.eg', 'com.eg'],
+    // private resale suffixes are not public suffixes
+    ['paypal.com.ru', 'com.ru'],
+    ['apple.com.de', 'com.de'],
+    ['foo.co.cc', 'co.cc'],
   ])('%s -> %s', (host, expected) => {
     expect(registrableDomain(host)).toBe(expected);
   });

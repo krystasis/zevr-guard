@@ -20,7 +20,8 @@ import { matchesDomainOrParent } from './blocking';
 //  4. brand + lure      apple-id.com, amazon-co-jp.com, smbc-card-login.com
 //
 // Every rule change is measured against the Tranco snapshot first:
-// scripts/dev/lookalike-fp.ts must stay empty for the top 10,000.
+// scripts/dev/lookalike-fp.ts must report no top-10,000 hit that the tracker
+// DB does not attribute to a company (those are skipped at runtime).
 // ---------------------------------------------------------------------------
 
 export type LookalikeReason = 'embedding' | 'homoglyph' | 'typosquat';
@@ -211,15 +212,18 @@ const BRANDS: Brand[] = (brandList as string[]).map((domain) => {
 
 const BRAND_DOMAINS = new Set(BRANDS.map((b) => b.domain));
 const BRAND_LABELS = new Set(BRANDS.map((b) => b.label));
+const BRANDS_BY_LABEL = new Map<string, Brand[]>();
 const FOLDED_BRANDS = new Map<string, Brand[]>();
 const BRANDS_BY_SUFFIX = new Map<string, Brand[]>();
-for (const b of BRANDS) {
-  const folded = FOLDED_BRANDS.get(fold(b.label)) ?? [];
-  folded.push(b);
-  FOLDED_BRANDS.set(fold(b.label), folded);
-  const arr = BRANDS_BY_SUFFIX.get(b.suffix) ?? [];
+function push<K>(map: Map<K, Brand[]>, key: K, b: Brand): void {
+  const arr = map.get(key) ?? [];
   arr.push(b);
-  BRANDS_BY_SUFFIX.set(b.suffix, arr);
+  map.set(key, arr);
+}
+for (const b of BRANDS) {
+  push(BRANDS_BY_LABEL, b.label, b);
+  push(FOLDED_BRANDS, fold(b.label), b);
+  push(BRANDS_BY_SUFFIX, b.suffix, b);
 }
 
 /** Of several brands sharing a label (amazon.com / amazon.co.jp), the one on the visited suffix reads most naturally in the warning. */
@@ -241,18 +245,44 @@ const LURE_WORDS = new Set([
   'confirm', 'service', 'center', 'customer', 'jp', 'japan', 'co', 'official',
   'mail', 'info', 'online', 'my', 'web', 'card', 'bank',
 ]);
+// Brand labels that are everyday words. "live-support.com", "my-office.com",
+// "united-bank.com" or "delta-card.com" are far more often unrelated sites
+// than imitations of Microsoft Live, Office, United or Delta, and the Tranco
+// gate cannot see that long tail. Brands whose word is owned by the brand in
+// domain context (apple, amazon, chase, discover, booking) stay in.
+const LURE_GENERIC_LABELS = new Set([
+  'office', 'live', 'meta', 'signal', 'monday', 'cash', 'wise', 'gemini', 'ledger',
+  'ally', 'line', 'target', 'wish', 'grab', 'bolt', 'delta', 'united', 'orange',
+  'spectrum', 'canada', 'toss', 'momo', 'tiki', 'dana', 'crypto',
+]);
 // Short brand labels (au, ana, jal) collide with ordinary words too easily.
-// Longest label first so smbc-card-login.com names smbc-card, not smbc.
 const LURE_MIN_BRAND_LABEL = 4;
-const LURE_BRANDS = BRANDS.filter((b) => b.label.length >= LURE_MIN_BRAND_LABEL).sort(
-  (a, b) => b.label.length - a.label.length,
-);
+
+interface LureBrand {
+  brand: Brand;
+  /** The brand label, or its hyphen-less spelling (tmobile for t-mobile). */
+  label: string;
+}
+
+// Longest label first so smbc-card-login.com names smbc-card, not smbc.
+const LURE_BRANDS: LureBrand[] = BRANDS.filter(
+  (b) =>
+    b.label.length >= LURE_MIN_BRAND_LABEL &&
+    !LURE_GENERIC_LABELS.has(b.label) &&
+    !LURE_WORDS.has(b.label), // mail.ru vs the lure word "mail"
+)
+  .flatMap((b) =>
+    b.label.includes('-')
+      ? [{ brand: b, label: b.label }, { brand: b, label: b.label.replace(/-/g, '') }]
+      : [{ brand: b, label: b.label }],
+  )
+  .sort((a, b) => b.label.length - a.label.length);
 
 /** Brand whose label plus one lure word spells `token` ("appleid"). */
 function gluedBrand(token: string): Brand | null {
-  for (const b of LURE_BRANDS) {
-    if (token.startsWith(b.label) && LURE_WORDS.has(token.slice(b.label.length))) return b;
-    if (token.endsWith(b.label) && LURE_WORDS.has(token.slice(0, -b.label.length))) return b;
+  for (const { brand, label } of LURE_BRANDS) {
+    if (token.startsWith(label) && LURE_WORDS.has(token.slice(label.length))) return brand;
+    if (token.endsWith(label) && LURE_WORDS.has(token.slice(0, -label.length))) return brand;
   }
   return null;
 }
@@ -260,14 +290,14 @@ function gluedBrand(token: string): Brand | null {
 /** True when the hyphenated `label` is a brand plus nothing but lure words. */
 function detectBrandLure(label: string): Brand | null {
   if (!label.includes('-')) return null;
-  for (const b of LURE_BRANDS) {
+  for (const { brand, label: bl } of LURE_BRANDS) {
     let rest: string | null = null;
-    if (label.startsWith(`${b.label}-`)) rest = label.slice(b.label.length + 1);
-    else if (label.endsWith(`-${b.label}`)) rest = label.slice(0, -b.label.length - 1);
-    else if (label.includes(`-${b.label}-`)) rest = label.replace(`-${b.label}-`, '-');
+    if (label.startsWith(`${bl}-`)) rest = label.slice(bl.length + 1);
+    else if (label.endsWith(`-${bl}`)) rest = label.slice(0, -bl.length - 1);
+    else if (label.includes(`-${bl}-`)) rest = label.replace(`-${bl}-`, '-');
     if (rest === null) continue;
     const tokens = rest.split('-').filter(Boolean);
-    if (tokens.length > 0 && tokens.every((t) => LURE_WORDS.has(t))) return b;
+    if (tokens.length > 0 && tokens.every((t) => LURE_WORDS.has(t))) return brand;
   }
   const tokens = label.split('-').filter(Boolean);
   for (let i = 0; i < tokens.length; i++) {
@@ -330,8 +360,7 @@ export function detectLookalike(rawHost: string): LookalikeHit | null {
   // 4. Brand label plus lure words, joined by hyphens.
   const lure = detectBrandLure(label);
   if (lure) {
-    const sameLabel = BRANDS.filter((b) => b.label === lure.label);
-    return { brand: preferSuffix(sameLabel, suffix).domain, reason: 'embedding' };
+    return { brand: preferSuffix(BRANDS_BY_LABEL.get(lure.label) ?? [lure], suffix).domain, reason: 'embedding' };
   }
 
   return null;

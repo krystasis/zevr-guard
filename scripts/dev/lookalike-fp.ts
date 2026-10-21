@@ -1,11 +1,14 @@
 // False-positive survey for the lookalike detector.
 //
 // Runs detectLookalike() over the Tranco snapshot (top 50k registrable
-// domains) and prints every hit, split into the protected band (top 10k —
-// must be empty) and the review band (10k–50k — a human reads it; see
-// docs/sources/tranco.md for why that band is not automatically trusted).
-// Hits that the tracker DB attributes to a company are marked: those are
-// skipped at runtime (checkNavigation), so they cost nothing in practice.
+// domains) and prints every hit, split into the protected band (top 10k) and
+// the review band (10k–50k — a human reads it; see docs/sources/tranco.md
+// for why that band is not automatically trusted).
+//
+// Gate (exit code): no protected-band hit outside the tracker DB. Hits the
+// tracker DB attributes to a company are skipped at runtime
+// (checkNavigation → lookupTracker), so they cost nothing in practice; the
+// lookup here walks the same way (exact key, then parent domains).
 //
 // Run it before changing a rule and after adding brands:
 //   npx vite-node scripts/dev/lookalike-fp.ts
@@ -13,13 +16,19 @@ import '../../src/test/setup';
 import brandList from '../../src/data/brands.json';
 import tranco from '../../src/data/tranco.snapshot.json';
 import trackers from '../../src/data/trackers.json';
-import { detectLookalike, registrableDomain } from '../../src/background/lookalike';
+import { detectLookalike } from '../../src/background/lookalike';
 
 const PROTECTED = 10_000;
 
-const TRACKER_DOMAINS = new Set(
-  Object.keys(trackers as Record<string, unknown>).map(registrableDomain),
-);
+const TRACKER_KEYS = trackers as Record<string, unknown>;
+/** Mirrors lookupTracker(): the host itself or any parent domain is a key. */
+function trackerKnows(domain: string): boolean {
+  const parts = domain.split('.');
+  for (let i = 0; i < parts.length - 1; i++) {
+    if (parts.slice(i).join('.') in TRACKER_KEYS) return true;
+  }
+  return false;
+}
 
 interface Row {
   rank: number;
@@ -38,7 +47,7 @@ const rows: Row[] = [];
       domain,
       reason: hit.reason,
       brand: hit.brand,
-      tracker: TRACKER_DOMAINS.has(domain),
+      tracker: trackerKnows(domain),
     });
   }
 });
@@ -54,7 +63,7 @@ function print(title: string, list: Row[]): void {
 
 const protectedBand = rows.filter((r) => r.rank <= PROTECTED);
 const reviewBand = rows.filter((r) => r.rank > PROTECTED);
-print(`top ${PROTECTED} — must be empty`, protectedBand);
+print(`top ${PROTECTED} — every hit must be tracker-DB covered`, protectedBand);
 print(`review band ${PROTECTED + 1}–${(tranco as string[]).length}`, reviewBand);
 
 const brandSelfHits = (brandList as string[]).filter((d) => detectLookalike(d));

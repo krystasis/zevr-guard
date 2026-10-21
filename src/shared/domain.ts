@@ -20,11 +20,24 @@ const MULTI_SUFFIXES = new Set([
   'co.nz', 'net.nz', 'org.nz', 'co.il', 'com.pl',
 ]);
 
+// Generic second-level labels that country registries hand out under a
+// two-letter ccTLD (com.eg, co.ke, gov.tr ...). Treating every such pair as a
+// public suffix is what the table above does by hand; this catches the long
+// tail so that google.com.eg is read as the brand's own country site, not as
+// "google.com" embedded in a stranger's domain.
+const GENERIC_SECOND_LEVEL = new Set(['com', 'net', 'org', 'gov', 'edu', 'co', 'ac', 'or', 'ne', 'go']);
+
+function isMultiSuffix(lastTwo: string): boolean {
+  if (MULTI_SUFFIXES.has(lastTwo)) return true;
+  const [second, tld] = lastTwo.split('.');
+  return tld.length === 2 && GENERIC_SECOND_LEVEL.has(second);
+}
+
 export function registrableDomain(host: string): string {
   const parts = host.split('.');
   if (parts.length <= 2) return host;
   const lastTwo = parts.slice(-2).join('.');
-  if (MULTI_SUFFIXES.has(lastTwo) && parts.length >= 3) {
+  if (isMultiSuffix(lastTwo) && parts.length >= 3) {
     return parts.slice(-3).join('.');
   }
   return lastTwo;

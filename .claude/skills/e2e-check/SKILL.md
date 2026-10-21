@@ -1,6 +1,6 @@
 ---
 name: e2e-check
-description: zevr-guard の全機能を実機の Chrome で通しで検証する。拡張を組み立てて未パッケージで読み込み、122 項目を自動で確かめて結果だけ報告する。「E2E」「実機で確かめて」「全機能テスト」「動作確認して」「リリース前チェック」「e2e-check」と言われたら使う。
+description: zevr-guard の全機能を実機の Chrome で通しで検証する。拡張を組み立てて未パッケージで読み込み、126 項目を自動で確かめて結果だけ報告する。「E2E」「実機で確かめて」「全機能テスト」「動作確認して」「リリース前チェック」「e2e-check」と言われたら使う。
 argument-hint: "[show|offscreen] 任意。show でブラウザを見せる(既定は画面に出さない)"
 ---
 
@@ -15,7 +15,7 @@ cd ~/Documents/business/release/zevr-guard
 npm run e2e          # build:app してからハーネスを回す
 ```
 
-**基準は 122/122 PASS。**終了コード 0 が全通過、1 が失敗あり。1 項目でも FAIL なら、それは報告すべき事実。
+**基準は 126/126 PASS。**終了コード 0 が全通過、1 が失敗あり。1 項目でも FAIL なら、それは報告すべき事実。
 
 `$ARGUMENTS` に `show` か `offscreen` があれば `ZEVR_E2E_WINDOW` に渡す。
 

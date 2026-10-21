@@ -11,12 +11,16 @@ import { matchesDomainOrParent } from './blocking';
 // brand. Everything runs on-device against a bundled brand list — no URL
 // ever leaves the browser.
 //
-// Three signals, all deliberately conservative (a false positive costs the
+// Four signals, all deliberately conservative (a false positive costs the
 // user a one-click interstitial, but too many of them costs trust):
 //
-//  1. brand embedding   paypal.com.secure-login.xyz
+//  1. brand embedding   paypal.com.secure-login.xyz, amazon.co.jp-login.com
 //  2. homoglyph         аpple.com (Cyrillic а), paypa1.com (digit swap)
 //  3. typosquat         amazom.com, boooking.com (edit distance 1)
+//  4. brand + lure      apple-id.com, amazon-co-jp.com, smbc-card-login.com
+//
+// Every rule change is measured against the Tranco snapshot first:
+// scripts/dev/lookalike-fp.ts must stay empty for the top 10,000.
 // ---------------------------------------------------------------------------
 
 export type LookalikeReason = 'embedding' | 'homoglyph' | 'typosquat';
@@ -153,6 +157,9 @@ function confusableSub(a: string, b: string): boolean {
 function isTyposquatOf(candidate: string, brand: string): boolean {
   if (candidate === brand) return false;
   if (candidate === `${brand}s`) return false; // plural — usually a real word
+  // Hyphen in or out is how brands spell their own alternates (tmobile.com
+  // is T-Mobile, wal-mart.com is Walmart), not a squat.
+  if (candidate.replace(/-/g, '') === brand.replace(/-/g, '')) return false;
 
   const la = candidate.length;
   const lb = brand.length;
@@ -204,13 +211,70 @@ const BRANDS: Brand[] = (brandList as string[]).map((domain) => {
 
 const BRAND_DOMAINS = new Set(BRANDS.map((b) => b.domain));
 const BRAND_LABELS = new Set(BRANDS.map((b) => b.label));
-const FOLDED_BRANDS = new Map<string, Brand>();
+const FOLDED_BRANDS = new Map<string, Brand[]>();
 const BRANDS_BY_SUFFIX = new Map<string, Brand[]>();
 for (const b of BRANDS) {
-  if (!FOLDED_BRANDS.has(fold(b.label))) FOLDED_BRANDS.set(fold(b.label), b);
+  const folded = FOLDED_BRANDS.get(fold(b.label)) ?? [];
+  folded.push(b);
+  FOLDED_BRANDS.set(fold(b.label), folded);
   const arr = BRANDS_BY_SUFFIX.get(b.suffix) ?? [];
   arr.push(b);
   BRANDS_BY_SUFFIX.set(b.suffix, arr);
+}
+
+/** Of several brands sharing a label (amazon.com / amazon.co.jp), the one on the visited suffix reads most naturally in the warning. */
+function preferSuffix(brands: Brand[], suffix: string): Brand {
+  return brands.find((b) => b.suffix === suffix) ?? brands[0];
+}
+
+// --- brand + lure words -------------------------------------------------------
+
+// Words phishers bolt onto a brand name with a hyphen: apple-id.com,
+// amazon-co-jp.com, smbc-card-login.com. Short on purpose — every entry
+// widens the net. "brand + word" glued together without a hyphen
+// (microsoftonline.com, myshopify.com, adobelogin.com) is how brands name
+// their own properties, so that form is only matched when it sits next to a
+// hyphen (appleid-jp.com), never as a whole label.
+const LURE_WORDS = new Set([
+  'login', 'signin', 'secure', 'security', 'verify', 'verification',
+  'account', 'id', 'auth', 'support', 'help', 'update', 'billing', 'payment',
+  'confirm', 'service', 'center', 'customer', 'jp', 'japan', 'co', 'official',
+  'mail', 'info', 'online', 'my', 'web', 'card', 'bank',
+]);
+// Short brand labels (au, ana, jal) collide with ordinary words too easily.
+// Longest label first so smbc-card-login.com names smbc-card, not smbc.
+const LURE_MIN_BRAND_LABEL = 4;
+const LURE_BRANDS = BRANDS.filter((b) => b.label.length >= LURE_MIN_BRAND_LABEL).sort(
+  (a, b) => b.label.length - a.label.length,
+);
+
+/** Brand whose label plus one lure word spells `token` ("appleid"). */
+function gluedBrand(token: string): Brand | null {
+  for (const b of LURE_BRANDS) {
+    if (token.startsWith(b.label) && LURE_WORDS.has(token.slice(b.label.length))) return b;
+    if (token.endsWith(b.label) && LURE_WORDS.has(token.slice(0, -b.label.length))) return b;
+  }
+  return null;
+}
+
+/** True when the hyphenated `label` is a brand plus nothing but lure words. */
+function detectBrandLure(label: string): Brand | null {
+  if (!label.includes('-')) return null;
+  for (const b of LURE_BRANDS) {
+    let rest: string | null = null;
+    if (label.startsWith(`${b.label}-`)) rest = label.slice(b.label.length + 1);
+    else if (label.endsWith(`-${b.label}`)) rest = label.slice(0, -b.label.length - 1);
+    else if (label.includes(`-${b.label}-`)) rest = label.replace(`-${b.label}-`, '-');
+    if (rest === null) continue;
+    const tokens = rest.split('-').filter(Boolean);
+    if (tokens.length > 0 && tokens.every((t) => LURE_WORDS.has(t))) return b;
+  }
+  const tokens = label.split('-').filter(Boolean);
+  for (let i = 0; i < tokens.length; i++) {
+    const b = gluedBrand(tokens[i]);
+    if (b && tokens.every((t, j) => j === i || LURE_WORDS.has(t))) return b;
+  }
+  return null;
 }
 
 function isIpHost(host: string): boolean {
@@ -233,27 +297,41 @@ export function detectLookalike(rawHost: string): LookalikeHit | null {
   // own property or beyond what a heuristic can judge — leave it alone.
   if (BRAND_LABELS.has(label)) return null;
 
-  // 1. Brand domain embedded as a leading subdomain chain.
+  const suffix = reg.slice(asciiLabel.length + 1);
+
+  // 1. Brand domain embedded as a leading subdomain chain, or glued to the
+  //    registrable label with a hyphen (amazon.co.jp-login.com).
   for (const b of BRANDS) {
-    if (host.startsWith(`${b.domain}.`) || host.includes(`.${b.domain}.`)) {
+    if (
+      host.startsWith(`${b.domain}.`) ||
+      host.includes(`.${b.domain}.`) ||
+      host.startsWith(`${b.domain}-`) ||
+      host.includes(`.${b.domain}-`)
+    ) {
       return { brand: b.domain, reason: 'embedding' };
     }
   }
 
   // 2. Visual skeleton collides with a brand label.
   const folded = FOLDED_BRANDS.get(fold(label));
-  if (folded && label !== folded.label) {
-    return { brand: folded.domain, reason: 'homoglyph' };
+  if (folded && label !== folded[0].label) {
+    return { brand: preferSuffix(folded, suffix).domain, reason: 'homoglyph' };
   }
 
   // 3. One risky edit away from a brand on the same suffix.
   if (label === asciiLabel && label.length >= 5) {
-    const suffix = reg.slice(asciiLabel.length + 1);
     for (const b of BRANDS_BY_SUFFIX.get(suffix) ?? []) {
       if (b.label.length >= 6 && isTyposquatOf(label, b.label)) {
         return { brand: b.domain, reason: 'typosquat' };
       }
     }
+  }
+
+  // 4. Brand label plus lure words, joined by hyphens.
+  const lure = detectBrandLure(label);
+  if (lure) {
+    const sameLabel = BRANDS.filter((b) => b.label === lure.label);
+    return { brand: preferSuffix(sameLabel, suffix).domain, reason: 'embedding' };
   }
 
   return null;

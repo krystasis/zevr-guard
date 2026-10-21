@@ -38,6 +38,12 @@ describe('detectLookalike', () => {
     ['paypal.com.ru', 'embedding', 'paypal.com'],
     ['apple.com.de', 'embedding', 'apple.com'],
     ['xn--mazon-3ve.co.jp', 'homoglyph', 'amazon.co.jp'], // Cyrillic а; names the brand on the visited suffix
+    // domestic brands added 2026-10-21 (docs/sources/brands.md)
+    ['sevenbank-login.com', 'embedding', 'sevenbank.co.jp'],
+    ['rakuten-sec-login.com', 'embedding', 'rakuten-sec.co.jp'],
+    ['sbisec.co.jp.secure-login.top', 'embedding', 'sbisec.co.jp'],
+    ['myna-login.com', 'embedding', 'myna.go.jp'],
+    ['vpass-login.com', 'embedding', 'vpass.ne.jp'],
   ];
 
   it.each(hits)('flags %s as %s of %s', (host, reason, brand) => {
@@ -105,6 +111,9 @@ describe('detectLookalike', () => {
     'secure-line.com',
     'office-online.com',
     'my-crypto.com',
+    'visa-support.com', // travel visas, not the card brand
+    'my-visa.com',
+    'sakura-hotel.com', // the word, not the hosting company
   ];
 
   it.each(clean)('leaves %s alone', (host) => {

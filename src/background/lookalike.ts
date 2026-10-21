@@ -254,6 +254,8 @@ const LURE_GENERIC_LABELS = new Set([
   'office', 'live', 'meta', 'signal', 'monday', 'cash', 'wise', 'gemini', 'ledger',
   'ally', 'line', 'target', 'wish', 'grab', 'bolt', 'delta', 'united', 'orange',
   'spectrum', 'canada', 'toss', 'momo', 'tiki', 'dana', 'crypto',
+  'visa', // travel-visa services: visa-support.com, my-visa.com
+  'sakura', // the word, not the hosting company: sakura-hotel, sakura-info
 ]);
 // Short brand labels (au, ana, jal) collide with ordinary words too easily.
 const LURE_MIN_BRAND_LABEL = 4;

@@ -808,6 +808,17 @@ await sw.evaluate(async (domain) => {
   check('a domain we did not flag reports no lookalike brand', spoofed.lookalike === null, JSON.stringify(spoofed.lookalike));
   const realSquat = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'amazom.com' })).context;
   check('a real typosquat reports the brand it imitates', realSquat.lookalike === 'amazon.com', JSON.stringify(realSquat.lookalike));
+  // Brand + lure words joined by hyphens, and the brand domain glued on with
+  // a hyphen — the shapes domestic phishing actually takes.
+  const lure = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'smbc-card-login.com' })).context;
+  check('brand + lure words reports the brand it imitates', lure.lookalike === 'smbc-card.com', JSON.stringify(lure.lookalike));
+  const glued = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'amazon.co.jp-login.com' })).context;
+  check('brand domain glued with a hyphen reports the brand', glued.lookalike === 'amazon.co.jp', JSON.stringify(glued.lookalike));
+  // Controls: the brand's own country site and its own hyphen-less spelling.
+  const ccSite = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'google.com.eg' })).context;
+  check("a brand's country site is not a lookalike", ccSite.lookalike === null, JSON.stringify(ccSite.lookalike));
+  const unhyphenated = (await send({ type: 'GET_BLOCK_CONTEXT', domain: 'tmobile.com' })).context;
+  check("a brand's hyphen-less spelling is not a typosquat", unhyphenated.lookalike === null, JSON.stringify(unhyphenated.lookalike));
 
   // ...and cannot get an arbitrary domain blocked through the report button.
   const spoofReport = await send({ type: 'REPORT_PHISHING', domain: 'www.example.org', context: 'warning-page', alsoBlock: true });

@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "重新打开介绍与导览"
   },
+  "settingsIosApp": {
+    "message": "iPhone 版 Zevr Guard"
+  },
+  "settingsIosAppDesc": {
+    "message": "也有适用于 iPhone 上 Safari 的版本（App Store，免费）"
+  },
   "settingsAllowlistAdd": {
     "message": "允许某个域名"
   },

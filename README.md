@@ -33,6 +33,8 @@ Zevr Guard is a Chrome extension that visualizes every connection your browser m
 - **Faster browsing as a side effect** — blocking ads and trackers removes dozens of HTTP requests and JS executions per page
 - **18 languages** — UI and store listing localized, picked automatically from your browser language
 
+On iPhone? Zevr Guard is also a free app for Safari on the [App Store](https://apps.apple.com/app/id6824213254) that blocks ads, trackers and dangerous sites (iOS 26 or later; a separate app, not part of this repository).
+
 ## Privacy model
 
 Zevr Guard **never uploads the URLs you visit**. The only outbound traffic is a scheduled, anonymous fetch of the threat database from Zevr's CDN. The request contains no information about you or the sites you browse — it is indistinguishable across users.

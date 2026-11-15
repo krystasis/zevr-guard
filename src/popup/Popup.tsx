@@ -25,6 +25,11 @@ import {
   type CountryGroup,
 } from '../shared/grouping';
 
+// Sister app: Zevr Guard's Safari content blockers for iPhone. A plain store
+// link — no country in the path (the viewer's own storefront opens), no
+// tracking parameters, no redirect.
+const IOS_APP_URL = 'https://apps.apple.com/app/id6824213254';
+
 const RISK_TEXT: Record<RiskLevel, string> = {
   safe: 'text-emerald-400',
   tracker: 'text-sky-400',
@@ -1926,6 +1931,11 @@ const SettingsPanel: React.FC<{
             url: chrome.runtime.getURL('src/welcome/index.html'),
           })
         }
+      />
+      <LinkRow
+        label={t('settingsIosApp', 'Zevr Guard for iPhone')}
+        description={t('settingsIosAppDesc', 'Also available for Safari on iPhone (App Store, free)')}
+        onClick={() => void chrome.tabs.create({ url: IOS_APP_URL })}
       />
       <ToggleRow
         label={t('settingsNotifications', 'Notifications')}

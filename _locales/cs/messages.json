@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Znovu otevřít úvod a prohlídku"
   },
+  "settingsIosApp": {
+    "message": "Zevr Guard pro iPhone"
+  },
+  "settingsIosAppDesc": {
+    "message": "K dispozici i pro Safari na iPhonu (App Store, zdarma)"
+  },
   "settingsAllowlistAdd": {
     "message": "Povolit doménu"
   },

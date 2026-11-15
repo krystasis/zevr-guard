@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Introductie en rondleiding opnieuw openen"
   },
+  "settingsIosApp": {
+    "message": "Zevr Guard voor iPhone"
+  },
+  "settingsIosAppDesc": {
+    "message": "Ook beschikbaar voor Safari op iPhone (App Store, gratis)"
+  },
   "settingsAllowlistAdd": {
     "message": "Domein toestaan"
   },

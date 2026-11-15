@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "紹介画面とガイドツアーをもう一度開く"
   },
+  "settingsIosApp": {
+    "message": "iPhone 版 Zevr Guard"
+  },
+  "settingsIosAppDesc": {
+    "message": "iPhone の Safari 版もあります(App Store・無料)"
+  },
   "settingsAllowlistAdd": {
     "message": "ドメインを許可"
   },

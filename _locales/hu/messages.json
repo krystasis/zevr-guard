@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Bevezető és túra újranyitása"
   },
+  "settingsIosApp": {
+    "message": "Zevr Guard iPhone-ra"
+  },
+  "settingsIosAppDesc": {
+    "message": "iPhone-on a Safarihoz is elérhető (App Store, ingyenes)"
+  },
   "settingsAllowlistAdd": {
     "message": "Domain engedélyezése"
   },

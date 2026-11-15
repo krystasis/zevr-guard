@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "परिचय और गाइडेड टूर फिर से खोलें"
   },
+  "settingsIosApp": {
+    "message": "iPhone के लिए Zevr Guard"
+  },
+  "settingsIosAppDesc": {
+    "message": "iPhone पर Safari के लिए भी उपलब्ध (App Store, मुफ़्त)"
+  },
   "settingsAllowlistAdd": {
     "message": "डोमेन की अनुमति दें"
   },

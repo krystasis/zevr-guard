@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Tanıtımı ve rehberli turu yeniden aç"
   },
+  "settingsIosApp": {
+    "message": "iPhone için Zevr Guard"
+  },
+  "settingsIosAppDesc": {
+    "message": "iPhone'da Safari için de mevcut (App Store, ücretsiz)"
+  },
   "settingsAllowlistAdd": {
     "message": "Alan adına izin ver"
   },

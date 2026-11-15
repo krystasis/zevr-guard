@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "소개와 둘러보기를 다시 열기"
   },
+  "settingsIosApp": {
+    "message": "iPhone용 Zevr Guard"
+  },
+  "settingsIosAppDesc": {
+    "message": "iPhone의 Safari용도 있습니다 (App Store, 무료)"
+  },
   "settingsAllowlistAdd": {
     "message": "도메인 허용"
   },

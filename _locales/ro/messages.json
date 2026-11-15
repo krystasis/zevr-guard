@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Redeschide introducerea și turul ghidat"
   },
+  "settingsIosApp": {
+    "message": "Zevr Guard pentru iPhone"
+  },
+  "settingsIosAppDesc": {
+    "message": "Disponibil și pentru Safari pe iPhone (App Store, gratuit)"
+  },
   "settingsAllowlistAdd": {
     "message": "Permite un domeniu"
   },

@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Знову відкрити вступ і огляд"
   },
+  "settingsIosApp": {
+    "message": "Zevr Guard для iPhone"
+  },
+  "settingsIosAppDesc": {
+    "message": "Є версія для Safari на iPhone (App Store, безкоштовно)"
+  },
   "settingsAllowlistAdd": {
     "message": "Дозволити домен"
   },

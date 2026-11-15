@@ -331,6 +331,12 @@
   "settingsOpenWelcomeDesc": {
     "message": "Einführung und Rundgang erneut öffnen"
   },
+  "settingsIosApp": {
+    "message": "Zevr Guard für iPhone"
+  },
+  "settingsIosAppDesc": {
+    "message": "Auch für Safari auf dem iPhone erhältlich (App Store, kostenlos)"
+  },
   "settingsAllowlistAdd": {
     "message": "Domain zulassen"
   },
